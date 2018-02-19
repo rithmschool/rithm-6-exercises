@@ -1,3 +1,5 @@
+# Core Modules
+
 For this exercise, we are going to build a simple command line tool which allows us to make a request to an API and store the data in a text file! We will be using the following modules:
 
 `fs` - for reading and writing to a file

@@ -1,3 +1,5 @@
+# Cookies + Sessions Auth
+
 For this application you will be building full CRUD on users, but with authentication and authorization. Here are the properties each user should have
 
 - a unique id

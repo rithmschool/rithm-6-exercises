@@ -1,3 +1,5 @@
+# Auth with JSON APIs
+
 For this application you will be rebuilding full CRUD on users, with authentication and authorization as an API. Here are the properties each user should have
 
 - a unique id

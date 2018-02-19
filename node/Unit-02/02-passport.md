@@ -1,3 +1,4 @@
+# Passport
 
 For this application you will be building a music application where users can log in through Spotify and search for music. You should use `passport-spotify` to authenticate users, and make sure to store your credentials in a `.env` file and add a `.env` to your `.gitignore`!
 
