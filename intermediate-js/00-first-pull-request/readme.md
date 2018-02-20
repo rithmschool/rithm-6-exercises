@@ -6,6 +6,7 @@ All you need to do to complete this assignment is add your name and your favorit
 
 Good luck!
 
-Your name:
+Your name: Yang
 
-Your favorite color:
+Your favorite color: sky blue
+
