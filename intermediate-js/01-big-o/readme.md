@@ -9,7 +9,7 @@ Simplify the following big O expressions as much as possible:
 3. `O(25)` O(1)
 4. `O(n^2 + n^3)` O(n^3)
 5. `O(n + n + n + n)` O(n)
-6. `O(1000 * log(n) + n)` O(log(n))
+6. `O(1000 * log(n) + n)` O(n)
 7. `O(1000 * n * log(n) + n)` O(nlog(n))
 8. `O(2^n + n^2)` O(2^n)
 9. `O(5 + 3 + 1)` O(1)
@@ -28,7 +28,7 @@ function logUpTo(n) {
   }
 }
 Time: O(n)
-Space: O(n)
+Space: O(1)
 
 // 2.
 
@@ -79,5 +79,5 @@ function subtotals(array) {
   return subtotalArray;
 }
 Time: O(n^2)
-Space: O(n^2)
+Space: O(n)
 ```
