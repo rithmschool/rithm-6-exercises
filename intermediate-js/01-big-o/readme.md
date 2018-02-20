@@ -36,7 +36,7 @@ function logAtMost10(n) {
     console.log(i);
   }
 }
-  O(n)
+  O(1)
   O(1)
 // 3.
 
