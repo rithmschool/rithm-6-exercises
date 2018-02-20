@@ -8,4 +8,4 @@ Good luck!
 
 Your name: Rich
 
-Your favorite color: Azul
+Your favorite color: Blue
