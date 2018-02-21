@@ -75,37 +75,32 @@ function search(array, value) {
 }
 
 function binarySearch(array, value) {
-    var count = 0;
-    var ind = -1; 
-    function binaryHelp(arr, val) {
-        if (arr[Math.floor(arr.length/2) -1] > val) {
-            return binaryHelp(arr.slice(0, Math.floor(arr.length/2)));
-        };
-        if (arr[Math.floor(arr.length/2) -1] < val) {
-            count += Math.floor(arr.length/2) + 1;
-            return binaryHelp(arr.slice(Math.floor(arr.length/2) + 1));
-        };
-        if (arr[Math.floor(arr.length/2) -1] === val) {
-            count += Math.floor(arr.length/2) -1;
-            ind = count;
+    var min = 0;
+    var max = array.length - 1;
+    var idx;
+
+    function binaryHelper(arr, val) {
+        if (arr[min] < val) {
+            min++;
+        }
+        if (arr[max] > val) {
+            max--;
+        }
+        if (arr[min] === val) {
+            idx = min;
             return;
-        };
-        else if (arr.length === 2) {
-            if (arr[0] === val) {
-                ind = count;
-                return;
-            }
-            if (arr[1] === val) {
-                count ++;
-                ind = count;
-                return;
-            }
-            ind = -1;
+        }
+        if (arr[max] === val) {
+            idx = max;
+            return;
+        }
+        else if (arr.length === 0 || 1) {
+            idx = -1;
             return;
         }
     }
-    binaryHelp(array,value);
-    return ind;
+    binaryHelper(array, value);
+    return idx; 
 }
 
 //binarySearch([1,2,3,4,5],5) // 4
