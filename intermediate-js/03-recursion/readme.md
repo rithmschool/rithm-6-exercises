@@ -109,8 +109,33 @@ contains(nestedObject2, 44) // true
 Complete the following CodeWars problems:
 
 - [https://www.codewars.com/kata/the-real-size-of-a-multi-dimensional-array/train/javascript](https://www.codewars.com/kata/the-real-size-of-a-multi-dimensional-array/train/javascript)
-- [https://www.codewars.com/kata/sum-squares-of-numbers-in-list-that-may-contain-more-lists/train/javascript](https://www.codewars.com/kata/sum-squares-of-numbers-in-list-that-may-contain-more-lists/train/javascript)
+
+function realSize(arr) {
+  let num = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof arr[i] === 'number') num++;
+    if (Array.isArray(arr[i])) num += realSize(arr[i]);
+  }
+  return num;
+}
+
+[https://www.codewars.com/kata/sum-squares-of-numbers-in-list-that-may-contain-more-lists/train/javascript](https://www.codewars.com/kata/sum-squares-of-numbers-in-list-that-may-contain-more-lists/train/javascript)
+
+function SumSquares(arr){
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (typeof arr[i] === 'number') sum += arr[i] * arr[i];
+      if (Array.isArray(arr[i])) sum += SumSquares(arr[i]);
+    }
+    return sum;
+}
+
 - [https://www.codewars.com/kata/recursive-replication](https://www.codewars.com/kata/recursive-replication)
+
+function replicate(times, number) {
+  if (times < 1) return [];
+  return [number].concat(replicate(--times, number));
+}
 
 **BONUS**
 
