@@ -1,0 +1,61 @@
+* {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+section {
+  padding: 50px;
+  border-bottom: 1px solid grey; }
+
+#mock1 button {
+  background-color: #1E90FF;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 5px; }
+  #mock1 button:hover {
+    background-color: #0366d6;
+    cursor: pointer; }
+
+#mock2 {
+  display: flex;
+  /*get rid of that little bit of white space*/ }
+  #mock2 #mock2container {
+    margin: auto;
+    max-width: 400px;
+    border: 1px solid grey;
+    box-shadow: -1px 1px .5px .1px; }
+  #mock2 #catImgDiv img {
+    width: 100%; }
+  #mock2 #catTextDiv {
+    background-color: #e6e6e6; }
+    #mock2 #catTextDiv div {
+      padding: 10px; }
+    #mock2 #catTextDiv div:first-of-type {
+      font-weight: bold;
+      border-bottom: 1px solid grey; }
+
+#mock3 {
+  display: flex;
+  justify-content: space-between; }
+  #mock3 > div {
+    border: 5px solid salmon;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden; }
+    #mock3 > div:hover {
+      background-color: red; }
+      #mock3 > div:hover .hiddenText {
+        /*bottom: 30px;*/
+        transform: translateY(-50px); }
+  #mock3 img {
+    max-width: 200px; }
+  #mock3 .hiddenText {
+    transition: transform 1s ease;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: -30px; }
+
+/*# sourceMappingURL=style.css.map */
