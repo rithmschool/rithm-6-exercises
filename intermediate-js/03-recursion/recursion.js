@@ -56,46 +56,46 @@ function stringifyNumbers(obj) {
 
 
 // WITH HELPER
-function contains(obj, val) {
-    var doesItContain = false;
-    
-    function containsHelper(object, value) {
-        for(var key in object) {
-            if(typeof(object[key]) !== 'object') {
-                if(object[key] === value) {
-                    doesItContain = true;  
-                }
-            } else {
-                containsHelper(object[key], value);
-            }
-        }
-    }
-    containsHelper(obj, val);
-
-    return doesItContain;
-}
-
-
-// WITHOUT HELPER
 // function contains(obj, val) {
 //     var doesItContain = false;
-//     for(var key in obj) {
-//         if(obj[key] === val) {
-//             doesItContain = true;  
-//         } else if(typeof(obj[key]) === 'object') {
-//             doesItContain = contains(obj[key], val);
+    
+//     function containsHelper(object, value) {
+//         for(var key in object) {
+//             if(typeof(object[key]) !== 'object') {
+//                 if(object[key] === value) {
+//                     doesItContain = true;  
+//                 }
+//             } else {
+//                 containsHelper(object[key], value);
+//             }
 //         }
 //     }
+//     containsHelper(obj, val);
+
 //     return doesItContain;
 // }
 
+
+// WITHOUT HELPER
+function contains(obj, val) {
+    var doesItContain = false;
+    for(var key in obj) {
+        if(obj[key] === val) {
+            doesItContain = true;  
+        } else if(typeof(obj[key]) === 'object') {
+            doesItContain = contains(obj[key], val);
+        }
+    }
+    return doesItContain;
+}
+
 // function contains(obj, val) {
 //     for(var key in obj) {
 //         if(obj[key] === val) {
 //             return true;
-//         } else if(typeof(obj[key]) === 'object' && contains(obj[key] === true)) {
-//             return true;
-//         }
+//         } else if(typeof(obj[key]) === 'object') {
+//             return contains(obj[key], val);
+//         } 
 //     }
 //     return false;
 // }
@@ -151,3 +151,33 @@ function replicate(times, number) {
 	
 	return arr;
 }
+
+// BONUS
+// SEARCH
+function search(arr) {
+    if(arr.length === 0) {
+        return -1;
+    } else {
+        return search(arr.slice(1));
+    }
+}
+
+function binarySearch(arr, val, basePoint){
+    basePoint = basePoint || 0;
+    var length = arr.length;
+    var middle = Math.floor(length / 2);
+    var newArr;
+  
+    if (arr[middle] > val && arr.length > 1) {
+      newArr = arr.slice(0, middle);
+      return binarySearch(newArr, val, basePoint);
+    } else if (arr[middle] < val && arr.length > 1) {
+      newArr = arr.slice(middle, arr.length);
+      basePoint += middle;
+      return binarySearch(newArr, val, basePoint);
+    } else if (arr[middle] === val) {
+      return middle + basePoint;
+    } else {
+      return -1;
+    }
+  }
