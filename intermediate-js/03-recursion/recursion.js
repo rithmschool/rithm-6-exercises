@@ -54,6 +54,8 @@ function stringifyNumbers(obj) {
     return newObj;
 }
 
+
+// WITH HELPER
 function contains(obj, val) {
     var doesItContain = false;
     
@@ -73,3 +75,79 @@ function contains(obj, val) {
     return doesItContain;
 }
 
+
+// WITHOUT HELPER
+// function contains(obj, val) {
+//     var doesItContain = false;
+//     for(var key in obj) {
+//         if(obj[key] === val) {
+//             doesItContain = true;  
+//         } else if(typeof(obj[key]) === 'object') {
+//             doesItContain = contains(obj[key], val);
+//         }
+//     }
+//     return doesItContain;
+// }
+
+// function contains(obj, val) {
+//     for(var key in obj) {
+//         if(obj[key] === val) {
+//             return true;
+//         } else if(typeof(obj[key]) === 'object' && contains(obj[key] === true)) {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+// CODEWARS
+
+function realSize(arr) {
+    var ints = 0;
+  
+    function realSizeHelper(array) {
+        for(var i = 0; i < array.length; i++) {
+            if(typeof(array[i]) === 'number') {
+                ints++;
+            } else {
+                realSizeHelper(array[i]);
+            }
+        }
+    }
+    realSizeHelper(arr);
+    
+    return ints;
+}
+
+function SumSquares(l){
+    var sum = 0;
+
+    function helper(array) {
+        for(var i = 0; i < array.length; i++) {
+            if(Array.isArray(array[i])) {
+                helper(array[i]);
+            } else {
+                sum += array[i] * array[i];
+            }
+        }
+    }
+    helper(l);
+
+    return sum;
+}
+
+function replicate(times, number) {
+	var arr = [];
+	
+    function addToArr(t, n) {
+        if(t <= 0) {
+	       return arr;
+	    } else {
+           arr.push(n);
+	       arr.concat(addToArr(t - 1, n));
+        }
+    }
+    addToArr(times, number);
+	
+	return arr;
+}
