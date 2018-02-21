@@ -12,4 +12,4 @@ In this exercise, your goal is to create the three design elements depicted belo
 
 ## Mock 3
 
-![CSS Mock 8](../images/css_mock8.png)
+![CSS Mock 8](../images/css_mock8.gif)
