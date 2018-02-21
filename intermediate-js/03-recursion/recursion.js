@@ -154,12 +154,24 @@ function replicate(times, number) {
 
 // BONUS
 // SEARCH
-function search(arr) {
-    if(arr.length === 0) {
-        return -1;
-    } else {
-        return search(arr.slice(1));
+function search(arr, val) {
+    var counter = arr.length - 1;
+    
+    function helper(array, value) {
+        if(counter === -1) {
+            return counter;
+        } else {
+            if(array[counter] === value) {
+                return counter;
+            } else {
+                counter--;
+                helper(array, value);
+            }
+        }
     }
+    helper(arr, val);
+
+    return counter;
 }
 
 function binarySearch(arr, val, basePoint){
