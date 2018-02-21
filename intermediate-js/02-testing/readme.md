@@ -8,7 +8,7 @@ For this exercise you will be writing tests to make functions pass. Start by wri
 
 ## Getting started
 
-You should not need to modify anything in the `index.html` file - we have already included Jasmine for you. Write tests **first** for the following functions, and then write the code to make them pass
+You should not need to modify anything in the `index.html` file - we have already included Jasmine for you. Write tests **first** for the following functions, and then write the code to make them pass.
 
 * Write a function called `replaceWith` that takes in a string, a character to replace and a character to replace it with and returns the string with the replacements. Write tests to make sure this is case **sensitive**
 
