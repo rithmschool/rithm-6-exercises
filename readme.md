@@ -43,11 +43,12 @@ Students can only push to their own branches.
 * [02 Testing Exercise](./intermediate-js/02-testing)
 * [03 Recursion Exercise](./intermediate-js/03-recursion)
 * [04 CSS Positioning Exercise](./intermediate-js/04-css-positioning)
-* [05 Bootstrap Mockup Exercise](./intermediate-js/05-bootstrap-mocks)
-* [06 jQuery Exercise](./intermediate-js/06-jquery)
-* [07 AJAX with jQuery Exercise](./intermediate-js/07-ajax-jquery)
-* [08 ES2015 Exercise](./intermediate-js/08-es2015)
-* [09 Object Oriented Exercises](./intermediate-js/09-oop)
+* [05 CSS Mockup Exercise](./intermediate-js/05-css-mocks)
+* [06 Bootstrap Mockup Exercise](./intermediate-js/05-bootstrap-mocks)
+* [07 jQuery Exercise](./intermediate-js/06-jquery)
+* [08 AJAX with jQuery Exercise](./intermediate-js/07-ajax-jquery)
+* [09 ES2015 Exercise](./intermediate-js/08-es2015)
+* [10 Object Oriented Exercises](./intermediate-js/09-oop)
 
 ## II. Flask
 
