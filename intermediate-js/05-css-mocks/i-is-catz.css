@@ -1,0 +1,30 @@
+#container {
+    width: 400px;
+    margin: 200px auto;
+    border: solid #cdcdcd 1px;
+    border-radius: 15px;
+    background-color: #eeeeee;
+    box-shadow: 0px 2px 1px #D3D3D3; 
+
+}
+
+#img-holder {
+    width: 100%;
+    height: 200px;
+    background-image: url("https://assets.rbl.ms/4829855/980x.jpg");
+    background-size: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#title {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 120%;
+    border-bottom: solid #cdcdcd 1px;
+}
+
+#text {
+    padding: 15px;
+    font-size: 85%;
+}
