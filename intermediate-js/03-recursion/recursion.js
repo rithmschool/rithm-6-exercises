@@ -60,12 +60,19 @@ function helpCont(newObj, target) {
 }
 
 function search(array, target) {
-for (var i = 0; i < array.length; i++) {
-    if(array[i] === target) {
-        return i;
+    var index = -1
+
+    function searchHelp(arr, sample) {
+     for (var i = 0; i < arr.length; i++) {
+        if(arr[i] === target) {
+        index = i;
+         } else {
+        searchHelp(arr[i]);
+        }
+     }
     }
-  }
-  return -1;
+  searchHelp(array, target);
+  return index;
 }
 
 function binarySearch(array, target) { //wanted to submit before I passed out.
