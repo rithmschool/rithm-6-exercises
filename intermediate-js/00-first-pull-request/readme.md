@@ -8,5 +8,4 @@ Good luck!
 
 Your name: Yang
 
-Your favorite color: sky blue
-
+Your favorite color: Blue
