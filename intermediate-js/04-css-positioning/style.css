@@ -20,4 +20,6 @@
   width: 100px;
   height: 100px;
   background-color: blue;
+  border: black 1px solid;
 }
+
