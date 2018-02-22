@@ -1,0 +1,109 @@
+/* body{
+    padding: 10px;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+h1{
+    margin: 10px;
+}
+
+section {
+    display: flex;
+    /* width: 100%; */
+    /* height: auto; */
+    flex-direction: column;
+    align-items: center;
+    margin: 2%;
+
+}
+button {
+    background-color:blue;
+    color: white;
+    height: 50px;
+    width: 100px;
+    border-radius: 10%;
+    font-size: 20px;
+    text-align: center;
+    padding: 1%;
+    margin: 10px;
+}
+
+button:hover{
+    background-color: darkblue;
+    cursor: pointer;
+}
+
+.card {
+    height: 300px;
+    width: 270px;
+    /* border: 1px solid black; */
+    border-radius: 2%;
+    overflow: hidden;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
+    background-color: lightgray;
+}
+
+.catImg {
+    background-image: url("http://www.cutestpaw.com/wp-content/uploads/2016/02/Yawn..jpeg");
+    background-size: cover;
+    overflow: hidden;
+    height: 170px;
+}
+
+.title {
+    border-bottom: 1px solid gray;
+}
+.paragraph {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.gif {
+    height: 230px;
+    width: 330px;
+    border: 3px solid peachpuff;
+    border-radius: 5%;
+    display: flex;
+    overflow: hidden;
+    margin: 2%;
+    justify-content: space-between;
+    
+}
+
+.gif:hover{
+    cursor: pointer;
+    position: relative;
+    
+    background-color: black;
+    transition: background-color 1s ease;
+}
+
+.first {
+    background-image: url("https://media.giphy.com/media/l3zoKeX8bMG5sMP4s/giphy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.first:hover {
+
+}
+.second {
+    background-image: url("https://media.giphy.com/media/kEKcOWl8RMLde/giphy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.third{
+    background-image: url("https://img.buzzfeed.com/buzzfeed-static/static/2015-01/28/15/enhanced/webdr10/anigif_enhanced-14809-1422475942-9.gif?downsize=715:*&output-format=auto&output-quality=auto");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
