@@ -8,26 +8,26 @@ For this exercise you will be writing tests to make functions pass. Start by wri
 
 ## Getting started
 
-You should not need to modify anything in the `index.html` file - we have already included mocha and chai for you. Write tests **first** for the following functions, and then write the code to make them pass
+You should not need to modify anything in the `index.html` file - we have already included Jasmine for you. Write tests **first** for the following functions, and then write the code to make them pass.
 
 * Write a function called `replaceWith` that takes in a string, a character to replace and a character to replace it with and returns the string with the replacements. Write tests to make sure this is case **sensitive**
 
 ```javascript
-replaceWith('awesome', 'e', 'z'); // "awzsomz"
-replaceWith('Foo', 'F', 'B'); // "Boo"
+replaceWith("awesome", "e", "z"); // "awzsomz"
+replaceWith("Foo", "F", "B"); // "Boo"
 ```
 
 * Write a function called `expand` which takes an array and a number and returns a copy of the array with as many numbers as specified
 
 ```javascript
 expand([1, 2, 3], 3); //[1,2,3,1,2,3,1,2,3]
-expand(['foo', 'test'], 1); //["foo","test"]
+expand(["foo", "test"], 1); //["foo","test"]
 ```
 
 * Write a function called `acceptNumbersOnly` which takes in any number of arguments and returns `true` if all of them are numbers. Watch out for `NaN` - it is a `typeof "number"`!
 
 ```javascript
-acceptNumbersOnly(1, 'foo'); // false
+acceptNumbersOnly(1, "foo"); // false
 acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7); // true
 acceptNumbersOnly(1, 2, 3, 4, 5, 6, NaN); // false
 ```
@@ -42,11 +42,11 @@ mergeArrays([2, 1], [3, 4]); // [1,2,3,4]
 
 ```javascript
 var obj1 = {
-  name: 'Foo',
+  name: "Foo",
   num: 33
 };
 var obj2 = {
-  test: 'thing',
+  test: "thing",
   num: 55
 };
 mergeObjects(obj1, obj2);

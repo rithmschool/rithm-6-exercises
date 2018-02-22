@@ -1,0 +1,134 @@
+body {
+    font-family: arial;
+    z-index: 5;
+}
+
+
+.button1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#button1 {
+    background-color: #94DBFF;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex-inline;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 100px;
+    color:white;
+}
+
+#button1:hover {
+    background-color: #4BC3FF;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex-inline;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 100px;
+    color: white;
+}
+
+#catbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: times;
+}
+
+.catbox img {
+    width: 200px;
+}
+
+.catbox {
+    width: 200px;
+    font-size: 8px;
+    background-color: #E6E6E6;
+    border-radius: 5px;
+    box-shadow: 1px 2px #cdcdcd;
+}
+
+.catbox .box1, .box2{
+    padding: 10px;
+}
+
+.catbox .box1 {
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+#gifs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 100px;
+}
+
+.gifcontain {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.container {
+    position: relative;
+    width: 50%;
+  }
+  
+  .image {
+    display: block;
+    width: 200px;
+    height: 200px;
+    height: auto;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #008CBA;
+    overflow: hidden;
+    width: 200px;
+    height: 0;
+    opacity: .5;
+    transition: .5s ease;
+  }
+  
+  iframe {
+      height: 200px;
+      width: 200px;
+      border-radius: 5px;
+      border: 5px solid wheat;
+      box-sizing: border-box;
+  }
+
+  .container:hover .overlay {
+    height: 100%;
+  }
+  
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
