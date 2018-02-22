@@ -94,9 +94,9 @@ function binarySearch(arr, target, min = 0, max = arr.length - 1) {
     return checkI;
   }
   if (arr[checkI] > target) {
-    max--;
+    max = checkI - 1;
   } else {
-    min++;
+    min = checkI + 1;
   }
   return binarySearch(arr, target, min, max);
 }
