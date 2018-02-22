@@ -19,15 +19,16 @@ section {
     cursor: pointer; }
 
 #mock2 {
-  /*display: flex;*/
-  /*get rid of that little bit of white space*/ }
+  /*display: flex;*/ }
   #mock2 #mock2container {
     margin: auto;
+    border-radius: 5px;
     max-width: 400px;
     border: 1px solid grey;
     box-shadow: -1px 1px .5px .1px; }
   #mock2 #catImgDiv img {
-    width: 100%; }
+    width: 100%;
+    display: block; }
   #mock2 #catTextDiv {
     background-color: #e6e6e6; }
     #mock2 #catTextDiv div {
@@ -38,7 +39,8 @@ section {
 
 @media all and (max-width: 800px) {
   #mock3 {
-    flex-direction: column; } }
+    flex-direction: column;
+    align-items: center; } }
 #mock3 {
   display: flex;
   justify-content: space-between; }
@@ -46,16 +48,18 @@ section {
     border: 5px solid salmon;
     border-radius: 5px;
     position: relative;
-    overflow: hidden; }
+    overflow: hidden;
+    margin: 10px; }
     #mock3 > div:hover {
       cursor: pointer; }
       #mock3 > div:hover .hiddenText {
-        transform: translateY(-140px); }
+        transform: translateY(-135px); }
   #mock3 img {
-    max-width: 200px; }
+    max-width: 200px;
+    display: block; }
   #mock3 .hiddenText {
     width: 100%;
-    height: 100%;
+    height: 110%;
     transition: transform 1s ease;
     background-color: black;
     color: white;
