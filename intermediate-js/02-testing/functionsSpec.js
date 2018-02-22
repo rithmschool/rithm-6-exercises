@@ -31,3 +31,21 @@ describe("acceptNumbersOnly", function() {
         expect(acceptNumbersOnly(-1567, 0, 34567)).toBe(true);
     });
 });
+
+describe("mergeArrays", function() {
+    it("expect mergeArrays to have a return", function() {
+        expect(mergeArrays([1], [2])).not.toBeUndefined();
+    });
+    it("expect mergeArrays to return one array with the same length as the sum of the input arrays", function() {
+        expect(mergeArrays([1], [2]).length).toBe(2);
+    });
+    it("expect mergeArrays to return all the elements in one array", function() {
+        expect(mergeArrays([1, 2], [3, 4])).toEqual([1,2,3,4]);
+    });
+});
+
+describe("mergeObjects", function() {
+    it("expects mergeObjects to have a return", function() {
+        expect(mergeObjects({a: 1}, {b: 2})).toBeUndefined();
+    });
+});

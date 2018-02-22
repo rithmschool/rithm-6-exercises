@@ -43,3 +43,10 @@ function acceptNumbersOnly() {
     }
     return true;
 }
+
+function mergeArrays(arr1, arr2) {
+    for(var i = 0; i < arr2.length; i++) {
+        arr1.push(arr2[i]);
+    }
+    return arr1;
+}
