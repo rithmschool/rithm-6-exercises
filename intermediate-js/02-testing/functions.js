@@ -18,3 +18,31 @@ function expand(arr,number){
     }
     return array
 }
+
+function acceptNumbersOnly(){
+    for(var i = 0; i < arguments.length; i++){
+        if(isNaN(arguments[i]) || typeof arguments[i] !== 'number'){
+            return false;
+        }
+    }
+    return true;
+}
+
+function mergeArrays(arr1,arr2){
+    return arr1.concat(arr2).sort()
+}
+
+function mergeObject(obj1, obj2){
+    var newObj = {}
+    for(var key in obj1){
+        newObj[key] = obj1[key]
+    }
+    for(var key in obj2){
+        if(newObj.hasOwnProperty(key)){
+            newObj[key] = obj2[key]
+        } else {
+            newObj[key] = obj2[key]
+        }
+    }
+    return newObj
+}
