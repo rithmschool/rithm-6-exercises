@@ -101,6 +101,8 @@ SOLUTION EXERCISE #2
   bottom: 0;
 } */
 
+/* SOLUTION TO EXERCISE 4.
+
 .one {
   width: 400px;
   height: 400px;
@@ -112,6 +114,9 @@ SOLUTION EXERCISE #2
   width: 300px;
   height: 300px;
   background-color: yellow;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .three {
@@ -119,9 +124,9 @@ SOLUTION EXERCISE #2
   height: 200px;
   background-color: green;
   position: absolute;
-  bottom: 0;
-  left:50%;
-  transform: translate(100%,-0)
+  top: 0;
+  left: 0;
+  transform: translate(-50%,-50%)
 }
 
 .four {
@@ -130,4 +135,48 @@ SOLUTION EXERCISE #2
   background-color: blue;
   position: absolute;
   bottom: 0;
+  right: 0;
+} */
+
+
+.one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  position: absolute;
+  bottom: 100%;
+  
+  
+}
+
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  
+  
+  
+
+  /* transform: translate(100%,100%) */
+  
 }
