@@ -46,6 +46,25 @@ describe("mergeArrays", function() {
 
 describe("mergeObjects", function() {
     it("expects mergeObjects to have a return", function() {
-        expect(mergeObjects({a: 1}, {b: 2})).toBeUndefined();
+        expect(mergeObjects({a: 1}, {b: 2})).not.toBeUndefined();
+    });
+    it("expect mergeObjects to return an object", function() {
+        expect(typeof(mergeObjects({a: 1}, {b: 2}))).toBe("object");
+    });
+    var obj1 = {
+        name: "Foo",
+        num: 33
+    };
+    var obj2 = {
+        test: "thing",
+        num: 55
+    };
+    var outputObj = {
+        name: "Foo",
+        test: "thing",
+        num: 55
+    };
+    it("expect mergeObjects to return an object with all the properties in the input objects and the existing values overwritten by that of the later object", function() {
+        expect(mergeObjects(obj1, obj2)).toEqual(outputObj);
     });
 });
