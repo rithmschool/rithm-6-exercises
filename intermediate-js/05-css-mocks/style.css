@@ -1,0 +1,134 @@
+/* body{
+    padding: 10px;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+h1{
+    margin: 10px;
+}
+
+section {
+    display: flex;
+    /* width: 100%; */
+    /* height: auto; */
+    flex-direction: column;
+    align-items: center;
+    margin: 2%;
+
+}
+button {
+    background-color:blue;
+    color: white;
+    height: 45px;
+    width: 115px;
+    border-radius: 10%;
+    font-size: 20px;
+    text-align: center;
+    padding: 0.5%;
+    margin: 10px;
+}
+
+button:hover{
+    background-color: darkblue;
+    cursor: pointer;
+}
+
+.card {
+    height: 285px;
+    width: 350px;
+    border-radius: 2%;
+    overflow: hidden;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+    background-color: lightgray;
+}
+
+.catImg {
+    background-image: url("http://www.cutestpaw.com/wp-content/uploads/2016/02/Yawn..jpeg");
+    background-size: cover;
+    overflow: hidden;
+    height: 170px;
+}
+
+.title {
+    border-bottom: 1px solid gray;
+}
+.paragraph {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 90%;
+}
+
+.gif {
+    height: 230px;
+    width: 250px;
+    border: 3px solid peachpuff;
+    border-radius: 3%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    margin: 2%;
+    
+    
+}
+
+.gif:hover .roll{
+    cursor: pointer;
+    height: 100%;  
+}
+
+.first {
+    background-image: url("https://media.giphy.com/media/l3zoKeX8bMG5sMP4s/giphy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.roll {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 0.5s ease;
+}
+
+.text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .first-roll:hover {
+    opacity: 1;
+    top: 0;
+}
+
+.first:hover {
+opacity: 0.3;
+} */
+.second {
+    background-image: url("https://media.giphy.com/media/kEKcOWl8RMLde/giphy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.third{
+    background-image: url("https://img.buzzfeed.com/buzzfeed-static/static/2015-01/28/15/enhanced/webdr10/anigif_enhanced-14809-1422475942-9.gif?downsize=715:*&output-format=auto&output-quality=auto");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
