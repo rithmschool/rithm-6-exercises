@@ -23,24 +23,38 @@ describe("acceptNumbersOnly", function() {
 describe("mergeArrays", function() {
     it("it should return a single sorted array consisting of all elements in the input arrays", function() {
         expect(mergeArrays([2, 1], [3, 4])).toEqual([1,2,3,4]);
+        expect(mergeArrays([2, 1], ['three', 'four', 'FIVE'])).toEqual([1,2,'three','four','FIVE']);
     });
 });
 
 describe("mergeObjects", function() {
+    var obj1 = {
+        name: "Foo",
+        num: 33
+    };
+    var obj2 = {
+        test: "thing",
+        luckyNum: 18
+    };
+    var obj3 = {
+        test: "thing",
+        num: 55
+    };
+    var obj4 = {
+        name: "Foo",
+        test: "thing",
+        num: 55,
+        luckyNum: 18
+    };
+    var obj5 = {
+        name = "Foo",
+        test: "thing",
+        num: 55
+    };
     it("it should return an object combining the keys and values of both objects", function() {
-        var obj1 = {
-            name: "Foo",
-            num: 33
-        };
-        var obj2 = {
-            test: "thing",
-            num: 55
-        };
-        var obj3 = {
-            name: "Foo",
-            test: "thing",
-            num: 55
-        }
+        expect(mergeObjects(obj1, obj2)).toEqual(obj3);
+    });
+    it("it should adopt the value of the second object for same key conflicts", function() {
         expect(mergeObjects(obj1, obj2)).toEqual(obj3);
     });
 });
