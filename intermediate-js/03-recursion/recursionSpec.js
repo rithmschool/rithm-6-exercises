@@ -1,5 +1,6 @@
 var expect = chai.expect;
 
+
 describe("#productOfArray", function() {
   it("returns the product of all the numbers in an array", function() {
     expect(productOfArray([1, 2, 3])).to.equal(6);
