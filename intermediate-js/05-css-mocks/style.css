@@ -1,4 +1,4 @@
-* {
+body {
   font-size: 18px;
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ section {
     cursor: pointer; }
 
 #mock2 {
-  display: flex;
+  /*display: flex;*/
   /*get rid of that little bit of white space*/ }
   #mock2 #mock2container {
     margin: auto;
@@ -36,6 +36,9 @@ section {
       font-weight: bold;
       border-bottom: 1px solid grey; }
 
+@media all and (max-width: 800px) {
+  #mock3 {
+    flex-direction: column; } }
 #mock3 {
   display: flex;
   justify-content: space-between; }
@@ -45,17 +48,23 @@ section {
     position: relative;
     overflow: hidden; }
     #mock3 > div:hover {
-      background-color: red; }
+      cursor: pointer; }
       #mock3 > div:hover .hiddenText {
-        /*bottom: 30px;*/
-        transform: translateY(-50px); }
+        transform: translateY(-140px); }
   #mock3 img {
     max-width: 200px; }
   #mock3 .hiddenText {
+    width: 100%;
+    height: 100%;
     transition: transform 1s ease;
     background-color: black;
     color: white;
     position: absolute;
-    bottom: -30px; }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    opacity: .7;
+    font-size: 2rem; }
 
 /*# sourceMappingURL=style.css.map */
