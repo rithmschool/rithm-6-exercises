@@ -12,3 +12,26 @@ describe("expand function", function(){
         expect(expand(["foo", "test"], 1)).toEqual(["foo","test"]);
     });
 });
+
+describe("acceptNumbersOnly function", function(){
+    it("returns `true` if all of them are numbers", function(){
+        expect(acceptNumbersOnly(1, "foo")).toBe(false); // false
+        expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7)).toBe(true); // true
+        expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, NaN)).toBe(false); // false
+    })
+    //it("does not return NaN")
+})
+
+describe("mergeArrays function", function(){
+    it("returns one array with the values sorted", function(){
+        expect(mergeArrays([2, 1], [3, 4])).toEqual([1,2,3,4])
+
+    })
+})
+
+describe("mergeObjects function", function(){
+    it("return an object with the keys and values combined"), function(){
+        expect(mergeObjects({name: "Foo", num: 33}, {test: "thing", num: 55})).toEqual({name: "Foo", test: "thing", num: 55})
+    }
+
+})
