@@ -1,0 +1,144 @@
+
+body {
+  font-family: Helvetica,Arial,sans-serif;
+}
+
+.mainDiv {
+  /* height: 100%;
+  width: 98%; */
+  /* height: 100vh;
+  width: 100vw; */
+  margin-left: 1%;
+}
+
+.mainDiv p {
+  font-size: 16px;
+}
+
+h2 {
+  margin-top:3%;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+hr {
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+#posBtn {
+  display: flex;
+  /* justify-content: flex-start; */
+  padding-left: 2%;
+}
+
+button {
+  height: 40px;
+  width: 120px;
+  background: rgb(81, 168, 243);
+  /* border-radius: 5px; */
+}
+
+button:hover {
+  background: rgb(47,114,170);
+  cursor: pointer;
+}
+
+#blueBtn {
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+}
+
+.cat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.catContent {
+  width: 263px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px gray;
+  background: rgb(235,235,235)
+}
+.catHeader {
+  font-size: 12px;
+}
+.catPara {
+  font-size: 8px;
+}
+#mitten {
+  width: 100%;
+  height: 133px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  object-fit: cover;
+}
+
+.catContent hr {
+  margin: 13px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.catContent .catPara {
+  margin-bottom: 13px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+#giffContainer {
+  display: flex;
+  /* box-sizing: border-box;
+  height: 30%; */
+  /* flex-direction: column; */
+  justify-content: space-around;
+
+}
+
+.giffs {
+  display: inline-block;
+  width: 190px;
+  height: 190px;
+  margin: 0;
+  border: 5px solid;
+  border-color: rgb(250,223,200);
+  border-radius: 8px;
+}
+
+
+.rocketRide {
+  width: 100%;
+  height: 189px;
+  margin: 0;
+  border-radius: 4px;
+  /* box-sizing: border-box; */
+  /* object-fit: contain; */
+}
+
+.hoverText {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.5;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+  border-radius: 10px;
+}
+
+.gifs:hover .hoverText {
+  height: 100%;
+}
+
+.gifText {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  margin: 0 auto;
+  text-align: center;
+}
