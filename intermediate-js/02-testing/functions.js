@@ -18,17 +18,35 @@ function replaceWith(string, letter, repLtr){
 
 // * Write a function called `expand` which takes an array and a number and returns a copy of the array with as many numbers as specified
 
-function expand(array) {
+function expand(array, num) {
+    var expanded = [];
+    for (var i = 0; i < num; i++) {
+        var copy = array.slice(0);
+        expanded = expanded.concat(copy);
+    }
     
+    return expanded;
 }
 
+
+
 // ```javascript
-// expand([1, 2, 3], 3); //[1,2,3,1,2,3,1,2,3]
+//expand([1, 2, 3], 3); //[1,2,3,1,2,3,1,2,3]
 // expand(["foo", "test"], 1); //["foo","test"]
 // ```
 
 // * Write a function called `acceptNumbersOnly` which takes in any number of arguments and returns `true` if all of them are numbers. Watch out for `NaN` - it is a `typeof "number"`!
 
+function acceptNumbersOnly() {
+    for (var i = 0; i< arguments.length; i++) {
+        if (typeof arguments[i] !== 'number') {
+            return false;
+        } else if (isNaN(arguments[i])) {
+            return false;
+        } 
+    }
+    return true;
+}
 // ```javascript
 // acceptNumbersOnly(1, "foo"); // false
 // acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7); // true
@@ -36,6 +54,27 @@ function expand(array) {
 // ```
 
 // * Write a function called `mergeArrays` which takes in two arrays and returns one array with the values sorted
+
+function mergeArrays(arr1, arr2){
+    var merged = arr1.concat(arr2);
+    var i = 0;
+    var j = merged.length -1;
+        while (i < j) {
+            if (merged[i] > merged[j]) {
+                var temp = merged[j];
+                merged[j] = merged[i];
+                merged[i] = temp;
+                j--;
+                i++;
+            } else if (merged[i] < merged[j]) {
+                j--;
+            } else {
+                i++;
+            }
+    }
+    return merged;
+}
+
 
 // ```javascript
 // mergeArrays([2, 1], [3, 4]); // [1,2,3,4]

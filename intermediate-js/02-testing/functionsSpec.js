@@ -25,6 +25,7 @@ describe("acceptNumbersOnly function", function(){
 describe("mergeArrays function", function(){
     it("returns one array with the values sorted", function(){
         expect(mergeArrays([2, 1], [3, 4])).toEqual([1,2,3,4])
+        expect(mergeArrays([-1, 5], [-6, 4])).toEqual([-6,-1,4,5])
 
     })
 })
