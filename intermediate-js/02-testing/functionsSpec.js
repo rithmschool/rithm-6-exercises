@@ -33,9 +33,6 @@ describe("expand", function() {
     expand(arr, 2);
     expect(arr).toEqual(["foo", "test"]);
   });
-  // it("should return an array", function () {
-  //   expect(Array.isArray(expand(["test"], 2))).toEqual(true);
-  // });??
 });
 
 describe("acceptNumbersOnly", function() {
@@ -62,10 +59,20 @@ describe("mergeArrays", function() {
   it("should return a merged array of the inputs arrays, sorted", function() {
     expect(mergeArrays([2, 1], [3, 4])).toEqual([1, 2, 3, 4]);
   });
-  it("should not filter the sorted array", function () {
+  it("should work with arrays of different lengths", function () {
+    expect(mergeArrays([2, 1, 3], [3, 4, 5, 6])).toEqual([1, 2, 3, 3, 4, 5, 6]);
+  });
+  it("should not filter for unique values in the sorted array", function () {
     expect(mergeArrays([2, 1], [1, 4])).toEqual([1, 1, 2, 4]);
   });
-  it("should ignore empty array inputs", function () {
+  it("should not filter for unique values in the sorted array", function () {
+    expect(mergeArrays([2, 1], [1, 4])).toEqual([1, 1, 2, 4]);
+  });
+  it("should sort different input types", function () {
+    expect(mergeArrays([2, 1, 'a'], [1, 4, 'b'])).toEqual([1, 1, 2, 4, 'a', 'b']);
+  });
+  it(
+    "should ignore empty array inputs", function () {
     expect(mergeArrays([], [1, 4])).toEqual([1, 4]);
     expect(mergeArrays([1, 4], [])).toEqual([1, 4]);
   });
