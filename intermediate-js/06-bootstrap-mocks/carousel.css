@@ -8,6 +8,15 @@ img {
     height: 512px;
 }
 
-#first-slide {
-    text-align: left;
+.heading-img {
+    width: 140px;
+    height: 140px;
+}
+
+.some-img {
+    width: 100%
+}
+
+#header {
+    color: #5a5a5a;
 }
