@@ -24,21 +24,20 @@ function addListItem(num, title, url) {
   var $solidStarDiv = $('<span>').append($('<i class=\"fas fa-star hidden\"><i>'));
   var $hollowStarDiv = $('<span>').append($('<i class=\"far fa-star\"><i>'));
   var $starContainer = $('<span>').append($solidStarDiv, $hollowStarDiv);
-  // $starContainer.on('click', function(e) {
-  //   console.log(e.target);
-  // })
-  
-  $hollowStarDiv.on('click', function(e) {
-    $(this).toggleClass('hidden');
-  });
 
+  $starContainer.css('border', '1px solid blue')
+  $starContainer.on('click', function(e) {
+    $(this).children().each(function() {
+      $(this).toggleClass('hidden');
+    });
+  });
 
   var $num = $('<span>').text(num)
   var $titleTxt = $('<span>').text(title)
   var $urlTxt = $('<span>').text(url)
 
   var $newLi = $('<li>');
-  $newLi.append($num, $solidStarDiv, $hollowStarDiv, $titleTxt, $urlTxt);
+  $newLi.append($num, $starContainer, $titleTxt, $urlTxt);
   $ul.append($newLi);
 }
 
