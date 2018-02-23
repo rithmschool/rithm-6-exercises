@@ -21,11 +21,10 @@ $form.on('submit', function(e) {
 
 function addListItem(num, title, url) {
 
-  var $solidStarDiv = $('<span>').append($('<i class=\"fas fa-star hidden\"><i>'));
+  var $solidStarDiv = ($('<span>').addClass('hidden')).append($('<i class=\"fas fa-star\"><i>'));
   var $hollowStarDiv = $('<span>').append($('<i class=\"far fa-star\"><i>'));
   var $starContainer = $('<span>').append($solidStarDiv, $hollowStarDiv);
 
-  $starContainer.css('border', '1px solid blue')
   $starContainer.on('click', function(e) {
     $(this).children().each(function() {
       $(this).toggleClass('hidden');
