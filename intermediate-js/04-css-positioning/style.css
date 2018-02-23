@@ -1,14 +1,14 @@
-/*beginning exercises now*/
+/*Exercise 1*/
 
 .one {
-  position: absolute;
+  position: relative;
   width: 400px;
   height: 400px;
   background-color: red;
 }
 
 .two {
-  position: relative;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -18,7 +18,7 @@
 }
 
 .three {
-  position: relative;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -28,7 +28,7 @@
 }
 
 .four {
-  position: relative;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -36,3 +36,135 @@
   height: 100px;
   background-color: blue;
 }
+
+/*Exercise 2*/
+
+/*.one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.four {
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}*/
+
+/*Exercise 3*/
+
+/*.one {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+}
+
+.three {
+  position: absolute;
+  bottom: 0;
+  right: -200px;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.four {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}*/
+
+/*Exercise 4*/
+
+/*.one {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+}
+
+.three {
+  position: relative;
+  top: -100px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.four {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}*/
+
+/*Exercise 5*/
+
+/*.one {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+}
+
+.three {
+  position: absolute;
+  top: -200px;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.four {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}*/
