@@ -43,11 +43,12 @@ Students can only push to their own branches.
 * [02 Testing Exercise](./intermediate-js/02-testing)
 * [03 Recursion Exercise](./intermediate-js/03-recursion)
 * [04 CSS Positioning Exercise](./intermediate-js/04-css-positioning)
-* [05 Bootstrap Mockup Exercise](./intermediate-js/05-bootstrap-mocks)
-* [06 jQuery Exercise](./intermediate-js/06-jquery)
-* [07 AJAX with jQuery Exercise](./intermediate-js/07-ajax-jquery)
-* [08 ES2015 Exercise](./intermediate-js/08-es2015)
-* [09 Object Oriented Exercises](./intermediate-js/09-oop)
+* [05 CSS Mockup Exercise](./intermediate-js/05-css-mocks)
+* [06 Bootstrap Mockup Exercise](./intermediate-js/05-bootstrap-mocks)
+* [07 jQuery Exercise](./intermediate-js/06-jquery)
+* [08 AJAX with jQuery Exercise](./intermediate-js/07-ajax-jquery)
+* [09 ES2015 Exercise](./intermediate-js/08-es2015)
+* [10 Object Oriented Exercises](./intermediate-js/09-oop)
 
 ## II. Flask
 
@@ -83,18 +84,34 @@ Students can only push to their own branches.
 
 ## IV. Node
 
-## V. MongoDB
+### Unit 01 - Node,Express, and Mongo Fundamentals
 
-## VI. React
+* [01 - Core Modules](./node/Unit-01/01-core_modules.md)
+* [02 - Express Intro](./node/Unit-01/02-express_intro.md)
+* [03 - Express Router](./node/Unit-01/03-express_router.md)
+* [04 - Mongoose CRUD](./node/Unit-01/04-mongoose_crud.md)
+* [05 - Mongoose Associations](./node/Unit-01/05-mongoose_associations.md)
+* [06 - Heroku with MongoDB](./node/Unit-01/06-heroku_with_mongodb.md)
 
-### Unit 01 Intro to React
+### Unit 02 - Intermediate Node and Express
+
+* [01 - Authentication + Authorization with sessions](./node/Unit-02/01-cookies_sessions_auth.md)
+* [02 - Authentication with Passport Local](./node/Unit-02/02-passport.md)
+* [03 - OAuth with Passport](./node/Unit-02/03-oauth.md)
+* [04 - JSON APIs](./node/Unit-02/04-json_apis.md)
+* [05 - Testing with JSON APIs](./node/Unit-02/05-testing_apis.md)
+* [06 - Authentication with JSON APIs](./node/Unit-02/06-json_apis_auth.md)
+
+## V. React
+
+### Unit 01 - Intro to React
 
 * [01 Introduction To React](./react/Unit-01/01-introduction-to-react)
 * [02 Props, State, and Component Architecture](./react/Unit-01/02-props-state-component-architecture)
 * [03 Events, Forms, Refs, and Life Cycle](./react/Unit-01/03-events-forms-refs-life-cycle)
 * [04 Final Project](./react/Unit-01/04-final-project/readme.md)
 
-### Unit 02 Intermediate React, React Router, and Redux
+### Unit 02 - Intermediate React, React Router, and Redux
 
 * [01 Prop Types](./react/Unireact/t-02/02-prop-types/readme.md)
 * [02 Testing](./react/Unit-02/02-testing/readme.md)
