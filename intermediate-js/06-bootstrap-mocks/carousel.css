@@ -1,0 +1,13 @@
+.carousel {
+    min-height: 512px;
+    min-width: auto;
+}
+
+img {
+    background-color: #777777;
+    height: 512px;
+}
+
+#first-slide {
+    text-align: left;
+}
