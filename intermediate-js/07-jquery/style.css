@@ -1,0 +1,25 @@
+.big-container {
+    background-color: #f6f6ef;
+    width: 800px;
+    margin: 50px auto;
+    padding-bottom: 10px;
+}
+
+.header {
+    background-color: #ff6600;
+}
+
+.form {
+    text-align: center;
+    width: 300px;
+    margin: 20px auto;
+    padding-bottom: 20px;
+}
+
+.btn {
+    background-color: #cccccc;
+}
+
+a:hover {
+    cursor: pointer;
+}
