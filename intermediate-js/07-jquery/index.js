@@ -2,12 +2,17 @@ $(document).ready(function() {
   var $ul = $('#list ul');
   var $form = $('form');
   var $toggleForm = $('#toggleForm')
+  var $toggleFavorites = $('#toggleFavorites')
   let counter = 1;
 
   sampleItems();
 
   $toggleForm.on('click', function(e) {
     $form.toggleClass('hidden');
+  })
+
+  $toggleFavorites.on('click', function(e) {
+    console.log('works');
   })
 
   $form.on('submit', function(e) {
