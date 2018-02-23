@@ -62,6 +62,21 @@ function search(arr, value) {
   return -1;
 }
 
+function binarySearch(arr, target, low = 0, high = arr.length - 1) {
+   var mid = getMid(low, high)
+   if (arr[mid] === target) {
+     return mid;
+   } 
+   if (low >= high) {
+     return -1;
+   }
+   else if (arr[mid] < target) {
+     return binarySearch(arr, target, mid + 1, high);
+   }
+   else {
+     return binarySearch(arr, target, low, mid - 1);    
+   } 
+}
 
 
 
