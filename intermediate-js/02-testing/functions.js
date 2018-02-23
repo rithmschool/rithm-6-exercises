@@ -10,9 +10,16 @@ function replaceWith(str, targetChar, replacementChar) {
 }
 
 function expand(arr, num) {
-  const newArr = [];
+  var newArr = [];
   for (let i = 0; i < num; i++) {
-    newArr.concat(arr);
+    newArr = newArr.concat(arr);
   }
   return newArr;
+}
+
+function acceptNumbersOnly(...nums) {
+  if (nums.length > 0) return nums.every(num => {
+    return (!(isNaN(num)) && typeof num === 'number')
+  });
+  return false
 }
