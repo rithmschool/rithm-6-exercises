@@ -5,19 +5,12 @@ $(function() {
 
     $(".home-link").on("click", function() {
         $form.hide();
+        $("li").show();
     });
 
     $(".submit-link").on("click", function() {
         $form.show();
-    });
-
-    // NEED TO FIX THIS!
-    // when clicking favorites, only show links with the star clicked
-    $(".favorites-link").on("click", function() {
-        $form.hide();
-        if ($("li").hasClass("fas fa-star")) {
-            $("li far fa-star").hide();
-        }
+        $("li").show();
     });
 
     $form.on("submit", function(event) {
@@ -25,6 +18,9 @@ $(function() {
 
         let title = $("#inputTitle").val();
         let url = $("#inputUrl").val();
+        let hostName = $("<a>")
+            .prop("href", url)
+            .prop("hostname");
 
         $("ol").append(
             $(
@@ -32,6 +28,9 @@ $(function() {
                 url +
                 "' target='_blank'> " +
                 title +
+                " (" +
+                hostName +
+                ")" +
                 "</a></li>"
             )
         );
@@ -42,13 +41,27 @@ $(function() {
         $form.hide();
     });
 
-    $(".fa-star").on("click", function() {
+    $("ol").on("click", ".fa-star", function() {
         $(this).toggleClass("far fa-star fas fa-star");
+        $(this)
+            .closest("li")
+            .toggleClass("favorited");
     });
 
-    if ($("li").hasClass("fas fa-star")) {
-        $("li").addClass("bookmarked");
-    }
-});
+    let $favorites = $(".favorites-link");
+    $favorites.data("text-original", $favorites.text());
+    $favorites.text($favorites.data("text-swap"));
 
-// when clicking star, add those to favorites
+    $favorites.on("click", function() {
+        $form.hide();
+        $("li:not(.favorited)").hide();
+        let el = $(this);
+        if (el.text() === el.data("text-swap")) {
+            el.text(el.data("text-original"));
+        } else {
+            el.data("text-original", el.text());
+            el.text(el.data("text-swap"));
+            $("li").show();
+        }
+    });
+});

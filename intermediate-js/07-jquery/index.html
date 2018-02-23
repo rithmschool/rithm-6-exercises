@@ -20,13 +20,12 @@
         <nav class="navbar navbar-expand-lg navbar-light header">
             <a class="navbar-brand home-link" href="#">Hack or Snooze</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        <span class="navbar-toggler-icon"></span>
+      </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link submit-link" href="#">submit </a>
-                    <a class="nav-item nav-link favorites-link" href="#">favorites</a>
-
+                    <a class="nav-item nav-link favorites-link" data-text-swap="favorites" href="#">all</a>
                 </div>
             </div>
         </nav>
@@ -36,11 +35,11 @@
             <form class="form-horizontal">
                 <div class="form-group row">
                     <label for="exampleInputTitle" class="control-label">title</label>
-                    <input type="title" class="form-control" id="inputTitle" placeholder="enter title here">
+                    <input type="title" required="required" class="form-control" id="inputTitle" placeholder="enter title here">
                 </div>
                 <div class="form-group row">
                     <label for="exampleInputUrl" class="control-label">url</label>
-                    <input type="url" class="form-control" id="inputUrl" placeholder="enter url here">
+                    <input type="url" required="required" class="form-control" id="inputUrl" placeholder="enter url here">
                 </div>
                 <button type="submit" class="btn">submit</button>
             </form>
@@ -48,10 +47,25 @@
 
         <!-- this is the article list -->
         <div class="article-list">
-            <ol>
-                <li><span><i class="far fa-star"></i></span> <a href="https://bost.ocks.org/mike/algorithms/" target="_blank"> Visualizing Algorithms</a></li>
-                <li><span><i class="far fa-star"></i></span> <a href="https://www.rithmschool.com/blog/problem-solving-strategies-01" target="_blank"> Problem Solving with Rithm</a></li>
-                <li><span><i class="far fa-star"></i></span> <a href="https://www.npr.org/sections/alltechconsidered/2017/06/22/533909715/all-girls-teen-engineering-team-create-a-solar-powered-tent-for-homeless-people" target="_blank">All-Girls Engineering Team Creates A Solar-Powered Tent For Homeless People</a></li>
+            <ol class="article-ol">
+                <li>
+                    <span>
+            <i class="far fa-star"></i>
+          </span>
+                    <a href="https://bost.ocks.org/mike/algorithms/" target="_blank"> Visualizing Algorithms</a>
+                </li>
+                <li>
+                    <span>
+            <i class="far fa-star"></i>
+          </span>
+                    <a href="https://www.rithmschool.com/blog/problem-solving-strategies-01" target="_blank"> Problem Solving with Rithm</a>
+                </li>
+                <li>
+                    <span>
+            <i class="far fa-star"></i>
+          </span>
+                    <a href="https://www.npr.org/sections/alltechconsidered/2017/06/22/533909715/all-girls-teen-engineering-team-create-a-solar-powered-tent-for-homeless-people" target="_blank">All-Girls Engineering Team Creates A Solar-Powered Tent For Homeless People</a>
+                </li>
             </ol>
         </div>
     </div>
