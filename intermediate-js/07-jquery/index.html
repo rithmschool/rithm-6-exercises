@@ -8,39 +8,38 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-
-<!-- class="container-fluid alert alert-primary" -->
-<div id='header'>
-  <div class="row">
-    <div class="col">
-      <h1>Hack or Snooze</h1>
+  <!-- class="container-fluid alert alert-primary" -->
+  <div id='header'>
+    <div class="row">
+      <div class="col">
+        <h1>Hack or Snooze</h1>
+      </div>
+      <div class="col">
+        <button id='toggleForm'>Submit</button>
+        <button>Favorites</button>
+      </div>
     </div>
-    <div class="col">
-      <button id='toggleForm'>Submit</button>
-      <button>Favorites</button>
+    <div id="submission" style="border: 1px solid blue">
+      <form action="">
+        <label for="title">Title:</label>
+        <input id='title' type="text">
+        <label for="url">Url:</label>
+        <input id='url' type="text">
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
+    <div id="list">
+      <ul>
+        <!-- add elements here -->
+      </ul>
     </div>
   </div>
-  <div id="submission" style="border: 1px solid blue">
-    <form action="">
-      <label for="title">Title:</label>
-      <input id='title' type="text">
-      <label for="url">Url:</label>
-      <input id='url' type="text">
-      <button type='submit'>Submit</button>
-    </form>
-  </div>
-  <div id="list">
-    <ul>
-    <!-- add elements here -->
-      
-    </ul>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.js " integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-<script src="./index.js"></script>
-
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js " integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script src="./index.js"></script>
 </body>
 
 </html>
