@@ -9,10 +9,6 @@
   width: 300px;
   height: 300px;
   background-color: yellow;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .three {
@@ -20,9 +16,8 @@
   height: 200px;
   background-color: green;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 100%;
+  bottom: 0;
 }
 
 .four {
@@ -30,7 +25,5 @@
   height: 100px;
   background-color: blue;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
 }
