@@ -1,1 +1,75 @@
+body {
+  margin: 8px;
+  background: rgb(255, 255, 255);
+  font-family: 'Open Sans', sans-serif;
+  color: #828282;
+  font-size: 10.25pt;
+  letter-spacing: 0.25px;
+}
 
+#header {
+  padding-left: 2px;
+  background: rgb(255, 102, 0);
+}
+#header .col {
+  display: flex;
+  align-items: center;
+}
+#brand {
+  color: white;
+  font-size: 25px;
+  padding-right: 2px;
+}
+#header strong {
+  padding-left: 2px;
+  color: #222222;
+}
+#header strong,
+#header a,
+#header span,
+#form {
+  padding-right: 5px;
+  color: #000000;
+}
+#header,
+#main {
+  margin-left: 107px;
+  margin-right: 107px;
+}
+#main {
+  padding: 10px 0 0 0;
+  background: rgb(246, 246, 240);
+}
+#form {
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+#form label {
+  padding: 8px;
+}
+#form label,
+#form button {
+  font-weight: 800;
+}
+#form input,
+#form button {
+  padding: 8px;
+  color: #000000;
+  font-size: 10.25pt;
+  letter-spacing: 0.25px;
+}
+#form button {
+  background: darkgray;
+  border: none;
+  color: white;
+}
+#form button:hover {
+  background: gray;
+}
+#list i {
+  padding-right: 10px;
+}
+hr {
+  height: 2px;
+  background: rgb(255, 102, 0);
+}
