@@ -24,6 +24,10 @@
     background-color: #cccccc;
 }
 
+a {
+    color: black;
+}
+
 a:hover {
     cursor: pointer;
 }

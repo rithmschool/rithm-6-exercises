@@ -3,12 +3,21 @@ let $form = $("form");
 $(function() {
     $form.hide();
 
-    $(".home-link").on("click", function(event) {
+    $(".home-link").on("click", function() {
         $form.hide();
     });
 
-    $(".submit-link").on("click", function(event) {
+    $(".submit-link").on("click", function() {
         $form.show();
+    });
+
+    // NEED TO FIX THIS!
+    // when clicking favorites, only show links with the star clicked
+    $(".favorites-link").on("click", function() {
+        $form.hide();
+        $("li")
+            .find("far fa-star")
+            .hide();
     });
 
     $form.on("submit", function(event) {
@@ -33,5 +42,3 @@ $(function() {
 });
 
 // when clicking star, add those to favorites
-
-// when clicking favorites, only show links with the star clicked
