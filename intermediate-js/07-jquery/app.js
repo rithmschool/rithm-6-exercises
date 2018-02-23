@@ -1,9 +1,17 @@
-// on home page, show all links by default
+let $form = $("form");
 
-// when clicking submit in nav bar, show form and links below
-// after submitting form, immeditaely hide form
 $(function() {
-    $("form").on("submit", function(event) {
+    $form.hide();
+
+    $(".home-link").on("click", function(event) {
+        $form.hide();
+    });
+
+    $(".submit-link").on("click", function(event) {
+        $form.show();
+    });
+
+    $form.on("submit", function(event) {
         event.preventDefault();
 
         let title = $("#inputTitle").val();
@@ -15,9 +23,13 @@ $(function() {
 
         $("#inputTitle").val("");
         $("#inputUrl").val("");
+
+        $form.hide();
     });
 
-    $(".fa-star").click(function() {});
+    $(".fa-star").on("click", function() {
+        $(this).toggleClass("far fa-star fas fa-star");
+    });
 });
 
 // when clicking star, add those to favorites
