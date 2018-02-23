@@ -1,0 +1,8 @@
+.flex-column{
+    width:10%;
+}
+
+.flex-container{
+    display:flex;
+    justify-content: row;
+}
