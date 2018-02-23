@@ -15,9 +15,9 @@ $(function() {
     // when clicking favorites, only show links with the star clicked
     $(".favorites-link").on("click", function() {
         $form.hide();
-        $("li")
-            .find("far fa-star")
-            .hide();
+        if ($("li").hasClass("fas fa-star")) {
+            $("li far fa-star").hide();
+        }
     });
 
     $form.on("submit", function(event) {
@@ -27,7 +27,13 @@ $(function() {
         let url = $("#inputUrl").val();
 
         $("ol").append(
-            $("<li><span><i class='far fa-star'></i></span> " + title + "</li>")
+            $(
+                "<li><span><i class='far fa-star'></i></span><a href=' " +
+                url +
+                "' target='_blank'> " +
+                title +
+                "</a></li>"
+            )
         );
 
         $("#inputTitle").val("");
@@ -39,6 +45,10 @@ $(function() {
     $(".fa-star").on("click", function() {
         $(this).toggleClass("far fa-star fas fa-star");
     });
+
+    if ($("li").hasClass("fas fa-star")) {
+        $("li").addClass("bookmarked");
+    }
 });
 
 // when clicking star, add those to favorites
