@@ -9,6 +9,10 @@
     background-color: #ff6600;
 }
 
+.home-link {
+    font-weight: bold;
+}
+
 .form {
     text-align: center;
     width: 300px;
