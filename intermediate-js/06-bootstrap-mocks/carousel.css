@@ -17,6 +17,10 @@ img {
     width: 100%
 }
 
+.class {
+    font-size: 1.2rem;
+}
+
 #header {
     color: #5a5a5a;
 }
