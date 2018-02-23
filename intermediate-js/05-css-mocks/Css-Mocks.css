@@ -1,0 +1,59 @@
+.button {
+    box-sizing: border-box;
+    background-color: #0D47A1;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition-duration: 0.35s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1565C0
+}
+
+.container1 {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    background-color: lightgrey;
+}
+
+.container1 h1 {
+    align-items: stretch;
+    background-color: lightgrey;
+}
+
+.container1 .minorhead h2 {
+    align-items: flex-start;
+    background-color: lightgrey;
+    color: red;
+
+}
+
+#corvette {
+    width: 100%;
+    border-radius: 2px;
+}
+
+hr {
+    width: 100%;
+}
+
+.container2 {
+    width: 70%;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    background-color: lightgrey;
+    display: flex;
+    padding: 20px;
+}
+
+.teacher {
+    border-radius: 12px;
+}
