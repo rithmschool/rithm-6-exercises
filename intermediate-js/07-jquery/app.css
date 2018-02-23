@@ -5,10 +5,11 @@ body{
 .nav{
 	display: flex;
 	width: 100vw;
-	height: 5vh;
+	height: 7vh;
 	align-items: center;
 	background-color: #DB6143;
 	margin: 0;
+	padding-left: 4rem;
 	position: relative;
 	left: -2vw;
 	top: -1vh;
