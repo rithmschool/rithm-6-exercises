@@ -38,7 +38,7 @@ $(function() {
         $("#inputTitle").val("");
         $("#inputUrl").val("");
 
-        $form.hide();
+        $form.slideUp("slow");
     });
 
     $("ol").on("click", ".fa-star", function() {

@@ -5,6 +5,11 @@
     padding-bottom: 10px;
 }
 
+.navbar {
+    border-radius: 5px;
+    height: 40px;
+}
+
 .header {
     background-color: #ff6600;
 }
@@ -22,6 +27,10 @@
 
 .btn {
     background-color: #cccccc;
+}
+
+ol li {
+    font-size: 14px;
 }
 
 li a {
