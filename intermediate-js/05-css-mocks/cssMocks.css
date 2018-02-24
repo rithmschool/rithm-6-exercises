@@ -3,7 +3,7 @@ body{
 	flex-direction: column;
 	justify-content: space-around;
 	width: 90%;
-	height: 100vh;
+	height: 90rem;
 	font-family: 'Alegreya', sans-serif;
 	box-sizing: border-box;;
 }
@@ -19,7 +19,7 @@ body div{
 	border-radius: 10px;
 	font-size: 2em;
 	font-family: 'Alegreya', sans-serif;
-	height: 5vh;
+	height: 3rem;
 	width: 10vw;
 	margin-left: 5vw;
 }
@@ -29,7 +29,7 @@ body div{
 }
 #mock2{
 	background-color: #DCD9D9;
-	height: 30vh;
+	height: 22rem;
 	width: 20vw;
 	border-radius: 30px 30px 30px 30px;
 	font-family: 'Alegreya', sans-serif;
@@ -39,7 +39,7 @@ body div{
 }
 
 #mock2 img{
-	height: 18vh;
+	height: 12rem;
 	border-radius: 30px 30px 0px 0px;
 
 }
@@ -58,7 +58,7 @@ hr{
 }
 
 h1{
-	height: 5vh;
+	height: 3rem;
 	margin-left: 1vw;
 	margin-bottom: 0;
 }
