@@ -1,0 +1,55 @@
+* {
+  font-size: 18px;
+}
+
+li {
+
+}
+
+.title-txt {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.url-txt {
+  font-size: .8rem;
+  color: grey;
+}
+
+#toggle-form, #toggle-favorites, #star-container, .url-txt, button {
+  cursor: pointer;
+}
+
+span {
+  padding: 0px 2px;
+}
+
+#header {
+  background-color: #f86161;
+  padding: 10px 30px;
+}
+
+#submission, #list {
+  background-color: ##f6f6ef
+}
+
+#submission {
+  padding: 30px;
+}
+
+#submission button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: grey;
+  color: white;
+  margin-top: 15px;
+}
+
+#list {
+  padding: 30px;
+}
+
+.hidden {
+  display: none;
+}
+

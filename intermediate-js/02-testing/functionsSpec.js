@@ -69,12 +69,16 @@ describe('acceptNumbersOnly', function() {
   })
 })
 
-/*
-takes in two arrays, returns one array with values sorted
-*/
 
 describe('mergeArrays', function() {
-  it('returns false with no input', function() {
-    expect(mergeArrays()).toEqual(false);
+  it('returns empty array with no input', function() {
+    expect(mergeArrays()).toEqual([]);
   })
+
+  it('returns a sorted, merged array', function() {
+    expect(mergeArrays([1], [2])).toEqual([1, 2]);
+    expect(mergeArrays([2, 1], [3, 4])).toEqual([1, 2, 3, 4])
+    expect(mergeArrays([1, 12, 5], [4, 3])).toEqual([1, 3, 4, 5, 12]);
+  })
+
 })
