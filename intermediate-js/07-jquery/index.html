@@ -14,6 +14,7 @@
   enter a valid url.
   * Users can click on a star next to a story to mark it as a "favorite."
   * Style your app! -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
   <style>
     nav {
@@ -25,7 +26,7 @@
     }
 
     @media screen and (min-width: 750px) {
-      nav {
+      body {
         margin: 8px 7.5% 0;
       }
     }
@@ -50,29 +51,133 @@
       text-decoration: none;
       color: inherit;
     }
+
+    .article-container {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      background-color: lightgrey;
+    }
+
+    a:hover {
+      border-bottom: 1px solid black;
+    }
+
+    input,
+    button {
+      display: block;
+      border-radius: 5px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .favorite {}
   </style>
 </head>
 
 <body>
-
   <section>
     <nav>
       <h1>Hack or Snooze</h1>
       <section class="nav-links">
-        <a href="">submit</a>
+        <a id="nav-submit" href="#">submit</a>
         <span id="vertical-bar">|</span>
-        <a href="">favorites</a>
+        <a id="nav-favorites" href="#">favorites</a>
       </section>
     </nav>
-    <section>
+    <section class="article-container">
+      <form action="" class="">
+        <label for="title"> title </label>
+        <input id="title" type="text">
+        <label for="URL"> URL </label>
+        <input id="URL" type="url">
+        <button type="submit">Submit</button>
+      </form>
+      <ol>
+        <li>
+          <span class="">
+            <i class="far fa-star"></i>
+          </span>
 
+          <strong>Visualizing Algorithms</strong>
+          <small>(visualgo.net)</small>
+        </li>
+
+        <li>
+          <span class="">
+            <i class="far fa-star"></i>
+          </span>
+
+          <strong>Problem Solving with Rithm</strong>
+          <small>(rithmschool.com)</small>
+        </li>
+
+        <li>
+          <span class="">
+            <i class="far fa-star"></i>
+          </span>
+
+          <strong>Buy this book!</strong>
+          <small>(amazon.com)</small>
+        </li>
+      </ol>
     </section>
   </section>
 
 </body>
-<script src=“//code.jquery.com/jquery-3.3.1.js” integrity=“sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=” crossorigin=“anonymous”></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+</script>
 <script>
+  $(function () {
 
+    var $form = $('form');
+    var $ol = $('ol');
+    var $navSubmit = $('#nav-submit');
+    var $navFavorites = $('#nav-favorites');
+    var $articleContainer = $('.article-container');
+
+    $navSubmit.on('click', e => {
+      $form.toggleClass('hide');
+    })
+
+    $navFavorites.on('click', e => {
+      $articleContainer.toggleClass('hide');
+
+    })
+
+    $form.on('submit', e => {
+      e.preventDefault();
+      var title = $('#title').val();
+      var url = $('#URL').val()
+      var li = $(`<li>
+        <span>
+        <i class="far fa-star"></i>
+        </span>
+        <strong>${title}</strong>
+        <small>${url}</small>
+        </li>`);
+      $ol.append(li);
+      $form.trigger('reset');
+    });
+
+    $('ol').on('click', 'li span', e => {
+      var $closestLi = $(e.target).closest('li')
+      $closestLi.toggleClass('favorite');
+      $closestSpan = $(e.target).closest('span');
+      if ($closestLi.hasClass('favorite')) {
+        $closestSpan.html(`<i class="fas fa-star"></i>`);
+      } else {
+        $closestSpan.html(`<i class="far fa-star"></i>`);
+      }
+
+    });
+
+    // <i class="far fa-star"></i>
+    // <i class="fas fa-star"></i>
+
+  });
 </script>
 
 </html>
