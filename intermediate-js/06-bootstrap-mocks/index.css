@@ -11,5 +11,8 @@ nav div{
 
 body{
     background-image: url('http://www.saladworks.com/sites/default/files/Sandwich-AvocadoBLT.jpg');
+}
 
+.bottom{
+    color: grey;
 }
