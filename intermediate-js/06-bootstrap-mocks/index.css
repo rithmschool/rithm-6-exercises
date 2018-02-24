@@ -1,0 +1,15 @@
+.content{
+    height: 80vh;
+    width: 60vw;
+    COLOR:#FFFFFF;
+    text-shadow: -2px 0px 18px #121980;
+}
+
+nav div{
+    color: white;
+}
+
+body{
+    background-image: url('http://www.saladworks.com/sites/default/files/Sandwich-AvocadoBLT.jpg');
+
+}
