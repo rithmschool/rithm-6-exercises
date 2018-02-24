@@ -1,3 +1,36 @@
+li {
+  
+}
+
+#header {
+  background-color: #f86161;
+  padding: 10px 30px;
+}
+
+#submission, #list {
+  background-color: ##f6f6ef
+}
+
+#submission {
+  padding: 30px;
+}
+
+#submission button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: grey;
+  color: white;
+  margin-top: 15px;
+}
+
+#list {
+  padding: 30px;
+}
+
 .hidden {
   display: none;
+}
+
+span {
+  padding: 0px 2px;
 }
