@@ -4,7 +4,7 @@ var $link = $("#link");
 var $form = $("form");
 var $favorites = $("#favorites");
 var $submit = $("#submit");
-var $starredElements = $(".far")
+
 $(document).ready(function(){
     console.log("hello")
 })
@@ -18,13 +18,14 @@ $form.on("submit", function(event){
     $titleText.addClass("larger-text").text($title.val());
     $post.append($titleText);
     $url.text("(" + $link.val() + ")");
-    $list.append($post.append($url))
+    $list.append($post.append($url));
+    $form.toggle("hide");
 })
 
 
 $list.on("click", "i", function(event){
     $(event.target).toggleClass("far fa-star fas fa-star");
-    $
+    
 });
 
 
@@ -34,7 +35,5 @@ $submit.on("click", function(){
 
 $favorites.on("click", function(){
     $form.toggle("hide")
-    $starredElements.parent().hide();
-    
-    
+    $(".far").parent().hide();
 });
