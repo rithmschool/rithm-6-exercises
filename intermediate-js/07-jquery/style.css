@@ -21,8 +21,9 @@
 .form {
     text-align: center;
     width: 300px;
-    margin: 20px auto;
+    margin: 0 auto;
     padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 .btn {
