@@ -39,7 +39,7 @@ function expand(arr, num) {
 
 function acceptNumbersOnly() {
     for(var i = 0; i < arguments.length; i++) {
-        if(isNaN(arguments[i])) return false;
+        if(typeof(arguments[i]) !== 'number' || isNaN(arguments[i])) return false;
     }
     return true;
 }
@@ -48,7 +48,7 @@ function mergeArrays(arr1, arr2) {
     for(var i = 0; i < arr2.length; i++) {
         arr1.push(arr2[i]);
     }
-    return arr1;
+    return arr1.sort((a, b) => a - b);
 }
 
 function mergeObjects(obj1, obj2) {

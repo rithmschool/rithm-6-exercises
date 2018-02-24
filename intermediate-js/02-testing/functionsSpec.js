@@ -25,6 +25,9 @@ describe("acceptNumbersOnly", function() {
     it("expect acceptNumbersOnly to return false if not all of them are", function() {
         expect(acceptNumbersOnly(1, "foo")).toBe(false);
         expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, NaN)).toBe(false);
+        expect(acceptNumbersOnly(1, 2, 3, {a:1})).toBe(false);
+        expect(acceptNumbersOnly(1, 2, 3, [])).toBe(false);
+        expect(acceptNumbersOnly("1", 2, 3)).toBe(false);
     });
     it("expect acceptNumbersOnly to true if the inputs are all numbers", function() {
         expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7)).toBe(true);
@@ -41,6 +44,9 @@ describe("mergeArrays", function() {
     });
     it("expect mergeArrays to return all the elements in one array", function() {
         expect(mergeArrays([1, 2], [3, 4])).toEqual([1,2,3,4]);
+    });
+    it("expect mergeArrays to return a sorted array of elements", function() {
+        expect(mergeArrays([2, 1], [3])).toEqual([1,2,3]);
     });
 });
 
