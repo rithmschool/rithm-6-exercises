@@ -8,4 +8,13 @@ function replaceWith(str, char1, char2) {
     return arr.join("");
 }
 
-function expand(arr, num) {}
+function expand(arr, num) {
+    var result = arr;
+    num = num - 1;
+
+    while (num > 0) {
+        result = result.concat(arr);
+        num--;
+    }
+    return result;
+}
