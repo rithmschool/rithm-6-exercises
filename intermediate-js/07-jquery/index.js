@@ -4,11 +4,12 @@ $(document).ready(function() {
 
   sampleItems();
 
-  $('#toggleForm').on('click', function(e) {
+  $('#toggle-form').on('click', function(e) {
     $form.toggleClass('hidden');
   })
 
-  $('#toggleFavorites').on('click', function(e) {
+  $('#toggle-favorites').on('click', function(e) {
+    // debugger;
     var $data = $ol.find('svg').filter('.fa-star')
     $data.closest('span').toggleClass('hidden');
 
@@ -17,7 +18,7 @@ $(document).ready(function() {
   $form.on('submit', function(e) {
     e.preventDefault();
     var titleTxt = $('#title').val();
-    var urlTxt = $('#urlInput').val();
+    var urlTxt = $('#url-input').val();
     addListItem(titleTxt, urlTxt);
     $form.trigger("reset");
   })
