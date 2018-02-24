@@ -71,7 +71,7 @@ describe("mergeArrays", function() {
 /*
 describe("mergeObjects", function() {
     it("should not accept strings", function() {
-        expect(mergeObjects());
+        expect(mergeObjects("hello", "hi")).toBe(undefined);
     });
 });
 
