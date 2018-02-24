@@ -22,17 +22,22 @@ div.main {
 }
 
 section {
-  margin: 2%;
+  margin: 1%;
 }
 
 nav.hackSnoozeNav {
   background-color: rgb(255, 102, 0);
 }
 
-form {
+/* form {
   display: none;
-}
+  transition: all 2s linear;
+} */
 
-.show-form {
+/* .show-form {
   display: block;
+} */
+
+.dont-display {
+  display: none;
 }
