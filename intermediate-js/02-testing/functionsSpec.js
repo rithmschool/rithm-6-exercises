@@ -82,3 +82,49 @@ describe('mergeArrays', function() {
   })
 
 })
+
+/*
+write function mergeObjects
+takes two objects
+returns an object with the keys and values combined
+if the second object and first object share a key,
+the value stored in the second object should
+override the value stored in the first object
+*/
+
+describe('mergeObjects' function() {
+  it('returns an empty object with no input', function() {
+    expect(mergeObjects()).toEqual({});
+  })
+
+  it('returns object with combined keys and values', function() {
+    expect(mergeObjects)
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
