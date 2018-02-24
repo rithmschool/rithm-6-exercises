@@ -6,17 +6,17 @@ li {
 
 }
 
-.titleTxt {
+.title-txt {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-.urlTxt {
+.url-txt {
   font-size: .8rem;
   color: grey;
 }
 
-#toggleForm, #toggleFavorites, #starContainer, .urlTxt, button {
+#toggle-form, #toggle-favorites, #star-container, .url-txt, button {
   cursor: pointer;
 }
 
