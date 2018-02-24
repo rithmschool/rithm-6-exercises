@@ -49,4 +49,25 @@ describe("acceptNumbersOnly", function() {
     });
 });*/
 
+/*
 // EXERCISE 4
+// failing test
+describe("mergeArrays", function() {
+    it("should not accept integers or strings", function() {
+        expect(mergeArrays(1, 2, 3, 4)).toBe(false);
+        expect(mergeArrays("hello", "hi")).toBe(false);
+    });
+});
+
+// passing test
+describe("mergeArrays", function() {
+    it("returns one array", function() {
+        expect(mergeArrays([2, 1], [3, 4])).toBe([1, 2, 3, 4]);
+    });
+});*/
+
+// EXERCISE 5
+// failing test
+describe("mergeObjects", function() {
+    it("should not  ");
+});

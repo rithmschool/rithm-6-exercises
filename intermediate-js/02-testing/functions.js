@@ -29,3 +29,12 @@ function acceptNumbersOnly() {
     }
     return false;
 }
+
+function mergeArrays(arr1, arr2) {
+    let combinedArr = arr1.concat(arr2);
+    return combinedArr.sort(function(a, b) {
+        return a - b;
+    });
+}
+
+function mergeObjects(obj1, obj2) {}
