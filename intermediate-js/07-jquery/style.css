@@ -1,5 +1,23 @@
+* {
+  font-size: 18px;
+}
+
 li {
-  
+
+}
+
+.titleTxt {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.urlTxt {
+  font-size: .8rem;
+  color: grey;
+}
+
+span {
+  padding: 0px 2px;
 }
 
 #header {
@@ -31,6 +49,3 @@ li {
   display: none;
 }
 
-span {
-  padding: 0px 2px;
-}

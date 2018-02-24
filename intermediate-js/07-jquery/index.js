@@ -33,9 +33,8 @@ $(document).ready(function() {
     var $solidStarDiv = ($('<span>').addClass('hidden')).append($('<i class=\"fas fa-star\"><i>'));
     var $hollowStarDiv = $('<span>').append($('<i class=\"far fa-star\"><i>'));
     var $starContainer = $('<span>').attr('id', 'starContainer').append($solidStarDiv, $hollowStarDiv);
-    // var $num = $('<span>').text(num)
-    var $titleTxt = $('<span>').text(title)
-    var $urlTxt = $('<span>').text(url)
+    var $titleTxt = $('<span>').addClass('titleTxt').text(title)
+    var $urlTxt = $('<span>').addClass('urlTxt').text(`(${url})`)
     var $newLi = $('<li>');
     $newLi.append($starContainer, $titleTxt, $urlTxt);
     $ol.append($newLi);
