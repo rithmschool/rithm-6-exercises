@@ -1,28 +1,40 @@
 var $title = $("#title");
 var $list = $("#posts")
 var $link = $("#link");
-
-var $form = $("form")
+var $form = $("form");
+var $favorites = $("#favorites");
+var $submit = $("#submit");
+var $starredElements = $(".far")
 $(document).ready(function(){
     console.log("hello")
 })
 $form.on("submit", function(event){
     event.preventDefault();
-    var $post = $("<li>");
-    let $star = $("<button>", { class: "far fa-star"});
+    let $post = $("<li>");
+    let $star = $("<i>").addClass("far fa-star")
+    let $titleText = $("<span>");
+    let $url = $("<span>")
     $post.append($star);
-    var $titleText = $("<span>");
-    $titleText.addClass("larger-text");
-    $titleText.text($title.val());
+    $titleText.addClass("larger-text").text($title.val());
     $post.append($titleText);
-    var $url = $("<span>")
     $url.text("(" + $link.val() + ")");
-    $post.append($url)
-    $list.append($post)
+    $list.append($post.append($url))
 })
 
 
+$list.on("click", "i", function(event){
+    $(event.target).toggleClass("far fa-star fas fa-star");
+    $
+});
 
-$list.on("click", "svg", function(event){
-    $(event.target).toggleClass("fas fa-star")
-})
+
+$submit.on("click", function(){
+    $form.toggle("hide");
+});
+
+$favorites.on("click", function(){
+    $form.toggle("hide")
+    $starredElements.parent().hide();
+    
+    
+});

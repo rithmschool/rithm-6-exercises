@@ -24,6 +24,7 @@ a{
 
 form{
     margin-left:20px;
+    margin-top:20px;
 }
 
 span{
@@ -32,4 +33,11 @@ span{
 }
 .larger-text{
     font-size:15px;
+}
+#posts{
+    padding-top:20px;
+}
+
+.btn{
+    margin-top:20px;
 }
