@@ -17,7 +17,7 @@ $(document).ready(function() {
   $form.on('submit', function(e) {
     e.preventDefault();
     var titleTxt = $('#title').val();
-    var urlTxt = $('#url').val();
+    var urlTxt = $('#urlInput').val();
     addListItem(titleTxt, urlTxt);
     $form.trigger("reset");
   })

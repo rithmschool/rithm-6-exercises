@@ -16,6 +16,10 @@ li {
   color: grey;
 }
 
+#toggleForm, #toggleFavorites, #starContainer, .urlTxt, button {
+  cursor: pointer;
+}
+
 span {
   padding: 0px 2px;
 }
