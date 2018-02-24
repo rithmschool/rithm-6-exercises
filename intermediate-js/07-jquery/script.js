@@ -1,5 +1,5 @@
+$("form").hide();
 $(function() {
-  $("form").hide();
   $("#submit-nav").on("click", function() {
     $($form).slideDown(1000);
   });
