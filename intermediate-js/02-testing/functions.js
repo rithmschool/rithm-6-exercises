@@ -7,3 +7,5 @@ function replaceWith(str, char1, char2) {
     }
     return arr.join("");
 }
+
+function expand(arr, num) {}
