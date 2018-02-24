@@ -50,7 +50,7 @@ function contains(object,value){
     var isFound = false;
     function containsHelper(obj,value){
         for(var key in obj){
-            if(typeof(obj[key] === "object")){
+            if(typeof obj[key] === "object"){
                 containsHelper(obj[key],value);
             }else if(obj[key] === value){
                 isFound = true;
