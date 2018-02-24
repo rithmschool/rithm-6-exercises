@@ -19,7 +19,7 @@ describe("replaceWith", function() {
 // EXERCISE 2
 // failing tests
 describe("expand", function() {
-    it("expects an array and number", function() {
+    it("should not accept an array and a string", function() {
         expect(expand([1, 2, 3], "hello")).toBe(undefined);
     });
 });
@@ -68,6 +68,20 @@ describe("mergeArrays", function() {
 
 // EXERCISE 5
 // failing test
+/*
 describe("mergeObjects", function() {
-    it("should not  ");
+    it("should not accept strings", function() {
+        expect(mergeObjects());
+    });
 });
+
+// passing test
+describe("mergeObjects", function() {
+    it("should combine two objects and override the first one if the second parameter has the same key ", function() {
+        expect(mergeObjects(obj1, obj2)).toBe({
+            name: "Foo",
+            test: "thing",
+            num: 55
+        });
+    });
+});*/
