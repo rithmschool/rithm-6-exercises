@@ -31,7 +31,7 @@ function mergeArrays(arr1, arr2) {
   if (Array.isArray(arr1) === false && Array.isArray(arr2) === false) return;
   if (Array.isArray(arr1) === false && Array.isArray(arr2) === true) return arr2.sort();
   if (Array.isArray(arr2) === false && Array.isArray(arr1) === true) return arr1.sort();
-  return arr1.concat(arr2).sort();
+  return arr1.concat(arr2).sort((a,b) => a - b);
 }
 
 function mergeObjects(obj1, obj2) {

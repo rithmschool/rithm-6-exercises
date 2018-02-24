@@ -59,7 +59,7 @@ describe("mergeArrays", function() {
   it("output sorted combined array given 2 arrays or 1 array sorted if just 1 array provided", function () {
     expect(mergeArrays([2, 1], [3, 4])).toEqual([1,2,3,4]);
     expect(mergeArrays([5, 4, 3], [1])).toEqual([1, 3, 4, 5]);
-    expect(mergeArrays([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]);
+    expect(mergeArrays([50, 400, 3, 2000, 1], [-10])).toEqual([-10, 1, 3, 50, 400, 2000]);
     expect(mergeArrays([9.6, 4.8, 0])).toEqual([0, 4.8, 9.6]);
   });
 
