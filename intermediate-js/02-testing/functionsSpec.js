@@ -7,7 +7,7 @@ describe("replaceWith", function() {
     });
 });
 
-//passing tests
+// passing tests
 describe("replaceWith", function() {
     it("expects the third input to replace the second input in the first string", function() {
         expect(replaceWith("awesome", "e", "z")).toBe("awzsomz");
@@ -17,14 +17,14 @@ describe("replaceWith", function() {
 
 /*
 // EXERCISE 2
-//failing tests
+// failing tests
 describe("expand", function() {
     it("expects an array and number", function() {
         expect(expand([1, 2, 3], "hello")).toBe(undefined);
     });
 });
 
-//passing tests
+// passing tests
 describe("expand", function() {
     it("returns an array", function() {
         //expect(expand(["foo", "test"], 2)).toBe(["foo", "test", "foo", "test"]);
@@ -34,7 +34,7 @@ describe("expand", function() {
 */
 
 /*
-//EXERCISE 3
+// EXERCISE 3
 //failing tests
 describe("acceptNumbersOnly", function() {
     it("should not accept strings", function() {
@@ -42,9 +42,11 @@ describe("acceptNumbersOnly", function() {
     });
 });
 
-//passing tests
+// passing tests
 describe("acceptNumbersOnly", function() {
     it("returns true if all arguments are numbers", function() {
         expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7)).toBe(true);
     });
 });*/
+
+// EXERCISE 4
