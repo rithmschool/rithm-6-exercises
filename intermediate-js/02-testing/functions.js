@@ -18,3 +18,14 @@ function expand(arr, num) {
     }
     return result;
 }
+
+function acceptNumbersOnly() {
+    let arr = Array.from(arguments);
+    let i = 0;
+    while (i < arr.length) {
+        if (typeof arr[i] && arr[i] !== NaN) {
+            return true;
+        }
+    }
+    return false;
+}

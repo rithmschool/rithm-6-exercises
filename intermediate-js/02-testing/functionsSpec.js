@@ -15,8 +15,8 @@ describe("replaceWith", function() {
     });
 });*/
 
-// EXERCISE 2
 /*
+// EXERCISE 2
 //failing tests
 describe("expand", function() {
     it("expects an array and number", function() {
@@ -33,8 +33,18 @@ describe("expand", function() {
 });
 */
 
+/*
 //EXERCISE 3
 //failing tests
 describe("acceptNumbersOnly", function() {
-    it("should not accept strings", function() {});
+    it("should not accept strings", function() {
+        expect(acceptNumbersOnly("hello", [1, 2, 3], NaN)).toBe(false);
+    });
 });
+
+//passing tests
+describe("acceptNumbersOnly", function() {
+    it("returns true if all arguments are numbers", function() {
+        expect(acceptNumbersOnly(1, 2, 3, 4, 5, 6, 7)).toBe(true);
+    });
+});*/
