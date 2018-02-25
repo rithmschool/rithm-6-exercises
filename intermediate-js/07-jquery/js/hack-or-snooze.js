@@ -13,7 +13,7 @@ $(document).ready(function() {
         }
     });
 
-
+    // ability to submit new list items
     $('button').on('click', function() {
         var inputText = $('input').eq(0).val();
         var inputUrl = $('input').eq(1).val();
@@ -23,7 +23,7 @@ $(document).ready(function() {
         var newListItem = $('<li>');
         var favStar = $('<span>').addClass('far fa-star fa-xs');
         var inputUrlA = $('<a>').addClass('li__url').attr('href', inputUrl).attr('target', '_blank').text(displayUrl);
-        console.log(inputUrlA)
+        
         newListItem.text(' ' + inputText + ' ');
         newListItem.prepend(favStar);
         newListItem.append(inputUrlA);
@@ -31,16 +31,24 @@ $(document).ready(function() {
         $ol.append(newListItem);
     });
     
+    // ability to switch between all list items and favorite list items
     $('#fav-all-btn').on('click', function() {
         if(isSubmissionFormOpen) {
             if($ol.css('display') === 'block') {
                 $form.fadeToggle();
                 $ol.fadeToggle(function() {
+                    var tempList = $ol.children().clone();
+                    for(let i = 0; i < tempList.length; i++) {
+                        if(tempList.eq(i).children().eq(0).attr('data-prefix') === 'fas') {
+                            $ul.append(tempList.eq(i));
+                        }
+                    }
                     $ul.fadeToggle();
                     $favAllBtn.text('all');
                 });
             } else {
                 $ul.fadeToggle(function() {
+                    $ul.html('');
                     $ol.fadeToggle();
                     $form.fadeToggle();
                     $favAllBtn.text('favorites');
@@ -49,11 +57,18 @@ $(document).ready(function() {
         } else {
             if($ol.css('display') === 'block') {
                 $ol.fadeToggle(function() {
+                    var tempList = $ol.children().clone();
+                    for(let i = 0; i < tempList.length; i++) {
+                        if(tempList.eq(i).children().eq(0).attr('data-prefix') === 'fas') {
+                            $ul.append(tempList.eq(i));
+                        }
+                    }
                     $ul.fadeToggle();
                     $favAllBtn.text('all');
                 });
             } else {
                 $ul.fadeToggle(function() {
+                    $ul.html('');
                     $ol.fadeToggle();
                     $favAllBtn.text('favorites');
                 });
@@ -61,6 +76,7 @@ $(document).ready(function() {
         } 
     });
     
+    // ability to select favorite list items
     $ol.on('click', 'svg', function() {
         if($(this).attr('data-prefix') === 'fas') {
             $(this).attr('data-prefix', 'far');
