@@ -9,7 +9,7 @@ Simplify the following big O expressions as much as possible:
 3. `O(1)`
 4. `O(n^3)`
 5. `O(n)`
-6. `O(log(n))`
+6. `O(n)`
 7. `O(n * log(n))`
 8. `O(2^n)`
 9. `O(1)`
@@ -38,7 +38,7 @@ function logAtMost10(n) {
   }
 }
 
-T: O(n)
+T: O(1)
 S: O(1)
 // 3.
 
