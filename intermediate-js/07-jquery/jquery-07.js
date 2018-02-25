@@ -1,19 +1,48 @@
 $(function() {
-  var $form = $('#form');
-
-  $form.on('submit', function(event) {
+  $('#form').on('submit', function(event) {
     event.preventDefault();
 
-    var $title = $('#title').val();
+    var $i = $('<i>').addClass('far fa-bookmark');
+    var $title = $('<span>')
+      .text($('#title').val())
+      .addClass('title-span')
+      .css('padding-left', '4px');
     var $url = $('#url').val();
-    var $li = $('<li>');
-    var $i = $('<i>').addClass('far fa-bookmark bookmark');
-    $('ol').append($li);
-    $li.append($i, $title, ' (', $url, ')');
-    $form.trigger('reset').hide();
+    $url = $url[0] === 'h' && ($url[9] === '.' || $url[10] === '.')
+        ? $url.split('/')[2].slice(4)
+        : $url.split('/')[2];
+    var $urlSpan = $('<span>').append($url).addClass('url-span');
+
+    $('ol').append($('<li>').append($i, $title, ' (', $urlSpan, ')'));
+    $('#form').trigger('reset').slideUp();
+    $('li').show();
+    $('#favorites').removeClass('hidden');
+    $('#show-all').addClass('hidden');
   });
 
   $('ol').on('click', 'i', function(event) {
     $(event.target).toggleClass('far fas');
+  });
+
+  $('#favorites').on('click', function() {
+    $('.far').parent().hide();
+    $('#favorites').addClass('hidden');
+    $('#show-all').removeClass('hidden');
+  });
+
+  $('ol').on('click', '.url-span', function(event) {
+    $('li:not(:contains("' + $(event.target).text() + '"))').hide();
+    $('#favorites').addClass('hidden');
+    $('#show-all').removeClass('hidden');
+  });
+
+  $('#show-all').on('click', function() {
+    $('li').show();
+    $('#favorites').removeClass('hidden');
+    $('#show-all').addClass('hidden');
+  });
+
+  $('.show-form').on('click', function() {
+    $('#form').slideDown();
   });
 });
