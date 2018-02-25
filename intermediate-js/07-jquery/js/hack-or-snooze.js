@@ -76,12 +76,23 @@ $(document).ready(function() {
         } 
     });
     
-    // ability to select favorite list items
+    // ability to select favorite list items from all items tab
     $ol.on('click', 'svg', function() {
         if($(this).attr('data-prefix') === 'fas') {
             $(this).attr('data-prefix', 'far');
         } else {
             $(this).attr('data-prefix', 'fas');
+        }
+    });
+
+    // ability to deselect fav list items in fav tab
+    $ul.on('click', 'svg', function() {
+        $(this).parent().fadeOut();
+        var statusChangeItem = $(this).next().text();
+        for(var i = 0; i < $ol.children().length; i++) {
+            if($ol.children().eq(i).children().eq(1).text() === statusChangeItem) {
+                $ol.children().eq(i).children().eq(0).attr('data-prefix', 'far');
+            };
         }
     });
 });
