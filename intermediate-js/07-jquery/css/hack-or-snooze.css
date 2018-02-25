@@ -1,6 +1,38 @@
+body {
+    font-family: 'Montserrat', 'Mukta Mahee', sans-serif;
+}
+
 #container {
     width: 50%;
     margin: 20px auto;
+    background-color: #f5f5ee;
+}
+
+header {
+    background-color: #e3481c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+header > span {
+    font-weight: 700;
+    margin-right: 5%;
+}
+
+header > a {
+    font-size: 80%;
+    text-decoration: none;
+    color: black;
+}
+
+header > a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
 }
 
 ul {

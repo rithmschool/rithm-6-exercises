@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var isSubmissionFormOpen = true;
-    var $favAllBtn = $('fav-all-btn');
+    var $favAllBtn = $('#fav-all-btn');
     var $form = $('form');
     var $ol = $('ol');
     var $ul = $('ul');
@@ -36,6 +36,8 @@ $(document).ready(function() {
             newListItem.append(inputUrlA);
             
             $ol.append(newListItem);
+            $form.slideUp();
+            isSubmissionFormOpen = !isSubmissionFormOpen;
         }
     });
     
