@@ -6,7 +6,6 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: grey;
-    text-align: center !important;
 }
 
 .navbar {
@@ -42,7 +41,9 @@ body {
 
 .jumbotron {
     background-color: transparent !important;
-    display: block;
+    padding-left: 30% !important;
+    padding-right: 30% !important;
+    text-align: center !important;
 }
 
 .vertical-center {
