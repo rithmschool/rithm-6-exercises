@@ -1,1 +1,61 @@
+body {
+    background-image: url(https://drive.google.com/uc?id=1X4w1832DW8CLLLw2qlyHVw50aK7cXfoi);
+    /* image by Mike Kenneally via Unsplash*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: grey;
+    text-align: center !important;
+}
 
+.navbar {
+    background: transparent;
+    background-image: none;
+    border-color: transparent;
+    box-shadow: none;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.navbar-brand,
+.navbar-nav {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav a:active {
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: lightgray;
+}
+
+.navbar-nav {
+    color: lightgray;
+}
+
+.navbar-nav a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.jumbotron {
+    background-color: transparent !important;
+    display: block;
+}
+
+.vertical-center {
+    min-height: 100%;
+    /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh;
+    /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    align-items: center;
+}
