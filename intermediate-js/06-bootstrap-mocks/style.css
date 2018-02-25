@@ -16,22 +16,22 @@ body {
     width: 80%;
     margin: 0 auto;
     align-items: center;
+    text-align: center;
 }
 
 .navbar-brand,
 .navbar-nav {
     text-decoration: none;
     color: white;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
 }
 
 .navbar-nav a:active {
     color: white;
     text-decoration: underline;
     text-decoration-color: lightgray;
-}
-
-.navbar-nav {
-    color: lightgray;
 }
 
 .navbar-nav a:hover {
