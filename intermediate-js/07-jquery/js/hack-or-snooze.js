@@ -1,3 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('the DOM is now loaded and ready!')
+$(document).ready(function() {
+    $('#submit-btn').on('click', function() {
+        $('form').slideToggle();
+    });
 });
