@@ -17,7 +17,7 @@ body {
 }
 
 .body-container {
-  max-width: 900px;
+  max-width: 740px;
 }
 
 a {
@@ -38,7 +38,7 @@ header {
   border-bottom: 4px solid;
 }
 
-.nav-mainheader .nav-link:hover {
+.nav-mainheader .nav-link {
   border-bottom-color: gray;
 }
 
@@ -61,4 +61,16 @@ header {
   color: black;
   background-color: #fff;
   border: 10px solid #fff;
+}
+
+.mainbody .heading {
+  font-weight: 700;
+}
+
+.mainbody p {
+  font-weight: 400;
+}
+
+.mainfooter p {
+  color: darkgray;
 }
