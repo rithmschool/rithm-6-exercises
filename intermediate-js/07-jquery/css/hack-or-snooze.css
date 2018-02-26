@@ -1,0 +1,123 @@
+body {
+    font-family: 'Montserrat', 'Mukta Mahee', sans-serif;
+}
+
+#container {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #f5f5ee;
+}
+
+header {
+    background-color: #e3481c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+header > span {
+    font-weight: 700;
+    margin-right: 5%;
+}
+
+header > a {
+    font-size: 80%;
+    text-decoration: none;
+    color: black;
+}
+
+header > a:hover {
+    text-decoration: underline;
+}
+
+form {
+    text-align: right;
+}
+
+form > div {
+    width: auto;
+    margin: 20px auto;
+}
+
+input {
+    width: 300px;
+    padding: 5px;
+    margin-right: 200px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+}
+
+input:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+label {
+   font-weight: 600;
+   margin-right: 25px;
+}
+
+#item-container, label, ul {
+    font-size: 85%;
+}
+
+#button-container {
+    height: 30px
+}
+
+button {
+    background-color: #a7a299;
+    color: white;
+    padding: 10px;
+    border: 0px solid grey;
+    border-radius: 5px;
+    margin-right: 456px;
+}
+
+button:hover {
+    background-color: #847e74;
+}
+
+button:active {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+#container > div {
+    margin: 5px;
+    padding: 5px;
+}
+
+ol {
+    padding: 0 40px;
+}
+
+.item-text {
+    font-weight: 600;
+    color: black;
+}
+
+li {
+    padding: 5px;
+    margin: 5px;
+    color: grey;
+}
+
+.li__link--grey-and-small {
+    font-size: 80%;
+}
+
+.li__link--grey-and-small a {
+    color: grey;
+}
+
+ul {
+    list-style: none;
+    display: none;
+}
