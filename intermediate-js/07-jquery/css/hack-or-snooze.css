@@ -31,10 +31,47 @@ header > a:hover {
     text-decoration: underline;
 }
 
-ul {
-    list-style: none;
+form > div {
+    margin: 20px;
+}
+
+input {
+    width: 50%;
+    padding: 5px;
+}
+
+label {
+   font-weight: 600;
+}
+
+#item-container, label {
+    font-size: 85%;
+}
+
+ol {
+    padding: 10px 40px;
+}
+
+.item-text {
+    font-weight: 600;
+    color: black;
+}
+
+li {
+    margin: 10px;
+    color: grey;
+}
+
+.li__link--grey-and-small {
+    font-size: 80%;
+}
+
+.li__link--grey-and-small a {
+    color: grey;
 }
 
 ul {
+    list-style: none;
     display: none;
+    padding: 10px;
 }

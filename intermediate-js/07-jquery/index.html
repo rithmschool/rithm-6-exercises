@@ -19,30 +19,38 @@
         </header>
         <div>
             <form>
-                <label for="input-text">Title</label>
-                <input type="text" id="input-text" required>
-                <br>
-                <label for="input-url">URL</label>
-                <input type="url" name="url-input" id="input-url" required>
-                <br>
+                <div>
+                    <label for="input-text">title</label>
+                    <input type="text" id="input-text" required>
+                </div>
+                <div>
+                    <label for="input-url">url</label>
+                    <input type="url" name="url-input" id="input-url" required>
+                </div>
                 <button type="submit">Submit</button>
             </form>
-            <div>
+            <div id="item-container">
                 <ol>
                     <li>
                         <span class="far fa-star fa-xs"></span>
-                        a good search engine
-                        <a href="http://www.google.com">google.com</a>
+                        <span class="item-text">a good search engine</span>
+                        <span class="li__link--grey-and-small">
+                            (<a class="li__url" target="_blank" href="http://www.google.com">google.com</a>)
+                        </span>
                     </li>
                     <li>
                         <span class="far fa-star fa-xs"></span>
-                        a good Hungarian news portal
-                        <a href="http://www.index.hu">index.hu</a>
+                        <span class="item-text">a good Hungarian news portal</span>
+                        <span class="li__link--grey-and-small">
+                            (<a class="li__url" target="_blank" href="http://www.index.hu">index.hu</a>)
+                        </span>
                     </li>
                     <li>
                         <span class="far fa-star fa-xs"></span>
-                        a top-notch science journal
-                        <a href="http://www.cience.com">science.com</a>
+                        <span class="item-text">a top-notch science journal</span>
+                        <span class="li__link--grey-and-small">
+                            (<a class="li__url" target="_blank" href="http://www.science.com">science.com</a>)
+                        </span>
                     </li>
                 </ol>
             </div>

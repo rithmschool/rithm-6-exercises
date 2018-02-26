@@ -29,11 +29,12 @@ $(document).ready(function() {
 
             var newListItem = $('<li>');
             var favStar = $('<span>').addClass('far fa-star fa-xs');
-            var inputUrlA = $('<a>').addClass('li__url').attr('href', inputUrl).attr('target', '_blank').text(displayUrl);
+            // var inputUrlA = $('<a>').addClass('li__url').attr('href', inputUrl).attr('target', '_blank').text(displayUrl);
+            var inputUrlSpan = $('<span>').addClass('li__link--grey-and-small').html('(<a class="li__url" target="_blank" href=' + inputUrl + '>' + displayUrl + '</a>)');
             
             newListItem.text(' ' + inputText + ' ');
             newListItem.prepend(favStar);
-            newListItem.append(inputUrlA);
+            newListItem.append(inputUrlSpan);
             
             $ol.append(newListItem);
             $form.slideUp();
