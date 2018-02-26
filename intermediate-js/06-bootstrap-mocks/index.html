@@ -7,22 +7,111 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+  <script>
+    window.onload = function () {
+
+      var options = {
+        animationEnabled: true,
+        theme: "light2",
+
+        axisX: {
+          valueFormatString: "DD MMM"
+        },
+        axisY: {
+          title: "Number of Sales",
+          suffix: "K",
+          minimum: 30
+        },
+        toolTip: {
+          shared: true
+        },
+        legend: {
+          cursor: "pointer",
+          verticalAlign: "bottom",
+          horizontalAlign: "left",
+          dockInsidePlotArea: true,
+          itemclick: toogleDataSeries
+        },
+        data: [{
+          type: "line",
+          showInLegend: true,
+          name: "Projected Sales",
+          markerType: "square",
+          xValueFormatString: "DD MMM, YYYY",
+          color: "#F08080",
+          yValueFormatString: "#,##0K",
+          dataPoints: [
+            { x: new Date(2017, 10, 1), y: 63 },
+            { x: new Date(2017, 10, 2), y: 69 },
+            { x: new Date(2017, 10, 3), y: 65 },
+            { x: new Date(2017, 10, 4), y: 70 },
+            { x: new Date(2017, 10, 5), y: 71 },
+            { x: new Date(2017, 10, 6), y: 65 },
+            { x: new Date(2017, 10, 7), y: 73 },
+            { x: new Date(2017, 10, 8), y: 96 },
+            { x: new Date(2017, 10, 9), y: 84 },
+            { x: new Date(2017, 10, 10), y: 85 },
+            { x: new Date(2017, 10, 11), y: 86 },
+            { x: new Date(2017, 10, 12), y: 94 },
+            { x: new Date(2017, 10, 13), y: 97 },
+            { x: new Date(2017, 10, 14), y: 86 },
+            { x: new Date(2017, 10, 15), y: 89 }
+          ]
+        },
+        {
+          type: "line",
+          showInLegend: true,
+          name: "Actual Sales",
+          lineDashType: "dash",
+          yValueFormatString: "#,##0K",
+          dataPoints: [
+            { x: new Date(2017, 10, 1), y: 60 },
+            { x: new Date(2017, 10, 2), y: 57 },
+            { x: new Date(2017, 10, 3), y: 51 },
+            { x: new Date(2017, 10, 4), y: 56 },
+            { x: new Date(2017, 10, 5), y: 54 },
+            { x: new Date(2017, 10, 6), y: 55 },
+            { x: new Date(2017, 10, 7), y: 54 },
+            { x: new Date(2017, 10, 8), y: 69 },
+            { x: new Date(2017, 10, 9), y: 65 },
+            { x: new Date(2017, 10, 10), y: 66 },
+            { x: new Date(2017, 10, 11), y: 63 },
+            { x: new Date(2017, 10, 12), y: 67 },
+            { x: new Date(2017, 10, 13), y: 66 },
+            { x: new Date(2017, 10, 14), y: 56 },
+            { x: new Date(2017, 10, 15), y: 64 }
+          ]
+        }]
+      };
+      $("#chartContainer").CanvasJSChart(options);
+
+      function toogleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          e.dataSeries.visible = false;
+        } else {
+          e.dataSeries.visible = true;
+        }
+        e.chart.render();
+      }
+
+    }
+  </script>
   <title>Bootstrap Mock</title>
 </head>
 
 <body>
   <div class="container-fluid mx-0">
     <header>
-      <nav class="navbar navbar-dark bg-dark justify-content-around row py-0">
+      <nav class="navbar navbar-dark bg-dark justify-content-around row border-0 my-0 py-0">
         <a class="navbar-brand col-1 text-white">Navbar</a>
-        <form class="form-inline col-10 text-white py-0 my-0">
-          <input class="form-control mr-sm-1 col-11 bg-secondary border-0" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success ml-0 mr-md-0 pr-3" type="submit">Search</button>
+        <form class="form-inline col-10 h-100 text-white p-0 ml-2">
+          <input class="form-control col-11 bg-secondary p-2 ml-2 rounded-0 border-0 mr-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary float-right ml-0 p-2 border-0" type="submit">Search</button>
         </form>
       </nav>
     </header>
-    <div class="row">
-      <section class="col-2 side-nav bg-light border-right">
+    <div class="row" style="height: 100vh">
+      <section class="col-2 side-nav fixed-left bg-light border-right">
         <nav class="nav flex-column">
           <a class="nav-link active" href="#">Active</a>
           <a class="nav-link" href="#">Link</a>
@@ -37,12 +126,59 @@
 
         </nav>
       </section>
-      <section class="col-10 main-page">
-
+      <section class="col-9 main-page">
+        <div class="row ml-1">
+          <h1>Dashboard</h1>
+        </div>
+        <hr>
+        <div class="row">
+          <div id="chartContainer" style="height: 500px; width: 90%;"></div>
+        </div>
+        <div class="row mt-3 ml-1">
+          <h1>Section Title</h1>
+        </div>
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
-  </div>
 
+  </div>
+  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
 
 </html>
