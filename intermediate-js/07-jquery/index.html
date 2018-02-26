@@ -11,43 +11,44 @@
 </head>
 
 <body>
-
-  <div class="nav">
-    <div class="col-md-3 ml-auto mr-5">
-      <h3>Hack or Snooze</h3>
+  <div class="maincontainer">
+    <div class="nav">
+      <div class="col-md-3 ml-auto mr-5">
+        <h3>Hack or Snooze</h3>
+      </div>
+      <div class="col-md-4 ml-auto mr-auto">
+        <a href="#" id="submitbutton">submit</a>|
+        <a href="#" id="favbutton">favorites</a>
+      </div>
     </div>
-    <div class="col-md-4 ml-auto mr-auto">
-      <a href="#" id="submitbutton">submit</a>|
-      <a href="#" id="favbutton">favorites</a>
-    </div>
-  </div>
 
-  <div class="container">
-    <form class="form-horizontal" id="newpost">
-      <div class="form-group row">
-        <label class="col-sm-1" for="title">title</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="title">
+    <div class="submitform container">
+      <form class="form-horizontal" id="newpost" style="display: none">
+        <div class="form-group row">
+          <label class="col-sm-1" for="title">title</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="title">
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-1" for="url">url</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="url">
+        <div class="form-group row">
+          <label class="col-sm-1" for="url">url</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="url">
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-offset-2 col-sm-6">
-          <button type="submit" class="btn btn-default">submit</button>
+        <div class="form-group row">
+          <div class="col-sm-offset-2 col-sm-6">
+            <button type="submit" class="btn btn-default">submit</button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-offset-2 col-sm-8">
-        <ol class="listings">
-        </ol>
+      </form>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+          <ol class="listings">
+          </ol>
+        </div>
       </div>
     </div>
   </div>

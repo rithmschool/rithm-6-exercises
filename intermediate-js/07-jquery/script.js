@@ -2,13 +2,12 @@ var $form = $("form");
 
 $form.on("submit", function(event) {
   event.preventDefault();
-  var $star = $('<span class="favfalse"><i class="far fa-star"></i></span>');
+  var $star = $('<i class="far fa-star"></i>');
   $star.attr("aria-hidden", "true");
   var $title = $("#title").val();
   var $url = $("#url").val();
   var $newLi = $("<li>", {
-    class: "listing",
-    id: "favorite-false"
+    class: "listing favfalse"
   });
   $newLi.append($star);
   var $newUrl = $("<small>", {
@@ -24,6 +23,13 @@ $("#submitbutton").click(function(event) {
   $form.toggle();
 });
 
-$("ol").on("click", "i", function() {
-  $(this).attr("class", "fas fa-star");
+$("ol").on("click", "li", function() {
+  $(this).toggleClass("favfalse");
+  $(this)
+    .find("i")
+    .toggleClass("far fas");
+});
+
+$("#favbutton").click(function() {
+  $(".favfalse").toggle();
 });
