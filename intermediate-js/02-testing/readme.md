@@ -33,7 +33,6 @@ acceptNumbersOnly(1, 2, 3, 4, 5, 6, NaN); // false
 ```
 
 * Write a function called `mergeArrays` which takes in two arrays and returns one array with the values sorted
-
 ```javascript
 mergeArrays([2, 1], [3, 4]); // [1,2,3,4]
 ```
