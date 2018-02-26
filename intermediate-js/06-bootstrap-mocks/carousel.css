@@ -1,0 +1,39 @@
+.carousel {
+    min-height: 512px;
+    min-width: auto;
+}
+
+img {
+    background-color: #777777;
+    height: 512px;
+}
+
+.heading-img {
+    width: 140px;
+    height: 140px;
+}
+
+.some-img {
+    width: 100%
+}
+
+.body-text {
+    color: #777777;
+}
+
+.featurette {
+    color: #5a5a5a;
+}
+
+.upsized {
+    font-size: 3.1rem;
+    line-height: 95%;
+}
+
+.upsized + h5 {
+    line-height: 140%;
+}
+
+#header {
+    color: #5a5a5a;
+}
