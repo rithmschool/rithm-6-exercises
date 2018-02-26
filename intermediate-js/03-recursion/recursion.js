@@ -65,3 +65,35 @@ function contains(object,value){
       return isFound;
   }
   
+
+  function search(array,value){
+    var index = -1;
+    var counter = 0;
+    function helper(helpArr,value){
+        if(helpArr.length === 0){
+            counter = index;
+        }else if(helpArr[0] === value){
+            return index;
+        }else{
+            counter++;
+            helper(helpArr.slice(1),value);
+        }
+        
+    }
+    helper(array,value);
+    return counter;
+}
+
+function binarySearch(arr, target, low = 0, high = arr.length - 1) {
+    var mid = Math.floor(low + (high - low) / 2);
+    if (arr[mid] === target) {
+      return mid;
+    }
+    if (low >= high) {
+      return -1;
+    } else if (arr[mid] < target) {
+      return binarySearch(arr, target, mid + 1, high);
+    } else {
+      return binarySearch(arr, target, low, mid - 1);
+    }
+  }
