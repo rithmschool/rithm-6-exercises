@@ -62,31 +62,36 @@
 <body>
   <div class="container-fluid mx-0">
     <header>
-      <nav class="navbar navbar-dark bg-dark justify-content-around row border-0 my-0 py-0">
-        <a class="navbar-brand col-1 text-white">Navbar</a>
+      <nav class="navbar navbar-dark bg-dark sticky-top flex-md-nowrap justify-content-around row border-0 my-0 py-0">
+        <a class="navbar-brand col-1 text-white">Company Name</a>
         <form class="form-inline col-10 h-100 text-white p-0 ml-2">
           <input class="form-control col-11 bg-secondary p-2 ml-2 rounded-0 border-0 mr-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-dark bg-* text-secondary ml-0 p-2 border-0" type="submit">Search</button>
         </form>
       </nav>
     </header>
-    <div class="row" style="height: 100vh">
-      <section class="col-2 side-nav fixed-left bg-light border-right">
+    <div class="row">
+      <!-- style="height: 100vh -->
+      <section class="col-2 side-nav 100vh fixed-left bg-light border-right mr-3">
         <nav class="nav flex-column">
           <a class="nav-link active" href="#">Active</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link disabled" href="#">Disabled</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
+          <a class=" nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-link text-dark" href="#">Link</a>
+          <a class=" nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-item nav-link disabled" href="#">Disabled &nbsp; &nbsp;&nbsp;&nbsp;
+            <span class="ml-4 pl-4 pr-0 mr-0">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+          </a>
+          <a class="nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-item nav-link text-dark" href="#">Link</a>
+          <a class="nav-item nav-link text-dark" href="#">Link</a>
 
         </nav>
       </section>
-      <section class="col-9 main-page mt-2">
+      <section class="col-8 main-page mt-2">
         <div class="row ml-1 justify-content-between">
           <div class="col-7">
             <h2>Dashboard</h2>
@@ -99,6 +104,9 @@
               <div class="btn-group ml-2" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle rounded btn-sm" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
+                  <span>
+                    <i class="far fa-calendar-alt text-secondary"></i>
+                  </span>
                   This week
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -205,6 +213,7 @@
     </div>
 
   </div>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
