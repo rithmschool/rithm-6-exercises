@@ -14,72 +14,32 @@
         animationEnabled: true,
         theme: "light2",
 
-        axisX: {
-          valueFormatString: "DD MMM"
-        },
+        // axisX: {
+        //   valueFormatString: "string"
+        // },
         axisY: {
-          title: "Number of Sales",
           suffix: "K",
-          minimum: 30
+          minimum: 0
         },
         toolTip: {
           shared: true
         },
-        legend: {
-          cursor: "pointer",
-          verticalAlign: "bottom",
-          horizontalAlign: "left",
-          dockInsidePlotArea: true,
-          itemclick: toogleDataSeries
-        },
+
         data: [{
           type: "line",
-          showInLegend: true,
-          name: "Projected Sales",
           markerType: "square",
-          xValueFormatString: "DD MMM, YYYY",
+          xValueFormatString: "#,##0K",
           color: "#F08080",
           yValueFormatString: "#,##0K",
           dataPoints: [
-            { x: new Date(2017, 10, 1), y: 63 },
-            { x: new Date(2017, 10, 2), y: 69 },
-            { x: new Date(2017, 10, 3), y: 65 },
-            { x: new Date(2017, 10, 4), y: 70 },
-            { x: new Date(2017, 10, 5), y: 71 },
-            { x: new Date(2017, 10, 6), y: 65 },
-            { x: new Date(2017, 10, 7), y: 73 },
-            { x: new Date(2017, 10, 8), y: 96 },
-            { x: new Date(2017, 10, 9), y: 84 },
-            { x: new Date(2017, 10, 10), y: 85 },
-            { x: new Date(2017, 10, 11), y: 86 },
-            { x: new Date(2017, 10, 12), y: 94 },
-            { x: new Date(2017, 10, 13), y: 97 },
-            { x: new Date(2017, 10, 14), y: 86 },
-            { x: new Date(2017, 10, 15), y: 89 }
-          ]
-        },
-        {
-          type: "line",
-          showInLegend: true,
-          name: "Actual Sales",
-          lineDashType: "dash",
-          yValueFormatString: "#,##0K",
-          dataPoints: [
-            { x: new Date(2017, 10, 1), y: 60 },
-            { x: new Date(2017, 10, 2), y: 57 },
-            { x: new Date(2017, 10, 3), y: 51 },
-            { x: new Date(2017, 10, 4), y: 56 },
-            { x: new Date(2017, 10, 5), y: 54 },
-            { x: new Date(2017, 10, 6), y: 55 },
-            { x: new Date(2017, 10, 7), y: 54 },
-            { x: new Date(2017, 10, 8), y: 69 },
-            { x: new Date(2017, 10, 9), y: 65 },
-            { x: new Date(2017, 10, 10), y: 66 },
-            { x: new Date(2017, 10, 11), y: 63 },
-            { x: new Date(2017, 10, 12), y: 67 },
-            { x: new Date(2017, 10, 13), y: 66 },
-            { x: new Date(2017, 10, 14), y: 56 },
-            { x: new Date(2017, 10, 15), y: 64 }
+
+            { x: 10, y: 30, label: "Sunday" },
+            { x: 20, y: 80, label: "Monday" },
+            { x: 30, y: 65, label: "Tuesday" },
+            { x: 40, y: 70, label: "Wednesday" },
+            { x: 50, y: 40, label: "Thursday" },
+            { x: 60, y: 65, label: "Friday" },
+            { x: 70, y: 73, label: "Saturday" }
           ]
         }]
       };
@@ -106,7 +66,7 @@
         <a class="navbar-brand col-1 text-white">Navbar</a>
         <form class="form-inline col-10 h-100 text-white p-0 ml-2">
           <input class="form-control col-11 bg-secondary p-2 ml-2 rounded-0 border-0 mr-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-secondary float-right ml-0 p-2 border-0" type="submit">Search</button>
+          <button class="btn btn-outline-dark bg-* text-secondary ml-0 p-2 border-0" type="submit">Search</button>
         </form>
       </nav>
     </header>
@@ -126,16 +86,35 @@
 
         </nav>
       </section>
-      <section class="col-9 main-page">
-        <div class="row ml-1">
-          <h1>Dashboard</h1>
+      <section class="col-9 main-page mt-2">
+        <div class="row ml-1 justify-content-between">
+          <div class="col-7">
+            <h2>Dashboard</h2>
+          </div>
+          <div class="col-3">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-outline-secondary btn-sm rounded">Share</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm rounded">Export</button>
+
+              <div class="btn-group ml-2" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle rounded btn-sm" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  This week
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" href="#">Dropdown link</a>
+                  <a class="dropdown-item" href="#">Dropdown link</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <hr>
         <div class="row">
           <div id="chartContainer" style="height: 500px; width: 90%;"></div>
         </div>
         <div class="row mt-3 ml-1">
-          <h1>Section Title</h1>
+          <h2>Section Title</h2>
         </div>
         <div class="row">
           <table class="table table-striped">
