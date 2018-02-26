@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     // ability to submit new list items
     $('button').on('click', function(event) {
-        event.preventDefault();
+        // event.preventDefault();
         var inputText = $('input').eq(0).val();
         var inputUrl = $('input').eq(1).val();
         var displayUrl = inputUrl.split(/[.,\/ ]/).splice(-2).join('.');
@@ -29,11 +29,12 @@ $(document).ready(function() {
 
             var newListItem = $('<li>');
             var favStar = $('<span>').addClass('far fa-star fa-xs');
+            var newListItemText = $('<span>').addClass('item-text').text(' ' + inputText + ' ');
             // var inputUrlA = $('<a>').addClass('li__url').attr('href', inputUrl).attr('target', '_blank').text(displayUrl);
             var inputUrlSpan = $('<span>').addClass('li__link--grey-and-small').html('(<a class="li__url" target="_blank" href=' + inputUrl + '>' + displayUrl + '</a>)');
             
-            newListItem.text(' ' + inputText + ' ');
-            newListItem.prepend(favStar);
+            newListItem.append(favStar);
+            newListItem.append(newListItemText);
             newListItem.append(inputUrlSpan);
             
             $ol.append(newListItem);
