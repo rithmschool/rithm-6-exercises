@@ -20,7 +20,7 @@ Simplify the following big O expressions as much as possible:
 Determine the time and space complexities for each of the following functions. If you're not sure what these functions do, copy and paste them into the console and experiment with different inputs!
 
 ```js
-// 1.
+// 1.  Time: O(n)   Space: O(1)
 
 function logUpTo(n) {
   for (var i = 1; i <= n; i++) {
