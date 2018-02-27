@@ -1,81 +1,102 @@
 function productOfArray(arr) {
-    if (arr.length === 1) return arr[0];
-    return arr[0] * productOfArray(arr.slice(1));
+  if (arr.length === 0) {
+    return 1;
+  }
+  return arr[0] * productOfArray(arr.slice(1))
 }
 
 function collectStrings(obj) {
-    let arr = [];
+  var newArr = [];
+  function collectStringsHelper(obj) {
     for (var key in obj) {
-        if (typeof obj[key] === 'object') {
-            arr = arr.concat(collectStrings(obj[key]));
-        } else if (typeof obj[key] === 'string') {
-            arr.push(obj[key]);
-        }
+      if (typeof (obj[key]) === "string") {
+        newArr.push(obj[key]);
+      } else {
+        newArr.concat(collectStringsHelper(obj[key]));
+      }
     }
-    return arr;
+  }
+  collectStringsHelper(obj);
+  return newArr;
 }
 
 function stringifyNumbers(obj) {
-    let answer = {};
+  var newObj = {};
+  function stringifyNumbersHelper(obj) {
     for (var key in obj) {
-        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-            answer[key] = stringifyNumbers(obj[key]);
-        } else if (typeof obj[key] === 'number') {
-            answer[key] = obj[key].toString();
-        } else {
-            answer[key] = obj[key];
-        }
+      if (typeof (obj[key]) === "number") {
+        newObj[key] = obj[key].toString();
+      } else if (typeof (obj[key]) === "object" && !Array.isArray(obj[key])) {
+        newObj[key] = (stringifyNumbers(obj[key]));
+      } else {
+        newObj[key] = obj[key];
+      }
     }
-    return answer;
+  }
+  stringifyNumbersHelper(obj);
+  return newObj;
 }
-
-// Paula's solution (better):
-// function contains(obj, val) {
-//     for (var key in obj) {
-//       if (obj[key] === val) {
-//         return true;
-//       } else if (typeof (obj[key]) === “object” && !Array.isArray(obj[key])) {
-//         if (contains(obj[key], val)) return true;
-//       }
-//     }
-//     return false;
-//   }
 
 function contains(obj, val) {
-    let bool = false;
-    function containsHelper(helperObj, helperVal) {
-        for (var key in helperObj) {
-            if (typeof helperObj[key] === 'object') containsHelper(helperObj[key]);
-            if (helperObj[key] === val) bool = true;
-        }
+  for (var key in obj) {
+    if (obj[key] === val) {
+      return true;
+    } else if (typeof (obj[key]) === "object" && !Array.isArray(obj[key])) {
+      if (contains(obj[key], val)) return true;
     }
-    containsHelper(obj, val)
-    return bool
+  }
+  return false;
 }
 
-// - Write a function called search that finds a value in an array and returns the index where the value is at. 
-// If the value is not found, the function should return negative 1.
-// search([1,2,3,4,5],5) // 4
-// search([1,2,3,4,5],15) // -1
-
-function search(arr, val, index = 0) {
-    if (arr.length === 0) return -1;
-    if (arr[0] === val) return index;
-    return search(arr.slice(1), val, ++index);
+function realSize(arr) {
+  let ints = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof (arr[i]) === "number") {
+      ints++;
+    }
+    if (Array.isArray(arr[i])) {
+      ints += realSize(arr[i]);
+    }
+  }
+  return ints;
 }
 
-// binarySearch([1,2,3,4,5],5) // 4
-// binarySearch([1,2,3,4,5],15) // -1
+function SumSquares(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof (arr[i]) === 'number') {
+      sum += arr[i] * arr[i];
+    } else if (Array.isArray(arr[i])) {
+      sum += SumSquares(arr[i]);
+    }
+  }
+  return sum;
+}
 
-function binarySearch(arr, val, l = 0, r = arr.length - 1) {
-    // Set min / max
-    // Start index at the middle
-    // Check if you found the value
-    // If not, adjust the min / max and recurse
-    if (l > r) return -1;
-    let i = Math.floor((l + r) / 2);
-    console.log('i is ' + i, 'l is ' + l, 'r is ' + r, 'arr[i] is ' + arr[i], 'val is ' + val);
-    if (arr[i] === val) return i;
-    arr[i] < val ? l = i + 1 : r = i - 1;
-    return binarySearch(arr, val, l, r);
+function replicate(times, num, newArr) {
+  if (times <= 0) return [];
+  times--;
+  return [num].concat(replicate(times, num));
+}
+
+function search(arr, target, i = 0) {
+  if (arr[i] === target) return i;
+  if (i === arr.length) return -1;
+  return search(arr, target, ++i)
+}
+
+function binarySearch(arr, target, min = 0, max = arr.length - 1) {
+  var checkI = Math.floor((max + min) / 2);
+  if (max < min) {
+    return -1;
+  }
+  if (arr[checkI] === target) {
+    return checkI;
+  }
+  if (arr[checkI] > target) {
+    max = checkI - 1;
+  } else {
+    min = checkI + 1;
+  }
+  return binarySearch(arr, target, min, max);
 }

@@ -1,0 +1,44 @@
+.navbar {
+  max-width: 700px;
+  margin: auto;
+}
+
+.navbar > ul {
+  text-align: right;
+}
+
+.navbar-nav > li > a {
+  padding: 0;
+  transition: all .2s;
+}
+
+.navbar-nav > li > a:hover, a:focus {
+  border-bottom: 3px solid rgba(255,255,255,.75);
+}
+
+.active > a {
+  border-bottom: 3px solid white;
+}
+
+@media (max-width: 768px) {
+  .navbar .col-md {
+    text-align: center;
+  }
+}
+
+#cover {
+  min-height: 80vh;
+  max-width: 540px;
+}
+
+#cover>p {
+  font-size: 1.25rem;
+  font-weight: lighter;
+  line-height: 2rem;
+}
+
+#button-learn {
+  width: 150px;
+  align-self: center;
+  font-weight: bold;
+}

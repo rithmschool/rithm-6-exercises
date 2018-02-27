@@ -6,6 +6,6 @@ All you need to do to complete this assignment is add your name and your favorit
 
 Good luck!
 
-Your name: Rich
+Your name: Paula
 
-Your favorite color: Blue
+Your favorite color: Purple
