@@ -1,0 +1,48 @@
+    .carousel-caption {
+      margin-bottom: 60px;
+    }
+
+    .media-body {
+      padding: 15px;
+      color: grey;
+    }
+
+    h4 {
+      font-size: 45px;
+    }
+
+    hr {
+      width: 100%;
+      margin-top: 70px;
+    }
+
+    .media {
+      margin: 80px auto;
+    }
+
+    .card {
+      margin: 70px auto;
+      color: grey;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      border: none;
+    }
+
+    .card>img {
+      color: grey;
+      height: 150px;
+      width: 150px;
+    }
+
+    .card>a {
+      background-color: grey;
+    }
+
+    footer {
+      padding: 60px;
+    }
+
+    h2 {
+      font-size: 50px;
+    }
