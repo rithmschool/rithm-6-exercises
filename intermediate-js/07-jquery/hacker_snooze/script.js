@@ -13,17 +13,30 @@ $(document).ready(() => {
     console.log("list item added!!")
     e.preventDefault();
     let $title = $('#title').val();
-    let $url = $('#url').val();
+    let $url = $('#url').val().replace(/^\/\/|^.*?:(\/\/)?(www\.)?/, '').replace(/^www\./,'');;
     id++;
-    $('ol').append(
-      $(`<li id="${id}">`).append(
-        `<span class="fav"><i class="foo far fa-star"></i></span>` +
-        `<span class="list-text">${$title}</span>` +
-        `<span class="smallSite"><a href=>${$url}</a></span>`
-      ));
+    $('ol.stories').append(
+      // $(`<li id="${id}">`).append(
+        // `<span class="fav"><i class="foo far fa-star"></i></span>` +
+        // `<span class="list-text">${$title}</span>` +
+        // `<span class="smallSite"><a class="smallSite" href=>(${$url})</a></span>`
+        `
+        <li id=${id}>
+          <span class="fav">
+            <i class="foo far fa-star"></i>
+          </span>
+          <span class="list-text">${$title}</span>
+          <span class="smallSite">
+            <a href="#" class="smallSite">(${$url})</a>
+          </span>
+        </li>
+        `
+      );
     $('.subForm').slideUp('slow');
     $('.subForm').trigger('reset');
   })
+
+// .replace(/^\/\/|^.*?:(\/\/)?(www\.)?/, '').replace(/^www\./,'');
 
   /********* toggle between favorites and all ********/
 
@@ -32,58 +45,24 @@ $(document).ready(() => {
     $('#reg-stories, #stories').toggle();
   })
 
-  $('#submitFav').on('click', () => {
-    $('.subForm').slideToggle(400);
-  })
-
   //
 
   // fav icon
   // console.log("What the fukc");
   $('.fav').on('click', e => {
-
-    let icon = $('.foo');
+    // debugger;
+    // let icon = $('.foo');
     let fav = $(e.currentTarget).children().first();
-    let icon_fa_prefix = icon.attr('data-prefix');
+    let icon_fa_prefix = $(e.currentTarget).children().first().attr('data-prefix');
     if (icon_fa_prefix === "fas") {
-        // icon.attr('data-prefix', 'far');
-        console.log($(e.target));
         $(e.currentTarget).children().first().attr('data-prefix', 'far');
-
-
-    } else {
-        // icon.attr('data-prefix', 'fas');
-        console.log($(e.target));
-        console.log("WOW")
-        $(e.currentTarget).children().first().attr('data-prefix', 'fas');
-        let copy = Object.assign({}, $(e.currentTarget))
-        console.log(copy);
-        addToFavorites(copy);
-        // $(e.currentTarget).closest('svg').attr('data-prefix', 'fas');
+        // console.log("Here is the parent: " + $(e.currentTarget).parent().contents());
+        $(e.currentTarget).remove();
+    } else {;
+      $(e.currentTarget).children().first().attr('data-prefix', 'fas');
+      // console.log("Here is the parent: " + $(e.currentTarget).parent().contents());
+      // debugger;
+      $(e.currentTarget).parent().clone().appendTo('ul.fav-stories');
     }
   });
-
-  function addToFavorites(story) {
-    console.log("Here we are: " + story);
-    $('ul').append(
-      $(`<li>`).append(story));
-  }
-
-
-  // $('.fav').on('click', event => {
-
-
-  //   var icon = $('.foo');
-  //   var icon_fa_prefix = icon.attr('data-prefix');
-
-  //   if (icon_fa_prefix === "fas") {
-  //       icon.attr('data-prefix', 'far');
-
-  //   } else {
-  //       icon.attr('data-prefix', 'fas');
-  //   }
-  // });
-
-
-
 })

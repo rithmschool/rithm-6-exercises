@@ -48,16 +48,12 @@
   margin-bottom: auto;
 }
 
-.smallSite {
-  font-size: 10px;
-}
-
 #bar {
   margin-right: 0.5%;
   margin-left: 0.5%;
 }
 
-a {
+#submitFav, #favs, #all {
   color: black;
 }
 
@@ -66,9 +62,11 @@ a:hover {
   color: black;
 }
 
-.hide {
-  display: none;
+.smallSite, a.smallSite {
+  font-size: 10px;
+  color: rgb(162, 164, 162);
 }
+
 
 .subForm {
   margin-right: 13%;
@@ -82,6 +80,10 @@ a:hover {
 .btn {
   background: rgb(167, 162, 153);
   border: none;
+}
+
+.btn:hover {
+  background: rgb(167, 162, 153);
 }
 
 /* stories list */
@@ -115,4 +117,8 @@ li {
 
 .favorites {
   display: none;
+}
+
+ul.fav-stories {
+  list-style-type: none;
 }
