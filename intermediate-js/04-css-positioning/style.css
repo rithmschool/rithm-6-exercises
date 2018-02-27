@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Exercise 1 */
 
 /* .one {
@@ -62,6 +63,8 @@
 
 /* Exercise 3 */
 /* 
+=======
+>>>>>>> parent of a0af6bc... making index and style
 .one {
   width: 400px;
   height: 400px;
@@ -78,15 +81,19 @@
   width: 200px;
   height: 200px;
   background-color: green;
+<<<<<<< HEAD
   position: relative;
   left: 400px;
   top: 200px;
+=======
+>>>>>>> parent of a0af6bc... making index and style
 }
 
 .four {
   width: 100px;
   height: 100px;
   background-color: blue;
+<<<<<<< HEAD
   position: relative;
   top: 100px;
 } */
@@ -159,3 +166,6 @@
   height: 100px;
   background-color: blue;
 }
+=======
+}
+>>>>>>> parent of a0af6bc... making index and style
