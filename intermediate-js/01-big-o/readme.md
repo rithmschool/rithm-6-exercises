@@ -9,7 +9,7 @@ Simplify the following big O expressions as much as possible:
 3. `O(25)` O(1)
 4. `O(n^2 + n^3)` O(n^3)
 5. `O(n + n + n + n)` O(n)
-6. `O(1000 * log(n) + n)` O(log n)
+6. `O(1000 * log(n) + n)` O(1000log n)
 7. `O(1000 * n * log(n) + n)` O(n log n)
 8. `O(2^n + n^2)` O(2^n)
 9. `O(5 + 3 + 1)` O(1)
@@ -21,7 +21,7 @@ Determine the time and space complexities for each of the following functions. I
 
 ```js
 // 1.
-//TIME IS O(n)
+//TIME IS O(1)
 //COMPLEXITY O(1)
 function logUpTo(n) {
   for (var i = 1; i <= n; i++) {
@@ -48,7 +48,7 @@ function logAtLeast10(n) {
 }
 
 // 4.
-//TIME IS O(log n)
+//TIME IS O(n)
 //COMPLEXITY O(n)
 function onlyElementsAtEvenIndex(array) {
   var newArray = Array(Math.ceil(array.length / 2));
