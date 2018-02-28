@@ -1,0 +1,85 @@
+.nav{
+    width:100%;
+    height:30px;
+    background-color:rgb(255, 102, 0);
+}
+
+.flex-container{
+    display:flex;
+    padding-top:5px;
+}
+
+.flex-container > li{
+    list-style: none;
+    padding-left:20px;
+    text-decoration: none;
+}
+
+a{
+    list-style: none;
+    padding-left:20px;
+    text-decoration: none;  
+    color:black;
+}
+
+form{
+    margin-left:20px;
+    margin-top:20px;
+}
+
+span{
+    margin-left:8px;
+    font-size: 10px;
+}
+.larger-text{
+    font-size:15px;
+}
+#posts, ul {
+    padding-top:20px;
+}
+
+.btn{
+    margin-top:20px;
+}
+
+#screen-cover{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:black;
+    opacity: 0.4;
+    z-index: 200;
+    display: none;
+}
+
+#signup-login-field,#user-info {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    min-width: 35%;
+    min-height: 35%;
+    z-index: 300;
+    background-color: rgb(255, 102, 0);
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 2px 2px black; 
+    display: none;
+}
+
+#signup-login-field > form {
+    z-index: 350;
+    margin: 10px;
+}
+
+#submit-story-form{
+    display: none;
+}
+
+#favorite-stories{
+    display:none;
+}
+#profile-btn{
+    display:none;
+}
