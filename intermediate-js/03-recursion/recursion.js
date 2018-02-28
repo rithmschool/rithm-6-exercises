@@ -55,8 +55,6 @@ function contains(object,value){
             }else if(obj[key] === value){
                 isFound = true;
                 return isFound;
-            }else{
-                return isFound;
             }
           }
        }
