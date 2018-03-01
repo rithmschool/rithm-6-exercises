@@ -32,7 +32,7 @@ span{
     font-size: 10px;
 }
 .larger-text{
-    font-size:15px;
+    font-size: 120%;
 }
 #posts, ul {
     padding-top:20px;
@@ -79,6 +79,7 @@ span{
 
 #favorite-stories{
     display:none;
+    list-style-type: none;
 }
 #profile-btn{
     display:none;
@@ -86,6 +87,7 @@ span{
 .li__url{
     color:grey;
     padding-left: 0;
+    font-size: 150%
 }
 .li__url:hover{
     color:grey;
@@ -114,3 +116,25 @@ span{
     text-align: center;
 }
 
+#update-story-field {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    min-width: 70%;
+    min-height: 35%;
+    z-index: 300;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 2px 2px black; 
+    display: none;
+}
+
+#pirate-icon {
+    border: solid .5px grey;
+    border-radius: 2px;
+}
+
+.btn-warning, .btn-danger {
+    margin: 2px 5px;
+}
