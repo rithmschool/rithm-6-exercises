@@ -7,43 +7,53 @@ body {
     background-size: cover;
     background-color: grey;
     margin-top: 20px;
+    padding-top: 20px;
 }
 
 .navbar {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    overflow: hidden;
     background: transparent;
-    background-image: none;
-    border-color: transparent;
-    box-shadow: none;
-    width: 80%;
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-}
-
-.navbar-brand,
-.navbar-nav {
-    text-decoration: none;
-    color: white;
-    display: inline-block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    color: #777486;
     float: none;
+    display: inline-block;
     vertical-align: top;
 }
 
-.navbar-nav a:active {
+.navbarLinks {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbarLinks a {
+    color: white;
+    font-size: 18px;
+}
+
+.navbarLinks a:active {
     color: white;
     text-decoration: underline;
     text-decoration-color: lightgray;
 }
 
-.navbar-nav a:hover {
+.navbarLinks a:hover {
     color: lightgray;
     text-decoration: underline;
 }
 
 .jumbotron {
     background-color: transparent !important;
-    padding-left: 30% !important;
-    padding-right: 30% !important;
+    padding-left: 25% !important;
+    padding-right: 25% !important;
     text-align: center !important;
 }
 
@@ -55,9 +65,4 @@ body {
     display: flex;
     align-items: center;
     color: white;
-    text-align: center;
-}
-
-.container {
-    align-items: center;
 }
