@@ -8,12 +8,16 @@ $(document).ready(function() {
     $form.toggleClass('hidden');
   })
 
-  $('#toggle-favorites').on('click', function(e) {
-    // debugger;
-    var $data = $ol.find('svg').filter('.fa-star')
-    $data.closest('span').toggleClass('hidden');
 
+
+  $('#toggle-favorites').on('click', function(e) {
+    var $data = $ol.find('li').filter(function(index,val){
+      return !$(val).find("").hasClass("hidden")
+    })
+    $data.closest('li').toggleClass('hidden');
   })
+
+
 
   $form.on('submit', function(e) {
     e.preventDefault();
@@ -31,7 +35,7 @@ $(document).ready(function() {
   })
 
   function addListItem(title, url) {
-    var $solidStarDiv = ($('<span>').addClass('hidden solid-star')).append($('<i class=\"fas fa-star\"><i>'));
+    var $solidStarDiv = ($('<span>').addClass('hidden solid-star')).append($('<i class="fas fa-star"><i>'));
     var $hollowStarDiv = $('<span>').append($('<i class=\"far fa-star\"><i>'));
     var $starContainer = $('<span>').attr('id', 'star-container').append($solidStarDiv, $hollowStarDiv);
     var $titleTxt = $('<span>').addClass('title-txt').text(title)
