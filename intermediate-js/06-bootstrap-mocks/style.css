@@ -36,13 +36,7 @@ header {
   padding: 5px 5px;
   color: darkgray;
   border-bottom: 4px solid;
-}
-
-.nav-mainheader .nav-link {
   border-bottom-color: gray;
-}
-
-.nav-mainheader .nav-link {
   margin-left: 20px;
 }
 
