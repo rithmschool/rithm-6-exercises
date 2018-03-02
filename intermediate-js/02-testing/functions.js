@@ -9,8 +9,9 @@ function replaceWith(str, char1, char2) {
 }
 
 function expand(arr, num) {
-    var result = arr;
+    var result = arr.slice();
     num = num - 1;
+    if (num === 0) return [];
 
     while (num > 0) {
         result = result.concat(arr);
@@ -22,12 +23,14 @@ function expand(arr, num) {
 function acceptNumbersOnly() {
     let arr = Array.from(arguments);
     let i = 0;
+    let count = 0;
     while (i < arr.length) {
-        if (typeof arr[i] && arr[i] !== NaN) {
-            return true;
+        if (typeof arr[i] === "number" && !isNaN(arr[i])) {
+            count++;
         }
+        i++;
     }
-    return false;
+    return count === arr.length;
 }
 
 function mergeArrays(arr1, arr2) {
