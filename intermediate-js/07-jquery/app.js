@@ -33,7 +33,7 @@ $(document).ready(function(){
                 <i class="fa fa-star hidden full"></i>
             </div>
             <a class='info' href="${url}">${title}</a>
-            <a class='info' href="${url}">(${url.slice(url.indexOf("www") + 4, url.indexOf(".com") + 4)})</a>
+            <a class='info' href="${url}">(${url.slice(url.indexOf("wwww") + 4, url.indexOf(".com") + 4)})</a>
         </li>`
 
         $('.news').append(lineItem)
