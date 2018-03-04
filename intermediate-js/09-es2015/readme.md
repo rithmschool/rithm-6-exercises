@@ -8,7 +8,7 @@ console.log(`When ${name} +  comes home, so good`)
 ```
 
 ```javascript
-let DO_NOT_CHANGE = 42;
+const DO_NOT_CHANGE = 42;
 DO_NOT_CHANGE = 50; // stop me from doing this!
 ```
 
@@ -24,7 +24,7 @@ function double(arr){
 ```
 
 ```javascript
-var {numbers: {a: valA, b: valB}} = obj
+{numbers: {a: valA, b: valB}} = obj
 var a = Vala;
 var b = Valb;
 ```
