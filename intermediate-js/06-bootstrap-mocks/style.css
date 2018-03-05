@@ -1,0 +1,68 @@
+body {
+    background-image: url(https://drive.google.com/uc?id=1X4w1832DW8CLLLw2qlyHVw50aK7cXfoi);
+    /* image by Mike Kenneally via Unsplash*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: grey;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.navbar {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: transparent;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    color: #777486;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.navbarLinks {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbarLinks a {
+    color: white;
+    font-size: 18px;
+}
+
+.navbarLinks a:active {
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: lightgray;
+}
+
+.navbarLinks a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.jumbotron {
+    background-color: transparent !important;
+    padding-left: 25% !important;
+    padding-right: 25% !important;
+    text-align: center !important;
+}
+
+.vertical-center {
+    min-height: 100%;
+    /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh;
+    /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+    color: white;
+}
