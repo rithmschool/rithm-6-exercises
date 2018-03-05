@@ -4,61 +4,55 @@ Convert the following es5 code blocks into es2015 code:
 
 ```javascript
 var name = "Josie"
-console.log("When " + name + " comes home, so good")
+console.log(`When ${name} comes home, so good`)
 ```
 
 ```javascript
-var DO_NOT_CHANGE = 42;
+const DO_NOT_CHANGE = 42;
 DO_NOT_CHANGE = 50; // stop me from doing this!
 ```
 
 ```javascript
-var arr = [1,2]
-var temp = arr[0]
-arr[0] = arr[1]
-arr[1] = temp
+let arr = [1,2]
+let a = arr[0]
+let b = arr[1];
+[a,b] = [b,a]
 ```
 
 ```javascript
 function double(arr){
-    return arr.map(function(val){
-        return val*2
-    });
-}
+    return arr.map(val => val*2)
+};
 ```
 
 ```javascript
-var obj = {
-    numbers: {
+let numbers = {
         a: 1,
         b: 2
-    } 
 }
+let obj = Object.assign({}, numbers)
 
-var a = obj.numbers.a;
-var b = obj.numbers.b;
+
+
+var a = obj.a;
+var b = obj.b;
 ```
 
 ```javascript
 function add(a,b){
-    if(a === 0) a = 0
-    else {
-        a = a || 10    
-    }
-    if(b === 0) b = 0
-    else {
-        b = b || 10    
-    }
-    return a+b
+    a===0 ? a =0 : a = a || 10;
+    b === 0 ? b = 0: b = b || 10;
+    return a + b
 }
+  
 ```
 
 Research the following functions - what do they do?
 
-`Array.from` -
+`Array.from` - creates a new Array instance from an array-like object or an iterable.
+ 
+`Object.assign` - used to copy properties and values from one object to another.
 
-`Object.assign` -
-
-`Array.includes` -
-
-`String.startsWith` -
+`Array.includes` - returns true if a given value is found in the array.
+ 
+`String.startsWith` - determines whether a string begins with the characters of a specific string.
