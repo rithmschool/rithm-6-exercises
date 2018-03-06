@@ -58,11 +58,11 @@ Students can only push to their own branches.
 * [02 Routing with Flask](./flask/Unit-01/02-flask-routing/readme.md)
 * [03 Templating with Jinja2](./flask/Unit-01/03-templating/readme.md)
 * [04 CRUD with Flask](./flask/Unit-01/04-flask-crud/readme.md)
-* [05 SQL With Flask and Postgres](./flask/Unit-01/05-sql-flask/readme.md)
-* [06 SQL Alchemy, Part I](./flask/Unit-01/06-sql-alchemy-1/readme.md)
-* [07 SQL Alchemy, Part II](./flask/Unit-01/07-sql-alchemy-2/readme.md)
-* [08 Testing With Flask](./flask/Unit-01/08-testing/readme.md)
-* [09 Server Side Validation with WTForms](./flask/Unit-01/09-forms/readme.md)
+* [05 SQL Alchemy, Part I](./flask/Unit-01/05-sql-alchemy-1/readme.md)
+* [06 SQL Alchemy, Part II](./flask/Unit-01/06-sql-alchemy-2/readme.md)
+* [07 Testing With Flask](./flask/Unit-01/07-testing/readme.md)
+* [08 Server Side Validation with WTForms](./flask/Unit-01/08-forms/readme.md)
+* [09 Heroku](./flask/Unit-01/09-heroku/readme.md)
 
 ### Unit 02 - Intermediate & Advanced Flask
 
