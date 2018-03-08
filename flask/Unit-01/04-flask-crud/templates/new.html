@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form class="form-inline" action="{{url_for("index")}}" method="POST">
+    <label class="h5" for="name">Brand Of Snack&nbsp; </label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="name" name="name" placeholder="Lays Potatoe Chips">
+
+    <label class="h5" for="kind">Snack Category&nbsp; </label>
+    <div class="input-group mb-2 mr-sm-2">
+      <input type="text" class="form-control" id="kind" name="kind"placeholder="Chips">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Put It On The List!</button>
+</form>
+
+{% endblock %}

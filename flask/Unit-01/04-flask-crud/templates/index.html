@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="row mx-auto">
+  <div>
+    <h1 class="align-self-center">The Only Snack List You'll Ever Need</h1>
+
+  <ul>
+    {% for snack in snack_list %}
+    <li>Brand of Snack: {{ snack.name }}&nbsp;&nbsp;Kind: {{ snack.kind }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+</section>
+{% endblock %}

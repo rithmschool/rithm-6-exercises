@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+<!-- content block -->
+{% block content %}
+<div class="row">
+  <form class="form-inline" action="{{url_for("show", id=found_snack.id)}}?_method=PATCH" method="POST">
+      <label class="h4" for="">Edit Brand Of Snack</label>
+      <input type="text" class="form-control mb-2 mr-sm-2" id="name" value="{{found_snack.name}}">
+
+      <label class="h4" for="kind">Edit Snack Category</label>
+      <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control" id="kind" name="kind" value="{{found_snack.kind}}">
+      </div>
+      <button type="submit" class="btn btn-success mb-2">Save Me!</button>
+    </form>
+    <form action="{{url_for('show', id=found_snack.id)}}?_method=DELETE" method="POST">
+      <button type="submit" class="btn btn-danger mb-2">Delete Me! :( </button>
+    </form>
+</div>
+
+{% endblock %}
