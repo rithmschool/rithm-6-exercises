@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %} New Snack {% endblock %} {% block body %}
+<h1>Add New Snack:</h1>
+<form action="{{url_for('index')}}" method="POST">
+    <label for="name">Name of Snack</label>
+    <input type="text" name="name" id="name">
+    <select name="kind">
+  <option value="cookies">Cookies</option>
+  <option value="chips">Chips</option>
+  <option value="candy">Candy</option>
+  <option value="pastries">Pastries</option>
+<option value="frozen">Frozen</option>
+<option value="fruit">Fruits</option>
+<option value="seeds-nuts">Frozen</option>
+<button>Submit</button>
+
+</form>
+{% endbody %}
