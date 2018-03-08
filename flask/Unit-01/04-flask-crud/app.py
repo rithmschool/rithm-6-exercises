@@ -36,6 +36,9 @@ def new():
 
 @app.route("/snacks/<int:id>", methods=["GET", "PATCH", "DELETE"])
 def show(id):
+    found_snack = [snack for snack in snack_list if snack.id == id]
+    if len(found_snack) is 0:
+        return render_template('404.html')
     found_snack = [snack for snack in snack_list if snack.id == id][0]
     if request.method == b"PATCH":
         found_snack.name = request.form.get("name")
@@ -50,8 +53,16 @@ def show(id):
 
 @app.route("/snacks/<int:id>/edit")
 def edit(id):
+    found_snack = [snack for snack in snack_list if snack.id == id]
+    if len(found_snack) == 0:
+        return render_template('404.html')
     found_snack = [snack for snack in snack_list if snack.id == id][0]
     return render_template("edit.html", found_snack=found_snack)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
 
 
 if __name__ == "__main__":

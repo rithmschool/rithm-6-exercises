@@ -1,3 +1,7 @@
 body:hover {
   cursor: pointer;
 }
+
+section {
+  margin-top: 2%;
+}
