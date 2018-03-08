@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Please enjoy some delicious snacks!</h1>
+  <ul>
+    {% for snack in snacks %}
+    <li>Name: {{ snack.name }} Type: {{ snack.kind }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
