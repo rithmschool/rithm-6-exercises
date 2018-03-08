@@ -10,5 +10,5 @@ Snacks
     <li>{{ snack.kind }} : <a href= "{{ url_for('show', id=snack.id) }}" > {{ snack.name }}</a></li>
     {% endfor %}
 </ul>
-<a href="/snacks/new">Add a New Snack</a>
+<a href="/snacks/new" class="btn btn-primary">Add a New Snack</a>
 {% endblock %} 
