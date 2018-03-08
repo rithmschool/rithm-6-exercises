@@ -3,6 +3,11 @@
 
 //     var name = "Josie"
 // console.log("When " + name + " comes home, so good")
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 10b47fad1bb407635e6c08098d2f21cccb739524
 // var DO_NOT_CHANGE = 42;
 // DO_NOT_CHANGE = 50; // stop me from doing this!
 // var arr = [1, 2]

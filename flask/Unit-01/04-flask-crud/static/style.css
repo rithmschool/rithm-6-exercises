@@ -1,0 +1,33 @@
+html {
+    background: url(images/snacksbg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+form {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+#new-snack {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+li,
+a {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+h1,
+p {
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+}
