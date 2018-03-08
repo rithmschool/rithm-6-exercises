@@ -1,8 +1,9 @@
 from flask import Flask, render_template, redirect, request, url_for
-from snack import Snack
 from flask_modus import Modus
+from snack import Snack
 
-snack_list = [Snack("Gelato", "Frozen")]
+
+snack_list = [Snack("Gelato", "Frozen"), Snack("Snickers", "Candy")]
 
 app = Flask(__name__)
 modus = Modus(app)
@@ -22,7 +23,7 @@ def index():
         kind = request.form.get("kind")
         snack_list.append(Snack(name, kind))
         return redirect(url_for('index'))
-    return render_template('index.html', snack=snack)
+    return render_template('index.html', snack_list=snack_list)
 
 @app.route("/snacks/new")
 def new():
@@ -49,5 +50,5 @@ def edit(id):
 
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     app.run(debug=True, port=3000)
