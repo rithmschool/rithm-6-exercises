@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_modus import Modus
 from snack import Snack
 
-snack_list = [Snack('chocolate bar', 'chocolate'), Snack('chocolate chip cookie', 'cookie')]
+snack_list = []
 
 app = Flask(__name__)
 modus = Modus(app)
@@ -23,13 +23,16 @@ def index():
 def new():
     return render_template('new.html')
 
-@app.route('/snacks/<int:id>', methods = ['GET', 'PATCH'])
+@app.route('/snacks/<int:id>', methods = ['GET', 'PATCH', 'DELETE'])
 def show(id):
     snack = get_snack_by_id(id)
     if request.method == b'PATCH':
         snack.name = request.form.get('name')
         snack.kind = request.form.get('kind')
         return redirect(url_for('show', id=snack.id))
+    if request.method == b'DELETE':
+        snack_list.remove(snack)
+        return redirect(url_for('index'))
     return render_template('show.html', snack =snack)
 
 @app.route('/snacks/<int:id>/edit')
