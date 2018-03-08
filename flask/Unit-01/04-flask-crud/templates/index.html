@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %} Snacks {% endblock %} {% block body %}
-<h1>View All Snacks: </h1>
+<h1>Select Your Snack!</h1>
 <ul>
     {% for snack in snack_list %}
     <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }}</li> <a href="{{url_for('show', id=snack.id)}}">View Snack</a> {% endfor %}
