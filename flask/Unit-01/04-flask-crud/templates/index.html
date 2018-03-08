@@ -8,7 +8,7 @@ This is where the snacks are hiding.html
 <h2>   lol.</h2>
 
 <br>
-<form action="/snacks/new" method="POST">
+<form action="/snacks" method="POST">
     <label for="name">Name </label>
     <input type="text" name="name" id="name">
     <label for="kind">Kind</label>
@@ -23,8 +23,7 @@ This is where the snacks are hiding.html
 {% for val in snack_list %}
 
     <li id="{{ val.id }}">{{val.name}} {{val.kind}}</li>
-    <!--<li id="{{ val.id }}">{{val.year}} {{val.make}} {{val.model}}</li>-->
-
+    
 {% endfor %}
   
 </ul>
