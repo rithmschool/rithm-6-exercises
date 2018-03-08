@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="row">
-    <h1 class="mx-auto">Your Selected Snack</h1>
-    <div>
-    <h4>Brand of Snack: &nbsp;</h4><p>{{found_snack.name}}</p>
-    <h4>Snack Category: &nbsp;</h4><p>{{found_snack.kind}}</p>
+<section class="row">
+  <div class="d-flex flex-column">
+
+    <div class="mb-3"><h2>Your Selected Snack</h2></div>
+    <div><h4>Brand of Snack: &nbsp;</h4><p>{{found_snack.name}}</p></div>
+    <div><h4>Snack Category: &nbsp;</h4><p>{{found_snack.kind}}</p></div>
+    <a href="{{url_for('edit', id=found_snack.id)}}"><button>WANT TO EDIT OR DELETE?</button></a>
     </div>
-    <div>
-        <a href="{{url_for('edit', id=found_snack.id)}}"><button>WANT TO EDIT OR DELETE?</button></a>
-    </div>
-  </div>
+
+</section>
 
 {% endblock %}
