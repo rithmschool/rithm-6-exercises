@@ -3,7 +3,7 @@
 
 class Snack():
 
-    id = 0
+    id = 1
 
     def __init__(self, name, kind):
         self.name = name

@@ -6,11 +6,11 @@ app = Flask(__name__)
 modus = Modus(app)
 
 snack_list = []
-snack_list.append(Snack('bread', 'carb'))
-snack_list.append(Snack('prletzel', 'carb'))
-snack_list.append(Snack('sausage', 'invigorating'))
-snack_list.append(Snack('melted butter', 'carb?'))
-snack_list.append(Snack('carrot', 'vegetable'))
+# snack_list.append(Snack('bread', 'carb'))
+# snack_list.append(Snack('prletzel', 'carb'))
+# snack_list.append(Snack('sausage', 'invigorating'))
+# snack_list.append(Snack('melted butter', 'carb?'))
+# snack_list.append(Snack('carrot', 'vegetable'))
 
 
 @app.route('/snacks', methods=["GET", "POST"])
