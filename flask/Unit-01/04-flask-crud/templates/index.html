@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Snacks</h1>
+<section id="all-snacks">
+  {% for snack in snacks: %}
+  <section class="snack">
+    <h3>{{snack.name}}</h3>
+    <a href="{{url_for('edit', id=snack.id)}}">Edit</a>
+    <a href="#" class="delete" id="{{snack.id}}">Delete</a>
+    <ul>
+      <li>Kind: {{snack.kind}}</li>
+    </ul>
+  </section>
+  {% endfor %}
+</section>
+<a href="{{url_for('new')}}">Add a new snack!</a>
+{% endblock %}
