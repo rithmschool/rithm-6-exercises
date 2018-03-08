@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_modus import Modus
 from snack import Snack
+
 
 snack_list = []
 
@@ -11,12 +12,16 @@ modus = Modus(app)
 def root():
     return redirect(url_for('index'))
 
-@app.route('/snacks', methods = ['GET', 'POST'])
+@app.route('/snacks', methods = ['GET', 'POST', 'DELETE'])
 def index():
     if request.method == 'POST':
         new_snack = Snack(request.form.get('name'), request.form.get('kind'))
         snack_list.append(new_snack)
         return redirect(url_for('index'))
+    if request.method == 'DELETE':
+        snack = get_snack_by_id(int(request.form['id']))
+        snack_list.remove(snack)
+        return jsonify('deleted')
     return render_template('index.html', snack_list = snack_list)
 
 @app.route('/snacks/new')
