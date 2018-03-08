@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{{url_for('index')}}" method='POST'>
+  <label for="brand">Brand-Name of Snack: </label>
+  <input type="text" name='brand'><br>
+  <label for="category">Category of Snack: </label>
+  <input type="text" name='category'><br><br>
+  <input type="submit" value='Add this Snack!'>
+</form>
+
+<button>
+  <a href="{{url_for('index')}}">All Snacks</a>
+</button>
+
+
+{% endblock %}
