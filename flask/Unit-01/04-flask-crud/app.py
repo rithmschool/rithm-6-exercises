@@ -6,3 +6,6 @@ app = Flask(__name__)
 
 snack_list = [ Snack('chocolate bar', 'chocolate'), Snack('chocolate chip cookie', 'cookie') ]
 modus = Modus(app)
+
+if __name__ == "__main__":
+    app.run(debug = True, port = 3000)
