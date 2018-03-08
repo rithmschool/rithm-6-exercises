@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit {{ snack.name }}
+ {% endblock %}
+
+ {% block content %} 
+    <h2>Edit {{ snack.name }}</h2>
+    <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+        <label for="name">Snack name: </label>
+        <input type="text" name="name" id="name" value="{{ snack.name }}">
+        <br>
+        <label for="kind">Snack kind: </label>
+        <input type="text" name="kind" id="kind" value="{{ snack.kind }}">
+        <br>
+        <button>Add the snack!</button>
+    </form>
+  {% endblock %}

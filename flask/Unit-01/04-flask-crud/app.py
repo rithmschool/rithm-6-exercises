@@ -23,10 +23,19 @@ def index():
 def new():
     return render_template('new.html')
 
-@app.route('/snacks/<int:id>', methods = ['GET'])
+@app.route('/snacks/<int:id>', methods = ['GET', 'PATCH'])
 def show(id):
     snack = get_snack_by_id(id)
-    return render_template('show.html', snack = snack)
+    if request.method == b'PATCH':
+        snack.name = request.form.get('name')
+        snack.kind = request.form.get('kind')
+        return redirect(url_for('show', id=snack.id))
+    return render_template('show.html', snack =snack)
+
+@app.route('/snacks/<int:id>/edit')
+def edit(id):
+    snack = get_snack_by_id(id)
+    return render_template('edit.html', snack = snack)
 
 def get_snack_by_id(id):
     selected_snack = [ el for el in snack_list if el.id == id ][0]
