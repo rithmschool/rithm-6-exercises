@@ -1,9 +1,13 @@
 {% extends 'base.html' %} {%block content%}
-<form action="{{url_for('index')}}" method="POST">
-  <label for="name_of_snack">Name Of Snack</label>
-  <input type="text" name="name_of_snack">
-  <label for="type_of_snack">Kind Of Snack</label>
-  <input type="text" name="type_of_snack">
-  <input type="submit" value="CREATE NEW SNACK">
-</form>
+
+<div id="new">
+  <form action="{{url_for('index')}}" method="POST">
+    <label for="name_of_snack">Name Of Snack</label>
+    <input type="text" name="name_of_snack">
+    <label for="type_of_snack">Kind Of Snack</label>
+    <input type="text" name="type_of_snack">
+    <input type="submit" value="CREATE NEW SNACK">
+  </form>
+</div>
+
 {%endblock%}
