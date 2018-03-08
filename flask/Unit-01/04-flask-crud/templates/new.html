@@ -3,15 +3,8 @@
 <form action="{{url_for('index')}}" method="POST">
     <label for="name">Name of Snack</label>
     <input type="text" name="name" id="name">
-    <select name="kind">
-  <option value="cookies">Cookies</option>
-  <option value="chips">Chips</option>
-  <option value="candy">Candy</option>
-  <option value="pastries">Pastries</option>
-<option value="frozen">Frozen</option>
-<option value="fruit">Fruits</option>
-<option value="seeds-nuts">Frozen</option>
-<button>Submit</button>
-
+    <label for="kind">Kind of Snack</label>
+    <input type="text" name="kind" id="kind">
+    <button>Submit</button>
 </form>
-{% endbody %}
+<a href="{{url_for('index')}}">View All Snacks</a> {% endbody %}

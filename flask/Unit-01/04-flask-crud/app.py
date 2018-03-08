@@ -1,30 +1,51 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, redirect, request, url_for
 from snack import Snack
 from flask_modus import Modus
+
+snack_list = [Snack("Gelato", "Frozen")]
 
 app = Flask(__name__)
 modus = Modus(app)
 
-snack_list = []
 
-def find_snack():
+def find_snack(id):
     return [snack for snack in snack_list if snack.id == id][0]
 
 @app.route("/")
 def root():
-    return render_template('index.html')
+    return redirect(url_for('index'))
+
+@app.route("/snacks", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        name = request.form.get("name")
+        kind = request.form.get("kind")
+        snack_list.append(Snack(name, kind))
+        return redirect(url_for('index'))
+    return render_template('index.html', snack=snack)
 
 @app.route("/snacks/new")
 def new():
     return render_template('new.html')
 
-@app.route("/snacks/<int:id>")
-def show():
-    pass
+@app.route("/snacks/<int:id>", methods=["GET", "PATCH", "DELETE"])
+def show(id):
+    snack = find_snack(id)
+    if request.method == b"PATCH":
+        snack.name = request.form.get("name")
+        snack.kind = request.form.get("kind")
+        return redirect(url_for('index'))
+
+    if request.method == b"DELETE":
+        snack_list.remove(snack)
+        return redirect(url_for('index'))
+
+    return render_template('show.html', snack=snack)
 
 @app.route("/snacks/<int:id>/edit")
-def edit():
-    pass
+def edit(id):
+    snack = find_snack(id)
+    return render_template("edit.html", snack=snack)
 
 
 
