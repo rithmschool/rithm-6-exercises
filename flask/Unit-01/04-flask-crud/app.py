@@ -23,14 +23,14 @@ def index():
 def new():
     return render_template('new.html')
 
-@app.route('/snacks/<int:id>')
+@app.route('/snacks/<int:id>', methods = ['GET'])
 def show(id):
     snack = get_snack_by_id(id)
     return render_template('show.html', snack = snack)
 
-if __name__ == "__main__":
-    app.run(debug = True, port = 3000)
-
 def get_snack_by_id(id):
     selected_snack = [ el for el in snack_list if el.id == id ][0]
     return selected_snack
+
+if __name__ == "__main__":
+    app.run(debug = True, port = 3000)
