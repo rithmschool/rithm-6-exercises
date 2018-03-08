@@ -1,1 +1,2 @@
-# Add a class for a snack here!
+class Snack:
+    pass
