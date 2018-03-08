@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add A Snack!
+{% endblock %}
+
+{% block content %}
+<form action="{{url_for('index')}}" method="POST">
+  <label for="snack_name">Enter the name of the snack to please your pallet: </label>
+  <input type="text" name="snack_name" id="snack_name">
+  <br>
+  <label for="snack_type">Enter the type of food genre the snack may be of: </label>
+  <input type="text" name="snack_type" id="snack_type">
+  <br>
+  <input type="submit" value="Add Snack!">
+</form>
+
+
+{% endblock %}

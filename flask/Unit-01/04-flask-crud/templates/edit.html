@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Ze Snack
+{% endblock %}
+
+{% block content %}
+<h1>Change your minde? Edit this snack below: {{found_snack.name}} {{found_snack.kind}}</h1>
+
+<form action="{{url_for('show', id=found_snack.id)}}?_method=PATCH" method="POST">
+
+  <label for="name">Enter the name of the snack to please your pallet: </label>
+  <input type="text" name="name" id="name" value="{{found_snack.name}}">
+
+  <br>
+
+  <label for="kind">Enter the type of food genre the snack may be of: </label>
+  <input type="text" name="kind" id="kind" value="{{found_snack.kind}}">
+
+  <br>
+
+  <input type="submit" value="Edit Snack!!">
+
+</form>
+<h2>...or perhaps you wish get rid of the ze snack!</h2>
+<br>
+<form action="{{url_for('show', id=found_snack.id)}}?_method=DELETE" method="POST">
+    <input type="submit" value="Delete this snack!!">
+</form>
+
+{% endblock %}
