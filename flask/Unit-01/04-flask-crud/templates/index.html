@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %} Snack List {% endblock %} {% block content %}
+<h1>Here are some delicous snack list</h1>
+<br> {% for snack in snacks%}
+<ul>
+  <li>
+    <b>{{snack.name}}</b> : {{snack.kind}} :
+    <a href="{{url_for('show', id=snack.id)}}">view snack</a>
+  </li>
+</ul> {% endfor %}
+<br>
+<form action="{{url_for('new')}}">
+  <input type="submit" value='Create New Snack'>
+</form>
+{% endblock %}
