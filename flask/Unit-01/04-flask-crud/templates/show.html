@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Here's your CRUDy Snack...</h1>
+<p>{{ snack.name }}</p>
+<p>{{ snack.kind }}</p>
+<a href="{{url_for('index')}}" >See Your List of CRUDy Snacks</a>
+<br>
+<a href="{{url_for('edit', id=snack.id)}}">Edit This CRUDy Snack</a>
+{% endblock %}
