@@ -3,9 +3,9 @@
 <div id="new">
   <form action="{{url_for('index')}}" method="POST">
     <label for="name_of_snack">Name Of Snack</label>
-    <input type="text" name="name_of_snack">
+    <input type="text" name="name" id="name_of_snack" required>
     <label for="type_of_snack">Kind Of Snack</label>
-    <input type="text" name="type_of_snack">
+    <input type="text" name="kind" required>
     <input type="submit" value="CREATE NEW SNACK">
   </form>
 </div>

@@ -5,12 +5,12 @@ from snack import Snack
 app = Flask(__name__)
 modus = Modus(app)
 
-snack_list = [Snack("Snickers", "Candy"), Snack("Oreo", "Candy")]
+snack_list = []
 
 
 @app.route('/')
 def root():
-    return redirect('snacks')
+    return redirect('index')
 
 
 @app.route('/snacks')
@@ -26,9 +26,7 @@ def new():
 @app.route('/snacks', methods=["POST"])
 def create():
     snack_list.append(
-        Snack(
-            request.form.get("name_of_snack"),
-            request.form.get("type_of_snack")))
+        Snack(request.form.get("name"), request.form.get("kind")))
     return redirect(url_for('index'))
 
 
@@ -47,8 +45,8 @@ def edit(id):
 @app.route('/snacks/<int:id>', methods=['PATCH'])
 def update(id):
     found_snack = [snack for snack in snack_list if snack.id == id][0]
-    found_snack.name = request.form.get("name_of_snack")
-    found_snack.type = request.form.get('type_of_snack')
+    found_snack.name = request.form.get("name")
+    found_snack.kind = request.form.get("kind")
     return redirect(url_for('index'))
 
 
