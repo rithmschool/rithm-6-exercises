@@ -9,6 +9,10 @@
   <input type="text" name='kind' value="{{ snack.kind }}">
   <input type="submit" value='Edit your snack ;)'>
 </form>
+
+<form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST">
+  <input type="submit" value="Remove snack? :(">
+</form>
 <h2>Yummy!</h2>
 
 {% endblock %}
