@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} 
+    New Snack
+{% endblock %}
+
+ {% block content %}
+    <h2>Add a new snack!</h2>
+    <form action="/snacks" method="POST">
+        <label for="name">Snack name: </label>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="kind">Snack kind: </label>
+        <input type="text" name="kind" id="kind">
+        <br>
+        <button>Add the snack!</button>
+    </form>
+  {% endblock %}∏

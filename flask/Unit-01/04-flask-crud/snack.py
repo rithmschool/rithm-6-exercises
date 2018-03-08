@@ -1,4 +1,4 @@
-def Snack():
+class Snack():
     
     id = 1
 
