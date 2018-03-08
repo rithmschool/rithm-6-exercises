@@ -3,7 +3,7 @@ from flask_modus import Modus
 from snack import Snack
 
 
-snack_list = [Snack("Gelato", "Frozen"), Snack("Snickers", "Candy")]
+snack_list = []
 
 app = Flask(__name__)
 modus = Modus(app)
