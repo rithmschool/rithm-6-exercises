@@ -11,9 +11,10 @@ Snack Attack
 {% for snack in snack_list %}
     
     <li> Name: {{snack.name}} <br> Kind: {{snack.kind}}
-        <a href="{{url_for('edit', id=snack.id)}}">Edit</a>
-        <i class="fas fa-pen-square"></i>
-        <a href='/snacks'><i class="fas fa-trash"></i></a>
+        <a href="{{url_for('edit', id=snack.id)}}"><i class="fas fa-pen-square"></i></a>
+        <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
+        </form>
     </li>
 {% endfor %}
 
