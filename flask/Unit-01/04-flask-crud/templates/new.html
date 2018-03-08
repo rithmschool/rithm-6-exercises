@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% block title %}
+Add Snack!
+{% endblock %}
+
+{% block content %}
+<h1>Enter any snack, we do not discriminate<h1>
+    <br>
+    <form action="/snacks" method="POST" class="form-horizontal">
+        <label for="name">Name </label>
+        <input type="text" name="name" id="name">
+        <label for="kind">Kind</label>
+        <input type="text" name="kind" id="model">
+        <button>Add Snack</button>
+    </form>
+
+{% endblock %}

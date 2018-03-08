@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Snack Info</h1>
+    <p>
+        The name of the toy is {{snack.name}}. <br>
+        It's a {{snack.kind}} kind of snack.
+    </p>
+    <a href="{{url_for('index')}}">See all the snacks</a>
+    <br>
+    <a href="{{url_for('edit', id=snack.id)}}">Edit this snack</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+{% block title %}
+Snack Attack
+{% endblock %}
+
+{% block content %}
+<h1>Got snacks?  We sure do.</h1>
+<h2>Check em out!</h2>
+<a href='/snacks/new' class='addsnack'><i class="fas fa-plus-circle"></i>Add a yummy snack!</a>
+<ul>
+{% for snack in snack_list %}
+    
+    <li> Name: {{snack.name}} <br> Kind: {{snack.kind}}
+        <a href="{{url_for('edit', id=snack.id)}}">Edit</a>
+        <i class="fas fa-pen-square"></i>
+        <a href='/snacks'><i class="fas fa-trash"></i></a>
+    </li>
+{% endfor %}
+
+</ul>
+
+
+
+
+{% endblock %}
