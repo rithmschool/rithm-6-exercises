@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% block title %}
+This is where the snacks are hiding.html
+{% endblock %}
+
+{% block content %}
+<h1>This is where all the snacks are at.</h1>
+<h2>   lol.</h2>
+
+<br>
+<ul>
+{% for val in snack_list %}
+
+    <li id="{{ val.id }}">{{val.name}} {{val.kind}}</li>
+    <!--<li id="{{ val.id }}">{{val.year}} {{val.make}} {{val.model}}</li>-->
+
+{% endfor %}
+  
+</ul>
+
+<p>testing for text</p>
+
+<a href="/">Go add another snack bro/sis!</a>
+
+
+{% endblock %}
