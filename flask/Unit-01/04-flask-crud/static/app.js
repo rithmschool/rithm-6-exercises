@@ -1,16 +1,16 @@
 $(function() {
   let $body = $("body");
   $body.on("click", ".delete", e => {
-    destroy($(e.target).attr("id"));
+    destroy($(e.target).closest("tr"));
   });
 });
 
-function destroy(id) {
-  $closestSection = $(`#${id}`).closest("section");
+function destroy($closestRow) {
+  let id = $closestRow.attr("id");
   return $.ajax({
     method: "DELETE",
     url: `/snacks/${id}`
   }).then(() => {
-    $closestSection.remove();
+    $closestRow.remove();
   });
 }

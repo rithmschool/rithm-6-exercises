@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_modus import Modus
-from snack import Snack
 from flask import jsonify
+from snack import Snack
 
 app = Flask(__name__)
 modus = Modus(app)
 
 snack_list = [
-    # Snack("yogurt", "savory"),
-    # Snack("pretzels", "salty"),
-    # Snack("froot loops", "sweet"),
-    # Snack("unsweetened chocolate", "bitter")
+    Snack("gummy worms", "sour"),
+    Snack("yogurt", "savory"),
+    Snack("pretzels", "salty"),
+    Snack("froot loops", "sweet"),
+    Snack("chocolate", "bitter")
 ]
 
 
@@ -51,7 +52,7 @@ def show(id):
 def destroy(id):
     found_snack = Snack.find_snack(snack_list, id)
     snack_list.remove(found_snack)
-    return ('', 200)
+    return jsonify({"message": "deleted"}, 200)
 
 
 @app.route("/snacks/<int:id>/edit")
