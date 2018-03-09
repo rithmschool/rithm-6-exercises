@@ -1,0 +1,51 @@
+1) Calculate the total calories for all the snacks. Call this column total_calories
+
+   SELECT SUM(price) AS total_calories FROM snacks;
+
+2) Calculate the average price for all the snacks. Call this column average_price
+
+   SELECT AVG(price) AS average_price FROM snacks;
+
+3) Calculate the lowest price for all the snacks. Call this column lowest_price
+
+   SELECT MIN(price) AS lowest_price FROM snacks;
+
+4) Calculate the highest price for all the snacks. Call this column highest_price
+
+   SELECT MAX(price) AS highest_price FROM snacks;
+
+5) Find the count for each kind of candy in the table. Your output should look like this
+
+   SELECT kind, COUNT(kind) FROM snacks GROUP BY kind;
+
+6) Find the count of each kind of candy where the count is greater than one.
+
+   SELECT kind, COUNT(kind) FROM snacks GROUP BY kind HAVING COUNT(kind) > 1;
+
+7) Find the average number of calories for each kind of candy and call the name of your column that contains the average average_calories.
+   Order your output by the kind of candy in ascending order. Your ouput should look like this.
+
+   SELECT kind, round(AVG(calories)) as average_calories FROM snacks GROUP BY kind ORDER BY kind ASC;
+
+8) Find the average number of calories for each kind of candy and call the name of your column that contains the average average_calories.
+   You should only select a kind that starts with the letter b and has an average calories less than 250 Order your output by the kind of candy in ascending order.
+   Your ouput should look like this.
+
+  SELECT kind, round(AVG(calories)) as average_calories FROM snacks GROUP BY kind HAVING round(AVG(calories)) < 250 AND kind LIKE 'b%' ORDER BY kind;
+
+Codewars:
+
+1) SELECT SUM(age) AS age_sum 
+FROM people
+
+
+2) SELECT MIN(age) AS age_min,
+MAX(age) AS age_max
+FROM people
+
+3) SELECT DISTINCT age
+FROM people
+
+4) SELECT age, COUNT(*) AS people_count FROM people GROUP BY age
+
+5) SELECT age, COUNT(*) AS total_people FROM people GROUP BY age HAVING COUNT(age) >= 10
