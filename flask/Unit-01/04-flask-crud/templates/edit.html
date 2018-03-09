@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<h2>Edit Your Snack!</h2>
 <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
   <div>
       <label for="name">Edit Snack Name: </label>
@@ -16,12 +17,7 @@
       </select>
   </div>
   <div>
-      <button type="submit">Save Your Changes!</button>
+      <button class="button">Save Your Changes!</button>
   </div>
 </form>
-<!-- <form action="{{url_for('destroy', id=snack.id)}}?_method=DELETE" method="POST">
-  <div>
-      <button type="button">Delete Your Snack :(</button>
-  </div>
-</form> -->
 {% endblock %}
