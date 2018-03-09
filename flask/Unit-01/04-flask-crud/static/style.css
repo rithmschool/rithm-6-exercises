@@ -5,6 +5,7 @@ html {
     -o-background-size: cover;
     background-size: cover;
     padding-top: 40px;
+    font-size: 20px;
 }
 
 #new-snack {
@@ -19,7 +20,7 @@ html {
     opacity: 0.8;
     text-align: left;
     border-radius: 20px;
-    color: black
+    color: black padding: 5px;
 }
 
 form {
@@ -28,6 +29,7 @@ form {
     vertical-align: middle;
     overflow: hidden;
     background-color: transparent;
+    padding: 25px;
 }
 
 ul {
