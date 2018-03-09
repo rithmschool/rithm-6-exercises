@@ -2,12 +2,24 @@
 
 Answer the following questions:
 
-- What is an `RDBMS`?
-- What is the difference between `RDBMS` and `SQL`? 
-- What is a relational database? 
-- What is ACID? 
-- What is the CAP Theorem? 
-- How do you connect to a database in `psql`?
-- How do you create a database in `psql`?
-- How do you create a database in the terminal?
-- How do you show all of your databases in `psql`?
+#### Conceptual
+
+1. What is an `RDBMS`?
+1. What is the difference between `RDBMS` and `SQL`? 
+1. What is a relational database? 
+1. What is a schema?
+
+#### Practical
+
+1. How do you connect to a database in `psql`?
+1. How do you create a database in `psql`?
+1. How do you create a database in the terminal?
+1. How do you drop a database in `psql`?
+1. How do you drop a database in the terminal?
+1. How do you show all of your databases in `psql`?
+1. How do you show all of your tables for the current database in `psql`?
+
+#### Bonus
+
+1. What is ACID? 
+1. What is the CAP Theorem? 
