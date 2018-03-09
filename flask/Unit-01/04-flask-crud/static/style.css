@@ -4,14 +4,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-form {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    overflow: hidden;
-    background-color: transparent;
+    padding-top: 40px;
 }
 
 #new-snack {
@@ -20,8 +13,20 @@ form {
 }
 
 #snack-container {
-    width: 400px;
-    margin: 50px auto;
+    width: 600px;
+    margin: 100px auto;
+    background-color: white;
+    opacity: 0.8;
+    text-align: left;
+    border-radius: 20px;
+    color: black
+}
+
+form {
+    display: table-cell;
+    /* text-align: center; */
+    vertical-align: middle;
+    overflow: hidden;
     background-color: transparent;
 }
 
@@ -33,11 +38,12 @@ li,
 a {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
-    text-align: center;
+    /* text-align: center; */
 }
 
 h1,
-p {
+p,
+#a-center {
     text-align: center;
     font-family: 'Shadows Into Light', cursive;
 }

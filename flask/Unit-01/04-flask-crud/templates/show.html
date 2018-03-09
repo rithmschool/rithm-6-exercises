@@ -1,4 +1,6 @@
 {% extends "base.html" %} {% block title %}View Snack {% endblock %} {% block body %}
-<h1>View Snack:</h1>
-<p>Name: {{ snack.name }}, Kind: {{ snack.kind }} <span><a href="{{url_for('edit', id=snack.id)}}">Edit Snack</a></span></p>
+<div id="snack-container">
+    <h1>View Snack:</h1>
+    <p>Name: {{ snack.name }}, Kind: {{ snack.kind }} <span><a href="{{url_for('edit', id=snack.id)}}">Edit Snack</a></span></p>
+</div>
 {% endblock %}
