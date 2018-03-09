@@ -10,10 +10,7 @@ Snacks
     {% for snack in snacks %}
     <li>
       <p>
-        Brand: {{ snack.brand }}
-      </p>
-      <p>
-        Category: {{ snack.category }}
+        {{ snack.name }} {{ snack.kind }}
       </p>
     </li>
     {% endfor %}
