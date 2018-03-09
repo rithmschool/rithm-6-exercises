@@ -11,6 +11,7 @@ modus = Modus(app)
 def get_snack(id):
     return next(snack for snack in snack_list if snack.id == id)
 
+
 @app.route('/')
 def root():
     return redirect(url_for('index'))
@@ -35,24 +36,21 @@ def new():
 @app.route('/snacks/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
     # found_snack = [snack for snack in snack_list if snack.id == id][0]
-    for found_snack in snack_list:
-        if found_snack.id == id:
-            if request.method == b"PATCH":
-                found_snack.name = request.form['name']
-                found_snack.kind = request.form['kind']
-                return redirect(url_for('index', found_snack=found_snack))
-
-            if request.method == b"DELETE":
-                snack_list.remove(found_snack)
-                return redirect(url_for('index'))
-
-            return render_template('show.html', found_snack=found_snack)
+    found_snack = get_snack(id)
+    if request.method == b"PATCH":
+        found_snack.name = request.form['snack_name']
+        found_snack.kind = request.form['snack_kind']
+        # return redirect(url_for('index', found_snack=found_snack))
+        return render_template('show.html', found_snack=found_snack)
+    if request.method == b"DELETE":
+        snack_list.remove(found_snack)
+        return redirect(url_for('index'))
+    return render_template('show.html', found_snack=found_snack)
 
 
 @app.route('/snacks/<int:id>/edit')
 def edit(id):
-    # found_snack = [snack for snack in snack_list if snack.id == id][0]
-    found_snack = 
+    found_snack = get_snack(id)
     return render_template('edit.html', found_snack=found_snack)
 
 
