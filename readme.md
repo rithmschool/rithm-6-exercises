@@ -44,33 +44,33 @@ Students can only push to their own branches.
 * [03 Recursion Exercise](./intermediate-js/03-recursion)
 * [04 CSS Positioning Exercise](./intermediate-js/04-css-positioning)
 * [05 CSS Mockup Exercise](./intermediate-js/05-css-mocks)
-* [06 Bootstrap Mockup Exercise](./intermediate-js/05-bootstrap-mocks)
-* [07 jQuery Exercise](./intermediate-js/06-jquery)
-* [08 AJAX with jQuery Exercise](./intermediate-js/07-ajax-jquery)
-* [09 ES2015 Exercise](./intermediate-js/08-es2015)
-* [10 Object Oriented Exercises](./intermediate-js/09-oop)
+* [06 Bootstrap Mockup Exercise](./intermediate-js/06-bootstrap-mocks)
+* [07 jQuery Exercise](./intermediate-js/07-jquery)
+* [08 AJAX with jQuery Exercise](./intermediate-js/08-ajax-jquery)
+* [09 ES2015 Exercise](./intermediate-js/09-es2015)
+* [10 Object Oriented Exercises](./intermediate-js/10-oop)
 
 ## II. Flask
 
 ### Unit 01 - Intro to Flask
 
-* [01 Introduction To Flask](./flask/Unit-01/01-flask-intro/readme.md)
-* [02 Routing with Flask](./flask/Unit-01/02-flask-routing/readme.md)
-* [03 Templating with Jinja2](./flask/Unit-01/03-templating/readme.md)
-* [04 CRUD with Flask](./flask/Unit-01/04-flask-crud/readme.md)
-* [05 SQL With Flask and Postgres](./flask/Unit-01/05-sql-flask/readme.md)
-* [06 SQL Alchemy, Part I](./flask/Unit-01/06-sql-alchemy-1/readme.md)
-* [07 SQL Alchemy, Part II](./flask/Unit-01/07-sql-alchemy-2/readme.md)
-* [08 Testing With Flask](./flask/Unit-01/08-testing/readme.md)
-* [09 Server Side Validation with WTForms](./flask/Unit-01/09-forms/readme.md)
+* [01 Introduction To Flask](./flask/Unit-01/01-flask-intro)
+* [02 Routing with Flask](./flask/Unit-01/02-flask-routing)
+* [03 Templating with Jinja2](./flask/Unit-01/03-templating)
+* [04 CRUD with Flask](./flask/Unit-01/04-flask-crud)
+* [05 SQL Alchemy, Part I](./flask/Unit-01/05-sql-alchemy-1)
+* [06 SQL Alchemy, Part II](./flask/Unit-01/06-sql-alchemy-2)
+* [07 Testing With Flask](./flask/Unit-01/07-testing)
+* [08 Server Side Validation with WTForms](./flask/Unit-01/08-forms)
+* [09 Heroku](./flask/Unit-01/09-heroku)
 
 ### Unit 02 - Intermediate & Advanced Flask
 
-* [01 Structuring Larger Flask Applications](./flask/Unit-02/01-blueprints/readme.md)
-* [02 Many to Many](./flask/Unit-02/02-many-to-many/readme.md)
-* [03 Hashing and Sessions](./flask/Unit-02/03-hashing-sessions/readme.md)
-* [04 Authentication with Flask Login](./flask/Unit-02/04-flask-login/readme.md)
-* [05 OAuth with Flask](./flask/Unit-02/05-oauth/readme.md)
+* [01 Structuring Larger Flask Applications](./flask/Unit-02/01-blueprints)
+* [02 Many to Many](./flask/Unit-02/02-many-to-many)
+* [03 Hashing and Sessions](./flask/Unit-02/03-hashing-sessions)
+* [04 Authentication with Flask Login](./flask/Unit-02/04-flask-login)
+* [05 OAuth with Flask](./flask/Unit-02/05-oauth)
 
 ## III. SQL
 
@@ -109,12 +109,12 @@ Students can only push to their own branches.
 * [01 Introduction To React](./react/Unit-01/01-introduction-to-react)
 * [02 Props, State, and Component Architecture](./react/Unit-01/02-props-state-component-architecture)
 * [03 Events, Forms, Refs, and Life Cycle](./react/Unit-01/03-events-forms-refs-life-cycle)
-* [04 Final Project](./react/Unit-01/04-final-project/readme.md)
+* [04 Final Project](./react/Unit-01/04-final-project)
 
 ### Unit 02 - Intermediate React, React Router, and Redux
 
-* [01 Prop Types](./react/Unireact/t-02/02-prop-types/readme.md)
-* [02 Testing](./react/Unit-02/02-testing/readme.md)
+* [01 Prop Types](./react/Unireact/t-02/02-prop-types)
+* [02 Testing](./react/Unit-02/02-testing)
 * [03 React Router](./react/Unit-02/03-react-router)
 * [04 React Router (Continued)](./react/Unit-02/04-react-router-continued)
 * [05 Redux](./react/Unit-02/05-redux)
