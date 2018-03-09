@@ -2,6 +2,6 @@
 <h1>Select Your Snack!</h1>
 <ul>
     {% for snack in snack_list %}
-    <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }}</li> <a href="{{url_for('show', id=snack.id)}}">View Snack</a> {% endfor %}
+    <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }} <span> <a href="{{url_for('show', id=snack.id)}}">View Snack</a></span> </li> {% endfor %}
 </ul>
 <a href="{{url_for('new')}}">Add a New Snack!</a> {% endblock %}

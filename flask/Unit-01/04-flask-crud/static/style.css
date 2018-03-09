@@ -19,6 +19,16 @@ form {
     font-family: 'Open Sans', sans-serif;
 }
 
+#snack-container {
+    width: 400px;
+    margin: 50px auto;
+    background-color: transparent;
+}
+
+ul {
+    list-style-type: none;
+}
+
 li,
 a {
     font-size: 20px;
