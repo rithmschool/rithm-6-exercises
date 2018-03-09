@@ -35,7 +35,7 @@ def edit(id):
 @app.route("/snacks/<int:id>", methods = ["PATCH"])
 def update(id):
     found_snack = [snack for snack in snack_list if snack.id == id][0]
-    found_snack.make = request.form.get("make")
+    found_snack.name = request.form.get("name")
     found_snack.kind = request.form.get("kind")
     return redirect(url_for("index"))
 
