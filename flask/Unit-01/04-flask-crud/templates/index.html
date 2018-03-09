@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>CRUDy Snacks with Flask!</h1>
+  <ol>
+    {% for s in snacks %}
+    <li>
+      {{ s.name + " " + s.kind }}
+    </li>
+    {% endfor %}
+  </ol>
+{% endblock %}
