@@ -1,14 +1,32 @@
-# Flask CRUD
+# Flask-SQLAlchemy, Part I
 
-For this application you will be building CRUD on the resouce `snacks`. Your application should:
+## Part 1
 
-- display all the `snacks`
-- allow a user to create `snacks` 
-    -  each snack should have a `name` and `kind`
-- allow a user to edit a snack
-- allow a user to delete a snack
+It's time for more refactoring! This time, refactor your `snack` app to use Flask SQLAlchemy. You should have a `Snack` model to serve as an interface between instances in Python and rows in your `snacks` table.
 
-You should use a list to store your snacks and make a class for a snack to create instances from.
+Research how to handle 404 errors using Flask-SQLAlchemy, and add a 404 page to your app that will get sent if someone tries to find a snack with an invalid id.
 
-**BONUS** Make your app look amazing with some CSS!
-**BONUS** If you go to the show page for an invalid id, your applicaiton will break. Create a 404 page and redirect to it in the event that a user tries to go to the show or edit pages for a snack with an invalid id.
+## Part 2
+
+Let's build another CRUD app! This time here's what we want:
+
+- Full CRUD on `bootcamps`
+- Each bootcamp should have an id, name and location
+- It should be styled!
+- It should handle 404 errors
+
+*BONUS*
+
+- Add a column called `votes`, which is an integer to your `bootcamps` table
+- In your `index.html` page, have two buttons next to each bootcamp, one to upvote and one to downvote
+- Have a route on your server for `POST /bootcamps/<int:id>/vote` which either adds one or subtracts one to the votes property for that bootcamp
+
+*SUPER BONUS*
+
+- Using AJAX, do not refresh the page when a bootcamp is deleted or when an upvote or downvote occurs. Use `jsonify` (a function from flask) to return JSON instead of rendering or redirect (so that the page does not refresh)
+- Using jQuery or vanilla JavaScript, sort most upvoted bootcamps to the top
+
+*SUPER DUPER BONUS*
+
+- Deploy this to Heroku! (Watch the screencast in a future section to do that)
+- Use the Google maps API to show a map of all the bootcamps you create on the `index.html` page
