@@ -1,0 +1,49 @@
+h1 {
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+body {
+    text-align: center;
+    background-image: url(https://images.freeimages.com/images/large-previews/099/fusion-cuisine-1-1327956.jpg);
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.4)
+}
+
+nav {
+    font-size: 150%;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 150%;
+}
+
+li {
+    margin: 15px;
+    background-color: rgba(255, 255, 255, 0.6)
+}
+
+a[href="/snacks/new"] {
+    font-size: 150%;
+}
+
+a[class="navbar-brand"] {
+    font-size: 150%;
+    background-color: rgba(0, 0, 0, 0.0)
+}
+
+label {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none !important;
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+.m-3 {
+    margin: 15px;
+    font-size: 150%;
+}
