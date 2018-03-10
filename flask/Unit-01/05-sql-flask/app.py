@@ -54,7 +54,7 @@ def show(id):
     if request.method == b'DELETE':
         db.session.delete(found_snack)
         db.session.commit()
-        return redirect(url_for)
+        return redirect(url_for('index'))
     return render_template("show.html, id=snack.id", snack=found_snack)
 
 
