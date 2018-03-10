@@ -1,16 +1,31 @@
 from flask import Flask, render_template, redirect, url_for, request
+from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from snack import Snack
 
 app = Flask(__name__)
 modus = Modus(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/computers-db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-snack_list = []
-# snack_list.append(Snack('bread', 'carb'))
-# snack_list.append(Snack('prletzel', 'carb'))
-# snack_list.append(Snack('sausage', 'invigorating'))
-# snack_list.append(Snack('melted butter', 'carb?'))
-# snack_list.append(Snack('carrot', 'vegetable'))
+class Snack(db.Model):
+
+    __tablename__ = "snacks"
+
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    kind = db.Column(db.Text)
+
+
+    def __init__(self, name, kind):
+        self.name = name
+        self.kind = kind
+
+
+    def __repr__(self):
+        return f"This {self.name} has {self.kind} GB of memory"
 
 
 @app.route('/snacks', methods=["GET", "POST"])
@@ -21,7 +36,7 @@ def index():
         snack_list.append(Snack(name, kind))
         return redirect(url_for('index'))
     else:
-        return render_template('index.html', snacks=snack_list)
+        return render_template('index.html', snacks=db.get_all_snacks)
 
 
 @app.route('/snacks/new')
