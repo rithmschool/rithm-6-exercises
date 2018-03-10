@@ -21,7 +21,7 @@ class Snack(db.Model):
     def __init__(self, name, kind):
         self.name = name
         self.kind = kind
-        # categories are: savory, sweet, sour, spicy, bitter
+        # categories are: savory, salty, sweet, sour, spicy, bitter
 
     def __repr__(self):
         return f"This snack: {self.name}, is {self.kind}"
@@ -51,7 +51,6 @@ def new():
 @app.route("/snacks/<int:id>", methods=["GET", "PATCH"])
 def show(id):
     found_snack = Snack.query.get_or_404(id)
-
     if request.method == b"PATCH":
         found_snack.name = request.form["name"]
         found_snack.kind = request.form["kind"]

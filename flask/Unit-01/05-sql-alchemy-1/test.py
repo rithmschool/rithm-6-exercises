@@ -48,7 +48,7 @@ class BaseTestCase(TestCase):
 
     def test_update(self):
         response = self.client.patch(
-            '/snacks/1',
+            '/snacks/1?_method=PATCH',
             data=dict(name="updated", kind="information"),
             follow_redirects=True)
         self.assertIn(b'updated', response.data)
