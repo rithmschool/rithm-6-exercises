@@ -46,7 +46,7 @@ def new():
 
 @app.route('/snacks/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
-    snack = Snack.query.get(id)
+    snack = Snack.query.get_or_404(id)
     if request.method == b"PATCH":
         snack.name = request.form.get("name")
         snack.kind = request.form.get("kind")
@@ -64,6 +64,11 @@ def show(id):
     "/snacks/<int:id>/edit", )
 def edit(id):
     return render_template('edit.html', snack=Snack.query.get(id))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":
