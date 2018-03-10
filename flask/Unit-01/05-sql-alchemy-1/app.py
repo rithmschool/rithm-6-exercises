@@ -54,7 +54,7 @@ def show(id):
     if request.method == b"DELETE":
         db.session.delete(snack)
         db.session.commit()
-        return redirect(url_for('index'))
+        return jsonify({"message": "Deleted Snack"})
 
     return render_template('show.html', snack=Snack.query.get(id))
 
