@@ -1,0 +1,29 @@
+/* .navbar {
+    background-color: #343a40;
+} */
+
+.top-item  img {
+  width:200px;
+
+}
+
+.container {
+    margin-top:80px;
+}
+
+.media h2 {
+    font-size:50px;
+}
+
+.media {
+    margin-top: 50px;
+    margin-bottom:50px;
+}
+
+.media p{
+ font-size:20px;
+}
+
+.footer {
+    margin-bottom: 25px;
+}
