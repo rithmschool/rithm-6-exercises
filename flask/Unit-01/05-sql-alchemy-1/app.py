@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, request, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
-# from snack import Snack
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/snacks_db'

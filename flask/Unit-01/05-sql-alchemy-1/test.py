@@ -1,59 +1,60 @@
-from snack import Snack
-from app import app, snack_list
+from app import app, db, Snack
+from flask_testing import TestCase
 import unittest
 
-class TestSnackMethods(unittest.TestCase):
+
+class BaseTestCase(TestCase):
+    def create_app(self):
+        app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///testing.db'
+        return app
 
     def setUp(self):
-        snack_list.append(Snack('snickers', 'chocolate'))
-        snack_list.append(Snack('skittles', 'candy'))
+        db.create_all()
+        snack1 = Snack("Hershey", "Chocolate")
+        snack2 = Snack("Skittles", "Candy")
+        snack3 = Snack("Chips Ahoy", "Cookie")
+        db.session.add_all([snack1, snack2, snack3])
+        db.session.commit()
 
     def tearDown(self):
-        snack_list.clear()
-        Snack.id = 1
+        db.drop_all()
 
     def test_index(self):
-        tester = app.test_client(self)
-        response = tester.get('/snacks', content_type='html/text')
+        response = self.client.get('/snacks', content_type='html/text')
         self.assertEqual(response.status_code, 200)
-
-    def test_new(self):
-        tester = app.test_client(self)
-        response = tester.get('/snacks/new', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-
-    def test_edit(self):
-        tester = app.test_client(self)
-        response = tester.get('/snacks/1', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Hershey Chocolate', response.data)
+        self.assertIn(b'Skittles Candy', response.data)
+        self.assertIn(b'Chips Ahoy Cookie', response.data)
 
     def test_show(self):
-        tester = app.test_client(self)
-        response = tester.get('/snacks/1/edit', content_type='html/text')
+        response = self.client.get('/snacks/1')
         self.assertEqual(response.status_code, 200)
 
-    def test_creating_snack(self):
-      tester = app.test_client(self)
-      tester.post('/snacks',
-                        data=dict(name="hersheys", kind="chocolate"), follow_redirects = True)
-      self.assertEqual(snack_list[2].id, 3)
-      self.assertEqual(snack_list[2].name, 'hersheys')
-      self.assertEqual(snack_list[2].kind, 'chocolate')
-      self.assertEqual(len(snack_list), 3)
+    def test_create(self):
+        response = self.client.post(
+            '/snacks',
+            data=dict(name="New", kind="Student"),
+            follow_redirects=True)
+        self.assertIn(b'New Student', response.data)
 
-    def test_editing_snack(self):
-      tester = app.test_client(self)
-      tester.post('/snacks/1?_method=PATCH',
-                        data=dict(name="almond_snickers", kind="almonds_and_chocolate"), follow_redirects = True)
-      self.assertEqual(snack_list[0].name, 'almond_snickers')
-      self.assertEqual(snack_list[0].kind, 'almonds_and_chocolate')
-      self.assertEqual(len(snack_list), 2)
+    def test_edit(self):
+        response = self.client.get('/snacks/1/edit')
+        self.assertIn(b'Hershey', response.data)
+        self.assertIn(b'Chocolate', response.data)
 
-    def test_deleting_snack(self):
-      tester = app.test_client(self)
-      tester.post('/snacks/1?_method=DELETE', follow_redirects = True)
-      tester.post('/snacks/2?_method=DELETE', follow_redirects = True)
-      self.assertEqual(len(snack_list), 0)
+    def test_update(self):
+        response = self.client.patch(
+            '/snacks/1?_method=PATCH',
+            data=dict(name="updated", kind="information"),
+            follow_redirects=True)
+        self.assertIn(b'updated information', response.data)
+        self.assertNotIn(b'Hershey Chocolate', response.data)
+
+    def test_delete(self):
+        response = self.client.delete(
+            '/snacks/1?_method=DELETE', follow_redirects=True)
+        self.assertNotIn(b'Hershey Chocolate', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
