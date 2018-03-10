@@ -32,10 +32,13 @@ def index():
     if request.method == "POST":
         name = request.form.get('name')
         kind = request.form.get('kind')
-        snack_list.append(Snack(name, kind))
+        newSnack = (Snack(name, kind))
+        db.session.add(newSnack)
+        db.session.commit()
         return redirect(url_for('index'))
     else:
-        return render_template('index.html', snacks=db.get_all_snacks)
+        snacks = Snack.query.all()
+        return render_template('index.html', snacks=snacks)
 
 
 @app.route('/snacks/new')
@@ -45,13 +48,20 @@ def new():
 
 @app.route('/snacks/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
-    target_snack = [snack for snack in snack_list if snack.id == id][0]
+    target_snack = Snack.query.get(id)
     if request.method == b"PATCH":
-        target_snack.name = request.form['name']
-        target_snack.kind = request.form['kind']
+        new_name = request.form['name']
+        new_kind = request.form['kind']
+        target_snack = Snack.query.get(id)
+        target_snack.name = new_name
+        target_snack.kind = new_kind
+        db.session.add(target_snack)
+        db.session.commit()
         return redirect(url_for('index'))
     elif request.method == b"DELETE":
-        snack_list.remove(target_snack)
+        target_snack = Snack.query.get(id)
+        db.session.delete(target_snack)
+        db.session.commit()
         return redirect(url_for('index'))
     else:
         return render_template('show.html', snack=target_snack)
@@ -59,7 +69,7 @@ def show(id):
 
 @app.route('/snacks/<int:id>/edit')
 def edit(id):
-    target_snack = [snack for snack in snack_list if snack.id == id][0]
+    target_snack = Snack.query.get(id)
     return render_template('edit.html', snack=target_snack)
 
 @app.errorhandler(404)
