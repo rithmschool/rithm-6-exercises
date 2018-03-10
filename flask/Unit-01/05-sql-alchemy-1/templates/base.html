@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   <title>Flask-Crud Exercise</title>
 </head>
-<body>
-  <section class="container snack-img">
+<body class="snack-img">
+  <section class="container">
   <header class="row mb-4">
     <div class="text-center mx-auto">
       <h2>The Only Snack List You'll Ever Need &nbsp;</h2><h4 class="text-muted mt-1 pt-1">Or Will Probably Ever Want</h4>
@@ -20,7 +20,9 @@
     {% endblock %}
 
   </section>
-
+  <footer class= "nav-bar-top">
+      <h6 class="company__bottom">BROUGHT TO YOU BY SNACKTIMELIST FAKE-CO</h6>
+  </footer>
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
