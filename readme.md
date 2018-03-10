@@ -18,7 +18,7 @@ Students can only push to their own branches.
 1.  While working on the assignment, you may push your branch upstream so it lives on GitHub as well as locally: `git push -u origin michael-big-o-exercise`.
 1.  Complete your work on the assignment, committing as often as you see fit on that branch.
 1.  When your assignment is complete, make sure you push your changes (`git push` if you've set the upstream origin or `git push -u origin michael-big-o-exercise` if you haven't pushed before).
-1.  Next, open a pull request in GitHub. [Click here](https://help.github.com/articles/creating-a-pull-request/) for instructions on how to do that. The Pull Request **must be against your personal branch** otherwise we will reject it.
+1.  Next, open a pull request in GitHub. [Click here](https://help.github.com/articles/creating-a-pull-request/) for instructions on how to do that. The Pull Request **must be against your personal branch** otherwise we will reject it. If you accidentally submit a Pull Request against the wrong branch, you can change it on GitHub.
 1.  Instructors may offer feedback, request changes, or reject a pull request at their disgression. We will always cite reasons for requesting changes or rejecting.
 1.  If you need to make changes or open a new Pull Request, you may continue to push to the assignment branch while the PR is open. It will automatically update.
 1.  Once your PR has been approved, you should merge the assignment branch into your personal branch and subsequently delete the assignment branch in GitHub. Note: instructors may do this for you.
