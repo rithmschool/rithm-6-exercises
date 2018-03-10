@@ -29,15 +29,10 @@ def new():
     return render_template('new.html')
 
 
-@app.route('/snacks/<int:id>', methods=["GET", "POST", "PATCH", "DELETE"])
+@app.route('/snacks/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
     target_snack = [snack for snack in snack_list if snack.id == id][0]
-    if request.method == "POST":
-        name = request.form.get('name')
-        kind = request.form.get('kind')
-        snack_list.append(Snack(name, kind))
-        return redirect(url_for('index'))
-    elif request.method == b"PATCH":
+    if request.method == b"PATCH":
         target_snack.name = request.form['name']
         target_snack.kind = request.form['kind']
         return redirect(url_for('index'))
@@ -53,6 +48,6 @@ def edit(id):
     target_snack = [snack for snack in snack_list if snack.id == id][0]
     return render_template('edit.html', snack=target_snack)
 
-
-if __name__ == "__main__":
-    app.run(debug=True, port=3000)
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
