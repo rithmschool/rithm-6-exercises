@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} 
+    New Snack
+{% endblock %}
+
+ {% block content %}
+    <h2 class="m-5">Add a new snack!</h2>
+    <!-- <form action="/snacks" method="POST">
+        <label for="name">Snack name: </label>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="kind">Snack kind: </label>
+        <input type="text" name="kind" id="kind">
+        <br>
+        <button>Add the snack!</button> -->
+    <form class="text-left" action="/snacks" method="POST">
+        <div class="form-group">
+            <label for="name">Snack name: </label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Name of the snack">
+            </div>
+            <div class="form-group">
+            <label for="formGroupExampleInput2">Snack kind: </label>
+            <input type="text" class="form-control" name="kind" id="kind" placeholder="Kind of the snack">
+        </div>
+        <button type="submit" class="btn btn-primary">Add the snack!</button>
+    </form>
+  {% endblock %}∏

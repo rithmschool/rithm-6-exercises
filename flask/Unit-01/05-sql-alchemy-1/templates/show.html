@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    {{ snack.name }}
+{% endblock %}
+
+ {% block content %}
+    <h1 class="m-5">You selected {{ snack.name }}, which is a {{ snack.kind }} kind of snack.</h1>
+    <a class="m-3" href="{{url_for('edit', id=snack.id)}}">Edit your snack</a>
+    <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="post">
+        <button class="btn btn-primary btn-lg m-4">Delete</button>
+    </form>
+
+  {% endblock %}

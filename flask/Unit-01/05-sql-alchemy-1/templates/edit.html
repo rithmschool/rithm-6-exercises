@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit {{ snack.name }}
+ {% endblock %}
+
+ {% block content %} 
+    <h2 class="m-5">Edit {{ snack.name }}</h2>
+    <form class="text-left" action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+        <div class="form-group">
+            <label for="name">Snack name: </label>
+            <input type="text" class="form-control" name="name" id="name" value="{{ snack.name }}" placeholder="Name of the scnack">
+            </div>
+            <div class="form-group">
+            <label for="formGroupExampleInput2">Snack kind: </label>
+            <input type="text" class="form-control" name="kind" id="kind" value="{{ snack.kind }}" placeholder="Kind of the snack">
+        </div>
+        <button type="submit" class="btn btn-primary">Update the snack!</button>
+    </form>
+  {% endblock %}
