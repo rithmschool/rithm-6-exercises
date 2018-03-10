@@ -5,14 +5,13 @@ from snack import Snack
 
 app = Flask(__name__)
 modus = Modus(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/computers-db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask-sql'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Snack(db.Model):
 
     __tablename__ = "snacks"
-
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
@@ -25,7 +24,7 @@ class Snack(db.Model):
 
 
     def __repr__(self):
-        return f"This {self.name} has {self.kind} GB of memory"
+        return f"{self.name} is a {self.kind} kind of snack"
 
 
 @app.route('/snacks', methods=["GET", "POST"])
