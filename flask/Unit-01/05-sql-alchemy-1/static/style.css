@@ -1,5 +1,6 @@
 body {
-    background-image: url('https://cdn.pixabay.com/photo/2015/10/13/11/39/dog-985945_1280.jpg');
+    background-image: url('https://images.unsplash.com/photo-1506759110912-e59fe631eeb5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=91b0ae312bac0259b2da56eb6de98eb8&auto=format&fit=crop&w=2098&q=80');
+    background-size: cover;
 
 }
 h1 {
