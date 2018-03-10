@@ -1,7 +1,14 @@
-# Flask-SQLAlchemy, Part I
+# Flask CRUD
 
-It's time for more refactoring! This time, refactor your `snack` app to use Flask SQLAlchemy. You should have a `Snack` model to serve as an interface between instances in Python and rows in your `snacks` table.
+For this application you will be building CRUD on the resouce `snacks`. Your application should:
 
-### Bonus
+- display all the `snacks`
+- allow a user to create `snacks` 
+    -  each snack should have a `name` and `kind`
+- allow a user to edit a snack
+- allow a user to delete a snack
 
-Research how to handle 404 errors using Flask-SQLAlchemy, and add a 404 page to your app that will get sent if someone tries to find a snack with an invalid id.
+You should use a list to store your snacks and make a class for a snack to create instances from.
+
+**BONUS** Make your app look amazing with some CSS!
+**BONUS** If you go to the show page for an invalid id, your applicaiton will break. Create a 404 page and redirect to it in the event that a user tries to go to the show or edit pages for a snack with an invalid id.
