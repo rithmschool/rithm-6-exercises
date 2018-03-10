@@ -44,14 +44,13 @@ def new():
 def show(id):
     snack = Snack.query.get(id)
     if request.method == b"PATCH":
-        # updated_snack = Snack(request.form.get('name'), request.form.get('kind'))
         snack.name = request.form.get('name')
         snack.kind = request.form.get('kind')
         db.session.add(snack)
         db.session.commit()
         return redirect(url_for('index'))
 
-    if request.method == b"DELETE":
+    if request.method == "DELETE":
         db.session.delete(snack)
         db.session.commit()
         return jsonify({"message": "Deleted Snack"})
