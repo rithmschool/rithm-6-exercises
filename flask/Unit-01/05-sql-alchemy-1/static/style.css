@@ -14,6 +14,7 @@
 }
 #error-body #header h1 {
   font-size: 200px;
+  padding-bottom: 0;
 }
 #index-body,
 #show-body {
@@ -27,7 +28,7 @@
 }
 #error-body {
   background-image: url('enter.jpeg');
-  background-position: 50% -10%;
+  background-position: 50% -8%;
 }
 #index-body h4,
 #show-body h4,
