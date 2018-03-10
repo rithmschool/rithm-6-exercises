@@ -3,7 +3,7 @@
 <div id="snack-container">
     <h1>Select Your Snack Below:</h1>
     <ul>
-        {% for snack in snack_list %}
+        {% for snack in snacks %}
         <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }} <span> <a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-search-plus"></i></a></span> </li> {% endfor %}
         <br>
         <a href="{{url_for('new')}}" class="a-center">Add a New Snack!</a>
