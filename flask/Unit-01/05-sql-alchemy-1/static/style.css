@@ -1,0 +1,17 @@
+body {
+    background-image: url('https://cdn.pixabay.com/photo/2015/10/13/11/39/dog-985945_1280.jpg');
+
+}
+h1 {
+    font-size: 26px;
+    text-align: center;
+    color: #d00b0b;
+}
+h2 {
+    font-size: 24px;
+    text-align: center;
+    color: #d00b0b;
+}
+.container {
+    margin-top: 50px;
+}
