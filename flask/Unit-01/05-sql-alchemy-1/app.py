@@ -6,6 +6,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/snacks"
 modus = Modus(app)
 db = SQLAlchemy(app)
 
+
+
 class Snack(db.Model):
     __tablename__ =  "snacks"
 
