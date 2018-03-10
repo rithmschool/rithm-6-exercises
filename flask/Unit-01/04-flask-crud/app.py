@@ -52,7 +52,7 @@ def show(id):
 def destroy(id):
     found_snack = Snack.find_snack(snack_list, id)
     snack_list.remove(found_snack)
-    return jsonify({"message": "deleted"}, 200)
+    return jsonify({"message": "deleted"})
 
 
 @app.route("/snacks/<int:id>/edit")

@@ -11,19 +11,21 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 10px;
 }
 
 h1 {
   font-family: "Work Sans", cursive;
   font-size: 3.5rem;
   letter-spacing: 0.1em;
-  margin: 0;
+  margin: 5px;
 }
 
 h3 {
   font-size: 1.2rem;
   letter-spacing: 0.05em;
   font-weight: 400;
+  margin: 10px;
 }
 
 .index {
@@ -33,8 +35,16 @@ h3 {
   background-size: cover;
 }
 
-.edit {
+.edit,
+.show,
+.None {
   background-image: url("edit-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.new {
+  background-image: url("new-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -77,14 +87,13 @@ h3 {
 table {
   border-collapse: collapse;
   border-style: hidden;
-  margin: 30px;
+  margin: 1.5rem;
 }
 
 th,
 td {
   border: 1px solid silver;
-  height: 40px;
-  padding: 0px 20px;
+  padding: 0.5rem 1rem;
   max-width: 300px;
   text-overflow: ellipsis;
   text-align: left;
@@ -125,5 +134,56 @@ table tr td:last-child {
 }
 
 .icon--edit:hover {
+  color: darkturquoise;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1rem 14rem;
+}
+
+form label,
+input,
+select {
+  font-weight: 400;
+  margin: 8px;
+  width: 20rem;
+  border: none;
+  border-radius: 5px;
+}
+
+form input {
+  line-height: normal;
+  padding: 0.5rem;
+}
+
+form select {
+  line-height: normal;
+  height: 2.5rem;
+  width: 21rem;
+}
+
+form input:focus,
+select:focus {
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px 5px darkturquoise;
+}
+
+.button--save,
+.button--new {
+  margin-top: 1rem;
+  width: 21rem;
+  border: 3px solid white;
+  background: rgba(255, 255, 255, 0.3);
+  color: black;
+  cursor: pointer;
+}
+
+.button--save:hover,
+.button--new:hover {
+  border: 3px solid white;
+  background: white;
   color: darkturquoise;
 }
