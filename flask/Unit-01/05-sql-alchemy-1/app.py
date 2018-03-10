@@ -50,7 +50,10 @@ def new():
 
 @app.route('/snacks/<int:id>', methods = ['GET', 'PATCH', 'DELETE'])
 def show(id):
-    snack = Snack.query.get(id)
+    snack = Snack.query.get_or_404(id)
+    # if not snack:
+        # return redirect("/404.html"), 404, {"Refresh": "1; url=/404.html"}
+        # return redirect(url_for('page_not_found'))
     if request.method == b'PATCH':
         snack.name = request.form.get('name')
         snack.kind = request.form.get('kind')
@@ -67,6 +70,10 @@ def show(id):
 def edit(id):
     snack = Snack.query.get(id)
     return render_template('edit.html', snack = snack)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 # def get_snack_by_id(id):
 #     selected_snack = [ el for el in snack_list if el.id == id ][0]

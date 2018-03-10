@@ -10,7 +10,7 @@
         {% for snack in snack_list %}
             <li id="{{ snack.id }}">
                 {{ snack.kind }}: <a href="{{url_for('show', id=snack.id)}}">{{ snack.name }}</a>
-                <button class="btn btn-sm btn-primary del-btn">Delete</button>
+                <button class="btn btn-sm btn-primary del-btn align-middle m-1">Delete</button>
             </li> 
          {% endfor %}
     </ul>
