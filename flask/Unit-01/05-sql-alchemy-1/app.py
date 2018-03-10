@@ -1,17 +1,36 @@
 from flask import Flask, render_template, redirect, request, url_for, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
-from threading import Timer
+# from threading import Timer
 # snack.py irrelevant with SQLAlchemy
 # from snack import Snack
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/snacks'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+db = SQLAlchemy(app)
 modus = Modus(app)
 
-snack_list = []
+# replaced by database
+# snack_list = []
 
 
-def get_snack(id):
-    return next(snack for snack in snack_list if snack.id == id)
+class Snack(db.Model):
+
+    __tablename__ = 'snacks'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    kind = db.Column(db.Text)
+
+    def __init__(self, name, kind):
+        self.name = name
+        self.kind = kind
+
+    # replaced by Model
+    # def get_snack(id):
+    #     return next(snack for snack in snack_list if snack.id == id)
 
 
 @app.route('/')
@@ -24,9 +43,11 @@ def index():
     if request.method == 'POST':
         name = request.form.get('name')
         kind = request.form.get('kind')
-        snack_list.append(Snack(name, kind))
+        db.session.add(Snack(name, kind))
+        db.session.commit()
+        # snack_list.append(Snack(name, kind))
         return redirect(url_for('index'))
-    return render_template('index.html', snack_list=snack_list)
+    return render_template('index.html', snack_list=Snack.query.all())
 
 
 @app.route('/snacks/new')
@@ -36,14 +57,19 @@ def new():
 
 @app.route('/snacks/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(id):
-    snack = get_snack(id)
+    snack = Snack.query.get(id)
+    # snack = get_snack(id)
     if request.method == b'PATCH':
         snack.name = request.form.get('name')
         snack.kind = request.form.get('kind')
+        db.session.add(snack)
+        db.session.commit()
         return redirect(url_for('index'))
     # this will fail test as test expects a byte string request
     if request.method == 'DELETE':
-        snack_list.remove(snack)
+        db.session.delete(snack)
+        db.session.commit()
+        # snack_list.remove(snack)
         return jsonify({'message': 'snack deleted'})
     # this will fail test as test expects return render_template('show.html', snack=snack)
     return redirect(url_for('edit', id=snack.id))
@@ -51,7 +77,8 @@ def show(id):
 
 @app.route('/snacks/<int:id>/edit')
 def edit(id):
-    snack = get_snack(id)
+    snack = Snack.query.get(id)
+    # snack = get_snack(id)
     return render_template('edit.html', snack=snack)
 
 
