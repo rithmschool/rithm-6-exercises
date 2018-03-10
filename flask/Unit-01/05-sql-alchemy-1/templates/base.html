@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   <title>Flask-Crud Exercise</title>
 </head>
 <body>
-  <section class="container">
+  <section class="container snack-img">
   <header class="row mb-4">
     <div class="text-center mx-auto">
       <h2>The Only Snack List You'll Ever Need &nbsp;</h2><h4 class="text-muted mt-1 pt-1">Or Will Probably Ever Want</h4>
@@ -18,7 +18,9 @@
   </header>
     {% block content %}
     {% endblock %}
+
   </section>
+
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

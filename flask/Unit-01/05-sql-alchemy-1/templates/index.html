@@ -14,6 +14,7 @@
             <th scope="col">Snack Brand Name</th>
             <th scope="col">Type of Snack</th>
             <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
             <td class="pl-4">{{ snack.name }}</td>
             <td class="pl-4">{{ snack.kind }}</td>
             <td><a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-pencil-alt"></i></td></a>
+            <td><a href="{{url_for('edit', id=snack.id)}}"></a><i class="fas fa-trash"></i></td>
           </tr>
             {% endfor %}
         </tbody>
