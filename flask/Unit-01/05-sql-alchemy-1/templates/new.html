@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %} Add a Bootcamp {% endblock %} {% block body %}
+<form action="{{ url_for('index') }}" method="POST">
+  <label for="name">name</label>
+  <input type="text" id="name" name="name">
+  <label for="location">location</label>
+  <input type="text" id="location" name="location">
+  <button type="submit">submit</button>
+</form>
+{% endblock %}

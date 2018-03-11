@@ -1,0 +1,37 @@
+{% extends'base.html' %} {% block title %} View Bootcamp {% endblock %} {% block body %}
+<style>
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+
+</style>
+<h2>View Bootcamp</h2>
+<div id="map"></div>
+<script>
+  function initMap() {
+    var geocoder = new google.maps.Geocoder();
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 19,
+      center: {
+        lat: 0,
+        lng: 0
+      },
+    });
+    geocoder.geocode({
+      'address': '{{ bootcamp.name }} {{ bootcamp.location }}'
+    }, function (results, status) {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJHt6FenkBe8EKemyrAuvahytICI3HNGw&callback=initMap">
+
+
+</script>
+{% endblock %}

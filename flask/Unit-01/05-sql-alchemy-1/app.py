@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 
@@ -15,11 +15,77 @@ class Bootcamp(db.Model):
     __tablename__ = 'bootcamps'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.text)
-    location = db.Column(db.text)
+    name = db.Column(db.Text)
+    location = db.Column(db.Text)
     votes = db.Column(db.Integer)
 
-    def __init__(self, name, location, votes):
+    def __init__(self, name, location):
         self.name = name
         self.location = location
-        self.votes = votes
+        self.votes = 0
+
+
+@app.route('/')
+def root():
+    return redirect(url_for('index'))
+
+
+@app.route('/bootcamps', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        location = request.form.get('location')
+        db.session.add(Bootcamp(name, location))
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('index.html', bootcamps=Bootcamp.query.all())
+
+
+@app.route('/bootcamps/<int:id>/show', methods=['GET', 'PATCH', 'DELETE'])
+def show(id):
+    bc = Bootcamp.query.get(id)
+    if request.method == b'PATCH':
+        bc.name = request.form.get('name')
+        bc.location = request.form.get('location')
+        db.session.add(bc)
+        db.session.commit()
+        return redirect(url_for('index'), bootcamps=Bootcamp.query.all())
+    if request.method == b'DELETE':
+        db.session.delete(bc)
+        db.session.commit
+        return redirect(url_for('index'), bootcamps=Bootcamp.query.all())
+    return render_template('show.html', bootcamp=bc)
+
+
+@app.route('/bootcamps/<int:id>/up', methods=['PATCH'])
+def up_vote(id):
+    bc = Bootcamp.query.get(id)
+    bc.votes += 1
+    return redirect(url_for('index'))
+
+
+@app.route('/bootcamps/<int:id>/down', methods=['PATCH'])
+def down_vote(id):
+    bc = Bootcamp.query.get(id)
+    bc.votes -= 1
+    return redirect(url_for('index'))
+
+
+@app.route('/bootcamps/new')
+def new():
+    return render_template('new.html')
+
+
+@app.route('/bootcamps/<int:id>/edit')
+def edit(id):
+    return render_template('edit.html')
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def id_not_found(error):
+    return render_template('500.html'), 500

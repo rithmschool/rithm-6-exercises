@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %} Bootcamps {% endblock %} {% block body %}
+<h2>Discover a Bootcamp:</h2>
+<ul>
+  {% for bc in bootcamps %}
+  <li id="{{ bc.id }}">
+    <i class="fas fa-arrow-up"></i> |
+    <i class="fas fa-arrow-down"></i> | {{ bc.name }} | {{ bc.location }} |
+    <a href="{{ url_for('show', id=bc.id) }}">View Bootcamp</a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('new') }}">Add a Bootcamp</a>
+{% endblock %}
