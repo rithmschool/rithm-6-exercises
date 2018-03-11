@@ -1,13 +1,15 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
-from snack import Snack
 
 app = Flask(__name__)
 modus = Modus(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask-sql'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+
+app.url_map.strict_slashes = False
 
 class Snack(db.Model):
 

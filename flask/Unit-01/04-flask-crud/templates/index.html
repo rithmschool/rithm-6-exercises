@@ -11,9 +11,18 @@
       <p>
         Type: {{ snack.kind }}
       </p>
+    <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST">
+      <input type="submit" value="Delete">
+    </form>
+
+    <form action="{{url_for('edit', id=snack.id)}}">
+      <input type="submit" value="Modify snack?">
+    </form>
+
     </li>
     {% endfor %}
   </ul>
+
 
   <button>
     <a href="{{url_for('new')}}">I would like to add a tasty snack</a>
