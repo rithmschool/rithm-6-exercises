@@ -3,7 +3,7 @@
   {% for snack in snacks %}
   <li id="{{snack.id}}">
     <a href="{{url_for('show', id=snack.id)}}">{{snack.name}} {{snack.kind}}</a>
-    <button>x</button>
+    <i class='far fa-trash-alt'></i>
   </li>
   {% endfor %}
 </ul>

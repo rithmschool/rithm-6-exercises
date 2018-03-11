@@ -1,5 +1,5 @@
 $(function() {
-  $("#snacks").on("click", "button", function(event) {
+  $("#snacks").on("click", "i", function(event) {
     event.preventDefault();
     let id = $(this)
       .closest("li")
