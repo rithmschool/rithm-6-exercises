@@ -43,31 +43,31 @@ def index():
 
 @app.route('/bootcamps/<int:id>/show', methods=['GET', 'PATCH', 'DELETE'])
 def show(id):
-    bc = Bootcamp.query.get(id)
+    bootcamp = Bootcamp.query.get(id)
     if request.method == b'PATCH':
-        bc.name = request.form.get('name')
-        bc.location = request.form.get('location')
-        db.session.add(bc)
+        bootcamp.name = request.form.get('name')
+        bootcamp.location = request.form.get('location')
+        db.session.add(bootcamp)
         db.session.commit()
-        return redirect(url_for('index'), bootcamps=Bootcamp.query.all())
+        return redirect(url_for('index'))
     if request.method == b'DELETE':
-        db.session.delete(bc)
+        db.session.delete(bootcamp)
         db.session.commit
-        return redirect(url_for('index'), bootcamps=Bootcamp.query.all())
-    return render_template('show.html', bootcamp=bc)
+        return redirect(url_for('index'))
+    return render_template('show.html', bootcamp=bootcamp)
 
 
 @app.route('/bootcamps/<int:id>/up', methods=['PATCH'])
 def up_vote(id):
-    bc = Bootcamp.query.get(id)
-    bc.votes += 1
+    bootcamp = Bootcamp.query.get(id)
+    bootcamp.votes += 1
     return redirect(url_for('index'))
 
 
 @app.route('/bootcamps/<int:id>/down', methods=['PATCH'])
 def down_vote(id):
-    bc = Bootcamp.query.get(id)
-    bc.votes -= 1
+    bootcamp = Bootcamp.query.get(id)
+    bootcamp.votes -= 1
     return redirect(url_for('index'))
 
 
@@ -78,7 +78,8 @@ def new():
 
 @app.route('/bootcamps/<int:id>/edit')
 def edit(id):
-    return render_template('edit.html')
+    bootcamp = Bootcamp.query.get(id)
+    return render_template('edit.html', bootcamp=bootcamp)
 
 
 @app.errorhandler(404)

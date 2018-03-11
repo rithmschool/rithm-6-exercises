@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block title %} {% endblock %} {% block body %}
-<form action="{{ url_for('show', id=bc.id) }}?_method=PATCH" method="POST">
+<form action="{{ url_for('show', id=bootcamp.id) }}?_method=PATCH" method="POST">
   <label for="name">name</label>
   <input type="text" id="name" name="name">
   <label for="location">location</label>
