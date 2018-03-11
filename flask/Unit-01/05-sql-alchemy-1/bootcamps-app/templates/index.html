@@ -8,24 +8,13 @@ BOOTCAMPS APP
 <h1>BOOTCAMPS IN YOUR AREA</h1>
 <ul>
     {% for bc in bootcamps %}
-    <li class="names" id="{{bc.id}}"><a href="/bootcamps/{{bc.id}}">{{ bc.name }}</a>
+    <li class="names" id="{{bc.id}}"><a href="/bootcamps/{{bc.id}}">{{ bc.name }} ({{bc.votes}})</a>
 
-
-        <div class="btn-group btn-group-toggle mx-5" data-toggle="buttons">
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" checked> 
-                    <i class="fas fa-arrow-down"></i>
-                </label>
-                <label class="btn btn-secondary disabled">
-                        {{ bc.votes}}
-                    <input type="radio" name="options" autocomplete="off"> 
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" autocomplete="off"> 
-                    <i class="fas fa-arrow-up"></i>
-                </label>
-            </div>
-
+        <form action="{{ url_for('vote', id=bc.id)}}?_method=POST" method='POST'>
+        
+            <input type='submit' name='submit' value='upvote'>
+            <input type='submit' name='submit' value='downvote'>
+        </form>    
     </li>
 
 

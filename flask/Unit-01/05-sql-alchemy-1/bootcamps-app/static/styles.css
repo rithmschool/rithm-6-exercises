@@ -6,29 +6,48 @@ background-size: cover;
 
 .navbar {
     
-    max-height:60px;
+    max-height:35px;
 }
 
 
 h1 {
-    font-size: 34px;
+    font-size: 23px;
     text-align: justify;
     color: blueviolet;
+    @media (min-width: 768px) {
+        font-size: 34px;
+    }
 }
 h2 {
-    font-size: 24px;
+    font-size: 18px;
     text-align: center;
     color: #d00b0b;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 15px;
     text-align: justify;
     color: #d00b0b;
 }
-.container {
-    margin-top: 50px;
+h5 {
+    font-size: 12px;
+    text-align: justify;
+    color: black;
 }
 
+.container {
+    max-width: 640px;
+    margin-top: 50px;
+}
+ul {
+    padding-left: 0;
+}
+ li {
+     font-size: 13px;
+ }
+
+.brand-name img {
+    width: 60px;
+}
 
 

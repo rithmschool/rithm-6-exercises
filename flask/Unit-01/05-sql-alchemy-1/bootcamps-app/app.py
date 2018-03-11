@@ -40,7 +40,8 @@ def index():
         db.session.commit()
         return redirect(url_for('index'))
 
-    return render_template('index.html', bootcamps=Bootcamp.query.all())
+    return render_template(
+        'index.html', bootcamps=Bootcamp.query.order_by(Bootcamp.name).all())
 
 
 @app.route('/bootcamps/new')
@@ -64,6 +65,20 @@ def show(id):
 def edit(id):
     bc = Bootcamp.query.get_or_404(id)
     return render_template('edit.html', bc=bc)
+
+
+@app.route('/bootcamps/<int:id>/vote', methods=['POST'])
+def vote(id):
+    bc = Bootcamp.query.get_or_404(id)
+    if request.method == b'POST':
+        if request.form.get('submit') == 'upvote':
+            bc.votes = bc.votes + 1
+        elif request.form.get('submit') == 'downvote':
+            bc.votes = bc.votes - 1
+        db.session.add(bc)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('index.html', bootcamps=Bootcamp.query.all())
 
 
 @app.errorhandler(404)
