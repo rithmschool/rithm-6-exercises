@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    
+
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+</head>
+<body>
+        <nav class="navbar sticky-top navbar-dark bg-primary">
+                <a class="navbar-brand" href="#!">Bootcamps Locator</a>
+                <h5>Sponsored by Rithm School</h5>
+        
+                <h2 class="navbar-brand brand-name">
+                    <a href="index.html"><img class="img-responsive2"       
+                    src="https://www.rithmschool.com/assets/logos/rithm-school-company-logo-eaabae929e57627848ee756658b028718af7d06d7e7534af22f899dfadfa8aa7.png"></a>
+                </h2>
+        
+              </nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=74rEa3p-7NI&list=PLfrkMgWd4RE6VOzVXMzBsFV8dNQIlXE22&t=0s&index=5" allowfullscreen></iframe>
+          </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</body>
+</html>
+
+
