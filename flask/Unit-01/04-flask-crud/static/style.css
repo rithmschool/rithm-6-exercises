@@ -1,5 +1,10 @@
-/* li {
-  font-size: 25px;
+body {
+  background-color: green;
+}
+
+li {
+  font-size: 15px;
+  text-decoration: none;
 }
 
 h1,
@@ -16,4 +21,4 @@ body::after {
   right: 0;
   position: absolute;
   z-index: -1;
-} */
+}
