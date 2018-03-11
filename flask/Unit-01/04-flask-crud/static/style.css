@@ -1,3 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,11 +36,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 li {
   font-size: 15px;
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -45,6 +55,7 @@ h1 {
   text-align: center;
 }
 
+form input,
 #index__form--delete,
 #index__form--edit {
   border-radius: 3px;
@@ -64,4 +75,13 @@ button a {
 #btn__add {
   border: none;
   padding-bottom: 10px;
+}
+
+input {
+  display: block;
+}
+
+.form-group {
+  /* width: 400px; */
+  /* display: inline-block; */
 }

@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main>
+  <h1>Add a new snack!</h1>
+  <form action="{{url_for('index')}}" method='POST'>
+    <div class="form-group">
+      <label for="name">Name of Snack: </label>
+      <input type="text" name='name'>
+    </div>
+    <div class="form-group">
+      <label for="kind">Kind of Snack: </label>
+      <input type="text" name='kind'>
+    </div>
+    <input type="submit" value='Add a new snack!'>
+  </form>
+  <h2>Yummy!</h2>
 
-<form action="{{url_for('index')}}" method='POST'>
-  <label for="name">Name of Snack: </label>
-  <input type="text" name='name'>
-  <label for="kind">Kind of Snack: </label>
-  <input type="text" name='kind'>
-  <input type="submit" value='Add a new snack!'>
-</form>
-<h2>Yummy!</h2>
+  <button>
+    <a href="{{url_for('index')}}">No thanks, I'm happy with my current snack selection</a>
+  </button>
 
-<button>
-  <a href="{{url_for('index')}}">I'm happy with my current snack selection</a>
-</button>
-
+</main>
 
 {% endblock %}
