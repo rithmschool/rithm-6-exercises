@@ -1,24 +1,31 @@
 body {
-  background-color: green;
+  background-image: url('Righteousness.jpeg');
+  background-position: center center;
+  background-repeat: repeat, repeat;
+  display: flex;
+  justify-content: center;
 }
 
 li {
   font-size: 15px;
-  text-decoration: none;
+  border: 1px solid green;
 }
 
-h1,
-p {
+ul {
+  list-style-type: none;
+}
+
+h1 {
   text-align: center;
 }
 
-body::after {
-  content: '';
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
+main {
+  width: 60%;
+  background-color: white;
+  opacity: 0.9;
+}
+
+#index__form--delete,
+#index__form--edit {
+  border-radius: 3px;
 }

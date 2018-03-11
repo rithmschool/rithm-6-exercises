@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Please enjoy some delicious snacks!</h1>
+  <main>
+
+  <h1>Please enjoy some <span>Righteous</span> snacks!</h1>
+    <button>
+      <a href="{{url_for('new')}}">Add a righteous snack</a>
+    </button>
   <ul>
     {% for snack in snacks %}
     <li>
@@ -9,14 +14,14 @@
         Name: {{ snack.name }}
       </p>
       <p>
-        Type: {{ snack.kind }}
+        Kind: {{ snack.kind }}
       </p>
     <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST">
-      <input type="submit" value="Delete">
+      <input type="submit" value="Delete" id='index__form--delete'>
     </form>
 
     <form action="{{url_for('edit', id=snack.id)}}">
-      <input type="submit" value="Modify snack?">
+      <input type="submit" value="Modify snack?" id='index__form--edit'>
     </form>
 
     </li>
@@ -24,9 +29,8 @@
   </ul>
 
 
-  <button>
-    <a href="{{url_for('new')}}">I would like to add a tasty snack</a>
-  </button>
 
+
+  </main>
 
 {% endblock %}
