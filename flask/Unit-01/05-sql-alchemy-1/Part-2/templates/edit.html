@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit {{ bootcamp.name }}
+ {% endblock %}
+
+ {% block content %}
+    <h1>Edit {{ bootcamp.name }}:</h1>
+    <form action="{{url_for('show', id = bootcamp.id)}}?_method=PATCH" method="POST">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="Enter the name" value="{{bootcamp.name}}" required>
+            <small id="nameHelp" class="form-text text-muted">Write the name of the new bootcamp here!</small>
+        </div>
+        <div class="form-group">
+            <label for="location">Location: </label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" value="{{bootcamp.location}}" required>
+            <small id="locationHelp" class="form-text text-muted">Please add street address, city, postalcode, and state here!</small>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit changes</button>
+    </form>
+    <hr>
+    <h4>
+        <a href="{{url_for('index')}}">Go back to the main page</a>
+    </h4>
+  {% endblock %}

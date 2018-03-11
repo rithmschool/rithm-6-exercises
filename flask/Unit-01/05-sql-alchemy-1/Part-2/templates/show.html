@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ bootcamp.name }}
+{% endblock %}
+
+{% block content %}
+    <img class="maps" src="https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=400x400&maptype=roadmap\&markers=size:normal%7Ccolor:red%7Clabel:{{map_elems['marker']}}%7C{{map_elems['address']}}&key=AIzaSyBWMPmIKv8AHzMHfSFzOSAVoPo2kykxRws" alt="map">
+    <h1>
+        {{ bootcamp.name }}
+    </h1>
+    <h2>
+        The location of {{ bootcamp.name }} is:
+        <br>
+        {{ bootcamp.location }}
+    </h2>
+    <h4>
+        <a href="{{url_for('edit', id = bootcamp.id)}}">Edit {{bootcamp.name}}</a>
+    </h4>
+
+    <h1>{{ test_variable }}</h1>
+  {% endblock %}

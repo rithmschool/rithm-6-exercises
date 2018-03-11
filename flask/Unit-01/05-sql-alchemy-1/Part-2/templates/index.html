@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Bootcamps App
+ {% endblock %}
+
+{% block content %}
+<h1>These are the available bootcamps</h1>
+<ul>
+    {% for bc in bootcamps %}
+        <li class="m-2 p-2 px-4 list-element d-flex align-middle" id="{{bc.id}}">
+            <a href="/bootcamps/{{bc.id}}">{{ bc.name }} </a>
+            <span class="location__span my-auto mx-4">{{ bc.location }}</span>
+            <button type="button" class="btn btn-secondary del-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="btn-group btn-group-toggle ml-auto mr-3" data-toggle="buttons">
+                <label class="btn btn-secondary down-btn">
+                    <input type="radio" name="options"> 
+                    <i class="fas fa-arrow-down"></i>
+                </label>
+                <label class="btn btn-secondary disabled">
+                    <span class="votes-display">{{bc.votes}}</span>
+                    <input type="radio" name="options"> 
+                </label>
+                <label class="btn btn-secondary up-btn">
+                    <input type="radio" name="options"> 
+                    <i class="fas fa-arrow-up"></i>
+                </label>
+            </div>
+        </li> 
+
+     {% endfor %}
+</ul>
+<hr class="my-4">
+<img id="combined-map" src="{{ src }}" alt="map"> 
+
+ {% endblock %}
