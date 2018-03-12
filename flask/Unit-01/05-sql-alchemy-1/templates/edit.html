@@ -1,9 +1,11 @@
 {% extends 'base.html' %} {% block title %} {% endblock %} {% block body %}
 <form action="{{ url_for('show', id=bootcamp.id) }}?_method=PATCH" method="POST">
+  <h3>Edit Bootcamp</h3>
   <label for="name">name</label>
-  <input type="text" id="name" name="name">
+  <input type="text" id="name" name="name" value="{{bootcamp.name}}" required>
   <label for="location">location</label>
-  <input type="text" id="location" name="location">
+  <input type="text" id="location" name="location" value="{{bootcamp.location}}" required>
   <button type="submit">submit</button>
+  <a href="{{ url_for('index') }}">Cancel</a>
 </form>
 {% endblock %}

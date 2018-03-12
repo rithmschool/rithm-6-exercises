@@ -1,9 +1,11 @@
 {% extends 'base.html' %} {% block title %} Add a Bootcamp {% endblock %} {% block body %}
 <form action="{{ url_for('index') }}" method="POST">
-  <label for="name">name</label>
-  <input type="text" id="name" name="name">
-  <label for="location">location</label>
-  <input type="text" id="location" name="location">
-  <button type="submit">submit</button>
+  <h3>Add a Bootcamp</h3>
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" placeholder="Bootcamp Name" required>
+  <label for="location">Location</label>
+  <input type="text" id="location" name="location" placeholder="City, State" required>
+  <button type="submit">Submit</button>
+  <a href="{{ url_for('index') }}">Cancel</a>
 </form>
 {% endblock %}

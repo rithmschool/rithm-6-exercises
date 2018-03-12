@@ -41,7 +41,7 @@ def index():
     return render_template('index.html', bootcamps=Bootcamp.query.all())
 
 
-@app.route('/bootcamps/<int:id>/show', methods=['GET', 'PATCH', 'DELETE'])
+@app.route('/bootcamps/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(id):
     bootcamp = Bootcamp.query.get(id)
     if request.method == b'PATCH':
@@ -50,10 +50,10 @@ def show(id):
         db.session.add(bootcamp)
         db.session.commit()
         return redirect(url_for('index'))
-    if request.method == b'DELETE':
+    if request.method == 'DELETE':
         db.session.delete(bootcamp)
-        db.session.commit
-        return redirect(url_for('index'))
+        db.session.commit()
+        return jsonify({'message': 'bootcamp deleted'})
     return render_template('show.html', bootcamp=bootcamp)
 
 
@@ -61,14 +61,18 @@ def show(id):
 def up_vote(id):
     bootcamp = Bootcamp.query.get(id)
     bootcamp.votes += 1
-    return redirect(url_for('index'))
+    db.session.add(bootcamp)
+    db.session.commit()
+    return jsonify({'message': 'rank up'})
 
 
 @app.route('/bootcamps/<int:id>/down', methods=['PATCH'])
 def down_vote(id):
     bootcamp = Bootcamp.query.get(id)
     bootcamp.votes -= 1
-    return redirect(url_for('index'))
+    db.session.add(bootcamp)
+    db.session.commit()
+    return jsonify({'message': 'rank down'})
 
 
 @app.route('/bootcamps/new')
@@ -85,8 +89,3 @@ def edit(id):
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
-
-
-@app.errorhandler(500)
-def id_not_found(error):
-    return render_template('500.html'), 500
