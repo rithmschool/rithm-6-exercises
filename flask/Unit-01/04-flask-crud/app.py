@@ -33,8 +33,8 @@ def index():
     if request.method == "POST":
         name = request.form.get('name')
         kind = request.form.get('kind')
-        newSnack = (Snack(name, kind))
-        db.session.add(newSnack)
+        new_snack = Snack(name, kind)
+        db.session.add(new_snack)
         db.session.commit()
         return redirect(url_for('index'))
     else:
