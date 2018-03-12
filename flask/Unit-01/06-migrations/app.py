@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -17,4 +17,15 @@ class Sunset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.Text)
     caption = db.Column(db.Text)
+    location = db.Column(db.Text)
 
+@app.route('/')
+def root():
+    return redirect(url_for('index'))
+
+@app.route('/sunsets', methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        pass
+    else:
+        return render_template('index.html')
