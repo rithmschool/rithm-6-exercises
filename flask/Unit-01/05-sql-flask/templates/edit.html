@@ -4,10 +4,10 @@
 <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST"> 
 
     <label for="name">Name: </label>
-    <input type="text" name="name" value="{{found_snack.name}}">
+    <input type="text" name="name" value="{{snack.name}}">
     <br>
     <label for="kind">Kind: </label>
-    <input type="text" name="kind" value="{{found_snack.kind}}">
+    <input type="text" name="kind" value="{{snack.kind}}">
     <br>
     <input type="submit" value="Save snack">
 

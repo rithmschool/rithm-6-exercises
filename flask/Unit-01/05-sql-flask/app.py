@@ -1,10 +1,12 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 
 app = Flask(__name__)
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/flask-student-app"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
 modus = Modus(app)
 db = SQLAlchemy(app)
 
@@ -45,6 +47,8 @@ def new():
 @app.route("/snacks/<int:id>", methods=["GET", "PATCH", "DELETE"])
 def show(id):
     found_snack = Snack.query.get(id)
+    if found_snack == None:
+        return page_not_found(404)
     if request.method == b'PATCH':
         found_snack.name = request.form['name']
         found_snack.kind = request.form['kind']
@@ -55,13 +59,17 @@ def show(id):
         db.session.delete(found_snack)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template("show.html, id=snack.id", snack=found_snack)
+    return render_template("show.html", snack=found_snack)
 
 
-@app.route("/cars/<int:id>/edit")
+@app.route("/snacks/<int:id>/edit")
 def edit(id):
     found_snack = Snack.query.get(id)
-    return render_template('edit.html, id=snack.id', snack=found_snack)
+    return render_template('edit.html', snack=found_snack)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":

@@ -3,11 +3,11 @@
 {% block content %}
 
 
-        <h1> {{found_car}}</h1>
+        <h1> {{snack.name + " "}}{{snack.kind}}</h1>
 
         <br>
 
-        <a href="{{url_for('index'}}"> See all snacks.</a>
+        <a href="{{url_for('index')}}"> See all snacks.</a>
         <a href="{{url_for('edit', id=snack.id)}}"> Edit this Snack</a>
 
         <br>
