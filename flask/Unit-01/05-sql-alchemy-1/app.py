@@ -28,6 +28,10 @@ class Snack(db.Model):
 # def get_snack(id):
 #     return next(snack for snack in snack_list if snack.id == id)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 @app.route('/')
 def root():
@@ -58,12 +62,17 @@ def show(id):
     # found_snack = [snack for snack in snack_list if snack.id == id][0]
     # found_snack = get_snack(id)
     found_snack = Snack.query.get(id)
+
+    if found_snack == None:
+        return page_not_found(404)
     if request.method == b"PATCH":
         found_snack.name = request.form['name']
         found_snack.kind = request.form['kind']
         # return redirect(url_for('index', found_snack=found_snack))
+        db.session.add(found_snack)
         db.session.commit()
-        return render_template('show.html', found_snack=found_snack)
+        # return render_template('show.html', found_snack=found_snack)
+        return redirect(url_for('index'))
     if request.method == b"DELETE":
         # snack_list.remove(found_snack)
         db.session.delete(found_snack)
@@ -77,6 +86,9 @@ def show(id):
 def edit(id):
     # found_snack = get_snack(id)
     found_snack = Snack.query.get(id)
+
+    if found_snack == None:
+        return page_not_found(404)
     return render_template('edit.html', found_snack=found_snack)
 
 
