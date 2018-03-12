@@ -9,19 +9,39 @@
   />
 </head>
 <body>
-      <form id="form">
+
+    <div class="container">
+
+      <!-- Remember to update the action and the method to the form -->
+      <form id="form" action="{{url_for('index')}}" method="POST">
         <div class="form-group row">
           <label for="image_url" class="col-2 col-form-label">Image URL:</label>
-          <input type="url" class="form-control col-9" id="image_url" placeholder="Enter image URL here">
+          <input type="url" class="form-control col-9" id="image_url" name="image_url" placeholder="Enter image URL here">
         </div>
         <div class="form-group row">
           <label for="caption" class="col-2 col-form-label">Caption:</label>
-          <input type="text" class="form-control col-9" id="caption" placeholder="Enter text you want at the top of the image">
+          <input type="text" class="form-control col-9" id="caption" name="caption" placeholder="Enter text you want at the top of the image">
         </div>
-
+        <div class="form-group row">
+          <label for="location" class="col-2 col-form-label">Location:</label>
+          <input type="text" class="form-control col-9" id="location" name="location" placeholder="Enter location">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
+      <div class="row">
+        {% for s in sunsets %}
+          <div class="col col-4">
+            <img class="col-12" src="{{s.image_url}} " alt="">
+            <p> {{ s.caption }} </p>
+            <p>{{ s.location }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
