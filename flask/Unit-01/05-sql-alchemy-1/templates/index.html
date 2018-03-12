@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="row mx-auto">
+
+    <!-- <h1 class="align-self-center">The Only Snack List You'll Ever Need</h1> -->
+    <div class="mx-auto mb-3">
+        <a href="{{url_for('new')}}"><button type="submit" class="btn btn-primary mb-2">ADD A SNACK!</button></a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+          <tr class="h5">
+            <th scope="col">&nbsp;</th>
+            <th scope="col">Snack Brand Name</th>
+            <th scope="col">Type of Snack</th>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for snack in snack_list %}
+          <tr id="{{snack.id }}">
+            <th scope="row"><i class="fas fa-utensils"></i></th>
+            <td class="pl-4">{{ snack.name }}</td>
+            <td class="pl-4">{{ snack.kind }}</td>
+            <td><a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-pencil-alt"></i></td></a>
+            <td><a href="{{url_for('edit', id=snack.id)}}"><i class="fas fa-trash button__delete"></i></a></td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+{% endblock %}
