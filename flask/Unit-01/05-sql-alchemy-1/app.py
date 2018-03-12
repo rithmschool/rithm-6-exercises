@@ -29,7 +29,7 @@ def root():
     return redirect(url_for('index'))
 
 
-@app.route('/snacksz', methods=['GET', 'POST'])
+@app.route('/snacks', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         new_snack = Snack(request.form.get('name'), request.form.get('kind'))
