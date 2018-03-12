@@ -9,7 +9,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
-Migrate = app(db)
+Modus = Modus(app)
+Migrate(app, db)
 
 class Sunset(db.Model):
     __tablename__ = "sunsets"
@@ -18,15 +19,15 @@ class Sunset(db.Model):
     image_url = db.Column(db.Text)
     caption = db.Column(db.Text)
 
-@app.routes("/")
+@app.route("/")
 def root():
     return redirect(url_for("index"))
 
-@app.routes("/sunsets")
+@app.route("/sunsets")
 def index():
     return render_template("index.html", sunsets=Sunset.query.all())
 
-@app.routes("/sunsets/new", methods=["POST"])
+@app.route("/sunsets/new", methods=["POST"])
 def new():
     new_sunset = Sunset(image_url=request.form.get("image_url"), caption=request.form.get("caption"))
     db.session.add(new_sunset)
