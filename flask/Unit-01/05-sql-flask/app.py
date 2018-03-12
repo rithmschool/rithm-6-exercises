@@ -58,7 +58,7 @@ def show(id):
     return render_template('show.html', bootcamp = found_bootcamp)
 
 
-@app.route("/snacks/<int:id>/edit")
+@app.route("/bootcamps/<int:id>/edit")
 def edit(id):
     found_bootcamp = Bootcamp.query.get_or_404(id)
     return render_template("edit.html", bootcamp = found_bootcamp)
