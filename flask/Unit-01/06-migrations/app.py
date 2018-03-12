@@ -1,4 +1,4 @@
-from Flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -15,6 +15,7 @@ migrate = Migrate(app, db)
 
 # two endpoints: one to render the `index` page, and one to handle the form submission when a user adds a sunset?
 
+
 class Sunset(db.Model):
 
     __tablename__ = "sunsets"
@@ -27,9 +28,11 @@ class Sunset(db.Model):
         self.image_url = image_url
         self.caption = caption
 
+
 @app.route('/')
-def root:
+def root():
     return redirect(url_for('index'))
+
 
 @app.route('/sunsets', methods=['GET', 'POST'])
 def index():
@@ -41,5 +44,3 @@ def index():
         db.session.commit()
         return redirect(url_for("index"))
     return render_template('index.html', Sunset.query.all())
-
-
