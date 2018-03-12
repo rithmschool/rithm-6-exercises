@@ -1,0 +1,56 @@
+body {
+    background-image: url("markus-spiske-187777-unsplash.jpg");
+    background-position-x: center;
+    background-size: cover;
+}
+
+nav {
+    opacity: .8;
+}
+
+h1 {
+    font-size: 300%;
+    margin: 3% 1%;
+}
+
+.list-element {
+    background-color: rgba(0,0,0,.5);
+    list-style: none;
+    
+}
+
+.list-element a {
+    text-decoration: none;
+    font-size: 150%;
+    color: white;
+}
+
+h4 a {
+    color: #545454;
+    text-decoration: none;
+}
+
+h4 a:hover {
+    color: #434343;
+    text-decoration: none;
+}
+
+.location__span {
+    color: white;
+    font-size: 85%;
+}
+
+.maps {
+    float: right;
+    opacity: 0.8;
+}
+
+#combined-map {
+    max-width: 65%;
+    position: relative;
+    left: 18%;
+    opacity: 0.85;
+}
+
+
+
