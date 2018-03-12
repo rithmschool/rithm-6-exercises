@@ -7,5 +7,10 @@
   {% endfor %}
 </ul>
 
-<a href="{{url_for('new')}}">New Snack</a>
+<div id="newSnack">
+  <form action="{{url_for('new')}}">
+    <input type="submit">
+  </form>
+</div>
+
 {%endblock%}
