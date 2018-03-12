@@ -1,5 +1,6 @@
-$(function() {
-  $("tr").on("click", ".button__delete", function(e) {
+$(function () {
+  $("tr").on("click", ".button__delete", function (e) {
+    event.preventDefault();
     let dataRow = $(e.target).closest("tr");
     deleteItem(dataRow);
   });
@@ -9,7 +10,7 @@ $(function() {
     return $.ajax({
       method: "DELETE",
       url: `/snacks/${id}`
-    }).then(function(data) {
+    }).then(function (data) {
       dataRow.remove();
     });
   }
