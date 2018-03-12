@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add New Bootcamp!
+{% endblock %}
+
+{% block content %}
+<h1>Add another awesome bootcamp to the list!</h1>
+<form action="{{url_for('index')}}" method="POST">
+  <label for="name">Name of bootcamp: </label>
+  <input type="text" name="name" id="name" placeholder="name">
+  <br>
+  <label for="location">Location: </label>
+  <input type="text" name="location" id="location">
+  <br>
+  <input type="submit" name="submitNew" id="submitNew" value="Add new bootcamp!">
+</form>
+{% endblock %}

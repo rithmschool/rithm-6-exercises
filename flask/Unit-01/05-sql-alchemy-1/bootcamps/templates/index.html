@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bootcamps!
+{% endblock %}
+
+{% block content %}
+<div class="background-wrap">
+<h1>Welcome! Below are some bootcamps that are here in the Bay</h1>
+<ul>
+  {% for bootcamp in bootcamps %}
+  <li>
+    <a href="{{url_for('show', id=bootcamp.id)}}">
+      {{ bootcamp.name }} located at {{bootcamp.location}}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+<p>Missing a bootcamp? <a href="{{url_for('new')}}"> Go ahead and add it to the list</a></p>
+</div>
+{% endblock %}

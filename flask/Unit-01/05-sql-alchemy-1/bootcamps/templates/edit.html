@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{bootcamp.name}}
+{% endblock %}
+
+{% block content  %}
+<h1>Here is the bootcamp: {{ bootcamp.name }} located at {{ bootcamp.location }}</h1>
+<h1><a href="{{url_for('index')}}">...or go back to the rest of the bootcamp list</a></h1>
+<h2>
+  Want make some updates to this information to this information? Just enter edits below in the input fields!
+</h2>
+<form action="{{url_for('show', id=bootcamp.id)}}?_method=PATCH" method="POST">
+  <label for="name">Update/Change name: </label>
+  <input type="text" name="name" id="name" value={{bootcamp.name}}>
+  <br>
+  <label for="location">Update/Change location: </label>
+  <input type="text" name="location" id="location" value={{bootcamp.location}}>
+  <br>
+  <input type="submit" name="edit" id="edit" value="Enter edit!">
+</form>
+<h2>One to remove this bootcamp from your list? Click below</h2>
+<form action="{{url_for('show', id=bootcamp.id)}}?_method=DELETE" method="POST">
+  <input type="submit" name="delete" id="delete" value="Remove this bootcamp!">
+</form>
+{% endblock %}
