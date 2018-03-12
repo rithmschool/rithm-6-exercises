@@ -13,6 +13,7 @@ app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+# two endpoints: one to render the `index` page, and one to handle the form submission when a user adds a sunset?
 
 class Sunset(db.Model):
 
@@ -25,3 +26,20 @@ class Sunset(db.Model):
     def __init__(self, image_url, caption):
         self.image_url = image_url
         self.caption = caption
+
+@app.route('/')
+def root:
+    return redirect(url_for('index'))
+
+@app.route('/sunsets', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        image_url = request.form.get('image_url')
+        caption = request.form.get('caption')
+        s = Sunset(image_url, caption)
+        db.session.add(s)
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template('index.html', Sunset.query.all())
+
+
