@@ -1,7 +1,11 @@
 {% extends "base.html" %} {% block title %} Snacks {% endblock %} {% block body %}
-<h1>Select Your Snack!</h1>
-<ul>
-    {% for snack in snack_list %}
-    <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }}</li> <a href="{{url_for('show', id=snack.id)}}">View Snack</a> {% endfor %}
-</ul>
-<a href="{{url_for('new')}}">Add a New Snack!</a> {% endblock %}
+<h1>Welcome to the Snack App!</h1>
+<div id="snack-container">
+    <h1>Select Your Snack Below:</h1>
+    <ul>
+        {% for snack in snacks %}
+        <li>Snack: {{ snack.name }}, Kind: {{ snack.kind }} <span> <a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-search-plus"></i></a></span> </li> {% endfor %}
+        <br>
+        <a href="{{url_for('new')}}" class="a-center">Add a New Snack!</a>
+    </ul>
+</div>{% endblock %}

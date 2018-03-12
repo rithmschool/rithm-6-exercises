@@ -4,14 +4,8 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-form {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    overflow: hidden;
-    background-color: transparent;
+    padding-top: 40px;
+    font-size: 20px;
 }
 
 #new-snack {
@@ -19,15 +13,42 @@ form {
     font-family: 'Open Sans', sans-serif;
 }
 
+#snack-container {
+    width: 600px;
+    margin: 100px auto;
+    background-color: white;
+    opacity: 0.8;
+    text-align: left;
+    border-radius: 20px;
+    color: black;
+    padding: 5px;
+    padding-bottom: 20px;
+}
+
+form {
+    display: table-cell;
+    /* text-align: center; */
+    vertical-align: middle;
+    overflow: hidden;
+    background-color: transparent;
+    padding: 25px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
 li,
 a {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
-    text-align: center;
+    /* text-align: center; */
 }
 
 h1,
-p {
+p,
+.a-center {
     text-align: center;
     font-family: 'Shadows Into Light', cursive;
 }
