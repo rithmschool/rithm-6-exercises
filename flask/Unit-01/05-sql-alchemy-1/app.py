@@ -49,16 +49,33 @@ def new():
 
 @app.route('/bootcamps/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
-    pass
+    target_bootcamp = Bootcamp.query.get(id)
+    if request.method = b"PATCH":
+        new_name = request.form.get('name')
+        new_location = request.form.get('location')
+        target_bootcamp.name = new_name
+        target_bootcamp.location = new_location
+        db.session.add(target_bootcamp)
+        db.session.commit()
+        return redirect(url_for('index'))
+    elif request.method = b"DELETE":
+        target_bootcamp = Bootcamp.query.get(id)
+        db.session.delete(target_bootcamp)
+        db.session.commit()
+        return redirect(url_for('index'))
+    else:
+        return render_template('show.html', bootcamp=target_bootcamp)
 
 @app.route('/bootcamps/<int:id>/edit')
 def edit(id):
-    pass
+    target_bootcamp = Bootcamp.query.get(id)
+    return render_template('edit.html', bootcamp=target_bootcamp)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    pass
+    return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def id_not_found(e):
-    pass
+    return render_template('500.html'), 500
+
