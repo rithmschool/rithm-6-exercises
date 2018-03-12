@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% block title %}
+List a new bootcamp!
+{% endblock %}
+
+{% block content %}
+<h1>Tell us about your bootcamp!<h1>
+    <br>
+    <form action="/bootcamps" method="POST" class="form-vertical">
+        <label for="name">Name </label>
+        <input type="text" name="name" id="name">
+        <label for="location">Location </label>
+        <input type="text" name="location" id="model">
+        <button>Post!</button>
+    </form>
+
+{% endblock %}
