@@ -16,7 +16,7 @@ class Sunset(db.Model):
     __tablename__ = "sunsets"
 
     id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.Text)
+    image_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
     prettiness = db.Column(db.Text)
