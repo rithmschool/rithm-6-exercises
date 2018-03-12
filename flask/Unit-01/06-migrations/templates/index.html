@@ -26,8 +26,8 @@
                 <input type="text" class="form-control col-9" id="location" name="location" placeholder="Enter your sunset's location">
             </div>
             <div class="form-group row">
-                <label for="prettiness" class="col-2 col-form-label">Prettiness:</label>
-                <input type="text" class="form-control col-9" id="prettiness" name="prettiness" placeholder="Enter your sunset's prettiness">
+                <label for="beauty" class="col-2 col-form-label">Beauty:</label>
+                <input type="text" class="form-control col-9" id="beauty" name="beauty" placeholder="Enter your sunset's beauty">
             </div>
             <button type="submit" class="btn btn-warning">Submit</button>
         </form>
@@ -38,7 +38,7 @@
                 <img class="col-12" src="{{ sunset.image_url }}" alt="Sunset">
                 <h5>{{ sunset.caption }}</h5>
                 <h5>Location: {{ sunset.location }}</h5>
-                <h5>Prettiness: {{ sunset.prettiness }}</h5>
+                <h5>Beauty: {{ sunset.beauty }}</h5>
             </div>
             {% endfor %}
         </div>
