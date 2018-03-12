@@ -54,7 +54,8 @@ hr {
 
 /* FORM STYLES */
 
-input {
+input,
+select {
   display: block;
   margin: 5px 0 10px;
   width: 100%;
@@ -66,7 +67,13 @@ input {
   border-radius: 3px;
 }
 
-input:focus {
+select {
+  width: 5rem;
+  height: 1.5rem;
+}
+
+input:focus,
+select:focus {
   outline-color: #999;
   outline-width: 2px;
 }
@@ -86,11 +93,11 @@ form button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* MEME STYLES */
-.meme-block {
+/* SUNSET IMAGE STYLES */
+.sunset-block {
   display: inline-block;
   margin: 5px 8px;
-  position: relative;
+  /* position: relative; */
 }
 
 .remove-button {
@@ -98,7 +105,7 @@ form button:hover {
   margin-right: 8px;
 }
 
-.download-link {
+.download-button {
   color: #444;
   margin-right: 8px;
 }
@@ -107,42 +114,20 @@ form button:hover {
   color: #ed1c24;
 }
 
-.download-link:hover {
+.download-button:hover {
   color: #3755d3;
 }
 
-.new-meme {
-  color: white;
-  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-    2px 2px 0 #000;
+.new-sunset {
+  color: black;
   font-family: Impact, Charcoal, sans-serif;
   font-size: 28px;
   margin: 2px 0 0;
 }
 
-.top-caption,
-.bottom-caption {
-  text-align: center;
-  text-transform: uppercase;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 30px 5px 10px;
-  z-index: 9000;
-  line-height: 30px;
-}
-
-.top-caption {
-  top: 0;
-}
-
-.bottom-caption {
-  bottom: 0;
-}
-
 /* Bring images closer together */
 
-#memes-section {
+#images-section {
   line-height: 0;
   column-count: 3;
   column-gap: 0px;
@@ -150,23 +135,23 @@ form button:hover {
   padding-bottom: 35px;
 }
 
-#memes-section img {
+#images-section img {
   width: 100%;
   height: auto;
 }
 
 @media (max-width: 1200px) {
-  #memes-section {
+  #images-section {
     column-count: 3;
   }
 }
 @media (max-width: 1000px) {
-  #memes-section {
+  #images-section {
     column-count: 2;
   }
 }
 @media (max-width: 800px) {
-  #memes-section {
+  #images-section {
     column-count: 1;
   }
 }

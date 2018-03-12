@@ -7,7 +7,7 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> -->
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400" rel="stylesheet">
   <link href="{{url_for('static', filename='style.css')}}" type="text/css" rel="stylesheet">
-  <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script> -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
   <!-- <script src="js/script.js"></script> -->
 </head>
@@ -15,13 +15,13 @@
 <body>
   <section class="top">
     <header>
-      <h1>😂</h1>
+      <h1>🌅</h1>
       <h1>SUNSETS</h1>
-      <h1>😂</h1>
+      <h1>🌅</h1>
     </header>
     <hr>
     <form action="#" id="sunset-form">
-      <h4>Add Sunset</h4>
+      <h4>Keep Track Of Your Sunsets</h4>
       <div>
         <label for="img-url">Image URL: </label>
         <input type="text" id="img-url" placeholder="What is the URL for your image?">
@@ -36,19 +36,33 @@
       </div>
       <div>
         <label for="beauty-list">Beauty Index: </label>
-        <select id="beauty-list" name="beauty-list" form="sunset-form">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+        <div>
+          <select id="beauty-list" name="beauty-list" form="sunset-form">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
       </div>
       <button type="submit">Submit Sunset!</button>
     </form>
   </section>
 
-  <section id="memes-section">
+  <section id="images-section">
+    <div class="sunset-block">
+      <a href="#" class="remove-button"><i class="fas fa-trash-alt"></i></a>
+      <a href="#" class="download-button"><i class="fas fa-download"></i></a>
+      <figure class="new-sunset">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Sunset_2007-1.jpg" alt="pretty sunset">
+        <figcaption class="">
+          <h4>What a beautiful sunset</h4>
+          <h4>Location: Tallahassee, FL</h4>
+          <h4>Beauty Index: 5</h4>
+        </figcaption>
+      </figure>
+    </div>
   </section>
   <footer class="text-center"> Coded and designed con mucho amor
     <i class="far fa-hand-spock"></i> by Paula Goyanes and Alex Bush 2018
