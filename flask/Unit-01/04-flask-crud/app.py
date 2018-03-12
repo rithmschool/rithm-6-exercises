@@ -8,7 +8,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask-sql'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
 app.url_map.strict_slashes = False
 
 class Snack(db.Model):
