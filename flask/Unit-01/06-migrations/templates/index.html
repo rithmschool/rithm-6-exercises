@@ -20,24 +20,24 @@
       <h1>🌅</h1>
     </header>
     <hr>
-    <form action="#" id="sunset-form">
+    <form action="{{url_for('index')}}" id="sunset-form" method="POST">
       <h4>Keep Track Of Your Sunsets</h4>
       <div>
         <label for="img-url">Image URL: </label>
-        <input type="text" id="img-url" placeholder="What is the URL for your image?">
+        <input type="text" name="img-url" id="img-url" placeholder="What is the URL for your image?">
       </div>
       <div>
         <label for="caption">Caption: </label>
-        <input type="text" id="caption" placeholder="Would you like your sunset to have a caption?">
+        <input type="text" name="caption" id="caption" placeholder="Would you like your sunset to have a caption?">
       </div>
       <div>
         <label for="location">Location: </label>
-        <input type="text" id="location" placeholder="Where is this sunset?">
+        <input type="text" name="location" id="location" placeholder="Where is this sunset?">
       </div>
       <div>
-        <label for="beauty-list">Beauty Index: </label>
+        <label for="beauty-index">Beauty Index: </label>
         <div>
-          <select id="beauty-list" name="beauty-list" form="sunset-form">
+          <select id="beauty-index" name="beauty-index" form="sunset-form">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -51,19 +51,29 @@
   </section>
 
   <section id="images-section">
-    <div class="sunset-block">
-      <a href="#" class="remove-button"><i class="fas fa-trash-alt"></i></a>
-      <a href="#" class="download-button"><i class="fas fa-download"></i></a>
-      <figure class="new-sunset">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Sunset_2007-1.jpg" alt="pretty sunset">
-        <figcaption class="">
-          <h4>What a beautiful sunset</h4>
-          <h4>Location: Tallahassee, FL</h4>
-          <h4>Beauty Index: 5</h4>
-        </figcaption>
-      </figure>
-    </div>
+    {% for sunset in sunsets %}
+        <div class="sunset-block">
+          <a href="#" class="remove-button">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+          <a href="#" class="download-button">
+            <i class="fas fa-download"></i>
+          </a>
+          <figure class="new-sunset">
+            <img src="{{ sunset.image_url }}" alt="pretty sunset (?)">
+            <figcaption class="">
+              <h4>{{ sunset.caption }}</h4>
+              <h4>Location: {{ sunset.location }}</h4>
+              <h4>Beauty Index: {{ sunset.beauty }}</h4>
+            </figcaption>
+          </figure>
+        </div>
+    {% endfor %}
   </section>
+
+
+
+
   <footer class="text-center"> Coded and designed con mucho amor
     <i class="far fa-hand-spock"></i> by Paula Goyanes and Alex Bush 2018
     <i class="far fa-copyright"></i>

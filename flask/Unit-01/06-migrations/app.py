@@ -27,6 +27,13 @@ def root():
 @app.route('/sunsets', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        pass
+        img_url = request.form.get('img-url')
+        caption = request.form.get('caption')
+        location = request.form.get('location')
+        beauty_index = request.form.get('beauty-index')
+        new_sunset = Sunset(image_url=img_url, caption=caption, location=location, beauty=beauty_index)
+        db.session.add(new_sunset)
+        db.session.commit()
+        return redirect(url_for('index'))
     else:
-        return render_template('index.html')
+        return render_template('index.html', sunsets=Sunset.query.all())
