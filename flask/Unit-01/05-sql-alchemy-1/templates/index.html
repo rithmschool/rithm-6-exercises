@@ -24,7 +24,7 @@
             <td class="pl-4">{{ snack.name }}</td>
             <td class="pl-4">{{ snack.kind }}</td>
             <td><a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-pencil-alt"></i></td></a>
-            <td><a href="{{url_for('edit', id=snack.id)}}"></a><i class="fas fa-trash button__delete"></i></td>
+            <td><a href="{{url_for('edit', id=snack.id)}}"><i class="fas fa-trash button__delete"></i></a></td>
           </tr>
             {% endfor %}
         </tbody>
