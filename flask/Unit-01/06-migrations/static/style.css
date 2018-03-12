@@ -1,0 +1,15 @@
+.img__add {
+  height: 200px;
+  width: 300px;
+}
+
+.img__container {
+  height: 350px;
+  width: 300px;
+}
+
+.form__input__length {
+  width: 300px;
+  height: 15px;
+  margin: 1%;
+}
