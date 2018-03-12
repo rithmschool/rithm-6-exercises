@@ -33,14 +33,19 @@ def get_bootcamp(id):
 @app.route('/bootcamps', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        pass
+        name = request.form.get('name')
+        location = request.form.get('location')
+        new_bootcamp = Bootcamp(name, location)
+        db.session.add(new_bootcamp)
+        db.session.commit()
+        return redirect(url_for('index'))
     else:
         bootcamps = Bootcamp.query.all()
         return render_template('index.html', bootcamps=bootcamps)
 
 @app.route('/bootcamps/new')
 def new():
-    pass
+    return render_template('new.html')
 
 @app.route('/bootcamps/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
