@@ -20,21 +20,31 @@
       <h1>😂</h1>
     </header>
     <hr>
-    <form action="#" id="meme-form">
-      <h4>Fill out the form to design your meme</h4>
+    <form action="#" id="sunset-form">
+      <h4>Add Sunset</h4>
       <div>
         <label for="img-url">Image URL: </label>
         <input type="text" id="img-url" placeholder="What is the URL for your image?">
       </div>
       <div>
-        <label for="top-text">Top Text: </label>
-        <input type="text" id="top-text" placeholder="[Optional] What text do you want at the top of your meme?">
+        <label for="caption">Caption: </label>
+        <input type="text" id="caption" placeholder="Would you like your sunset to have a caption?">
       </div>
       <div>
-        <label for="bottom-text">Bottom Text: </label>
-        <input type="text" id="bottom-text" placeholder="[Optional] What text do you want at the bottom of your meme?">
+        <label for="location">Location: </label>
+        <input type="text" id="location" placeholder="Where is this sunset?">
       </div>
-      <button type="submit">Make your meme!</button>
+      <div>
+        <label for="beauty-list">Beauty Index: </label>
+        <select id="beauty-list" name="beauty-list" form="sunset-form">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button type="submit">Submit Sunset!</button>
     </form>
   </section>
 
