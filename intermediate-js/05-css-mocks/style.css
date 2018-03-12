@@ -1,0 +1,74 @@
+body {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+section {
+  padding: 50px;
+  border-bottom: 1px solid grey; }
+
+#mock1 button {
+  background-color: #1E90FF;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 5px; }
+  #mock1 button:hover {
+    background-color: #0366d6;
+    cursor: pointer; }
+
+#mock2 {
+  /*display: flex;*/ }
+  #mock2 #mock2container {
+    margin: auto;
+    border-radius: 5px;
+    max-width: 400px;
+    border: 1px solid grey;
+    box-shadow: -1px 1px .5px .1px; }
+  #mock2 #catImgDiv img {
+    width: 100%;
+    display: block; }
+  #mock2 #catTextDiv {
+    background-color: #e6e6e6; }
+    #mock2 #catTextDiv div {
+      padding: 10px; }
+    #mock2 #catTextDiv div:first-of-type {
+      font-weight: bold;
+      border-bottom: 1px solid grey; }
+
+@media all and (max-width: 800px) {
+  #mock3 {
+    flex-direction: column;
+    align-items: center; } }
+#mock3 {
+  display: flex;
+  justify-content: space-between; }
+  #mock3 > div {
+    border: 5px solid salmon;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px; }
+    #mock3 > div:hover {
+      cursor: pointer; }
+      #mock3 > div:hover .hiddenText {
+        transform: translateY(-135px); }
+  #mock3 img {
+    max-width: 200px;
+    display: block; }
+  #mock3 .hiddenText {
+    width: 100%;
+    height: 110%;
+    transition: transform 1s ease;
+    background-color: black;
+    color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    opacity: .7;
+    font-size: 2rem; }
+
+/*# sourceMappingURL=style.css.map */
