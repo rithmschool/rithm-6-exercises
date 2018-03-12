@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <title>Sunsets!</title>
+</head>
+<body class="container">
+  <div id="input-sun">
+    <form id="submit-sunset">
+        <div class="form-group">
+          <label for="image_url">Image URL: </label>
+          <input id = "url"type="text" class="form-control" id="image_url" placeholder="Enter url" name="image_url">
+        </div>
+        <div class="form-group">
+          <label for="caption">Caption: </label>
+          <input id = "caption" type="text" class="form-control" id="caption" placeholder="Enter caption" name="caption">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+  <hr>
+  <div id="collection">
+    {% for sunset in sunsets %}
+    <div class="sunset-image" style="background-image:url({{sunset.image_url}})">{{sunset.caption}}</div>
+    {% endfor %}
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="./static/script.js"></script>
+</body>
+</html>
