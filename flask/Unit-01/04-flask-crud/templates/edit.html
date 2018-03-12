@@ -1,9 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %} Edit Snack {% endblock %} {% block body %}
 
-{% block title %}
+<body id="edit-body" class="container">
+  <form id="edit-snack-form" class="form-horizontal" action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+    <div class="form-group row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-5 text-left form-heading">Edit Snack</div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 form-label text-lg-right" for="snack-name">Snack Name</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" id="snack-name" name="name" value="{{snack.name}}" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 form-label text-lg-right" for="snack-kind">Snack Category</label>
+      <div class="col-lg-5">
+        <select class="form-control" id="snack-kind" name=kind required>
+          <option value="" hidden>Choose a category</option>
+          <option value="Candy">Candy</option>
+          <option value="Ice Cream">Ice Cream</option>
+          <option value="Baked Goods">Baked Goods</option>
+          <option value="Nuts">Nuts</option>
+          <option value="Chips">Chips</option>
+          <option value="Crackers">Crackers</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Fruit">Fruit</option>
+          <option value="Veggies">Veggies</option>
+          <option value="Protein">Protein</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-5">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="submit" class="btn btn-secondary">Update</button>
+          <a href="{{url_for('index')}}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
 
-{% endblock %}
-
-{% block body %}
-
+</body>
 {% endblock %}

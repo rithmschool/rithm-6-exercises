@@ -1,8 +1,70 @@
-body {
-  color: red;
-  background-color: purple;
+#index-body,
+#new-body,
+#edit-body,
+#show-body,
+#error-body {
+  font-family: 'Orbitron', sans-serif;
+  color: gainsboro;
+  text-shadow: 1px 1px 20px magenta;
 }
-h1 {
-  color: green;
-  font-size: 1000px;
+#header h1 {
+  padding: 50px;
+  font-weight: 700;
+  font-size: 60px;
+}
+#error-body #header h1 {
+  font-size: 200px;
+}
+#index-body,
+#show-body {
+  background-image: url('kale.jpeg');
+  background-position: 50% 0%;
+}
+#new-body,
+#edit-body {
+  background-image: url('bacon.jpeg');
+  background-position: 50% 0%;
+}
+#error-body {
+  background-image: url('enter.jpeg');
+  background-position: 50% -10%;
+}
+#index-body h4,
+#show-body h4,
+.form-heading,
+.form-label,
+.btn-group {
+  font-weight: 700;
+  color: gainsboro;
+  text-shadow: 1px 1px 20px rgb(160, 220, 215);
+}
+#index-body h6 {
+  font-size: 0.75rem;
+}
+#index-body h6,
+#index-body a,
+#show-body a,
+#error-body a {
+  color: magenta;
+  text-shadow: 1px 1px 20px white;
+}
+#index-body li,
+#show-body li {
+  padding-top: 10px;
+  color: gainsboro;
+  text-shadow: 1px 1px 20px rgb(160, 220, 215);
+}
+#index-body a:hover,
+#error-body a:hover,
+#show-body a:hover {
+  color: gainsboro;
+  text-shadow: 1px 1px 10px rgb(160, 220, 215);
+  text-decoration: none;
+}
+.fa-eye-slash:hover {
+  color: orangered;
+  cursor: pointer;
+}
+.btn-group .btn-secondary {
+  font-size: 0.75rem;
 }
