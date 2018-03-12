@@ -16,6 +16,8 @@ class Sunset(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     image_url = db.Column(db.Text)
     caption = db.Column(db.Text)
+    location = db.Column(db.Text)
+    prettiness = db.Column(db.Text)
     
 @app.route('/')
 def root():
@@ -27,7 +29,7 @@ def index():
 
 @app.route('/sunsets/new', methods = ['POST'])
 def new():
-    new_sunset = Sunset(image_url = request.form.get('image_url'), caption = request.form.get('caption'))
+    new_sunset = Sunset(image_url = request.form.get('image_url'), caption = request.form.get('caption'), location = request.form.get('location'), prettiness = request.form.get('prettiness'))
     db.session.add(new_sunset)
     db.session.commit()
     return redirect(url_for('index'))

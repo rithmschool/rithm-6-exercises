@@ -12,15 +12,33 @@
         <form action="{{url_for('new')}}" method="POST" id="sunset_form">
             <div class="form-group row">
                 <label for="image_url" class="col-2 col-form-label">Image URL: </label>
-                <input type="url" class="form-control col-9" name="image_url" id="image_url" placeholder="Enter image URL here">
+                <input type="url" class="form-control col-9" name="image_url" id="image_url" placeholder="Enter image URL here" required>
             </div>
             <div class="form-group row">
                 <label for="caption" class="col-2 col-form-label">Caption: </label>
                 <input type="text" class="form-control col-9" name="caption" id="caption" placeholder="Enter sunset caption">
             </div>
+            <div class="form-group row">
+                <label for="location" class="col-2 col-form-label">Location: </label>
+                <input type="text" class="form-control col-9" name="location" id="location" placeholder="Enter sunset location">
+            </div>
+            <div class="form-group row">
+                <label for="prettiness" class="col-2 col-form-label">Prettiness: </label>
+                <input type="text" class="form-control col-9" name="prettiness" id="prettiness" placeholder="Enter sunset prettiness">
+            </div>
     
             <button type="submit" class="btn btn-secondary">Submit your sunset!</button>
         </form> 
+        <div class="row" id="image-container">
+            {% for sunset in sunsets %} 
+                <div class="col col-4 p-2">
+                    <img class="col-12" src="{{ sunset.image_url }}" alt="Sunset">
+                    <h4>{{ sunset.caption }}</h4>
+                    <h5>Location: {{ sunset.location }}</h5>
+                    <h5>Prettiness: {{ sunset.prettiness }}</h5>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
