@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %} Snacks {% endblock %} {% block body %}
+<h1>Welcome to the Snack App!</h1>
+<div id="snack-container">
+    <h1>Select Your Snack Below:</h1>
+    <ul id="snack-list">
+        {% for snack in snacks %}
+        <li id="{{snack.id}}">Snack: {{ snack.name }}, Kind: {{ snack.kind }} <span> <a href="{{url_for('show', id=snack.id)}}"><i class="far fa-edit"></i>
+
+</a>
+          </span> <i class="far fa-trash-alt"></i></li> {% endfor %}
+        <br>
+        <a href="{{url_for('new')}}" class="a-center">Add a New Snack!</a>
+    </ul>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}
