@@ -23,7 +23,6 @@ class Snack(db.Model):
         self.name = name
         self.kind = kind
 
-
     def __repr__(self):
         return f"{self.name} is a {self.kind} kind of snack"
 
@@ -51,9 +50,8 @@ def new():
 def show(id):
     target_snack = Snack.query.get(id)
     if request.method == b"PATCH":
-        new_name = request.form['name']
-        new_kind = request.form['kind']
-        target_snack = Snack.query.get(id)
+        new_name = request.form.get('name')
+        new_kind = request.form.get('kind')
         target_snack.name = new_name
         target_snack.kind = new_kind
         db.session.add(target_snack)
