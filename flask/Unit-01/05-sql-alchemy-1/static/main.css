@@ -1,0 +1,51 @@
+body{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://i.pinimg.com/originals/f6/84/71/f684718960e3747d2c96e1c252903bae.jpg"); 
+    color:white;
+    text-decoration:none;
+    list-style:none;
+}
+
+#snacks > li, a{
+    text-decoration:none;
+    color:black;
+    list-style: none;
+    font-size: 20px;
+    display:flex;
+      margin:0 2rem 4px;
+      padding:1.1rem 3rem;
+      justify-content:space-between;
+      align-items:center;
+      background:black;
+    color:white;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 2s; /* Firefox < 16 */
+         -ms-animation: fadein 2s; /* Internet Explorer */
+          -o-animation: fadein 2s; /* Opera < 12.1 */
+             animation: fadein 2s;
+}
+
+#index-form{
+    max-width: 80vh;
+    margin : 0 auto;
+    color:#F4A460;
+}
+
+#index{
+    max-width: 30vh;
+    margin: 0 auto;
+    margin:4rem auto;
+	padding:2rem 3rem 3rem;
+	max-width:500px;
+	background:black;
+	color:white;
+	/*box-shadow:-20px -20px 0px 0px #F7F0E5;*/
+  /*background: linear-gradient(100deg, #02D5FA, black 40%, black);*/
+  background:#F4A460;;
+
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: fadein 1s; /* Firefox < 16 */
+       -ms-animation: fadein 1s; /* Internet Explorer */
+        -o-animation: fadein 1s; /* Opera < 12.1 */
+           animation: fadein 1s;
+   
+}
