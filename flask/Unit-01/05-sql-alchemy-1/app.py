@@ -50,7 +50,7 @@ def new():
 @app.route('/bootcamps/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
     target_bootcamp = Bootcamp.query.get(id)
-    if request.method = b"PATCH":
+    if request.method == b"PATCH":
         new_name = request.form.get('name')
         new_location = request.form.get('location')
         target_bootcamp.name = new_name
@@ -58,7 +58,7 @@ def show(id):
         db.session.add(target_bootcamp)
         db.session.commit()
         return redirect(url_for('index'))
-    elif request.method = b"DELETE":
+    elif request.method == b"DELETE":
         target_bootcamp = Bootcamp.query.get(id)
         db.session.delete(target_bootcamp)
         db.session.commit()
