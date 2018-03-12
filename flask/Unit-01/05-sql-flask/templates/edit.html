@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h4>Edit {{bootcamp.name}}
+    </h4>
+    <form action="{{url_for('show', id=bootcamp.id)}}?_method=PATCH" method="POST">    
+        <input type="text" name="name" value="{{bootcamp.name}}">
+        <input type="text" name="location" value="{{bootcamp.kind}}">
+        <input type="submit" value="Edit">
+    </form>
+{% endblock %}
+
+
+

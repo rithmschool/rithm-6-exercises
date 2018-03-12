@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+{% block title %}
+Snack Attack
+{% endblock %}
+
+{% block content %}
+<h2 class="mainheader">Looking for Bootcamps?</h2>
+<h3 class="mainheader"">Check out this list</h3>
+<a href='/bootcamps/new' class='addbootcamp'><i class="fas fa-plus-circle"></i>List a bootcamp</a>
+<ul class="list-group">
+{% for bootcamp in bootcamp_list %}
+    
+    <li class="list-item"><a href="{{url_for('show', id=bootcamp.id)}}"> Name: {{bootcamp.name}} Location: {{bootcamp.location}}
+        <form action="{{url_for('show', id=bootcamp.id)}}?_method=DELETE" method="POST">
+                <a href="{{url_for('edit', id=bootcamp.id)}}">
+                    <i class="fas fa-pen-square"></i></a>
+                <input type="submit" value="Delete">
+        </form>
+    </li>
+{% endfor %}
+
+</ul>
+
+
+
+
+{% endblock %}
