@@ -42,12 +42,14 @@ h4 a:hover {
 
 .maps {
     float: right;
+    opacity: 0.8;
 }
 
 #combined-map {
     max-width: 65%;
     position: relative;
     left: 18%;
+    opacity: 0.85;
 }
 
 
