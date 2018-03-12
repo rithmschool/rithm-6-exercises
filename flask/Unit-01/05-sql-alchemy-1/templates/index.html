@@ -19,24 +19,16 @@
         </thead>
         <tbody>
             {% for snack in snack_list %}
-          <tr>
+          <tr id="{{snack.id }}">
             <th scope="row"><i class="fas fa-utensils"></i></th>
             <td class="pl-4">{{ snack.name }}</td>
             <td class="pl-4">{{ snack.kind }}</td>
             <td><a href="{{url_for('show', id=snack.id)}}"><i class="fas fa-pencil-alt"></i></td></a>
-            <td><a href="{{url_for('edit', id=snack.id)}}"></a><i class="fas fa-trash"></i></td>
+            <td><a href="{{url_for('edit', id=snack.id)}}"></a><i class="fas fa-trash button__delete"></i></td>
           </tr>
             {% endfor %}
         </tbody>
       </table>
     </section>
-  <!-- <div>
-  <ul>
-    {% for snack in snack_list %}
-    <li>Brand of Snack: {{ snack.name }}&nbsp;&nbsp;Kind: {{ snack.kind }}</li>
-    {% endfor %}
-  </ul>
-</div>
 
-</section> -->
 {% endblock %}

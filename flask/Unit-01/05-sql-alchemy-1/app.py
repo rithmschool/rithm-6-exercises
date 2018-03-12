@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 
@@ -58,10 +58,11 @@ def show(id):
         db.session.add(found_snack)
         db.session.commit()
         return redirect(url_for('index'))
-    elif request.method == b"DELETE":
+    elif request.method == "DELETE":
         db.session.delete(found_snack)
         db.session.commit()
-        return redirect(url_for('index'))
+        return jsonify({"message": "deleted"})
+        # return redirect(url_for('index'))
 
     return render_template("show.html", found_snack=found_snack)
 
