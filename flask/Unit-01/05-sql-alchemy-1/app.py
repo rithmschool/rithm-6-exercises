@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, request, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
-# from snack import Snack
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/snacks_db'
@@ -45,17 +44,16 @@ def new():
 def show(id):
     snack = Snack.query.get(id)
     if request.method == b"PATCH":
-        # updated_snack = Snack(request.form.get('name'), request.form.get('kind'))
         snack.name = request.form.get('name')
         snack.kind = request.form.get('kind')
         db.session.add(snack)
         db.session.commit()
         return redirect(url_for('index'))
 
-    if request.method == b"DELETE":
+    if request.method == "DELETE":
         db.session.delete(snack)
         db.session.commit()
-        return redirect(url_for('index'))
+        return jsonify({"message": "Deleted Snack"})
 
     return render_template('show.html', snack=Snack.query.get(id))
 

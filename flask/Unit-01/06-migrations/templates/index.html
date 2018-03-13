@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <form id="sunset-form" action="{{url_for('new')}}" method="POST">
+            <div class="form-group row">
+                <label for="image_url" class="col-2 col-form-label">Image URL:</label>
+                <input type="url" class="form-control col-9" id="image_url" name="image_url" placeholder="Enter image URL for your sunset here" required>
+            </div>
+            <div class="form-group row">
+                <label for="caption" class="col-2 col-form-label">Caption:</label>
+                <input type="text" class="form-control col-9" id="caption" name="caption" placeholder="Enter a caption for your sunset">
+            </div>
+            <div class="form-group row">
+                <label for="location" class="col-2 col-form-label">Location:</label>
+                <input type="text" class="form-control col-9" id="location" name="location" placeholder="Enter your sunset's location">
+            </div>
+            <div class="form-group row">
+                <label for="beauty" class="col-2 col-form-label">Beauty:</label>
+                <input type="number" min="1" max="10" class="form-control col-9" id="beauty" name="beauty" placeholder="Rate your sunset's beauty from 1 (meh) - 10 (stunning)">
+            </div>
+            <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
+        <br>
+        <div class="row" id="image-gallery">
+            {% for sunset in sunsets %}
+            <div class="col col-4">
+                <img class="col-12" src="{{ sunset.image_url }}" alt="Sunset">
+                <h5>{{ sunset.caption }}</h5>
+                <h5>Location: {{ sunset.location }}</h5>
+                <h5>Beauty: {{ sunset.beauty }}</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
