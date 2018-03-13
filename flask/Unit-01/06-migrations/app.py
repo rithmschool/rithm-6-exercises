@@ -19,6 +19,8 @@ class Sunset(db.Model):
     location = db.Column(db.Text)
     prettiness = db.Column(db.Text)
 
+
+<< << << < HEAD
     def __init__(self, image_url, caption, location, prettiness):
         self.image_url = image_url
         self.caption = caption
