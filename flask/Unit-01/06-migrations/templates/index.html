@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block title %} Sunsets Page {% endblock %} {% block content %}
+
+
+<div class="container p-3 mb-2 bg-secondary text-white">
+  <h1>RELAXING SUNSETS</h1>
+  <h5 class="text-right">yo these sunsets are so relaxing and romantic</h5>
+  <form action="{{url_for('index')}}" method="POST">
+    <div class="form-group">
+      <label for="imgurl">Sunset Image</label>
+      <input class="form-control" name="img_url" id="img_url" placeholder="Provide a link to your sunset">
+    </div>
+    <div class="form-group">
+      <label for="caption">Sunset Caption</label>
+      <input class="form-control" name="caption" id="caption" placeholder="Provide a caption for your sunset">
+    </div>
+    <div class="form-group">
+      <label for="location">Sunset Location</label>
+      <input class="form-control" name="location" id="location" placeholder="Where did you see this sunset?">
+    </div>
+    <div class="form-group">
+      <label for="beauty">Beauty!</label>
+      <input class="form-control" name="beauty" id="beauty" placeholder="Rate the beauty?">
+    </div>
+    <button type="submit" class="btn btn-primary">Add a sunset!</button>
+  </form>
+</div>
+
+{% for sunset in sunset_list %}
+<!--Card Regular-->
+<div class="card card-cascade">
+
+  <!--Card image-->
+  <div class="view overlay">
+    <img src="{{sunset.img_url}}" class="img-fluid" alt="">
+    <a>
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+  <!--/.Card image-->
+
+  <!--Card content-->
+  <div class="card-body text-left">
+    <!--Title-->
+    <h5>ID: {{sunset.id}}</h5>
+    <h5>Caption: {{sunset.caption}}</h5>
+    <h5>Location: {{sunset.location}}</h5>
+    <h5>Beauty: {{sunset.beauty}}</h5>
+
+  </div>
+  <!--/.Card content-->
+
+</div>
+<!--/.Card Regular-->
+
+{% endfor %} {% endblock %}
