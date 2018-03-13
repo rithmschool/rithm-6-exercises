@@ -14,7 +14,7 @@ class Sunset(db.Model):
     __tablename__ = "sunsets"
 
     id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.Text)
+    image_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
     prettiness = db.Column(db.Text)
@@ -38,7 +38,11 @@ def root():
 def index():
     if request.method == "POST":
         data = request.form
-        new_sunset = Sunset(data.get("url"),
+        if data.get("url") == "":
+            image_url = None
+        else:
+            image_url = data.get("url")
+        new_sunset = Sunset(image_url,
                             data.get("caption"),
                             data.get("location"),
                             data.get("prettiness"))
