@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <section class="top">
+  <section class="container--header">
     <header>
       <h1>🌅</h1>
       <h1>SUNSETS</h1>
@@ -23,8 +23,8 @@
     <form action="{{url_for('index')}}" id="sunset-form" method="POST">
       <h4>Keep Track Of Your Sunsets</h4>
       <div>
-        <label for="img-url">Image URL: </label>
-        <input type="text" name="image_url" id="img-url" placeholder="What is the URL for your image?">
+        <label for="image_url">Image URL: </label>
+        <input type="text" name="image_url" id="image_url" placeholder="What is the URL for your image?">
       </div>
       <div>
         <label for="caption">Caption: </label>
@@ -70,10 +70,6 @@
         </div>
     {% endfor %}
   </section>
-
-
-
-
   <footer class="text-center"> Coded and designed con mucho amor
     <i class="far fa-hand-spock"></i> by Paula Goyanes and Alex Bush 2018
     <i class="far fa-copyright"></i>

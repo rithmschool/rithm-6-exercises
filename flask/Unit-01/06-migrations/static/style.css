@@ -42,7 +42,7 @@ hr {
   border: 0.5px solid;
 }
 
-.top {
+.container--header {
   background: linear-gradient(to right, #ee0979, #ff6a00);
   padding: 0px 40px 20px;
   color: white;
