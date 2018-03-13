@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Rate My Slice</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <h1>RATE MY SLICE!</h1>
+  <form action="{{ url_for('index') }}" method='POST'>
+    <label for="img_url">Image URL</label>
+    <input type="url" name="img_url" id="img_url" placeholder="Link your slice" required>
+    <label for="caption">Caption</label>
+    <input type="text" name="caption" id="caption" placeholder="Talk pizza to me" required>
+    <label for="location">Store Location</label>
+    <input type="text" name="location" id="location" placeholder="But where can I eat it?" required>
+    <label for="beauty">Beauty</label>
+    <input type="text" name="beauty" id="beauty" placeholder="0-10, how beautiful is it?" required>
+    <button type="submit">Serve</button>
+  </form>
+  {% for pza in pizza %}
+  <div id="{{ pza.id }}" class="card">
+    <p>Location : {{ pza.location }}</p>
+    <p>Beauty 0-10 : {{ pza.beauty }}</p>
+    <p>{{ pza.caption }}</p>
+    <img src="{{ pza.img_url }} " alt="delicious pizza, no doubt">
+    <form action="{{ url_for('destroy', id=pza.id) }}?_method=DELETE" method="POST">
+      <button type="submit">Ew delete</button>
+    </form>
+  </div>
+  {% endfor %}
+</body>
+
+</html>
