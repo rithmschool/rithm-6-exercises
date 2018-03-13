@@ -1,4 +1,4 @@
-.img__add {
+.img__add img {
   height: 300px;
   width: 400px;
 }
@@ -11,22 +11,42 @@
 }
 
 .form__input__length {
-  width: 300px;
-  height: 15px;
+  width: 400px;
   margin: 1%;
+  padding: 0.5%;
 }
 
 .gallery__looks {
-  list-style-type: none;
+  list-style: none;
+  width: 100%;
+}
+
+.gallery__looks li {
   display: inline-block;
+  margin: 2%;
 }
 
 h1 {
   position: relative;
   left: 50%;
-  transform: translate(-15%);
+  transform: translate(-20%);
 }
 
 .form__look {
-  margin-top: 5%;
+  margin-left: 2%;
+  width: 50%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.form__dropdown {
+  margin-top: 1%;
+}
+
+button {
+  margin-top: 2%;
+  /* height: 20px; */
+  padding: 0.5%;
+  border-radius: 3%;
 }
