@@ -1,8 +1,8 @@
 class Snack():
-    count = 1
+    id = 1
 
-    def __init__(self, name, variety):
+    def __init__(self, name, kind):
         self.name = name
-        self.variety = variety
-        self.id = Snack.count
-        Snack.count += 1
+        self.kind = kind
+        self.id = Snack.id
+        Snack.id += 1
