@@ -9,12 +9,26 @@
     <a href="{{url_for('new')}}" class='btn btn-primary'>Add a righteous snack</a>
   </button>
 
+  <section id="new__section">
+
+    <h1>Add a new snack!</h1>
+    <form action="{{url_for('index')}}" method='POST' id='new__form'>
+      <div class="form-group">
+        <label for="name">Name of Snack: </label>
+        <input type="text" name='name'>
+      </div>
+      <div class="form-group">
+        <label for="kind">Kind of Snack: </label>
+        <input type="text" name='kind'>
+      </div>
+      <input type="submit" value='Add a new snack!'>
+    </form>
+
+  </section>
+
   <ul>
     {% for snack in snacks %}
     <li>
-      <p>
-        For the tests: {{snack.name}} {{snack.kind}}
-      </p>
       <p>
         Name: {{ snack.name }}
       </p>
