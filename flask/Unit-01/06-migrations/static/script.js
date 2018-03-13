@@ -7,7 +7,8 @@ $("#submit-sunset").on('submit', (e) => {
     data: {
       url: $("#url").val(),
       caption: $("#caption").val(),
-      location: $("#location").val()
+      location: $("#location").val(),
+      prettiness: $("#prettiness").val()
     }
   }).then(data => {
     console.log(data)
@@ -17,7 +18,9 @@ $("#submit-sunset").on('submit', (e) => {
         "style": "background-image: url(" +
           data.key.url + ")"
       }).text(data.key.caption).append(
-        $("<span>").text(data.key.location)
+        $("<span>").text(data.key.location).append(
+          $("<span>").text(data.key.prettiness)
+        )
       )
     )
   })
