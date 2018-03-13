@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meats</title>
+</head>
+<body>
+    <form action="{{url_for('index')}}" method="POST">
+    <label for="kind">Kind</label>
+    <input type="text" name="kind">
+    <label for="url">Image URL</label>
+    <input type="url" name="url">
+    <label for="umaminess">Umaminess</label>
+    <input type="number" name="umaminess" max='10' min='0' value='0'>
+    <label for="price">Price</label>
+    <input type="text" name="price">
+    <input type="submit" value="Submit">
+    </form>
+    <ul id="meat-list">
+        {% for meat in meats %}
+            <li>
+                <img src="{{meat.url}}" alt="meat{{meat.id}}">
+                <div>{{meat.kind}} </div>
+                {% if meat.umaminess != None %}
+                    <div> {{meat.umaminess}} </div>
+                {% endif %}
+                {% if meat.price != None %}
+                    <div> {{meat.price}} </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
