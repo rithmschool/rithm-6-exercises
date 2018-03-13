@@ -1,8 +1,18 @@
-.card {
-  display: inline-block;
-  height: 300px;
-  width: 300px;
+#header {
+  padding-bottom: 60px;
 }
-img {
-  width: 100%;
+.modal-body {
+  background: url('pizza.png');
+}
+.card,
+.card li,
+.card form {
+  display: inline-block;
+}
+form {
+  padding-left: 30px;
+}
+#card-container {
+  display: flex;
+  justify-content: space-between;
 }
