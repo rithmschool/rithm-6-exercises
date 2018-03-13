@@ -15,6 +15,9 @@ class SunsetsTestCase(TestCase):
         db.session.add_all([sunset1, sunset2, sunset3])
         db.session.commit()
 
+    def tearDown(self):
+        db.drop_all()
+
     def test_index(self):
         response = self.client.get('/sunsets', content_type='html/text')
         self.assertEqual(response.status_code, 200)
