@@ -6,7 +6,8 @@ $("#submit-sunset").on('submit', (e) => {
     url: `/sunsets`,
     data: {
       url: $("#url").val(),
-      caption: $("#caption").val()
+      caption: $("#caption").val(),
+      location: $("#location").val()
     }
   }).then(data => {
     console.log(data)
@@ -15,7 +16,9 @@ $("#submit-sunset").on('submit', (e) => {
         "class": "sunset-image",
         "style": "background-image: url(" +
           data.key.url + ")"
-      }).text(data.key.caption)
+      }).text(data.key.caption).append(
+        $("<span>").text(data.key.location)
+      )
     )
   })
 })
