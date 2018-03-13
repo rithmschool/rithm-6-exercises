@@ -27,7 +27,7 @@ def root():
 @app.route('/sunsets', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        img_url = request.form.get('img-url')
+        img_url = request.form.get('image_url')
         caption = request.form.get('caption')
         location = request.form.get('location')
         beauty_index = request.form.get('beauty-index')
