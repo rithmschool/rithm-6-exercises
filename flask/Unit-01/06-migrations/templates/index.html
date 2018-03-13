@@ -24,6 +24,7 @@
     {% for sunset in sunset_list  %}
         <img class="sunsetimg" src="{{sunset.image_url}}" alt="{{sunset.id}}">
         <p>{{ sunset.caption }}</p>
+        <small>Location: {{sunset.location}} </small>
     {% endfor %}
 </div>
 </body>
