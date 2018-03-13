@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  <title>Sunsets</title>
+</head>
+<body>
+  <header>
+  <h1>Beautiful Sunsets over the Horizon</h1>
+</header>
+  <form action="{{url_for('index')}}" method="POST" class="form__look">
+    <div>
+    <label for="img_url">Input Sunset Link</label>
+    <input type="text" class= "form__input__length"name="img_url" id="img_url" placeholder="e.g: https://example.com">
+  </div>
+  <div>
+    <label for="caption">Write a caption!</label>
+    <input type="text" class= "form__input__length" name="caption" id="caption" placeholder="What a beautiful sunset!" required>
+  </div>
+  <div>
+      <label for="location">Where was this taken?</label>
+      <input type="text" class= "form__input__length" name="location" id="location" placeholder="San Francisco, CA" required>
+    </div>
+    <div>
+        <label for="beauty">Rate the Pretty-level! </label>
+        <select name="beauty" id="beauty" class="form__dropdown">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+      </div>
+  <button type="submit">Generate!</button>
+  </form>
+
+  <ul class="gallery__looks">
+    {% for sunset in sunsets %}
+
+  <li>
+    <div class=".img__container">
+      <div class=".img__add">
+        <img src="{{ sunset.img_url }}" alt="pic of sunset">
+      </div>
+
+      <h3>{{sunset.caption}}</h3>
+      <h4>{{sunset.location}}</h4>
+      <h5>{{sunset.beauty}}</h5>
+    </div>
+
+    {% endfor %}
+
+  </li>
+  </ul>
+
+
+</body>
+</html>
