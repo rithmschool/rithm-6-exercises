@@ -7,6 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/bootcamps-db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 modus = Modus(app)
+Migrate(app, db)
 
 class Bootcamp(db.Model):
     __tablename__ = "bootcamps"
