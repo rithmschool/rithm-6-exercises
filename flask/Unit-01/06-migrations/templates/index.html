@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Rate My Slice</title>
+  <title>Rate My Pizza</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-  <h1>RATE MY SLICE!</h1>
+  <h1>RATE MY PIZZA!</h1>
   <form action="{{ url_for('index') }}" method='POST'>
     <label for="img_url">Image URL</label>
     <input type="url" name="img_url" id="img_url" placeholder="Link your slice" required>
