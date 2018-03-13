@@ -11,13 +11,13 @@ class SunsetTestCase(TestCase):
         db.create_all()
         sunset1 = Sunset(
             image_url="http://www.bestourism.com/img/items/med/725/2861.jpg", caption="this is amazing", location="Hawaii", beauty=8)
-        sunset2 = Snack(
+        sunset2 = Sunset(
             image_url=
             "https://img.vimbly.com/images/full_photos/san-francisco-bay-sunset-6.jpg",
             caption="city viewzzz",
             location="SF",
             beauty=10)
-        sunset3 = Snack(
+        sunset3 = Sunset(
             image_url=
             "https://maketimetoseetheworld.com/wp-content/uploads/2017/09/Palawan-Sunset-c-Sarah-Ambler.png",
             caption="what a gorgeous sunset",
@@ -30,31 +30,27 @@ class SunsetTestCase(TestCase):
         db.drop_all();
 
     def test_index(self):
-        tester = app.test_client(self)
-        response = tester.get('/sunsets', content_type='html/text')
+        response = self.client.get('/sunsets', content_type='html/text')
         self.assertEqual(response.status_code, 200)
-
-    def test_new(self):
-        tester = app.test_client(self)
-        response = tester.get('/sunsets/new', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Hawaii', response.data)
+        self.assertIn(b'san-francisco', response.data)
+        self.assertIn(b'9', response.data)
 
     def test_creating_sunset(self):
-        tester = app.test_client(self)
-        tester.post(
-            '/sunsets',
+        response = self.client.post(
+            '/sunsets/new',
             data=dict(
                 image_url=
-                "http://www.bestourism.com/img/items/med/725/2861.jpg",
-                caption="omg wow",
-                location="Cool Place",
-                beauty=7),
+                'http://www.bestourism.com/img/items/med/725/2861.jpg',
+                caption='omg wow',
+                location='Cool Place',
+                beauty='7'),
             follow_redirects=True)
-        self.assertEqual(Sunset[0].id, 1)
-        self.assertEqual(
-            Sunset[0].image_url,
-            'http://www.bestourism.com/img/items/med/725/2861.jpg')
-        self.assertEqual(Sunset[0].caption, 'omg wow')
-        self.assertEqual(Sunset[0].location, 'Cool Place')
-        self.assertEqual(Sunset[0].beauty, 7)
-        self.assertEqual(len(Sunset), 6)
+        self.assertIn(b'http://www.bestourism.com/img/items/med/725/2861.jpg', response.data)
+        self.assertIn(b'omg wow', response.data)
+        self.assertIn(b'Cool Place', response.data)
+        self.assertIn(b'7', response.data)
+
+
+if __name__ == '__main__':
+    unittest.main()
