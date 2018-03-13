@@ -21,14 +21,16 @@ class Sunset(db.Model):
     __tablename__ = "sunsets"
 
     id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.Text)
+    image_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
+    beauty = db.Column(db.Integer)
 
-    def __init__(self, image_url, caption, location):
+    def __init__(self, image_url, caption, location, beauty):
         self.image_url = image_url
         self.caption = caption
         self.location = location
+        self.beauty = beauty
 
 
 @app.route('/')
@@ -40,9 +42,13 @@ def root():
 def index():
     if request.method == 'POST':
         image_url = request.form.get('image_url')
+        # since the form sends an empty string, change to None so nullable=False constraint is enforced
+        if image_url == "":
+            image_url = None
         caption = request.form.get('caption')
         location = request.form.get('location')
-        s = Sunset(image_url, caption, location)
+        beauty = request.form.get('beauty')
+        s = Sunset(image_url, caption, location, beauty)
         db.session.add(s)
         db.session.commit()
         return redirect(url_for("index"))
