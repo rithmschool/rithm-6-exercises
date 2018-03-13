@@ -17,7 +17,7 @@ class Sunset(db.Model):
     image_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
-    beauty = db.Column(db.Text)
+    beauty = db.Column(db.Integer)
 
     def __init__(self, image_url, caption, location, beauty):
         self.image_url = image_url
