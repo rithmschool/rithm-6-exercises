@@ -17,9 +17,10 @@ class Sunset(db.Model):
     image_url = db.Column(db.Text)
     caption = db.Column(db.Text)
 
-    def __init__(self, image_url, caption):
+    def __init__(self, image_url, caption, location):
         self.image_url = image_url
         self.caption = caption
+        self.location = location
 
     # def __repr__(self):
     #     return f"This is the url {self.image_url} and this is the caption {self.caption}"
@@ -35,7 +36,8 @@ def index():
     if request.method == "POST":
         data = request.form
         new_sunset = Sunset(data.get("url"),
-                            data.get("caption"))
+                            data.get("caption"),
+                            data.get("location"))
         db.session.add(new_sunset)
         db.session.commit()
         return jsonify({"key": data})
