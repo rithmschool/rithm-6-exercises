@@ -17,13 +17,13 @@ class Sunset(db.Model):
     image_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
-    prettiness = db.Column(db.Text)
+    beauty = db.Column(db.Text)
 
-    def __init__(self, image_url, caption, location, prettiness):
+    def __init__(self, image_url, caption, location, beauty):
         self.image_url = image_url
         self.caption = caption
         self.location = location
-        self.prettiness = prettiness
+        self.beauty = beauty
 
     # def __repr__(self):
     #     return f"This is the url {self.image_url} and this is the caption {self.caption}"
@@ -45,7 +45,7 @@ def index():
         new_sunset = Sunset(image_url,
                             data.get("caption"),
                             data.get("location"),
-                            data.get("prettiness"))
+                            data.get("beauty"))
         db.session.add(new_sunset)
         db.session.commit()
         return jsonify({"key": data})
