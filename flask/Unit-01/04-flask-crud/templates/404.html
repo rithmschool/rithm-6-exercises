@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+<section class="row">
+  <div class="mx-auto text-center">
+      <h1>Page Not Found &nbsp;</h1>
+        <i class="far fa-frown fa-7x"></i>
+  <p class="mt-4">These are not the snack you were looking for.... Because it hasn't been added to the list!</p>
+  <p class="mt-4"><a href="{{ url_for('index') }}">Go add it!... NOW!</a></p>
+  </div>
+</section>
+{% endblock %}
