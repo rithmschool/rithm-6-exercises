@@ -18,7 +18,7 @@ class Sunset(db.Model):
     img_url = db.Column(db.Text, nullable=False)
     caption = db.Column(db.Text)
     location = db.Column(db.Text)
-    prettiness = db.Column(db.Text)
+    beauty = db.Column(db.Integer)
 
 @app.route('/')
 def root():
@@ -30,8 +30,8 @@ def index():
         url = request.form.get('img_url')
         cap = request.form.get('caption')
         location = request.form.get('location')
-        pretty = request.form.get('prettiness')
-        db.session.add(Sunset(img_url=url, caption=cap, location=location, prettiness=prettiness))
+        beauty = request.form.get('beauty')
+        db.session.add(Sunset(img_url=url, caption=cap, location=location, beauty=beauty))
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('index.html', sunsets=Sunset.query.all())

@@ -8,8 +8,10 @@
   <title>Sunsets</title>
 </head>
 <body>
+  <header>
   <h1>Beautiful Sunsets over the Horizon</h1>
-  <form action="{{url_for('index')}}" method="POST">
+</header>
+  <form action="{{url_for('index')}}" method="POST" class="form__look">
     <div>
     <label for="img_url">Input Sunset Link</label>
     <input type="text" class= "form__input__length"name="img_url" id="img_url" placeholder="e.g: https://example.com">
@@ -23,23 +25,30 @@
       <input type="text" class= "form__input__length" name="location" id="location" placeholder="San Francisco, CA" required>
     </div>
     <div>
-        <label for="prettiness">Rate the Pretty-level!</label>
-        <input type="text" class= "form__input__length" name="prettiness" id="prettiness" placeholder="Rate the Pretty from 1 to 10" required>
+        <label for="beauty">Rate the Pretty-level!</label>
+        <input type="text" class= "form__input__length" name="beauty" id="beauty" placeholder="Rate the Pretty from 1 to 10" required>
       </div>
   <button type="submit">Generate!</button>
   </form>
 
-
+  <ul class="gallery__looks">
     {% for sunset in sunsets %}
 
+  <li>
+    <div class=".img__container">
+      <div class=".img__add">
+        <img src="{{ sunset.img_url }}" alt="pic of sunset">
+      </div>
 
-  <img src="{{ sunset.img_url }}" alt="pic of sunset">
-
-    <h4>{{sunset.caption}}</h4>
-    <h6>{{sunset.location}}</h6>
+      <h3>{{sunset.caption}}</h3>
+      <h4>{{sunset.location}}</h4>
+      <h5>{{sunset.beauty}}</h5>
+    </div>
 
     {% endfor %}
 
+  </li>
+  </ul>
 
 
 </body>
