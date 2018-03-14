@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<section>
-  <h1>Here Are All of {{user.first_name}}'s Messages</h1>
-  <div>
-    <a href="{{url_for('message_new', user_id=messages.user_id)}}">Add a New Message!</a>
+<section class="container">
+  <h1 class="header__center">Here Are All of {{user.first_name}}'s Messages</h1>
+  <div class="link__register--user">
+    <a href="{{url_for('message_new', user_id=user.id)}}" class="btn btn-outline-info my-2 my-sm-0">Add a New Message!</a>
   </div>
-    <table>
-      <thead>
+    <table class="table__whole--changes">
+      <thead class="table__structure">
         <tr>
-          <th>User's Name</th>
-          <th>Message ID</th>
-          <th>Edit</th>
-          <th>View Message in Full</th>
+          <th class="column__headers">User's Name</th>
+          <th class="column__headers">Message ID</th>
+          <th class="column__headers">Edit</th>
+          <th class="column__headers">View Message in Full</th>
         </tr>
       </thead>
       <tbody>
         {% for message in user.messages %}
         <tr>
-            <td>{{ user.first_name }} {{ user.last_name }}</td>
-            <td>{{ message.id }}</td>
-            <td><a href="{{url_for('message_edit', user_id=user.id, id=message.id)}}"><i class="fas fa-edit"></i></a></td>
-            <td><a href="{{url_for('message_show', user_id=user.id, id=message.id)}}"><i class="fas fa-envelope"></i></a></td>
+            <td class="column__headers">{{ user.first_name }} {{ user.last_name }}</td>
+            <td class="column__headers">{{ message.id }}</td>
+            <td class="column__headers"><a href="{{url_for('message_edit', user_id=user.id, id=message.id)}}"><i class="fas fa-edit"></i></a></td>
+            <td class="column__headers"><a href="{{url_for('message_show', user_id=user.id, id=message.id)}}"><i class="fas fa-envelope"></i></a></td>
           </tr>
         {% endfor %}
       </tbody>

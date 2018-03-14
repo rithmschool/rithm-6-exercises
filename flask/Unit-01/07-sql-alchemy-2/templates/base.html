@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   <title>Users and Messages App</title>
 </head>
 <body>
   <header>
-    <nav>
-      <a href="{{url_for('index')}}">Users</a>
-      <a href="">Messages</a>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{url_for('index')}}">
+            <i class="fas fa-envelope-square fa-lg bg-info"></i>
+            Generic Users and Messages App!
+          </a>
+      <a href="{{url_for('index')}}" class="btn btn-outline-info my-2 my-sm-0">Users</a>
     </nav>
   </header>
   {% block content %}

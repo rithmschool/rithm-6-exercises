@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+    <h1>Update a New User!</h1>
+    <div>
+      <form action="{{url_for('message_show', user_id=messages.user_id, id=messages.id)}}?_method=PATCH" method="POST">
+        <div>
+          <label for="content">Update Your Message</label>
+          <input type="text" name="content" value="{{messages.content}}" id="content">
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Update It!</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <h3>Want to Delete The User?</h3>
+      <form action="{{url_for('message_show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE" method="POST">
+        <button type="submit"><i class="fas fa-trash-alt"></i></button>
+      </form>
+    </div>
+
+  </section>
+
+{% endblock %}

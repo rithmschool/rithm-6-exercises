@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  <h1>Add a Message New User!</h1>
+  <div>
+    <form action="{{url_for('messages_index', user_id=user.id)}}" method="POST">
+      <div>
+          <label for="content">Please Enter your Message</label>
+          <input type="text" name="content" id="content" placeholder="e.g. Smith">
+      </div>
+      <div>
+        <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Add Message!</button>
+      </div>
+
+    </form>
+  </div>
+
+</section>
+{% endblock %}

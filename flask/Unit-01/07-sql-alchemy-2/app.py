@@ -47,7 +47,7 @@ def index():
     return render_template('users/index.html', users=User.query.all())
 
 
-@app.route("/users/<int:user_id>/messages")
+@app.route("/users/<int:user_id>/messages", methods=['GET', 'POST'])
 def messages_index(user_id):
     if request.method == 'POST':
         content = request.form['content']
@@ -109,5 +109,5 @@ def message_show(user_id, id):
     if request.method == b'DELETE':
         db.session.delete(found_message)
         db.session.commit()
-        return redirect(url_for('messages_index'))
-    return render_template('messages/show.html', message=found_message)
+        return redirect(url_for('messages_index', user_id=user_id))
+    return render_template('messages/show.html', messages=found_message)
