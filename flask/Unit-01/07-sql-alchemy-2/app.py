@@ -110,8 +110,6 @@ def show_message(user_id, message_id):
         db.session.delete(found_message)
         db.session.commit()
         return redirect(url_for('index_message', user_id=user_id))
-    # for test: test_messages_show to pass, uncomment
-    # return render_template('messages/show.html', found_message=found_message)
     return redirect(url_for('index_message', user_id=user_id))
 
 

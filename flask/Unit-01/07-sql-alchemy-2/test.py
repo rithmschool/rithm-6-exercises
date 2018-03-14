@@ -75,7 +75,8 @@ class BaseTestCase(TestCase):
         self.assertIn(b'Goodbye Elie!!', response.data)
 
     def test_messages_show(self):
-        response = self.client.get('/users/1/messages/1')
+        response = self.client.get(
+            '/users/1/messages/1', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
     def test_messages_create(self):
