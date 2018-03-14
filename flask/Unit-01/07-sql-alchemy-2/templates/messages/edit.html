@@ -15,4 +15,11 @@
         
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit changes!</button>
     </form>
+    <div class="text-right my-2">
+        <form action="{{url_for('show_messages', id = id, message_id = message.id)}}?_method=DELETE" method="POST" class="form-group">
+            <button type="submit" class="btn btn-secondary btn-lg">
+                    delete message
+            </button>        
+        </form>
+    </div>
   {% endblock %}

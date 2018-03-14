@@ -9,11 +9,6 @@
     <h5 class="mt-4 mx-4">first name: {{ user.first_name }}</h5>
     <h5 class="mx-4">last name: {{ user.last_name }}</h5>
     <a class="mx-4 mb-4" href="{{url_for('edit', id = user.id)}}">edit user profile</a>
-    <form action="{{url_for('show', id = user.id)}}?_method=DELETE" method="POST" class="form-grou m-4">
-        <button type="submit" class="btn btn-secondary btn-sm">
-                <i class="fas fa-times"></i>
-        </button>        
-    </form>
     <hr>
     <a href="{{url_for('index_messages', id = user.id)}}">check out {{ user.first_name }}'s messages</a>
     |

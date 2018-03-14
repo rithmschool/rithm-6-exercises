@@ -15,6 +15,14 @@
             <label for="last_name">last name</label>
             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" value="{{user.last_name}}">
         </div>
-        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit changes!</button>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">submit changes!</button>
     </form>
+    <div class="text-right my-2">
+        <form action="{{url_for('show', id = user.id)}}?_method=DELETE" method="POST" class="form-group">
+            <button type="submit" class="btn btn-secondary btn-lg">
+                    delete user
+            </button>        
+        </form>
+    </div>
+    
   {% endblock %}
