@@ -7,12 +7,12 @@ Edit Message!
 
 {% block content %}
 <h1>Change the message: "{{ message.content }}"</h1>
-<form action="{{url_for('edit_message', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+<form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
   <input type="text" name="content" id="content" value="{{ message.content }}">
   <input type="submit" name="submit-new-user" id="submit-new-message">
 </form>
 <h1>...or delete!</h1>
-<form action="{{url_for('edit_message', id=user.id, message_id=message.id)}}?_method=DELETE" method=POST>
+<form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=DELETE" method=POST>
   <input type="submit" value="X">
 </form>
 <h2>Done? Return back to the current user <a href="{{url_for('index_messages', id=user.id)}}">here</a></h2>
