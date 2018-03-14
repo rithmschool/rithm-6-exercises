@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %} Messages {% endblock %} {% block content %}
+<div class="container">
+    <h2>Check out these messages from {{user.first_name}}:</h2>
+    <br> {% for message in messages %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            {{ message.content }}
+            <a href="{{url_for('show_message', id=user.id, message_id=message.id)}}">Edit</a>
+        </li>
+    </ul>
+
+    {% endfor %}
+    <br>
+    <a href="{{url_for('new_message'), id=user.id}}">Add a new message</a>
+    <a href="{{url_for('index')}}">Home</a>
+</div>
+
+{% endblock %}
