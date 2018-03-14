@@ -18,6 +18,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+    image_url = db.Column(db.Text)
     messages = db.relationship('Message', backref = 'user', lazy = 'dynamic', cascade='all, delete')
 
 class Message(db.Model):
@@ -42,7 +43,8 @@ def index():
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
-        new_user = User(first_name = first_name, last_name = last_name)
+        image_url = request.form.get('image_url')
+        new_user = User(first_name = first_name, last_name = last_name, image_url = image_url)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))
@@ -62,6 +64,7 @@ def show(id):
     if request.method == b'PATCH':
         found_user.first_name = request.form.get('first_name')
         found_user.last_name = request.form.get('last_name')
+        found_user.image_url = request.form.get('image_url')
         db.session.add(found_user)
         db.session.commit()
         return redirect(url_for('show', id = id))
