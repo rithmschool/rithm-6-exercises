@@ -1,0 +1,12 @@
+{% extends 'user/base.html' %} {% block content %}
+
+<a href="{{url_for('new')}}">Add A New User</a>
+
+{%for user in users%}
+<p>
+  {{user.first_name}} {{user.last_name}}
+  <br>
+  <a href="{{url_for('show', id=user.id)}}">See more about {{user.first_name}}</a>
+</p>
+
+{%endfor%} {%endblock%}
