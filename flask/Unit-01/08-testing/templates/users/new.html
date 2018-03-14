@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    add new user
+ {% endblock %}
+
+ {% block content %}
+    <h2>add a new user</h2>
+    <form action="{{url_for('index')}}" method="POST">
+        <div class="form-group">
+            <label for="first_name">first name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">last name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name">
+        </div>
+        <div class="form-group">
+            <label for="image_url">avatar image</label>
+            <input type="text" class="form-control" id="image_url" name="image_url" placeholder="Enter avatar url">
+        </div>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit new user!</button>
+    </form>
+  {% endblock %}

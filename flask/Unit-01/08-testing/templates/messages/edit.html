@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    update message
+ {% endblock %}
+
+ {% block content %}
+    <h2>update your message</h2>
+    <form action="{{url_for('show_messages', id = id, message_id = message.id)}}?_method=PATCH" method="POST">
+        <div class="form-group">
+            <label for="content">content</label>
+            <input type="text" class="form-control" max=164 id="content" name="content" placeholder="Enter message" value="{{ message.content }}">
+            <small class="form-text text-muted">You can post a maximum 164 character message</small>
+        </div>
+        
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit changes!</button>
+    </form>
+    <div class="text-right my-2">
+        <form action="{{url_for('show_messages', id = id, message_id = message.id)}}?_method=DELETE" method="POST" class="form-group">
+            <button type="submit" class="btn btn-secondary btn-lg">
+                    delete message
+            </button>        
+        </form>
+    </div>
+  {% endblock %}

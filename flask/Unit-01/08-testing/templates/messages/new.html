@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    post new message
+ {% endblock %}
+
+ {% block content %}
+    <h2>post a new message</h2>
+    <form action="{{url_for('index_messages', id = id)}}" method="POST">
+        <div class="form-group">
+            <label for="content">content</label>
+            <input type="text" class="form-control" max=164 id="content" name="content" placeholder="Enter message">
+            <small class="form-text text-muted">You can post a maximum 164 character message</small>
+        </div>
+        
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit message!</button>
+    </form>
+  {% endblock %}
