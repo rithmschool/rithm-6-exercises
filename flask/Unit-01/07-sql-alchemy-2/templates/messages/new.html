@@ -5,10 +5,22 @@
   <h1>Add a Message New User!</h1>
   <div>
     <form action="{{url_for('messages_index', user_id=user.id)}}" method="POST">
-      <div>
-          <label for="content">Please Enter your Message</label>
-          <input type="text" name="content" id="content" placeholder="e.g. Smith">
-      </div>
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+
+        <div>
+          {{ field.label }}
+          {{ field }}
+          <span>
+            {% if field.errors %}
+              {% for error in field.errors %}
+                {{ error }}
+              {% endfor %}
+            {% endif %}
+          </span>
+        </div>
+
+          {% endfor %}
       <div>
         <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Add Message!</button>
       </div>

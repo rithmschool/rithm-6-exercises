@@ -17,6 +17,7 @@
       <a href="{{url_for('message_edit', user_id=messages.user_id, id=messages.id)}}">Edit Here  &nbsp;<i class="fas fa-edit"></i></a>
     </div>
     <form method="POST" action="{{url_for('message_show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE">
+        {{delete_form.hidden_tag()}}
         <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Delete &nbsp;<i class="fas fa-trash-alt"></i> </button>
       </form>
   </div>

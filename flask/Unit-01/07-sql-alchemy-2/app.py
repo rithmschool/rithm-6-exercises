@@ -2,12 +2,10 @@ from flask import Flask, request, url_for, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
-from forms import UserForm, MessageForm
+from forms import UserForm, MessageForm, DeleteForm
 import os
-from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
-csrf = CSRFProtect(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users-db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -58,12 +56,17 @@ def index():
 
 @app.route("/users/<int:user_id>/messages", methods=['GET', 'POST'])
 def messages_index(user_id):
+    form = MessageForm(request.form)
     if request.method == 'POST':
-        content = request.form['content']
-        new_message = Message(content=content, user_id=user_id)
-        db.session.add(new_message)
-        db.session.commit()
-        return redirect(url_for('messages_index', user_id=user_id))
+        if form.validate():
+            content = form.data['content']
+            new_message = Message(content=content, user_id=user_id)
+            db.session.add(new_message)
+            db.session.commit()
+            return redirect(url_for('messages_index', user_id=user_id))
+        else:
+            return render_template(
+                'messages/new.html', user=User.query.get(user_id), form=form)
 
     return render_template('messages/index.html', user=User.query.get(user_id))
 
@@ -85,19 +88,30 @@ def message_new(user_id):
 def edit(id):
     found_user = User.query.get(id)
     form = UserForm(obj=found_user)
+    delete_form = DeleteForm(request.form)
     return render_template(
-        'users/edit.html', user=User.query.get(id), form=form)
+        'users/edit.html',
+        user=User.query.get(id),
+        form=form,
+        delete_form=delete_form)
 
 
 @app.route("/users/<int:user_id>/messages/<int:id>/edit")
 def message_edit(user_id, id):
     found_message = Message.query.get(id)
-    return render_template('messages/edit.html', messages=found_message)
+    form = MessageForm(obj=found_message)
+    delete_form = DeleteForm(request.form)
+    return render_template(
+        'messages/edit.html',
+        messages=found_message,
+        form=form,
+        delete_form=delete_form)
 
 
 @app.route("/users/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
 def show(id):
     found_user = User.query.get(id)
+    delete_form = DeleteForm(request.form)
     if found_user is None:
         return render_template('404.html')
 
@@ -112,10 +126,13 @@ def show(id):
         else:
             return render_template('users/edit.html', form=form)
     if request.method == b'DELETE':
-        db.session.delete(found_user)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('users/show.html', user=found_user)
+        delete_form = DeleteForm(request.form)
+        if delete_form.validate():
+            db.session.delete(found_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+    return render_template(
+        'users/show.html', delete_form=delete_form, user=found_user)
 
 
 @app.route(
@@ -123,15 +140,30 @@ def show(id):
     methods=['GET', 'DELETE', 'PATCH'])
 def message_show(user_id, id):
     found_message = Message.query.get(id)
+    delete_form = DeleteForm(request.form)
     if found_message is None:
         return render_template('404.html')
     if request.method == b'PATCH':
-        found_message.content = request.form['content']
-        db.session.add(found_message)
-        db.session.commit()
-        return redirect(url_for('messages_index', user_id=user_id))
+        form = MessageForm(request.form)
+        if form.validate():
+            found_message.content = form.data['content']
+            db.session.add(found_message)
+            db.session.commit()
+            return redirect(url_for('messages_index', user_id=user_id))
+        else:
+            return render_template(
+                'messages/edit.html',
+                user_id=user_id,
+                messages=found_message,
+                form=form,
+                delete_form=delete_form)
     if request.method == b'DELETE':
-        db.session.delete(found_message)
-        db.session.commit()
-        return redirect(url_for('messages_index', user_id=user_id))
-    return render_template('messages/show.html', messages=found_message)
+        if delete_form.validate():
+            db.session.delete(found_message)
+            db.session.commit()
+            return redirect(url_for('messages_index', user_id=user_id))
+    return render_template(
+        'messages/show.html',
+        delete_form=delete_form,
+        user_id=user_id,
+        messages=found_message)

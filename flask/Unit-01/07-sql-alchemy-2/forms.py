@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators
+from wtforms import StringField, TextField, validators
 
 
 class UserForm(FlaskForm):
@@ -10,8 +10,8 @@ class UserForm(FlaskForm):
 
 
 class MessageForm(FlaskForm):
-    content = StringField('Please Enter your Message',
-                          [validators.DataRequired()])
+    content = TextField('Please Enter your Message',
+                        [validators.DataRequired()])
 
 
 class DeleteForm(FlaskForm):
