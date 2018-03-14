@@ -19,12 +19,16 @@
         <input type="text" name="location" id="location">
         <label for="caption">Caption</label>
         <input type="text" name="caption" id="caption">
+        <label for="beauty">Beauty</label>
+        <input type="number" name="beauty" id="beauty">
+        <input type="submit" value="Submit">
         <button>Add Sunset</button>
     </form>
     {% for sunset in sunset_list  %}
         <img class="sunsetimg" src="{{sunset.image_url}}" alt="{{sunset.id}}">
         <p>{{ sunset.caption }}</p>
         <small>Location: {{sunset.location}} </small>
+        <small>Beauty Level: {{sunset.beauty}} </small>
     {% endfor %}
 </div>
 </body>
