@@ -3,7 +3,8 @@
     <h2>User Profile:</h2>
     <h5>First name: {{user.first_name}} </h5>
     <h5>Last name: {{user.last_name}} </h5>
-    <a href="{{url_for('edit', id=user.id)}}">Edit Profile</a> |
+    <a href="{{url_for('edit', id=user.id)}}">Edit Profile </a> |
+    <a href="{{url_for('index_message', id=user.id)}}"> View Messages </a> |
     <a href="{{url_for('index')}}"> Home </a>
 </div>
 {% endblock %}

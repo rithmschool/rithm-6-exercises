@@ -28,7 +28,7 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 @app.route('/')
 def root():
@@ -81,7 +81,7 @@ def index_message(id):
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for('index_message', id=id))
-    return render_template('messages/index.html', users=User.query.get(id))
+    return render_template('messages/index.html', user=User.query.get(id))
 
 @app.route('/users/<int:id>/messages/new')
 def new_message(id):
@@ -91,7 +91,7 @@ def new_message(id):
 def edit_message(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)
-    return render_template('users/edit.html', user=found_user, message=found_message)
+    return render_template('messages/edit.html', id=id, message=found_message)
 
 @app.route('/users/<int:id>/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
 def show_message(id, message_id):
@@ -101,7 +101,7 @@ def show_message(id, message_id):
         found_message.content = request.form.get('content')
         db.session.add(found_message)
         db.session.commit()
-        return redirect(url_for('show', id=id, message=message_id))
+        return redirect(url_for('show_message', id=id, message_id=message_id))
     if request.method == b"DELETE":
         db.session.delete(found_message)
         db.session.commit()

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}Edit Message {% endblock %} {% block content %}
 <div class="container">
     <h2>Edit Your Message!</h2>
-    <form action="{{url_for('index_message', id=id)}}?_method=PATCH" method="POST">
+    <form action="{{url_for('show_message', id=id, message_id=message.id)}}?_method=PATCH" method="POST">
         <div class="form-group">
             <label for="content">Message:</label>
             <input type="text" class="form-control" id="content" name="content" max=200 value="{{message.content}}">
