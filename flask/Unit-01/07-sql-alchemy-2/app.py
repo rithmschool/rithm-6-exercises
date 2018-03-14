@@ -62,6 +62,12 @@ def new():
     return render_template("users/new.html")
 
 
+@app.route("/users/<int:id>")
+def show(id):
+    found_user = User.query.get(id)
+    return render_template("users/show.html", user=found_user)
+
+
 @app.route("/users/<int:id>/edit", methods=["GET", "PATCH", "DELETE"])
 def edit(id):
     found_user = User.query.get(id)
@@ -97,7 +103,14 @@ def new_message(id):
     return render_template("messages/new.html", id=id)
 
 
-@app.route("/users/<int:id>/message/<int:message_id>/edit", methods=["GET", "PATCH", "DELETE"])
+@app.route("/users/<int:id>/messages/<int:message_id>")
+def show_message(id, message_id):
+    found_user = User.query.get(id)
+    found_message = Message.query.get(message_id)
+    return render_template("messages/show.html", user=found_user, message=found_message)
+
+
+@app.route("/users/<int:id>/messages/<int:message_id>/edit", methods=["GET", "PATCH", "DELETE"])
 def edit_message(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)

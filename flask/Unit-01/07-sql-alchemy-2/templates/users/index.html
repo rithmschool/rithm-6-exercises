@@ -9,10 +9,11 @@ Users!
 <ul>
   {% for user in users %}
   <li>
-    <a href="{{url_for('edit', id=user.id)}}">
+    <a href="{{url_for('show', id=user.id)}}">
       {{user.first_name}} {{ user.last_name }}
     </a>
     See this users <a href="{{url_for('index_messages', id=user.id)}}">messages</a>
+    or edit this user <a href="{{url_for('edit', id=user.id)}}">here</a>
   </li>
   {% endfor %}
 </ul>
