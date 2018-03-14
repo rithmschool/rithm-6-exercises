@@ -82,3 +82,47 @@ def show(id):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('users/show.html', user=user)
+
+
+# MESSAGE VIEW FUNCTIONS START HERE
+
+
+@app.route('/users/<int:id>/messages', methods=['GET', 'POST'])
+def msg_index(id):
+    user = User.query.get(id)
+    if request.method == 'POST':
+        content = request.form['content']
+        msg = Message(content, id)
+        db.session.add(msg)
+        db.session.commit()
+        return redirect(url_for('msg_index', id=id))
+    return render_template('messages/index.html', user=user)
+
+
+@app.route('/users/<int:id>/messages/new')
+def msg_new(id):
+    user = User.query.get(id)
+    return render_template('messages/new.html', user=user)
+
+
+@app.route('/users/<int:id>/messages/<int:msg_id>/edit')
+def msg_edit(id, msg_id):
+    message = Message.query.get(msg_id)
+    return render_template('messages/edit.html', message=message)
+
+
+@app.route(
+    '/users/<int:id>/messages/<int:msg_id>',
+    methods=['GET', 'PATCH', 'DELETE'])
+def msg_show(id, msg_id):
+    message = Message.query.get(msg_id)
+    if request.method == b"PATCH":
+        message.content = request.form['content']
+        db.session.add(message)
+        db.session.commit()
+        return redirect(url_for('msg_index', id=id))
+    if request.method == b"DELETE":
+        db.session.delete(message)
+        db.session.commit()
+        return redirect(url_for('msg_index', id=id))
+    return render_template('messages/show.html', message=message)
