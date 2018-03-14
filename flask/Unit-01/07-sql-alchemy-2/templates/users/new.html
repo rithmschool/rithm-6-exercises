@@ -5,21 +5,27 @@
   <h1>Register a New User!</h1>
   <div>
     <form action="{{url_for('index')}}" method="POST">
+      {{ form.hidden_tag() }}
+      {% for field in form if field.widget.input_type != 'hidden' %}
+
       <div>
-        <label for="first_name">Please Enter your First Name</label>
-        <input type="text" name="first_name" id="first_name" placeholder="e.g. John">
+        {{ field.label }}
+        {{ field }}
+        <span>
+          {% if field.errors %}
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          {% endif %}
+        </span>
       </div>
-      <div>
-          <label for="last_name">Please Enter your Last Name</label>
-          <input type="text" name="last_name" id="last_name" placeholder="e.g. Smith">
-      </div>
+
+        {% endfor %}
       <div>
         <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Ship It!</button>
       </div>
-
     </form>
   </div>
-
 </section>
 
 

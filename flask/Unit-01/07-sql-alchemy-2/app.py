@@ -2,12 +2,17 @@ from flask import Flask, request, url_for, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
+from forms import UserForm, MessageForm
+import os
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users-db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
@@ -36,13 +41,17 @@ def root():
 
 @app.route("/users", methods=['GET', 'POST'])
 def index():
+    form = UserForm(request.form)
     if request.method == 'POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        new_user = User(first_name=first_name, last_name=last_name)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        if form.validate():
+            first_name = form.data['first_name']
+            last_name = form.data['last_name']
+            new_user = User(first_name=first_name, last_name=last_name)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('users/new.html', form=form)
 
     return render_template('users/index.html', users=User.query.all())
 
@@ -61,17 +70,23 @@ def messages_index(user_id):
 
 @app.route("/users/new")
 def new():
-    return render_template('users/new.html')
+    form = UserForm()
+    return render_template('users/new.html', form=form)
 
 
 @app.route("/users/<int:user_id>/messages/new")
 def message_new(user_id):
-    return render_template('messages/new.html', user=User.query.get(user_id))
+    form = MessageForm()
+    return render_template(
+        'messages/new.html', user=User.query.get(user_id), form=form)
 
 
 @app.route("/users/<int:id>/edit")
 def edit(id):
-    return render_template('users/edit.html', user=User.query.get(id))
+    found_user = User.query.get(id)
+    form = UserForm(obj=found_user)
+    return render_template(
+        'users/edit.html', user=User.query.get(id), form=form)
 
 
 @app.route("/users/<int:user_id>/messages/<int:id>/edit")
@@ -85,12 +100,17 @@ def show(id):
     found_user = User.query.get(id)
     if found_user is None:
         return render_template('404.html')
+
     if request.method == b'PATCH':
-        found_user.first_name = request.form['first_name']
-        found_user.last_name = request.form['last_name']
-        db.session.add(found_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        form = UserForm(request.form)
+        if form.validate():
+            found_user.first_name = form.data['first_name']
+            found_user.last_name = form.data['last_name']
+            db.session.add(found_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('users/edit.html', form=form)
     if request.method == b'DELETE':
         db.session.delete(found_user)
         db.session.commit()
