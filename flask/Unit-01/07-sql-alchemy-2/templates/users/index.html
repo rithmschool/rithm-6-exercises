@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="{{url_for('users_new')}}">Add a new User</a>
+
+{% for user in users %}
+    <p>
+        {{user.first_name}} {{user.last_name}}
+        <br>
+        <a href="{{url_for('users_show', id=user.id)}}">See more about {{user.first_name}}</a> |
+        <a href="{{url_for('users_edit', id=user.id)}}">Edit a user</a>
+        <a href="{{url_for('messages_index', id = user.id)}}">See all user messages</a>
+    </p>
+{% endfor %}
+
+{% endblock %}
