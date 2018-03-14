@@ -78,4 +78,41 @@ def edit(id):
     target_user = User.query.get(id)
     return render_template('/users/edit.html', user=target_user)
 
+######################################################
+###                 MESSAGES ROUTES
+######################################################
 
+
+@app.route('/users/<int:id>/messages', methods=["POST"])
+def index_message(id):
+    if request.method == 'POST':
+        content = request.form.get('content')
+        user_id = id
+        new_message = Message(content, user_id)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for('show', id=id))
+
+@app.route('/users/<int:id>/messages/new')
+def new_message(id):
+    return render_template('./messages/message_new.html', user_id=id)
+
+@app.route('/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
+def show_message(message_id):
+    target_user = Message.query.get(message_id)
+    if request.method == b'PATCH':
+        target_message.first_name = request.form.get('first_name')
+        target_message.last_name = request.form.get('last_name')
+        db.session.add(target_message)
+        db.session.commit()
+        return redirect(url_for('index'))
+    if request.method == b'DELETE':
+        db.session.delete(target_message)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('/messages/show.html', message=target_message)
+
+@app.route('/messages/<int:message_id>/edit')
+def edit_message(message_id):
+    target_message = Message.query.get(id)
+    return render_template('/messages/edit.html', message=target_message)

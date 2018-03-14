@@ -4,5 +4,20 @@
 
 <p>{{ user.first_name }} {{ user.last_name}}</p>
 
+<button>
+  <a href="{{url_for('new_message', id=user.id)}}">Add new message</a>
+</button>
+
+<ul>
+  {% for message in user.messages %}
+  <li>
+    {{ message.content }}
+  </li>
+  {% endfor %}
+</ul>
+
+<button>
+  <a href="{{url_for('index')}}">Back to all users</a>
+</button>
 
 {% endblock %}
