@@ -99,20 +99,22 @@ def new_message(id):
 
 @app.route('/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
 def show_message(message_id):
-    target_user = Message.query.get(message_id)
+    target_message = Message.query.get(message_id)
     if request.method == b'PATCH':
-        target_message.first_name = request.form.get('first_name')
-        target_message.last_name = request.form.get('last_name')
-        db.session.add(target_message)
-        db.session.commit()
+        # from IPython import embed; embed()
+        # target_message.first_name = request.form.get('first_name')
+        # target_message.last_name = request.form.get('last_name')
+        # db.session.add(target_message)
+        # db.session.commit()
+        # return redirect(url_for('show', id=mes))
         return redirect(url_for('index'))
     if request.method == b'DELETE':
-        db.session.delete(target_message)
-        db.session.commit()
+        # db.session.delete(target_message)
+        # db.session.commit()
         return redirect(url_for('index'))
     return render_template('/messages/show.html', message=target_message)
 
 @app.route('/messages/<int:message_id>/edit')
 def edit_message(message_id):
-    target_message = Message.query.get(id)
-    return render_template('/messages/edit.html', message=target_message)
+    target_message = Message.query.get(message_id)
+    return render_template('/messages/message_edit.html', message=target_message)

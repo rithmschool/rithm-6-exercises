@@ -8,10 +8,11 @@
   <a href="{{url_for('new_message', id=user.id)}}">Add new message</a>
 </button>
 
+<h4>Click Message To Edit:</h4>
 <ul>
   {% for message in user.messages %}
   <li>
-    {{ message.content }}
+    <a href="{{url_for('edit_message', message_id=message.id)}}"> {{ message.content }}</a>
   </li>
   {% endfor %}
 </ul>
