@@ -32,7 +32,7 @@ def index():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('users/index.html')
+    return render_template('users/index.html', users = User.query.all())
 
 @app.route('/users/new')
 def new():
@@ -40,7 +40,7 @@ def new():
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
-    return render_template('users/edit.html', id = id )
+    return render_template('users/edit.html', user = User.query.get(id) )
 
 @app.route('/users/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(id):
