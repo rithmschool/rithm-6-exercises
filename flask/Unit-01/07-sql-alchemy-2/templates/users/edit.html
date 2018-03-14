@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} Create User {% endblock %} {% block body %}
+<h2>Edit User</h2>
+<form method="POST" action="{{ url_for('show', u_id=u.id) }}?_method=PATCH">
+  <label for="f">First Name</label>
+  <input type="text" name="f" id="f" value="{{ u.first_name }}" required>
+  <label for="l">Last Name</label>
+  <input type="text" name="l" id="l" value="{{ u.last_name }}" required>
+  <label for="i">Profile Picture URL</label>
+  <input type="url" name="i" id="i" value="{{ u.image_url }}">
+  <input type="submit" value="Update User">
+  <a href="{{ url_for('show', u_id=u.id) }}">Cancel</a>
+</form>
+<form method="POST" action="{{ url_for('show', u_id=u.id) }}?_method=DELETE">
+  <input type="submit" value="X">
+</form>
+{% endblock %}
