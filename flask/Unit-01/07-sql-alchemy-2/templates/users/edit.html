@@ -8,7 +8,7 @@
   <label for="i">Profile Picture URL</label>
   <input type="url" name="i" id="i" value="{{ u.image_url }}">
   <input type="submit" value="Update User">
-  <a href="{{ url_for('show', u_id=u.id) }}">Cancel</a>
+  <a href="{{ url_for('m_index', u_id=u.id) }}">Cancel</a>
 </form>
 <form method="POST" action="{{ url_for('show', u_id=u.id) }}?_method=DELETE">
   <input type="submit" value="X">

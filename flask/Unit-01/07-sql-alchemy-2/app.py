@@ -57,7 +57,7 @@ def m_index(u_id):
         db.session.add(Message(content=request.form['c'], user_id=u_id))
         db.session.commit()
         return redirect(url_for('m_index', u_id=u_id))
-    return render_template('messages/index.html', u=User.query.get(u_id))
+    return render_template('messages/index.html', u=User.query.get_or_404(u_id))
 
 
 @app.route('/users/new')
@@ -67,32 +67,32 @@ def new():
 
 @app.route('/users/<int:u_id>/messages/new')
 def m_new(u_id):
-    return render_template('messages/new.html', u=User.query.get(u_id))
+    return render_template('messages/new.html', u=User.query.get_or_404(u_id))
 
 
 @app.route('/users/<int:u_id>/edit')
 def edit(u_id):
-    return render_template('users/edit.html', u=User.query.get(u_id))
+    return render_template('users/edit.html', u=User.query.get_or_404(u_id))
 
 
 @app.route('/users/<int:u_id>/messages/<int:m_id>/edit')
 def m_edit(u_id, m_id):
     return render_template(
         'messages/edit.html',
-        u=User.query.get(u_id),
-        m=Message.query.get(m_id))
+        u=User.query.get_or_404(u_id),
+        m=Message.query.get_or_404(m_id))
 
 
 @app.route('/users/<int:u_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(u_id):
-    u = User.query.get(u_id)
+    u = User.query.get_or_404(u_id)
     if request.method == b'PATCH':
         u.first_name = request.form['f']
         u.last_name = request.form['l']
         u.image_url = request.form['i']
         db.session.add(u)
         db.session.commit()
-        return redirect(url_for('show', u_id=u_id))
+        return redirect(url_for('m_index', u_id=u_id))
     if request.method == b'DELETE':
         db.session.delete(u)
         db.session.commit()
@@ -113,3 +113,13 @@ def m_show(u_id, m_id):
         db.session.delete(m)
         db.session.commit()
         return redirect(url_for('m_index', u_id=u_id))
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(405)
+def page_not_found(error):
+    return render_template('404.html'), 405
+
+
