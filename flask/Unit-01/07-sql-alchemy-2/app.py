@@ -53,12 +53,12 @@ def new():
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
-    found_user = User.query.get(id)
+    found_user = User.query.get_or_404(id)
     return render_template('users/edit.html', user=found_user)
 
 @app.route('/users/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
-    found_user = User.query.get(id)
+    found_user = User.query.get_or_404(id)
     if request.method == b"PATCH":
         found_user.first_name = request.form.get('first_name')
         found_user.last_name = request.form.get('last_name')
@@ -81,7 +81,7 @@ def index_message(id):
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for('index_message', id=id))
-    return render_template('messages/index.html', user=User.query.get(id))
+    return render_template('messages/index.html', user=User.query.get_or_404(id))
 
 @app.route('/users/<int:id>/messages/new')
 def new_message(id):
@@ -89,13 +89,13 @@ def new_message(id):
 
 @app.route('/users/<int:id>/messages/<int:message_id>/edit')
 def edit_message(id, message_id):
-    found_user = User.query.get(id)
+    found_user = User.query.get_or_404(id)
     found_message = Message.query.get(message_id)
     return render_template('messages/edit.html', id=id, message=found_message)
 
 @app.route('/users/<int:id>/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
 def show_message(id, message_id):
-    found_user = User.query.get(id)
+    found_user = User.query.get_or_404(id)
     found_message = Message.query.get(message_id)
     if request.method == b"PATCH":
         found_message.content = request.form.get('content')
@@ -107,3 +107,7 @@ def show_message(id, message_id):
         db.session.commit()
         return redirect(url_for('index_message', id=id))
     return render_template('messages/show.html', user=found_user, message=found_message)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
