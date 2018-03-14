@@ -7,6 +7,7 @@
   {{user.first_name}} {{user.last_name}}
   <br>
   <a href="{{url_for('show', id=user.id)}}">See more about {{user.first_name}}</a>
+  <a href="{{url_for('messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
 </p>
 
 {%endfor%} {%endblock%}

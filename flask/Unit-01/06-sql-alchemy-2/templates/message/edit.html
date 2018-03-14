@@ -1,0 +1,12 @@
+{% extends 'user/base.html' %} {% block content %}
+<h1>Edit an existing message</h1>
+<form action="{{url_for('messages_update', user_id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+  <label for="">Message</label>
+  <input type="text" name="message" value="{{message.message}}">
+  <input type="submit" value="EDIT AN EXISTING MESSAGE">
+</form>
+
+<form action="{{url_for('messages_destroy', user_id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+  <input type="submit" value="DELETE MESSAGE">
+</form>
+{%endblock%}
