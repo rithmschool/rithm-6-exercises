@@ -6,7 +6,7 @@ New Message!
 
 
 {% block content %}
-<form action="{{url_for('index'), id=user.id}}" method="POST">
+<form action="{{url_for('index_messages', id=id)}}" method="POST">
   <input type="text" name="content" id="content" placeholder="Enter content">
   <input type="submit" name="submit-new-message" id="submit-new-message">
 </form>

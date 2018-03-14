@@ -16,5 +16,7 @@ Messages!
   {% endfor %}
 </ul>
 <br>
-<a href="{{url_for('new_message', id=user.id)}}">Add another user!</a>
+<a href="{{url_for('new_message', id=user.id)}}">Add another message!</a>
+<br>
+Or checkout <a href="{{url_for('index')}}">users</a>
 {% endblock %}

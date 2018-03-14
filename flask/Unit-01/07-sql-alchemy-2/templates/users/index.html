@@ -12,6 +12,7 @@ Users!
     <a href="{{url_for('edit', id=user.id)}}">
       {{user.first_name}} {{ user.last_name }}
     </a>
+    See this users <a href="{{url_for('index_messages', id=user.id)}}">messages</a>
   </li>
   {% endfor %}
 </ul>

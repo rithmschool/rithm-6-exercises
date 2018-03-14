@@ -33,9 +33,11 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
+    message_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-    def __init__(self, content):
+    def __init__(self, content, message_id):
         self.content = content
+        self.message_id = message_id
 
 
 @app.route("/")
@@ -82,7 +84,8 @@ def edit(id):
 def index_messages(id):
     found_user = User.query.get(id)
     if request.method == "POST":
-        new_message = Message(content=request.form.get("content"))
+        new_message = Message(content=request.form.get("content"),
+                              message_id=id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("index_messages", id=found_user.id))
@@ -91,7 +94,7 @@ def index_messages(id):
 
 @app.route("/users/<int:id>/messages/new")
 def new_message(id):
-    return render_template("messages/new.html", user=User.query.get(id))
+    return render_template("messages/new.html", id=id)
 
 
 @app.route("/users/<int:id>/message/<int:message_id>/edit", methods=["GET", "PATCH", "DELETE"])
@@ -99,7 +102,7 @@ def edit_message(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)
     if request.method == b"PATCH":
-        found_message.content = request.form("content")
+        found_message.content = request.form.get("content")
         db.session.add(found_message)
         db.session.commit()
         # return render_template("messages/index.html", messages=Message.query.all(), user=User.query.get(id))
@@ -109,4 +112,4 @@ def edit_message(id, message_id):
         db.session.commit()
         # return render_template("messages/index.html", messages=Message.query.all(), user=User.query.get(id))
         return redirect(url_for("index_messages", id=found_user.id))
-    return render_template("messages/edit.html", messages=Message.query.all(), user=User.query.get(id))
+    return render_template("messages/edit.html", message=found_message, user=User.query.get(id))
