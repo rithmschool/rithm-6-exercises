@@ -20,10 +20,21 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+    messages = db.relationship('Message', backref='user', lazy='dynamic', cascade='all/delete')
+
+class Message(db.Model):
+
+    __tablename__ = 'messages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 @app.route('/')
 def root():
     return redirect(url_for('index'))
+
+# USER ROUTES
 
 @app.route('/users', methods=["GET", "POST"])
 def index():
@@ -34,7 +45,7 @@ def index():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('users/index.html')
+    return render_template('users/index.html', users=User.query.all())
 
 @app.route('/users/new')
 def new():
@@ -42,7 +53,8 @@ def new():
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
-    return render_template('users/edit.html', id=id)
+    found_user = User.query.get(id)
+    return render_template('users/edit.html', user=found_user)
 
 @app.route('/users/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
@@ -58,3 +70,40 @@ def show(id):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('users/show.html', user=found_user)
+
+# MESSAGE ROUTES #
+
+@app.route('/users/<int:id>/messages', methods=["GET", "POST"])
+def index_message(id):
+    if request.method == "POST":
+        content = request.form.get('content')
+        new_message = Message(content=content, user_id=id)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for('index_message', id=id))
+    return render_template('messages/index.html', users=User.query.get(id))
+
+@app.route('/users/<int:id>/messages/new')
+def new_message(id):
+    return render_template('messages/new.html', id=id)
+
+@app.route('/users/<int:id>/messages/<int:message_id>/edit')
+def edit_message(id, message_id):
+    found_user = User.query.get(id)
+    found_message = Message.query.get(message_id)
+    return render_template('users/edit.html', user=found_user, message=found_message)
+
+@app.route('/users/<int:id>/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
+def show_message(id, message_id):
+    found_user = User.query.get(id)
+    found_message = Message.query.get(message_id)
+    if request.method == b"PATCH":
+        found_message.content = request.form.get('content')
+        db.session.add(found_message)
+        db.session.commit()
+        return redirect(url_for('show', id=id, message=message_id))
+    if request.method == b"DELETE":
+        db.session.delete(found_message)
+        db.session.commit()
+        return redirect(url_for('index_message', id=id))
+    return render_template('messages/show.html', user=found_user, message=found_message)
