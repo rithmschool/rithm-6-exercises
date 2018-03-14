@@ -72,7 +72,7 @@ def show(id):
 def index_messages(id):
     if request.method == 'POST':
         content = request.form.get('content')
-        new_message = User(content = content, user_id = id)
+        new_message = Message(content = content, user_id = id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for('index_messages', id = id))
@@ -84,7 +84,7 @@ def new_messages(id):
 
 @app.route('/users/<int:id>/messages/<int:message_id>/edit')
 def edit_messages(id, message_id):
-    return render_template('users/edit.html', user = User.query.get(id), message = Message.query.get(id))
+    return render_template('messages/edit.html', id = id, message = Message.query.get(message_id))
 
 @app.route('/users/<int:id>/messages/<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show_messages(id, message_id):
@@ -94,7 +94,7 @@ def show_messages(id, message_id):
         found_message.content = request.form.get('content')
         db.session.add(found_message)
         db.session.commit()
-        return redirect(url_for('show', id = id, message_id = message_id))
+        return redirect(url_for('show_messages', id = id, message_id = message_id))
     if request.method == b'DELETE':
         db.session.delete(found_message)
         db.session.commit()
