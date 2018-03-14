@@ -5,12 +5,9 @@
 
   <h1>Please enjoy some Righteous snacks!</h1>
 
-  <button id='btn__add'>
-    <a href="{{url_for('new')}}" class='btn btn-primary'>Add a righteous snack</a>
-  </button>
+  <button id='add__btn' class='btn btn-primary'>Add a righteous snack</button>
 
-  <section id="new__section">
-
+  <section id="new__section" class='hidden'>
     <h1>Add a new snack!</h1>
     <form action="{{url_for('index')}}" method='POST' id='new__form'>
       <div class="form-group">
@@ -23,10 +20,9 @@
       </div>
       <input type="submit" value='Add a new snack!'>
     </form>
-
   </section>
 
-  <ul>
+  <ul id='snack__list'>
     {% for snack in snacks %}
     <li>
       <p>
@@ -36,24 +32,34 @@
         Kind: {{ snack.kind }}
       </p>
 
-    <div>
-
-      <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST" class='snack__buttons'>
+    <section id='modifier__btns'>
+      <form action="#" method="POST" class='snack__buttons' id='delete__btn'>
         <input type="submit" value="Delete" id='index__form--delete' class='btn btn-warning'>
       </form>
-
-      <form action="{{url_for('edit', id=snack.id)}}" class='snack__buttons'>
+      <form action="#" class='snack__buttons edit__btn'>
         <input type="submit" value="Modify snack?" id='index__form--edit' class='btn btn-info'>
       </form>
+      <!-- <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST" class='snack__buttons'>
+        <input type="submit" value="Delete" id='index__form--delete' class='btn btn-warning'>
+      </form>
+      <form action="{{url_for('edit', id=snack.id)}}" class='snack__buttons'>
+        <input type="submit" value="Modify snack?" id='index__form--edit' class='btn btn-info'>
+      </form> -->
+    </section id='edit__btns'>
 
-    </div>
+    <section class='hidden edit__form'>
+      <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method='POST'>
+        <label for="name">Name of Snack: </label>
+        <input type="text" name='name' value="{{ snack.name }}">
+        <label for="kind">Kind of Snack: </label>
+        <input type="text" name='kind' value="{{ snack.kind }}">
+        <input type="submit" value='Update snack'>
+      </form>
+    </section>
 
     </li>
     {% endfor %}
   </ul>
-
-
-
 
   </main>
 
