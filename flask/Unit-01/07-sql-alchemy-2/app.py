@@ -83,6 +83,8 @@ def message_edit(user_id, id):
 @app.route("/users/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
 def show(id):
     found_user = User.query.get(id)
+    if found_user is None:
+        return render_template('404.html')
     if request.method == b'PATCH':
         found_user.first_name = request.form['first_name']
         found_user.last_name = request.form['last_name']
@@ -101,6 +103,8 @@ def show(id):
     methods=['GET', 'DELETE', 'PATCH'])
 def message_show(user_id, id):
     found_message = Message.query.get(id)
+    if found_message is None:
+        return render_template('404.html')
     if request.method == b'PATCH':
         found_message.content = request.form['content']
         db.session.add(found_message)
