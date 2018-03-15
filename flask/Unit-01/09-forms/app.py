@@ -45,8 +45,6 @@ def index():
     if request.method == "POST":
         form = UserForm(request.form)
         if form.validate():
-            # first_name = request.form.get('first_name')
-            # last_name = request.form.get('last_name')
             new_user = User(first_name=form.data['first_name'], last_name=form.data['last_name'])
             db.session.add(new_user)
             db.session.commit()
@@ -83,20 +81,23 @@ def show(id):
 
 @app.route('/users/<int:id>/messages', methods=["GET", "POST"])
 def index_message(id):
+    found_user = User.query.get_or_404(id)
+    form = MessageForm(request.form)
     if request.method == "POST":
-        content = request.form.get('content')
         if form.validate():
-            new_message = Message(content=content, user_id=id)
+            new_message = Message(content=form.data['content'], user_id=id)
             db.session.add(new_message)
             db.session.commit()
             return redirect(url_for('index_message', id=id))
-        return render_template('messages/index.html', content=content)
-    return render_template('messages/index.html', user=User.query.get_or_404(id))
+        return render_template('messages/new.html', id=id, form=form)
+    return render_template('messages/index.html', form=form, user=found_user)
+
 
 @app.route('/users/<int:id>/messages/new')
 def new_message(id):
     form = MessageForm()
     return render_template('messages/new.html', id=id, form=form)
+
 
 @app.route('/users/<int:id>/messages/<int:message_id>/edit')
 def edit_message(id, message_id):
