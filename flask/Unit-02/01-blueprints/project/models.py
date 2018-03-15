@@ -7,6 +7,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+    img_url = db.Column(db.Text)
     messages = db.relationship('Message', backref='user', lazy='dynamic')
 
 

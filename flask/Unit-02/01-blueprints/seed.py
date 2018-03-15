@@ -1,4 +1,5 @@
-from app import db, User, Message
+from project import db
+from project.models import User, Message
 
 u1 = User(first_name='Paula', last_name='Goyanes')
 u2 = User(first_name='Zoran', last_name='Savic')
