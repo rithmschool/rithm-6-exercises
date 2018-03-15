@@ -119,3 +119,11 @@ def show_message(message_id):
 def edit_message(message_id):
     target_message = Message.query.get(message_id)
     return render_template('/messages/message_edit.html', message=target_message)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template('500.html'), 500
