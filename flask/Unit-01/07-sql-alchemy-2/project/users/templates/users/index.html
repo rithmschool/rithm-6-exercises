@@ -2,14 +2,16 @@
 
 {% block content %}
 
-<section>
-  <h1 class="header__center">List Of All Active Users</h1>
+<section class="container">
+  <div "div__center align-self-center">
+    <h1 class="header__center align-self-center">List Of All Active Users</h1>
+  </div>
   <div class="link__register--user">
     <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Register a New User!</a>
   </div>
     <table class="table__whole--changes">
       <thead class="table__structure">
-        <tr>
+        <tr class="bg-info text-light">
           <th class="column__headers">First Name</th>
           <th class="column__headers">Last Name</th>
           <th class="column__headers">Edit</th>

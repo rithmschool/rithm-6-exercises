@@ -1,6 +1,12 @@
 .header__center {
-  margin: 0 auto;
   padding: 2% 0;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.div__center {
+  width: 50%;
+  margin: 0 auto;
 }
 
 .link__register--user {
@@ -12,8 +18,9 @@
 }
 .table__whole--changes {
   margin: 0 auto;
-  width: 75%;
+  width: 100%;
   border: 1px solid black;
+  margin-top: 5%;
 }
 
 .table__structure tr {
@@ -21,8 +28,7 @@
 }
 
 .column__headers {
-  border-right: 1px solid black;
-  border-left: 1px solid black;
+  border: 1px solid rgb(70, 70, 70);
   padding: 10px 20px;
   text-align: center;
 }
@@ -36,3 +42,23 @@
   max-height: 250px;
   max-width: 250px;
 }
+
+button > .button__edit:hover,
+button > .button__edit:active,
+button > .button__edit:visited,
+button > .button__edit:link {
+  text-decoration: none;
+  border: none;
+  color: #17a2b8;
+}
+
+.form__input {
+  width: 275px;
+  border-radius: 5%;
+  box-shadow: inset 0 0 1px #3e3e3e;
+  margin-left: 2%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+/* body> section > div: nth-child(4) > div > button > a; */

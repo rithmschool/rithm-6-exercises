@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section>
-  <h1>Register a New User!</h1>
+<section class="container">
+  <div "div__center mx-auto">
+    <h1 class="header__center">Register a New User!</h1>
+  </div>
   <div>
     <form action="{{url_for('users.index')}}" method="POST">
       {{ form.hidden_tag() }}
@@ -10,7 +12,7 @@
 
       <div>
         {{ field.label }}
-        {{ field }}
+        {{ field(class_="form__input") }}
         <span>
           {% if field.errors %}
             {% for error in field.errors %}

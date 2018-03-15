@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section>
-  <h2>User Profile</h2>
+<section class="container-fluid">
+  <div class="mx-auto">
+  <h2>{{user.first_name}}'s Profile</h2>
+</div>
   <div class="img-container">
       <img src="{{user.image_url}}" alt="pic of user">
   </div>
   <div>
-    <h5>User's First Name:&nbsp;</h5> <span><p>{{user.first_name}}</p></span>
+    <h5>User's Full Name:&nbsp;</h5> <span><p>{{user.first_name}} {{user.last_name}}</p></span>
   </div>
   <div>
-    <h5>User's Last Name:&nbsp;</h5> <span><p>{{user.last_name}}</p></span>
+    <h5>Need To Update or Delete {{user.first_name}}'s Profile?</h5>
+    <div>
+      <button class="btn btn-outline-info my-2 my-sm-0"> <a href="{{url_for('users.edit', id=user.id)}}" class="button__edit">Edit Here  &nbsp;<i class="fas fa-edit"></i></a></button>
+    </div>
+    <form method="POST" action="{{url_for('users.show', id=user.id)}}?_method=DELETE">
+        {{delete_form.hidden_tag()}}
+        <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Delete Profile &nbsp;<i class="fas fa-trash-alt"></i> </button>
+      </form>
   </div>
   <div>
       <a href="{{url_for('messages.index', user_id=user.id)}}">See {{user.first_name}}'s messages &nbsp;<i class="fas fa-envelope"></i></a>
     </div>
-
-  <div>
-    <h5>Need To Update or Delete {{user.first_name}}'s Profile?</h5>
-    <div>
-      <a href="{{url_for('users.edit', id=user.id)}}">Edit Here  &nbsp;<i class="fas fa-edit"></i></a>
-    </div>
-    <form method="POST" action="{{url_for('users.show', id=user.id)}}?_method=DELETE">
-        {{delete_form.hidden_tag()}}
-        <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Delete &nbsp;<i class="fas fa-trash-alt"></i> </button>
-      </form>
-  </div>
 
 </section>
 
