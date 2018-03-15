@@ -2,11 +2,12 @@ from flask import Flask, url_for, redirect, request, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from forms import UserForm, MessageForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/07-sql-alchemy'
 app.config['SQLALCHEMY_ECHO'] = True
-
+app.config['SECRET_KEY'] = 'this is an insecure key'
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
@@ -41,22 +42,27 @@ def error(e):
 @app.route('/users', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        image_url = request.form.get('image_url')
-        new_user = User(first_name = first_name, last_name = last_name, image_url = image_url)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        form = UserForm(request.form)
+        if form.validate():
+            first_name = form.data['first_name']
+            last_name = form.data['last_name']
+            image_url = form.data['image_url']
+            new_user = User(first_name = first_name, last_name = last_name, image_url = image_url)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        return render_template('users/new.html', form = form)
     return render_template('users/index.html', users = User.query.all())
 
 @app.route('/users/new')
 def new():
-    return render_template('users/new.html')
+    form = UserForm()
+    return render_template('users/new.html', form = form)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
-    return render_template('users/edit.html', user = User.query.get_or_404(id) )
+    form = UserForm(obj = User.query.get_or_404(id))
+    return render_template('users/edit.html', user = User.query.get_or_404(id), form = form)
 
 @app.route('/users/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(id):

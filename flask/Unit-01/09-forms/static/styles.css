@@ -10,6 +10,9 @@
     border: rgba(0, 0, 0, .5) solid 1px;
 }
 
+.error_msg {
+    /* color: red !important; */
+}
 /* body {
     background-color: red;
 } */
