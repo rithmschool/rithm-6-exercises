@@ -13,6 +13,7 @@
 .table__whole--changes {
   margin: 0 auto;
   width: 75%;
+  border: 1px solid black;
 }
 
 .table__structure tr {
