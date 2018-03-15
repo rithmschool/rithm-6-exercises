@@ -10,4 +10,5 @@
     </p>
 {% endfor %}
 <a href= "{{url_for('messages_new', id = user.id)}}">Add a new message</a>
+<a href = "{{url_for('users_show', id = user.id)}}" >Back to User Page</a>
 {% endblock %}
