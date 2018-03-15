@@ -84,30 +84,38 @@ def show(id):
 @app.route('/users/<int:id>/messages', methods=['GET', 'POST'])
 def index_messages(id):
     if request.method == 'POST':
-        content = request.form.get('content')
-        new_message = Message(content = content, user_id = id)
-        db.session.add(new_message)
-        db.session.commit()
-        return redirect(url_for('index_messages', id = id))
+        form = MessageForm()
+        if form.validate():
+            content = form.data['content']
+            new_message = Message(content = content, user_id = id)
+            db.session.add(new_message)
+            db.session.commit()
+            return redirect(url_for('index_messages', id = id))
+        return render_template('messages/new.html', id = id, form = form)
     return render_template('messages/index.html', user = User.query.get_or_404(id))
 
 @app.route('/users/<int:id>/messages/new')
 def new_messages(id):
-    return render_template('messages/new.html', id = id)
+    form = MessageForm()
+    return render_template('messages/new.html', id = id, form = form)
 
 @app.route('/users/<int:id>/messages/<int:message_id>/edit')
 def edit_messages(id, message_id):
-    return render_template('messages/edit.html', id = id, message = Message.query.get_or_404(message_id))
+    form = MessageForm(obj = Message.query.get_or_404(message_id))
+    return render_template('messages/edit.html', id = id, message = Message.query.get_or_404(message_id), form = form)
 
 @app.route('/users/<int:id>/messages/<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show_messages(id, message_id):
     found_user = User.query.get_or_404(id)
     found_message = Message.query.get_or_404(message_id)
     if request.method == b'PATCH':
-        found_message.content = request.form.get('content')
-        db.session.add(found_message)
-        db.session.commit()
-        return redirect(url_for('show_messages', id = id, message_id = message_id))
+        form = MessageForm(request.form)
+        if form.validate():
+            found_message.content = form.data['content']
+            db.session.add(found_message)
+            db.session.commit()
+            return redirect(url_for('show_messages', id = id, message_id = message_id))
+        return render_template('messages/edit.html', id = id, message = found_message, form = form)
     if request.method == b'DELETE':
         db.session.delete(found_message)
         db.session.commit()

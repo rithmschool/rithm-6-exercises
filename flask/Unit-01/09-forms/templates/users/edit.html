@@ -13,7 +13,7 @@
             <div class="form-group">    
                 {{ field.label }}
                 {{ field (class_='form-control') }}
-                <small class="error_msg" class="form-text text-muted text-danger">
+                <small class="form-text text-danger error_msg">
                     {% if field.errors %}
                         {% for error in field.errors %}
                             {{ error }}

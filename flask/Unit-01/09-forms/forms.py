@@ -7,4 +7,4 @@ class UserForm(FlaskForm):
     image_url = StringField('avatar url')
 
 class MessageForm(FlaskForm):
-    content = StringField('message content', [validators.DataRequired()])
+    content = StringField('message content', [validators.DataRequired(), validators.Length(max = 164)])
