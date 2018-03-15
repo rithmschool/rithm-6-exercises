@@ -4,9 +4,9 @@
 <br>
 <div class="container p-3 mb-2 bg-secondary text-white rounded">
         <p class="text-right"> You are logged in as {{user.first_name}}</p>
-<form>
-<div class="form-group" action="{{url_for('post_new_message', user_id=user.id)}}" method="POST">
-    <label for="exampleTextarea">Type your message</label>
+<div class="form-group">
+<form action="{{url_for('post_new_message', user_id=user.id)}}" method="POST">
+    <label for="content">Type your message</label>
     <textarea class="form-control" name="content" id="content" rows="3"></textarea>
   </div>
 <button type="submit" class="btn btn-primary">Submit</button>
@@ -27,7 +27,7 @@
           <tr>
             <th scope="row">{{usersss.id}}</th>
             <td>{{user.first_name}}</td>
-            <td>{{user.first_name}}</td>
+            <td>{{user.messages}}</td>
           </tr>
         </tbody>
         {% endfor %}
