@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %} Edit Message {% endblock %} {% block content %}
+
+<form method="POST" action="{{url_for('show_messages', user_id=user.id, message_id=message.id)}}?_method=PATCH">
+  <input type="text" value="{{message.content}}" name="content">
+  <input type="submit" value="Edit Message!">
+</form>
+
+<form method="POST" action="{{url_for('show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
+  <input type="submit" value="Delete Message!">
+</form>
+
+{% endblock %}
