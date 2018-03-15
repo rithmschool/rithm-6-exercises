@@ -7,7 +7,7 @@ Messages!
 {% block content %}
 <h1>This is {{ user.first_name }} {{ user.last_name }}'s messages:</h1>
 <ul>
-  {% for message in messages %}
+  {% for message in user.message %}
   <li>
     <a href="{{url_for('show_message', id=user.id, message_id=message.id)}}">
       {{ message.content }}
