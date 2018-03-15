@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from forms import AddForm, DeleteForm, AddMessage
 import os
 
 app = Flask(__name__)
@@ -13,6 +14,9 @@ else:
         'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/alekinixII"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
@@ -51,37 +55,47 @@ def root():
 @app.route('/users', methods=["GET", "POST"])
 def index():
     if request.method == 'POST':
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        new_user = User(first_name, last_name)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('./users/index.html', users=User.query.all())
+        form = AddForm(request.form)
+        if form.validate():
+            first_name = request.form.get('first_name')
+            last_name = request.form.get('last_name')
+            new_user = User(first_name, last_name)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('./users/new.html', form=form)
+    return render_template('./users/index.html', users=User.query.all(), form=DeleteForm())
 
 @app.route('/users/new')
 def new():
-    return render_template('./users/new.html')
+    return render_template('./users/new.html', form=AddForm())
 
 @app.route('/users/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
     target_user = User.query.get(id)
     if request.method == b'PATCH':
-        target_user.first_name = request.form.get('first_name')
-        target_user.last_name = request.form.get('last_name')
-        db.session.add(target_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        form = AddForm(request.form)
+        if form.validate():
+            target_user.first_name = request.form.get('first_name')
+            target_user.last_name = request.form.get('last_name')
+            db.session.add(target_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('./users/new.html', form=form)
     if request.method == b'DELETE':
-        db.session.delete(target_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        delete_form = DeleteForm(request.form)
+        if delete_form.validate():
+            db.session.delete(target_user)
+            db.session.commit()
+            return redirect(url_for('index'))
     return render_template('/users/show.html', user=target_user)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
     target_user = User.query.get(id)
-    return render_template('/users/edit.html', user=target_user)
+    return render_template('/users/edit.html', user=target_user, form=AddForm(obj=target_user))
 
 ######################################################
 ###                 MESSAGES ROUTES
@@ -100,7 +114,7 @@ def index_message(id):
 
 @app.route('/users/<int:id>/messages/new')
 def new_message(id):
-    return render_template('./messages/message_new.html', user_id=id)
+    return render_template('./messages/message_new.html', user_id=id, form=AddMessage(request.form))
 
 @app.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
 def show_message(message_id):
