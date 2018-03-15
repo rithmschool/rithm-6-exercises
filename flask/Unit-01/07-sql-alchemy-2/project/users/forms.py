@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextField, validators
+from wtforms import StringField, validators
 
 
 class UserForm(FlaskForm):
@@ -7,11 +7,9 @@ class UserForm(FlaskForm):
                              [validators.DataRequired()])
     last_name = StringField('Please Enter your Last Name',
                             [validators.DataRequired()])
-
-
-class MessageForm(FlaskForm):
-    content = TextField('Please Enter your Message',
-                        [validators.DataRequired()])
+    image_url = StringField(
+        'If You Want A User Picture Please Enter A Link Here',
+        [validators.URL(message='URL Must Be Valid')])
 
 
 class DeleteForm(FlaskForm):

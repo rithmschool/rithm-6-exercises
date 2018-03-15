@@ -25,3 +25,13 @@
   padding: 10px 20px;
   text-align: center;
 }
+
+.img-container {
+  width: 250px;
+  height: 250px;
+}
+
+.img-container img {
+  max-height: 250px;
+  max-width: 250px;
+}

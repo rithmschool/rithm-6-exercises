@@ -12,11 +12,11 @@
 <body>
   <header>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{url_for('index')}}">
+        <a class="navbar-brand" href="{{url_for('users.index')}}">
             <i class="fas fa-envelope-square fa-lg bg-info"></i>
             Generic Users and Messages App!
           </a>
-      <a href="{{url_for('index')}}" class="btn btn-outline-info my-2 my-sm-0">Users</a>
+      <a href="{{url_for('users.index')}}" class="btn btn-outline-info my-2 my-sm-0">Users</a>
     </nav>
   </header>
   {% block content %}

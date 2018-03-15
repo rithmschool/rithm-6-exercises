@@ -3,9 +3,9 @@
 {% block content %}
 
 <section>
-    <h1>Update a New User!</h1>
+    <h1>Update {{user.first_name}}'s Messages!</h1>
     <div>
-      <form action="{{url_for('show', id=user.id)}}?_method=PATCH" method="POST">
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=PATCH" method="POST">
           {{ form.hidden_tag() }}
           {% for field in form if field.widget.input_type != 'hidden' %}
 
@@ -22,6 +22,7 @@
           </div>
 
             {% endfor %}
+
         <div>
           <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Update It!</button>
         </div>
@@ -29,9 +30,9 @@
     </div>
     <div>
       <h3>Want to Delete The User?</h3>
-      <form action="{{url_for('show', id=user.id)}}?_method=DELETE" method="POST">
-          {{delete_form.hidden_tag()}}
-        <button type="submit" class="btn btn-outline-info my-2 my-sm-0"><i class="fas fa-trash-alt"></i></button>
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE" method="POST">
+        {{ delete_form.hidden_tag() }}
+        <button type="submit"><i class="fas fa-trash-alt"></i></button>
       </form>
     </div>
 

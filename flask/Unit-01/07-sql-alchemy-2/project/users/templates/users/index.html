@@ -5,7 +5,7 @@
 <section>
   <h1 class="header__center">List Of All Active Users</h1>
   <div class="link__register--user">
-    <a href="{{url_for('new')}}" class="btn btn-outline-info my-2 my-sm-0">Register a New User!</a>
+    <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Register a New User!</a>
   </div>
     <table class="table__whole--changes">
       <thead class="table__structure">
@@ -22,9 +22,9 @@
         <tr>
             <td class="column__headers">{{ user.first_name }}</td>
             <td class="column__headers">{{ user.last_name }}</td>
-            <td class="column__headers"><a href="{{url_for('edit', id=user.id)}}"><i class="fas fa-edit"></i></a></td>
-            <td class="column__headers"><a href="{{url_for('show', id=user.id)}}"><i class="fas fa-user"></i></a></td>
-            <td class="column__headers"><a href="{{url_for('messages_index', user_id=user.id)}}"><i class="fas fa-envelope"></i></a></td>
+            <td class="column__headers"><a href="{{url_for('users.edit', id=user.id)}}"><i class="fas fa-edit"></i></a></td>
+            <td class="column__headers"><a href="{{url_for('users.show', id=user.id)}}"><i class="fas fa-user"></i></a></td>
+            <td class="column__headers"><a href="{{url_for('messages.index', user_id=user.id)}}"><i class="fas fa-envelope"></i></a></td>
           </tr>
         {% endfor %}
       </tbody>
