@@ -1,4 +1,4 @@
-from flask import Flask, url_for, redirect
+from flask import Flask, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
@@ -27,3 +27,8 @@ app.register_blueprint(
 @app.route("/")
 def root():
     return redirect(url_for('users.index'))
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html')

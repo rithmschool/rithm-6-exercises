@@ -45,10 +45,8 @@ def edit(user_id, id):
 
 @messages_blueprint.route("/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
 def show(user_id, id):
-    found_message = Message.query.get(id)
+    found_message = Message.query.get_or_404(id)
     delete_form = DeleteForm(request.form)
-    if found_message is None:
-        return render_template('404.html')
     if request.method == b'PATCH':
         form = MessageForm(request.form)
         if form.validate():

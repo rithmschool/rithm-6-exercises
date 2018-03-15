@@ -46,11 +46,8 @@ def edit(id):
 
 @users_blueprint.route("/<int:id>", methods=['GET', 'DELETE', 'PATCH'])
 def show(id):
-    found_user = User.query.get(id)
+    found_user = User.query.get_or_404(id)
     delete_form = DeleteForm(request.form)
-    if found_user is None:
-        return render_template('404.html')
-
     if request.method == b'PATCH':
         form = UserForm(request.form)
         if form.validate():
