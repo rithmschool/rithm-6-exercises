@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, request
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+import os
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://localhost/sunset-data"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/sunset-data'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 

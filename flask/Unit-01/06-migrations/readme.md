@@ -1,4 +1,4 @@
-# Migrations
+<!-- # Migrations
 
 For this assignment, you'll be getting lots of practice working with migrations. We're going to build a small application and gradually develop our data model over time.
 
@@ -21,4 +21,4 @@ The app should only have a single `index.html` page, containing both the form to
 
 1.  In step 5, take a look at the migration file that's generated. Alembic generates a migration that deletes a column of `prettiness` and adds a column of `beauty`, but this isn't exactly what we want. It's sufficient to just change the column name, rather than deleting the entire column and adding a new one. Figure out how to edit the migration file to rename the column instead of deleting it.
 1.  You might find it difficult to generate a migration for the last step. You should try to Google your way to a solution, but if you really get stuck, [here's](https://github.com/miguelgrinberg/Flask-Migrate/issues/24) a (big) hint.
-1. Write some tests!
+1. Write some tests! -->
