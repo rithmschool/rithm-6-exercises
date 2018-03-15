@@ -11,6 +11,7 @@ app.config[
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.url_map.strict_slashes = False
 
 modus = Modus(app)
 db = SQLAlchemy(app)
@@ -92,7 +93,8 @@ def index_message(id):
 
 @app.route('/users/<int:id>/messages/new')
 def new_message(id):
-    return render_template('messages/new.html', id=id)
+    form = MessageForm()
+    return render_template('messages/new.html', id=id, form=form)
 
 @app.route('/users/<int:id>/messages/<int:message_id>/edit')
 def edit_message(id, message_id):
