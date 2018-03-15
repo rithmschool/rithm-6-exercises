@@ -5,6 +5,7 @@ import unittest
 
 class BaseTestCase(TestCase):
     def create_app(self):
+        app.config['WTF_CSRF_ENABLED'] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///testing.db'
         return app
 
@@ -110,6 +111,10 @@ class BaseTestCase(TestCase):
             '/users/1/messages/1?_method=DELETE', follow_redirects=True)
         self.assertNotIn(b'In the name of the moon, I wish punish you',
                          response.data)
+
+    def test_404(self):
+        response = self.client.get('/random')
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':

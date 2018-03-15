@@ -10,7 +10,8 @@ Content: {{ message.content }}
 <a href="{{url_for('edit_message', message_id=message.id, user_id=user.id)}}">edit</a>
 <br>
 <form action="{{url_for('show_message', message_id=message.id, user_id=user.id)}}?_method=DELETE" method="POST">
-    <input type="submit" value="Delete">
+  {{ delete_form.hidden_tag() }}
+  <input type="submit" value="Delete">
 </form>
 <br>
 {% endfor %}

@@ -9,6 +9,7 @@
 <a href="{{url_for('edit', user_id=user.id)}}">Edit User</a>
 <br>
 <form action="{{url_for('show', user_id=user.id)}}?_method=DELETE" method="POST">
-    <input type="submit" value="Delete">
+  {{ delete_form.hidden_tag() }}
+  <input type="submit" value="Delete">
 </form>
 {% endblock %}
