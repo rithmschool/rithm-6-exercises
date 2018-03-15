@@ -14,7 +14,7 @@
     {% endif %}
     <h5 class="mx-4">first name: {{ user.first_name }}</h5>
     <h5 class="mx-4">last name: {{ user.last_name }}</h5>
-    <a class="mx-4 mb-4" href="{{url_for('edit', id = user.id)}}">edit user profile</a>
+    <a class="mx-4 mb-4" href="{{url_for('edit', id = user.id)}}">edit or delete user profile</a>
     <hr>
     <a href="{{url_for('index_messages', id = user.id)}}">check out {{ user.first_name }}'s messages</a>
     |
