@@ -16,4 +16,6 @@ class MessageForm(FlaskForm):
         "Message: ", [validators.DataRequired(),
                       validators.Length(max=200)])
 
-class Delete
+
+class DeleteForm(FlaskForm):
+    pass
