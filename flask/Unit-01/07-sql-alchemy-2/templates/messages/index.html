@@ -5,7 +5,7 @@
 <h1> These are the messages for the person, {{user.first_name}} {{user.last_name}} </h1>
 
 
-<div class="container p-3 mb-2 bg-secondary text-white">
+<div class="container p-3 mb-2 bg-secondary text-white rounded">
     <a href="{{url_for('new_message', user_id=user.id)}}">Add a new message</a>
 
 {% for message in messages %}

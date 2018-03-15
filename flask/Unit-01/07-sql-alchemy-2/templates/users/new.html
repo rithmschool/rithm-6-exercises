@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block title %} Users Page {% endblock %} 
 
 {% block content %}
-<div class="container p-3 mb-2 bg-secondary text-white">
+<div class="container p-3 mb-2 bg-secondary text-white rounded">
   <h1>Create a new user!</h1>
   <h5 class="text-right">Rithm School is awesome</h5>
 
-  <form action="{{url_for('index')}}" method="POST">
+  <form action="{{url_for('index')}}" method="POST"></form>
     <div class="form-group">
       <label for="first_name">First Name</label>
       <input class="form-control" name="first_name" id="first_name" placeholder="Your first name goes here!">

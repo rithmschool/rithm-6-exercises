@@ -22,7 +22,7 @@
             <td>{{user.first_name}} {{user.last_name}}</td>
             <td><a href="{{url_for('show', id=user.id)}}">See more info</td>
             <td><a href="{{url_for('edit', id=user.id)}}">Edit user</a></td>
-            <td><a href="{{url_for('message_index', id=user.id)}}">Messages</a></td>
+            <td><a href="{{url_for('message_index', user_id=user.id)}}">Messages</a></td>
           </tr>
         </tbody>
         {% endfor %}

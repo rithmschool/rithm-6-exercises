@@ -1,14 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p> testing 111</p>
-<div class="container p-3 mb-2 bg-secondary text-white">
+<br>
+<div class="container p-3 mb-2 bg-secondary text-white rounded">
+        <p class="text-right"> You are logged in as {{user.first_name}}</p>
 <form>
-<div class="form-group">
+<div class="form-group" action="{{url_for('post_new_message', user_id=user.id)}}" method="POST">
     <label for="exampleTextarea">Type your message</label>
-    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+    <textarea class="form-control" name="content" id="content" rows="3"></textarea>
   </div>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
+
+<table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>#</th>
+            <th>User first_name</th>
+            <th>Message.content</th>
+            <th>Edit Link</th>
+          </tr>
+        </thead>
+        {% for message in messages %}
+        <tbody>
+          <tr>
+            <th scope="row">{{usersss.id}}</th>
+            <td>{{user.first_name}}</td>
+            <td>{{user.first_name}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
 {% endblock %}

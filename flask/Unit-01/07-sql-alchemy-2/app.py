@@ -122,7 +122,7 @@ def post_new_message(user_id):
     message = Message(request.form.get('content'), user_id)
     db.session.add(message)
     db.session.commit()
-    return redirect(url_for('message', user_id=message))
+    return redirect(url_for('new_message', user_id=message))
 
 
 @app.route('/users/<int:user_id>/messages/<int:id>', methods=['PATCH'])

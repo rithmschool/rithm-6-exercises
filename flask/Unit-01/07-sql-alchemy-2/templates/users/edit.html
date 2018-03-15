@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container p-3 mb-2 bg-secondary text-white">
+<div class="container p-3 mb-2 bg-secondary text-white rounded">
   <h1>Edit this user!</h1>
   <form action="{{url_for('show', id=user.id)}}?_method=PATCH" method="POST">
   <label>Name</label>
