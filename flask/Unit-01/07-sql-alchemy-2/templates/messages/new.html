@@ -22,12 +22,13 @@
             <th>Edit Link</th>
           </tr>
         </thead>
-        {% for message in messages %}
+
+        {% for message in user_messages %}
         <tbody>
           <tr>
-            <th scope="row">{{usersss.id}}</th>
-            <td>{{user.first_name}}</td>
-            <td>{{user.messages}}</td>
+            <th scope="row">{{user.id}}</th>
+            <td>{{message.user.first_name}}</td>
+            <td>{{message.content}}</td> 
           </tr>
         </tbody>
         {% endfor %}

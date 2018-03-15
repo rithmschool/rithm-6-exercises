@@ -99,13 +99,13 @@ def destroy(id):
 @app.route('/users/<int:user_id>/messages')
 def message_index(user_id):
     user = User.query.get(user_id)
-    return render_template('messages/index.html', user=user)
+    return render_template('messages/index.html', user=user, messages=Message.query.all())
 
 
 @app.route('/users/<int:user_id>/messages/new')
 def new_message(user_id):
     user = User.query.get(user_id)
-    return render_template('messages/new.html', user=user)
+    return render_template('messages/new.html', user=user, user_messages=user.messages)
 
 # @app.route('/users/<int:user_id>/messages/<int:id>')
 # def show_message(user_id, id):
@@ -114,7 +114,7 @@ def new_message(user_id):
 
 @app.route('/users/<int:user_id>/messages/<int:id>/edit')
 def edit_message(user_id, id):
-    return render_template('messages/edit.html', message=Message.query.get(id))
+    return render_template('messages/edit.html', messages=Message.query.get(id))
 
 
 @app.route('/users/<int:user_id>/messages', methods=['POST'])
@@ -122,7 +122,7 @@ def post_new_message(user_id):
     message = Message(request.form.get('content'), user_id)
     db.session.add(message)
     db.session.commit()
-    return redirect(url_for('new_message', user_id=user_id))
+    return redirect(url_for('new_message', user_id=user_id, messages=Message.query.all()))
 
 
 @app.route('/users/<int:user_id>/messages/<int:id>', methods=['PATCH'])
