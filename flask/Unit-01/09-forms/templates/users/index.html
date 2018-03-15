@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Look at all them users!</h1>
+
+<a href="{{url_for('new')}}">Add a User</a>
+
+<ol>
+  {% for user in users %}
+  <li>
+    {{ user.first_name + " " + user.last_name }}
+    <a href="{{url_for('edit', id=user.id)}}">Edit User</a>
+    <a href="{{url_for('show', id=user.id)}}">Show User</a>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endblock %}
