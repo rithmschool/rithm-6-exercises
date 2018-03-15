@@ -2,10 +2,13 @@ from flask import Flask, url_for, redirect, request, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from forms import UserForm, MessageForm
+import os
 
 app = Flask(__name__)
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/07-sql-alchemy"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -39,17 +42,21 @@ def root():
 @app.route('/users', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        new_user = User(first_name=first_name, last_name=last_name)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('index'))
+        form = UserForm(request.form)
+        if form.validate():
+            # first_name = request.form.get('first_name')
+            # last_name = request.form.get('last_name')
+            new_user = User(first_name=form.data['first_name'], last_name=form.data['last_name'])
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        return render_template('users/new.html', form=form)
     return render_template('users/index.html', users=User.query.all())
 
 @app.route('/users/new')
 def new():
-    return render_template('users/new.html')
+    form = UserForm()
+    return render_template('users/new.html', form=form)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):

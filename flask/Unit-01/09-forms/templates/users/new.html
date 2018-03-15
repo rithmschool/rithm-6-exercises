@@ -2,14 +2,26 @@
 <div class="container w-50 p-3">
     <h2>Create a New Profile:</h2>
     <form action="{{url_for('index')}}" method="POST">
-        <div class="form-group">
-            <label for="first_name">First name:</label>
+        <!-- <div class="form-group"> -->
+        {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+        <div>
+            {{field.label}} {% field %}
+            <span>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+            {% endif %}
+            </span>
+        </div>
+        {% endfor %}
+        <!-- <label for="first_name">First name:</label>
             <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
         </div>
         <div class="form-group">
             <label for="last_name">Last name:</label>
             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name">
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
     <br>
