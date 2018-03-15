@@ -19,7 +19,7 @@ def index():
                 last_name=form.data['last_name'])
             db.session.add(new_user)
             db.session.commit()
-            flash('User Created')
+            flash('User Created!')
             return redirect(url_for('users.index'))
         return render_template('users/new.html', form=form)
     return render_template('users/index.html', users=User.query.all())
