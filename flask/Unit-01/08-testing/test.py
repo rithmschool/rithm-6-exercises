@@ -3,6 +3,7 @@ from flask_testing import TestCase
 import unittest
 
 class UserMessageTestCase(TestCase):
+# HOUSE KEEPING TESTING FUNCTIONS
     def create_app(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db'
         return app
@@ -24,23 +25,61 @@ class UserMessageTestCase(TestCase):
     def tearDown(self):
         db.drop_all()
 
-    def test_create_user(self):
+# USER TESTS
+
+    def test_create_read_user(self):
         response = self.client.get('/users', content_type='html/text')
         self.assertLess(response.status_code, 400)
         self.assertIn(b'John Doe', response.data)
         self.assertIn(b'Jane Doe_1', response.data)
         self.assertIn(b'test', response.data)
 
-# USER TESTS
+    def test_update_user(self):
+        response_1 = self.client.get('/users/1/edit')
+        self.assertEqual(response_1.status_code, 200)
+        self.assertIn(b'John', response_1.data)
+        self.assertIn(b'Doe', response_1.data)
 
-    def test_delete_user(self):
+        response_2 = self.client.patch('/users/1', data = dict( first_name = 'NoFirstName', last_name = 'NoLastName', image_url = "NewUrl"), follow_redirects=True)
+        self.assertEqual(response_2.status_code, 200)
+        self.assertIn(b'John', response_2.data)
+        self.assertIn(b'Doe', response_2.data)
+
+    def test_delete(self):
         response = self.client.delete('/users/1', follow_redirects=True)
-        from IPython import embed; embed()
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'John', response.data)
         self.assertIn(b'Doe', response.data)
 
+# MESSAGE TESTS
 
+    def test_create_read_message(self):
+        response_1 = self.client.get('/users/1/messages', content_type='html/text')
+        self.assertEqual(response_1.status_code, 200)
+        self.assertIn(b'Test message 11', response_1.data)
+        self.assertIn(b'Test message 12', response_1.data)
+        response_2 = self.client.get('/users/2/messages', content_type='html/text')
+        self.assertEqual(response_2.status_code, 200)
+        self.assertIn(b'Test message 2', response_2.data)
+
+    def test_update_message(self):
+        response_1 = self.client.get('/users/1/messages/1/edit')
+        self.assertEqual(response_1.status_code, 200)
+        self.assertIn(b'Test message 11', response_1.data)
+
+        response_2 = self.client.patch('/users/1/messages/2', data = dict( content = 'NewContent', user_id = 1), follow_redirects=True)
+        self.assertEqual(response_2.status_code, 200)
+        self.assertIn(b'Test message 12', response_2.data)
+
+    def test_delete_message(self):
+        response_1 = self.client.delete('/users/1/messages/2', follow_redirects=True)
+        self.assertEqual(response_1.status_code, 200)
+        self.assertIn(b'Test message 12', response_1.data)
+        
+        self.client.delete('/users/3', follow_redirects=True)
+        response_2 = self.client.get('/users/3/messages/4', follow_redirects=True)
+        self.assertEqual(response_2.status_code, 404)
+        self.assertNotIn(b'Test message 3', response_2.data)    
 
 # 404 TESTS
 
