@@ -10,6 +10,8 @@
   {% for message in user.messages %}
   <li>
     Content: {{ message.content }} ( Message id: {{ message.id }} )
+    <a href="{{url_for('msg_edit', id=user.id, msg_id=message.id)}}">Edit message</a>
+    <a href="{{url_for('msg_show', id=user.id, msg_id=message.id)}}">Show message</a>
   </li>
   {% endfor %}
 </ol>
