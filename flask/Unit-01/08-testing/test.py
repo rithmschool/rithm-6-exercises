@@ -40,16 +40,20 @@ class UserMessageTestCase(TestCase):
         self.assertIn(b'John', response_1.data)
         self.assertIn(b'Doe', response_1.data)
 
-        response_2 = self.client.patch('/users/1', data = dict( first_name = 'NoFirstName', last_name = 'NoLastName', image_url = "NewUrl"), follow_redirects=True)
-        self.assertEqual(response_2.status_code, 200)
-        self.assertIn(b'John', response_2.data)
-        self.assertIn(b'Doe', response_2.data)
+        response_2 = self.client.patch('/users/1?_method=PATCH', data = dict( first_name = 'NoFirstName', last_name = 'NoLastName', image_url = "NewUrl"), follow_redirects=False)
+        self.assertEqual(response_2.status_code, 302)
+        
+        response_3 = self.client.patch('/users/1?_method=PATCH', data = dict( first_name = 'NoFirstName', last_name = 'NoLastName', image_url = "NewUrl"), follow_redirects=True)
+        self.assertEqual(response_3.status_code, 200)
+        self.assertIn(b'NoFirstName', response_3.data)
+        self.assertIn(b'NoLastName', response_3.data)
+        self.assertIn(b'NewUrl', response_3.data)
 
     def test_delete(self):
-        response = self.client.delete('/users/1', follow_redirects=True)
+        response = self.client.delete('/users/1?_method=DELETE', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'John', response.data)
-        self.assertIn(b'Doe', response.data)
+        self.assertIn(b'Jane Doe_1', response.data)
+        self.assertIn(b'Jane Doe_2', response.data)
 
 # MESSAGE TESTS
 
