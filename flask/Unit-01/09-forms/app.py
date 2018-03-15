@@ -106,24 +106,29 @@ def show(id):
 def msg_index(id):
     user = User.query.get(id)
     if request.method == 'POST':
-        content = request.form['content']
-        msg = Message(content, id)
-        db.session.add(msg)
-        db.session.commit()
-        return redirect(url_for('msg_index', id=id))
+        form = MessageForm(request.form)
+        if form.validate():
+            content = form.data['content']
+            msg = Message(content, id)
+            db.session.add(msg)
+            db.session.commit()
+            return redirect(url_for('msg_index', id=id))
+        return render_template('messages/new.htm.', user=user, form=form)
     return render_template('messages/index.html', user=user)
 
 
 @app.route('/users/<int:id>/messages/new')
 def msg_new(id):
     user = User.query.get(id)
-    return render_template('messages/new.html', user=user)
+    form = MessageForm()
+    return render_template('messages/new.html', user=user, form=form)
 
 
 @app.route('/users/<int:id>/messages/<int:msg_id>/edit')
 def msg_edit(id, msg_id):
     message = Message.query.get(msg_id)
-    return render_template('messages/edit.html', message=message)
+    form = MessageForm(obj=message)
+    return render_template('messages/edit.html', message=message, form=form)
 
 
 @app.route(
@@ -132,12 +137,17 @@ def msg_edit(id, msg_id):
 def msg_show(id, msg_id):
     message = Message.query.get(msg_id)
     if request.method == b"PATCH":
-        message.content = request.form['content']
+        form = MessageForm(request.form)
+        message.content = form.data['content']
         db.session.add(message)
         db.session.commit()
         return redirect(url_for('msg_index', id=id))
     if request.method == b"DELETE":
-        db.session.delete(message)
-        db.session.commit()
-        return redirect(url_for('msg_index', id=id))
-    return render_template('messages/show.html', message=message)
+        delete_form = DeleteForm(request.form)
+        if delete_form.validate():
+            db.session.delete(message)
+            db.session.commit()
+            return redirect(url_for('msg_index', id=id))
+    delete_form = DeleteForm()
+    return render_template(
+        'messages/show.html', message=message, delete_form=delete_form)
