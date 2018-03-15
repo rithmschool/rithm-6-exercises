@@ -2,10 +2,16 @@
 <h2>All Users</h2>
 <a href="{{ url_for('new') }}">Add a User!</a>
 {% for u in users %}
-<div class="post-it">
-  <h4>{{ u.first_name }} {{ u.last_name }}</h4>
+<div class="card" style="width: 18rem;">
   {% if u.image_url %}
-  <img src="{{ u.image_url }}" alt="{{ u.first_name }} {{ u.last_name }}'s profile picture"> {% endif %}
-  <a href="{{ url_for('m_index', u_id=u.id) }}">View User</a>
+  <img class="card-img-top" src="{{ u.image_url }}" alt="{{ u.first_name }} {{ u.last_name }}'s profile picture"> {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ u.first_name }} {{ u.last_name }}</h5>
+    {% if u.messages[-1] %}
+    <p class="card-text"> {{ u.messages[-1].content }}</p>
+    {% endif %}
+    <a href="{{ url_for('m_index', u_id=u.id) }}">
+      View {{ u.first_name }}'s Messages</a>
+  </div>
 </div>
 {% endfor %} {% endblock %}
