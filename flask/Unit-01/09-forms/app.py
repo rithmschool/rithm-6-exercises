@@ -3,11 +3,12 @@ from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from forms import UserForm, MessageForm, DeleteForm
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/07-sql-alchemy'
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = 'this is an insecure key'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
