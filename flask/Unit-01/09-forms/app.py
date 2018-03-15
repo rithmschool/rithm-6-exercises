@@ -113,7 +113,7 @@ def msg_index(id):
             db.session.add(msg)
             db.session.commit()
             return redirect(url_for('msg_index', id=id))
-        return render_template('messages/new.htm.', user=user, form=form)
+        return render_template('messages/new.html', user=user, form=form)
     return render_template('messages/index.html', user=user)
 
 
