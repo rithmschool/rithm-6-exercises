@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: e15ac758d720
-Revises: 
+Revises:
 Create Date: 2018-03-13 18:37:30.343856
 
 """
