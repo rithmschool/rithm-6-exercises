@@ -1,118 +1,58 @@
-from app import app,db, User, Message
+from app import app, db, User, Message
 from flask_testing import TestCase
 import unittest
 
-class BaseTestCase(TestCase):
+class UserMessageTestCase(TestCase):
     def create_app(self):
-        app.config['WTF_CSRF_ENABLED'] = False
-        app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///testing.db'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db'
         return app
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
-        user1 = User("Elie", "Schoppik")
-        user2 = User("Tim", "Garcia")
-        user3 = User("Matt", "Lane")
+        user1 = User(first_name = 'John', last_name = 'Doe', image_url = 'test')
+        user2 = User(first_name = 'Jane', last_name = 'Doe_1', image_url = 'test')
+        user3 = User(first_name = 'Jane', last_name = 'Doe_2', image_url = 'test')
         db.session.add_all([user1, user2, user3])
-        message1 = Message("Hello Elie!!", 1)
-        message2 = Message("Goodbye Elie!!", 1)
-        message3 = Message("Hello Tim!!", 2)
-        message4 = Message("Goodbye Tim!!", 2)
-        db.session.add_all([message1, message2, message3,message4])
+        message1 = Message(content = 'Test message 11', user_id = 1)
+        message2 = Message(content = 'Test message 12', user_id = 1)
+        message3 = Message(content = 'Test message 2', user_id = 2)
+        message4 = Message(content = 'Test message 3', user_id = 3)
+        db.session.add_all([message1, message2, message3])
         db.session.commit()
 
     def tearDown(self):
         db.drop_all()
 
-    def test_users_index(self):
-        response = self.client.get('/users', content_type='html/text', follow_redirects=True)
+    def test_create_user(self):
+        response = self.client.get('/users', content_type='html/text')
         self.assertLess(response.status_code, 400)
-        self.assertIn(b'Elie Schoppik', response.data)
-        self.assertIn(b'Tim Garcia', response.data)
-        self.assertIn(b'Matt Lane', response.data)
+        self.assertIn(b'John Doe', response.data)
+        self.assertIn(b'Jane Doe_1', response.data)
+        self.assertIn(b'test', response.data)
 
-    def test_users_show(self):
-        response = self.client.get('/users/1')
+# USER TESTS
+
+    def test_delete_user(self):
+        response = self.client.delete('/users/1', follow_redirects=True)
+        from IPython import embed; embed()
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b'John', response.data)
+        self.assertIn(b'Doe', response.data)
 
-    def test_users_create(self):
-        response = self.client.post(
-            '/users',
-            data=dict(first_name="Awesome", last_name="Student"),
-            follow_redirects=True
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Awesome', response.data)
 
-    def test_users_edit(self):
-        response = self.client.get(
-            '/users/1/edit'
-        )
-        self.assertIn(b'Elie', response.data)
-        self.assertIn(b'Schoppik', response.data)
 
-    def test_users_update(self):
-        response = self.client.patch(
-            '/users/1?_method=PATCH',
-            data=dict(first_name="updated", last_name="information"),
-            follow_redirects=True
-        )
-        self.assertIn(b'updated information', response.data)
-        self.assertNotIn(b'Elie Schoppik', response.data)
+# 404 TESTS
 
-    def test_users_delete(self):
-        response = self.client.delete(
-            '/users/1?_method=DELETE',
-            follow_redirects=True
-        )
-        self.assertNotIn(b'Elie Schoppik', response.data)
-
-    #### TESTS FOR MESSAGES ####
-
-    def test_messages_index(self):
-        response = self.client.get('/users/1/messages', content_type='html/text', follow_redirects=True)
-        self.assertLess(response.status_code, 400)
-        self.assertIn(b'Hello Elie!!', response.data)
-        self.assertIn(b'Goodbye Elie!!', response.data)
-
-    def test_messages_show(self):
-        response = self.client.get('/users/1/messages/1')
-        self.assertEqual(response.status_code, 200)
-
-    def test_messages_create(self):
-        response = self.client.post(
-            '/users/1/messages',
-            data=dict(content="Hi Matt!!", user_id=3),
-            follow_redirects=True
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Hi Matt!!', response.data)
-
-    def test_messages_edit(self):
-        response = self.client.get(
-            '/users/1/messages/1/edit'
-        )
-        self.assertIn(b'Hello Elie!!', response.data)
-
-        response = self.client.get(
-            '/users/2/messages/4/edit'
-        )
-        self.assertIn(b'Goodbye Tim!!', response.data)
-
-    def test_messages_update(self):
-        response = self.client.patch(
-            '/users/1/messages/1?_method=PATCH',
-            data=dict(content="Welcome Back Elie!"),
-            follow_redirects=True
-        )
-        self.assertIn(b'Welcome Back Elie!', response.data)
-
-    def test_messages_delete(self):
-        response = self.client.delete(
-            '/users/1/messages/1?_method=DELETE',
-            follow_redirects=True
-        )
-        self.assertNotIn(b'Hello Elie!!', response.data)
+    def test_404(self):
+        response_1 = self.client.get('/use')
+        self.assertEqual(response_1.status_code, 404)
+        response_2 = self.client.get('/users/4')
+        self.assertEqual(response_2.status_code, 404)
+        response_3 = self.client.get('/users/4/mess/')
+        self.assertEqual(response_3.status_code, 404)
+        response_4 = self.client.get('/users/4/messages/5')
+        self.assertEqual(response_4.status_code, 404)
 
 
 if __name__ == '__main__':
