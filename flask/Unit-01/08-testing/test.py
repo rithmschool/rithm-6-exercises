@@ -62,6 +62,7 @@ class UserMessageTestCase(TestCase):
         self.assertEqual(response_1.status_code, 200)
         self.assertIn(b'Test message 11', response_1.data)
         self.assertIn(b'Test message 12', response_1.data)
+        
         response_2 = self.client.get('/users/2/messages', content_type='html/text')
         self.assertEqual(response_2.status_code, 200)
         self.assertIn(b'Test message 2', response_2.data)
@@ -71,14 +72,15 @@ class UserMessageTestCase(TestCase):
         self.assertEqual(response_1.status_code, 200)
         self.assertIn(b'Test message 11', response_1.data)
 
-        response_2 = self.client.patch('/users/1/messages/2', data = dict( content = 'NewContent', user_id = 1), follow_redirects=True)
+        response_2 = self.client.patch('/users/1/messages/2?_method=PATCH', data = dict( content = 'NewContent', user_id = 1), follow_redirects=True)
         self.assertEqual(response_2.status_code, 200)
-        self.assertIn(b'Test message 12', response_2.data)
+        self.assertIn(b'NewContent', response_2.data)
 
     def test_delete_message(self):
-        response_1 = self.client.delete('/users/1/messages/2', follow_redirects=True)
+        response_1 = self.client.delete('/users/1/messages/2?_method=DELETE', follow_redirects=True)
         self.assertEqual(response_1.status_code, 200)
-        self.assertIn(b'Test message 12', response_1.data)
+        self.assertNotIn(b'Test message 12', response_1.data)
+        self.assertIn(b'Test message 11', response_1.data)
         
         self.client.delete('/users/3', follow_redirects=True)
         response_2 = self.client.get('/users/3/messages/4', follow_redirects=True)
