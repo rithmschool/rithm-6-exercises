@@ -85,10 +85,12 @@ def show(id):
 def index_message(id):
     if request.method == "POST":
         content = request.form.get('content')
-        new_message = Message(content=content, user_id=id)
-        db.session.add(new_message)
-        db.session.commit()
-        return redirect(url_for('index_message', id=id))
+        if form.validate():
+            new_message = Message(content=content, user_id=id)
+            db.session.add(new_message)
+            db.session.commit()
+            return redirect(url_for('index_message', id=id))
+        return render_template('messages/index.html', content=content)
     return render_template('messages/index.html', user=User.query.get_or_404(id))
 
 @app.route('/users/<int:id>/messages/new')
