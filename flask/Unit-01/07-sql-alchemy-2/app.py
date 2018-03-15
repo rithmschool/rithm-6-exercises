@@ -97,15 +97,15 @@ def destroy(id):
 
 
 @app.route('/users/<int:user_id>/messages')
-def message(user_id):
+def message_index(user_id):
     user = User.query.get(user_id)
-    return render_template('users/index.html', user=user)
+    return render_template('messages/index.html', user=user)
 
 
 @app.route('/users/<int:user_id>/messages/new')
 def new_message(user_id):
     user = User.query.get(user_id)
-    return render_template('users/new.html', user=user)
+    return render_template('messages/new.html', user=user)
 
 # @app.route('/users/<int:user_id>/messages/<int:id>')
 # def show_message(user_id, id):

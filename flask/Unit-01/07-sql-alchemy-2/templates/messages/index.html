@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container p-3 mb-2 bg-secondary text-white">
-<a href="{{url_for('new')}}">Add a new user</a>
 
-{% for user in users %}
+<h1> These are the messages for the person, {{user.first_name}} {{user.last_name}} </h1>
+
+
+<div class="container p-3 mb-2 bg-secondary text-white">
+    <a href="{{url_for('new_message', user_id=user.id)}}">Add a new message</a>
+
+{% for message in messages %}
     <p>
-        {{user.first_name}} {{user.last_name}}
-        <br>
-        <a href="{{url_for('show', id=user.id)}}">See more about {{user.first_name}}</a> |
-        <a href="{{url_for('edit', id=user.id)}}">Edit a user</a>
+        {{message.user_id}} {{message.content}}
     </p>
 {% endfor %}
 </div>
