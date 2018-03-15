@@ -1,4 +1,4 @@
-from flask import request, url_for, render_template, redirect, Blueprint
+from flask import request, url_for, render_template, redirect, flash, Blueprint
 from project.models import Message, User
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
@@ -16,6 +16,7 @@ def index(user_id):
             new_message = Message(content=content, user_id=user_id)
             db.session.add(new_message)
             db.session.commit()
+            flash("SUCCESS! You Have Created A New Message")
             return redirect(url_for('messages.index', user_id=user_id))
         else:
             return render_template(
@@ -53,6 +54,7 @@ def show(user_id, id):
             found_message.content = form.data['content']
             db.session.add(found_message)
             db.session.commit()
+            flash("SUCCESS! You've Updated Your Message")
             return redirect(url_for('messages.index', user_id=user_id))
         else:
             return render_template(
@@ -65,6 +67,7 @@ def show(user_id, id):
         if delete_form.validate():
             db.session.delete(found_message)
             db.session.commit()
+            flash("Message Deleted")
             return redirect(url_for('messages.index', user_id=user_id))
     return render_template(
         'messages/show.html',

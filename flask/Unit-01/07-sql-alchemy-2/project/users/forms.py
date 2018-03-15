@@ -8,7 +8,7 @@ class UserForm(FlaskForm):
     last_name = StringField('Please Enter your Last Name',
                             [validators.DataRequired()])
     image_url = StringField(
-        'If You Want A User Picture Please Enter A Link Here',
+        'Add a Picture to your Profile By Entering A Link Here',
         [validators.URL(message='URL Must Be Valid')])
 
 
