@@ -7,6 +7,10 @@
     <input type="submit" value="Edit Message">
 </form>
 
-<a method = "DELETE" href="{{url_for('message_edit',id = user.id, message_id = message.id)}}">Delete this Message</a>
+
+<form method="POST" action="{{url_for('message_edit',message_id = message.id, id=user.id)}}?_method=DELETE">
+    <input type="submit" value="DELETE THIS MESSAGE">
+</form>
+
 
 {% endblock %}

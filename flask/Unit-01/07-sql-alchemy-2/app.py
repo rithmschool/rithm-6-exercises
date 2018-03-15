@@ -74,19 +74,17 @@ def users_edit(id):
 
 
 
-@app.route("/users/<int:id>/messages", methods = ["GET", "POST", "PATCH"])
+@app.route("/users/<int:id>/messages", methods = ["GET", "POST"])
 def messages_index(id):
     found_user = User.query.get(id)
-    if request.method == b"POST":
-        new_message = Message(content = request.form.get("content"),user_id = id)
+
+    if request.method == "POST":
+        new_message = Message(content = request.form["content"],user_id = id)
+        from IPython import embed; embed()
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("messages_index", id = id))
-    
-    
-    
-    messages_list = found_user.messages.all()
-    return render_template("messages/index.html", messages_list = messages_list, user = found_user)
+    return render_template("messages/index.html", user = found_user)
 
 @app.route("/users/<int:id>/messages/new")
 def messages_new(id):
@@ -106,7 +104,7 @@ def message_edit(id,message_id):
     if request.method == b"DELETE":
         db.session.delete(found_message)
         db.session.commit()
-        return redirect(url_for('message_index', id = found_user.id))
+        return redirect(url_for('messages_index', id = found_user.id))
     elif request.method == b"PATCH":
         found_message.content = request.form["content"] 
         db.session.add(found_message)
