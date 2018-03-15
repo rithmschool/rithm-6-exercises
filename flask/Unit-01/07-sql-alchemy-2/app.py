@@ -2,10 +2,15 @@ from flask import Flask, request, redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
 app = Flask(__name__)
-app.config[
-    'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/alekinixII"
+if os.environ.get("ENV") == 'production':
+    app.config[
+        'SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+else:
+    app.config[
+        'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/alekinixII"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 modus = Modus(app)
@@ -97,22 +102,18 @@ def index_message(id):
 def new_message(id):
     return render_template('./messages/message_new.html', user_id=id)
 
-@app.route('/messages/<int:message_id>', methods=["GET", "PATCH", "DELETE"])
+@app.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
 def show_message(message_id):
     target_message = Message.query.get(message_id)
     if request.method == b'PATCH':
-        # from IPython import embed; embed()
-        # target_message.first_name = request.form.get('first_name')
-        # target_message.last_name = request.form.get('last_name')
-        # db.session.add(target_message)
-        # db.session.commit()
-        # return redirect(url_for('show', id=mes))
-        return redirect(url_for('index'))
+        target_message.content = request.form.get('content')
+        db.session.add(target_message)
+        db.session.commit()
+        return redirect(url_for('show', id=target_message.user_id))
     if request.method == b'DELETE':
-        # db.session.delete(target_message)
-        # db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('/messages/show.html', message=target_message)
+        db.session.delete(target_message)
+        db.session.commit()
+        return redirect(url_for('show', id=target_message.user_id))
 
 @app.route('/messages/<int:message_id>/edit')
 def edit_message(message_id):
