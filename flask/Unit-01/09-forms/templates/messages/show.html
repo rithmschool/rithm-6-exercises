@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    message
+ {% endblock %}
+
+{% block content %}
+    <h2>this is {{ user.first_name }}'s message</h2>
+    <h5 class="mt-4">{{ message.content }}</h5>
+    <a href="{{url_for('edit_messages', id = user.id, message_id = message.id)}}">edit or delete message</a>
+    <hr>
+    <a href="{{url_for('index_messages', id = user.id)}}">{{ user.first_name }}'s messages</a>
+    |
+    <a href="{{url_for('index')}}">home</a>
+ {% endblock %}

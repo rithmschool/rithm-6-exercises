@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    update message
+ {% endblock %}
+
+ {% block content %}
+    <h2>update your message</h2>
+    <form action="{{url_for('show_messages', id = id, message_id = message.id)}}?_method=PATCH" method="POST">
+        {{ message_form.hidden_tag() }}
+
+        {% for field in message_form if field.widget.input_type != 'hidden' %}
+            <div class="form-group">
+                {{ field.label }}
+                {{ field (class_="form-control") }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                {% endif %}
+                {% if not field.errors %}
+                <small class="form-text text-muted">You can post a maximum 164 character message</small>
+                {% endif %}
+                
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit changes!</button>
+    </form>
+    <div class="text-right my-2">
+        <form action="{{url_for('show_messages', id = id, message_id = message.id)}}?_method=DELETE" method="POST" class="form-group">
+            {{ delete_form.hidden_tag() }}
+            <button type="submit" class="btn btn-secondary btn-lg">
+                    delete message
+            </button>        
+        </form>
+    </div>
+  {% endblock %}
