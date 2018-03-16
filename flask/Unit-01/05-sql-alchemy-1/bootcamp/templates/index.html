@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block title %} Snack List {% endblock %} {% block content %}
+<h1>Here is a delicous snack list</h1>
+<br> {% for snack in snacks%}
+<ul>
+  <li>
+    <b>
+      <a href="{{url_for('show', id=snack.id)}}">{{snack.name}}</a>
+    </b> : {{snack.kind}} {{snack.name}} {{snack.kind}}
+
+    <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+      <input type="submit" value='Upvote'>
+    </form>
+    <form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+      <input type="submit" value='Downvote'>
+    </form>
+
+    <form action="{{url_for('show', id=snack.id)}}?_method=DELETE" method="POST">
+      <input type="submit" value='X'>
+    </form>
+  </li>
+</ul> {% endfor %}
+<br>
+
+<a href="{{url_for('new')}}" class="button">Create New Snack</a>
+
+{% endblock %}
