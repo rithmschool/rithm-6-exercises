@@ -15,8 +15,10 @@ def index():
         form = UserForm(request.form)
         if form.validate():
             new_user = User(
-                first_name=form.data['first_name'],
-                last_name=form.data['last_name'])
+                first_name=form.first_name.data,
+                last_name=form.last_name.data,
+                about_me=form.about_me.data,
+                img_url=form.img_url.data)
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!')

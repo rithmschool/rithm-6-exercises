@@ -7,7 +7,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
-    img_url = db.Column(db.Text)
+    img_url = db.Column(
+        db.Text,
+        default=
+        "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+    )
+    about_me = db.Column(db.Text, default="lorem ipsum something or another")
     messages = db.relationship('Message', backref='user', lazy='dynamic')
 
 

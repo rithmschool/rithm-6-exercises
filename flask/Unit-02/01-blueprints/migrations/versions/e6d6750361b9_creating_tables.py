@@ -1,15 +1,15 @@
-"""adding users and messages tables
+"""creating tables
 
-Revision ID: 05fe03737915
+Revision ID: e6d6750361b9
 Revises:
-Create Date: 2018-03-15 15:59:15.375095
+Create Date: 2018-03-15 21:06:35.771637
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '05fe03737915'
+revision = 'e6d6750361b9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -20,6 +20,7 @@ def upgrade():
     op.create_table('users', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('first_name', sa.Text(), nullable=True),
                     sa.Column('last_name', sa.Text(), nullable=True),
+                    sa.Column('img_url', sa.Text(), nullable=True),
                     sa.PrimaryKeyConstraint('id'))
     op.create_table('messages', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('content', sa.Text(), nullable=True),
