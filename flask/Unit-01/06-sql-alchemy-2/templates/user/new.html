@@ -1,0 +1,19 @@
+{% extends 'user/base.html' %} {% block content %}
+
+<form action="{{url_for('create')}}" method="POST">
+  <!-- <label for="">First Name</label>
+  <input type="text" name="first_name" required>
+  <label for="">Last Name</label>
+  <input type="text" name="last_name"> -->
+  {{ form.hidden_tag()}} {% for field in form if field.widget.input_type != 'hidden'%}
+  <p>
+    {{field.label}} {{field}}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {%endfor%}
+  <input type="submit" value="Create A New User" required>
+</form>
+
+{%endblock%}
