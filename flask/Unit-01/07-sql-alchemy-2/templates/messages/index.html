@@ -4,7 +4,7 @@
 <ul>
     {% for message in user.messages %}
     <li>
-        <a href="{{url_for('messages_show', user_id=user.id, id=message.id)}}">{{message.content}}</a>
+        <a href="{{url_for('messages_show', user_id=user.id, id=message.id, delete_form=delete_form)}}">{{message.content}}</a>
     </li>
     {% endfor %}
 </ul>

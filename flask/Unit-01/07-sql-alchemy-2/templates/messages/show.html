@@ -8,6 +8,7 @@
 </li>
 
 <form method="POST" action="{{url_for('messages_show', user_id=message.user_id, id=message.id)}}?_method=DELETE">
+    {{delete_form.hidden_tag()}}
     <input type="submit" value="X">
 </form>
 
