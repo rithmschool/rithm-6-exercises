@@ -4,9 +4,9 @@
   <br>
   Content: {{ message.content }}
   <br>
-  <a href="{{url_for('edit_message', id=user.id, message_id=message.id)}}">Edit {{ message.content }}</a>
+  <a href="{{url_for('messages.edit', id=user.id, message_id=message.id)}}">Edit {{ message.content }}</a>
 </p>
 <h1>Return back to message
-  <a href="{{url_for('index_messages', id=user.id)}}">here</a>
+  <a href="{{url_for('messages.index', id=user.id)}}">here</a>
 </h1>
 {% endblock %}
