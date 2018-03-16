@@ -28,7 +28,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
-    messages = db.relationship('Message', backref='user', lazy='dynamic')
+    messages = db.relationship('Message', backref=('user', cascade="all,delete") lazy='dynamic')
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
@@ -83,7 +83,7 @@ def show(id):
             db.session.commit()
             return redirect(url_for('index'))
         else:
-            return render_template('./users/edit.html', form=form)
+            return render_template('./users/edit.html', user=target_user, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
