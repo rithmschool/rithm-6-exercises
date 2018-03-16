@@ -28,7 +28,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
-    messages = db.relationship('Message', backref=('user', cascade="all,delete") lazy='dynamic')
+    messages = db.relationship('Message', backref='user', cascade="all,delete", lazy='dynamic')
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
