@@ -1,13 +1,10 @@
-from flask import redirect, render_template, request, url_for, flask, Blueprint, flash
+from flask import redirect, render_template, request, url_for, Blueprint, flash
 from project.messages.forms import DeleteForm, MessageForm
 from project.models import Message, User
 from project import db
 
 messages_blueprint = Blueprint(
-    'messages',
-    __name__,
-    template_folder='templates'
-)
+    'messages', __name__, template_folder='templates')
 
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
@@ -44,8 +41,7 @@ def edit(message_id, user_id):
 
 
 @messages_blueprint.route(
-    '//<int:message_id>',
-    methods=['GET', 'PATCH', 'DELETE'])
+    '//<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(user_id, message_id):
     found_message = Message.query.get_or_404(message_id)
     if request.method == b'PATCH':
@@ -54,7 +50,7 @@ def show(user_id, message_id):
             found_message.content = form.content.data
             db.session.add(found_message)
             db.session.commit()
-             flash('Message updated!')
+            flash('Message updated!')
             return redirect(url_for('messages.index', user_id=user_id))
         return render_template(
             'messages/edit.html', message=found_message, form=form)
@@ -63,6 +59,6 @@ def show(user_id, message_id):
         if delete_form.validate():
             db.session.delete(found_message)
             db.session.commit()
-             flash('Message deleteed!')
+            flash('Message deleteed!')
             return redirect(url_for('messages.index', user_id=user_id))
     return redirect(url_for('messages.index', user_id=user_id))

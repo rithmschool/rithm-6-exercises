@@ -1,6 +1,7 @@
-from flask import redirect, render_template, request, url_for, flask, Blueprint, flash
+from flask import redirect, render_template, request, url_for, Blueprint, flash
 from project.users.forms import UserForm, DeleteForm
-from projectmodels import User
+from project.models import Message, User
+
 from project import db
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
@@ -17,7 +18,7 @@ def index():
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
         return render_template('users/new.html', form=form)
     return render_template('users/index.html', users=User.query.all())
 
@@ -47,7 +48,7 @@ def show(user_id):
             db.session.add(found_user)
             db.session.commit()
             flash('User Updated!')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
         return render_template('users/edit.html', user=found_user, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
@@ -55,6 +56,6 @@ def show(user_id):
             db.session.delete(found_user)
             db.session.commit()
             flash('User Deleted!')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
     return render_template(
         'users/show.html', user=found_user, delete_form=delete_form)

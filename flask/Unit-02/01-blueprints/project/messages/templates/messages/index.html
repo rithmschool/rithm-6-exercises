@@ -7,14 +7,14 @@
 <br>
 Content: {{ message.content }}
 <br>
-<a href="{{url_for('message.edit', message_id=message.id, user_id=user.id)}}">edit</a>
+<a href="{{url_for('messages.edit', message_id=message.id, user_id=user.id)}}">edit</a>
 <br>
-<form action="{{url_for('message.show', message_id=message.id, user_id=user.id)}}?_method=DELETE" method="POST">
+<form action="{{url_for('messages.show', message_id=message.id, user_id=user.id)}}?_method=DELETE" method="POST">
   {{ delete_form.hidden_tag() }}
   <input type="submit" value="Delete">
 </form>
 <br>
 {% endfor %}
 <br>
-<a href="{{url_for('message.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
+<a href="{{url_for('messages.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
 {% endblock %}
