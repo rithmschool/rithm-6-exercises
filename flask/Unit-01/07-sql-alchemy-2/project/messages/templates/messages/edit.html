@@ -2,8 +2,11 @@
 
 {% block content %}
 
-<section>
-    <h1>Update {{user.first_name}}'s Messages!</h1>
+<section class="container">
+    <div "div__center mx-auto">
+      <h1 class="header__center">Update {{user.first_name}}'s Messages!</h1>
+      <div class="borderb__head"></div>
+    </div>
     <div>
       <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=PATCH" method="POST">
           {{ form.hidden_tag() }}
@@ -11,7 +14,7 @@
 
           <div>
             {{ field.label }}
-            {{ field }}
+            {{ field(class_="form__input") }}
             <span>
               {% if field.errors %}
                 {% for error in field.errors %}
@@ -32,7 +35,7 @@
       <h3>Want to Delete The User?</h3>
       <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE" method="POST">
         {{ delete_form.hidden_tag() }}
-        <button type="submit"><i class="fas fa-trash-alt"></i></button>
+        <button type="submit">Delete &nbsp;<i class="fas fa-trash-alt"></i></button>
       </form>
     </div>
 

@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section>
-  <h1>Add a Message to {{user.first_name}}'s Profile!</h1>
+<section class="container">
+  <div "div__center mx-auto">
+    <h1 class="header__center">Add a Message to {{user.first_name}}'s Profile!</h1>
+    <div class="borderb__head"></div>
+  </div>
   <div>
     <form action="{{url_for('messages.index', user_id=user.id)}}" method="POST">
         {{ form.hidden_tag() }}
@@ -10,7 +13,7 @@
 
         <div>
           {{ field.label }}
-          {{ field }}
+          {{ field(class_="form__input") }}
           <span>
             {% if field.errors %}
               {% for error in field.errors %}
