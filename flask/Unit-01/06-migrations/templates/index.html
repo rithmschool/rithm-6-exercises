@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="{{url_for('create')}}" method="POST">
+  <label for=" ">URL</label>
+  <input type="text" name="url" required>
+  <label for=" ">caption</label>
+  <input type="text" name="caption">
+  <label for=" ">location</label>
+  <input type="text" name="location">
+  <label for=" ">beauty</label>
+  <input type="text" name="beauty">
+  <input type="submit" value="create new sunset">
+
+</form>
+
+
+<div>
+  {%for sunset in sunsets%}
+  <img src={{sunset.url}} alt=" ">
+  <p>{{sunset.caption}}</p>
+  <p>{{sunset.location}}</p>
+  {%endfor%}
+</div>
+
+{%endblock%}
