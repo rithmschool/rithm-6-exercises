@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    users
+ {% endblock %}
+
+{% block content %} 
+    <h2>these are the users</h2>
+    <ul class="list-group m-4">
+        {% for user in users %}
+        <li class="list-group-item">
+            {% if user.image_url %}
+                <img src="{{ user.image_url }}" class="small-avatar" alt="avatar">
+            {% endif %}
+            <a href="{{url_for('show', id = user.id)}}">
+                {{ user.first_name }} {{ user.last_name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{url_for('new')}}">add a new user</a>
+ {% endblock %}
