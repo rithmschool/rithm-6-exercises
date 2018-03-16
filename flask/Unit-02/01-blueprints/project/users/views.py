@@ -1,4 +1,3 @@
-# CREATING BLUEPRINT
 from flask import Blueprint, redirect, render_template, request, url_for
 from project.users.models import User
 from project.users.forms import UserForm, DeleteForm
