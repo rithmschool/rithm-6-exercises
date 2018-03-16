@@ -70,13 +70,18 @@ def show(id):
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
-    return render_template('users/edit.html', user=User.query.get(id))
+    # this piece of code looks into the database and returns the user
+    found_user = User.query.get(id)
+    # this code provides the user to the NewUser instance so it can be displayed
+    user_form = NewUser(obj=found_user)
+    return render_template('users/edit.html', user=User.query.get(id), form=user_form)
 
 
 @app.route('/users', methods=['POST'])
 def create():
     user_form = NewUser(request.form)
     if user_form.validate():
+        form = NewUser(request.form)
         new_user = User(request.form.get('first_name'),
                         request.form.get('last_name'))
         db.session.add(new_user)
@@ -88,12 +93,16 @@ def create():
 
 @app.route('/users/<int:id>', methods=['PATCH'])
 def update(id):
-    user = User.query.get(id)
-    user.first_name = request.form.get('first_name')
-    user.last_name = request.form.get('last_name')
-    db.session.add(user)
-    db.session.commit()
-    return redirect(url_for('index'))
+    found_user = User.query.get(id)
+    form = NewUser(request.form)
+    if form.validate():
+        user = User.query.get(id)
+        user.first_name = request.form.get('first_name')
+        user.last_name = request.form.get('last_name')
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('users/edit.html', user=found_user, form=form)
 
 
 @app.route('/users/<int:id>', methods=['DELETE'])
