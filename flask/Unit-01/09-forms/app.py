@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users-messages"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
+print(os.environ.get('SECRET_KEY'))
 db = SQLAlchemy(app)
 
 modus = Modus(app)
@@ -82,8 +82,8 @@ def create():
     user_form = NewUser(request.form)
     if user_form.validate():
         form = NewUser(request.form)
-        new_user = User(request.form.get('first_name'),
-                        request.form.get('last_name'))
+        new_user = User(form.data['first_name'],
+                        form.data['last_name'])
         db.session.add(new_user)
         db.session.commit()
     else:
@@ -91,17 +91,18 @@ def create():
     return redirect(url_for('index'))
 
 
-@app.route('/users/<int:id>', methods=['PATCH'])
+@app.route('/users/<int:id>', methods=['GET', 'PATCH'])
 def update(id):
     found_user = User.query.get(id)
     form = NewUser(request.form)
-    if form.validate():
-        user = User.query.get(id)
-        user.first_name = request.form.get('first_name')
-        user.last_name = request.form.get('last_name')
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('index'))
+    if request.method == b'PATCH':
+        if form.validate():
+            found_user.first_name = form.data['first_name']
+            found_user.last_name = form.data['last_name']
+            db.session.add(found_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        return render_template('users/edit.html', user=found_user, form=form)
     return render_template('users/edit.html', user=found_user, form=form)
 
 

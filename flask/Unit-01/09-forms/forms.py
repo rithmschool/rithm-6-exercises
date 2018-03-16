@@ -8,9 +8,9 @@ from wtforms import BooleanField, StringField, PasswordField, IntegerField, vali
 class NewUser(FlaskForm):
     # value on the left must be the same as what is defined in the database.  String value on the right is the label HTML name
     first_name = StringField(
-        'first_name', [validators.DataRequired(), validators.Length(min=1)])
+        'first_name', [validators.DataRequired()])  # , validators.Length(min=1)])
     last_name = StringField(
-        'last_name', [validators.DataRequired(), validators.Length(min=6, max=35)])
+        'last_name', [validators.DataRequired()])  # , validators.Length(min=2, max=35)])
 
 
 class MessageForm(FlaskForm):
