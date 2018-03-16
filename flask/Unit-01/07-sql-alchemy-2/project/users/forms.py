@@ -8,8 +8,9 @@ class UserForm(FlaskForm):
     last_name = StringField('Please Enter your Last Name',
                             [validators.DataRequired()])
     image_url = StringField(
-        'Add a Picture to your Profile By Entering A Link Here',
-        [validators.URL(message='URL Must Be Valid')])
+        'Post a Picture to your Profile ',
+        [validators.URL(message='URL Must Be Valid')],
+        render_kw={"placeholder": " Only URLs Please!"})
 
 
 class DeleteForm(FlaskForm):
