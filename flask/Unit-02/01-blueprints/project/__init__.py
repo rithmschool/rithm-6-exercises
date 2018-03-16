@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
@@ -19,4 +19,9 @@ app.register_blueprint(users_blueprint, url_prefix='/users')
 
 @app.route('/')
 def root():
-    return 'Hurray, the blueprints live'
+    return redirect(url_for('users.index'))
+
+@app.errorhandler(404)
+def error(e):
+    return render_template('404.html'), 404
+

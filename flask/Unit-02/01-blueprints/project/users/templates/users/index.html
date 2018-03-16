@@ -12,11 +12,11 @@
             {% if user.image_url %}
                 <img src="{{ user.image_url }}" class="small-avatar" alt="avatar">
             {% endif %}
-            <a href="{{url_for('show', id = user.id)}}">
+            <a href="{{url_for('users.show', id = user.id)}}">
                 {{ user.first_name }} {{ user.last_name }}
             </a>
         </li>
         {% endfor %}
     </ul>
-    <a href="{{url_for('new')}}">add a new user</a>
+    <a href="{{url_for('users.new')}}">add a new user</a>
  {% endblock %}
