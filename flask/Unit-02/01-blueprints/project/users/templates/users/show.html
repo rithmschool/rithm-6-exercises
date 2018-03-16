@@ -3,8 +3,8 @@
     <h3>User Profile:</h3>
     <h5>First name: {{user.first_name}} </h5>
     <h5>Last name: {{user.last_name}} </h5>
-    <a href="{{url_for('edit', id=user.id)}}">Edit Profile </a> |
-    <a href="{{url_for('index_message', id=user.id)}}"> View Messages </a> |
-    <a href="{{url_for('index')}}"> Home </a>
+    <a href="{{url_for('users.edit', id=user.id)}}">Edit Profile </a> |
+    <a href="{{url_for('messages.index', id=user.id)}}"> View Messages </a> |
+    <a href="{{url_for('users.index')}}"> Home </a>
 </div>
 {% endblock %}
