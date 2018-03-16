@@ -3,9 +3,16 @@
 ### Part I - Questions
 
 1. Describe the MVC pattern.
+    Model, View, Controller (or MVC for short) is a pattern to structure large apps. This pattern is followed for each individual resource. The controller is in charge of communicating with the models and view and calling them as needed. The model and view don't directly communicate. The MVC resources are tied together by a central controller. 
+
 2. In the MVC pattern, does the model communicate directly with the view?
+    It does not.
+
 2. What is the purpose of blueprints?
+    The purpose of blueprints is to enable coders to divide unmanegably large application files into smaller components in a predictable and replicable structure. One of the common patterns that can be followed using blueprints is the MVC pattern.
+
 3. How does using blueprints help us organize bigger applications?
+    Blueprints enable coders to divide large app files into separate files and folders. Thereby it is possible to separate resources and models, forms, view functions related to those resources. Thus, it is possible to replicate similar folder/file/name structures for each of the resources and there is no need to come up with separate naming for each to work together. 
 
 ### Part II - Exercise
 
