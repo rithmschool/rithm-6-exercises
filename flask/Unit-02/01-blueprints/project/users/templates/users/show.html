@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.first_name }}'s page
+ {% endblock %}
+
+{% block content %}
+    <h2>this is {{ user.first_name }}'s page</h2>
+    {% if user.image_url %}
+        <div class="mt-4 mx-4 mb-2">
+            <img src="{{ user.image_url }}" class="big-avatar" alt="avatar">
+        </div>
+        
+    {% endif %}
+    <h5 class="mx-4">first name: {{ user.first_name }}</h5>
+    <h5 class="mx-4">last name: {{ user.last_name }}</h5>
+    <a class="mx-4 mb-4" href="{{url_for('edit', id = user.id)}}">edit or delete user profile</a>
+    <hr>
+    <a href="{{url_for('index_messages', id = user.id)}}">check out {{ user.first_name }}'s messages</a>
+    |
+    <a href="{{url_for('index')}}">home</a>
+ {% endblock %}
