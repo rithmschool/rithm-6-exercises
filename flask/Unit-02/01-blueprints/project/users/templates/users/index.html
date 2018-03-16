@@ -4,10 +4,10 @@
     <br> {% for user in users %}
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="{{url_for('show', id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a></li>
+            <a href="{{url_for('users.show', id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a></li>
     </ul>
 
     {% endfor %}
     <br>
-    <a href="{{url_for('new')}}">Add a new user</a>
+    <a href="{{url_for('users.new')}}">Add a new user</a>
 </div>{% endblock %}

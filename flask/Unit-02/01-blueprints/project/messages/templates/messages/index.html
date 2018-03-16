@@ -5,14 +5,14 @@
     <ul class="list-group">
         <li class="list-group-item">
             {{ message.content }}
-            <a href="{{url_for('edit_message', id=user.id, message_id=message.id)}}">Edit</a>
+            <a href="{{url_for('messages.edit', id=user.id, message_id=message.id)}}">Edit</a>
         </li>
     </ul>
 
     {% endfor %}
     <br>
-    <a href="{{url_for('new_message', id=user.id)}}">Add a new message</a> |
-    <a href="{{url_for('index')}}">Home</a>
+    <a href="{{url_for('messages.new', id=user.id)}}">Add a new message</a> |
+    <a href="{{url_for('users.index')}}">Home</a>
 </div>
 
 {% endblock %}

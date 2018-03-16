@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}Edit Message {% endblock %} {% block content %}
 <div class="container w-50 p-3">
     <h3>Edit Message:</h3>
-    <form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+    <form action="{{url_for('messages.show', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
         {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
         <div>
             {{field.label}} {{ field }}
@@ -21,7 +21,7 @@
         <button type="submit" class="btn btn-info">Edit message</button>
     </form>
     <br>
-    <form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+    <form action="{{url_for('messages.show', id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
         {{ delete_form.hidden_tag() }}
         <button type="submit" class="btn btn-danger">Delete message</button>
     </form>
