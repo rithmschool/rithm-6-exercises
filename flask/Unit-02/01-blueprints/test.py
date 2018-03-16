@@ -11,20 +11,23 @@ class BaseTestCase(TestCase):
         return app
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
-        user1 = User("Elie", "Schoppik")
-        user2 = User("Tim", "Garcia")
-        user3 = User("Matt", "Lane")
+        user1 = User(first_name = "Elie", last_name = "Schoppik")
+        user2 = User(first_name = "Tim", last_name = "Garcia")
+        user3 = User(first_name = "Matt", last_name = "Lane")
         db.session.add_all([user1, user2, user3])
-        message1 = Message("Hello Elie!!", 1)
-        message2 = Message("Goodbye Elie!!", 1)
-        message3 = Message("Hello Tim!!", 2)
-        message4 = Message("Goodbye Tim!!", 2)
+        message1 = Message(content = "Hello Elie!!", user_id = 1)
+        message2 = Message(content = "Goodbye Elie!!", user_id = 1)
+        message3 = Message(content = "Hello Tim!!", user_id = 2)
+        message4 = Message(content = "Goodbye Tim!!", user_id = 2)
         db.session.add_all([message1, message2, message3,message4])
         db.session.commit()
 
     def tearDown(self):
         db.drop_all()
+
+    # TESTS FOR USERS
 
     def test_users_index(self):
         response = self.client.get('/users', content_type='html/text', follow_redirects=True)
@@ -60,8 +63,10 @@ class BaseTestCase(TestCase):
             data=dict(first_name="updated", last_name="information"),
             follow_redirects=True
         )
-        self.assertIn(b'updated information', response.data)
-        self.assertNotIn(b'Elie Schoppik', response.data)
+        self.assertIn(b'updated', response.data)
+        self.assertIn(b'information', response.data)
+        self.assertNotIn(b'Elie', response.data)
+        self.assertNotIn(b'Schoppik', response.data)
 
     def test_users_delete(self):
         response = self.client.delete(
@@ -85,7 +90,7 @@ class BaseTestCase(TestCase):
     def test_messages_create(self):
         response = self.client.post(
             '/users/1/messages/',
-            data=dict(text="Hi Matt!!", user_id=3),
+            data=dict(content="Hi Matt!!", user_id=1),
             follow_redirects=True
         )
         self.assertEqual(response.status_code, 200)
@@ -105,7 +110,7 @@ class BaseTestCase(TestCase):
     def test_messages_update(self):
         response = self.client.patch(
             '/users/1/messages/1?_method=PATCH',
-            data=dict(text="Welcome Back Elie!"),
+            data=dict(content="Welcome Back Elie!"),
             follow_redirects=True
         )
         self.assertIn(b'Welcome Back Elie!', response.data)
@@ -116,7 +121,6 @@ class BaseTestCase(TestCase):
             follow_redirects=True
         )
         self.assertNotIn(b'Hello Elie!!', response.data)
-
 
 if __name__ == '__main__':
     unittest.main()
