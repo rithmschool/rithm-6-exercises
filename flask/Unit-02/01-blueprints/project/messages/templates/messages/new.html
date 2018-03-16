@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %} Create Message {% endblock %} {% block body %}
 <h2>Add a New Message for {{ u.first_name }}</h2>
-<form method="POST" action="{{ url_for('m_index', u_id=u.id) }}">
+<form method="POST" action="{{ url_for('m.index', u_id=u.id) }}">
   <div class="form-group">
     {{ m_form.hidden_tag() }} {% for field in m_form if field.widget.input_type != 'hidden' %}
     <div class="form-group">
@@ -11,7 +11,7 @@
     </div>
     {% endfor %}
     <input type="submit" value="Create Message">
-    <a href="{{ url_for('m_index', u_id=u.id) }}">Cancel</a>
+    <a href="{{ url_for('m.index', u_id=u.id) }}">Cancel</a>
 
 </form>
 {% endblock %}

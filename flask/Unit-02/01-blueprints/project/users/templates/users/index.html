@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %} Users {% endblock %} {% block body %}
 <h2>All Users</h2>
-<a href="{{ url_for('new') }}">Add a User!</a>
+<a href="{{ url_for('u.new') }}">Add a User!</a>
 {% for u in users %}
 <div class="card" style="width: 18rem;">
   {% if u.image_url %}
@@ -10,7 +10,7 @@
     {% if u.messages[-1] %}
     <p class="card-text"> {{ u.messages[-1].content }}</p>
     {% endif %}
-    <a href="{{ url_for('m_index', u_id=u.id) }}">
+    <a href="{{ url_for('m.index', u_id=u.id) }}">
       View {{ u.first_name }}'s Messages</a>
   </div>
 </div>
