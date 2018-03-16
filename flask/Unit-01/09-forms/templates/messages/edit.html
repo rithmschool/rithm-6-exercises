@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Message!
+{% endblock %}
+
+
+{% block content %}
+<h1>Change the message: "{{ message.content }}"</h1>
+<form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+  {{ form.hidden_tag() }}
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <div>
+    {{ field.label }} {{ field }}
+    <span>
+      {% if field.errors %}
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </div>
+  {% endfor %}
+<button type="submit">Create new message!</button>
+</form>
+<h1>...or delete!</h1>
+<form action="{{url_for('show_message', id=user.id, message_id=message.id)}}?_method=DELETE" method=POST>
+  {{ delete_form.hidden_tag() }}
+  <input type="submit" value="X">
+</form>
+<h2>Done? Return back to the current user <a href="{{url_for('index_messages', id=user.id)}}">here</a></h2>
+{% endblock %}
