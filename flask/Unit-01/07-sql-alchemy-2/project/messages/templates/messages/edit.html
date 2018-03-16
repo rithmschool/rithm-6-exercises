@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+    <div "div__center mx-auto">
+      <h1 class="header__center">Update {{messages.user.first_name}}'s Messages!</h1>
+      <div class="borderb__head"></div>
+    </div>
+    <div>
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=PATCH" method="POST">
+          {{ form.hidden_tag() }}
+          {% for field in form if field.widget.input_type != 'hidden' %}
+
+          <div>
+            {{ field.label }}
+            {{ field(class_="form__input") }}
+            <span>
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+              {% endif %}
+            </span>
+          </div>
+
+            {% endfor %}
+
+        <div>
+          <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Update It!</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <h3>Want to Delete The User?</h3>
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE" method="POST">
+        {{ delete_form.hidden_tag() }}
+        <button type="submit">Delete &nbsp;<i class="fas fa-trash-alt"></i></button>
+      </form>
+    </div>
+
+  </section>
+
+{% endblock %}
