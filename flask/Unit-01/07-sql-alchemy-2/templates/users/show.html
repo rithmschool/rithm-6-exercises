@@ -1,0 +1,11 @@
+{% extends '/users/base.html' %}
+
+{% block content %}
+
+{{user.first_name}} {{user.last_name}}
+
+<a href="{{url_for('edit', id=user.id)}}">Edit this user</a>
+<a href="{{url_for('index')}}"> Back to all users </a>
+<a href="{{url_for('messages_index', user_id=user.id)}}">See users messages</a>
+
+{% endblock %}
