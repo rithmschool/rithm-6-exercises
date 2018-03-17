@@ -10,7 +10,7 @@
   <div class="link__register--user">
     <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Register a New User!</a>
   </div>
-    <table class="table__whole--changes">
+    <!-- <table class="table__whole--changes">
       <thead class="table__structure">
         <tr class="bg-info text-light">
           <th class="column__headers">First Name</th>
@@ -20,17 +20,55 @@
           <th class="column__headers">Messages</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody> -->
         {% for user in users %}
-        <tr>
+        <!-- <tr>
             <td class="column__headers">{{ user.first_name }}</td>
             <td class="column__headers">{{ user.last_name }}</td>
             <td class="column__headers"><a href="{{url_for('users.edit', id=user.id)}}"><i class="fas fa-edit"></i></a></td>
             <td class="column__headers"><a href="{{url_for('users.show', id=user.id)}}"><i class="fas fa-user"></i></a></td>
             <td class="column__headers"><a href="{{url_for('messages.index', user_id=user.id)}}"><i class="fas fa-envelope"></i></a></td>
-          </tr>
+          </tr> -->
+          <div class="card text-center d-inline-flex profilecard__space" style="width: 19rem;">
+              <div class="card-header">
+                Active User
+              </div>
+              <div class="imgcard__container">
+              <img class="card-img-top cover" src="{{user.image_url}}" alt="Card image of User">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                <p class="card-text"><a href="{{url_for('users.show', id=user.id)}}" class="btn btn-primary mx-1">See Profile!&nbsp;<i class="fas fa-user"></i></a>
+                  <a href="{{url_for('users.edit', id=user.id)}}" class="btn btn-primary">Edit&nbsp;<i class="fas fa-user"></i></a>
+                </p>
+
+                <a href="{{url_for('messages.index', user_id=user.id)}}" class="btn btn-primary btn-sm mx-1">See Messages!&nbsp;<i class="fas fa-envelope"></i> </a>
+              </div>
+              <div class="card-footer text-muted">
+                User ID {{user.id}}
+              </div>
+            </div>
         {% endfor %}
-      </tbody>
-    </table>
+
+      <!-- </tbody>
+    </table> -->
 </section>
 {% endblock %}
+
+
+<!-- <div class="card text-center" style="width: 20rem;">
+    <div class="card-header">
+      Active User
+    </div>
+    <img class="card-img-top" src="{{user.image_url}}" alt="Card image of User">
+    <div class="card-body">
+      <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="{{url_for('users.edit', id=user.id)}}" class="btn btn-primary">Edit&nbsp;<i class="fas fa-user"></i></a>
+      <a href="{{url_for('users.show', id=user.id)}}" class="btn btn-primary">See Profile!&nbsp;<i class="fas fa-user"></i> </a>
+      <a href="{{url_for('messages.index', user_id=user.id)}}" class="btn btn-primary">See Messages!&nbsp;<i class="fas fa-envelope"></i> </a>
+    </div>
+    <div class="card-footer text-muted">
+      User ID {{user.id}}
+    </div>style="max-height: 20rem;"
+  </div> -->
