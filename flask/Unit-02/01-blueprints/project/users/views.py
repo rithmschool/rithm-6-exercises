@@ -1,12 +1,12 @@
-from flask, import redirect, render_template, request, url_for, flash, Blueprint
-from project.users.forms import UserForm, DeleteForm
+from flask import redirect, render_template, request, url_for, flash, Blueprint
+from project.users.forms import AddForm, DeleteForm
 from project.models import User
 from project import db
 
 users_blueprint = Blueprint(
     'users',
     __name__,
-    templates_folder='templates'
+    template_folder='templates'
 )
 
 @users_blueprint.route('/', methods=["GET", "POST"])
@@ -20,14 +20,14 @@ def index():
             db.session.add(new_user)
             db.session.commit()
             flash('User Created')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
         else:
-            return render_template('./new.html', form=form)
-    return render_template('./index.html', users=User.query.all(), form=DeleteForm())
+            return render_template('./users/new.html', form=form)
+    return render_template('./users/index.html', users=User.query.all(), form=DeleteForm())
 
 @users_blueprint.route('/new')
 def new():
-    return render_template('./new.html', form=AddForm())
+    return render_template('./users/new.html', form=AddForm())
 
 @users_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
@@ -40,7 +40,7 @@ def show(id):
             db.session.add(target_user)
             db.session.commit()
             flash('User Updated')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
         else:
             return render_template('./edit.html', user=target_user, form=form)
     if request.method == b'DELETE':
@@ -49,10 +49,10 @@ def show(id):
             db.session.delete(target_user)
             db.session.commit()
             flash('User Deleted')
-            return redirect(url_for('index'))
-    return render_template('/show.html', user=target_user)
+            return redirect(url_for('users.index'))
+    return render_template('/users/show.html', user=target_user)
 
 @users_blueprint.route('/<int:id>/edit')
 def edit(id):
     target_user = User.query.get(id)
-    return render_template('/edit.html', user=target_user, form=AddForm(obj=target_user))
+    return render_template('/users/edit.html', user=target_user, form=AddForm(obj=target_user))

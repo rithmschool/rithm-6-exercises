@@ -2,7 +2,7 @@
 
 <h1>Edit User</h1>
 
-<form method="POST" action="{{url_for('show', id=user.id)}}?_method=PATCH">
+<form method="POST" action="{{url_for('users.show', id=user.id)}}?_method=PATCH">
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
@@ -15,7 +15,7 @@
 </form>
 
 <button>
-  <a href="{{url_for('index')}}">Home</a>
+  <a href="{{url_for('users.index')}}">Home</a>
 </button>
 
 {% endblock %}

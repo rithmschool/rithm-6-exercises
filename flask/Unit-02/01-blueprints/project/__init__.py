@@ -1,8 +1,7 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, redirect, url_for
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from forms import AddForm, DeleteForm, AddMessage
 import os
 
 app = Flask(__name__)
@@ -21,12 +20,16 @@ modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
 
+app.url_map.strict_slashes = False
+
 from project.users.views import users_blueprint
+from project.messages.views import messages_blueprint
 
 app.register_blueprint(users_blueprint, url_prefex='/users')
+app.register_blueprint(messages_blueprint, url_prefex='/users/<int:user_id>/messages')
 
 @app.route('/')
 def root():
-    return redirect(url_for('index'))
+    return redirect(url_for('users.index'))
 
 

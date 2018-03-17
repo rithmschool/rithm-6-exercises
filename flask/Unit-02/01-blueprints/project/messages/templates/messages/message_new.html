@@ -4,7 +4,7 @@
 
 <h1>Add a new message</h1>
 
-<form method="POST" action="{{url_for('index_message', id=user_id)}}">
+<form method="POST" action="{{url_for('messages.index_message', id=user_id)}}">
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
@@ -17,7 +17,7 @@
 </form>
 
 <button>
-  <a href="{{url_for('show', id=user_id)}}">Back to all messages</a>
+  <a href="{{url_for('users.show', id=user_id)}}">Back to all messages</a>
 </button>
 
 {% endblock %}
