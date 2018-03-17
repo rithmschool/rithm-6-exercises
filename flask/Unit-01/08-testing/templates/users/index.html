@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %} List of Users {% endblock %} {% block content %} {% for user in users %}
+<br>
+<p>
+  {{user.id}} | {{user.first_name}} {{user.last_name}} | {{user.image_url}}
+  <br>
+  <a href="{{url_for('show_users', user_id=user.id)}}">See more about {{user.first_name}}</a> |
+  <a href="{{url_for('edit_users', user_id=user.id)}}">edit</a> |
+  <form action="{{url_for('show_users', user_id=user.id)}}?_method=DELETE" method="POST">
+    <input type="submit" class="button" value='X'>
+  </form>
+</p>
+{% endfor %}
+<a href="{{url_for('new_users')}}">Create a New User</a>
+{% endblock %}

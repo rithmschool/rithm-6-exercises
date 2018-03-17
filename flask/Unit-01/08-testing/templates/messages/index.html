@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block title %} List of Messages {% endblock %} {% block content %}
+<br>
+<h1>Messages for {{user.first_name}} {{user.last_name}}</h1>
+{% for message in user.messages %}
+<p>
+  {{message.content}}
+  <br>
+  <a href="{{url_for('show_messages', user_id=user.id, message_id=message.id)}}">See more about message</a> |
+  <a href="{{url_for('edit_messages', user_id=user.id, message_id=message.id)}}">edit</a>
+  <form method="POST" action="{{url_for('show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
+    <input type="submit" value="X">
+  </form>
+</p>
+{% endfor %}
+<a href="{{url_for('new_messages', user_id=user.id)}}">Create a New Message</a> |
+<a href="{{url_for('root')}}" class="button">Home</a>
+{% endblock %}
