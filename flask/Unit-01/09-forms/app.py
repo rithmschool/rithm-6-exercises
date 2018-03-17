@@ -77,6 +77,8 @@ def edit(id):
     user_form = NewUser(obj=found_user)
     return render_template('users/edit.html', user=User.query.get(id), form=user_form)
 
+# CREATE NEW USER --------------------------------------
+
 
 @app.route('/users', methods=['POST'])
 def create():
@@ -90,6 +92,7 @@ def create():
     else:
         return render_template('users/new.html', form=user_form)
     return redirect(url_for('index'))
+# ----------------------------------------------------------------------------
 
 
 @app.route('/users/<int:id>', methods=['GET', 'PATCH'])
@@ -143,13 +146,21 @@ def new_message(user_id):
 def edit_message(user_id, id):
     return render_template('messages/edit.html', messages=Message.query.get(id))
 
+# POST NEW MESSAGE--------------------------------------
+
 
 @app.route('/users/<int:user_id>/messages', methods=['POST'])
 def post_new_message(user_id):
-    message = Message(request.form.get('content'), user_id)
-    db.session.add(message)
-    db.session.commit()
+    message_form = MessageForm(request.form)
+    print("we're almost there")
+    if message_form.validate():
+        print('this baby is authorized')
+        message = Message(request.form.get('content'), user_id)
+        db.session.add(message)
+        db.session.commit()
+        return redirect(url_for('new_message', user_id=user_id, messages=Message.query.all()))
     return redirect(url_for('new_message', user_id=user_id, messages=Message.query.all()))
+# ----------------------------------------------------------------------------
 
 
 @app.route('/users/<int:user_id>/messages/<int:id>', methods=['PATCH'])

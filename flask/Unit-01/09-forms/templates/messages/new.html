@@ -6,9 +6,24 @@
         <p class="text-right"> You are logged in as {{user.first_name}}</p>
 <div class="form-group">
 <form action="{{url_for('post_new_message', user_id=user.id)}}" method="POST">
+    
     <label for="content">Type your message</label>
     <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+    {{ form.hidden_tag() }} 
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <p>
+      <span>
+        {% if field.errors %}
+        {% for error in field.errors %}
+          {{error}}
+          {% endfor %}
+          {% endif %}
+      </span>
+    </p>
+    {% endfor %}
   </div>
+  
+
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -19,7 +34,7 @@
             <th>#</th>
             <th>User first_name</th>
             <th>Message.content</th>
-            <th>Edit Link</th>
+            <th>Delete Link</th>
           </tr>
         </thead>
 
