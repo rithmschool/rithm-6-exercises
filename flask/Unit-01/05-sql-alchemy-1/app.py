@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/flask-snacks-app-db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-# app.config["SQLALCHEMY_ECHO"] = True
+app.config["SQLALCHEMY_ECHO"] = True
 app.url_map.strict_slashes = False
 modus = Modus(app)
 db = SQLAlchemy(app)
@@ -30,6 +30,7 @@ def root():
 
 @app.route('/snacks', methods=['GET', 'POST'])
 def index():
+
     if request.method == "POST":
         new_snack = Snack(request.form.get('name'), request.form.get('kind'))
         db.session.add(new_snack)
@@ -46,9 +47,7 @@ def new():
 @app.route('/snacks/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
 
-    found_snack = Snack.query.get(id)
-    if found_snack == None:
-        return render_template("404.html")
+    found_snack = Snack.query.get_or_404(id)
 
     if request.method == b"PATCH":
         #found_snack.name = request.form['name']

@@ -1,20 +1,16 @@
-{% extends "base.html" %} {% block title %}Edit Snack {% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Edit Bootcamp {% endblock %} {% block content %}
 
-<h1>Edit Snack</h1>
+<h1>Edit Bootcamp Information</h1>
 
-<form action="{{url_for('show', id=snack.id)}}?_method=PATCH" method="POST">
+<form action="{{url_for('show', id=bootcamp.id)}}?_method=PATCH" method="POST">
 
   <label for="name">Name:</label>
-  <input type="text" name="name" id="name" value='{{snack.name}}'>
+  <input type="text" name="name" id="name" value='{{bootcamp.name}}'>
   <br>
 
-  <label for="kind">Kind:</label>
-  <input type="text" name="kind" id="kind" value='{{snack.kind}}'>
+  <label for="location">Location:</label>
+  <input type="text" name="location" id="location" value='{{bootcamp.location}}'>
   <br>
-
-  <!-- <label for="imageurl">Image URL:</label>
-  <input type="text" name="imageurl" id="imageurl" value='{{snack.imageurl}}'>
-  <br> -->
 
   <input type="submit" class="button" value='Submit'>
 </form>

@@ -1,3 +1,4 @@
+from IPython import embed
 from flask import Flask, render_template, redirect, request, url_for
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
@@ -19,35 +20,40 @@ class Bootcamp(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
     location = db.Column(db.Text)
-    votes = db.Column(db.Integer)
+    votes = db.Column(db.Integer, default=0)
+
+    def __init__(self, name, location, votes):
+        self.name = name
+        self.location = location
+        self.votes = votes
 
 @app.route('/')
 def root():
     return redirect(url_for('index'))
-##############################################
+
 @app.route('/bootcamps', methods=['GET', 'POST'])
 def index():
+
+    bootcamps = Bootcamp.query.all()
+
     if request.method == "POST":
-        new_bootcamp = Bootcamp(request.form.get('name'), request.form.get('kind'))
+        new_bootcamp = Bootcamp(request.form.get('name'), request.form.get('location'), 0)
         db.session.add(new_bootcamp)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template("index.html", bootcamps=Bootcamp.query.all())
+    return render_template("index.html", bootcamps=sorted(bootcamps, key=lambda bc: bc.votes, reverse=True))
 
 @app.route('/bootcamps/new')
 def new():
     return render_template("new.html")
 
-@app.route('/bootcamps/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@app.route('/bootcamps/<int:id>', methods=["GET", "POST", "PATCH", "DELETE"])
 def show(id):
-
-    found_bootcamp = Bootcamp.query.get(id)
-    if found_bootcamp == None:
-        return render_template("404.html")
+    found_bootcamp = Bootcamp.query.get_or_404(id)
 
     if request.method == b"PATCH":
         found_bootcamp.name = request.form.get('name')
-        found_bootcamp.kind = request.form.get('kind')
+        found_bootcamp.location = request.form.get('location')
         db.session.add(found_bootcamp)
         db.session.commit()
         return redirect(url_for('show', id=found_bootcamp.id))
@@ -56,6 +62,15 @@ def show(id):
         db.session.delete(found_bootcamp)
         db.session.commit()
         return redirect(url_for('index'))
+
+    elif request.method == "POST":
+        if request.form['vote'] == "Downvote":
+            found_bootcamp.votes -= 1
+        elif request.form['vote'] == "Upvote":
+            found_bootcamp.votes += 1
+        db.session.add(found_bootcamp)
+        db.session.commit()
+        return render_template('show.html', bootcamp=found_bootcamp)
 
     else:
         return render_template('show.html', bootcamp=found_bootcamp)
@@ -68,7 +83,7 @@ def edit(id):
 @app.route("/bootcamps/<int:id>/vote")
 def vote(id):
     found_bootcamp = Bootcamp.query.get(id)
-    return render_template('edit.html', bootcamp=found_bootcamp)
+    return render_template('vote.html', bootcamp=found_bootcamp)
 
 @app.errorhandler(404)
 def page_not_found(e):
