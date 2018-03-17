@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% block title %} {{ u.first_name}} {% endblock %} {% block body %}
+<h2>{{ u.first_name }} {{ u.last_name }}</h2>
+<a href="{{ url_for('edit', u_id=u.id) }}">Edit User</a>
+<a href="{{ url_for('m_new', u_id=u.id) }}">Create a Message for {{ u.first_name }}</a>
+<a href="{{ url_for('index') }}">View All Users</a>
+{% endblock %}

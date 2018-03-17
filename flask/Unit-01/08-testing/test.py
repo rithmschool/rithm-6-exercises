@@ -1,7 +1,8 @@
-from app import app, db, User, Message
+from project import app,db
+from project.users.models import User
+from project.messages.models import Message
 from flask_testing import TestCase
 import unittest
-
 
 class BaseTestCase(TestCase):
     def create_app(self):
@@ -19,15 +20,14 @@ class BaseTestCase(TestCase):
         message2 = Message("Goodbye Elie!!", 1)
         message3 = Message("Hello Tim!!", 2)
         message4 = Message("Goodbye Tim!!", 2)
-        db.session.add_all([message1, message2, message3, message4])
+        db.session.add_all([message1, message2, message3,message4])
         db.session.commit()
 
     def tearDown(self):
         db.drop_all()
 
     def test_users_index(self):
-        response = self.client.get(
-            '/users', content_type='html/text', follow_redirects=True)
+        response = self.client.get('/users', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
         self.assertIn(b'Elie Schoppik', response.data)
         self.assertIn(b'Tim Garcia', response.data)
@@ -39,14 +39,18 @@ class BaseTestCase(TestCase):
 
     def test_users_create(self):
         response = self.client.post(
-            '/users',
+            '/users/',
             data=dict(first_name="Awesome", last_name="Student"),
-            follow_redirects=True)
+            follow_redirects=True
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Awesome', response.data)
+        self.assertIn(b'User Created!', response.data)
 
     def test_users_edit(self):
-        response = self.client.get('/users/1/edit')
+        response = self.client.get(
+            '/users/1/edit'
+        )
         self.assertIn(b'Elie', response.data)
         self.assertIn(b'Schoppik', response.data)
 
@@ -54,22 +58,22 @@ class BaseTestCase(TestCase):
         response = self.client.patch(
             '/users/1?_method=PATCH',
             data=dict(first_name="updated", last_name="information"),
-            follow_redirects=True)
+            follow_redirects=True
+        )
         self.assertIn(b'updated information', response.data)
         self.assertNotIn(b'Elie Schoppik', response.data)
 
     def test_users_delete(self):
         response = self.client.delete(
-            '/users/1?_method=DELETE', follow_redirects=True)
+            '/users/1?_method=DELETE',
+            follow_redirects=True
+        )
         self.assertNotIn(b'Elie Schoppik', response.data)
 
     #### TESTS FOR MESSAGES ####
 
     def test_messages_index(self):
-        response = self.client.get(
-            '/users/1/messages',
-            content_type='html/text',
-            follow_redirects=True)
+        response = self.client.get('/users/1/messages', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
         self.assertIn(b'Hello Elie!!', response.data)
         self.assertIn(b'Goodbye Elie!!', response.data)
@@ -80,29 +84,37 @@ class BaseTestCase(TestCase):
 
     def test_messages_create(self):
         response = self.client.post(
-            '/users/1/messages',
-            data=dict(content="Hi Matt!!", user_id=3),
-            follow_redirects=True)
+            '/users/1/messages/',
+            data=dict(text="Hi Matt!!", user_id=3),
+            follow_redirects=True
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Hi Matt!!', response.data)
 
     def test_messages_edit(self):
-        response = self.client.get('/users/1/messages/1/edit')
+        response = self.client.get(
+            '/users/1/messages/1/edit'
+        )
         self.assertIn(b'Hello Elie!!', response.data)
 
-        response = self.client.get('/users/2/messages/4/edit')
+        response = self.client.get(
+            '/users/2/messages/4/edit'
+        )
         self.assertIn(b'Goodbye Tim!!', response.data)
 
     def test_messages_update(self):
         response = self.client.patch(
             '/users/1/messages/1?_method=PATCH',
-            data=dict(content="Welcome Back Elie!"),
-            follow_redirects=True)
+            data=dict(text="Welcome Back Elie!"),
+            follow_redirects=True
+        )
         self.assertIn(b'Welcome Back Elie!', response.data)
 
     def test_messages_delete(self):
         response = self.client.delete(
-            '/users/1/messages/1?_method=DELETE', follow_redirects=True)
+            '/users/1/messages/1?_method=DELETE',
+            follow_redirects=True
+        )
         self.assertNotIn(b'Hello Elie!!', response.data)
 
 
