@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} New Message {% endblock %} {% block content %}
+
+<h1>Post a new message for {{user.first_name}}</h1>
+<form method="POST" action="{{url_for('index_messages', user_id=user.id)}}">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{field.label}} {{field}}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{error}} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Add Message!">
+</form>
+<a href="{{url_for('root')}}" class="button">Home</a>
+{% endblock %}
