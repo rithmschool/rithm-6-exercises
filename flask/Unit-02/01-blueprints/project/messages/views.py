@@ -10,7 +10,8 @@ messages_blueprint = Blueprint(
 )
 
 @messages_blueprint.route('/', methods=["POST"])
-def index_message(id):
+#this view function has not been checked yet because of the bug
+def index(id):
     if request.method == 'POST':
         form = AddMessage(request.form)
         if form.validate():
@@ -22,15 +23,16 @@ def index_message(id):
             flash('Message added')
             return redirect(url_for('users.show', id=id))
         else:
-            return render_template('./users/message_new.html', form=form)
+            return render_template('./messages/new.html', form=form)
 
 @messages_blueprint.route('/new')
-def new_message(id):
+def new(id):
     #is the request.form neccesary here?
-    return render_template('./messages/message_new.html', user_id=id, form=AddMessage(request.form))
+    return render_template('./messages/new.html', user_id=id, form=AddMessage(request.form))
 
 @messages_blueprint.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
-def show_message(message_id):
+#this view function has not been tested because of the bug
+def show(message_id):
     target_message = Message.query.get(message_id)
     if request.method == b'PATCH':
         form = AddMessage(request.form)
@@ -41,16 +43,20 @@ def show_message(message_id):
             flash('Message editted')
             return redirect(url_for('users.show', id=target_message.user_id))
         else:
-            return render_template('/messages/message_edit.html', message=target_message, form=form)
+            return render_template('/messages/edit.html', message=target_message, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
-        if delete_form.validate():
-            db.session.delete(target_message)
-            db.session.commit()
-            flash('Message Deleted')
-            return redirect(url_for('show', id=target_message.user_id))
+        #delete form isn't validating
+        #why not?
+
+        #I have temporarily removed validation, I will add it back once i debug
+        # if delete_form.validate():
+        db.session.delete(target_message)
+        db.session.commit()
+        flash('Message Deleted')
+        return redirect(url_for('users.show', id=target_message.user_id))
 
 @messages_blueprint.route('/messages/<int:message_id>/edit')
-def edit_message(message_id):
+def edit(message_id):
     target_message = Message.query.get(message_id)
-    return render_template('/messages/message_edit.html', message=target_message, form=AddMessage(obj=target_message))
+    return render_template('/messages/edit.html', message=target_message, form=AddMessage(obj=target_message))

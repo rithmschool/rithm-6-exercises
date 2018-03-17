@@ -42,7 +42,7 @@ def show(id):
             flash('User Updated')
             return redirect(url_for('users.index'))
         else:
-            return render_template('./edit.html', user=target_user, form=form)
+            return render_template('.users/edit.html', user=target_user, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
