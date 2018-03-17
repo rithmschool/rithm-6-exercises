@@ -2,7 +2,7 @@ from flask import Flask, url_for, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
-from forms import NewUser, MessageForm
+from forms import NewUser, MessageForm, DeleteForm
 import os
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users-messages"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-print(os.environ.get('SECRET_KEY'))
+# print(os.environ.get('SECRET_KEY')) - this was to check that the secret key was getting through!
 db = SQLAlchemy(app)
 
 modus = Modus(app)
@@ -54,7 +54,8 @@ def root():
 
 @app.route('/users')
 def index():
-    return render_template('users/index.html', users=User.query.all())
+    delete_form = DeleteForm()
+    return render_template('users/index.html', users=User.query.all(), delete_form=delete_form)
 
 
 @app.route('/users/new')
@@ -96,6 +97,8 @@ def update(id):
     found_user = User.query.get(id)
     form = NewUser(request.form)
     if request.method == b'PATCH':
+        from IPython import embed
+        embed()
         if form.validate():
             found_user.first_name = form.data['first_name']
             found_user.last_name = form.data['last_name']
@@ -108,9 +111,14 @@ def update(id):
 
 @app.route('/users/<int:id>', methods=['DELETE'])
 def destroy(id):
+    delete_form = DeleteForm(request.form)
     user = User.query.get(id)
-    db.session.delete(user)
-    db.session.commit()
+    print('we try to delete')
+    if delete_form.validate():
+        print('we are deleting')
+        db.session.delete(user)
+        db.session.commit()
+        return redirect(url_for('index'))
     return redirect(url_for('index'))
 
 
