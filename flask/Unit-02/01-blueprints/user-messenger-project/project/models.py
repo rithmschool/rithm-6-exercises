@@ -1,5 +1,22 @@
 from project import db
 
+
+MessageTags = db.Table('mesaage_tags', 
+                        db.Column('id', db.Integer,
+                                        primary_key = True),
+                        db.Column('message_id',
+                        db.Integer,
+                        db.ForeignKey('messages.id',ondelete = "cascade")),
+                        
+                        db.Column('tags.id',
+                        db.Integer,
+                        db.ForeignKey('tags.id', ondelete = "cascade")))
+
+
+
+
+
+
 class User(db.Model):
 
     __tablename__ = "users"
@@ -23,4 +40,10 @@ class Message(db.Model):
 
 
 
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key = True)
+    subject = db.Column(db.Text)
 
