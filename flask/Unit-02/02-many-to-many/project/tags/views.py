@@ -27,9 +27,8 @@ def index(id):
     return render_template('tags/index.html')
 
 @tags_blueprint.route('/new')
-def new(id):
-    #is the request.form neccesary here?
-    return render_template('./tags/new.html', user_id=id, form=AddMessage(request.form))
+def new():
+    return render_template('./tags/new.html', form=NewTagForm())
 
 @tags_blueprint.route('/tags/<int:message_id>', methods=["PATCH", "DELETE"])
 #this view function has not been tested because of the bug

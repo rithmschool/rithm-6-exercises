@@ -29,9 +29,9 @@ def index():
 def new():
     return render_template('users/new.html', form=AddForm())
 
-@users_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
-def show(id):
-    target_user = User.query.get(id)
+@users_blueprint.route('/<int:user_id>', methods=["GET", "PATCH", "DELETE"])
+def show(user_id):
+    target_user = User.query.get(user_id)
     if request.method == b'PATCH':
         form = AddForm(request.form)
         if form.validate():
