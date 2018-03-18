@@ -11,12 +11,12 @@
   </p>
   {% endfor %}
 
-  <input type="submit" value="Edit Message!">
+  <input class="btn btn-primary" type="submit" value="Edit Message">
 </form>
-
+<br>
 <form method="POST" action="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
   {{delete_form.hidden_tag()}}
-  <input type="submit" value="Delete Message!">
+  <input class="btn btn-primary" type="submit" value="Delete Message">
 </form>
 
 {% endblock %}

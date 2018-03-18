@@ -10,7 +10,8 @@
     </span>
   </p>
   {% endfor %}
-  <input type="submit" value="Add Message!">
+  <input class="btn btn-primary" type="submit" value="Add Message">
 </form>
-<a href="{{url_for('root')}}" class="button">Home</a>
+<br>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

@@ -3,15 +3,16 @@
 <p>
   {{user.id}} | {{user.first_name}} {{user.last_name}} | {{user.image_url}}
   <br>
-  <a href="{{url_for('users.show_users', user_id=user.id)}}">See more about {{user.first_name}}</a> |
-  <a href="{{url_for('users.edit_users', user_id=user.id)}}">edit</a> |
+  <br>
+  <a class="btn btn-primary" href="{{url_for('users.show_users', user_id=user.id)}}">See more about {{user.first_name}}</a>
+  <a class="btn btn-primary" href="{{url_for('users.edit_users', user_id=user.id)}}">Edit</a>
 
   <form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
     {{delete_form.hidden_tag()}}
-    <input type="submit" class="button" value='X'>
+    <input class="btn btn-primary" type="submit" class="button" value='Delete Me'>
   </form>
-
+  <hr>
 </p>
 {% endfor %}
-<a href="{{url_for('users.new_users')}}">Create a New User</a>
+<a class="btn btn-primary" href="{{url_for('users.new_users')}}">Create a New User</a>
 {% endblock %}

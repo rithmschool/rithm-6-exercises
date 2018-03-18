@@ -1,21 +1,23 @@
 {% extends 'base.html' %} {% block title %} List of Messages {% endblock %} {% block content %}
 <br>
 <h1>Messages for {{user.first_name}} {{user.last_name}}</h1>
-{% for message in user.messages %}
+<hr> {% for message in user.messages %}
 <p>
   {{message.content}}
   <br>
-  <a href="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}">See more about message</a> |
-  <a href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">edit</a>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}">See more about message</a>
+  <a class="btn btn-primary" href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">Edit</a>
 
   <form method="POST" action="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
     {{delete_form.hidden_tag()}}
-    <input type="submit" value="X">
+    <input class="btn btn-primary" type="submit" value="Delete Message">
   </form>
-
+  <hr>
 </p>
 
 {% endfor %}
-<a href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Message</a> |
-<a href="{{url_for('root')}}" class="button">Home</a>
+<br>
+<a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Message</a>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

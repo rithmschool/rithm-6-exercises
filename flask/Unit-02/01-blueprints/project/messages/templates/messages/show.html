@@ -5,14 +5,17 @@
   <br>
   <br> {{message.content}}
   <br>
-  <a href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">edit this message</a>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">Edit this message</a>
 </p>
 
 <form method="POST" action="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
   {{delete_form.hidden_tag()}}
-  <input type="submit" value="Delete Message!">
+  <input class="btn btn-primary" type="submit" value="Delete Message!">
 </form>
-
-<a href="{{url_for('messages.index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a> |
-<a href="{{url_for('root')}}" class="button">Home</a>
+<br>
+<a class="btn btn-primary" href="{{url_for('messages.index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a>
+<br>
+<br>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

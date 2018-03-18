@@ -1,0 +1,33 @@
+Part I - Questions
+
+----------------------------------------------------------------------------
+
+1. Describe the MVC pattern.
+
+MVC is a design pattern for building web applications and has three parts.
+
+i) Model - This is responsible for managing data storage, retrieval, and validation in an application.
+
+ii) View - This is what a user sees, however all logic is handled by controller.
+
+iii) Controller - This is responsible for talking to the model when necessary and updating the view. The controller is where actions are actually processed and determines what data to retrieve from the Model, how to package it, and update the View with that data.
+
+----------------------------------------------------------------------------
+
+2. In the MVC pattern, does the model communicate directly with the view?
+
+No, all commumications are handled by the Controller. Controller is responsible for talking to the Model and updating the View.
+
+----------------------------------------------------------------------------
+
+3. What is the purpose of blueprints?
+
+A blueprint is a template/mold for generating a part of a web application. We can take the blueprint and apply it to our application in several places. Each time we apply it, the blueprint will create a new version of its structure for our application.
+
+----------------------------------------------------------------------------
+
+4. How does using blueprints help us organize bigger applications?
+
+Blueprints can greatly simplify how large applications work and provide a central means for Flask extensions to register operations on applications. 
+
+----------------------------------------------------------------------------

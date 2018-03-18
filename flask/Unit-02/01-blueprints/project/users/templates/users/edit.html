@@ -11,16 +11,14 @@
   </p>
   {% endfor %}
 
-  <input type="submit" value="Edit User!">
+  <input class="btn btn-primary" type="submit" value="Edit User">
 </form>
-
+<br>
 <form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
   {{delete_form.hidden_tag()}}
-  <input type="submit" class="button" value='Delete Me'>
+  <input type="submit" class="btn btn-primary" value='Delete Me'>
 </form>
-
-<p>
-  <a href="{{url_for('users.index_users')}}" class="button">Cancel</a>
-</p>
+<br>
+<a class="btn btn-primary" href="{{url_for('users.index_users')}}">Cancel</a>
 
 {% endblock %}
