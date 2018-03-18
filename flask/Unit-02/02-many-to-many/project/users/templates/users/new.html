@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %}New User {% endblock %} {% block content %}
+<div class="page-content">
+    <h2>Create a New Profile:</h2>
+    <form action="{{url_for('users.index')}}" method="POST">
+        {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+        <div>
+            {{field.label}} {{ field }}
+            <span>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+            {% endif %}
+            </span>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+</div>
+{% endblock %}
