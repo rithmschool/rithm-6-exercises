@@ -12,7 +12,11 @@ class User(db.Model):
         default=
         "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
     )
-    about_me = db.Column(db.Text, default="lorem ipsum something or another")
+    about_me = db.Column(
+        db.Text,
+        default=
+        "Lorem ipsum we need to leverage our synergies it just needs more cowbell we're ahead of the curve on that one. Can you ballpark the cost per unit for me"
+    )
     messages = db.relationship('Message', backref='user', lazy='dynamic')
 
 

@@ -10,9 +10,12 @@ class UserForm(FlaskForm):
         "Last Name", [validators.DataRequired(),
                       validators.Length(max=20)])
     about_me = TextAreaField(
-        "About Me", [validators.Length(max=200)],
+        "About Me", [validators.Length(max=150)],
         filters=[lambda x: x or None])
-    img_url = StringField("Profile Picture", filters=[lambda x: x or None])
+    img_url = StringField(
+        "Profile Picture",
+        filters=[lambda x: x or None],
+        render_kw={"placeholder": "Enter image url"})
 
 
 class DeleteForm(FlaskForm):

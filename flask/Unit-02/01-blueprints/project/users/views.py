@@ -49,6 +49,8 @@ def show(user_id):
         if form.validate():
             found_user.first_name = form.first_name.data
             found_user.last_name = form.last_name.data
+            found_user.about_me = form.about_me.data
+            found_user.img_url = form.img_url.data
             db.session.add(found_user)
             db.session.commit()
             flash('User Updated!')

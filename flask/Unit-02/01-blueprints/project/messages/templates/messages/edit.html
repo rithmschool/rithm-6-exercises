@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>EDIT</h3>
-<form method="POST" action="{{url_for('messages.show', message_id=message.id, user_id=message.user_id)}}?_method=PATCH">
+<form method="POST" action="{{url_for('messages.show', message_id=message.id, user_id=message.user_id)}}?_method=PATCH" class="m-5 d-flex flex-column align-items-center">
   {{ form.hidden_tag() }}
+  <h3>Edit Message</h3>
   {% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="form-group w-75" style="max-width: 40rem;">
     {{ field.label }}
-    {{ field }}
+    {{ field(class_="form-control", rows="3") }}
 
     {% if field.errors %}
       {% for error in field.errors %}
-        {{ error }}
+        <span class="text-danger">{{ error }}</span>
       {% endfor %}
     {% endif %}
-
+  </div>
   {% endfor %}
-  <input type="submit" value="Save your changes!">
+  <button class="btn btn-outline-primary btn-large w-50 mt-3" type="submit">Submit Changes</button>
 </form>
 {% endblock %}
