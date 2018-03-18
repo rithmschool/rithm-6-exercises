@@ -1,10 +1,10 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.messages.forms import DeleteForm, AddMessage
+from project.tags.forms import DeleteForm, AddMessage
 from project.models import Message, User
 from project import db
 
 messages_blueprint = Blueprint(
-    'messages',
+    'tags',
     __name__,
     template_folder='templates'
 )
@@ -23,14 +23,14 @@ def index(id):
             flash('Message added')
             return redirect(url_for('users.show', id=id))
         else:
-            return render_template('./messages/new.html', form=form)
+            return render_template('./tags/new.html', form=form)
 
 @messages_blueprint.route('/new')
-def new(user_id):
+def new(id):
     #is the request.form neccesary here?
-    return render_template('messages/new.html', user_id=user_id, form=AddMessage())
+    return render_template('./tags/new.html', user_id=id, form=AddMessage(request.form))
 
-@messages_blueprint.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
+@messages_blueprint.route('/tags/<int:message_id>', methods=["PATCH", "DELETE"])
 #this view function has not been tested because of the bug
 def show(message_id):
     target_message = Message.query.get(message_id)
@@ -43,7 +43,7 @@ def show(message_id):
             flash('Message editted')
             return redirect(url_for('users.show', id=target_message.user_id))
         else:
-            return render_template('/messages/edit.html', message=target_message, form=form)
+            return render_template('/tags/edit.html', message=target_message, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         #delete form isn't validating
@@ -56,7 +56,7 @@ def show(message_id):
         flash('Message Deleted')
         return redirect(url_for('users.show', id=target_message.user_id))
 
-@messages_blueprint.route('/messages/<int:message_id>/edit')
+@messages_blueprint.route('/tags/<int:message_id>/edit')
 def edit(message_id):
     target_message = Message.query.get(message_id)
-    return render_template('/messages/edit.html', message=target_message, form=AddMessage(obj=target_message))
+    return render_template('/tags/edit.html', message=target_message, form=AddMessage(obj=target_message))
