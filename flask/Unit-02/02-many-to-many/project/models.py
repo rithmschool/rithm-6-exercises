@@ -1,6 +1,17 @@
 from project import db
 #project refers to __init__.py
 
+MessageTag = db.Table('message_tags',
+                db.Column('id',
+                        db.Integer,
+                        primary_key=True),
+                db.Column('message_id',
+                        db.Integer,
+                        db.ForeignKey('message.id', ondelete="cascade")),
+                db.Column('tag_id',
+                        db.Integer,
+                        db.ForeignKey('tag.id', ondelete="cascade")))
+
 class User(db.Model):
 
     __tablename__ = 'users'
@@ -26,3 +37,13 @@ class Message(db.Model):
         self.content = content
         self.user_id = user_id
 
+
+class Tag(db.Model):
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+
+    def __init__(self, content, user_id):
+        self.content = content

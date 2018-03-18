@@ -27,6 +27,7 @@ from project.messages.views import messages_blueprint
 
 app.register_blueprint(users_blueprint, url_prefex='/users')
 app.register_blueprint(messages_blueprint, url_prefex='/users/<int:user_id>/messages')
+app.register_blueprint(tags_blueprint, url_prefex='/tags')
 
 @app.route('/')
 def root():

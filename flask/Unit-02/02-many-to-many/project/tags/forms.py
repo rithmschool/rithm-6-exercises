@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, PasswordField, IntegerField, validators
 
-class AddTag(FlaskForm):
-    content = StringField('tag', [validators.Length(min=1, max=40)])
+class NewTagForm(FlaskForm):
+    content = TextField('Content', validators=[DataRequired()])
+    message = SelectMultipleField('Messages',
+                                     choices=[(d.id, d.name) for d in Messages.query.all()])
 
 class DeleteForm(FlaskForm):
     pass
