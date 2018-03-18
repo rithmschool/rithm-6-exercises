@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block nav %}
+<h1>Edit the Message</h1>
+{% endblock %}
 
-<h1>Edit the Message:</h1>
+{% block content %}
 
 <form action="{{url_for('messages.show', id=message.user_id, msg_id=message.id)}}?_method=PATCH" method="POST">
   {{ form.hidden_tag() }}

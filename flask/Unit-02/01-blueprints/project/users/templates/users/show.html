@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+<h1>Show User</h1>
+{% endblock %}
+
 {% block content %}
 
-<p>First Name: {{ user.first_name }}</p>
-<p>Last Name: {{ user.last_name }}</p>
+<div class="show-form">
 
-<a href="{{url_for('users.index')}}">Back to All Users</a>
-<a href="{{url_for('users.edit', id=user.id)}}">Edit User</a>
-<form action="{{url_for('users.show', id=user.id)}}?_method=DELETE" method="POST">
-  {{ delete_form.hidden_tag() }}
-  <button>Delete</button>
-</form>
+  <p>First Name: {{ user.first_name }}</p>
+  <p>Last Name: {{ user.last_name }}</p>
 
+    <a href="{{url_for('users.index')}}"><button>Home</button></a>
+    <a href="{{url_for('users.edit', id=user.id)}}"><button>Edit</button></a>
+  <form class="delete-form" action="{{url_for('users.show', id=user.id)}}?_method=DELETE" method="POST">
+    {{ delete_form.hidden_tag() }}
+    <button>Delete</button>
+  </form>
 
+</div>
 {% endblock %}
