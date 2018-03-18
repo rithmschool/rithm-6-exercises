@@ -22,7 +22,7 @@ def index_messages(user_id):
             db.session.add(new_message)
             db.session.commit()
             flash('Message Created!')
-            return redirect(url_for('index_messages', user_id=user_id))
+            return redirect(url_for('messages.index_messages', user_id=user_id))
         else:
             return render_template('messages/new.html', user=found_user, form=message_form)
 
@@ -58,7 +58,7 @@ def show_messages(user_id, message_id):
             db.session.add(found_message)
             db.session.commit()
             flash('Message Updated!')
-            return redirect(url_for('index_messages', user_id=user_id))
+            return redirect(url_for('messages.index_messages', user_id=user_id))
         return render_template('messages/edit.html', user=found_user, message=found_message, form=message_form, delete_form=delete_form)
 
     if request.method == b'DELETE':
@@ -67,7 +67,7 @@ def show_messages(user_id, message_id):
             db.session.delete(found_message)
             db.session.commit()
             flash('Message Deleted!')
-        return redirect(url_for('index_messages', user_id=user_id))
+        return redirect(url_for('messages.index_messages', user_id=user_id))
 
     return render_template('messages/show.html', user=found_user, message=found_message, delete_form=delete_form)
 

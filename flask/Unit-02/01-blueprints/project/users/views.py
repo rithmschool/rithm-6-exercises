@@ -18,7 +18,7 @@ def index_users():
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!')
-            return redirect(url_for('index_users'))
+            return redirect(url_for('users.index_users'))
         else:
             return render_template('users/new.html', form=user_form)
 
@@ -51,7 +51,7 @@ def show_users(user_id):
             db.session.add(found_user)
             db.session.commit()
             flash('User Updated!')
-            return redirect(url_for('index_users'))
+            return redirect(url_for('users.index_users'))
         return render_template('users/edit.html', user=found_user, form=user_form, delete_form=delete_form)
 
     if request.method == b'DELETE':
@@ -60,7 +60,7 @@ def show_users(user_id):
             db.session.delete(found_user)
             db.session.commit()
             flash('User Deleted!')
-        return redirect(url_for('index_users'))
+        return redirect(url_for('users.index_users'))
 
     return render_template('users/show.html', user=found_user, delete_form=delete_form)
 
