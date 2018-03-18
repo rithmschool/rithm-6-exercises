@@ -83,8 +83,8 @@ class BaseTestCase(TestCase):
 
     def test_messages_create(self):
         response = self.client.post(
-            '/users/1/messages',
-            data=dict(content="Hi Tuxedo Mask!", user_id=3),
+            '/users/1/messages/',
+            data=dict(content="Hi Tuxedo Mask!", user_id=1),
             follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Hi Tuxedo Mask!', response.data)
