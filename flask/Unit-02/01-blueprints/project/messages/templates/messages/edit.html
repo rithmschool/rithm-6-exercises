@@ -2,25 +2,21 @@
 
 {% block content %}
 
-<!-- render the token -->
-<!-- render the non-hidden fields with a for loop -->
-<!-- for loop inside a span for errors -->
+<h1>Edit the Message:</h1>
 
-<h1>Add a Message for {{ user.first_name }}:</h1>
-
-<form action="{{url_for('msg_index', id=user.id)}}" method="POST">
+<form action="{{url_for('messages.show', id=message.user_id, msg_id=message.id)}}?_method=PATCH" method="POST">
   {{ form.hidden_tag() }}
   {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }}
     {{ field }}
-  <span>
+    <span>
     {% if field.errors %}
       {% for error in field.errors %}
         {{ error }}
       {% endfor %}
     {% endif %}
-  </span>
+    </span>
   </p>
   {% endfor %}
   <button>Submit</button>

@@ -4,14 +4,14 @@
 
 <h1>Look at all them messages for {{ user.first_name }}!</h1>
 
-<a href="{{url_for('msg_new', id=user.id)}}">Add a Message</a>
+<a href="{{url_for('messages.new', id=user.id)}}">Add a Message</a>
 
 <ol>
   {% for message in user.messages %}
   <li>
     Content: {{ message.content }} ( Message id: {{ message.id }} )
-    <a href="{{url_for('msg_edit', id=user.id, msg_id=message.id)}}">Edit message</a>
-    <a href="{{url_for('msg_show', id=user.id, msg_id=message.id)}}">Show message</a>
+    <a href="{{url_for('messages.edit', id=user.id, msg_id=message.id)}}">Edit message</a>
+    <a href="{{url_for('messages.show', id=user.id, msg_id=message.id)}}">Show message</a>
   </li>
   {% endfor %}
 </ol>
