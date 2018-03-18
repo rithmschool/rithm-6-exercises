@@ -7,11 +7,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
-    messages = db.relationship('Message', backref='user', lazy='dynamic')
+    messages = db.relationship('Message', backref='user', lazy='dynamic', cascade='all, delete')
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
+
+MessageTag = db.Table('message_tags',
+db.Column('message_id', db.Integer, db.ForeignKey('messages.id')),
+db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')))
+
 
 class Message(db.Model):
     __tablename__ = "messages"
@@ -19,12 +24,20 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    tags = db.relationship('Tag', secondary=MessageTag, backref=db.backref('messages'))
 
     def __init__(self, message, user_id):
         self.message = message
         self.user_id = user_id
 
+class Tag(db.Model):
+    __tablename__ = 'tags'
 
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text)
+
+    def __init__(self, text):
+        self.text = text
 
 
     # db.relationship allows association from one Model to another

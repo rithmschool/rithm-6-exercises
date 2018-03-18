@@ -1,0 +1,24 @@
+ {% extends 'base.html' %} {% block content %}
+<h1>Edit the {{tag.text}} Tag</h1>
+<form method="POST" action="{{url_for('tags.tags_show', id=tag.id)}}?_method=PATCH">
+  {{ form.csrf_token }}
+  <p>
+    <!-- {{form.text.label}} -->
+    {{form.text(value=tag.text)}}
+    <span>
+      {% if form.text.errors %} {% for error in form.text.errors %} {{error}} {% endfor %} {% endif %}
+    </span>
+  </p>
+  <p>
+    {{form.messages}}
+  </p>
+  <button type="submit">Edit</button>
+</form>
+
+<p></p>
+<form method="POST" action="{{url_for('tags.tags_show', id=tag.id)}}?_method=DELETE">
+  {{ form.csrf_token }}
+  <button type="submit">Delete</button>
+</form>
+</p>
+{% endblock %}
