@@ -7,10 +7,36 @@ MessageTag = db.Table('message_tags',
                         primary_key=True),
                 db.Column('message_id',
                         db.Integer,
-                        db.ForeignKey('message.id', ondelete="cascade")),
+                        db.ForeignKey('messages.id', ondelete="cascade")),
                 db.Column('tag_id',
                         db.Integer,
-                        db.ForeignKey('tag.id', ondelete="cascade")))
+                        db.ForeignKey('tags.id', ondelete="cascade")))
+
+class Message(db.Model):
+
+    __tablename__ = 'messages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    #why do I ONLY need this in tag? Why not in both models?
+    # tags = db.relationship("Tag", secondary=MessageTag, backref=db.backref('messages'))
+
+    def __init__(self, content, user_id):
+        self.content = content
+        self.user_id = user_id
+
+
+class Tag(db.Model):
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    messages = db.relationship("Message", secondary=MessageTag, backref=db.backref('tags'))
+
+    def __init__(self, content, user_id):
+        self.content = content
 
 class User(db.Model):
 
@@ -24,26 +50,3 @@ class User(db.Model):
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
-
-class Message(db.Model):
-
-    __tablename__ = 'messages'
-
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-    def __init__(self, content, user_id):
-        self.content = content
-        self.user_id = user_id
-
-
-class Tag(db.Model):
-
-    __tablename__ = 'tags'
-
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
-
-    def __init__(self, content, user_id):
-        self.content = content

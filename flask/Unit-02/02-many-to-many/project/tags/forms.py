@@ -4,11 +4,9 @@ from wtforms.validators import DataRequired
 
 class NewTagForm(FlaskForm):
     name = TextField('Name', validators=[DataRequired()])
-    years_at_company = IntegerField('Years At Company',
-                                    validators=[DataRequired()])
-    departments = SelectMultipleField('Messages',
-                                     coerce=int,
-                                     choices=[(d.id, d.name) for d in Message.query.all()])
+    # departments = SelectMultipleField('Messages',
+    #                                  coerce=int,
+    #                                  choices=[(d.id, d.name) for d in Message.query.all()])
 
 class DeleteForm(FlaskForm):
     pass

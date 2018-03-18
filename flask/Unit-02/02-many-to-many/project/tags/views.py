@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.tags.forms import DeleteForm, AddTag
+from project.tags.forms import DeleteForm, NewTagForm
 from project.models import Message, User
 from project import db
 
