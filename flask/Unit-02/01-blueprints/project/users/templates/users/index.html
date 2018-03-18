@@ -21,9 +21,9 @@
           <tr>
             <th scope="row">{{user.id}}</th>
             <td>{{user.first_name}} {{user.last_name}}</td>
-            <td><a class="btn btn-link" href="{{url_for('show', id=user.id)}}">See more info</td>
-            <td><a class="btn btn-link" href="{{url_for('edit', id=user.id)}}">Edit user</a></td>
-            <td><a class="btn btn-link" href="{{url_for('message_index', user_id=user.id)}}">Messages</a></td>
+            <td><a class="btn btn-link" href="{{url_for('users.show', id=user.id)}}">See more info</td>
+            <td><a class="btn btn-link" href="{{url_for('users.edit', id=user.id)}}">Edit user</a></td>
+            <td><a class="btn btn-link" href="{{url_for('messages.index', user_id=user.id)}}">Messages</a></td>
             <td><form action="{{url_for('destroy', id=user.id)}}?_method=DELETE" method="POST">
               {{delete_form.hidden_tag()}}
               <input class="btn btn-link" type="submit" value="Delete user">
@@ -35,7 +35,7 @@
       </table>
                 
         <br>
-        <a href="{{url_for('new')}}"> Click here to add a new user. </a>
+        <a href="{{url_for('users.new')}}"> Click here to add a new user. </a>
 
        
 {% endblock %}

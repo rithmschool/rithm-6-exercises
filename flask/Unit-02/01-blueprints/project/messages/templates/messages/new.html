@@ -5,7 +5,7 @@
 <div class="container p-3 mb-2 bg-secondary text-white rounded">
         <p class="text-right"> You are logged in as {{user.first_name}}</p>
 <div class="form-group">
-<form action="{{url_for('post_new_message', user_id=user.id)}}" method="POST">
+<form action="{{url_for('messages.post_new', user_id=user.id)}}" method="POST">
     
     <label for="content">Type your message</label>
     <textarea class="form-control" name="content" id="content" rows="3"></textarea>

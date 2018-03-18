@@ -4,7 +4,7 @@
 <div class="container p-3 mb-2 bg-secondary text-white rounded">
   <h1>Create a new user!</h1>
   <h5 class="text-right">Rithm School is awesome</h5>
-  <form action="{{url_for('create')}}" method="POST">
+  <form action="{{url_for('users.create')}}" method="POST">
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{field.label}}

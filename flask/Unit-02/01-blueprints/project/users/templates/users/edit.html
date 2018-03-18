@@ -5,7 +5,7 @@
 
 <div class="container p-3 mb-2 bg-secondary text-white rounded">
   <h1>Edit this user!</h1>
-  <form action="{{url_for('update', id=user.id)}}?_method=PATCH" method="POST">
+  <form action="{{url_for('users.update', id=user.id)}}?_method=PATCH" method="POST">
     {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
       {{field.label}}
