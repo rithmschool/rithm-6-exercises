@@ -48,7 +48,6 @@ def show(message_id):
         delete_form = DeleteForm(request.form)
         #delete form isn't validating
         #why not?
-
         #I have temporarily removed validation, I will add it back once i debug
         # if delete_form.validate():
         db.session.delete(target_message)
