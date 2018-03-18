@@ -1,1 +1,21 @@
-Implement me! The show page for employees
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{employee.name}}'s Info</h1>
+<h3>Years Mined</h3>
+    <p>{{ employee.years_at_company }}</p>
+<h3>Departments Beholden To:</h3>
+
+<ol>
+    {% for department in employee.departments %}
+        <li>{{ department.name }}</li>
+    {% endfor %}
+</ol>
+
+<form action="{{url_for('employees.edit', id=employee.id)}}" method="GET">
+    <input type="submit" class="btn btn-warning" value="UPDATE INFO">
+  </form>
+  <form action="{{url_for('employees.index')}}" method="GET">
+    <input type="submit" class="btn btn-primary" value="All Employees">
+  </form>
+{% endblock %}

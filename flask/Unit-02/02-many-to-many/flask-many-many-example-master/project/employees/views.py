@@ -1,13 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from project.employees.forms import NewEmployeeForm
 from project.models import Employee, Department
 from project import db
 
 employees_blueprint = Blueprint(
-    'employees',
-    __name__,
-    template_folder="templates"
-    )
+    'employees', __name__, template_folder="templates")
 
 
 @employees_blueprint.route('/', methods=["POST", "GET"])
@@ -18,12 +15,14 @@ def index():
         if form.validate_on_submit():
             new_employee = Employee(form.name.data, form.years_at_company.data)
             for department in form.departments.data:
-                new_employee.departments.append(Department.query.get(department))
+                new_employee.departments.append(
+                    Department.query.get(department))
             db.session.add(new_employee)
             db.session.commit()
         else:
             return render_template('employees/new.html', form=form)
-    return render_template('employees/index.html', employees=Employee.query.all())
+    return render_template(
+        'employees/index.html', employees=Employee.query.all())
 
 
 @employees_blueprint.route('/new', methods=["GET"])
@@ -44,7 +43,7 @@ def edit(id):
 
 @employees_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
-    found_employee=Employee.query.get(id)
+    found_employee = Employee.query.get(id)
     if request.method == b"DELETE":
         db.session.delete(found_employee)
         db.session.commit()
@@ -57,7 +56,8 @@ def show(id):
             found_employee.years_at_company = form.years_at_company.data
             found_employee.departments = []
             for department in form.departments.data:
-                found_employee.departments.append(Department.query.get(department))
+                found_employee.departments.append(
+                    Department.query.get(department))
             db.session.add(found_employee)
             db.session.commit()
             return redirect(url_for('employees.index'))
