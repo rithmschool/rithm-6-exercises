@@ -11,4 +11,6 @@
 </p>
 {%endfor%}
 <a href="{{url_for('messages.messages_new', user_id=user.id)}}">Create a New Message</a>
+<br>
+<a href="{{ url_for('root') }}">Go Back To Users</a>
 {%endblock%}

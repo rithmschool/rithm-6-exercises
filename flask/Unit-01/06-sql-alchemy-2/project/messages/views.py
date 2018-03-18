@@ -23,8 +23,7 @@ def messages_index(user_id):
 @messages_blueprint.route('/new')
 def messages_new(user_id):
     message_form = MessageForm()
-    return render_template(
-        'messages/new.html', user=User.query.get(user_id), form=message_form)
+    return render_template('messages/new.html', user=User.query.get(user_id), form=message_form)
 
 
 #create a specific message for a specfic user
@@ -34,17 +33,13 @@ def messages_new(user_id):
 def messages_create(user_id):
     message_form = MessageForm(request.form)
     if message_form.validate():
-        new_message = Message(
-            message=request.form.get('message'), user_id=user_id)
+        new_message = Message(request.form.get('message'), user_id)
         db.session.add(new_message)
         db.session.commit()
         flash('Creating a New Message!')
         return redirect(url_for('messages.messages_index', user_id=user_id))
     else:
-        return render_template(
-            'messages/new.html',
-            user=User.query.get(user_id),
-            form=message_form)
+        return render_template('messages/new.html', user=User.query.get(user_id), form=message_form)
 
 
 #edit a specific message for a specfic user render template
@@ -53,43 +48,27 @@ def messages_edit(user_id, message_id):
     found_message = Message.query.get(message_id)
     found_user = User.query.get(user_id)
     message_form = MessageForm(obj=found_message)
-    return render_template(
-        'messages/edit.html',
-        #don't name varibales same name as parameters dumbo Mark
-        user=found_user,
-        message=found_message,
-        form=message_form)
-
+    return render_template('messages/edit.html', user=found_user, message=found_message, form=message_form)
 
 #show message
 @messages_blueprint.route('/<int:message_id>', methods=["GET"])
 def messages_show(user_id, message_id):
-    return render_template(
-        'messages/show.html',
-        user=User.query.get(user_id),
-        message=Message.query.get(message_id))
+    return render_template('messages/show.html', user=User.query.get(user_id), message=Message.query.get(message_id))
 
 
 #update message on submit after edit
 @messages_blueprint.route('/<int:message_id>', methods=["PATCH"])
 def messages_update(user_id, message_id):
     message_form = MessageForm(request.form)
-    #NEED TO PASS IN FOR THE REDIRECT
-    found_user = User.query.get(user_id)
-    found_message = Message.query.get(message_id)
     if message_form.validate():
-        update_message = Message.query.get(message_id)
-        update_message.message = request.form.get('message')
-        db.session.add(update_message)
+        found_message = Message.query.get(message_id)
+        found_message.message = request.form.get('message')
+        db.session.add(found_message)
         db.session.commit()
         flash('Updating a Message')
         return redirect(url_for('messages.messages_index', user_id=user_id))
     else:
-        return render_template(
-            'messages/edit.html',
-            user=found_user,
-            message=found_message,
-            form=message_form)
+        return render_template('messages/edit.html', user=found_user, message=messages.user.id, form=message_form)
 
 
 #delete a specific message for a specfic user

@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for,render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -17,8 +17,7 @@ from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/users')
-app.register_blueprint(
-    messages_blueprint, url_prefix='/users/<int:user_id>/messages')
+app.register_blueprint(messages_blueprint, url_prefix='/users/<int:user_id>/messages')
 
 
 #user routes
@@ -28,9 +27,9 @@ def root():
     return redirect(url_for('users.index'))
 
 
-# @app.errorhandler(404)
-# def page_not_found(e):
-#     return render_template('user/404.html'), 404
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html', error=error), 404
 
 # Mistakes
 # dont name variables the same name as parameters or things will be undefined
