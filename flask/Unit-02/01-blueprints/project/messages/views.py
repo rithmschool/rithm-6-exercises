@@ -18,7 +18,7 @@ def index(id):
             new_message = Message(content=form.data['content'], user_id=id)
             db.session.add(new_message)
             db.session.commit()
-            flash('MESSAGE CREATED!')
+            flash('Message Created!')
             return redirect(url_for('messages.index', id=id))
         return render_template('messages/new.html', id=id, form=form)
     return render_template('messages/index.html', form=form, user=found_user)
@@ -59,7 +59,7 @@ def show(id, message_id):
             found_message.content = form.content.data
             db.session.add(found_message)
             db.session.commit()
-            flash('MESSAGE UPDATED!')
+            flash('Message Updated!')
             return redirect(
                 url_for('messages.index', id=id, message_id=message_id))
         return render_template(
@@ -74,7 +74,7 @@ def show(id, message_id):
         if delete_form.validate():
             db.session.delete(found_message)
             db.session.commit()
-            flash('MESSAGE DELETED!')
+            flash('Message Deleted!', 'error')
             return redirect(url_for('messages.index', id=id))
         return render_template(
             'messages/edit.html',

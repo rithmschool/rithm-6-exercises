@@ -20,7 +20,7 @@ def index():
                 last_name=form.data['last_name'])
             db.session.add(new_user)
             db.session.commit()
-            flash('USER CREATED!')
+            flash('User Created!')
             return redirect(url_for('users.index'))
         return render_template('users/new.html', form=form)
     return render_template(
@@ -53,7 +53,7 @@ def show(id):
             found_user.last_name = form.last_name.data
             db.session.add(found_user)
             db.session.commit()
-            flash('USER CREATED!')
+            flash('User Updated!')
             return redirect(url_for('users.index'))
         return render_template(
             'users/edit.html',
@@ -64,7 +64,7 @@ def show(id):
         if delete_form.validate():
             db.session.delete(found_user)
             db.session.commit()
-            flash('USER DELETED!')
+            flash('User Deleted!', 'error')
             return redirect(url_for('users.index'))
         return render_template(
             'users/edit.html',

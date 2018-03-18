@@ -1,13 +1,21 @@
 {% extends 'base.html' %} {% block title %}Users{% endblock %} {% block content %}
-<div class="container w-50 p-3">
-    <h2>Here are our lovely users:</h2>
-    <br> {% for user in users %}
-    <ul class="list-group">
+<h2>Here are our lovely users:</h2>
+<br> {% for user in users %}
+<!-- <ul class="list-group">
         <li class="list-group-item">
             <a href="{{url_for('users.show', id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a></li>
-    </ul>
-
-    {% endfor %}
-    <br>
-    <a href="{{url_for('users.new')}}">Add a new user</a>
-</div>{% endblock %}
+    </ul> -->
+<div class="container-fluid">
+    <div class="card-deck mt-3">
+        <div class="card-deck-wrapper">
+            <div class="card">
+                <div class="card-header"><a href="{{url_for('users.show', id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a></div>
+                <div class="card-body">
+                    <p class="card-text">Follow me for the latest updates.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %} {% endblock %}
