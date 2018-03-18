@@ -24,6 +24,7 @@ app.url_map.strict_slashes = False
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
+from project.tags.views import tags_blueprint
 
 app.register_blueprint(users_blueprint, url_prefex='/users')
 app.register_blueprint(messages_blueprint, url_prefex='/users/<int:user_id>/messages')
