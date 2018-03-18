@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>USER INFORMATION</h4>
+<h5>First Name: {{user.first_name}}</h5>
+<h5>Last Name: {{user.last_name}}</h5>
+<br>
+
+<a href="{{url_for('message_index', user_id=user.id)}}">See Messages</a>
+<br>
+<a href="{{url_for('edit', user_id=user.id)}}">Edit User</a>
+<br>
+<form action="{{url_for('show', user_id=user.id)}}?_method=DELETE" method="POST">
+    <i class="fas fa-pen-square"></i>Delete User</a>
+    <input type="submit" value="Delete">
+</form>
+{% endblock %}

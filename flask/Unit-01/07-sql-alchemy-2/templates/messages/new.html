@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+{% block title %}
+Write a message
+{% endblock %}
+
+{% block content %}
+<h1>Write a message!<h1>
+    <br>
+    <form action="{{url_for('message_index', user_id=user.id)}}" method="POST">
+        <label for="content">Message Content: </label>
+        <input type="text" name="content" id="content">
+        <button>Post Message</button>
+    </form>
+
+{% endblock %}

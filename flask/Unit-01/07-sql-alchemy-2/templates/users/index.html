@@ -10,8 +10,11 @@ User or Loser
 <br>
 <br>
 {% for user in users %}
-<a href="{{url_for('show', id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
-<br>
+<a href="{{url_for('show', user_id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
+<p>User's Messages:</p>
+{% for message in user.messages%}
+<small>{{message.content}}</small>
+{% endfor %}
 <br>
 <br>
 {% endfor %}
