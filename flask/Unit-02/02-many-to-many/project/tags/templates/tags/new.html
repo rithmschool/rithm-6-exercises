@@ -8,15 +8,17 @@ New tag!
 {% block content %}
 <form action="{{url_for('tags.index', id=id)}}" method="POST">
   {{ form.hidden_tag() }}
+  {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
-    {{ form.name.label }}
-    {{ form.name }}
-    {% if form.name.errors %}
-      {% for error in form.name.errors %}
+    {{ field.label }}
+    {{ field }}
+    {% if field.errors %}
+      {% for error in field.errors %}
         {{ error }}
       {% endfor %}
     {% endif %}
   </p>
+  {% endfor %}
   <button type="submit">Add tag!</button>
 </form>
 {% endblock %}

@@ -2,7 +2,17 @@
 <p>
   Tag: {{ tag.name }}
   <br>
-  Messages: {{ form.messages }}
+  <p>
+      Messages associated with {{ tag.name }}:
+    <ul>
+        {% for message in messages %}
+            <li>
+                {{message.content}}
+            </li>
+        {% endfor %}
+    </ul>
+  </p>
+
   <br>
   <a href="{{url_for('tags.edit', id=tag.id)}}">
     Edit {{ tag.name }}

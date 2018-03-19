@@ -18,6 +18,11 @@ def index():
         if form.validate():
             new_tag = Tag(
                 name=form.data["name"])
+            new_tag.messages = []
+            for message in form.messages.data:
+                new_tag.messages.append(
+                    Message.query.get(message))
+
             db.session.add(new_tag)
             db.session.commit()
             flash("tag Created!")
@@ -28,9 +33,9 @@ def index():
 
 @tags_blueprint.route("/new")
 def new():
-    form = TagForm()
+    form = TagForm(request.form)
     form.set_choices()
-    return render_template("tags/new.html", form=tag_form)
+    return render_template("tags/new.html", form=form)
 
 
 @tags_blueprint.route("/<int:id>", methods=["GET", "PATCH", "DELETE"])
@@ -39,9 +44,15 @@ def show(id):
     form = TagForm(request.form)
     form.set_choices()
     delete_form = DeleteForm(request.form)
+    messages = [message for message in found_tag.messages]
     if request.method == b"PATCH":
         if form.validate():
             found_tag.name = form.data["name"]
+            found_tag.messages = []
+            for message in form.messages.data:
+                found_tag.messages.append(
+                    Message.query.get(message))
+
             db.session.add(found_tag)
             db.session.commit()
             flash("tag Edited!")
@@ -54,13 +65,14 @@ def show(id):
             flash("tag Deleted")
             return redirect(url_for("tags.index"))
         return render_template("tags/edit.html", tag=found_tag, form=form, delete_form=delete_form)
-    return render_template("tags/show.html", tag=found_tag, form=form)
+    return render_template("tags/show.html", tag=found_tag, messages=messages)
 
 
 @tags_blueprint.route("/<int:id>/edit")
 def edit(id):
     found_tag = Tag.query.get(id)
-    form = TagForm(request.form)
-    delete_form = DeleteForm()
+    messages = [message.id for message in found_tag.messages]
+    form = TagForm(messages=messages)
     form.set_choices()
+    delete_form = DeleteForm()
     return render_template("tags/edit.html", tag=found_tag, form=form, delete_form=delete_form)

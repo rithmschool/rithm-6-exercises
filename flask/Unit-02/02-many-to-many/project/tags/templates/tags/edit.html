@@ -20,12 +20,24 @@ Edit Tag!
   <p>
     {{ form.messages }}
   </p>
-<button type="submit">Create new tag!</button>
+<button type="submit">Modify tag!</button>
 </form>
 <h1>...or delete!</h1>
 <form action="{{url_for('tags.show', id=tag.id)}}?_method=DELETE" method=POST>
   {{ delete_form.hidden_tag() }}
   <input type="submit" value="X">
 </form>
-<h2>Done? Return back to the current user <a href="{{url_for('tags.index')}}">here</a></h2>
+<h2>
+  Done? Return back to all tags
+  <a href="{{url_for('tags.index')}}">
+    here
+  </a>
+</h2>
+<h2>
+  All users
+  <a href="{{url_for('users.index')}}">
+    here
+  </a>
+</h2>
+
 {% endblock %}
