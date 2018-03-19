@@ -152,8 +152,9 @@ def edit_message(user_id, id):
 @app.route('/users/<int:user_id>/messages', methods=['POST'])
 def post_new_message(user_id):
     message_form = MessageForm(request.form)
-    print("we're almost there")
+    print("we're almost there")  # debugging
     if message_form.validate():
+        # created print statement to check authorization
         print('this baby is authorized')
         message = Message(request.form.get('content'), user_id)
         db.session.add(message)
