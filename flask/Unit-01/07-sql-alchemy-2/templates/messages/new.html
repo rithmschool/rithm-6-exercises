@@ -6,10 +6,20 @@ Write a message
 {% block content %}
 <h1>Write a message!<h1>
     <br>
-    <form action="{{url_for('message_index', user_id=user.id)}}" method="POST">
-        <label for="content">Message Content: </label>
-        <input type="text" name="content" id="content">
-        <button>Post Message</button>
+    <form action="{{url_for('message_index', user_id=user_id)}}" method="POST">
+        {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                {{ field.label }}
+                {{ field }}
+          
+                {% if field.errors %}
+                  {% for error in field.errors %}
+                    {{ error }}
+                  {% endfor %}
+                {% endif %}
+          
+            {% endfor %}
+        <button>Submit</button>
     </form>
-
+    <small><a href="{{url_for('index')}}">Go Home</a></small>
 {% endblock %}

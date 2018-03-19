@@ -5,5 +5,20 @@
         <input type="text" name="content" value="{{message.content}}">
         <input type="submit" value="Edit">
 </form>
+<form method="POST" action="{{url_for('show_message', message_id=message.id, user_id=message.user_id)}}?_method=PATCH">
+    {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ field.label }}
+            {{ field }}
+      
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+      
+        {% endfor %}
+    <input type="submit" value="Save your changes!">
+</form>
 <small><a href="{{url_for('index')}}">Go Home</a></small>
 {% endblock %}

@@ -6,12 +6,20 @@ Create User
 {% block content %}
 <h1>We are welcome to have you!<h1>
     <br>
-    <form action="/users" method="POST" class="form-vertical">
-        <label for="first_name">First Name </label>
-        <input type="text" name="first_name" id="first_name">
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" id="last_nae">
-        <button>Create User</button>
+    <form action="{{url_for('index')}}" method="POST">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ field.label }}
+            {{ field }}
+          
+            {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+            {% endif %}
+          
+        {% endfor %}
+        <button type="submit">Submit</button>
     </form>
-
+    <small><a href="{{url_for('index')}}">Go Home</a></small>
 {% endblock %}

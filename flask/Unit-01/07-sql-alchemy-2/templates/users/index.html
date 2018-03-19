@@ -12,9 +12,11 @@ User or Loser
 {% for user in users %}
 <a href="{{url_for('show', user_id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
 <p>User's Messages:</p>
+<ol>
 {% for message in user.messages%}
-<small>{{message.content}}</small>
+<li>{{message.content}}</li>
 {% endfor %}
+</ol>
 <br>
 <br>
 {% endfor %}

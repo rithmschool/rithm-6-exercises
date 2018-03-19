@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
     <h4>Edit {{user.name}}
-    </h4>
-    <form action="{{url_for('show', user_id=user.id)}}?_method=PATCH" method="POST">    
-        <input type="text" name="first_name" value="{{user.first_name}}">
-        <input type="text" name="last_name" value="{{user.last_name}}">
-        <input type="submit" value="Edit">
+
+    <form action="{{url_for('show', user_id=user.id)}}?_method=PATCH" method="POST">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ field.label }}
+            {{ field }}
+          
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endif %}
+          
+        {% endfor %}
+        <button type="submit">Edit Your User</button>
     </form>
+    <small><a href="{{url_for('index')}}">Go Home</a></small>
 {% endblock %}
+
