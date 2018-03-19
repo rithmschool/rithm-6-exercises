@@ -1,16 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, SelectMultipleField, widgets, validators
-from project.models import Tag
 
 
 class MessageForm(FlaskForm):
     content = TextField('Please Enter your Message',
                         [validators.DataRequired()])
-    tags = SelectMultipleField(
-        'Tags',
-        coerce=int,
-        widget=widgets.ListWidget(prefix_label=True),
-        option_widget=widgets.CheckboxInput())
 
 
 class DeleteForm(FlaskForm):
