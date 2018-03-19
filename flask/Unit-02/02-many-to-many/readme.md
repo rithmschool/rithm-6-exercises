@@ -2,7 +2,7 @@
 
 ### Part 1 
 
-1. Finish building CRUD in the many to many application with employees and departments. You can find the starter code [here](https://github.com/rithmschool/flask-many-many-example)
+1. Finish building CRUD in the many to many application with employees and departments. You can find the starter code [here](https://github.com/rithmschool/flask-many-many-example). You don't need to submit a PR for this part, it's purely for you to get more practice.
 
 Your app should have the following features:
 
@@ -20,4 +20,5 @@ Add another resource to your users and messages application! Create a resource f
 - When you create a message, you should be able to add existing tags to it. 
 - When you edit a message, you should be able to modify the tags associated to it. 
 - When you create a tag, you should be able to add existing messages to it.
-- When you edit a tag, you should be able to modify the messages associated to it. 
+- When you edit a tag, you should be able to modify the messages associated to it.
+- As a bonus, add some tests for your tags! We've provided some starter test code.
