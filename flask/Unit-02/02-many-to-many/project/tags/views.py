@@ -45,13 +45,13 @@ def show(tag_id):
         #delete form isn't validating
         #why not?
         #I have temporarily removed validation, I will add it back once i debug
-        # if delete_form.validate():
-        db.session.delete(target_tag)
-        db.session.commit()
-        flash('Tag Deleted')
-        return redirect(url_for('users.index'))
+        if delete_form.validate():
+            db.session.delete(target_tag)
+            db.session.commit()
+            flash('Tag Deleted')
+            return redirect(url_for('users.index'))
 
 @tags_blueprint.route('/tags/<int:tag_id>/edit')
 def edit(tag_id):
     target_tag = Tag.query.get(tag_id)
-    return render_template('/tags/edit.html', messages=Message.query.all(), tag=target_tag, form=NewTagForm(obj=target_tag))
+    return render_template('/tags/edit.html', delete_form=DeleteForm(), messages=Message.query.all(), tag=target_tag, form=NewTagForm(obj=target_tag))

@@ -15,6 +15,7 @@
 </form>
 
   <form action="{{url_for('messages.show', user_id=message.user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+    {{ delete_form.hidden_tag() }}
     <input type="submit" value="Delete">
   </form>
 

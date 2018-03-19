@@ -37,7 +37,7 @@ def show(message_id, user_id):
             target_message.content = request.form.get('content')
             db.session.add(target_message)
             db.session.commit()
-            flash('Message editted')
+            flash('Message edited')
             return redirect(url_for('users.show', user_id=user_id))
         else:
             return render_template('/messages/edit.html', user_id=user_id, message=target_message, form=form)
@@ -46,13 +46,13 @@ def show(message_id, user_id):
         #delete form isn't validating
         #why not?
         #I have temporarily removed validation, I will add it back once i debug
-        # if delete_form.validate():
-        db.session.delete(target_message)
-        db.session.commit()
-        flash('Message Deleted')
-        return redirect(url_for('users.show', user_id=target_message.user_id))
+        if delete_form.validate():
+            db.session.delete(target_message)
+            db.session.commit()
+            flash('Message Deleted')
+            return redirect(url_for('users.show', user_id=target_message.user_id))
 
 @messages_blueprint.route('/messages/<int:message_id>/edit')
 def edit(message_id, user_id):
     target_message = Message.query.get(message_id)
-    return render_template('/messages/edit.html', user_id=user_id, tags=Tag.query.all(), message=target_message, form=AddMessage(obj=target_message))
+    return render_template('/messages/edit.html', user_id=user_id, delete_form=DeleteForm(), tags=Tag.query.all(), message=target_message, form=AddMessage(obj=target_message))
