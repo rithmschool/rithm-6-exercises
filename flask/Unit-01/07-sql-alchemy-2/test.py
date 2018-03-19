@@ -1,118 +1,116 @@
-from app import app,db, User, Message
+from app import app, db, User, Message
 from flask_testing import TestCase
 import unittest
 
+
 class BaseTestCase(TestCase):
     def create_app(self):
-        app.config['WTF_CSRF_ENABLED'] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///testing.db'
+        app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
         return app
 
     def setUp(self):
         db.create_all()
-        user1 = User("Elie", "Schoppik")
-        user2 = User("Tim", "Garcia")
-        user3 = User("Matt", "Lane")
-        db.session.add_all([user1, user2, user3])
-        message1 = Message("Hello Elie!!", 1)
-        message2 = Message("Goodbye Elie!!", 1)
-        message3 = Message("Hello Tim!!", 2)
-        message4 = Message("Goodbye Tim!!", 2)
-        db.session.add_all([message1, message2, message3,message4])
+        userTestA = User("Kelson", "Warner")
+        userTestB = User("Jimmy", "Jones")
+        userTestC = User("Test", "User")
+        db.session.add_all([userTestA, userTestB, userTestC])
+        messageTestA = Message(
+            "Contrary to popular belief, Lorem Ipsum is not simply random text.", 1)
+        messageTestB = Message(
+            "It has roots in a piece of classical Latin literature from 45 BC", 2)
+        messageTestC = Message("making it over 2000 years old.", 3)
+        db.session.add_all([messageTestA, messageTestB, messageTestC])
         db.session.commit()
 
     def tearDown(self):
         db.drop_all()
 
-    def test_users_index(self):
-        response = self.client.get('/users', content_type='html/text', follow_redirects=True)
+    def user_index(self):
+        response = self.client.get(
+            '/users', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
-        self.assertIn(b'Elie Schoppik', response.data)
-        self.assertIn(b'Tim Garcia', response.data)
-        self.assertIn(b'Matt Lane', response.data)
+        self.assertIn(b'Kelson Warner', response.data)
+        self.assertIn(b'Jimmy Jones', response.data)
+        self.assertIn(b'Test User', response.data)
 
-    def test_users_show(self):
+    def user_show(self):
         response = self.client.get('/users/1')
         self.assertEqual(response.status_code, 200)
 
-    def test_users_create(self):
+    def user_create(self):
         response = self.client.post(
             '/users',
-            data=dict(first_name="Awesome", last_name="Student"),
-            follow_redirects=True
+            data=dict(first_name="Cool", last_name="Dude",
+                      follow_redirects=True)
         )
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Awesome', response.data)
+        self.assertIn(b'Cool Dude', response.data)
 
-    def test_users_edit(self):
+    def user_edit(self):
         response = self.client.get(
             '/users/1/edit'
         )
-        self.assertIn(b'Elie', response.data)
-        self.assertIn(b'Schoppik', response.data)
+        self.assertIn(b'Kelson', response.data)
+        self.assertIn(b'Warner', response.data)
 
-    def test_users_update(self):
+    def user_update(self):
         response = self.client.patch(
-            '/users/1?_method=PATCH',
-            data=dict(first_name="updated", last_name="information"),
+            '/users/1',
+            data=dict(first_name="Really", last_name="Cooldude"),
             follow_redirects=True
         )
-        self.assertIn(b'updated information', response.data)
-        self.assertNotIn(b'Elie Schoppik', response.data)
+        self.assertIn(b'Really Cooldude', response.data)
+        self.assertNotIn(b'Kelson Warner', response.data)
 
-    def test_users_delete(self):
+    def user_delete(self):
         response = self.client.delete(
-            '/users/1?_method=DELETE',
+            '/users/3',
             follow_redirects=True
         )
-        self.assertNotIn(b'Elie Schoppik', response.data)
+        self.assertNotIn(b'Test User', response.data)
 
-    #### TESTS FOR MESSAGES ####
-
-    def test_messages_index(self):
-        response = self.client.get('/users/1/messages', content_type='html/text', follow_redirects=True)
+    def messages_index(self):
+        response = self.client.get(
+            '/users/2/messages',
+            content_type='html/text',
+            follow_redirects=True)
         self.assertLess(response.status_code, 400)
-        self.assertIn(b'Hello Elie!!', response.data)
-        self.assertIn(b'Goodbye Elie!!', response.data)
+        self.assertIn(
+            b'It has roots in a piece of classical Latin literature from 45 BC', response.data)
 
-    def test_messages_show(self):
+    def messages_show(self):
         response = self.client.get('/users/1/messages/1')
         self.assertEqual(response.status_code, 200)
 
-    def test_messages_create(self):
+    def messages_create(self):
         response = self.client.post(
             '/users/1/messages',
-            data=dict(content="Hi Matt!!", user_id=3),
-            follow_redirects=True
-        )
+            data=dict(content="testingmessage", user_id=3),
+            follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Hi Matt!!', response.data)
+        self.assertIn(b'testingmessage', response.data)
 
-    def test_messages_edit(self):
-        response = self.client.get(
-            '/users/1/messages/1/edit'
-        )
-        self.assertIn(b'Hello Elie!!', response.data)
+    def messages_edit(self):
+        response = self.client.get('/users/1/messages/1/edit')
+        self.assertEqual(response.status_code, 400)
+        response = self.client.get('/users/2/messages/2/edit')
+        self.assertIn(
+            b'It has roots in a piece of classical Latin literature from 45 BC', response.data)
 
-        response = self.client.get(
-            '/users/2/messages/4/edit'
-        )
-        self.assertIn(b'Goodbye Tim!!', response.data)
-
-    def test_messages_update(self):
+    def messages_update(self):
+        response = self.client.get('/users/2/messages/2?_method=PATCH')
+        self.assertEqual(response.status_code, 400)
         response = self.client.patch(
             '/users/1/messages/1?_method=PATCH',
-            data=dict(content="Welcome Back Elie!"),
-            follow_redirects=True
-        )
-        self.assertIn(b'Welcome Back Elie!', response.data)
+            data=dict(content="Lorem Ipsum is Weird"),
+            follow_redirects=True)
+        self.assertNotIn(
+            b'It has roots in a piece of classical Latin literature from 45 BC', response.data)
 
-    def test_messages_delete(self):
+    def messages_delete(self):
         response = self.client.delete(
-            '/users/1/messages/1?_method=DELETE',
-            follow_redirects=True
-        )
-        self.assertNotIn(b'Hello Elie!!', response.data)
+            '/users/3/messages/3?_method=DELETE', follow_redirects=True)
+        self.assertNotIn(b'making it over 2000 years old.', response.data)
 
 
 if __name__ == '__main__':

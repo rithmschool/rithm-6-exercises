@@ -115,6 +115,7 @@ def edit_message(message_id, user_id):
     methods=['GET', 'PATCH', 'DELETE'])
 def show_message(user_id, message_id):
     found_message = Message.query.get_or_404(message_id)
+    found_user = User.query.get_or_404(user_id)
     if request.method == b'PATCH':
         found_message.content = request.form['content']
         db.session.add(found_message)
@@ -124,7 +125,7 @@ def show_message(user_id, message_id):
         db.session.delete(found_message)
         db.session.commit()
         return redirect(url_for('message_index', user_id=user_id))
-    return redirect(url_for('message_index', user_id=user_id))
+    return render_template('messages/show.html', message_id=found_message.id, user=found_user, found_message=found_message)
 
 
 @app.errorhandler(404)
