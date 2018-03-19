@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.tags.forms import DeleteForm, NewTagForm
-from project.models import Tag, User, Tag
+from project.models import Message, User, Tag
 from project import db
 
 tags_blueprint = Blueprint(
@@ -28,7 +28,6 @@ def new():
     return render_template('./tags/new.html', form=NewTagForm())
 
 @tags_blueprint.route('/tags/<int:tag_id>', methods=["PATCH", "DELETE"])
-#this view function has not been tested because of the bug
 def show(tag_id):
     target_tag = Tag.query.get(tag_id)
     if request.method == b'PATCH':
@@ -37,10 +36,10 @@ def show(tag_id):
             target_tag.content = request.form.get('content')
             db.session.add(target_tag)
             db.session.commit()
-            flash('Tag editted')
+            flash('Tag edited')
             return redirect(url_for('users.index'))
         else:
-            return render_template('/tags/edit.html', message=target_tag, form=form)
+            return render_template('/tags/edit.html', tag=target_tag, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         #delete form isn't validating
@@ -55,4 +54,4 @@ def show(tag_id):
 @tags_blueprint.route('/tags/<int:tag_id>/edit')
 def edit(tag_id):
     target_tag = Tag.query.get(tag_id)
-    return render_template('/tags/edit.html', tag=target_tag, form=NewTagForm(obj=target_tag))
+    return render_template('/tags/edit.html', messages=Message.query.all(), tag=target_tag, form=NewTagForm(obj=target_tag))

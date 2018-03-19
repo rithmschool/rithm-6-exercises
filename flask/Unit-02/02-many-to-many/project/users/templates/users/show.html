@@ -13,7 +13,9 @@
 <ul>
   {% for message in user.messages %}
   <li>
-    <a href="{{url_for('messages.edit', message_id=message.id)}}"> {{ message.content }}</a>
+    <!-- all of a sudden I get an error unless I include a user id, even though
+    I only need a message id for messages.edit. why? -->
+    <a href="{{url_for('messages.edit', user_id=user.id, message_id=message.id)}}"> {{ message.content }}</a>
   </li>
   {% endfor %}
 </ul>
