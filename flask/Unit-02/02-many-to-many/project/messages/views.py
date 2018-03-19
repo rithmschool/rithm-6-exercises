@@ -1,5 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import DeleteForm, AddMessage
+from project.tags.forms import NewTagForm
 from project.models import Message, User, Tag
 from project import db
 
@@ -25,7 +26,7 @@ def index(user_id):
 
 @messages_blueprint.route('/new')
 def new(user_id):
-    return render_template('messages/new.html', tags=Tag.query.all(), user_id=user_id, form=AddMessage())
+    return render_template('messages/new.html', tag_form=NewTagForm(), tags=Tag.query.all(), user_id=user_id, form=AddMessage())
 
 @messages_blueprint.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
 def show(message_id, user_id):
