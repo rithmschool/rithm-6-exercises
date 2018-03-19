@@ -26,7 +26,9 @@ def index(user_id):
 
 @messages_blueprint.route('/new')
 def new(user_id):
-    return render_template('messages/new.html', tag_form=NewTagForm(), tags=Tag.query.all(), user_id=user_id, form=AddMessage())
+    form = AddMessage()
+    form.set_choices()
+    return render_template('messages/new.html', user_id=user_id, form=form)
 
 @messages_blueprint.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
 def show(message_id, user_id):
@@ -43,9 +45,6 @@ def show(message_id, user_id):
             return render_template('/messages/edit.html', user_id=user_id, message=target_message, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
-        #delete form isn't validating
-        #why not?
-        #I have temporarily removed validation, I will add it back once i debug
         if delete_form.validate():
             db.session.delete(target_message)
             db.session.commit()
@@ -55,4 +54,6 @@ def show(message_id, user_id):
 @messages_blueprint.route('/messages/<int:message_id>/edit')
 def edit(message_id, user_id):
     target_message = Message.query.get(message_id)
-    return render_template('/messages/edit.html', user_id=user_id, delete_form=DeleteForm(), tags=Tag.query.all(), message=target_message, form=AddMessage(obj=target_message))
+    form = AddMessage(obj=target_message)
+    form.set_choices()
+    return render_template('/messages/edit.html', user_id=user_id, delete_form=DeleteForm(), message=target_message, form=form)

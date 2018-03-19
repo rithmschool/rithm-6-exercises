@@ -17,26 +17,6 @@
   <input type="submit" value="Add Message">
 </form>
 
-<!-- need to make this into a checkbox
-this also needs to extend newmessage form  -->
-
-<!-- <form method="POST" action="{{url_for('messages.index', user_id=user_id)}}">
-  {{ tag_form.hidden_tag() }} {% for field in tag_form if field.widget.input_type != 'hidden' %}
-  <p>
-    {{ field.label }} {{ field }}
-    <span>
-      {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
-    </span>
-  </p>
-  {% endfor %} -->
-
-  <h2>All Tags:</h2>
-  {% for tag in tags %}
-  <p>
-    {{ tag.content }}
-  </p>
-  {% endfor %}
-
 <button>
   <a href="{{url_for('users.show', user_id=user_id)}}">Back to all messages</a>
 </button>

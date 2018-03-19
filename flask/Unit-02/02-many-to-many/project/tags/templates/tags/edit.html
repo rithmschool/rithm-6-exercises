@@ -15,15 +15,9 @@
 </form>
 
   <form action="{{url_for('tags.show', tag_id=tag.id)}}?_method=DELETE" method="POST">
+    {{ delete_form.hidden_tag() }}
     <input type="submit" value="Delete">
   </form>
-
-  <h2>All Messages:</h2>
-  {% for message in messages %}
-    <p>
-      {{ message.content }}
-    </p>
-  {% endfor %}
 
   <button>
     <a href="{{url_for('users.index')}}">Back to all users</a>

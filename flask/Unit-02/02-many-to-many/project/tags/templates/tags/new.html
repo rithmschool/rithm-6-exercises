@@ -16,13 +16,6 @@
   <input type="submit" value="Add Tag">
 </form>
 
-  <h2>All Messages:</h2>
-  {% for message in messages %}
-  <p>
-    {{ message.content }}
-  </p>
-  {% endfor %}
-
 <button>
   <a href="{{url_for('users.index')}}">Back to all users</a>
 </button>
