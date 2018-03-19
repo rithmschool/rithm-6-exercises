@@ -8,7 +8,7 @@
     <p>
         {{user.first_name}} {{user.last_name}}
         <br>
-        <a href="{{url_for('users.show', id=user.id)}}">See more about this user</a>
+        <a href="{{url_for('users.show', id=user.id)}}"> Login to see more about this user</a>
         <a href="{{url_for('messages.index', id = user.id)}}">See all user messages</a>
     </p>
 {% endfor %}
