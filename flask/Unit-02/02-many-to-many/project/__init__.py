@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 import os
 
 app = Flask(__name__)
@@ -15,6 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+bcrypt = Bcrypt(app)
 
 modus = Modus(app)
 db = SQLAlchemy(app)

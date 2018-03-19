@@ -45,8 +45,10 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+    password = db.Column(db.Text)
     messages = db.relationship('Message', backref='user', cascade="all,delete", lazy='dynamic')
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
+        self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
