@@ -2,6 +2,7 @@ from flask import Flask, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
+from flask_debugtoolbar import DebugToolbarExtension
 # from forms import UserForm, MessageForm, DeleteForm
 import os
 
@@ -14,6 +15,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
+toolbar = DebugToolbarExtension(app)
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
