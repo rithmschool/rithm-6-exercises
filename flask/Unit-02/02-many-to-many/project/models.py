@@ -29,3 +29,15 @@ class Message(db.Model):
         self.content = content
         self.users_id = users_id
 
+class Tag(db.Model):
+
+    __tablename_ = "tags"
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    messages_id = db.Column(db.Integer, db.ForeignKey('messages.id'))
+
+    def __init__(self, content, messages_id):
+        self.content = content
+        self.messages_id = messages_id
+
