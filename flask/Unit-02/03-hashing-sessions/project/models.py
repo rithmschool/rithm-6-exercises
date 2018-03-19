@@ -1,4 +1,4 @@
-from project import db
+from project import db, bcrypt
 
 class User(db.Model):
 
@@ -7,9 +7,10 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+    username = db.Column(db.Text, unique=True)
+    password = db.Column(db.Text)
     messages = db.relationship(
         'Message', backref='user', lazy='dynamic', cascade='all,delete')
-
 
 class Message(db.Model):
 

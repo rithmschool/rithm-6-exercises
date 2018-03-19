@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.users.forms import UserForm, DeleteForm
+from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import Message, User
-from project import db
+from project import db, bcrypt
 
 users_blueprint = Blueprint(
     'users',
@@ -15,9 +15,13 @@ def index():
     if request.method == "POST":
         form = UserForm(request.form)
         if form.validate():
+            hashed = bcrypt.generate_password_hash(form.data['password'])
+            hashed_utf8 = hashed.decode('utf8')
             new_user = User(
                 first_name=form.data['first_name'],
-                last_name=form.data['last_name'])
+                last_name=form.data['last_name'],
+                username=form.data['username'],
+                password=hashed_utf8)
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!')
@@ -72,3 +76,19 @@ def show(id):
             form=form,
             delete_form=delete_form)
     return render_template('users/show.html', user=found_user)
+
+
+@users_blueprint.route('/auth', methods=["GET", "POST"])
+def login():
+    login_form = LoginForm(request.form)
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).one()
+
+        if bcrypt.check_password_hash(user.password, password):
+            if login_form.validate():
+                flash('Successfully logged in!')
+                return redirect(url_for('users.login'))
+
+    return render_template('users/login.html', login_form=login_form)

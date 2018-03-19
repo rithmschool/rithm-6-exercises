@@ -2,6 +2,8 @@ from flask import Flask, url_for, redirect
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from flask_debugtoolbar import DebugToolbarExtension
 import os
 
 app = Flask(__name__)
@@ -14,6 +16,7 @@ app.url_map.strict_slashes = False
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
+bcrypt = Bcrypt(app)
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
@@ -28,4 +31,4 @@ def root():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('users.404.html'), 404
