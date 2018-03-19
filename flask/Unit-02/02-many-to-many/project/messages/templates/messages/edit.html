@@ -18,6 +18,13 @@
     <input type="submit" value="Delete">
   </form>
 
+  <h2>All Tags:</h2>
+  {% for tag in tags %}
+  <p>
+    {{ tag.content }}
+  </p>
+  {% endfor %}
+
 <button>
   <a href="{{url_for('users.show', user_id=message.user.id)}}">Back to all messages</a>
 </button>

@@ -25,7 +25,7 @@ def index():
 
 @tags_blueprint.route('/new')
 def new():
-    return render_template('./tags/new.html', form=NewTagForm())
+    return render_template('./tags/new.html', messages=Message.query.all(), form=NewTagForm())
 
 @tags_blueprint.route('/tags/<int:tag_id>', methods=["PATCH", "DELETE"])
 def show(tag_id):
