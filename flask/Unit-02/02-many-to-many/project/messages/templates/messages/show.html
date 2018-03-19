@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<p>
+  Author: {{ user.first_name }} {{ user.last_name }}
+  <br>
+  Content: {{ message.content }}
+  <br>
+  <a href="{{url_for('messages.edit', id=user.id, message_id=message.id)}}">Edit {{ message.content }}</a>
+</p>
+<h1>Return back to message
+  <a href="{{url_for('messages.index', id=user.id)}}">here</a>
+</h1>
+{% endblock %}
