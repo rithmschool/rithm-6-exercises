@@ -2,6 +2,7 @@ from flask import Flask, url_for, redirect, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 from os import environ
 
 app = Flask(__name__)
@@ -23,7 +24,7 @@ from project.messages.views import messages_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/users')
 app.register_blueprint(
-    messages_blueprint, url_prefix='/users/<int:user>/messages')
+    messages_blueprint, url_prefix='/users/<int:user_id>/messages')
 
 
 @app.route('/')

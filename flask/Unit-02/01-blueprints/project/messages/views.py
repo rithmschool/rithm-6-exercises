@@ -20,7 +20,7 @@ def index(user_id):
 def new(user_id):
     user = User.query.get(user_id)
     user_form = NewUser()
-    return render_template('messages/new.html', user=user, user_messages=user.messages, form=user_form)
+    return render_template('messages/new.html', user_id=user, user_messages=user.messages, form=user_form)
 
 # @messages_blueprint.route('//<int:id>')
 # def show_message(user_id, id):

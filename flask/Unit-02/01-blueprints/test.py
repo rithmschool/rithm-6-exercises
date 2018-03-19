@@ -1,8 +1,9 @@
-from project import app,db
+from project import app, db
 from project.users.models import User
 from project.messages.models import Message
 from flask_testing import TestCase
 import unittest
+
 
 class BaseTestCase(TestCase):
     def create_app(self):
@@ -20,14 +21,15 @@ class BaseTestCase(TestCase):
         message2 = Message("Goodbye Elie!!", 1)
         message3 = Message("Hello Tim!!", 2)
         message4 = Message("Goodbye Tim!!", 2)
-        db.session.add_all([message1, message2, message3,message4])
+        db.session.add_all([message1, message2, message3, message4])
         db.session.commit()
 
     def tearDown(self):
         db.drop_all()
 
     def test_users_index(self):
-        response = self.client.get('/users', content_type='html/text', follow_redirects=True)
+        response = self.client.get(
+            '/users', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
         self.assertIn(b'Elie Schoppik', response.data)
         self.assertIn(b'Tim Garcia', response.data)
@@ -73,7 +75,8 @@ class BaseTestCase(TestCase):
     #### TESTS FOR MESSAGES ####
 
     def test_messages_index(self):
-        response = self.client.get('/users/1/messages', content_type='html/text', follow_redirects=True)
+        response = self.client.get(
+            '/users/1/messages', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
         self.assertIn(b'Hello Elie!!', response.data)
         self.assertIn(b'Goodbye Elie!!', response.data)

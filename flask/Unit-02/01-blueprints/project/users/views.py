@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.users.forms import UserForm, DeleteForm
+from project.users.forms import NewUser, DeleteForm
 from project.models import User
 from project import db
 
@@ -48,7 +48,7 @@ def create():
         flash('User created!')
     else:
         return render_template('users/new.html', form=user_form)
-    return redirect(url_for('index'))
+    return redirect(url_for('users.index'))
 # ----------------------------------------------------------------------------
 
 
@@ -57,20 +57,18 @@ def update(id):
     found_user = User.query.get(id)
     form = NewUser(request.form)
     if request.method == b'PATCH':
-        from IPython import embed
-        embed()
         if form.validate():
             found_user.first_name = form.data['first_name']
             found_user.last_name = form.data['last_name']
             db.session.add(found_user)
             db.session.commit()
             flash('User updated!')
-            return redirect(url_for('index'))
+            return redirect(url_for('users.index'))
         return render_template('users/edit.html', user=found_user, form=form)
     return render_template('users/edit.html', user=found_user, form=form)
 
 
-@app.route('/<int:id>', methods=['DELETE'])
+@users_blueprint.route('/<int:id>', methods=['DELETE'])
 def destroy(id):
     delete_form = DeleteForm(request.form)
     user = User.query.get(id)
@@ -81,4 +79,4 @@ def destroy(id):
         db.session.commit()
         flash('User deleted!')
         return redirect(url_for('index'))
-    return redirect(url_for('index'))
+    return redirect(url_for('users.index'))
