@@ -6,17 +6,19 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, PasswordField, IntegerField, validators
 from forms import UsersForm, MessagesForm, DeleteForm
 import os
-import config
+
 
 app = Flask(__name__)
 if os.environ.get('ENV') == 'production':
-    app.config.from_object('config.ProductionConfig')
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    app.config['DEBUG'] = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/user-messages'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
 
 modus = Modus(app)
 db = SQLAlchemy(app)
@@ -120,7 +122,8 @@ def show(user_id):
             db.session.delete(found_user)
             db.session.commit()
             return redirect(url_for('index'))
-    return render_template('users/show.html', user=found_user, delete_form=delete_form)
+    return render_template('users/show.html', user=found_user,
+                           delete_form=delete_form)
 
 
 @app.route("/users/<int:user_id>/edit")
@@ -142,6 +145,7 @@ def edit_message(message_id, user_id):
     '/users/<int:user_id>/messages/<int:message_id>',
     methods=['GET', 'PATCH', 'DELETE'])
 def show_message(user_id, message_id):
+    delete_form = DeleteForm()
     found_message = Message.query.get_or_404(message_id)
     found_user = User.query.get_or_404(user_id)
     if request.method == b'PATCH':
@@ -152,13 +156,13 @@ def show_message(user_id, message_id):
             db.session.commit()
             return redirect(url_for('message_index', user_id=user_id))
         return render_template('messages/edit.html', message=found_message, form=form)
-    if request.method == b"DELETE":
-        delete_form = Delete.form(request.form)
+    if request.method == b'DELETE':
+        delete_form = DeleteForm(request.form)
         if delete_form.validate():
             db.session.delete(found_message)
             db.session.commit()
-            return redirect(url_for('message_index', user_id=user_id))
-    return render_template('messages/show.html', message_id=found_message.id, user=found_user, found_message=found_message)
+            return redirect(url_for('index'))
+    return render_template('messages/show.html', message_id=found_message.id, user=found_user, found_message=found_message, delete_form=delete_form)
 
 
 @app.errorhandler(404)
