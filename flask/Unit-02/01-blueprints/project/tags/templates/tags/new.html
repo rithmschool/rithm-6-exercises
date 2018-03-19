@@ -1,8 +1,7 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<h3>EDIT</h3>
-<form method="POST" action="{{url_for('messages.show', message_id=message.id, user_id=message.user_id)}}?_method=PATCH">
+<form action="{{url_for('tags.index')}}" method="POST">
   {{ form.hidden_tag() }}
   {% for field in form if field.widget.input_type != 'hidden' %}
     {{ field.label }}
@@ -15,7 +14,8 @@
     {% endif %}
 
   {% endfor %}
-  
-  <input type="submit" value="Save your changes!">
+  <button type="submit">Submit</button>
+
 </form>
+
 {% endblock %}
