@@ -1,19 +1,22 @@
 from flask import Flask, request, redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, PasswordField, IntegerField, validators
 from forms import UsersForm, MessagesForm, DeleteForm
 import os
-
+import config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/user-messages'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-# app.config['SQLALCHEMY_ECHO'] = True
+if os.environ.get('ENV') == 'production':
+    app.config.from_object('config.ProductionConfig')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/user-messages'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
 
 modus = Modus(app)
 db = SQLAlchemy(app)
@@ -161,3 +164,7 @@ def show_message(user_id, message_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html')
+
+
+if __name__ == '__main__':
+    app.run(port=3000)

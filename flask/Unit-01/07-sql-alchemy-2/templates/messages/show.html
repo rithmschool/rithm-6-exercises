@@ -10,7 +10,6 @@
 <br>
 <form action="{{url_for('show_message', message_id = found_message.id, user_id=user.id)}}?_method=DELETE" method="POST">
     {{ delete_form.hidden_tag() }}
-    <i class="fas fa-pen-square"></i>Delete Message</a>
 <input type="submit" value="Delete">
 </form>
 <small><a href="{{url_for('index')}}">Go Home</a></small>
