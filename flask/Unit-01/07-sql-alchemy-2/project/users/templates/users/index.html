@@ -38,8 +38,8 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-                <p class="card-text"><a href="{{url_for('users.show', id=user.id)}}" class="btn btn-primary mx-1">See Profile!&nbsp;<i class="fas fa-user"></i></a>
-                  <a href="{{url_for('users.edit', id=user.id)}}" class="btn btn-primary">Edit&nbsp;<i class="fas fa-user"></i></a>
+                <p class="card-text"><a href="{{url_for('users.show', id=user.id)}}" class="btn btn-primary mx-1">See Profile!&nbsp;&nbsp;<i class="fas fa-user"></i></a>
+                  <a href="{{url_for('users.edit', id=user.id)}}" class="btn btn-primary">Edit&nbsp;&nbsp;<i class="fas fa-user"></i></a>
                 </p>
 
                 <a href="{{url_for('messages.index', user_id=user.id)}}" class="btn btn-primary btn-sm mx-1">See Messages!&nbsp;<i class="fas fa-envelope"></i> </a>
