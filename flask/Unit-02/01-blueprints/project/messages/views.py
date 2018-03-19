@@ -36,7 +36,7 @@ def new(id):
 def show(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)
-    form = MessageForm(obj=found_message)
+    form = MessageForm(request.form)
     delete_form = DeleteForm(request.form)
     if request.method == b"PATCH":
         if form.validate():

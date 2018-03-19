@@ -9,18 +9,22 @@ Edit User!
 <h1>Edit this user's info: {{ user.first_name }} {{ user.last_name }}</h1>
 <form action="{{url_for('users.show', id=user.id)}}?_method=PATCH" method="POST">
     {{ form.hidden_tag() }}
-    {% for field in form if field.widget.input_type != 'hidden' %}
-    <div>
-      {{ field.label }} {{ field }}
-      <span>
-        {% if field.errors %}
-          {% for error in field.errors %}
-            {{ error }}
-          {% endfor %}
-        {% endif %}
-      </span>
-    </div>
-    {% endfor %}
+    <p>
+      {{ form.first_name.label }} {{ form.first_name(value=user.first_name) }}
+      {% if form.first_name.errors %}
+        {% for error in form.first_name.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </p>
+    <p>
+      {{ form.last_name.label }} {{ form.last_name(value=user.last_name) }}
+      {% if form.last_name.errors %}
+        {% for error in form.last_name.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </p>
   <button type="submit">Submit Edit!</button>
 </form>
 <h1>...or delete!</h1>

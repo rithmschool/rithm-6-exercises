@@ -35,12 +35,10 @@ def new():
 @users_blueprint.route("/<int:id>", methods=["GET", "PATCH", "DELETE"])
 def show(id):
     found_user = User.query.get(id)
-    form = UserForm(obj=found_user)
+    form = UserForm(request.form)
     delete_form = DeleteForm(request.form)
     if request.method == b"PATCH":
-        form = UserForm(request.form)
         if form.validate():
-            
             found_user.first_name = form.data["first_name"]
             found_user.last_name = form.data["last_name"]
             db.session.add(found_user)
@@ -61,6 +59,6 @@ def show(id):
 @users_blueprint.route("/<int:id>/edit")
 def edit(id):
     found_user = User.query.get(id)
-    form = UserForm(obj=found_user)
+    form = UserForm(request.form)
     delete_form = DeleteForm()
     return render_template("users/edit.html", user=found_user, form=form, delete_form=delete_form)
