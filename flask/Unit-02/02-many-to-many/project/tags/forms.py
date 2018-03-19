@@ -3,7 +3,7 @@ from wtforms import BooleanField, StringField, PasswordField, IntegerField, vali
 from wtforms.validators import DataRequired
 
 class NewTagForm(FlaskForm):
-    name = TextField('Name', validators=[DataRequired()])
+    content = TextField('Content', validators=[DataRequired()])
     # departments = SelectMultipleField('Messages',
     #                                  coerce=int,
     #                                  choices=[(d.id, d.name) for d in Message.query.all()])

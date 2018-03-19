@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.users.forms import AddForm, DeleteForm
-from project.models import User
+from project.models import User, Tag
 from project import db
 
 users_blueprint = Blueprint(
@@ -23,7 +23,7 @@ def index():
             return redirect(url_for('users.index'))
         else:
             return render_template('./users/new.html', form=form)
-    return render_template('./users/index.html', users=User.query.all(), form=DeleteForm())
+    return render_template('./users/index.html', users=User.query.all(), tags=Tag.query.all(), form=DeleteForm())
 
 @users_blueprint.route('/new')
 def new():
@@ -52,7 +52,7 @@ def show(user_id):
             return redirect(url_for('users.index'))
     return render_template('/users/show.html', user=target_user)
 
-@users_blueprint.route('/<int:id>/edit')
-def edit(id):
-    target_user = User.query.get(id)
+@users_blueprint.route('/<int:user_id>/edit')
+def edit(user_id):
+    target_user = User.query.get(user_id)
     return render_template('/users/edit.html', user=target_user, form=AddForm(obj=target_user))

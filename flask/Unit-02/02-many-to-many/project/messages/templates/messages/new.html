@@ -14,20 +14,11 @@
   </p>
   {% endfor %}
 
-  {% for %}
-
-  {% endfor %}
-
-
-
-
-
-
   <input type="submit" value="Add Message">
 </form>
 
 <button>
-  <a href="{{url_for('users.show', id=user_id)}}">Back to all messages</a>
+  <a href="{{url_for('users.show', user_id=user_id)}}">Back to all messages</a>
 </button>
 
 {% endblock %}

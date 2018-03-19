@@ -20,7 +20,7 @@ class Message(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     #why do I ONLY need this in tag? Why not in both models?
-    # tags = db.relationship("Tag", secondary=MessageTag, backref=db.backref('messages'))
+    tags = db.relationship("Tag", secondary=MessageTag, backref=db.backref('messages'))
 
     def __init__(self, content, user_id):
         self.content = content
@@ -33,9 +33,9 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
-    messages = db.relationship("Message", secondary=MessageTag, backref=db.backref('tags'))
+    # messages = db.relationship("Message", secondary=MessageTag, backref=db.backref('tags'))
 
-    def __init__(self, content, user_id):
+    def __init__(self, content):
         self.content = content
 
 class User(db.Model):

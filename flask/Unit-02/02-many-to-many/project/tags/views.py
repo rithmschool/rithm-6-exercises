@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.tags.forms import DeleteForm, NewTagForm
-from project.models import Message, User
+from project.models import Tag, User, Tag
 from project import db
 
 tags_blueprint = Blueprint(
@@ -10,52 +10,49 @@ tags_blueprint = Blueprint(
 )
 
 @tags_blueprint.route('/', methods=["POST"])
-#this view function has not been checked yet because of the bug
-def index(id):
+def index():
     if request.method == 'POST':
-        form = AddMessage(request.form)
+        form = NewTagForm(request.form)
         if form.validate():
             content = request.form.get('content')
-            user_id = id
-            new_message = Message(content, user_id)
+            new_message = Tag(content)
             db.session.add(new_message)
             db.session.commit()
-            flash('Message added')
-            return redirect(url_for('users.show', id=id))
+            flash('Tag added')
+            return redirect(url_for('users.index'))
         else:
             return render_template('./tags/new.html', form=form)
-    return render_template('tags/index.html')
 
 @tags_blueprint.route('/new')
 def new():
     return render_template('./tags/new.html', form=NewTagForm())
 
-@tags_blueprint.route('/tags/<int:message_id>', methods=["PATCH", "DELETE"])
+@tags_blueprint.route('/tags/<int:tag_id>', methods=["PATCH", "DELETE"])
 #this view function has not been tested because of the bug
-def show(message_id):
-    target_message = Message.query.get(message_id)
+def show(tag_id):
+    target_tag = Tag.query.get(tag_id)
     if request.method == b'PATCH':
-        form = AddMessage(request.form)
+        form = NewTagForm(request.form)
         if form.validate():
-            target_message.content = request.form.get('content')
-            db.session.add(target_message)
+            target_tag.content = request.form.get('content')
+            db.session.add(target_tag)
             db.session.commit()
-            flash('Message editted')
-            return redirect(url_for('users.show', id=target_message.user_id))
+            flash('Tag editted')
+            return redirect(url_for('users.index'))
         else:
-            return render_template('/tags/edit.html', message=target_message, form=form)
+            return render_template('/tags/edit.html', message=target_tag, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         #delete form isn't validating
         #why not?
         #I have temporarily removed validation, I will add it back once i debug
         # if delete_form.validate():
-        db.session.delete(target_message)
+        db.session.delete(target_tag)
         db.session.commit()
-        flash('Message Deleted')
-        return redirect(url_for('users.show', id=target_message.user_id))
+        flash('Tag Deleted')
+        return redirect(url_for('users.index'))
 
-@tags_blueprint.route('/tags/<int:message_id>/edit')
-def edit(message_id):
-    target_message = Message.query.get(message_id)
-    return render_template('/tags/edit.html', message=target_message, form=AddMessage(obj=target_message))
+@tags_blueprint.route('/tags/<int:tag_id>/edit')
+def edit(tag_id):
+    target_tag = Tag.query.get(tag_id)
+    return render_template('/tags/edit.html', tag=target_tag, form=NewTagForm(obj=target_tag))

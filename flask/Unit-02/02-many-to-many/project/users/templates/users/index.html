@@ -11,25 +11,32 @@
 <ul>
   {% for user in users %}
     <li>
-      <a href="{{url_for('users.show', id=user.id)}}"> {{ user.first_name }} {{ user.last_name}}</a>
+      <a href="{{url_for('users.show', user_id=user.id)}}"> {{ user.first_name }} {{ user.last_name}}</a>
 
       <button>
-        <a href="{{url_for('users.edit', id=user.id)}}">Edit user</a>
+        <a href="{{url_for('users.edit', user_id=user.id)}}">Edit user</a>
       </button>
 
-      <form method="POST" action="{{url_for('users.show', id=user.id)}}?_method=DELETE">
+      <form method="POST" action="{{url_for('users.show', user_id=user.id)}}?_method=DELETE">
         {{ form.hidden_tag() }}
         <input type="submit" value="Delete User">
       </form>
 
     </li>
-
-
-<button>
-  <a href="{{url_for('tags.new')}}">Add a new tag</a>
-</button>
-
   {% endfor %}
+
+
+  <h2>Tags:</h2>
+  <button>
+    <!-- this should be tags.new once I get that working -->
+    <a href="{{url_for('tags.new')}}">Add a new tag</a>
+  </button>
+  {% for tag in tags %}
+    <a href="{{url_for('tags.edit', tag_id=tag.id)}}">
+      {{ tag.content }}
+    </a>
+  {% endfor %}
+
 </ul>
 
 {% endblock %}
