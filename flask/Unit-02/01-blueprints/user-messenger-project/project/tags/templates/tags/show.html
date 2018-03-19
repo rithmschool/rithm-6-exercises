@@ -4,10 +4,10 @@
 <p>
     {{tag.subject}}
     <br>
-    <a href="{{url_for('tags.edit', id = tag.id)}}">Edit this tag</a>
+    <a href="{{url_for('tags.edit', tag_id = tag.id)}}">Edit this tag</a>
 </p>
 
-<form action="{{url_for('tags.show', id = tag.id)}}?_method = DELETE">
+<form action="{{url_for('tags.show', tag_id = tag.id)}}?_method = DELETE">
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
     <p>

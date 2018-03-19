@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.users.forms import UserForm
-from project.models import db
+from project import db
 from project.models import Message, User
 
 users_blueprint = Blueprint(
@@ -23,8 +23,8 @@ def index():
             flash('User Created!')
             return redirect(url_for('users.index'))
         else:
-            return render_template("new.html", form = form)
-    return render_template("/users/index.html", users = User.query.all())
+            return render_template("users/new.html", form = form)
+    return render_template("users/index.html", users = User.query.all())
 
 @users_blueprint.route("/new")
 def new():
@@ -36,12 +36,14 @@ def show(id):
     form = UserForm()
     found_user = User.query.get(id)
     if request.method == b'PATCH':
-        found_user.first_name = request.form['first_name']
-        found_user.last_name = request.form['last_name']
-        db.session.add(found_user)
-        db.session.commit()
+        if form.validate():
+            found_user.first_name = request.form['first_name']
+            found_user.last_name = request.form['last_name']
+            db.session.add(found_user)
+            db.session.commit()
         return redirect(url_for('users.index'))
-    elif request.method == b"DELETE":
+    return render_template('/users/edit.html', user = found_user, form = form)
+    if request.method == b"DELETE":
         db.session.delete(found_user)
         db.session.commit()
         return redirect(url_for('users.index'))
@@ -50,5 +52,5 @@ def show(id):
 @users_blueprint.route("/<int:id>/edit", methods = ["GET"])
 def edit(id):
     found_user = User.query.get(id)
-    
-    return render_template("/users/edit.html", user = found_user)
+    form = UserForm(obj = found_user)
+    return render_template("/users/edit.html", user = found_user, form = form)

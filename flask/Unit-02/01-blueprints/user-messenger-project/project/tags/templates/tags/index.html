@@ -6,7 +6,7 @@
 
 {% for tag in tags%}
 <p>
-    {tag.subject}
+    {{tag.subject}}
     <br>
 <a href="{{url_for('tags.show', tag_id = tag.id)}}">See more info about this tag</a>
 

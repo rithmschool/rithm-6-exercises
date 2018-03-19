@@ -1,11 +1,11 @@
-from flask import Flask,redirect, url_for
+from flask import Flask,redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 app = Flask(__name__)
 app.config[
-    'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/usersdb"
+    'SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users-messagesdb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST" action="{{url_for('messages.index', id = id)}}">
+<form method="POST" action="{{url_for('messages.index', id = user.id)}}">
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
@@ -18,7 +18,6 @@
     </p>
     {% endfor %}
     <p>
-        {{form.tags}}
     </p>
     <input type="submit" value="Add Message">
 </form>

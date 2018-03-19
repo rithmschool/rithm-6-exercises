@@ -1,8 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-
+<h2>Message Headline</h2>
 <p>
   {{message.content}}
   <br>
+<h2>Tags Associated with this message</h2>
+  {% for tag in tags%}
+  <p>
+      {{tag.subject}}
+  </p>
+  {% endfor %}
   <a href="{{url_for('messages.edit',id = message.user_id, message_id = message.id)}}">Edit this message</a>
 </p>
 
