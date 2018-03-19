@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import MessageForm, DeleteForm
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project import db
 
 messages_blueprint = Blueprint(
@@ -15,6 +15,7 @@ def index(id):
     found_user = User.query.get(id)
     if request.method == "POST":
         form = MessageForm(request.form)
+        form.set_choices()
         if form.validate():
             new_message = Message(content=form.data["content"],
                                   message_id=id)
@@ -29,6 +30,7 @@ def index(id):
 @messages_blueprint.route("/new")
 def new(id):
     form = MessageForm(request.form)
+    form.set_choices()
     return render_template("messages/new.html", id=id, form=form)
 
 
@@ -36,11 +38,17 @@ def new(id):
 def show(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)
+    tags = [tag for tag in found_message.tags]
     form = MessageForm(request.form)
+    form.set_choices()
     delete_form = DeleteForm(request.form)
     if request.method == b"PATCH":
         if form.validate():
             found_message.content = form.data["content"]
+            found_message.tags = []
+            for tag in form.tags.data:
+                found_message.tags.append(
+                    Tag.query.get(tag))
             db.session.add(found_message)
             db.session.commit()
             flash("Message updated!")
@@ -53,7 +61,7 @@ def show(id, message_id):
             flash("Message deleted!")
             return redirect(url_for("messages.index", id=found_user.id))
         return render_template("messages/edit.html", message=found_message, user=User.query.get(id), form=form, delete_form=delete_form)
-    return render_template("messages/show.html", user=found_user, message=found_message)
+    return render_template("messages/show.html", user=found_user, message=found_message, tags=tags)
 
 
 @messages_blueprint.route("/<int:message_id>/edit")
@@ -61,5 +69,8 @@ def edit(id, message_id):
     found_user = User.query.get(id)
     found_message = Message.query.get(message_id)
     form = MessageForm(obj=found_message)
+    tags = [tag for tag in found_message.tags]
+    form.set_choices()
     delete_form = DeleteForm()
-    return render_template("messages/edit.html", message=found_message, user=User.query.get(id), form=form, delete_form=delete_form)
+
+    return render_template("messages/edit.html", message=found_message, user=User.query.get(id), form=form, delete_form=delete_form, tags=tags)

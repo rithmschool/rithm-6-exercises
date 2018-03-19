@@ -9,16 +9,15 @@ New Message!
 <form action="{{url_for('messages.index', id=id)}}" method="POST">
   {{ form.hidden_tag() }}
   {% for field in form if field.widget.input_type != 'hidden' %}
-  <div>
-    {{ field.label }} {{ field }}
-    <span>
+  <p>
+      {{field.label}}
+      {{field}}
       {% if field.errors %}
-        {% for error in field.errors %}
-          {{ error }}
-        {% endfor %}
-      {% endif %}
-    </span>
-  </div>
+      {% for error in field.errors %}
+        {{ error }}
+      {% endfor %}
+    {% endif %}
+  </p>
   {% endfor %}
   <button type="submit">Add content!</button>
 </form>
