@@ -13,14 +13,15 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-light bg-light py-0">
-        <a class="navbar-brand" href="{{url_for('users.index')}}">
+    <nav class="navbar fixed-top navbar-light bg-info  text-white py-0">
+        <a class="navbar-brand text-white" href="{{url_for('users.index')}}">
             <i class="far fa-comments"></i> MessageBox
         </a>
         <div class="navbar-right">
-            <a href="{{url_for('users.new')}}">Sign Up</a> | {% if g.current_user %}
-            <a href="{{url_for('users.logout')}}"></span> Logout</a> {% else %}
-            <a href="{{url_for('users.login')}}"></span> Login</a> {% endif %}
+            {% if g.current_user %} {{ g.current_user.username }} |
+            <a href="{{url_for('users.logout')}}" class="text-white"></span> Logout</a> {% else %}
+            <a href="{{url_for('users.new')}}" class="text-white">Sign Up</a> |
+            <a href="{{url_for('users.login')}}" class="text-white"></span> Login</a> {% endif %}
         </div>
     </nav>
 
