@@ -1,18 +1,35 @@
-from flask import Flask, redirect, render_template, request, url_for, flash, Blueprint, session
+from flask import Flask, redirect, render_template, request, url_for, flash, Blueprint, session, g
 from sqlalchemy.exc import IntegrityError
-from project.users.forms import UserForm, DeleteForm, LoginForm
+from project.users.forms import UserForm, DeleteForm, LoginForm, EditForm
 from project.models import Message, User
 from project import db, bcrypt
-from project.decorators import ensure_authenticated
+from project.decorators import ensure_authenticated, prevent_multiple_login_signup, ensure_authorized
 
 users_blueprint = Blueprint(
     'users',
     __name__,
     template_folder = 'templates'
 )
-@users_blueprint.route('/', methods=["GET", "POST"])
+
+
+@users_blueprint.before_request
+def current_user():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
+
+
+@users_blueprint.route('/')
+@ensure_authenticated
 def index():
     delete_form = DeleteForm()
+    return render_template('users/index.html', users=User.query.all(), delete_form=delete_form)
+
+
+@users_blueprint.route('/', methods=["GET", "POST"])
+@prevent_multiple_login_signup
+def signup():
     if request.method == "POST":
         form = UserForm(request.form)
         if form.validate():
@@ -32,30 +49,33 @@ def index():
             except IntegrityError as error:
                 return render_template('users/new.html', form=form, error='username_error')
         return render_template('users/new.html', form=form)
-    return render_template(
-        'users/index.html', users=User.query.all(), delete_form=delete_form)
 
 
 @users_blueprint.route('/new')
+@prevent_multiple_login_signup
 def new():
     form = UserForm()
     return render_template('users/new.html', form=form)
 
 
 @users_blueprint.route('/<int:id>/edit')
+@ensure_authenticated
+@ensure_authorized
 def edit(id):
     found_user = User.query.get_or_404(id)
-    form = UserForm(obj=found_user)
+    form = EditForm(obj=found_user)
     delete_form = DeleteForm(request.form)
     return render_template(
         'users/edit.html', user=found_user, form=form, delete_form=delete_form)
 
 
 @users_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@ensure_authenticated
+@ensure_authorized
 def show(id):
     found_user = User.query.get_or_404(id)
     delete_form = DeleteForm(request.form)
-    form = UserForm(request.form)
+    form = EditForm(request.form)
     if request.method == b"PATCH":
         if form.validate():
             found_user.first_name = form.first_name.data
@@ -84,23 +104,19 @@ def show(id):
 
 
 @users_blueprint.route('/auth', methods=["GET", "POST"])
+@prevent_multiple_login_signup
 def login():
     login_form = LoginForm(request.form)
     if request.method == "POST":
-        # username = request.form.get('username')
-        # password = request.form.get('password')
-        # user = User.query.filter_by(username=username).one()
-
-        # if bcrypt.check_password_hash(user.password, password):
-            if login_form.validate():
-                authenticated_user = User.authenticate(login_form.username.data, login_form.password.data)
-                if authenticated_user:
-                    session['user_id'] = authenticated_user.id
-                    flash('Successfully logged in!')
-                    return redirect(url_for('users.index'))
-                else:
-                    flash('Invalid credentials')
-                    return redirect(url_for('users.login'))
+        if login_form.validate():
+            authenticated_user = User.authenticate(login_form.username.data, login_form.password.data)
+            if authenticated_user:
+                session['user_id'] = authenticated_user.id
+                flash('Successfully logged in!')
+                return redirect(url_for('users.index'))
+            else:
+                flash('Invalid credentials')
+                return redirect(url_for('users.login'))
     return render_template('users/login.html', login_form=login_form)
 
 

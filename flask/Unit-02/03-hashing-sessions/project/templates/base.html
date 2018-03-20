@@ -18,20 +18,20 @@
             <i class="far fa-comments"></i> MessageBox
         </a>
         <div class="navbar-right">
-            <a href="{{url_for('users.new')}}">Sign Up</a> |
-            <a href="{{url_for('users.login')}}"></span> Login</a> |
-            <a href="{{url_for('users.logout')}}"></span> Logout</a>
+            <a href="{{url_for('users.new')}}">Sign Up</a> | {% if g.current_user %}
+            <a href="{{url_for('users.logout')}}"></span> Logout</a> {% else %}
+            <a href="{{url_for('users.login')}}"></span> Login</a> {% endif %}
         </div>
     </nav>
 
-    <div class="container pt-5">
+    <div class="container pt-5 center">
         {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
         <div class="alert alert-{{ category }} alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <p><strong>{{ message }}</strong></p>
         </div>
         {% endfor %} {% endif %} {% endwith %}
-        <div class="container w-50 p-3">{% block content %} {% endblock %}</div>
+        <div class="container p-3">{% block content %} {% endblock %}</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
