@@ -9,7 +9,6 @@ messages_blueprint = Blueprint(
 
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
-@require_login
 def index(user_id):
     delete_form = DeleteForm()
     if request.method == "POST":

@@ -9,7 +9,6 @@ users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
 @users_blueprint.route('/')
-@require_login
 def index():
     return render_template('users/index.html', users=User.query.all())
 
@@ -41,6 +40,7 @@ def signup():
 
 @users_blueprint.route('/new')
 @prevent_login_signup
+@require_login
 def new():
     form = UserForm()
     return render_template('users/new.html', form=form)
@@ -80,7 +80,6 @@ def edit(user_id):
 
 
 @users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
-@require_login
 def show(user_id):
     found_user = User.query.get_or_404(user_id)
     delete_form = DeleteForm()
