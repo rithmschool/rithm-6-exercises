@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session
 from project.messages.forms import MessageForm
 from project.models import Message, User, Tag
 from project import db
