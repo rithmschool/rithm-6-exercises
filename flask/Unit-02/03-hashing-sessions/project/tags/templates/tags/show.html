@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %} Show Tag {% endblock %} {% block content %}
+
+<p> {{tag.id}} | {{tag.content}}
+  <br>
+  <br>
+  <b>Messages associated with this tag</b>
+  <br> {% for message in messages %} {{message}} | {% endfor %}
+  <br>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('tags.edit_tags', tag_id=tag.id)}}">Edit Tag</a>
+  <br>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('tags.new_tags', tag_id=tag.id)}}">Create a New Tag</a>
+</p>
+
+<form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=DELETE" method="POST">
+  {{delete_form.hidden_tag()}}
+  <input type="submit" class="btn btn-primary" value='Delete Me'>
+</form>
+<br>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">List of Tags</a>
+<a class="btn btn-primary" href="{{url_for('root')}}">Home</a>
+{% endblock %}
