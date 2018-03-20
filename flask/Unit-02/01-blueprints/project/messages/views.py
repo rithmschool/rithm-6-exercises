@@ -1,5 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import DeleteForm, MessageForm
+from project.users.forms import NewUser
 from project.models import Message, User
 from project import db
 
@@ -18,9 +19,9 @@ def index(user_id):
 
 @messages_blueprint.route('/new')
 def new(user_id):
-    user = User.query.get(user_id)
+    user_id = User.query.get(user_id)
     user_form = NewUser()
-    return render_template('messages/new.html', user_id=user, user_messages=user.messages, form=user_form)
+    return render_template('messages/new.html', user_id=user_id, user_messages=user_id.messages, form=user_form)
 
 # @messages_blueprint.route('//<int:id>')
 # def show_message(user_id, id):
@@ -44,8 +45,8 @@ def post_new(user_id):
         db.session.add(message)
         db.session.commit()
         flash('Message Created')
-        return redirect(url_for('message.new', user_id=user_id, messages=Message.query.all()))
-    return redirect(url_for('message.new', user_id=user_id, messages=Message.query.all()))
+        return redirect(url_for('messages.new', user_id=User.query.get(user_id).id, messages=Message.query.all()))
+    return redirect(url_for('messages.new', user_id=user_id, messages=Message.query.all()))
 # ----------------------------------------------------------------------------
 
 
@@ -65,4 +66,4 @@ def delete(user_id, id):
     db.session.delete(message)
     db.session.commit()
     flash('Message Deleted!')
-    return redirect(url_for('messages.index', user_id=user_id))
+    return redirect(url_for('messages.new', user_id=user_id))

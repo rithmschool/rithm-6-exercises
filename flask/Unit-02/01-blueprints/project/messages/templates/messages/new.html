@@ -3,9 +3,9 @@
 {% block content %}
 <br>
 <div class="container p-3 mb-2 bg-secondary text-white rounded">
-        <p class="text-right"> You are logged in as {{user.first_name}}</p>
+        <p class="text-right"> You are logged in as {{user_id.first_name}}</p>
 <div class="form-group">
-<form action="{{url_for('messages.post_new', user_id=user.id)}}" method="POST">
+<form action="{{url_for('messages.post_new', user_id=user_id.id)}}" method="POST">
     
     <label for="content">Type your message</label>
     <textarea class="form-control" name="content" id="content" rows="3"></textarea>
@@ -31,19 +31,22 @@
 <table class="table">
         <thead class="thead-inverse">
           <tr>
-            <th>#</th>
-            <th>User first_name</th>
+            <th>UserID #</th>
+            <th>User Name</th>
             <th>Message.content</th>
-            <th>Delete Link</th>
+            <th>Delete</th>
           </tr>
         </thead>
 
         {% for message in user_messages %}
         <tbody>
           <tr>
-            <th scope="row">{{user.id}}</th>
-            <td>{{message.user.first_name}}</td>
+            <th scope="row">{{user_id.id}}</th>
+            <td>{{user_id.first_name}} {{user_id.last_name}}</td>
             <td>{{message.content}}</td> 
+            <td>{{message.user_id.first_name}}</td>
+            <td><a class="btn btn-link" href="{{url_for('messages.delete', user_id=user_id.id, id=message.id)}}?_method=DELETE">Delete</td>
+                              
           </tr>
         </tbody>
         {% endfor %}
