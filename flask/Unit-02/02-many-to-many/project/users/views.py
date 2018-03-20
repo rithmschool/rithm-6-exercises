@@ -9,7 +9,7 @@ users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index_users():
-    ''''''
+    '''Display list of users'''
 
     if request.method == 'POST':
         user_form = UserForm(request.form)
@@ -36,10 +36,7 @@ def new_users():
 def show_users(user_id):
     ''''''
 
-    found_user = User.query.get(user_id)
-    if found_user is None:
-        return render_template("404.html")
-
+    found_user = User.query.get_or_404(user_id)
     delete_form = DeleteForm()
 
     if request.method == b'PATCH':
@@ -68,10 +65,7 @@ def show_users(user_id):
 def edit_users(user_id):
     ''''''
 
-    found_user = User.query.get(user_id)
-    if found_user is None:
-        return render_template("404.html")
-
+    found_user = User.query.get_or_404(user_id)
     delete_form = DeleteForm()
     user_form = UserForm(obj=found_user)
     return render_template('users/edit.html', user=found_user, form=user_form, delete_form=delete_form)

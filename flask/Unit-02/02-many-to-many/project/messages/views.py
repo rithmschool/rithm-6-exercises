@@ -11,9 +11,7 @@ messages_blueprint = Blueprint('messages', __name__, template_folder='templates'
 def index_messages(user_id):
     '''Create a new message'''
 
-    found_user = User.query.get(user_id)
-    if found_user is None:
-        return render_template("404.html")
+    found_user = User.query.get_or_404(user_id)
 
     if request.method == 'POST':
         message_form = MessageForm(request.form)
@@ -28,6 +26,7 @@ def index_messages(user_id):
             db.session.commit()
             flash('Message Created!')
             return redirect(url_for('messages.index_messages', user_id=user_id))
+
         else:
             return render_template('messages/new.html', user=found_user, form=message_form)
 
@@ -38,10 +37,7 @@ def index_messages(user_id):
 def new_messages(user_id):
     '''Creates a new message'''
 
-    found_user = User.query.get(user_id)
-    if found_user is None:
-        return render_template("404.html")
-
+    found_user = User.query.get_or_404(user_id)
     message_form = MessageForm()
     message_form.set_choices()
     return render_template('messages/new.html', user=found_user, form=message_form)
@@ -50,10 +46,8 @@ def new_messages(user_id):
 def show_messages(user_id, message_id):
     ''''''
 
-    found_user = User.query.get(user_id)
-    found_message = Message.query.get(message_id)
-    if found_user is None or found_message is None:
-        return render_template("404.html")
+    found_user = User.query.get_or_404(user_id)
+    found_message = Message.query.get_or_404(message_id)
 
     delete_form = DeleteForm()
 
@@ -64,9 +58,6 @@ def show_messages(user_id, message_id):
         if message_form.validate():
             found_message.content = message_form.content.data
             found_message.tags = [Tag.query.get(tag) for tag in message_form.tags.data]
-            # found_message.tags = []
-            # for tag in message_form.tags.data:
-            #     found_message.tags.append(Tag.query.get(tag))
 
             db.session.add(found_message)
             db.session.commit()
@@ -82,18 +73,17 @@ def show_messages(user_id, message_id):
             flash('Message Deleted!')
         return redirect(url_for('messages.index_messages', user_id=user_id))
 
-    return render_template('messages/show.html', user=found_user, message=found_message, delete_form=delete_form)
+    message_tags = [tag.content for tag in found_message.tags]
+    return render_template('messages/show.html', user=found_user, message=found_message, tags=message_tags, delete_form=delete_form)
 
 @messages_blueprint.route('/<int:message_id>/edit')
 def edit_messages(user_id, message_id):
-    ''''''
+    '''Edit Messages'''
 
-    found_user = User.query.get(user_id)
-    found_message = Message.query.get(message_id)
-    if found_user is None or found_message is None:
-        return render_template("404.html")
-
+    found_user = User.query.get_or_404(user_id)
+    found_message = Message.query.get_or_404(message_id)
     delete_form = DeleteForm()
+
     tags = [tag.id for tag in found_message.tags]
     message_form = MessageForm(content=found_message.content, tags=tags)
     message_form.set_choices()

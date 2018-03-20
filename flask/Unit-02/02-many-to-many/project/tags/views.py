@@ -24,6 +24,7 @@ def index_tags():
             db.session.commit()
             flash('Tag Created!')
             return redirect(url_for('tags.index_tags'))
+
         else:
             return render_template('tags/new.html', form=tag_form)
 
@@ -38,15 +39,11 @@ def new_tags():
     tag_form.set_choices()
     return render_template('tags/new.html', form=tag_form)
 
-
 @tags_blueprint.route('/<int:tag_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show_tags(tag_id):
     ''''''
 
-    found_tag = Tag.query.get(tag_id)
-    if found_tag is None:
-        return render_template("404.html")
-
+    found_tag = Tag.query.get_or_404(tag_id)
     delete_form = DeleteForm()
 
     if request.method == b'PATCH':
@@ -69,17 +66,16 @@ def show_tags(tag_id):
             flash('Tag Deleted!')
         return redirect(url_for('tags.index_tags'))
 
-    return render_template('tags/show.html', tag=found_tag, delete_form=delete_form)
+    tag_messages = [message.content for message in found_tag.messages]
+    return render_template('tags/show.html', tag=found_tag, messages=tag_messages, delete_form=delete_form)
 
 @tags_blueprint.route('/<int:tag_id>/edit')
 def edit_tags(tag_id):
     ''''''
 
-    found_tag = Tag.query.get(tag_id)
-    if found_tag is None:
-        return render_template("404.html")
-
+    found_tag = Tag.query.get_or_404(tag_id)
     delete_form = DeleteForm()
+
     messages = [message.id for message in found_tag.messages]
     tag_form = TagForm(content=found_tag.content, messages=messages)
     tag_form.set_choices()

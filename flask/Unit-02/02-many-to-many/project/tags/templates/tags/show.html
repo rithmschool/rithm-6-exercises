@@ -3,6 +3,10 @@
 <p> {{tag.id}} | {{tag.content}}
   <br>
   <br>
+  <b>Messages associated with this tag</b>
+  <br> {% for message in messages %} {{message}} | {% endfor %}
+  <br>
+  <br>
   <a class="btn btn-primary" href="{{url_for('tags.edit_tags', tag_id=tag.id)}}">Edit Tag</a>
   <br>
   <br>
