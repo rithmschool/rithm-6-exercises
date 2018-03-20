@@ -1,15 +1,24 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
-from project.users.forms import AddForm, DeleteForm, LogInForm
+from project.users.forms import AddForm, DeleteForm, LogInForm, EditUserForm
 from project.models import User, Tag
 from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 from functools import wraps
+# from flask-login import
 
 users_blueprint = Blueprint(
     'users',
     __name__,
     template_folder='templates'
 )
+
+#add to init on app.before_requset
+# @users_blueprint.before_request
+# def current_user():
+#     if session.get('user_id'):
+#         g.current_user = User.query.get(session['username'])
+#     else:
+#         g.current_user = None
 
 def ensure_logged_in(fn):
     @wraps(fn)
@@ -20,15 +29,22 @@ def ensure_logged_in(fn):
         return fn(*args, **kwargs)
     return wrapper
 
+def prevent_login_signup(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if session.get('user_id'):
+            flash('You are logged in already!')
+            return redirect(url_for('users.index'))
+        return fn(*args, **kwargs)
+    return wrapper
+
 def ensure_correct_user(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
-
-        if kwargs.get('id') != session.get('user_id'):
-
+        # import pdb; pdb.set_trace()
+        if kwargs.get('user_id') != session.get('user_id'):
             flash("Not Authorized")
-            return redirect(url_for('users.welcome'))
-
+            return redirect(url_for('users.index'))
         return fn(*args, **kwargs)
     return wrapper
 
@@ -58,6 +74,7 @@ def login():
     if request.method == "POST" and form.validate():
         authenticated_user = User.authenticate(form.data.get('username'), form.data.get('password'))
         if authenticated_user:
+            session['user_id'] = authenticated_user.id
             flash('You are logged in!')
             return redirect(url_for('users.index'))
         else:
@@ -80,21 +97,29 @@ def current_user():
         g.current_user = None
 
 #refactor so just the GET request here
-@users_blueprint.route('/<int:user_id>', methods=["GET", "PATCH", "DELETE"])
+@users_blueprint.route('/<int:user_id>')
 def show(user_id):
     target_user = User.query.get(user_id)
+    return render_template('/users/show.html', user=target_user)
+
+#this should be authorization only
+@ensure_correct_user
+@users_blueprint.route('/<int:user_id>', methods=["PATCH", "DELETE"])
+def show_update(user_id):
+    target_user = User.query.get(user_id)
     if request.method == b'PATCH':
-        form = AddForm(request.form)
+        form = EditUserForm(request.form)
         if form.validate():
             target_user.first_name = request.form.get('first_name')
             target_user.last_name = request.form.get('last_name')
-            # target_user.username = request.form.get('username')
+            target_user.username = request.form.get('username')
+            #edit password on another page!!
             db.session.add(target_user)
             db.session.commit()
             flash('User Updated')
             return redirect(url_for('users.index'))
         else:
-            return render_template('.users/edit.html', user=target_user, form=form)
+            return render_template('users/edit.html', user=target_user, form=form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
@@ -102,14 +127,9 @@ def show(user_id):
             db.session.commit()
             flash('User Deleted')
             return redirect(url_for('users.index'))
-    return render_template('/users/show.html', user=target_user)
-
-#this should be decorated
-#this should be authorization only
-# @users_blueprint.route('/<int:user_id>', methods=[PATCH", "DELETE"])
-# def show_update(user_id):
 
 @users_blueprint.route('/<int:user_id>/edit')
+@ensure_correct_user
 def edit(user_id):
     target_user = User.query.get(user_id)
-    return render_template('/users/edit.html', user=target_user, form=AddForm(obj=target_user))
+    return render_template('/users/edit.html', user=target_user, form=EditUserForm(obj=target_user))

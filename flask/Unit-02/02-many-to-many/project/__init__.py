@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, session, g
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -32,6 +32,15 @@ from project.tags.views import tags_blueprint
 app.register_blueprint(users_blueprint, url_prefix='/users')
 app.register_blueprint(messages_blueprint, url_prefix='/users/<int:user_id>/messages')
 app.register_blueprint(tags_blueprint, url_prefix='/tags')
+
+from project.models import User
+
+@app.before_request
+def add_current_user_to_g():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
 
 @app.route('/')
 def root():
