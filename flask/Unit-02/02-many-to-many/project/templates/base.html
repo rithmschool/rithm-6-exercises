@@ -18,6 +18,16 @@
     {% endif %}
   {% endwith %}
 
+  {% if g.current_user %}
+    <p>
+      <a href="{{url_for('users.logout')}}">Logout!</a>
+      {% else %}
+      <a href="{{url_for('users.login')}}">Login!</a>
+      <a href="{{url_for('users.signup')}}">Sign up!</a>
+    </p>
+  {% endif %}
+
+
   {% block content %}
 
 

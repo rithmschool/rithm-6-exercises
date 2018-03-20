@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from project.users.forms import AddForm, DeleteForm, LogInForm
 from project.models import User, Tag
 from project import db, bcrypt
@@ -41,7 +41,10 @@ def signup():
     form = AddForm(request.form)
     if request.method == "POST" and form.validate():
         try:
-            new_user = User(form.data.get('first_name'), form.data.get('last_name'), form.data.get('password'))
+            new_user = User(form.data.get('first_name'),
+                form.data.get('last_name'),
+                form.data.get('username'),
+                form.data.get('password'))
             db.session.add(new_user)
             db.session.commit()
         except IntegrityError as error:
@@ -53,14 +56,12 @@ def signup():
 def login():
     form = LogInForm(request.form)
     if request.method == "POST" and form.validate():
-        found_user = User.query.filter_by(last_name = form.data['last_name']).first()
-        if found_user:
-            authenticated_user = bcrypt.check_password_hash(found_user.password, form.data['password'])
-            if authenticated_user:
-                return redirect(url_for('users.index'))
-            else:
-                return render_template('users/login.html', form=form, error="password_incorrect")
+        authenticated_user = User.authenticate(form.data.get('username'), form.data.get('password'))
+        if authenticated_user:
+            flash('You are logged in!')
+            return redirect(url_for('users.index'))
         else:
+            flash('Invalid Credentials')
             return render_template('users/login.html', form=form, error="username_incorrect")
     return render_template('users/login.html', form=form)
 
@@ -78,6 +79,7 @@ def current_user():
     else:
         g.current_user = None
 
+#refactor so just the GET request here
 @users_blueprint.route('/<int:user_id>', methods=["GET", "PATCH", "DELETE"])
 def show(user_id):
     target_user = User.query.get(user_id)
@@ -86,6 +88,7 @@ def show(user_id):
         if form.validate():
             target_user.first_name = request.form.get('first_name')
             target_user.last_name = request.form.get('last_name')
+            # target_user.username = request.form.get('username')
             db.session.add(target_user)
             db.session.commit()
             flash('User Updated')
@@ -100,6 +103,11 @@ def show(user_id):
             flash('User Deleted')
             return redirect(url_for('users.index'))
     return render_template('/users/show.html', user=target_user)
+
+#this should be decorated
+#this should be authorization only
+# @users_blueprint.route('/<int:user_id>', methods=[PATCH", "DELETE"])
+# def show_update(user_id):
 
 @users_blueprint.route('/<int:user_id>/edit')
 def edit(user_id):
