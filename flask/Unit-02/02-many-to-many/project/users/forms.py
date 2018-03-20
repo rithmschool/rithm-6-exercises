@@ -9,6 +9,10 @@ class AddForm(FlaskForm):
     last_name = StringField('last name', [validators.Length(min=1, max=35)])
     password = PasswordField('password', validators=[DataRequired()])
 
+class LogInForm(FlaskForm):
+    last_name = StringField('last name', [validators.Length(min=1, max=35)])
+    password = PasswordField('password', validators=[DataRequired()])
+
 class DeleteForm(FlaskForm):
     pass
 

@@ -1,4 +1,4 @@
-from project import db
+from project import db, bcrypt
 #project refers to __init__.py
 
 MessageTag = db.Table('message_tags',
@@ -43,12 +43,12 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.Text)
-    last_name = db.Column(db.Text)
-    password = db.Column(db.Text)
+    first_name = db.Column(db.Text, nullable=False)
+    last_name = db.Column(db.Text, nullable=False, unique=True)
+    password = db.Column(db.Text, nullable=False)
     messages = db.relationship('Message', backref='user', cascade="all,delete", lazy='dynamic')
 
-    def __init__(self, first_name, last_name):
+    def __init__(self, first_name, last_name, password):
         self.first_name = first_name
         self.last_name = last_name
         self.password = bcrypt.generate_password_hash(password).decode('UTF-8')

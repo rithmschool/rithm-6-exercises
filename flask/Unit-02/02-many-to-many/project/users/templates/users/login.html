@@ -1,11 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
+<h1>Log In</h1>
+
 <form method="POST" action="{{url_for('users.login')}}">
+  {{ form.hidden_tag() }}
+  <!-- this line means "push out all hidden fields, which includes CSRF" -->
   {{ form.csrf_token }}
-  <p>{{ form.first_name(placeholder="first_name") }}
   <p>{{ form.last_name(placeholder="last_name") }}
     <span>
-      {% if form.username.errors %} {% for error in form.username.errors %} {{ error }} {% endfor %} {% endif %}
+      {% if form.last_name.errors %} {% for error in form.last_name.errors %} {{ error }} {% endfor %} {% endif %}
     </span>
   </p>
   <p>
@@ -16,5 +19,9 @@
   </p>
   <button type="submit">Log In!</button>
 </form>
+
+  <button>
+    <a href="{{url_for('users.index')}}">Home</a>
+  </button>
 
 {% endblock %}
