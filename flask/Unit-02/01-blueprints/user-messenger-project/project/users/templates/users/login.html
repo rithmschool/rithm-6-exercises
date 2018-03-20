@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<form method="POST" action="{{url_for('users.index')}}">
-    {{ form.hidden_tag() }}
+<form method="POST" action="{{url_for('users.login')}}">
+    {{form.hidden_tag()}}
     {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
         {{field.label}}
@@ -18,7 +18,7 @@
         </span>
     </p>
     {% endfor %}
-    <input type="submit" value="Register User">
+    <input type="submit" value="Login">
 </form>
 
 {% endblock %}

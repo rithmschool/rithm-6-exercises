@@ -2,8 +2,10 @@
 
 {% block content %}
 
-<form method="POST" action="{{url_for('users.login')}}">
+<form method="POST" action="{{url_for('users.signup')}}">
     {{ form.hidden_tag() }}
+    
+
     {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
         {{field.label}}
