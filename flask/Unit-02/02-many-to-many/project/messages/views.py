@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import MessageForm, DeleteForm
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project import db
 
 messages_blueprint = Blueprint('messages', __name__, template_folder='templates')
@@ -12,13 +12,18 @@ def index_messages(user_id):
     '''Create a new message'''
 
     found_user = User.query.get(user_id)
-    if found_user == None:
+    if found_user is None:
         return render_template("404.html")
 
     if request.method == 'POST':
         message_form = MessageForm(request.form)
+        message_form.set_choices()
+
         if message_form.validate():
             new_message = Message(request.form['content'], users_id=user_id)
+            for tag in message_form.tags.data:
+                new_message.tags.append(Tag.query.get(tag))
+
             db.session.add(new_message)
             db.session.commit()
             flash('Message Created!')
@@ -34,10 +39,11 @@ def new_messages(user_id):
     '''Creates a new message'''
 
     found_user = User.query.get(user_id)
-    if found_user == None:
+    if found_user is None:
         return render_template("404.html")
 
     message_form = MessageForm()
+    message_form.set_choices()
     return render_template('messages/new.html', user=found_user, form=message_form)
 
 @messages_blueprint.route('/<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
@@ -46,15 +52,22 @@ def show_messages(user_id, message_id):
 
     found_user = User.query.get(user_id)
     found_message = Message.query.get(message_id)
-    if found_user == None or found_message == None:
+    if found_user is None or found_message is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()
 
     if request.method == b'PATCH':
         message_form = MessageForm(request.form)
+        message_form.set_choices()
+
         if message_form.validate():
             found_message.content = message_form.content.data
+            found_message.tags = [Tag.query.get(tag) for tag in message_form.tags.data]
+            # found_message.tags = []
+            # for tag in message_form.tags.data:
+            #     found_message.tags.append(Tag.query.get(tag))
+
             db.session.add(found_message)
             db.session.commit()
             flash('Message Updated!')
@@ -77,9 +90,11 @@ def edit_messages(user_id, message_id):
 
     found_user = User.query.get(user_id)
     found_message = Message.query.get(message_id)
-    if found_user == None or found_message == None:
+    if found_user is None or found_message is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()
-    message_form = MessageForm(obj=found_message)
+    tags = [tag.id for tag in found_message.tags]
+    message_form = MessageForm(content=found_message.content, tags=tags)
+    message_form.set_choices()
     return render_template('messages/edit.html', user=found_user, message=found_message, form=message_form, delete_form=delete_form)

@@ -17,6 +17,13 @@ class User(db.Model):
         self.last_name = last_name
         self.image_url = image_url
 
+
+MessageTag = db.Table('messages_tags',
+                    db.Column('id', db.Integer, primary_key=True),
+                    db.Column('message_id', db.Integer, db.ForeignKey('messages.id', ondelete='cascade')),
+                    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id', ondelete='cascade')))
+
+
 class Message(db.Model):
 
     __tablename__ = "messages"
@@ -29,15 +36,14 @@ class Message(db.Model):
         self.content = content
         self.users_id = users_id
 
+
 class Tag(db.Model):
 
-    __tablename_ = "tags"
+    __tablename__ = "tags"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    messages_id = db.Column(db.Integer, db.ForeignKey('messages.id'))
+    messages = db.relationship("Message", backref=db.backref('tags'), secondary=MessageTag)
 
-    def __init__(self, content, messages_id):
+    def __init__(self, content):
         self.content = content
-        self.messages_id = messages_id
-

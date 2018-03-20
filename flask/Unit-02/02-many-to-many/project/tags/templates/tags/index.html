@@ -1,18 +1,19 @@
-{% extends 'base.html' %} {% block title %} List of Users {% endblock %} {% block content %} {% for user in users %}
+{% extends 'base.html' %} {% block title %} List of Tags {% endblock %} {% block content %} {% for tag in tags %}
 <br>
 <p>
-  {{user.id}} | {{user.first_name}} {{user.last_name}} | {{user.image_url}}
+  {{tag.id}} | {{tag.content}}
   <br>
   <br>
-  <a class="btn btn-primary" href="{{url_for('users.show_users', user_id=user.id)}}">See more about {{user.first_name}}</a>
-  <a class="btn btn-primary" href="{{url_for('users.edit_users', user_id=user.id)}}">Edit</a>
+  <a class="btn btn-primary" href="{{url_for('tags.show_tags', tag_id=tag.id)}}">See more about tag</a>
+  <a class="btn btn-primary" href="{{url_for('tags.edit_tags', tag_id=tag.id)}}">Edit Tag</a>
 
-  <form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
+  <form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=DELETE" method="POST">
     {{delete_form.hidden_tag()}}
     <input class="btn btn-primary" type="submit" class="button" value='Delete Me'>
   </form>
   <hr>
 </p>
 {% endfor %}
-<a class="btn btn-primary" href="{{url_for('users.new_users')}}">Create a New User</a>
+<a class="btn btn-primary" href="{{url_for('tags.new_tags')}}">Create a New Tag</a>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

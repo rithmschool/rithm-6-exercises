@@ -37,7 +37,7 @@ def show_users(user_id):
     ''''''
 
     found_user = User.query.get(user_id)
-    if found_user == None:
+    if found_user is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()
@@ -69,7 +69,7 @@ def edit_users(user_id):
     ''''''
 
     found_user = User.query.get(user_id)
-    if found_user == None:
+    if found_user is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()

@@ -1,21 +1,19 @@
-{% extends 'base.html' %} {% block title %} Show User {% endblock %} {% block content %}
+{% extends 'base.html' %} {% block title %} Show Tag {% endblock %} {% block content %}
 
-<p> {{user.id}} | {{user.first_name}} {{user.last_name}}
+<p> {{tag.id}} | {{tag.content}}
   <br>
   <br>
-  <a class="btn btn-primary" href="{{url_for('users.edit_users', user_id=user.id)}}">Edit</a>
-  <br>{{user.image_url}}
-  <br>
-  <a class="btn btn-primary" href="{{url_for('messages.index_messages', user_id=user.id)}}">Show Messages</a>
+  <a class="btn btn-primary" href="{{url_for('tags.edit_tags', tag_id=tag.id)}}">Edit Tag</a>
   <br>
   <br>
-  <a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Nessage</a>
+  <a class="btn btn-primary" href="{{url_for('tags.new_tags', tag_id=tag.id)}}">Create a New Tag</a>
 </p>
 
-<form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
+<form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=DELETE" method="POST">
   {{delete_form.hidden_tag()}}
   <input type="submit" class="btn btn-primary" value='Delete Me'>
 </form>
 <br>
-<a class="btn btn-primary" href="{{url_for('users.index_users')}}">Home</a>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">List of Tags</a>
+<a class="btn btn-primary" href="{{url_for('root')}}">Home</a>
 {% endblock %}

@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.tags.forms import TagForm, DeleteForm
-from project.models import Tag
+from project.models import Tag, Message
 from project import db
 
 tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
@@ -8,13 +8,18 @@ tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 ################### Tags View Functions #########################
 
 @tags_blueprint.route('/', methods=['GET', 'POST'])
-def index_tags(message_id):
-    ''''''
+def index_tags():
+    '''Display list of tags'''
 
     if request.method == 'POST':
         tag_form = TagForm(request.form)
+        tag_form.set_choices()
+
         if tag_form.validate():
-            new_tag = Tag(request.form['content'], messages_id=message_id)
+            new_tag = Tag(request.form['content'])
+            for message in tag_form.messages.data:
+                new_tag.messages.append(Message.query.get(message))
+
             db.session.add(new_tag)
             db.session.commit()
             flash('Tag Created!')
@@ -30,22 +35,26 @@ def new_tags():
     '''Create's a new tag'''
 
     tag_form = TagForm()
+    tag_form.set_choices()
     return render_template('tags/new.html', form=tag_form)
+
 
 @tags_blueprint.route('/<int:tag_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show_tags(tag_id):
     ''''''
 
     found_tag = Tag.query.get(tag_id)
-    if found_tag == None:
+    if found_tag is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()
 
     if request.method == b'PATCH':
         tag_form = TagForm(request.form)
+        tag_form.set_choices()
         if tag_form.validate():
-            found_tag.first_name = tag_form.content.data
+            found_tag.content = tag_form.content.data
+            found_tag.messages = [Message.query.get(message) for message in tag_form.messages.data]
             db.session.add(found_tag)
             db.session.commit()
             flash('Tag Updated!')
@@ -67,9 +76,13 @@ def edit_tags(tag_id):
     ''''''
 
     found_tag = Tag.query.get(tag_id)
-    if found_tag == None:
+    if found_tag is None:
         return render_template("404.html")
 
     delete_form = DeleteForm()
-    tag_form = TagForm(obj=found_tag)
+    messages = [message.id for message in found_tag.messages]
+    tag_form = TagForm(content=found_tag.content, messages=messages)
+    tag_form.set_choices()
     return render_template('tags/edit.html', tag=found_tag, form=tag_form, delete_form=delete_form)
+
+
