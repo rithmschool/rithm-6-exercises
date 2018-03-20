@@ -43,7 +43,7 @@ def new(user_id):
 def edit(message_id, user_id):
     found_message = Message.query.get_or_404(message_id)
     form = MessageForm(
-        content=found_message.name,
+        content=found_message.content,
         tags=[tag.id for tag in found_message.tags])
     form.set_choices()
     return render_template(
