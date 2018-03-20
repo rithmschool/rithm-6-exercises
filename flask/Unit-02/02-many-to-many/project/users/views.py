@@ -1,7 +1,7 @@
-from flask import request, url_for, render_template, redirect, flash, Blueprint
+from flask import request, url_for, render_template, redirect, flash, Blueprint, session
 from project.models import User
-from project.users.forms import UserForm, DeleteForm
-from project import db
+from project.users.forms import UserForm, DeleteForm, LoginForm
+from project import db, bcrypt
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
@@ -12,11 +12,11 @@ def index():
         if form.validate():
             first_name = form.data['first_name']
             last_name = form.data['last_name']
+            username = form.data['username']
+            password = form.data['password']
             image_url = form.data['image_url']
-            new_user = User(
-                first_name=first_name,
-                last_name=last_name,
-                image_url=image_url)
+            new_user = User.register(first_name, last_name, username, password,
+                                     image_url)
             db.session.add(new_user)
             db.session.commit()
             flash("SUCCESS! You have added this user")
@@ -31,6 +31,31 @@ def index():
 def new():
     form = UserForm()
     return render_template('users/new.html', form=form)
+
+
+@users_blueprint.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        form = LoginForm(request.form)
+        if form.validate():
+            username = form.data['username']
+            password = form.data['password']
+            found_user = User.authenticate(username, password)
+            if found_user:
+                session['user_id'] = found_user.id
+                flash("SUCCESS! You Have Logged in!")
+                return redirect(
+                    url_for('messages.index', user_id=found_user.id))
+            else:
+                flash(
+                    "Login Failed! There's No Username or Password That Matches"
+                )
+                return render_template('users/login.html', form=form)
+        else:
+            flash("Please make sure all fields are filled in")
+            return render_template('users/login.html', form=form)
+    form = LoginForm()
+    return render_template('users/login.html', form=form)
 
 
 @users_blueprint.route("/<int:id>/edit")
@@ -52,8 +77,12 @@ def show(id):
     if request.method == b'PATCH':
         form = UserForm(request.form)
         if form.validate():
+            hashed = bcrypt.generate_password_hash(form.data['password'])
+            hashed_utf8 = hashed.decode("utf8")
             found_user.first_name = form.data['first_name']
             found_user.last_name = form.data['last_name']
+            found_user.username = form.data['username']
+            found_user.password = hashed_utf8
             found_user.image_url = form.data['image_url']
             db.session.add(found_user)
             db.session.commit()

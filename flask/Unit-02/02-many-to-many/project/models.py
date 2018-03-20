@@ -1,14 +1,39 @@
-from project import db
+from project import db, bcrypt
 
 
 class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.Text)
-    last_name = db.Column(db.Text)
-    image_url = db.Column(db.Text)
+    first_name = db.Column(db.Text, nullable=False)
+    last_name = db.Column(db.Text, nullable=False)
+    username = db.Column(db.Text, nullable=False, unique=True)
+    password = db.Column(db.Text, nullable=False)
+    image_url = db.Column(
+        db.Text,
+        default="http://www.sessionlogs.com/media/icons/defaultIcon.png")
     messages = db.relationship('Message', backref='user', lazy='dynamic')
+
+    @classmethod
+    def register(cls, first_name, last_name, username, password, image_url):
+        hashed = bcrypt.generate_password_hash(password)
+        hashed_utf8 = hashed.decode("utf8")
+        return cls(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            password=hashed_utf8,
+            image_url=image_url)
+
+    @classmethod
+    def authenticate(cls, username, password):
+
+        user = User.query.filter_by(username=username).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, password):
+                return user
+
+        return False
 
 
 MessageTag = db.Table('message_tags',

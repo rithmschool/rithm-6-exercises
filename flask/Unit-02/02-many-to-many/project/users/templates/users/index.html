@@ -8,29 +8,14 @@
     <div class="borderb__head"></div>
   </div>
   <div class="link__register--user">
-    <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Register a New User!</a>
+    <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Sign Up!</a>
+    <a href="{{url_for('users.login')}}" class="btn btn-outline-info my-2 my-sm-0">Login!</a>
   </div>
-    <!-- <table class="table__whole--changes">
-      <thead class="table__structure">
-        <tr class="bg-info text-light">
-          <th class="column__headers">First Name</th>
-          <th class="column__headers">Last Name</th>
-          <th class="column__headers">Edit</th>
-          <th class="column__headers">View</th>
-          <th class="column__headers">Messages</th>
-        </tr>
-      </thead>
-      <tbody> -->
+
         {% for user in users %}
-        <!-- <tr>
-            <td class="column__headers">{{ user.first_name }}</td>
-            <td class="column__headers">{{ user.last_name }}</td>
-            <td class="column__headers"><a href="{{url_for('users.edit', id=user.id)}}"><i class="fas fa-edit"></i></a></td>
-            <td class="column__headers"><a href="{{url_for('users.show', id=user.id)}}"><i class="fas fa-user"></i></a></td>
-            <td class="column__headers"><a href="{{url_for('messages.index', user_id=user.id)}}"><i class="fas fa-envelope"></i></a></td>
-          </tr> -->
+
           <div class="card text-center d-inline-flex profilecard__space" style="width: 19rem;">
-              <div class="card-header">
+              <div class="card-header bg-info text-light">
                 Active User
               </div>
               <div class="imgcard__container">
@@ -42,7 +27,7 @@
                   <a href="{{url_for('users.edit', id=user.id)}}" class="btn btn-primary">Edit&nbsp;&nbsp;<i class="fas fa-user"></i></a>
                 </p>
 
-                <a href="{{url_for('messages.index', user_id=user.id)}}" class="btn btn-primary btn-sm mx-1">See Messages!&nbsp;<i class="fas fa-envelope"></i> </a>
+                <a href="{{url_for('users.login')}}" class="btn btn-primary btn-sm mx-1">See Messages!&nbsp;<i class="fas fa-envelope"></i> </a>
               </div>
               <div class="card-footer text-muted">
                 User ID {{user.id}}

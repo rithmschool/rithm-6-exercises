@@ -12,6 +12,13 @@
     <p> {{messages.content}} </p>
   </div>
 
+  <h4>Message Tags</h4>
+  <div>
+      {% for tag in messages.tags %}
+    <p> {{tag.tag_name}} </p>
+    {% endfor %}
+  </div>
+
 
   <div>
     <div>

@@ -4,7 +4,7 @@
 
 <section class="container">
   <div class="div__center align-self-center">
-    <h1 class="header__center align-self-center">Here Are All of {{user.first_name}}'s Messages</h1>
+    <h1 class="header__center align-self-center">Welcome {{user.first_name}}! Here are your Messages</h1>
   </div>
   <div class="link__register--user">
     <a href="{{url_for('messages.new', user_id=user.id)}}" class="btn btn-outline-info my-2 my-sm-0">Add a New Message!</a>

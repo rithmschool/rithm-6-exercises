@@ -28,7 +28,10 @@
             <i class="fas fa-envelope-square fa-lg bg-info"></i>
             Generic Users and Messages App!
           </a>
+          <div>
       <a href="{{url_for('users.index')}}" class="btn btn-outline-info my-2 my-sm-0">Users</a>
+      <a href="{{url_for('messages_root')}}" class="btn btn-outline-info my-2 my-sm-0">Messages</a>
+    </div>
     </nav>
   </header>
   {% block content %}

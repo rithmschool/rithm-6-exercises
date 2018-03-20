@@ -1,5 +1,5 @@
 from flask import request, url_for, render_template, redirect, flash, Blueprint
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
 
@@ -28,6 +28,8 @@ def index(user_id):
 @messages_blueprint.route("/new")
 def new(user_id):
     form = MessageForm()
+    form.set_choices()
+
     return render_template(
         'messages/new.html', user=User.query.get(user_id), form=form)
 
@@ -50,6 +52,7 @@ def show(user_id, id):
     delete_form = DeleteForm(request.form)
     if request.method == b'PATCH':
         form = MessageForm(request.form)
+        form.set_choices()
         if form.validate():
             found_message.content = form.data['content']
             db.session.add(found_message)
