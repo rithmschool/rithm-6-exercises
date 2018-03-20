@@ -1,9 +1,32 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.users.forms import UserForm, DeleteForm
+from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import User
 from project import db
+
+from sqlalchemy.exc import IntegrityError
+
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
+@users_blueprint.route('/signup', methods=["GET", "POST"])
+def signup():
+    newUser = UserForm(request.form)
+    if request.method == "POST" and newUser.validate():
+        try:
+            new_person = User.register(first_name=request.form.get('first_name'), last_name=request.form.get('last_name'), username=request.form.get('username'), password=request.form.get('password'))
+            db.session.add(new_person)
+            db.session.commit()
+        except IntegrityError as e:
+            return render_template('users/signup.html', form=newUser)
+        return redirect(url_for('users.login'))
+    return render_template('users/signup.html', form=newUser)
+
+@users_blueprint.route('/login', methods=["GET", "POST"])
+def login():
+    userlogin = LoginForm(request.form)
+    if request.method == "POST" and userlogin.validate():
+        user = User.authenticate(username=request.form.get('username'), password=request.form.get('password'))
+        return redirect(url_for('users.show', id=user.id))
+    return render_template('users/login.html', form=userlogin)
 
 @users_blueprint.route('/')
 def index():
@@ -12,8 +35,9 @@ def index():
 
 @users_blueprint.route('/new')
 def new():
-    user_form = UserForm()
-    return render_template('users/new.html', form=user_form)
+    # user_form = UserForm()
+    # return render_template('users/signup.html', form=user_form)
+    return redirect(url_for('users.signup'))
 
 
 @users_blueprint.route('/', methods=['POST'])

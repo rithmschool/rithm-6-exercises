@@ -7,4 +7,6 @@
   <a href="{{url_for('tags.tags_edit', id=tag.id)}}">Edit</a> |
   <a href="{{url_for('tags.tags_show', id=tag.id)}}">See More</a>
 </p>
-{% endfor %} {% endblock %}
+{% endfor %}
+<a href="{{url_for('tags.tags_new')}}">Create a New Tag</a>
+{% endblock %}

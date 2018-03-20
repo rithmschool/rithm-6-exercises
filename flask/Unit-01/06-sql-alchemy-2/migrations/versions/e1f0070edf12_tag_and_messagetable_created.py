@@ -24,10 +24,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('message_tags',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('message_id', sa.Integer(), nullable=True),
     sa.Column('tag_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['message_id'], ['messages.id'], ),
-    sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], )
+    sa.ForeignKeyConstraint(['tag_id'], ['tags.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 

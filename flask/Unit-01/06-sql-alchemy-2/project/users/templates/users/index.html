@@ -1,13 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 
-<a href="{{url_for('users.new')}}">Add A New User</a>
+<!-- <a href="{{url_for('users.new')}}">Add A New User</a> -->
+<div class="container">
+  {%for user in users%}
+  <p>
+    {{user.first_name}} {{user.last_name}}
+    <br>
+    <a href="{{url_for('users.show', id=user.id)}}">See more about {{user.first_name}}</a>
+    <a href="{{url_for('messages.messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
+  </p>
 
-{%for user in users%}
-<p>
-  {{user.first_name}} {{user.last_name}}
-  <br>
-  <a href="{{url_for('users.show', id=user.id)}}">See more about {{user.first_name}}</a>
-  <a href="{{url_for('messages.messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
-</p>
-
-{%endfor%} {%endblock%}
+  {%endfor%}
+  <a href="{{url_for('users.login')}}">Log on To Profile</a>
+  <a href="{{url_for('users.signup')}}">Signup For A Free Account</a>
+</div>
+{%endblock%}

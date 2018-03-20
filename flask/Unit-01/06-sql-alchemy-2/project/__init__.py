@@ -2,6 +2,8 @@ from flask import Flask, redirect, url_for,render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from flask_debugtoolbar import DebugToolbarExtension
 import os
 
 app = Flask(__name__)
@@ -9,6 +11,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/troll'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+toolbar = DebugToolbarExtension(app)
+
+bcrypt = Bcrypt()
 modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
