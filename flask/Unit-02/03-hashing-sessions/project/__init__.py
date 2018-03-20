@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 modus = Modus(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/02-many-to-many'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/03-hashing-sessions'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'this should be a hidden key but in this exercise it really deosnt matter'
