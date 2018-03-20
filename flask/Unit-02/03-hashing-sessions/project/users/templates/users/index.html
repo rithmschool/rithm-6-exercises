@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% block title %} Users {% endblock %} {% block body %}
 <h2>All Users</h2>
 <a href="{{ url_for('u.new') }}">Add a User!</a>
+<a href="{{ url_for('u.login') }}">Login!</a>
+<a href="{{ url_for('u.logout') }}">Logout!</a>
 {% for u in users %}
 <div class="card" style="width: 18rem;">
   {% if u.image_url %}

@@ -1,7 +1,10 @@
-{% extends 'base.html' %} {% block title %} Create User {% endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %} Create User {% endblock %} {% block body %} {% if error == 'username unavailable'
+%}
+<h1>USERNAME ALREADY EXISTS</h1>
+{% endif %}
 <h2>Edit User</h2>
 <form method="POST" action="{{ url_for('u.show', u_id=u.id) }}?_method=PATCH">
-  {{ u_form.hidden_tag() }} {% for field in u_form if field.widget.input_type != 'hidden' %}
+  {{ edit_form.hidden_tag() }} {% for field in edit_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
     <span>
