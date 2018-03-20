@@ -17,6 +17,19 @@
       {% if form.password.errors %} {% for error in form.password.errors %} {{ error }} {% endfor %} {% endif %}
     </span>
   </p>
+
+  {% if error == "password_incorrect" %}
+    <p>
+      Password incorrect
+    </p>
+  {% endif %}
+
+  {% if error == "username_incorrect" %}
+    <p>
+      Username incorrect
+    </p>
+  {% endif %}
+
   <button type="submit">Log In!</button>
 </form>
 

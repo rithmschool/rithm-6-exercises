@@ -37,11 +37,11 @@ def login():
             authenticated_user = bcrypt.check_password_hash(found_user.password, form.data['password'])
             if authenticated_user:
                 return redirect(url_for('users.index'))
+            else:
+                return render_template('users/login.html', form=form, error="password_incorrect")
+        else:
+            return render_template('users/login.html', form=form, error="username_incorrect")
     return render_template('users/login.html', form=form)
-
-# @users_blueprint.route('/welcome')
-# def welcome():
-#     return render_template('users/welcome.html')
 
 @users_blueprint.route('/<int:user_id>', methods=["GET", "PATCH", "DELETE"])
 def show(user_id):
