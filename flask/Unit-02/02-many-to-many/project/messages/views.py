@@ -58,7 +58,7 @@ def show(id, message_id):
         return render_template('messages/edit.html', id = id, message = found_message, form = form)
     if request.method == b'DELETE':
         message_form = MessageForm(obj = request.form)
-        form.set_choices()
+        message_form.set_choices()
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
             db.session.delete(found_message)
