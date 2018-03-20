@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import DeleteForm, MessageForm
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project import db, bcrypt
 
 messages_blueprint = Blueprint(

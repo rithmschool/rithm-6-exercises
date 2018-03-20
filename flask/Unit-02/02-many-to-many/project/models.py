@@ -3,7 +3,7 @@ from project import db, bcrypt
 MessageTags = db.Table('message_tags',
 db.Column('id', db.Integer, primary_key=True),
 db.Column('message_id', db.Integer, db.ForeignKey('messages.id', ondelete='cascade')),
-db.Column('tag_id', db.Integer, db.ForeignKey('tags.id', ondelete='cascade'))
+db.Column('tag_id', db.Integer, db.ForeignKey('tags.id', ondelete='cascade')),
 )
 class User(db.Model):
 
@@ -16,7 +16,7 @@ class User(db.Model):
     password = db.Column(db.Text)
     messages = db.relationship(
         'Message', backref='user', lazy='dynamic', cascade='all,delete')
-    tags = db.relationship('Tags', secondary=MessageTags, backref=db.backref('user'))
+    tags = db.relationship('Tag', secondary=MessageTags, backref=db.backref('user'))
 
     @classmethod
     def authenticate(cls, username, password):
@@ -37,3 +37,9 @@ class Message(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="cascade"))
     tags = db.relationship('Tag', secondary=MessageTags, backref=db.backref('messages'))
 
+class Tag(db.Model):
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    tag = db.Column(db.Text)

@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint, session
 from sqlalchemy.exc import IntegrityError
 from project.users.forms import UserForm, DeleteForm, LoginForm
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project import db, bcrypt
 from project.decorators import ensure_authenticated
 
