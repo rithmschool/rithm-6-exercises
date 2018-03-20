@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class = "alert alert-success">
-<a href="{{url_for('users.new')}}">Add a new User</a>
+<a href="{{url_for('users.new')}}">Add a New User</a>
+<a href="{{url_for('tags.new')}}">Add a New Tag</a>
 </div>
 {% for user in users %}
     
