@@ -1,5 +1,10 @@
 {% extends 'base.html' %} {% block title %}New User {% endblock %} {% block content %}
 <div class="page-content">
+
+    {% if error == 'username_error' %}
+    <p>USERNAME TAKEN! Choose another username. </p>
+    {% endif %}
+
     <h2>Create a New Profile:</h2>
     <br>
     <form action="{{url_for('users.index')}}" method="POST">

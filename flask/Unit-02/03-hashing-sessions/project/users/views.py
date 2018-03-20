@@ -1,31 +1,36 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session
+from sqlalchemy.exc import IntegrityError
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import Message, User
 from project import db, bcrypt
+from project.decorators import ensure_authenticated
 
 users_blueprint = Blueprint(
     'users',
     __name__,
     template_folder = 'templates'
 )
-
 @users_blueprint.route('/', methods=["GET", "POST"])
 def index():
     delete_form = DeleteForm()
     if request.method == "POST":
         form = UserForm(request.form)
         if form.validate():
-            hashed = bcrypt.generate_password_hash(form.data['password'])
-            hashed_utf8 = hashed.decode('utf8')
-            new_user = User(
-                first_name=form.data['first_name'],
-                last_name=form.data['last_name'],
-                username=form.data['username'],
-                password=hashed_utf8)
-            db.session.add(new_user)
-            db.session.commit()
-            flash('User Created!')
-            return redirect(url_for('users.index'))
+            try:
+                hashed = bcrypt.generate_password_hash(form.data['password'])
+                hashed_utf8 = hashed.decode('utf8')
+                new_user = User(
+                    first_name=form.data['first_name'],
+                    last_name=form.data['last_name'],
+                    username=form.data['username'],
+                    password=hashed_utf8)
+                db.session.add(new_user)
+                db.session.commit()
+                session['user_id'] = new_user.id
+                flash('User Created!')
+                return redirect(url_for('users.index'))
+            except IntegrityError as error:
+                return render_template('users/new.html', form=form, error='username_error')
         return render_template('users/new.html', form=form)
     return render_template(
         'users/index.html', users=User.query.all(), delete_form=delete_form)
@@ -82,13 +87,19 @@ def show(id):
 def login():
     login_form = LoginForm(request.form)
     if request.method == "POST":
-        username = request.form.get('username')
-        password = request.form.get('password')
-        user = User.query.filter_by(username=username).one()
+        # username = request.form.get('username')
+        # password = request.form.get('password')
+        # user = User.query.filter_by(username=username).one()
 
-        if bcrypt.check_password_hash(user.password, password):
+        # if bcrypt.check_password_hash(user.password, password):
             if login_form.validate():
-                flash('Successfully logged in!')
-                return redirect(url_for('users.login'))
-
+                authenticated_user = User.authenticate(login_form.username.data, login_form.password.data)
+                if authenticated_user:
+                    session['user_id'] = authenticated_user.id
+                    flash('Successfully logged in!')
+                    return redirect(url_for('users.index'))
+                else:
+                    flash('Invalid credentials')
+                    return redirect(url_for('users.login'))
     return render_template('users/login.html', login_form=login_form)
+

@@ -17,6 +17,7 @@ modus = Modus(app)
 db = SQLAlchemy(app)
 Migrate(app, db)
 bcrypt = Bcrypt(app)
+toolbar = DebugToolbarExtension(app)
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
