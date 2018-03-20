@@ -103,3 +103,9 @@ def login():
                     return redirect(url_for('users.login'))
     return render_template('users/login.html', login_form=login_form)
 
+
+@users_blueprint.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash('Successfully logged out')
+    return redirect(url_for('users.login'))

@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/07-sql-alchemy"
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.url_map.strict_slashes = False
 
 modus = Modus(app)
