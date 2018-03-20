@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session
+from flask import Flask, redirect, render_template, request, url_for, flash, Blueprint, session
 from sqlalchemy.exc import IntegrityError
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import Message, User
