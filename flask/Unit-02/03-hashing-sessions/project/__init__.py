@@ -1,4 +1,4 @@
-from flask import Flask, url_for, redirect
+from flask import Flask, url_for, redirect, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -31,4 +31,4 @@ def root():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('users.404.html'), 404
+    return render_template('404.html'), 404
