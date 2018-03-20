@@ -1,17 +1,20 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.tags.forms import TForm, DForm
-from project.models import Tag
+from project.models import Tag, Message
 from project import db
 
 tbp = Blueprint('t', __name__, template_folder='templates')
-
 
 @tbp.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         t_form = TForm(request.form)
+        t_form.set_choices()
         if t_form.validate():
-            db.session.add(Tag(name=t_form.data['name']))
+            new_tag = Tag(name=t_form.data['name'])
+            for message in t_form.messages.data:
+                new_tag.messages.append(Message.query.get(message))
+            db.session.add(new_tag)
             db.session.commit()
             flash('Tag Created!')
             return redirect(url_for('t.index'))
@@ -23,7 +26,9 @@ def index():
 
 @tbp.route('/new')
 def new():
-    return render_template('tags/new.html', t_form=TForm())
+    t_form = TForm()
+    t_form.set_choices()
+    return render_template('tags/new.html', t_form=t_form)
 
 
 @tbp.route('/<int:t_id>/edit')

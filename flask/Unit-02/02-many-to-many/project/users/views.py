@@ -1,15 +1,16 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from project.users.forms import UForm, DForm, LoginForm, EditForm
 from project.models import User
+from project.decorators import verify_login, verify_user, prevent_duplicate_login
 from project import db, bcrypt
-from functools import wraps
 from IPython import embed
 
 ubp = Blueprint('u', __name__, template_folder='templates')
 
 
 @ubp.route('/', methods=['GET', 'POST'])
+
 def index():
     if request.method == 'POST':
         u_form = UForm(request.form)
@@ -29,15 +30,14 @@ def index():
     return render_template('users/index.html', users=User.query.all())
 
 @ubp.route('/auth', methods=['GET','POST'])
+@prevent_duplicate_login
 def login():
     login_form = LoginForm(request.form)
     if request.method == 'POST':
-
         if login_form.validate():
             user = User.authenticate(login_form.data['username'], login_form.data['password'])
             if user:
                 session['user_id'] = user.id
-
                 flash('Login Successful!')
                 return redirect(url_for('u.index'))
         flash('Invalid Username/Password')
@@ -46,7 +46,7 @@ def login():
 @ubp.route('/logout')
 def logout():
     session.pop('user_id', None)
-    flash('You have been signed out.')
+    flash('You have been signed out')
     return redirect(url_for('u.login'))
 
 
@@ -56,6 +56,8 @@ def new():
 
 
 @ubp.route('/<int:u_id>/edit')
+@verify_login
+@verify_user
 def edit(u_id):
     u = User.query.get_or_404(u_id)
     edit_form = EditForm(obj=u)
@@ -64,6 +66,8 @@ def edit(u_id):
 
 
 @ubp.route('/<int:u_id>', methods=['GET', 'PATCH', 'DELETE'])
+@verify_login
+@verify_user
 def show(u_id):
     u = User.query.get_or_404(u_id)
     d_form = DForm(request.form)
@@ -93,9 +97,11 @@ def show(u_id):
         flash('Delete Request Denied!')
         return redirect(url_for('u.index'))
 
-# @ubp.before_request
-# def current_user():
-#     if session.get('user_id'):
-#         g.current_user = User.query.get(session['user_id'])
-    # else:
-    #     g.current_user = None
+
+
+@ubp.before_request
+def current_user():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
