@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import DeleteForm, MessageForm
-from project.models import Message, User
+from project.models import Message, User, Tag
 from project import db
 
 messages_blueprint = Blueprint(
@@ -12,8 +12,12 @@ def index(user_id):
     delete_form = DeleteForm(request.form)
     if request.method == 'POST':
         form = MessageForm(request.form)
-        new_message = Message(content=request.form['content'], user_id=user_id)
+        form.set_choices()
         if form.validate():
+            new_message = Message(
+                content=request.form['content'], user_id=user_id)
+            for tag in form.tags.data:
+                new_message.tags.append(Tag.query.get(tag))
             db.session.add(new_message)
             db.session.commit()
             flash('Message Created!')
@@ -29,6 +33,7 @@ def index(user_id):
 @messages_blueprint.route('/new')
 def new(user_id):
     message_form = MessageForm()
+    message_form.set_choices()
     return render_template(
         '/messages/new.html', user_id=user_id, form=message_form)
 
@@ -36,7 +41,9 @@ def new(user_id):
 @messages_blueprint.route('/<int:id>/edit')
 def edit(user_id, id):
     found_message = Message.query.get(id)
-    form = MessageForm(obj=found_message)
+    tags = [tag.id for tag in found_message.tags]
+    form = MessageForm(content=found_message.content, tags=tags)
+    form.set_choices()
     return render_template(
         '/messages/edit.html',
         user=User.query.get(user_id),
@@ -47,11 +54,16 @@ def edit(user_id, id):
 @messages_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(user_id, id):
     found_message = Message.query.get(id)
+    found_tags = found_message.tags
     delete_form = DeleteForm(request.form)
     if request.method == b"PATCH":
         form = MessageForm(request.form)
+        form.set_choices()
         if form.validate():
             found_message.content = request.form["content"]
+            found_message.tags = []
+            for tag in form.tags.data:
+                found_message.tags.append(Tag.query.get(tag))
             db.session.add(found_message)
             db.session.commit()
             flash('Message Updated!')
@@ -77,6 +89,8 @@ def show(user_id, id):
                 id=id))
     return render_template(
         '/messages/show.html',
+        tags=found_tags,
+        id=id,
         message=found_message,
         user=user_id,
         delete_form=delete_form)

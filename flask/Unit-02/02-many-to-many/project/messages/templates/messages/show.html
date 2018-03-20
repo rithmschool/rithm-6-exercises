@@ -6,12 +6,21 @@
     {{message.content}}
     <a href="{{url_for('messages.edit', user_id=message.user_id, id=message.id)}}"> Edit this message</a>
 </li>
+</ul>
 
 <form method="POST" action="{{url_for('messages.show', user_id=message.user_id, id=message.id)}}?_method=DELETE">
     {{delete_form.hidden_tag()}}
     <input type="submit" value="X">
 </form>
 
+<div>
+{% for tag in tags %}
+<a href="{{url_for('tags.edit', id=message.id, tag_id=tag.id)}}">{{tag.label}}</a>
+{% endfor %}
+</div>
+
+<a href="{{url_for('tags.index', id=message.id)}}">See all tags</a>
+<a href="{{url_for('tags.new', id=message.id)}}">Add a new tag to this message</a>
 <a href="{{url_for('messages.index', user_id=message.user_id)}}"> Back to user's messages</a>
-</ul>
+
 {% endblock %}
