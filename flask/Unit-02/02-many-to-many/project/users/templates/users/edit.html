@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{{url_for('users.show', user_id=user.id)}}?_method=PATCH" method="POST" class="m-5 d-flex flex-column align-items-center">
+  {{ form.hidden_tag() }}
+  <h4>Update User Profile</h4>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <div class="form-group w-75" style="max-width: 40rem;">
+      {% if field.name == 'password' %}
+      Confirm
+      {% endif %}
+      {{ field.label }}
+      {{ field(class_="form-control", rows="3") }}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+  {% endfor %}
+  <button class="btn btn-outline-primary btn-large w-50 mt-3" type="submit">Submit Changes</button>
+</form>
+{% endblock %}
