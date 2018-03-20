@@ -1,16 +1,30 @@
 {% extends 'base.html' %} {% block content %}
-
-<h1>See all the messages for {{user.first_name}}</h1>
-
-{%for message in user.messages%}
-<p>{{message.message}}
-  <br>
-  <a href="{{url_for('messages.messages_show', user_id=user.id, message_id=message.id)}}">See More about {{message.message}}</a>
-  <br>
-  <a href="{{url_for('messages.messages_edit', user_id=user.id, message_id=message.id)}}">Edit messge</a>
-</p>
-{%endfor%}
-<a href="{{url_for('messages.messages_new', user_id=user.id)}}">Create a New Message</a>
 <br>
-<a href="{{ url_for('root') }}">Go Back To Users</a>
+<div class="container">
+  <h1>See all the messages for {{user.first_name}}</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Message</th>
+        <th scope="col">More Message Info</th>
+        <th scope="col">Edit Message</th>
+      </tr>
+      {%for message in user.messages%}
+      <tr>
+        <td>{{message.message}}</td>
+        <td>See more about
+          <a href="{{url_for('messages.messages_show', user_id=user.id, message_id=message.id)}}">{{message.message}}</a>
+        </td>
+        <td>
+          <a href="{{url_for('messages.messages_edit', user_id=user.id, message_id=message.id)}}">Edit messge</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </thead>
+  </table>
+  <a href="{{url_for('messages.messages_new', user_id=user.id)}}">Create a New Message</a>
+  <br>
+  <a href="{{ url_for('root') }}">Go Back To Users</a>
+</div>
 {%endblock%}

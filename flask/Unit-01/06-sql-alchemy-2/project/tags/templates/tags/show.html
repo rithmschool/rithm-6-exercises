@@ -4,6 +4,10 @@
   {{tag.text}}
 </p>
 
+{%for message in message%}
+<p>{{message}}</p>
+{%endfor%}
+
 <a href="{{url_for('tags.tags_edit', id=tag.id)}}">Edit Tag</a>
 <br>
 <a href="{{ url_for('root') }}">Go To Users</a>

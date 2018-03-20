@@ -1,15 +1,18 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Add a New Tag</h1>
-<form method="POST" action="{{url_for('tags.tags_index')}}">
-  {{ form.csrf_token }}
-  <p>
-    <!-- {{form.text.label}} -->
-    {{form.text(placeholder=form.text.label.text)}}
-  </p>
-  <p>
-    {{form.messages}}
-  </p>
+<br>
+<div class="container">
+  <h1>Add a New Tag</h1>
+  <form method="POST" action="{{url_for('tags.tags_index')}}">
+    {{ form.csrf_token }}
+    <p>
+      <!-- {{form.text.label}} -->
+      {{form.text(placeholder=form.text.label.text)}}
+    </p>
+    <p>
+      {{form.messages}}
+    </p>
 
-  <button type="submit">Create</button>
-</form>
+    <button type="submit">Create</button>
+  </form>
+</div>
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 
+
 <div class="container">
   <p>
     {{message.message}}
     <br>
     <a href="{{url_for('messages.messages_edit', user_id=user.id, message_id=message.id)}}">Edit messge</a>
   </p>
-
+  {%for tag in tags%}
+  <p>{{tag}}</p>
+  {%endfor%}
   <a href="{{ url_for('root') }}">Go To Users</a>
 
   <form action="{{url_for('messages.messages_destroy', user_id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">

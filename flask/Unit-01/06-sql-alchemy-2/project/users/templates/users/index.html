@@ -1,17 +1,34 @@
 {% extends 'base.html' %} {% block content %}
 
-<!-- <a href="{{url_for('users.new')}}">Add A New User</a> -->
+<br>
 <div class="container">
-  {%for user in users%}
-  <p>
-    {{user.first_name}} {{user.last_name}}
-    <br>
-    <a href="{{url_for('users.show', id=user.id)}}">See more about {{user.first_name}}</a>
-    <a href="{{url_for('messages.messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
-  </p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">User Name</th>
+        <th scope="col">See More About User</th>
+        <th scope="col">See Messges From User</th>
+      </tr>
+      {%for user in users%}
+      <tr>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}} </td>
+        <td>{{user.username}}</td>
+        <td>
+          <a href="{{url_for('users.show', id=user.id)}}">See more about {{user.first_name}}</a>
+        </td>
+        <td>
+          <a href="{{url_for('messages.messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </thead>
+  </table>
 
-  {%endfor%}
-  <a href="{{url_for('users.login')}}">Log on To Profile</a>
+  <a href="{{url_for('users.login')}}">Log on To Profile</a> |
+  <br>
   <a href="{{url_for('users.signup')}}">Signup For A Free Account</a>
 </div>
 {%endblock%}

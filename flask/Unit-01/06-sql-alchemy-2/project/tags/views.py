@@ -3,16 +3,13 @@ from project.tags.forms import DeleteForm, TagForm
 from project.models import Message, Tag
 from project import db
 
-tags_blueprint = Blueprint(
-    'tags',
-    __name__,
-    template_folder='templates'
-)
+tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
 
 @tags_blueprint.route('/')
 def tags_index():
     return render_template('tags/index.html', tags=Tag.query.all())
+
 
 @tags_blueprint.route('/', methods=["POST"])
 def tags_create():
@@ -29,15 +26,19 @@ def tags_create():
     else:
         return render_template(url_for('tags/new.html', form=tag_form))
 
+
 @tags_blueprint.route('/new')
 def tags_new():
     tag_form = TagForm()
     tag_form.set_choices()
-    return render_template('tags/new.html' , form=tag_form)
+    return render_template('tags/new.html', form=tag_form)
+
 
 @tags_blueprint.route('/<int:id>', methods=["GET"])
 def tags_show(id):
-    return render_template('tags/show.html', tag=Tag.query.get(id))
+    get_tag = Tag.query.get(id)
+    messages = [message.message for message in get_tag.messages]
+    return render_template('tags/show.html', tag=get_tag, message=messages)
 
 
 @tags_blueprint.route('/<int:id>', methods=["PATCH"])
@@ -55,7 +56,9 @@ def tags_update(id):
         flash('Tag has been updated')
         return redirect(url_for('tags.tags_index'))
     else:
-        return render_template('tags/edit.html', tag=Tag.query.get(id), form=tag_form)
+        return render_template(
+            'tags/edit.html', tag=Tag.query.get(id), form=tag_form)
+
 
 @tags_blueprint.route('/<int:id>', methods=["DELETE"])
 def tags_destroy(id):
@@ -66,6 +69,7 @@ def tags_destroy(id):
         db.session.commit()
         flash('Deleting Tag')
     return redirect(url_for('tags.tags_index'))
+
 
 @tags_blueprint.route('/<int:id>/edit')
 def tags_edit(id):
