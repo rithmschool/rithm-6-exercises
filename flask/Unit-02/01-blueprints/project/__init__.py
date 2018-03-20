@@ -2,10 +2,12 @@ from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 import os
 
 app = Flask(__name__)
 modus = Modus(app)
+bcrypt = Bcrypt()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/1M-db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -23,4 +25,4 @@ app.register_blueprint(
 
 @app.route('/')
 def root():
-    return redirect(url_for('users.index'))
+    return redirect(url_for('users.login'))

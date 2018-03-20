@@ -33,7 +33,7 @@ h1  {
   margin-left: 15px;
 }
 
-form {
+form, .register-button {
   padding: 10px 15px;
 }
 

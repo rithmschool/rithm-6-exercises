@@ -1,25 +1,53 @@
-from flask import render_template, redirect, request, url_for, flash, Blueprint
-from project.users.forms import UserForm, DeleteForm
+from flask import render_template, redirect, request, url_for, flash, Blueprint, session
+from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.users.models import User
-from project import db
+from project import db, bcrypt
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
+
     if request.method == 'POST':
         form = UserForm(request.form)
         if form.validate():
             first_name = form.data['first_name']
             last_name = form.data['last_name']
-            user = User(first_name, last_name)
+            username = form.data['username']
+            password = form.data['password']
+            user = User.register(first_name, last_name, username, password)
             db.session.add(user)
             db.session.commit()
+            session['user_id'] = user.id
             flash('User Created!')
             return redirect(url_for('users.index'))
         return render_template('users/new.html', form=form)
+
+    if "user_id" not in session:
+        flash("Must be logged in!")
+        return redirect(url_for('users.login', form=LoginForm()))
+
     return render_template('users/index.html', users=User.query.all())
+
+
+# NEW FOR BCRYPT
+@users_blueprint.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        form = LoginForm(request.form)
+        if form.validate():
+            username = form.data['username']
+            password = form.data['password']
+            user = User.authenticate(username, password)
+            if user:
+                session['user_id'] = user.id
+                flash("Login Successful!")
+                return redirect(url_for('users.index'))
+            else:
+                flash("Either username or password are invalid")
+                return render_template('users/login.html', form=LoginForm())
+    return render_template('users/login.html', form=LoginForm())
 
 
 @users_blueprint.route('/new')
