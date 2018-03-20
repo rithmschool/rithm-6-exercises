@@ -9,21 +9,23 @@
     <form action="{{url_for('messages.index', id = id)}}" method="POST">
         {{ form.hidden_tag() }}
 
-        {% for field in form if field.widget.input_type != 'hidden' %}
-            <div class="form-group">
-                {{ field.label }}
-                {{ field (class_="form-control") }}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                {% endif %}
-                {% if not field.errors %}
-                <small class="form-text text-muted">You can post a maximum 164 character message</small>
-                {% endif %}
+        <div class="form-group">
+            {{ form.content.label }}
+            
+            {{ form.content (class_="form-control") }}
+            
+            {% if form.content.errors %}
+                {% for error in form.content.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+            {% endif %}
+            {% if not form.content.errors %}
+            <small class="form-text text-muted">You can post a maximum 164 character message</small>
+            {% endif %}
                 
-            </div>
-        {% endfor %}
+            {{ form.tags (class_="tag_list") }}
+            
+        </div>
         
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit message!</button>
     </form>

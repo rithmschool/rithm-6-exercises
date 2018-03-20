@@ -13,6 +13,10 @@
             <a href="{{url_for('messages.show', id = user.id, message_id = message.id)}}">
                 (go to message page)
             </a>
+            <br>
+            {% for tag in message.tags %}    
+                <button type="button" class="btn btn-light btn-sm mt-2">{{ tag.content }}</button>
+            {% endfor %}
         </li>
         {% endfor %}
     </ul>

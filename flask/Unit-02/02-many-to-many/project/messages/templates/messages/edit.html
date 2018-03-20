@@ -9,21 +9,23 @@
     <form action="{{url_for('messages.show', id = id, message_id = message.id)}}?_method=PATCH" method="POST">
         {{ message_form.hidden_tag() }}
 
-        {% for field in message_form if field.widget.input_type != 'hidden' %}
-            <div class="form-group">
-                {{ field.label }}
-                {{ field (class_="form-control") }}
-                {% if field.errors %}
-                    {% for error in field.errors %}
+        <div class="form-group">
+                {{ message_form.content.label }}
+                
+                {{ message_form.content (class_="form-control") }}
+                
+                {% if message_form.content.errors %}
+                    {% for error in message_form.content.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
                 {% endif %}
-                {% if not field.errors %}
+                {% if not message_form.content.errors %}
                 <small class="form-text text-muted">You can post a maximum 164 character message</small>
                 {% endif %}
+                    
+                {{ message_form.tags (class_="tag_list") }}
                 
-            </div>
-        {% endfor %}
+        </div>
         
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit changes!</button>
     </form>
