@@ -6,11 +6,11 @@
 <h5>Last Name: {{found_message.user.last_name}}</h5>
 <br>
 <p>Content: {{found_message.content}}</p>
-<a href="{{url_for('edit_message', message_id = found_message.id, user_id=user.id)}}">Edit Message</a>
+<a href="{{url_for('messages.edit', message_id = found_message.id, user_id=user.id)}}">Edit Message</a>
 <br>
-<form action="{{url_for('show_message', user_id=user.id, message_id = found_message.id)}}?_method=DELETE" method="POST">
+<form action="{{url_for('messages.show', user_id=user.id, message_id=found_message.id)}}?_method=DELETE" method="POST">
         {{ delete_form.hidden_tag() }}
         <input type="submit" value="Delete">
     </form>
-<small><a href="{{url_for('index')}}">Go Home</a></small>
+<small><a href="{{url_for('users.index')}}">Go Home</a></small>
 {% endblock %}

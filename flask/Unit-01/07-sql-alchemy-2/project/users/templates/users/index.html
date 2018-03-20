@@ -5,12 +5,12 @@ User or Loser
 
 {% block content %}
 <h2>USERS:</h2>
-<a href='/users/new'>Create User</a>
+<a href="{{url_for('users.new')}}">Create User</a>
 <br>
 <br>
 <br>
 {% for user in users %}
-<a href="{{url_for('show', user_id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
+<a href="{{url_for('users.show', user_id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
 <p>User's Messages:</p>
 <ol>
 {% for message in user.messages%}

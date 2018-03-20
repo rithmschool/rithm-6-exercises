@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h4>Edit Message</h4>
-<form action="{{url_for('show_message', message_id=message.id, user_id=user.id)}}?_method=PATCH" method="POST">    
-        <input type="text" name="content" value="{{message.content}}">
-        <input type="submit" value="Edit">
-</form>
-<form method="POST" action="{{url_for('show_message', message_id=message.id, user_id=message.user_id)}}?_method=PATCH">
+<form method="POST" action="{{url_for('messages.show', message_id=message.id, user_id=message.user_id)}}?_method=PATCH">
     {{ form.hidden_tag() }}
         {% for field in form if field.widget.input_type != 'hidden' %}
             {{ field.label }}
@@ -20,5 +16,5 @@
         {% endfor %}
     <input type="submit" value="Save your changes!">
 </form>
-<small><a href="{{url_for('index')}}">Go Home</a></small>
+<small><a href="{{url_for('users.index')}}">Go Home</a></small>
 {% endblock %}

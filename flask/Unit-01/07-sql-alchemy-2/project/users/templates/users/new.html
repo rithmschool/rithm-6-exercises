@@ -6,7 +6,7 @@ Create User
 {% block content %}
 <h1>We are welcome to have you!<h1>
     <br>
-    <form action="{{url_for('index')}}" method="POST">
+    <form action="{{url_for('users.index')}}" method="POST">
         {{ form.hidden_tag() }}
         {% for field in form if field.widget.input_type != 'hidden' %}
             {{ field.label }}
@@ -21,5 +21,5 @@ Create User
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
-    <small><a href="{{url_for('index')}}">Go Home</a></small>
+    <small><a href="{{url_for('users.index')}}">Go Home</a></small>
 {% endblock %}
