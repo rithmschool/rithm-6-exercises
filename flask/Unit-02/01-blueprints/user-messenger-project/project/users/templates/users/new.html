@@ -3,6 +3,7 @@
 {% block content %}
 
 <form method="POST" action="{{url_for('users.index')}}">
+        <div class="form-control">
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
@@ -19,6 +20,7 @@
     </p>
     {% endfor %}
     <input type="submit" value="Add User">
+    </div>
 </form>
 
 {% endblock %}

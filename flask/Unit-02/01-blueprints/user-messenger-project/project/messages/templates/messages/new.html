@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<ul class = "list-group list-group-flush">
 
-<form method="POST" action="{{url_for('messages.index', id = user.id)}}">
+        <li class = "list-group-item"><form method="POST" action="{{url_for('messages.index', id = user.id)}}">
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
-    <p>
+     <p>
         {{field.label}}
         {{field}}
         <span>
@@ -21,5 +22,6 @@
     </p>
     <input type="submit" value="Add Message">
 </form>
-
+</li>
+</ul>
 {% endblock %}

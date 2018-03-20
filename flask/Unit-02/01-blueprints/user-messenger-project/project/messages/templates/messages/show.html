@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Message Headline</h2>
+<ul class = "list-group list-group-flush">
+
+<li class = "list-group-item"> <h2>Message Headline</h2>
 <p>
   {{message.content}}
   <br>
@@ -9,6 +11,7 @@
       {{tag.subject}}
   </p>
   {% endfor %}
+
   <a href="{{url_for('messages.edit',id = message.user_id, message_id = message.id)}}">Edit this message</a>
 </p>
 
@@ -27,4 +30,6 @@
         {% endfor %}
     <input type="submit" value="DELETE THIS MESSAGE">
 </form>
+
+</ul>
 {% endblock %}

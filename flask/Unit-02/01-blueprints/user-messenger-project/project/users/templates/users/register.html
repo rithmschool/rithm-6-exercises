@@ -3,6 +3,7 @@
 {% block content %}
 
 <form method="POST" action="{{url_for('users.signup')}}">
+        <div class="form-control">
     {{ form.hidden_tag() }}
     
 
@@ -21,6 +22,7 @@
     </p>
     {% endfor %}
     <input type="submit" value="Register User">
+    </div>
 </form>
 
 {% endblock %}
