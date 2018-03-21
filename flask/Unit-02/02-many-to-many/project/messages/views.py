@@ -1,8 +1,9 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from project.messages.forms import DeleteForm, AddMessage
 from project.tags.forms import NewTagForm
 from project.models import Message, User, Tag
 from project import db
+from project.decorators import ensure_logged_in, prevent_login_signup, ensure_correct_user
 
 messages_blueprint = Blueprint(
     'messages',
@@ -25,12 +26,14 @@ def index(user_id):
             return render_template('./messages/new.html', form=form)
 
 @messages_blueprint.route('/new')
+@ensure_correct_user
 def new(user_id):
     form = AddMessage()
     form.set_choices()
     return render_template('messages/new.html', user_id=user_id, form=form)
 
 @messages_blueprint.route('/messages/<int:message_id>', methods=["PATCH", "DELETE"])
+@ensure_correct_user
 def show(message_id, user_id):
     target_message = Message.query.get(message_id)
     if request.method == b'PATCH':
@@ -52,6 +55,7 @@ def show(message_id, user_id):
             return redirect(url_for('users.show', user_id=target_message.user_id))
 
 @messages_blueprint.route('/messages/<int:message_id>/edit')
+@ensure_correct_user
 def edit(message_id, user_id):
     target_message = Message.query.get(message_id)
     form = AddMessage(obj=target_message)
