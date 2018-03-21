@@ -1,9 +1,28 @@
-from flask import Blueprint, redirect, render_template, request, url_for, flash, session
+from flask import Blueprint, redirect, render_template, request, url_for, flash, session, g
 from project.users.models import User
 from project.users.forms import UserForm, LoginForm, DeleteForm
 from project import db
+from functools import wraps
 
 users_blueprint = Blueprint('users', __name__, template_folder = 'templates')
+
+def ensure_correct_user(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if session.get('user_id') != kwargs['id']:
+            flash('not authorized to access area!')
+            return redirect(url_for('users.index'))
+        return fn(*args, **kwargs)
+    return wrapper
+
+def ensure_logged_in(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if not session.get('user_id'):
+            flash('please sign up or log in!')
+            return redirect(url_for('welcome'))
+        return fn(*args, **kwargs)
+    return wrapper
 
 @users_blueprint.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -23,6 +42,7 @@ def login():
     return render_template('users/login.html', form = form)
 
 @users_blueprint.route('/logout')
+@ensure_logged_in
 def logout():
     if 'user_id' in session:
         del session['user_id']
@@ -32,6 +52,7 @@ def logout():
 
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
+@ensure_logged_in
 def index():
     if request.method == 'POST':
         form = UserForm(request.form)
@@ -55,12 +76,14 @@ def new():
     return render_template('users/new.html', form = form)
 
 @users_blueprint.route('/<int:id>/edit')
+@ensure_correct_user
 def edit(id):
     user_form = UserForm(obj = User.query.get_or_404(id))
     delete_form = DeleteForm(obj = User.query.get_or_404(id))
     return render_template('users/edit.html', user = User.query.get_or_404(id), user_form = user_form, delete_form = delete_form)
 
 @users_blueprint.route('/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+@ensure_correct_user
 def show(id):
     found_user = User.query.get_or_404(id)
     if request.method == b'PATCH':

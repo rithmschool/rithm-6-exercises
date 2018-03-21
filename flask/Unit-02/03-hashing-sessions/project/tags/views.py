@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, url_for, flash, session
+from flask import Blueprint, redirect, render_template, request, url_for, flash, session, g
 from project.tags.models import Tag
 from project.tags.forms import TagForm, DeleteForm
 from project import db

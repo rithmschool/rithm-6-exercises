@@ -5,6 +5,13 @@
  {% endblock %}
 
 {% block content %} 
+    {% for user in users %}
+        {% if user.id == session.user_id %}
+            <div class="text-center">
+                <h2>welcome {{user.first_name}}!</h2>
+            </div>
+        {% endif %}
+    {% endfor %}
     <h2>these are the users</h2>
     <ul class="list-group m-4">
         {% for user in users %}
@@ -12,9 +19,16 @@
             {% if user.image_url %}
                 <img src="{{ user.image_url }}" class="small-avatar" alt="avatar">
             {% endif %}
-            <a href="{{url_for('users.show', id = user.id)}}">
-                {{ user.first_name }} {{ user.last_name }}
-            </a>
+            {% if session.user_id == user.id %}
+                <a href="{{url_for('users.show', id = user.id)}}">
+                    {{ user.first_name }} {{ user.last_name }}
+                </a>
+            {% else %}
+                <a href="#">
+                    {{ user.first_name }} {{ user.last_name }}
+                </a>
+            {% endif %}
+            
         </li>
         {% endfor %}
     </ul>

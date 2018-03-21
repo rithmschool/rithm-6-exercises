@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, url_for, flash, session
+from flask import Blueprint, redirect, render_template, request, url_for, flash, session, g
 from project.messages.models import Message
 from project.users.models import User
 from project.tags.models import Tag
@@ -8,17 +8,17 @@ from functools import wraps
 
 messages_blueprint = Blueprint('messages', __name__, template_folder = 'templates')
 
-def ensure_logged_in(fn):
+def ensure_correct_user(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
-        if not session.get('user_id'):
-            flash('please sign up or log in!')
-            return redirect(url_for('welcome'))
+        if session.get('user_id') != kwargs['id']:
+            flash('not authorized to access area!')
+            return redirect(url_for('users.index'))
         return fn(*args, **kwargs)
     return wrapper
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
-@ensure_logged_in
+@ensure_correct_user
 def index(id):
     if request.method == 'POST':
         form = MessageForm()
@@ -36,14 +36,14 @@ def index(id):
     return render_template('messages/index.html', user = User.query.get_or_404(id))
 
 @messages_blueprint.route('/new')
-@ensure_logged_in
+@ensure_correct_user
 def new(id):
     form = MessageForm()
     form.set_choices()
     return render_template('messages/new.html', id = id, form = form, tags = Tag.query.all())
 
 @messages_blueprint.route('/<int:message_id>/edit')
-@ensure_logged_in
+@ensure_correct_user
 def edit(id, message_id):
     message = Message.query.get_or_404(message_id)
     tags = [ tag.id for tag in message.tags ]
@@ -53,7 +53,7 @@ def edit(id, message_id):
     return render_template('messages/edit.html', id = id, message = Message.query.get_or_404(message_id), message_form = message_form, delete_form = delete_form)
 
 @messages_blueprint.route('/<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
-@ensure_logged_in
+@ensure_correct_user
 def show(id, message_id):
     found_user = User.query.get_or_404(id)
     found_message = Message.query.get_or_404(message_id)

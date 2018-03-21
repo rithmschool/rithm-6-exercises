@@ -13,6 +13,42 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">users | messages</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if session.user_id %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('users.index')}}">home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('tags.index')}}">tags</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('messages.index', id = session.user_id )}}">messages</a>
+                    </li>
+                </ul>
+            {% endif %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    {% if session.user_id %}
+                        <a class="nav-link" href="{{ url_for('users.logout') }}">
+                            log out
+                        </a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('users.login') }}">
+                            log in
+                        </a>
+                    {% endif %}
+                    
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container my-3">
         {% block content %} 
         {% endblock %}

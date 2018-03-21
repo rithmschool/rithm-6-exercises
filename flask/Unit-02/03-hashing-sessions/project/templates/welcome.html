@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="m-5">
-        welcome to the user messages app
-    </h2>
-    <h5 class="m-5">
-        please
-        <a href="{{url_for('users.new')}}">sign up</a>
-        or
-        <a href="{{url_for('users.login')}}">log in</a>
-        to proceed to view the users and the messages!
-    </h5>
+    <div class="container text-center">
+        <h2 class="m-5">
+            welcome to the user messages app
+        </h2>
+        <h5 class="m-5">
+            please
+            <a href="{{url_for('users.new')}}">sign up</a>
+            or
+            <a href="{{url_for('users.login')}}">log in</a>
+            to proceed to view the users and the messages!
+        </h5>
+    </div>
 {% endblock %}
