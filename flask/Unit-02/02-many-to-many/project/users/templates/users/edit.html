@@ -10,11 +10,18 @@
     <div>
       <form action="{{url_for('users.show', id=user.id)}}?_method=PATCH" method="POST">
           {{ form.hidden_tag() }}
-          {% for field in form if field.widget.input_type != 'hidden' or field. %}
+          {% for field in form if field.widget.input_type != 'hidden' %}
 
           <div>
-            {{ field.label }}
+            {% if field.name == 'password' %}
+            Enter
+            {{ field.label}}
+            To Save Your Changes
             {{ field(class_="form__input") }}
+            {% else %}
+            {{ field.label}}
+            {{ field(class_="form__input") }}
+            {% endif %}
             <span>
               {% if field.errors %}
                 {% for error in field.errors %}
@@ -31,11 +38,11 @@
       </form>
     </div>
     <div class="mt-3">
-      <h3>Want to Delete The User?</h3>
+      <h3>Want to Delete Your Account?</h3>
       <div class="button__edit-delete">
       <form action="{{url_for('users.show', id=user.id)}}?_method=DELETE" method="POST">
           {{delete_form.hidden_tag()}}
-        <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Delete &nbsp;<i class="fas fa-trash-alt"></i></button>
+        <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Delete &nbsp;<i class="fas fa-trash-alt"></i></button>
       </form>
     </div>
     </div>

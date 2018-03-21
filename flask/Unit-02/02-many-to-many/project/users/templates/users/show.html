@@ -12,6 +12,7 @@
   <div>
     <h5>User's Full Name:&nbsp;</h5> <span><p>{{user.first_name}} {{user.last_name}}</p></span>
   </div>
+  {% if current_user.id == user.id %}
   <div>
     <div>
       <h5>Need To Update or Delete {{user.first_name}}'s Profile?</h5>
@@ -29,7 +30,7 @@
   <div>
       <a href="{{url_for('users.login')}}">See {{user.first_name}}'s messages &nbsp;<i class="fas fa-envelope"></i></a>
   </div>
-
+  {% endif %}
 </section>
 
 

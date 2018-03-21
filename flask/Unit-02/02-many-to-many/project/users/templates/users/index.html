@@ -7,10 +7,6 @@
     <h1 class="header__center align-self-center">List Of All Active Users</h1>
     <div class="borderb__head"></div>
   </div>
-  <div class="link__register--user">
-    <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Sign Up!</a>
-    <a href="{{url_for('users.login')}}" class="btn btn-outline-info my-2 my-sm-0">Login!</a>
-  </div>
 
         {% for user in users %}
 

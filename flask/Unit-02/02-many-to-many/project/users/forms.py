@@ -3,18 +3,14 @@ from wtforms import StringField, PasswordField, validators
 
 
 class UserForm(FlaskForm):
-    first_name = StringField('Please Enter your First Name',
-                             [validators.DataRequired()])
-    last_name = StringField('Please Enter your Last Name',
-                            [validators.DataRequired()])
-    username = StringField('Create a Username', [validators.DataRequired()])
+    first_name = StringField('First Name', [validators.DataRequired()])
+    last_name = StringField('Last Name', [validators.DataRequired()])
+    username = StringField('Username', [validators.DataRequired()])
     password = PasswordField(
-        'Please Pick a Password at Least 8 Characters long',
-        [validators.DataRequired(),
-         validators.Length(min=8)])
+        'Password', [validators.DataRequired(),
+                     validators.Length(min=8)])
     image_url = StringField(
-        'Post a Picture to your Profile ',
-        [validators.URL(message='URL Must Be Valid')],
+        'Profile Picture', [validators.URL(message='URL Must Be Valid')],
         filters=[lambda x: x],
         render_kw={"placeholder": " Only URLs Please!"})
 

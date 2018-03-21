@@ -28,8 +28,13 @@
             <i class="fas fa-envelope-square fa-lg bg-info"></i>
             Generic Users and Messages App!
           </a>
-          <div>
-      <a href="{{url_for('users.index')}}" class="btn btn-outline-info my-2 my-sm-0">Users</a>
+          <div class="text-light">
+      {% if current_user.is_authenticated %}
+      Welcome {{ current_user.first_name }} &nbsp; &nbsp;<a href="{{url_for('users.logout')}}" class="btn btn-outline-info my-2 my-sm-0">Logout</a>
+      {% else %}
+      <a href="{{url_for('users.login')}}" class="btn btn-outline-info my-2 my-sm-0">Login</a>
+      <a href="{{url_for('users.new')}}" class="btn btn-outline-info my-2 my-sm-0">Sign Up!</a>
+          {% endif %}
       <a href="{{url_for('messages_root')}}" class="btn btn-outline-info my-2 my-sm-0">Messages</a>
     </div>
     </nav>
