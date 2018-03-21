@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_migrate import Migrate
@@ -25,9 +25,12 @@ app.register_blueprint(tags_blueprint, url_prefix='/tags')
 
 @app.route('/')
 def root():
-    return redirect(url_for('users.welcome'))
+    return redirect(url_for('welcome'))
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
 
 @app.errorhandler(404)
 def error(e):
     return render_template('404.html'), 404
-

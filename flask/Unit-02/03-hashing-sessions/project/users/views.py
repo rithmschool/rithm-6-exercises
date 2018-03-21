@@ -5,10 +5,6 @@ from project import db
 
 users_blueprint = Blueprint('users', __name__, template_folder = 'templates')
 
-@users_blueprint.route('/welcome')
-def welcome():
-    return render_template('users/welcome.html')
-
 @users_blueprint.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
@@ -25,6 +21,15 @@ def login():
         flash('something went wrong; try logging in again!')
         return render_template('users/login.html', form = form)
     return render_template('users/login.html', form = form)
+
+@users_blueprint.route('/logout')
+def logout():
+    if 'user_id' in session:
+        del session['user_id']
+
+    flash('you logged out!')
+    return redirect(url_for('welcome'))
+
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
