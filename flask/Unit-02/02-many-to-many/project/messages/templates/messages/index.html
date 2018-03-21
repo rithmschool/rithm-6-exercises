@@ -9,7 +9,7 @@
     <img class="card-img-top" src="{{user.img_url}}" alt="{{user.first_name}}'s profile picture">
   </div>
 
-  {% if user.id == session.get('user_id') %}
+  {% if user.id == current_user.id %}
   <a class="btn btn-info my-4" href="{{url_for('messages.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
   {% endif %}
 
@@ -26,7 +26,7 @@
           {% endfor %}
         </td>
 
-        {% if user.id == session.get('user_id') %}
+        {% if user.id == current_user.id %}
         <td>
             <a class="btn btn-primary" href="{{url_for('messages.edit', message_id=message.id, user_id=user.id)}}">
               <i class="fas fa-pencil-alt"></i>

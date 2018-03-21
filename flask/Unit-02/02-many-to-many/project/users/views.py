@@ -1,9 +1,10 @@
-from flask import request, redirect, url_for, render_template, flash, Blueprint, session, g
+from flask import request, redirect, url_for, render_template, flash, Blueprint, session
 from project import db, bcrypt
-from project.decorators import require_login, prevent_login_signup, ensure_correct_user
+from project.decorators import prevent_login_signup, ensure_correct_user
 from project.users.forms import UserForm, LoginForm, DeleteForm
 from project.models import User
 from sqlalchemy.exc import IntegrityError
+from flask_login import login_user, logout_user, login_required
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
@@ -29,7 +30,7 @@ def signup():
                                      img_url, password)
             db.session.add(new_user)
             db.session.commit()
-            session['user_id'] = new_user.id
+            login_user(new_user)
             flash('User Created!')
             return redirect(url_for('users.index'))
         except IntegrityError:
@@ -40,7 +41,6 @@ def signup():
 
 @users_blueprint.route('/new')
 @prevent_login_signup
-@require_login
 def new():
     form = UserForm()
     return render_template('users/new.html', form=form)
@@ -54,7 +54,7 @@ def login():
         if form.validate():
             user = User.authenticate(form.username.data, form.password.data)
             if user:
-                session['user_id'] = user.id
+                login_user(user)
                 flash("Success! You logged in :)!")
                 return redirect(url_for('users.index'))
         flash("Login failed")
@@ -63,15 +63,15 @@ def login():
 
 
 @users_blueprint.route('/logout')
-@require_login
+@login_required
 def logout():
-    del session["user_id"]
+    logout_user()
     flash('You have been signed out.')
     return redirect(url_for('users.login'))
 
 
 @users_blueprint.route('/<int:user_id>/edit')
-@require_login
+@login_required
 @ensure_correct_user
 def edit(user_id):
     found_user = User.query.get_or_404(user_id)
@@ -79,7 +79,7 @@ def edit(user_id):
     return render_template('users/edit.html', user=found_user, form=form)
 
 
-@users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
+@users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH'])
 def show(user_id):
     found_user = User.query.get_or_404(user_id)
     delete_form = DeleteForm()
@@ -96,15 +96,24 @@ def show(user_id):
             db.session.commit()
             flash('User Updated!')
             return redirect(url_for('users.show', user_id=user_id))
-        flash('Password Incorrect')
-        return render_template('users/edit.html', user=found_user, form=form)
+        else:
+            flash('Password Incorrect')
+            return render_template(
+                'users/edit.html', user=found_user, form=form)
+    return render_template(
+        'users/show.html', user=found_user, delete_form=delete_form)
+
+
+@login_required
+@ensure_correct_user
+@users_blueprint.route('/<int:user_id>', methods=['DELETE'])
+def destroy(user_id):
+    found_user = User.query.get(user_id)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
             db.session.delete(found_user)
             db.session.commit()
-            del session["user_id"]
+            logout_user()
             flash('User Deleted!')
-            return redirect(url_for('users.login'))
-    return render_template(
-        'users/show.html', user=found_user, delete_form=delete_form)
+    return redirect(url_for('users.login'))

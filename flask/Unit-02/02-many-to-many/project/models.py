@@ -1,4 +1,5 @@
 from project import db, bcrypt  # project refers to __init__.py
+from flask_login import UserMixin
 
 MessageTag = db.Table('message_tags',
                       db.Column("id", db.Integer, primary_key=True),
@@ -9,7 +10,7 @@ MessageTag = db.Table('message_tags',
                                 db.ForeignKey("tags.id", ondelete="cascade")))
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

@@ -16,8 +16,8 @@
           <i class="fas fa-bolt"></i> CRUD App
       </a>
       {% block logout %}
-      {% if g.user %}
-        <span class="text-white ml-auto mr-3">{{ g.user.username }} |
+      {% if current_user.is_authenticated %}
+        <span class="text-white ml-auto mr-3">{{ current_user.username }} |
         <a href="{{url_for('users.logout')}}" class="navbar-text">Logout</a>
         </span>
       {% else %}

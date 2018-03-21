@@ -1,8 +1,9 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint
 from project.messages.forms import MessageForm, DeleteForm
 from project.models import User, Message
-from project.decorators import ensure_correct_user, require_login
+from project.decorators import ensure_correct_user
 from project import db
+from flask_login import login_required
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder='templates')
@@ -29,7 +30,7 @@ def index(user_id):
 
 
 @messages_blueprint.route('/new')
-@require_login
+@login_required
 @ensure_correct_user
 def new(user_id):
     form = MessageForm()
@@ -38,7 +39,7 @@ def new(user_id):
 
 
 @messages_blueprint.route('/<int:message_id>/edit')
-@require_login
+@login_required
 @ensure_correct_user
 def edit(message_id, user_id):
     found_message = Message.query.get_or_404(message_id)

@@ -7,7 +7,7 @@
   {% for field in form if field.widget.input_type != 'hidden' %}
     <div class="form-group w-75" style="max-width: 40rem;">
       {% if field.name == 'password' %}
-      Confirm
+        Confirm
       {% endif %}
       {{ field.label }}
       {{ field(class_="form-control", rows="3") }}
