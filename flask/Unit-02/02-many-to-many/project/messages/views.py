@@ -2,12 +2,14 @@ from flask import request, url_for, render_template, redirect, flash, Blueprint
 from project.models import Message, User, Tag
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
+from flask_login import UserMixin, login_user, logout_user, current_user, login_required
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder='templates')
 
 
 @messages_blueprint.route("/", methods=['GET', 'POST'])
+@login_required
 def index(user_id):
     form = MessageForm(request.form)
     if request.method == 'POST':
@@ -38,6 +40,7 @@ def new(user_id):
 def edit(user_id, id):
     found_message = Message.query.get(id)
     form = MessageForm(obj=found_message)
+    form.set_choices()
     delete_form = DeleteForm(request.form)
     return render_template(
         'messages/edit.html',
@@ -55,6 +58,8 @@ def show(user_id, id):
         form.set_choices()
         if form.validate():
             found_message.content = form.data['content']
+            found_message.tags = form.data['tags']
+            found_message.append
             db.session.add(found_message)
             db.session.commit()
             flash("SUCCESS! You've Updated Your Message")

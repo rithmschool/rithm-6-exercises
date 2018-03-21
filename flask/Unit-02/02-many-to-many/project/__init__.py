@@ -27,7 +27,7 @@ login_manager.init_app(app)
 login_manager.login_view = "users.login"
 login_manager.login_message = "Please log in!"
 
-#### Hand Made Decorators
+# Hand Made Decorators
 # def require_login(fn):
 #     @functools.wraps(fn)
 #     def wrapped(*args, **kwargs):
