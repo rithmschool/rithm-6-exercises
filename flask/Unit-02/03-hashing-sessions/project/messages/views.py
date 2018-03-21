@@ -17,6 +17,7 @@ def current_user():
         g.current_user = None
 
 @messages_blueprint.route('/', methods=["GET", "POST"])
+@ensure_authenticated
 def index(id):
     found_user = User.query.get_or_404(id)
     form = MessageForm(request.form)
