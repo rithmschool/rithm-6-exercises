@@ -4,6 +4,7 @@ from flask import Flask, redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 
 from os import environ
@@ -15,11 +16,12 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.url_map.strict_slashes = False
-modus = Modus(app)
+bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
+modus = Modus(app)
 toolbar = DebugToolbarExtension(app)
 
-Migrate(app, db)
+migrate = Migrate(app, db)
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
@@ -43,5 +45,3 @@ def page_not_found(e):
     '''400 Error Page'''
 
     return render_template('404.html'), 404
-
-

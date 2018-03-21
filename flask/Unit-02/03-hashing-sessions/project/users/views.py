@@ -1,12 +1,14 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.users.forms import UserForm, DeleteForm
 from project.models import User
-from project import db
+from project import db, bcrypt
+from sqlalchemy.exc import IntegrityError
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 ################### Users View Functions #########################
 
+# @users_blueprint.route('/')
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index_users():
     '''Display list of users'''
@@ -69,3 +71,31 @@ def edit_users(user_id):
     delete_form = DeleteForm()
     user_form = UserForm(obj=found_user)
     return render_template('users/edit.html', user=found_user, form=user_form, delete_form=delete_form)
+
+@users_blueprint.route('/signup', methods=["GET", "POST"])
+def signup():
+    '''Creates a new user'''
+
+    user_form = UserForm(request.form)
+
+    if request.method == 'POST' and user_form.validate():
+        try:
+            new_user = User(request.form['first_name'], request.form['last_name'], request.form['image_url'], request.form['username'], request.form['password'])
+            db.session.add(new_user)
+            db.session.commit()
+            flash('User Created!')
+        except IntegrityError as e:
+            return render_template('users/signup.html', form=user_form)
+        return redirect(url_for('users.login'))
+    else:
+        return render_template('users/signup.html', form=user_form)
+
+@users_blueprint.route('/login', methods=["GET", "POST"])
+def login():
+
+    user_form = UserForm(request.form)
+
+    if request.method == "POST" and form.validate():
+        found_user = User.query.filter_by(username = form.data['username']).first()
+        if found_user:
+            authenticated_user = bcrypt.check_password_hash
