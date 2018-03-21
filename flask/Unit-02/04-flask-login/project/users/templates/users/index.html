@@ -7,7 +7,7 @@
   <h1>User/Messages App (Flask Blueprint MVC)</h1>
   <a href="{{url_for('users.signup')}}">Sign Up</a>
   <p>
-    Welcome User {{ g.current_user.first_name }}  {{ g.current_user.last_name }} {{ g.current_user.id }}
+    Welcome User {{ current_user.first_name }}  {{ current_user.last_name }} {{ current_user.id }}
   </p>
 </nav>
 

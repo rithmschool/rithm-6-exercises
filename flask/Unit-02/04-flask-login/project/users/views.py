@@ -3,17 +3,10 @@ from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import User
 from project import db
 from sqlalchemy.exc import IntegrityError
-from project.decorators import require_login, ensure_correct_user
+from project.decorators import ensure_correct_user
+from flask_login import login_user, logout_user, login_required
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
-
-
-@users_blueprint.before_request
-def current_user():
-    if 'user_id' in session:
-        g.current_user = User.query.get(session['user_id'])
-    else:
-        g.current_user = None
 
 
 @users_blueprint.route('/signup')
@@ -34,7 +27,7 @@ def create():
             user = User.register(first_name, last_name, username, password)
             db.session.add(user)
             db.session.commit()
-            session['user_id'] = user.id
+            login_user(user)
             flash('User Created!')
             return redirect(url_for('users.index'))
         except IntegrityError:
@@ -44,7 +37,7 @@ def create():
 
 
 @users_blueprint.route('/')
-@require_login
+@login_required
 def index():
     if request.method == 'POST':
         form = UserForm(request.form)
@@ -57,7 +50,7 @@ def index():
                 user = User.register(first_name, last_name, username, password)
                 db.session.add(user)
                 db.session.commit()
-                session['user_id'] = user.id
+                login_user(user)
                 flash('User Created!')
                 return redirect(url_for('users.index'))
             except IntegrityError:
@@ -80,7 +73,7 @@ def login():
             password = form.data['password']
             user = User.authenticate(username, password)
             if user:
-                session['user_id'] = user.id
+                login_user(user)
                 flash("You are now logged in!")
                 return redirect(url_for('users.index'))
             else:
@@ -90,7 +83,7 @@ def login():
 
 
 @users_blueprint.route('/<int:id>/edit')
-@require_login
+@login_required
 @ensure_correct_user
 def edit(id):
     user = User.query.get(id)
@@ -99,7 +92,7 @@ def edit(id):
 
 
 @users_blueprint.route('/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-@require_login
+@login_required
 @ensure_correct_user
 def show(id):
     user = User.query.get(id)
@@ -118,6 +111,7 @@ def show(id):
         if delete_form.validate():
             db.session.delete(user)
             db.session.commit()
+            logout_user()
             flash("User Deleted!")
             return redirect(url_for('users.index'))
     delete_form = DeleteForm()
@@ -126,8 +120,8 @@ def show(id):
 
 
 @users_blueprint.route('/logout')
-@require_login
+@login_required
 def logout():
-    del session['user_id']
+    logout_user()
     flash('Logged out!')
     return redirect(url_for('users.login'))

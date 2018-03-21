@@ -1,17 +1,16 @@
-from flask import url_for, redirect, flash, g, session
+from flask import url_for, redirect, flash, session
 from functools import wraps
 
+# def require_login(fn):
+#     @wraps(fn)
+#     def wrapped(*args, **kwargs):
+#         if hasattr(g, 'current_user'):
+#             return fn(*args, **kwargs)
+#         else:
+#             flash('Not authorized')
+#             return redirect(url_for('login'))
 
-def require_login(fn):
-    @wraps(fn)
-    def wrapped(*args, **kwargs):
-        if hasattr(g, 'current_user'):
-            return fn(*args, **kwargs)
-        else:
-            flash('Not authorized')
-            return redirect(url_for('login'))
-
-    return wrapped
+#     return wrapped
 
 
 def ensure_correct_user(fn):

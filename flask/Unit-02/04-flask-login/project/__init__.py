@@ -4,10 +4,15 @@ from flask_modus import Modus
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 import os
+from flask_login import LoginManager
 
 app = Flask(__name__)
 modus = Modus(app)
 bcrypt = Bcrypt(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "users.login"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/1M-db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -31,3 +36,11 @@ def root():
 @app.route('/messages')
 def messages():
     return render_template('messages.html')
+
+
+from project.models import User
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))

@@ -1,23 +1,16 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
+from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.models import User, Message
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
-from project.decorators import require_login, ensure_correct_user
+from project.decorators import ensure_correct_user
+from flask_login import login_required
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder="templates")
 
 
-@messages_blueprint.before_request
-def current_user():
-    if 'user_id' in session:
-        g.current_user = User.query.get(session['user_id'])
-    else:
-        g.current_user = None
-
-
 @messages_blueprint.route('/', methods=['GET', 'POST'])
-@require_login
+@login_required
 @ensure_correct_user
 def index(id):
     user = User.query.get(id)
@@ -35,7 +28,7 @@ def index(id):
 
 
 @messages_blueprint.route('/new')
-@require_login
+@login_required
 @ensure_correct_user
 def new(id):
     user = User.query.get(id)
@@ -44,7 +37,7 @@ def new(id):
 
 
 @messages_blueprint.route('/<int:msg_id>/edit')
-@require_login
+@login_required
 @ensure_correct_user
 def edit(id, msg_id):
     message = Message.query.get(msg_id)
@@ -53,7 +46,7 @@ def edit(id, msg_id):
 
 
 @messages_blueprint.route('/<int:msg_id>', methods=['GET', 'PATCH', 'DELETE'])
-@require_login
+@login_required
 @ensure_correct_user
 def show(id, msg_id):
     message = Message.query.get(msg_id)
