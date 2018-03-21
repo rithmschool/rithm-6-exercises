@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for,render_template
+from flask import Flask, redirect, url_for, render_template
 from flask_modus import Modus
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 toolbar = DebugToolbarExtension(app)
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 bcrypt = Bcrypt()
 modus = Modus(app)
@@ -23,7 +24,8 @@ from project.messages.views import messages_blueprint
 from project.tags.views import tags_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/users')
-app.register_blueprint(messages_blueprint, url_prefix='/users/<int:user_id>/messages')
+app.register_blueprint(
+    messages_blueprint, url_prefix='/users/<int:user_id>/messages')
 app.register_blueprint(tags_blueprint, url_prefix='/tags')
 
 
@@ -37,6 +39,7 @@ def root():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html', error=error), 404
+
 
 # Mistakes
 # dont name variables the same name as parameters or things will be undefined

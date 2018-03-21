@@ -2,6 +2,7 @@ from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import DeleteForm, MessageForm
 from project.models import Message, User, Tag
 from project import db
+from project.decorators import ensure_authentication, ensure_correct_user
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder='templates')
@@ -13,6 +14,7 @@ messages_blueprint = Blueprint(
 
 
 @messages_blueprint.route('/')
+@ensure_authentication
 def messages_index(user_id):
     # find user
     return render_template('messages/index.html', user=User.query.get(user_id))
@@ -22,6 +24,7 @@ def messages_index(user_id):
 
 
 @messages_blueprint.route('/new')
+@ensure_authentication
 def messages_new(user_id):
     message_form = MessageForm()
     message_form.set_choices()
@@ -33,6 +36,8 @@ def messages_new(user_id):
 
 
 @messages_blueprint.route('/', methods=["POST"])
+@ensure_authentication
+@ensure_correct_user
 def messages_create(user_id):
     message_form = MessageForm(request.form)
     message_form.set_choices()
@@ -56,6 +61,8 @@ def messages_create(user_id):
 
 #edit a specific message for a specfic user render template
 @messages_blueprint.route('/<int:message_id>/edit')
+@ensure_authentication
+@ensure_correct_user
 def messages_edit(user_id, message_id):
     found_message = Message.query.get(message_id)
     tags = [tag.id for tag in found_message.tags]
@@ -71,6 +78,7 @@ def messages_edit(user_id, message_id):
 
 #show message
 @messages_blueprint.route('/<int:message_id>', methods=["GET"])
+@ensure_authentication
 def messages_show(user_id, message_id):
     found_message = Message.query.get(message_id)
     message_tags = [tag.text for tag in found_message.tags]
@@ -83,6 +91,7 @@ def messages_show(user_id, message_id):
 
 #update message on submit after edit
 @messages_blueprint.route('/<int:message_id>', methods=["PATCH"])
+@ensure_correct_user
 def messages_update(user_id, message_id):
     message_form = MessageForm(request.form)
     message_form.set_choices()
@@ -107,6 +116,7 @@ def messages_update(user_id, message_id):
 
 #delete a specific message for a specfic user
 @messages_blueprint.route('/<int:message_id>', methods=["DELETE"])
+@ensure_correct_user
 def messages_destroy(user_id, message_id):
     message_delete = Message.query.get(message_id)
     delete_form = DeleteForm(request.form)

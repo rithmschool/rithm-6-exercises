@@ -1,22 +1,25 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Edit an existing message</h1>
-<form action="{{url_for('messages.messages_update', user_id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
-  <!-- <label for="">Message</label>
-  <input type="text" name="message" value="{{message.message}}"> -->
-  {{ form.hidden_tag()}} {% for field in form if field.widget.input_type != 'hidden'%}
-  <p>
-    {{field.label}} {{field}}
-    <span>
-      {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
-    </span>
-  </p>
-  {%endfor%}
-  <input type="submit" value="SUBMIT EDIT">
-</form>
+<div class="container">
+  <h1>Edit an existing message</h1>
+  <form action="{{url_for('messages.messages_update', user_id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+    <!-- <label for="">Message</label>
+      <input type="text" name="message" value="{{message.message}}"> -->
+    {{ form.hidden_tag()}} {% for field in form if field.widget.input_type != 'hidden'%}
+    <p>
+      {{field.label}} {{field}}
+      <span>
+        {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
+      </span>
+    </p>
+    {%endfor%}
+    <input type="submit" class="btn btn-primary">
+  </form>
+  <br>
+  <form action="{{url_for('messages.messages_destroy', user_id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+    <input type="submit" value="DELETE MESSAGE" class="btn btn-danger">
+  </form>
 
-<form action="{{url_for('messages.messages_destroy', user_id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
-  <input type="submit" value="DELETE MESSAGE">
-</form>
+  <a href="{{ url_for('root') }}">Go Back To Users</a>
+</div>
 
-<a href="{{ url_for('root') }}">Go Back To Users</a>
 {%endblock%}

@@ -1,6 +1,7 @@
 from project import db  # project refers to __init__.py
 from project import bcrypt
 
+
 class User(db.Model):
     __tablename__ = "users"
 
@@ -9,7 +10,8 @@ class User(db.Model):
     last_name = db.Column(db.Text)
     username = db.Column(db.Text, unique=True)
     password = db.Column(db.Text)
-    messages = db.relationship('Message', backref='user', lazy='dynamic', cascade='all, delete')
+    messages = db.relationship(
+        'Message', backref='user', lazy='dynamic', cascade='all, delete')
 
     def __init__(self, first_name, last_name, username, password):
         self.first_name = first_name
@@ -18,10 +20,14 @@ class User(db.Model):
         self.password = password
 
     @classmethod
-    def register(cls,first_name, last_name, username, password):
+    def register(cls, first_name, last_name, username, password):
         hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
-        return cls(first_name=first_name, last_name=last_name, username=username, password=hashed_utf8)
+        return cls(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            password=hashed_utf8)
 
     @classmethod
     def authenticate(cls, username, password):
@@ -33,9 +39,11 @@ class User(db.Model):
 
 
 MessageTag = db.Table('message_tags',
-db.Column('id', db.Integer, primary_key=True),
-db.Column('message_id', db.Integer, db.ForeignKey('messages.id')),
-db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')))
+                      db.Column('id', db.Integer, primary_key=True),
+                      db.Column('message_id', db.Integer,
+                                db.ForeignKey('messages.id')),
+                      db.Column('tag_id', db.Integer,
+                                db.ForeignKey('tags.id')))
 
 
 class Message(db.Model):
@@ -44,11 +52,13 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    tags = db.relationship('Tag', secondary=MessageTag, backref=db.backref('messages'))
+    tags = db.relationship(
+        'Tag', secondary=MessageTag, backref=db.backref('messages'))
 
     def __init__(self, message, user_id):
         self.message = message
         self.user_id = user_id
+
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -58,7 +68,6 @@ class Tag(db.Model):
 
     def __init__(self, text):
         self.text = text
-
 
     # db.relationship allows association from one Model to another
     # find a specific user

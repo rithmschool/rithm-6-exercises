@@ -13,10 +13,11 @@
       <tr>
         <td>{{ tag.text }}</td>
         <td>
-          <a href="{{url_for('tags.tags_edit', id=tag.id)}}">Edit</a>
+          See More About
+          <a href="{{url_for('tags.tags_show', id=tag.id)}}">{{ tag.text }}</a>
         </td>
         <td>
-          <a href="{{url_for('tags.tags_show', id=tag.id)}}">See More</a>
+          <a href="{{url_for('tags.tags_edit', id=tag.id)}}">Edit</a>
         </td>
       </tr>
       {%endfor%}

@@ -2,18 +2,20 @@
 
 
 <div class="container">
-  <p>
-    {{message.message}}
-    <br>
-    <a href="{{url_for('messages.messages_edit', user_id=user.id, message_id=message.id)}}">Edit messge</a>
-  </p>
+  <h1>{{message.message}}</h1>
+  <br>
+  <h3>Tags associated with {{message.message}}</h3>
   {%for tag in tags%}
-  <p>{{tag}}</p>
+  <ul>
+    <li>{{tag}}</li>
+  </ul>
   {%endfor%}
+  <a href="{{url_for('messages.messages_edit', user_id=user.id, message_id=message.id)}}">Edit messge</a>
+  <br>
   <a href="{{ url_for('root') }}">Go To Users</a>
-
+  <br>
   <form action="{{url_for('messages.messages_destroy', user_id=user.id, message_id=message.id)}}?_method=DELETE" method="POST">
-    <input type="submit" value="DELETE MESSAGE">
+    <input type="submit" value="DELETE MESSAGE" class="btn btn-danger">
   </form>
 </div>
 
