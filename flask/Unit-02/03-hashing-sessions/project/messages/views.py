@@ -1,13 +1,20 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from project.messages.forms import DeleteForm, MessageForm
 from project.models import Message, User
 from project import db, bcrypt
+from project.decorators import ensure_authenticated, prevent_multiple_login_signup, ensure_authorized
 
 messages_blueprint = Blueprint(
     'messages',
     __name__,
     template_folder = 'templates'
 )
+@messages_blueprint.before_request
+def current_user():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
 
 @messages_blueprint.route('/', methods=["GET", "POST"])
 def index(id):
@@ -25,12 +32,15 @@ def index(id):
 
 
 @messages_blueprint.route('/new')
+@ensure_authorized
 def new(id):
     form = MessageForm()
     return render_template('messages/new.html', id=id, form=form)
 
 
 @messages_blueprint.route('/<int:message_id>/edit')
+@ensure_authenticated
+@ensure_authorized
 def edit(id, message_id):
     found_user = User.query.get_or_404(id)
     found_message = Message.query.get(message_id)
@@ -49,6 +59,8 @@ def edit(id, message_id):
 @messages_blueprint.route(
     '/<int:message_id>',
     methods=["GET", "PATCH", "DELETE"])
+@ensure_authenticated
+@ensure_authorized
 def show(id, message_id):
     found_user = User.query.get_or_404(id)
     found_message = Message.query.get(message_id)

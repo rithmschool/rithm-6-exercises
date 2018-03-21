@@ -1,13 +1,15 @@
 {% extends 'base.html' %} {% block title %}Users{% endblock %} {% block content %}
 <h3>Welcome back {{g.current_user.first_name}}!</h3>
 <h4>See all users:</h4>
-<div class="row mt-3">
+<div class="row">
     <br> {% for user in users %}
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="card-deck col-lg-3 col-md-4 col-sm-6">
         <div class="card mt-3">
             <div class="card-header bg-info"><a href="{{url_for('users.show', id=user.id)}}" class="text-white">{{ user.first_name }} {{ user.last_name }}</a></div>
             <div class="card-body">
-                <p class="card-text">Follow me for the latest updates.</p>
+                <p class="card-text">{% if user.messages[-1] %}
+                    <p class="card-text"> {{ user.messages[-1].content }}</p>
+                    {% endif %}</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>

@@ -71,7 +71,6 @@ def edit(id):
 
 @users_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
 @ensure_authenticated
-@ensure_authorized
 def show(id):
     found_user = User.query.get_or_404(id)
     delete_form = DeleteForm(request.form)
