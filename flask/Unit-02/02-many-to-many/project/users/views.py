@@ -83,6 +83,7 @@ def edit(user_id):
 def show(user_id):
     found_user = User.query.get_or_404(user_id)
     delete_form = DeleteForm()
+    # show_edit_buttons = user.can_edit(...)
     if request.method == b'PATCH':
         form = UserForm(request.form)
         if form.validate() and bcrypt.check_password_hash(
@@ -108,12 +109,16 @@ def show(user_id):
 @ensure_correct_user
 @users_blueprint.route('/<int:user_id>', methods=['DELETE'])
 def destroy(user_id):
+    """ """
     found_user = User.query.get(user_id)
+
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
+
         if delete_form.validate():
             db.session.delete(found_user)
             db.session.commit()
             logout_user()
             flash('User Deleted!')
+
     return redirect(url_for('users.login'))
