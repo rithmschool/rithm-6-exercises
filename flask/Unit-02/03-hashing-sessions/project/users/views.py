@@ -1,9 +1,30 @@
-from flask import Blueprint, redirect, render_template, request, url_for, flash
+from flask import Blueprint, redirect, render_template, request, url_for, flash, session
 from project.users.models import User
-from project.users.forms import UserForm, DeleteForm
+from project.users.forms import UserForm, LoginForm, DeleteForm
 from project import db
 
 users_blueprint = Blueprint('users', __name__, template_folder = 'templates')
+
+@users_blueprint.route('/welcome')
+def welcome():
+    return render_template('users/welcome.html')
+
+@users_blueprint.route('/login', methods = ['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    if request.method == 'POST':
+        if form.validate():
+            username = form.data['username']
+            password = form.data['password']
+            if User.login_user(username = username, password = password):
+                user = User.query.filter_by(username = username).first()
+                session['user_id'] = user.id
+                return redirect(url_for('users.index'))
+            flash('credentials not recognized!') 
+            return render_template('users/login.html', form = form)
+        flash('something went wrong; try logging in again!')
+        return render_template('users/login.html', form = form)
+    return render_template('users/login.html', form = form)
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
@@ -12,12 +33,14 @@ def index():
         if form.validate():
             first_name = form.data['first_name']
             last_name = form.data['last_name']
+            username = form.data['username']
+            password = form.data['password']
             image_url = form.data['image_url']
-            new_user = User(first_name = first_name, last_name = last_name, image_url = image_url)
+            new_user = User.register_user(first_name = first_name, last_name = last_name, username = username, password = password, image_url = image_url)
             db.session.add(new_user)
             db.session.commit()
             flash('User Created!')
-            return redirect(url_for('users.index'))
+            return redirect(url_for('users.login'))
         return render_template('users/new.html', form = form)
     return render_template('users/index.html', users = User.query.all())
 
