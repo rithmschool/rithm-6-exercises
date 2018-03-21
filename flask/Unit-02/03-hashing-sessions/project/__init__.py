@@ -31,6 +31,9 @@ app.register_blueprint(messages_blueprint, url_prefix='/users/<int:id>/messages'
 def root():
     return redirect(url_for('users.index'))
 
+@app.route('/messages')
+def all():
+    return
 
 @app.errorhandler(404)
 def page_not_found(e):
