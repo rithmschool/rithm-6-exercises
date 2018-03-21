@@ -2,9 +2,11 @@ from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_modus import Modus
+from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
 modus = Modus(app)
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/many-many-example'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -12,6 +14,8 @@ app.config['SECRET_KEY'] = "MOVE ME TO AN ENV FILE!"
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+toolbar = DebugToolbarExtension(app)
 
 from project.employees.views import employees_blueprint
 from project.departments.views import departments_blueprint

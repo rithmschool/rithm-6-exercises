@@ -9,6 +9,13 @@ departments_blueprint = Blueprint(
     template_folder='templates'
 )
 
+employees_blueprint = Blueprint(
+    'employees',
+    __name__,
+    template_folder="templates"
+)
+
+
 @departments_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -22,6 +29,7 @@ def index():
             return render_template('departments/new.html', form=form)
     return render_template('departments/index.html', departments=Department.query.all())
 
+
 @departments_blueprint.route('/<int:id>', methods=['GET', 'DELETE'])
 def show(id):
     department = Department.query.get_or_404(id)
@@ -30,6 +38,7 @@ def show(id):
         db.session.commit()
         return redirect(url_for('departments.index'))
     return render_template('departments/show.html', department=department)
+
 
 @departments_blueprint.route('/new')
 def new():
