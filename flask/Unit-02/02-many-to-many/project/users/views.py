@@ -62,7 +62,7 @@ def show(user_id):
 @ensure_correct_user
 @users_blueprint.route('/<int:user_id>', methods=["PATCH", "DELETE"])
 def show_update(user_id):
-    target_user = User.query.get(user_id)
+    target_user = User.query.get_or_404(user_id)
     if request.method == b'PATCH':
         form = EditUserForm(request.form)
         if form.validate():
