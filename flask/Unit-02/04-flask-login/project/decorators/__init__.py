@@ -19,8 +19,6 @@ def ensure_correct_user(fn):
         correct_id = kwargs.get('id')
         if str(correct_id) != session.get('user_id'):
             # if correct_id != g.current_user.id'):
-            from IPython import embed
-            embed()
             flash('Not Authorized!')
             return redirect(url_for('users.index'))
         return fn(*args, **kwargs)

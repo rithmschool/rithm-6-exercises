@@ -6,6 +6,7 @@ from flask import request
 from flask_login import current_user
 
 app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
+app.config['DEBUG'] = False
 
 
 class TestUser(TestCase):
@@ -210,7 +211,7 @@ class TestUser(TestCase):
                 '/users/1/messages',
                 data=dict(content='Hello World', user_id=current_user.id),
                 follow_redirects=True)
-            user2 = User("Another", "User", "secret", "secret")
+            user2 = User.register("Another", "User", "secret", "secret")
             db.session.add(user2)
             db.session.commit()
             self.client.get('/users/logout', follow_redirects=True)
