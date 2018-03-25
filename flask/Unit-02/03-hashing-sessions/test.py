@@ -5,6 +5,7 @@ from project.models import User, Message
 from flask import request, g, session
 
 app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
+app.config['DEBUG'] = False
 
 
 class TestUser(TestCase):
