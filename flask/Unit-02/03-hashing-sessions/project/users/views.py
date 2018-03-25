@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash, Blueprint, session, g
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import User
-from project import db
+from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 from project.decorators import require_login, ensure_correct_user
 
@@ -108,6 +108,9 @@ def show(id):
         if form.validate():
             user.first_name = form.data['first_name']
             user.last_name = form.data['last_name']
+            user.username = form.data['username']
+            hashed = bcrypt.generate_password_hash(form.data['password'])
+            user.password = hashed.decode('utf8')
             db.session.add(user)
             db.session.commit()
             flash("User Updated!")
@@ -128,6 +131,9 @@ def show(id):
 @users_blueprint.route('/logout')
 @require_login
 def logout():
-    del session['user_id']
-    flash('Logged out!')
+    if session.get('user_id'):
+        del session['user_id']
+        flash('Logged Out!')
+        return redirect(url_for('users.login'))
+    flash('Please log in first')
     return redirect(url_for('users.login'))

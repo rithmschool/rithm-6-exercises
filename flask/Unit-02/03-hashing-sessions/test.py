@@ -9,11 +9,10 @@ app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
 
 class TestUser(TestCase):
     def _login_user(self, username, password, follow_redirects=False):
-        with self.client:
-            return self.client.post(
-                '/users/login',
-                data=dict(username=username, password=password),
-                follow_redirects=follow_redirects)
+        return self.client.post(
+            '/users/login',
+            data=dict(username=username, password=password),
+            follow_redirects=follow_redirects)
 
     def create_app(self):
         app.config["WTF_CSRF_ENABLED"] = False
@@ -24,7 +23,7 @@ class TestUser(TestCase):
     def setUp(self):
         """Disable CSRF, initialize a sqlite DB and seed a user"""
         db.create_all()
-        user = User("Elie", "Schoppik", "eschoppik", "secret")
+        user = User.register("Elie", "Schoppik", "eschoppik", "secret")
         db.session.add(user)
         db.session.commit()
 
@@ -197,7 +196,7 @@ class TestUser(TestCase):
                     content='Hello World',
                     user_id=session.get('user_id'),
                     follow_redirects=True))
-            user2 = User("Another", "User", "secret", "secret")
+            user2 = User.register("Another", "User", "secret", "secret")
             db.session.add(user2)
             db.session.commit()
             self.client.get('/users/logout', follow_redirects=True)
@@ -220,7 +219,7 @@ class TestUser(TestCase):
                     content='Hello World',
                     user_id=session.get('user_id'),
                     follow_redirects=True))
-            user2 = User("Another", "User", "secret", "secret")
+            user2 = User.register("Another", "User", "secret", "secret")
             db.session.add(user2)
             db.session.commit()
             self.client.get('/users/logout', follow_redirects=True)
