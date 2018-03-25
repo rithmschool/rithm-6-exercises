@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body id="override-body">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('login')}}">Log In</a>
+    </li>
+    {% if g.user %} 
+    <li class = "nav-item">
+      <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
+  </li>
+  <li class = "nav-item">
+    {{g.user.username}}
+</li>
+    {% endif %}
+  </ul>
+
+  
+{% block content %} {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{user.username}}
+
+<a href="{{url_for('add_restaurant')}}">Add a New Restaurant</a>
+
+
+{% endblock %}
