@@ -85,23 +85,27 @@ Students can only push to their own branches.
 
 ## IV. Node
 
+### Async Review
+
+* [00 - Async Review](./node/00-async_review.md)
+
 ### Unit 01 - Node,Express, and Mongo Fundamentals
 
-* [01 - Core Modules](./node/Unit-01/01-core_modules.md)
-* [02 - Express Intro](./node/Unit-01/02-express_intro.md)
-* [03 - Express Router](./node/Unit-01/03-express_router.md)
-* [04 - Mongoose CRUD](./node/Unit-01/04-mongoose_crud.md)
-* [05 - Mongoose Associations](./node/Unit-01/05-mongoose_associations.md)
-* [06 - Heroku with MongoDB](./node/Unit-01/06-heroku_with_mongodb.md)
+* [01 - Core Modules](./node/01-core_modules.md)
+* [02 - Express Intro](./node/02-express_intro.md)
+* [03 - Express Router](./node/03-express_router.md)
+* [04 - Mongoose CRUD](./node/04-mongoose_crud.md)
+* [05 - Mongoose Associations](./node/05-mongoose_associations.md)
+* [06 - Heroku with MongoDB](./node/06-heroku_with_mongodb.md)
 
 ### Unit 02 - Intermediate Node and Express
 
-* [01 - Authentication + Authorization with sessions](./node/Unit-02/01-cookies_sessions_auth.md)
-* [02 - Authentication with Passport Local](./node/Unit-02/02-passport.md)
-* [03 - OAuth with Passport](./node/Unit-02/03-oauth.md)
-* [04 - JSON APIs](./node/Unit-02/04-json_apis.md)
-* [05 - Testing with JSON APIs](./node/Unit-02/05-testing_apis.md)
-* [06 - Authentication with JSON APIs](./node/Unit-02/06-json_apis_auth.md)
+* [07 - Authentication + Authorization with sessions](./node/07-cookies_sessions_auth.md)
+* [08 - Authentication with Passport Local](./node/08-passport.md)
+* [09 - OAuth with Passport](./node/09-oauth.md)
+* [10 - JSON APIs](./node/10-json_apis.md)
+* [11 - Testing with JSON APIs](./node/11-testing_apis.md)
+* [12 - Authentication with JSON APIs](./node/12-json_apis_auth.md)
 
 ## V. React
 
