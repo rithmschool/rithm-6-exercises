@@ -85,44 +85,26 @@ Students can only push to their own branches.
 
 ## IV. Node
 
-### Async Review
-
-* [00 - Async Review](./node/00-async_review.md)
-
-### Unit 01 - Node,Express, and Mongo Fundamentals
-
-* [01 - Core Modules](./node/01-core_modules.md)
-* [02 - Express Intro](./node/02-express_intro.md)
-* [03 - Express Router](./node/03-express_router.md)
-* [04 - Mongoose CRUD](./node/04-mongoose_crud.md)
-* [05 - Mongoose Associations](./node/05-mongoose_associations.md)
-* [06 - Heroku with MongoDB](./node/06-heroku_with_mongodb.md)
-
-### Unit 02 - Intermediate Node and Express
-
-* [07 - Authentication + Authorization with sessions](./node/07-cookies_sessions_auth.md)
-* [08 - Authentication with Passport Local](./node/08-passport.md)
-* [09 - OAuth with Passport](./node/09-oauth.md)
-* [10 - JSON APIs](./node/10-json_apis.md)
-* [11 - Testing with JSON APIs](./node/11-testing_apis.md)
-* [12 - Authentication with JSON APIs](./node/12-json_apis_auth.md)
+* [00 - Async Review](./node/00_async_review)
+* [01 - Command Line Node](./node/01_command_line_node)
+* [02 - Express Intro](./node/02_express_intro)
+* [03 - Express CRUD](./node/03_express_router)
+* [04 - Mongoose CRUD](./node/04_mongoose_crud)
+* [05 - Mongoose Associations](./node/05_mongoose_associations)
+* [06 - LinkedList Backend](./node/06_linkedlist_backend)
 
 ## V. React
 
-### Unit 01 - Intro to React
-
-* [01 Introduction To React](./react/Unit-01/01-introduction-to-react)
-* [02 Props, State, and Component Architecture](./react/Unit-01/02-props-state-component-architecture)
-* [03 Events, Forms, Refs, and Life Cycle](./react/Unit-01/03-events-forms-refs-life-cycle)
-* [04 Final Project](./react/Unit-01/04-final-project)
-
-### Unit 02 - Intermediate React, React Router, and Redux
-
-* [01 Prop Types](./react/Unireact/t-02/02-prop-types)
-* [02 Testing](./react/Unit-02/02-testing)
-* [03 React Router](./react/Unit-02/03-react-router)
-* [04 React Router (Continued)](./react/Unit-02/04-react-router-continued)
-* [05 Redux](./react/Unit-02/05-redux)
-* [06 React and Redux](./react/Unit-02/06-react-redux)
-* [07 Full Stack React](./react/Unit-02/07-full-stack-react)
-* [08 BONUS React Router](./react/Unit-02/08-bonus-react-router)
+* [01 JSX and Babel](./react/01_jsx_babel)
+* [02 Props](./react/02_props)
+* [03 State](./react/03_state)
+* [04 Events](./react/04_events)
+* [05 Forms](./react/05_forms)
+* [06 Lifecycle Methods](./react/06_lifecycle)
+* [07 Todo List](./react/07_react_todo_list)
+* [08 PropTypes and Testing](./react/08_proptypes_testing_todo)
+* [09 React Router](./react/09_react_router)
+* [10 React Router Todo List](./react/10_react_router_todo)
+* [11 Redux](./react/11_redux)
+* [12 React Redux Todo](./react/12_react_redux_todo)
+* [13 React LinkedList Frontend](./react/13_linkedlist_frontend)
