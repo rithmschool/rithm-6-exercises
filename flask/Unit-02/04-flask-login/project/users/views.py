@@ -1,7 +1,7 @@
-from flask import render_template, redirect, request, url_for, flash, Blueprint, session, g
+from flask import render_template, redirect, request, url_for, flash, Blueprint, session
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import User
-from project import db
+from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 from project.decorators import ensure_correct_user
 from flask_login import login_user, logout_user, login_required
@@ -88,6 +88,8 @@ def login():
 def edit(id):
     user = User.query.get(id)
     form = UserForm(obj=user)
+    from IPython import embed
+    embed()
     return render_template('users/edit.html', user=user, form=form)
 
 
@@ -101,6 +103,9 @@ def show(id):
         if form.validate():
             user.first_name = form.data['first_name']
             user.last_name = form.data['last_name']
+            user.username = form.data['username']
+            hashed = bcrypt.generate_password_hash(form.data['password'])
+            user.password = hashed.decode('utf8')
             db.session.add(user)
             db.session.commit()
             flash("User Updated!")
@@ -123,5 +128,5 @@ def show(id):
 @login_required
 def logout():
     logout_user()
-    flash('Logged out!')
+    flash('Logged Out!')
     return redirect(url_for('users.login'))

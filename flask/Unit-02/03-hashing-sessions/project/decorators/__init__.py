@@ -5,11 +5,11 @@ from functools import wraps
 def require_login(fn):
     @wraps(fn)
     def wrapped(*args, **kwargs):
-        if hasattr(g, 'current_user'):
+        if hasattr(g, 'current_user') and g.current_user != None:
             return fn(*args, **kwargs)
         else:
             flash('Not authorized')
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
 
     return wrapped
 
@@ -20,7 +20,7 @@ def ensure_correct_user(fn):
         correct_id = kwargs.get('id')
         if correct_id != session.get('user_id'):
             # if correct_id != g.current_user.id'):
-            flash('Not authorized!')
+            flash('Not Authorized!')
             return redirect(url_for('users.index'))
         return fn(*args, **kwargs)
 

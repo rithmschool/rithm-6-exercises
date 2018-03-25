@@ -17,9 +17,11 @@ def ensure_correct_user(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         correct_id = kwargs.get('id')
-        if correct_id != session.get('user_id'):
+        if str(correct_id) != session.get('user_id'):
             # if correct_id != g.current_user.id'):
-            flash('Not authorized!')
+            from IPython import embed
+            embed()
+            flash('Not Authorized!')
             return redirect(url_for('users.index'))
         return fn(*args, **kwargs)
 
