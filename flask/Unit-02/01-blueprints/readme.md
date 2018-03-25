@@ -3,9 +3,15 @@
 ### Part I - Questions
 
 1. Describe the MVC pattern.
+M - Model: models.py The models the ORM maps to tables in our database.  Used (by the Controller) for writing and retrieving data from the database.
+V - View: What the user sees, i.e., the templates, populated with data received from the Controller.  Contain minimal logic for displaying data to the user.
+C - Controller: views.py Responsible for communication between M & V. Uses models to retrieve, store, and manipulated data from the database to be sent to the View for display to the user.
 2. In the MVC pattern, does the model communicate directly with the view?
+Nope!
 2. What is the purpose of blueprints?
+Blueprints help organize larger applications.
 3. How does using blueprints help us organize bigger applications?
+They enable streamlined communication in an MVC pattern in a larger file structure without complicated naming or overly large files.
 
 ### Part II - Exercise
 

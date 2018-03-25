@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block nav %}
+<nav>
+
+  <h1>User/Messages App (Flask Blueprint MVC)</h1>
+  <a href="{{url_for('users.signup')}}">Sign Up</a>
+  <p>
+    Welcome User {{ g.current_user.first_name }}  {{ g.current_user.last_name }} {{ g.current_user.id }}
+  </p>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+<article>
+
+  <ol>
+    {% for user in users %}
+    <li>
+      {{ user.first_name + " " + user.last_name }}
+      <small>
+        <a href="{{url_for('users.edit', id=user.id)}}">Edit</a>
+        <a href="{{url_for('users.show', id=user.id)}}">Show</a>
+        <a href="{{url_for('messages.index', id=user.id)}}">Messages</a>
+      </small>
+    </li>
+    {% endfor %}
+  </ol>
+
+</article>
+
+{% endblock %}
