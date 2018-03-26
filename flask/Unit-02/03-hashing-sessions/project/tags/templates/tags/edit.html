@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Tag!
+{% endblock %}
+
+
+{% block content %}
+<h1>Change the tag: "{{ tag.name }}"</h1>
+<form action="{{url_for('tags.show', id=tag.id)}}?_method=PATCH" method="POST">
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.name.label }} {{ form.name(value=tag.name) }}
+      {% if form.name.errors %}
+      {% for error in form.name.errors %}
+        {{ error }}
+      {% endfor %}
+    {% endif %}
+  </p>
+  <p>
+    {{ form.messages }}
+  </p>
+<button type="submit">Modify tag!</button>
+</form>
+<h1>...or delete!</h1>
+<form action="{{url_for('tags.show', id=tag.id)}}?_method=DELETE" method=POST>
+  {{ delete_form.hidden_tag() }}
+  <input type="submit" value="X">
+</form>
+<h2>
+  Done? Return back to all tags
+  <a href="{{url_for('tags.index')}}">
+    here
+  </a>
+</h2>
+<h2>
+  All users
+  <a href="{{url_for('users.index')}}">
+    here
+  </a>
+</h2>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Users!
+{% endblock %}
+
+{% block content %}
+<h1> Welcome back {{ g.current_user.username }}</h1>
+<h1>Reach out to other people!</h1>
+<ul>
+  {% for user in users %}
+  <li>
+    <a href="{{url_for('users.show', id=user.id)}}">
+      {{user.first_name}} {{ user.last_name }}
+    </a>
+    See this users <a href="{{url_for('messages.index', id=user.id)}}">messages</a>
+    or edit this user <a href="{{url_for('users.edit', id=user.id)}}">here</a>
+  </li>
+  {% endfor %}
+</ul>
+<br>
+<a href="{{url_for('users.new')}}">Add another user!</a>
+<a href="{{url_for('users.logout')}}">Logout</a>
+{% endblock %}
