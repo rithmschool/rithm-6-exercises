@@ -1,3 +1,7 @@
+body li {
+  list-style: none;
+}
+
 .card-img--container {
   align-self: center;
   display: flex;

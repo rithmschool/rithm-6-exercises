@@ -10,7 +10,10 @@
   </div>
 
   {% if user.id == current_user.id %}
-  <a class="btn btn-info my-4" href="{{url_for('messages.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
+  <section class="d-flex my-4">
+    <a class="btn btn-info mx-1" href="{{url_for('messages.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
+    <a class="btn btn-info mx-2" href="{{url_for('tags.new')}}">ADD A NEW TAG</a>
+  </section>
   {% endif %}
 
   <h4>Messages</h4>
@@ -24,6 +27,9 @@
           {% for tag in message.tags %}
             <span>{{ tag.name }}</span>
           {% endfor %}
+          {% if message.tags|length == 0 %}
+          <span>no tags added</span>
+          {% endif %}
         </td>
 
         {% if user.id == current_user.id %}

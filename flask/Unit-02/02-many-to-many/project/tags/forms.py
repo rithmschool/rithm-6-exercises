@@ -4,8 +4,8 @@ from wtforms import StringField, validators
 
 class TagForm(FlaskForm):
     name = StringField(
-        "Message: ", [validators.DataRequired(),
-                      validators.Length(max=50)])
+        "Tag: ", [validators.DataRequired(),
+                  validators.Length(max=20)])
 
 
 class DeleteForm(FlaskForm):

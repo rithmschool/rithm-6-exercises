@@ -1,6 +1,6 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint
 from project.messages.forms import MessageForm, DeleteForm
-from project.models import User, Message
+from project.models import User, Message, Tag
 from project.decorators import ensure_correct_user
 from project import db
 from flask_login import login_required
@@ -18,6 +18,8 @@ def index(user_id):
         if form.validate():
             new_message = Message(
                 content=form.data['content'], user_id=user_id)
+            for tag in form.tags.data:
+                new_message.tags.append(Tag.query.get(tag))
             db.session.add(new_message)
             db.session.commit()
             flash('Message Created')
@@ -58,7 +60,9 @@ def show(user_id, message_id):
         form.set_choices()
         if form.validate():
             found_message.content = form.content.data
-            flash(form.tags.data)
+            found_message.tags = []
+            for tag in form.tags.data:
+                found_message.tags.append(Tag.query.get(tag))
             db.session.add(found_message)
             db.session.commit()
             flash('Message Updated')
