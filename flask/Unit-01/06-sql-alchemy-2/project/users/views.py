@@ -88,7 +88,7 @@ def show(id):
 @users_blueprint.route('/<int:id>/edit')
 @ensure_correct_user
 def edit(id):
-    found_user = User.query.get(id)
+    found_user = User.query.get(id).id
     #obj=found_user prepopulates the edit form
     user_form = UserForm(obj=found_user)
     return render_template('users/edit.html', user=found_user, form=user_form)

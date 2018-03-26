@@ -32,8 +32,7 @@ def ensure_correct_user(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         #get kwargs id from person you are trying to edit check vs session
-        correct_id = kwargs.get('id')
-        if correct_id != session.get('user_id'):
+        if kwargs.get('id') != session.get('user_id'):
             flash('Not authorized')
             return redirect(url_for('users.index'))
         return fn(*args, **kwargs)

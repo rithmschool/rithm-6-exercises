@@ -36,9 +36,9 @@ def messages_new(user_id):
 
 
 @messages_blueprint.route('/', methods=["POST"])
-@ensure_authentication
 @ensure_correct_user
 def messages_create(user_id):
+    get_user = User.query.get(user_id)
     message_form = MessageForm(request.form)
     message_form.set_choices()
     if message_form.validate():
@@ -50,8 +50,7 @@ def messages_create(user_id):
         db.session.commit()
         flash('Creating a New Message!')
         return redirect(
-            url_for(
-                'messages.messages_index', user_id=User.query.get(user_id).id))
+            url_for('messages.messages_index', user_id=get_user.id))
     else:
         return render_template(
             'messages/new.html',
@@ -62,7 +61,6 @@ def messages_create(user_id):
 #edit a specific message for a specfic user render template
 @messages_blueprint.route('/<int:message_id>/edit')
 @ensure_authentication
-@ensure_correct_user
 def messages_edit(user_id, message_id):
     found_message = Message.query.get(message_id)
     tags = [tag.id for tag in found_message.tags]
@@ -79,6 +77,7 @@ def messages_edit(user_id, message_id):
 #show message
 @messages_blueprint.route('/<int:message_id>', methods=["GET"])
 @ensure_authentication
+@ensure_correct_user
 def messages_show(user_id, message_id):
     found_message = Message.query.get(message_id)
     message_tags = [tag.text for tag in found_message.tags]
@@ -91,6 +90,7 @@ def messages_show(user_id, message_id):
 
 #update message on submit after edit
 @messages_blueprint.route('/<int:message_id>', methods=["PATCH"])
+@ensure_authentication
 @ensure_correct_user
 def messages_update(user_id, message_id):
     message_form = MessageForm(request.form)
@@ -116,6 +116,7 @@ def messages_update(user_id, message_id):
 
 #delete a specific message for a specfic user
 @messages_blueprint.route('/<int:message_id>', methods=["DELETE"])
+@ensure_authentication
 @ensure_correct_user
 def messages_destroy(user_id, message_id):
     message_delete = Message.query.get(message_id)
