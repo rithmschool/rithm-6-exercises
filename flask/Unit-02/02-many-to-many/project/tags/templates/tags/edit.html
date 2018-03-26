@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    edit tag
+ {% endblock %}
+
+ {% block content %}
+    <h2>edit tag</h2>
+    <form action="{{url_for('tags.show', tag_id = tag.id)}}?_method=PATCH" method="POST">
+        {{ tag_form.hidden_tag() }}
+
+        {% for field in tag_form if field.widget.input_type != 'hidden' %}
+            <div class="form-group">    
+                {{ field.label }}
+                {{ field (class_='form-control') }}
+                
+                {% if not field.errors %}
+                    <small class="form-text text-muted">The tag cannot be longer than 37 characters.</small> 
+                {% endif %}
+                {% if field.errors %}
+                    <small class="form-text text-danger">
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">submit changes!</button>
+    </form>
+    <div class="text-right my-2">
+        <form action="{{url_for('tags.show', tag_id = tag.id)}}?_method=DELETE" method="POST" class="form-group">
+            {{ delete_form.hidden_tag() }}
+
+            <button type="submit" class="btn btn-secondary btn-lg">
+                    delete tag
+            </button>        
+        </form>
+    </div>
+    
+  {% endblock %}

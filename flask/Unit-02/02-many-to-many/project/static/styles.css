@@ -1,0 +1,16 @@
+.small-avatar {
+    max-width: 25px;
+    border-radius: 2px;
+    border: rgba(0, 0, 0, .5) solid .5px;
+}
+
+.big-avatar {
+    max-width: 200px !important;
+    border-radius: 4px;
+    border: rgba(0, 0, 0, .5) solid 1px;
+}
+
+.tag_list {
+    list-style: none;
+    margin-top: 1rem;
+}
