@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, SelectMultipleField, widgets, validators
+from wtforms import StringField, SelectMultipleField, widgets, validators
 from project.models import Tag
 
 
 class MessageForm(FlaskForm):
-    content = TextField('Please Enter your Message',
-                        [validators.DataRequired()])
+    content = StringField(
+        'Please Enter your Message', [validators.DataRequired()],
+        widget=widgets.TextArea())
     tags = SelectMultipleField(
         'Tags',
         coerce=int,

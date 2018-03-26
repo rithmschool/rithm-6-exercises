@@ -1,9 +1,9 @@
-from flask import request, url_for, render_template, redirect, flash, Blueprint, session
+from flask import request, url_for, render_template, redirect, flash, Blueprint
 from project.models import User
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project import db, bcrypt, correct_user, prevent_login_signup
 from sqlalchemy.exc import IntegrityError
-from flask_login import UserMixin, login_user, logout_user, current_user, login_required
+from flask_login import login_user, logout_user, current_user, login_required
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 

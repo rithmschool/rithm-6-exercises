@@ -2,7 +2,7 @@ from flask import request, url_for, render_template, redirect, flash, Blueprint
 from project.models import Message, User, Tag
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
-from flask_login import UserMixin, login_user, logout_user, current_user, login_required
+from flask_login import current_user, login_required
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder='templates')
