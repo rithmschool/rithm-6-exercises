@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %} Bootcamp List {% endblock %} {% block content %}
+<h1>Bootcamp List</h1>
+<br> {% for bootcamp in bootcamps%}
+<ul>
+  <li>
+    <b>
+      <a href="{{url_for('show', id=bootcamp.id)}}">{{bootcamp.name}}</a>
+    </b> : {{bootcamp.location}}
+    <br> Votes: {{bootcamp.votes}}
+
+    <form action="{{url_for('show', id=bootcamp.id)}}" method="POST">
+      <input type="submit" name="vote" value="Upvote">
+    </form>
+    <form action="{{url_for('show', id=bootcamp.id)}}" method="POST">
+      <input type="submit" name="vote" value="Downvote">
+    </form>
+
+    <form action="{{url_for('show', id=bootcamp.id)}}?_method=DELETE" method="POST">
+      <input type="submit" value='X'>
+    </form>
+  </li>
+</ul> {% endfor %}
+<br>
+
+<a href="{{url_for('new')}}" class="button">Create New Bootcamp</a>
+
+{% endblock %}
