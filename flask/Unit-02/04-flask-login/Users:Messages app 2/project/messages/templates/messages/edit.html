@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+    <h1 class="display-3 niki-headline">Update Message!</h1>
+    <div>
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=PATCH" method="POST">
+          {{ form.hidden_tag() }}
+          {% for field in form if field.widget.input_type != 'hidden' %}
+
+          <div>
+            {{ field.label }}
+            {{ field }}
+            <span>
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+              {% endif %}
+            </span>
+          </div>
+
+            {% endfor %}
+
+        <div>
+          <button type="submit" class="btn btn-dark niki-btn">Update</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <form action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE" method="POST">
+        {{ delete_form.hidden_tag() }}
+        <button type="submit" class="btn btn-dark niki-btn">Delete <i class="fas fa-trash-alt"></i></button>
+      </form>
+    </div>
+
+  </section>
+
+{% endblock %}

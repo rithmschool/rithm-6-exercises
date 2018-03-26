@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="display-3 niki-headline">User: {{user.first_name}} {{user.last_name}}</h2>
+  <br>
+  <h3>Recent Messages</h3>
+  
+  <ol class="list-group niki-ul">
+      {% for message in user.messages %}
+        <li class="list-group-item-primary niki-li">{{ message.content }}</li>
+      {% endfor %}
+  </ol>
+
+  <a class="btn btn-dark niki-btn" href="{{url_for('messages.index', user_id=user.id)}}">
+    All Messages&nbsp;<i class="fas fa-envelope"></i></a>
+
+  <a class="btn btn-dark niki-btn" href="{{url_for('users.edit', id=user.id)}}">
+    Edit Profile  &nbsp;<i class="fas fa-edit"></i></a>
+  <a class="btn btn-dark niki-btn" href="{{url_for('users.logout')}}">
+    Logout  &nbsp;<i class="fas fa-sign-out-alt"></i></a>
+    <form method="POST" action="{{url_for('users.show', id=user.id)}}?_method=DELETE">
+      {{delete_form.hidden_tag()}}
+      <button type="submit" class="btn btn-dark niki-btn w-20">Delete &nbsp;<i class="fas fa-trash-alt"></i> </button>
+  </form>
+ 
+</div>
+
+{% endblock %}

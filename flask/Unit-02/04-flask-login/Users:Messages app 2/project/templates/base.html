@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto+Slab:200,300,400,700">
+  <title>Users and Messages App</title>
+</head>
+  <header>
+    <nav class="navbar navbar-dark bg-dark d-flex justify-content-end">
+      <a class="navbar-brand mr-auto" href="{{url_for('users.index')}}">
+          <i class="fas fa-envelope-square fa-lg bg-info"></i>
+            Vivaldi Appreciation Message Board!
+        </a>
+      {% if session.user_id %}
+        <a href="{{url_for('users.show', id= session['user_id'])}}" class="btn btn-outline-info text-white">{{ session['user_name'] }}</a>
+      {% endif %}
+      <a href="{{url_for('users.index')}}" class="btn btn-outline-light ml-2">Users</a>
+      <a href="{{url_for('root_Messages')}}" class="btn btn-outline-light ml-2">Messages</a>
+    </nav>
+  </header>
+<body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success popup container" role="alert">
+        <h6 class='text-center'>{{ message }}</h6>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

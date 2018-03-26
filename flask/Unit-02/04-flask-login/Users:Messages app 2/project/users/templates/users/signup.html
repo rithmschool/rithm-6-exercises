@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class='container'>
+  <h1 class="display-3 niki-headline">Register a New User!</h1>
+  <div>
+    <form action="{{url_for('users.signup')}}" method="POST">
+      {{ form.hidden_tag() }}
+      {% for field in form if field.widget.input_type != 'hidden' %}
+
+      <div>
+        {{ field.label }}
+        {{ field }}
+        <span>
+          {% if field.errors %}
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          {% endif %}
+        </span>
+      </div>
+
+        {% endfor %}
+      <div>
+        <button type="submit" class="btn niki-btn btn-dark my-2 my-sm-0">Submit</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+{% endblock %}

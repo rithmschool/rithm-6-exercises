@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="d-flex justify-content-center align-content-center flex-column">
+    <h1 class="header__center">Community Messages</h1>
+    <div class="link__register--user">
+      <a href="{{url_for('users.login')}}" class="btn btn-dark my-2 my-sm-0">Login</a>
+      <a href="{{url_for('users.login')}}" class="btn btn-dark my-2 my-sm-0">Register!</a>
+    </div>
+      <table class="table__whole--changes tbl table-light table-striped tbl">
+        <thead class="table__structure">
+          <tr>
+            <th class="column__headers">User's Name</th>
+            <th class="column__headers">Content</th>
+            <th class="column__headers">Tags</th>
+            <th class="column__headers">View Full Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messages %}
+          <tr>
+              <td class="column__headers">{{ message.user.first_name }} {{ message.user.last_name }}</td>
+              <td class="column__headers">{{ message.content }}</td>
+              <td class="column__headers"><a href=""><i class="fas fa-tags"></i></a></td>
+              <td class="column__headers"><a href="{{url_for('messages.show', user_id=message.user.id ,id=message.id)}}"><i class="fas fa-envelope"></i></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </section>
+{% endblock %}
