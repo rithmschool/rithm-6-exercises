@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+<h1>Login</h1>
+{% endblock %}
+
+{% block content %}
+
+<form class="login-forms" action="{{url_for('users.login')}}" method="POST">
+  {{ form.hidden_tag() }}
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{ field.label }} {{ field }}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {% endfor %}
+  <button>Login</button>
+</form>
+  <a class="register-button" href="{{url_for('users.signup')}}">
+    <button>Sign Up</button>
+  </a>
+
+
+
+{% endblock %}

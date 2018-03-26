@@ -13,14 +13,14 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
-        user1 = User("Elie", "Schoppik")
-        user2 = User("Tim", "Garcia")
-        user3 = User("Matt", "Lane")
+        user1 = User("A", "B")
+        user2 = User("C", "D")
+        user3 = User("E", "F")
         db.session.add_all([user1, user2, user3])
-        message1 = Message("Hello Elie!!", 1)
-        message2 = Message("Goodbye Elie!!", 1)
-        message3 = Message("Hello Tim!!", 2)
-        message4 = Message("Goodbye Tim!!", 2)
+        message1 = Message("a b", 1)
+        message2 = Message("c d", 1)
+        message3 = Message("e f", 2)
+        message4 = Message("g h", 2)
         db.session.add_all([message1, message2, message3, message4])
         db.session.commit()
 
@@ -31,9 +31,9 @@ class BaseTestCase(TestCase):
         response = self.client.get(
             '/users', content_type='html/text', follow_redirects=True)
         self.assertLess(response.status_code, 400)
-        self.assertIn(b'Elie Schoppik', response.data)
-        self.assertIn(b'Tim Garcia', response.data)
-        self.assertIn(b'Matt Lane', response.data)
+        self.assertIn(b'A B', response.data)
+        self.assertIn(b'C D', response.data)
+        self.assertIn(b'E F', response.data)
 
     def test_users_show(self):
         response = self.client.get('/users/1')
@@ -43,31 +43,31 @@ class BaseTestCase(TestCase):
         with self.client:
             response = self.client.post(
                 '/users/',
-                data=dict(first_name="Awesome", last_name="Student"),
+                data=dict(first_name="X", last_name="Y"),
                 follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Awesome', response.data)
+        self.assertIn(b'X', response.data)
         self.assertIn(b'User Created!', response.data)
 
     def test_users_edit(self):
         response = self.client.get('/users/1/edit')
-        self.assertIn(b'Elie', response.data)
-        self.assertIn(b'Schoppik', response.data)
+        self.assertIn(b'A', response.data)
+        self.assertIn(b'B', response.data)
 
     def test_users_update(self):
         with self.client:
             response = self.client.patch(
                 '/users/1?_method=PATCH',
-                data=dict(first_name="updated", last_name="information"),
+                data=dict(first_name="p", last_name="q"),
                 follow_redirects=True)
-        self.assertIn(b'updated information', response.data)
-        self.assertNotIn(b'Elie Schoppik', response.data)
+        self.assertIn(b'p q', response.data)
+        self.assertNotIn(b'A B', response.data)
 
     def test_users_delete(self):
         with self.client:
             response = self.client.delete(
                 '/users/1?_method=DELETE', follow_redirects=True)
-        self.assertNotIn(b'Elie Schoppik', response.data)
+        self.assertNotIn(b'A SchopBpik', response.data)
 
     #### TESTS FOR MESSAGES ####
 
@@ -77,8 +77,8 @@ class BaseTestCase(TestCase):
             content_type='html/text',
             follow_redirects=True)
         self.assertLess(response.status_code, 400)
-        self.assertIn(b'Hello Elie!!', response.data)
-        self.assertIn(b'Goodbye Elie!!', response.data)
+        self.assertIn(b'a b', response.data)
+        self.assertIn(b'c d', response.data)
 
     def test_messages_show(self):
         response = self.client.get('/users/1/messages/1')
@@ -88,31 +88,31 @@ class BaseTestCase(TestCase):
         with self.client:
             response = self.client.post(
                 '/users/1/messages/',
-                data=dict(content="Hi Matt!!", user_id=3),
+                data=dict(content="Hi Mate!!", user_id=3),
                 follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Hi Matt!!', response.data)
+        self.assertIn(b'Hi Mate!!', response.data)
 
     def test_messages_edit(self):
         response = self.client.get('/users/1/messages/1/edit')
-        self.assertIn(b'Hello Elie!!', response.data)
+        self.assertIn(b'a b', response.data)
 
         response = self.client.get('/users/2/messages/4/edit')
-        self.assertIn(b'Goodbye Tim!!', response.data)
+        self.assertIn(b'g h', response.data)
 
     def test_messages_update(self):
         with self.client:
             response = self.client.patch(
                 '/users/1/messages/1?_method=PATCH',
-                data=dict(content="Welcome Back Elie!"),
+                data=dict(content="hh"),
                 follow_redirects=True)
-        self.assertIn(b'Welcome Back Elie!', response.data)
+        self.assertIn(b'hh', response.data)
 
     def test_messages_delete(self):
         with self.client:
             response = self.client.delete(
                 '/users/1/messages/1?_method=DELETE', follow_redirects=True)
-        self.assertNotIn(b'Hello Elie!!', response.data)
+        self.assertNotIn(b'a b', response.data)
 
 
 if __name__ == '__main__':

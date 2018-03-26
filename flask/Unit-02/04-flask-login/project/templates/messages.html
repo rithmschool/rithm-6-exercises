@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block nav %}
+
+<nav>
+
+  <h1>All Messages</h1>
+
+  <a href="{{url_for('users.login')}}">Login</a>
+
+</nav>
+
+{% endblock %} {% block content %}
+
+<ol>
+  {% for message in messages %}
+  <li>
+    Content: {{ message.content }} ( Message id: {{ message.id }} {{ message.user.name }} )
+    <small>
+      <a href="{{url_for('messages.edit', id=user.id, msg_id=message.id)}}">Edit message</a>
+      <a href="{{url_for('messages.show', id=user.id, msg_id=message.id)}}">Show message</a>
+    </small>
+  </li>
+  {% endfor %}
+</ol>
+
+{% endblock %}
