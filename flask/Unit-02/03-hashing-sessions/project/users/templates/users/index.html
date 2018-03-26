@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block title %} Users {% endblock %} {% block body %}
+<h2>All Users</h2>
+<a href="{{ url_for('u.new') }}">Add a User!</a>
+<a href="{{ url_for('u.login') }}">Login!</a>
+<a href="{{ url_for('u.logout') }}">Logout!</a>
+{% for u in users %}
+<div class="card" style="width: 18rem;">
+  {% if u.image_url %}
+  <img class="card-img-top" src="{{ u.image_url }}" alt="{{ u.first_name }} {{ u.last_name }}'s profile picture"> {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ u.first_name }} {{ u.last_name }}</h5>
+    {% if u.messages[-1] %}
+    <p class="card-text"> {{ u.messages[-1].content }}</p>
+    {% endif %}
+    <a href="{{ url_for('m.index', u_id=u.id) }}">
+      View {{ u.first_name }}'s Messages</a>
+  </div>
+</div>
+{% endfor %} {% endblock %}
