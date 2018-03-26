@@ -28,12 +28,8 @@ function logUpTo(n) {
   }
 }
 
-<<<<<<< HEAD
-//Time O(n)     Space O(1)
-=======
-T: O(n)
-S: O(1)
->>>>>>> paula
+T: O(n);
+S: O(1);
 
 // 2.
 
@@ -43,13 +39,9 @@ function logAtMost10(n) {
   }
 }
 
-<<<<<<< HEAD
-//Time O(1)     Space O(1)
-=======
-T: O(1)
-S: O(1)
+T: O(1);
+S: O(1);
 
->>>>>>> paula
 // 3.
 
 function logAtLeast10(n) {
@@ -58,12 +50,8 @@ function logAtLeast10(n) {
   }
 }
 
-<<<<<<< HEAD
-//Time O(n)     Space O(1)
-=======
-T: O(n)
-S: O(1)
->>>>>>> paula
+T: O(n);
+S: O(1);
 
 // 4.
 
@@ -77,12 +65,8 @@ function onlyElementsAtEvenIndex(array) {
   return newArray;
 }
 
-<<<<<<< HEAD
-//Time O(n)     Space O(n)
-=======
-T: O(n)
-S: O(n)
->>>>>>> paula
+T: O(n);
+S: O(n);
 
 // 5.
 
@@ -97,11 +81,7 @@ function subtotals(array) {
   }
   return subtotalArray;
 }
-<<<<<<< HEAD
-//Time O(n^2)     Space O(n)
-=======
 
-T: O(n^2)
-S: O(n)
->>>>>>> paula
+T: O(n ^ 2);
+S: O(n);
 ```
