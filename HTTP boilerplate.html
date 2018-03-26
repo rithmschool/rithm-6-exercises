@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+  <span id="number-fact"></span>
+
+<script>
+// $.get('http://numbersapi.com/1337/trivia?notfound=floor&fragment', function(data) {
+//     $('#number').text(data);
+// });
+$(function() {
+  $.getJSON("http://numbersapi.com/1..6,12", data => {
+    for (var key in data) {
+      $li = $('<li>');
+      $li.text(data[key].text);
+      $('ol').append($li);
+    };
+      $.getJSON("http://numbersapi.com/12?json", data => {
+        $li = $('<li>');
+        $li.text(data.text);
+        $('ol').append($li);
+        $.getJSON("http://numbersapi.com/12?json", data => {
+          $li = $('<li>');
+          $li.text(data.text);
+          $('ol').append($li);
+          $.getJSON("http://numbersapi.com/12?json", data => {
+            $li = $('<li>');
+            $li.text(data.text);
+            $('ol').append($li);
+          });
+        });
+      });
+    });
+  });
+// REMEMBER that we make a HTTP request which returns parsed JSON
+// In this case, and often is the case, the returned value is JS Obj.
+// 
+</script>
+
+
+<script>
+$.getJSON(
+  "https://icanhazdadjoke.com/",
+  function(data) {
+    console.log("Cool, here's some joke data: ", data);
+  },
+  function(error) {
+    console.log("Oops something went wrong!", error);
+  }
+);
+
+</script>
+
+<script>
+function promiseFn() {
+  return new Promise(function(resolve, reject) {
+    var time = Math.random() * 10000;
+    setTimeout(function(){
+      if (time < 4000) {
+        resolve('Hey, I resolved after ${time} milliseconds!');
+      } else {
+        reject('Hey, this took too long... I am quitting after ${time} milliseconds.');
+      }}, time);
+    })
+}
+
+promiseFn2()
+  .then(function(data) {
+    console.log("YEP!", data);
+    return promiseFn();
+  })
+  .then(function(moreData) {
+    console.log("YEP AGAIN!", moreData);
+  })
+  .catch(function(error) {
+    console.log("Nope!", error);
+  });
+
+$.getJSON('${BASE_URL}/${FAV_NUMBER}?json')
+  .then(data => console.log(data))
+  .catch(data => console.log(data))
+
+
+Promise.all([promiseFn(),promiseFn(),promiseFn()])
+  .then(function(whaaat) {console.log(whaaat); })
+  .catch(err => console.log(err))
+</script>
+
+</body>
+</html>
