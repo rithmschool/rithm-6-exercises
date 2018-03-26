@@ -11,6 +11,7 @@ class BaseTestCase(TestCase):
         return app
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
         user1 = User("Mark", "Suzuki")
         user2 = User("Max", "Nawa")
@@ -56,9 +57,9 @@ class BaseTestCase(TestCase):
 
     def test_users_edit(self):
         response = self.client.get('/users/4/edit')
-        self.assertIn(b'Jim', response.data)
-        self.assertNotIn(b'Yoseph', response.data)
-
+        self.assertIn(b'Jim Boolean', response.data)
+        self.assertNotIn(b'Hunter Casbeer', response.data)
+        
     def test_users_update(self):
         response = self.client.patch(
             '/users/4?_method=PATCH',
@@ -79,6 +80,7 @@ class BaseTestCase(TestCase):
             follow_redirects=True)
         self.assertLess(response.status_code, 400)
         self.assertIn(b'Hunter eats rice and chicken', response.data)
+
 
     def test_messages_show(self):
         response = self.client.get('/users/2/messages/5')

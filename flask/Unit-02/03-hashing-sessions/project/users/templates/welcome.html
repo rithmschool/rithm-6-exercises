@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>You are logged in!</h1>
+
+<a href="{{url_for('users.edit', id=user_id)}}">Edit yourself</a>
+<a href="{{url_for('users.show', id=user_id)}}">Your page</a>
+
+{% endblock %}
