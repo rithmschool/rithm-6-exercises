@@ -21,4 +21,8 @@ def upgrade():
 
 
 def downgrade():
+<<<<<<< HEAD
     ${downgrades if downgrades else "pass"}
+=======
+    ${downgrades if downgrades else "pass"}
+>>>>>>> fc5abe4aec4e17398bf8fe26030f83e947105edf

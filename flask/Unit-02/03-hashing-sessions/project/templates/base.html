@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>Users</title>
 </head>
 <body>
@@ -17,6 +18,16 @@
     {% endwith %}
     
     {% block content %}
+=======
+    <title>Auth App</title>
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+    {% block content %}
+
+>>>>>>> fc5abe4aec4e17398bf8fe26030f83e947105edf
     {% endblock %}
 </body>
 </html>
