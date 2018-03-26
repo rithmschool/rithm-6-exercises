@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2> Welcome to the user messages app</h2>
+
+<h5>
+    <a href="{{url_for('users.new')}}">SIGN UP HERE</a>
+    <br>
+    <br>
+    <a href="{{url_for('users.login')}}">LOG IN</a>
+</h5>
+{% endblock %}

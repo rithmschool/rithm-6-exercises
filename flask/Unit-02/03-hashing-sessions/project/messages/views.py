@@ -1,13 +1,26 @@
-from flask import redirect, render_template, request, url_for, Blueprint, flash
+from flask import redirect, render_template, request, url_for, Blueprint, flash, session, g
 from project.messages.forms import DeleteForm, MessageForm
 from project.models import Message, User, Tag
 from project import db
+from functools import wraps
 
 messages_blueprint = Blueprint(
     'messages', __name__, template_folder='templates')
 
 
+def ensure_logged_in(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if not session.get('user_id'):
+            flash('Please log in or sign up first')
+            return redirect(url_for('welcome'))
+        return fn(*args, **kwargs)
+
+    return wrapper
+
+
 @messages_blueprint.route('/', methods=['GET', 'POST'])
+@ensure_logged_in
 def index(user_id):
     delete_form = DeleteForm()
     if request.method == "POST":
@@ -33,6 +46,7 @@ def index(user_id):
 
 
 @messages_blueprint.route('/new/')
+@ensure_logged_in
 def new(user_id):
     form = MessageForm()
     form.set_choices()
@@ -40,6 +54,7 @@ def new(user_id):
 
 
 @messages_blueprint.route('/<int:message_id>/edit')
+@ensure_logged_in
 def edit(message_id, user_id):
     found_message = Message.query.get_or_404(message_id)
     form = MessageForm(

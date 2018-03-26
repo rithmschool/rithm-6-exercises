@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators
+from wtforms import StringField, validators, PasswordField
 
 
 class UserForm(FlaskForm):
@@ -9,6 +9,28 @@ class UserForm(FlaskForm):
     last_name = StringField(
         "Last Name", [validators.DataRequired(),
                       validators.Length(max=20)])
+
+    username = StringField(
+        "username",
+        [validators.DataRequired(),
+         validators.Length(min=6, max=14)])
+
+    password = PasswordField(
+        "password",
+        [validators.DataRequired(),
+         validators.Length(min=6, max=14)])
+
+
+class LoginForm(FlaskForm):
+    username = StringField(
+        "username",
+        [validators.DataRequired(),
+         validators.Length(min=6, max=14)])
+
+    password = PasswordField(
+        "password",
+        [validators.DataRequired(),
+         validators.Length(min=6, max=14)])
 
 
 class DeleteForm(FlaskForm):
