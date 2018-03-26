@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block title %} Show Message {% endblock %}{% block content %}
+
+<p>
+  <b>{{user.first_name}} posted following messages:</b>
+  <br>
+  <br> {{message.content}}
+  <br>
+  <br>
+  <b>Tags associated with this message</b>
+  <br> {% for tag in tags %} {{tag}} | {% endfor %}
+  <br>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">Edit this message</a>
+</p>
+
+<form method="POST" action="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
+  {{delete_form.hidden_tag()}}
+  <input class="btn btn-primary" type="submit" value="Delete Message!">
+</form>
+<br>
+<a class="btn btn-primary" href="{{url_for('messages.index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a>
+<br>
+<br>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
+{% endblock %}

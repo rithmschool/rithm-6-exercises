@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} New User {% endblock %} {% block content %}
+<h1>Add a new user!</h1>
+<form method="POST" action="{{url_for('users.index_users')}}">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{field.label}} {{field}}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{error}} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {% endfor %}
+  <input class="btn btn-primary" type="submit" value="Add User">
+</form>
+<br>
+<a class="btn btn-primary" href="{{url_for('root')}}">Home</a>
+{% endblock %}
