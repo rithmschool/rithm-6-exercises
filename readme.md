@@ -38,91 +38,77 @@ Students can only push to their own branches.
 
 ## I. Intermediate & Advanced JavaScript
 
-* [00 Your First Pull Request](./intermediate-js/00-first-pull-request)
-* [01 Big O Exercise](./intermediate-js/01-big-o)
-* [02 Testing Exercise](./intermediate-js/02-testing)
-* [03 Recursion Exercise](./intermediate-js/03-recursion)
-* [04 CSS Positioning Exercise](./intermediate-js/04-css-positioning)
-* [05 CSS Mockup Exercise](./intermediate-js/05-css-mocks)
-* [06 Bootstrap Mockup Exercise](./intermediate-js/06-bootstrap-mocks)
-* [07 jQuery Exercise](./intermediate-js/07-jquery)
-* [08 AJAX with jQuery Exercise](./intermediate-js/08-ajax-jquery)
-* [09 ES2015 Exercise](./intermediate-js/09-es2015)
-* [10 Object Oriented Exercises](./intermediate-js/10-oop)
+1.  [Your First Pull Request](./intermediate-js/00-first-pull-request)
+1.  [Big O Exercise](./intermediate-js/01-big-o)
+1.  [Testing Exercise](./intermediate-js/02-testing)
+1.  [Recursion Exercise](./intermediate-js/03-recursion)
+1.  [CSS Positioning Exercise](./intermediate-js/04-css-positioning)
+1.  [CSS Mockup Exercise](./intermediate-js/05-css-mocks)
+1.  [Bootstrap Mockup Exercise](./intermediate-js/06-bootstrap-mocks)
+1.  [jQuery Exercise](./intermediate-js/07-jquery)
+1.  [AJAX with jQuery Exercise](./intermediate-js/08-ajax-jquery)
+1.  [ES2015 Exercise](./intermediate-js/09-es2015)
+1.  [Object Oriented Exercises](./intermediate-js/10-oop)
 
 ## II. Flask
 
 ### Unit 01 - Intro to Flask
 
-* [01 Introduction To Flask](./flask/Unit-01/01-flask-intro)
-* [02 Routing with Flask](./flask/Unit-01/02-flask-routing)
-* [03 Templating with Jinja2](./flask/Unit-01/03-templating)
-* [04 CRUD with Flask](./flask/Unit-01/04-flask-crud)
-* [05 SQL Alchemy, Part I](./flask/Unit-01/05-sql-alchemy-1)
-* [06 Migrations](./flask/Unit-01/06-migrations)
-* [07 SQL Alchemy, Part II](./flask/Unit-01/07-sql-alchemy-2)
-* [08 Testing With Flask](./flask/Unit-01/08-testing)
-* [09 Server Side Validation with WTForms](./flask/Unit-01/09-forms)
-* [10 Heroku](./flask/Unit-01/10-heroku)
+1.  [Introduction To Flask](./flask/Unit-01/01-flask-intro)
+1.  [Routing with Flask](./flask/Unit-01/02-flask-routing)
+1.  [Templating with Jinja2](./flask/Unit-01/03-templating)
+1.  [CRUD with Flask](./flask/Unit-01/04-flask-crud)
+1.  [SQL Alchemy, Part I](./flask/Unit-01/05-sql-alchemy-1)
+1.  [Migrations](./flask/Unit-01/06-migrations)
+1.  [SQL Alchemy, Part II](./flask/Unit-01/07-sql-alchemy-2)
+1.  [Testing With Flask](./flask/Unit-01/08-testing)
+1.  [Server Side Validation with WTForms](./flask/Unit-01/09-forms)
+1.  [Heroku](./flask/Unit-01/10-heroku)
 
 ### Unit 02 - Intermediate & Advanced Flask
 
-* [01 Structuring Larger Flask Applications](./flask/Unit-02/01-blueprints)
-* [02 Many to Many](./flask/Unit-02/02-many-to-many)
-* [03 Hashing and Sessions](./flask/Unit-02/03-hashing-sessions)
-* [04 Authentication with Flask Login](./flask/Unit-02/04-flask-login)
-* [05 OAuth with Flask](./flask/Unit-02/05-oauth)
+1.  [Structuring Larger Flask Applications](./flask/Unit-02/01-blueprints)
+1.  [Many to Many](./flask/Unit-02/02-many-to-many)
+1.  [Hashing and Sessions](./flask/Unit-02/03-hashing-sessions)
+1.  [Authentication with Flask Login](./flask/Unit-02/04-flask-login)
+1.  [OAuth with Flask](./flask/Unit-02/05-oauth)
 
 ## III. SQL
 
-* [01 SQL Fundamentals](./sql/01-fundamentals.md)
-* [02 CRUD Operations](./sql/02-crud_operators.md)
-* [03 Aggregates](./sql/03-aggregates.md)
-* [04 Joins](./sql/04-joins.md)
-* [05 Normalization](./sql/05-normalization.md)
-* [06 Data Modeling](./sql/06-modeling.md)
-* [07 SQL Assessment](./sql/07-assessment.md)
+1.  [SQL Fundamentals](./sql/01-fundamentals.md)
+1.  [CRUD Operations](./sql/02-crud_operators.md)
+1.  [Aggregates](./sql/03-aggregates.md)
+1.  [Joins](./sql/04-joins.md)
+1.  [Normalization](./sql/05-normalization.md)
+1.  [Data Modeling](./sql/06-modeling.md)
+1.  [SQL Assessment](./sql/07-assessment.md)
 
 ## IV. Node
 
-### Async Review
+0.  [Async Review](./node/00_async_review)
+1.  [Command Line Node](./node/01_command_line_node)
+1.  [Express Intro](./node/02_express_intro)
+1.  [Express CRUD with Pug](./node/03_express_crud_pug)
+1.  [Mongoose CRUD](./node/04_mongoose_crud)
+1.  [Mongoose Associations](./node/05_mongoose_associations)
+1.  [LinkedList Backend](./node/06_linkedlist_backend)
 
-* [00 - Async Review](./node/00-async_review.md)
+## V. MongoDB
 
-### Unit 01 - Node,Express, and Mongo Fundamentals
+1.  [MongoDB Fundamentals](./mongodb/01_fundamentals)
 
-* [01 - Core Modules](./node/01-core_modules.md)
-* [02 - Express Intro](./node/02-express_intro.md)
-* [03 - Express Router](./node/03-express_router.md)
-* [04 - Mongoose CRUD](./node/04-mongoose_crud.md)
-* [05 - Mongoose Associations](./node/05-mongoose_associations.md)
-* [06 - Heroku with MongoDB](./node/06-heroku_with_mongodb.md)
+## VI. React
 
-### Unit 02 - Intermediate Node and Express
-
-* [07 - Authentication + Authorization with sessions](./node/07-cookies_sessions_auth.md)
-* [08 - Authentication with Passport Local](./node/08-passport.md)
-* [09 - OAuth with Passport](./node/09-oauth.md)
-* [10 - JSON APIs](./node/10-json_apis.md)
-* [11 - Testing with JSON APIs](./node/11-testing_apis.md)
-* [12 - Authentication with JSON APIs](./node/12-json_apis_auth.md)
-
-## V. React
-
-### Unit 01 - Intro to React
-
-* [01 Introduction To React](./react/Unit-01/01-introduction-to-react)
-* [02 Props, State, and Component Architecture](./react/Unit-01/02-props-state-component-architecture)
-* [03 Events, Forms, Refs, and Life Cycle](./react/Unit-01/03-events-forms-refs-life-cycle)
-* [04 Final Project](./react/Unit-01/04-final-project)
-
-### Unit 02 - Intermediate React, React Router, and Redux
-
-* [01 Prop Types](./react/Unireact/t-02/02-prop-types)
-* [02 Testing](./react/Unit-02/02-testing)
-* [03 React Router](./react/Unit-02/03-react-router)
-* [04 React Router (Continued)](./react/Unit-02/04-react-router-continued)
-* [05 Redux](./react/Unit-02/05-redux)
-* [06 React and Redux](./react/Unit-02/06-react-redux)
-* [07 Full Stack React](./react/Unit-02/07-full-stack-react)
-* [08 BONUS React Router](./react/Unit-02/08-bonus-react-router)
+1.  [JSX and Babel](./react/01_jsx_babel)
+1.  [Props](./react/02_props)
+1.  [State](./react/03_state)
+1.  [Events](./react/04_events)
+1.  [Forms](./react/05_forms)
+1.  [Lifecycle Methods](./react/06_lifecycle)
+1.  [Todo List](./react/07_react_todo_list)
+1.  [PropTypes and Testing](./react/08_proptypes_testing_todo)
+1.  [React Router](./react/09_react_router)
+1.  [React Router Todo List](./react/10_react_router_todo)
+1.  [Redux](./react/11_redux)
+1.  [React Redux Todo](./react/12_react_redux_todo)
+1.  [React LinkedList Frontend](./react/13_linkedlist_frontend)
