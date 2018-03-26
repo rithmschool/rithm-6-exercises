@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ bc.name }}
+{% endblock %}
+
+{% block content %}
+<h1>
+    This is the page of {{ bc.name }} Bootcamp
+</h1>
+<h3>
+    The location of {{ bc.name }} Bootcamp is in {{ bc.location }}
+</h3>
+
+
+
+<h5>
+        <a href="{{url_for('edit', id = bc.id)}}">Edit {{bc.name}}</a>
+        <p><a href="{{ url_for('index') }}">GO BACK TO MAIN PAGE</a></p>
+    </h5>
+{% endblock %}
