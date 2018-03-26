@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> These are the messages for the person, {{user.first_name}} {{user.last_name}} </h1>
+
+<div class="container p-3 mb-2 bg-secondary text-white rounded">
+    <a class='btn btn-primary' href="{{url_for('messages.new', user_id=user.id)}}">Add a new message</a>
+    <br><br>
+{% for message in messages %}
+    <p>
+        {{message.user_id}} {{message.content}}
+    </p>
+{% endfor %}
+</div>
+{% endblock %}

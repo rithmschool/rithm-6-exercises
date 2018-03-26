@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Index of users</h1>
+<br>
+<table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>&nbsp;&nbsp;&nbsp;More Info</th>
+            <th>&nbsp;&nbsp;&nbsp;Edit Link</th>
+            <th>&nbsp;&nbsp;&nbsp;Messages Link</th>
+            <th>&nbsp;&nbsp;&nbsp;Delete Link</th>
+          </tr>
+        </thead>
+        {% for user in users %}
+        <tbody>
+        
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+            <td><a class="btn btn-link" href="{{url_for('show', id=user.id)}}">See more info</td>
+            <td><a class="btn btn-link" href="{{url_for('edit', id=user.id)}}">Edit user</a></td>
+            <td><a class="btn btn-link" href="{{url_for('message_index', user_id=user.id)}}">Messages</a></td>
+            <td><form action="{{url_for('destroy', id=user.id)}}?_method=DELETE" method="POST">
+              {{delete_form.hidden_tag()}}
+              <input class="btn btn-link" type="submit" value="Delete user">
+            </form></td>
+            
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+                
+        <br>
+        <a href="{{url_for('new')}}"> Click here to add a new user. </a>
+
+       
+{% endblock %}
+
+
