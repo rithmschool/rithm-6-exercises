@@ -7,9 +7,7 @@ class UserForm(FlaskForm):
     first_name = StringField(
         "First Name", [validators.DataRequired(),
                        validators.Length(max=20)])
-    last_name = StringField(
-        "Last Name", [validators.DataRequired(),
-                      validators.Length(max=20)])
+    last_name = StringField("Last Name", [validators.Length(max=20)])
     about_me = TextAreaField(
         "About Me", [validators.Length(max=150)],
         filters=[lambda x: x or None])

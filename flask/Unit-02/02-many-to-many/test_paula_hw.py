@@ -1,4 +1,4 @@
-from project import app, db
+from project import app, db, bcrypt
 from project.models import User, Message
 from flask_testing import TestCase
 import unittest
@@ -7,7 +7,8 @@ import unittest
 class BaseTestCase(TestCase):
     def create_app(self):
         app.config['WTF_CSRF_ENABLED'] = False
-        app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///testing.db'
+        app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///:memory:'
+        app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
         return app
 
     def setUp(self):
@@ -16,17 +17,17 @@ class BaseTestCase(TestCase):
             username="Elie Schoppik",
             first_name="Elie",
             last_name="Schoppik",
-            password="password")
+            password=bcrypt.generate_password_hash("password").decode('UTF-8'))
         user2 = User(
             username="Tim Garcia",
             first_name="Tim",
             last_name="Garcia",
-            password="password")
+            password=bcrypt.generate_password_hash("password").decode('UTF-8'))
         user3 = User(
             username="Matt Lane",
             first_name="Matt",
             last_name="Lane",
-            password="password")
+            password=bcrypt.generate_password_hash("password").decode('UTF-8'))
         db.session.add_all([user1, user2, user3])
         message1 = Message(content="Hello Elie!!", user_id=1)
         message2 = Message(content="Goodbye Elie!!", user_id=1)
@@ -37,6 +38,12 @@ class BaseTestCase(TestCase):
 
     def tearDown(self):
         db.drop_all()
+
+    def login(self, username, password):
+        return self.client.post(
+            '/users/login',
+            data=dict(username=username, password=password),
+            follow_redirects=True)
 
     def test_users_index(self):
         response = self.client.get(
@@ -56,14 +63,16 @@ class BaseTestCase(TestCase):
             data=dict(
                 username="Awesome Student",
                 first_name="Awesome",
-                last_name="Student"),
+                last_name="Student",
+                password="password"),
             follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Awesome', response.data)
-        # self.assertIn(b'User Created!', response.data)
+        self.assertIn(b'User Created!', response.data)
 
     def test_users_edit(self):
-        response = self.client.get('/users/1/edit')
+        self.login('Elie Schoppik', 'password')
+        response = self.client.get('/users/1/edit', follow_redirects=True)
         self.assertIn(b'Elie', response.data)
         self.assertIn(b'Schoppik', response.data)
 
@@ -107,11 +116,12 @@ class BaseTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_messages_edit(self):
+        self.login('Elie Schoppik', 'password')
         response = self.client.get('/users/1/messages/1/edit')
         self.assertIn(b'Hello Elie!!', response.data)
 
         response = self.client.get('/users/2/messages/4/edit')
-        self.assertIn(b'Goodbye Tim!!', response.data)
+        self.assertNotIn(b'Goodbye Tim!!', response.data)
 
     def test_messages_update(self):
         response = self.client.patch(

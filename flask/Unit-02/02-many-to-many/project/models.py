@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text, nullable=False, unique=True)
     first_name = db.Column(db.Text, nullable=False)
-    last_name = db.Column(db.Text)
+    last_name = db.Column(db.Text, default="")
     img_url = db.Column(
         db.Text,
         default=
