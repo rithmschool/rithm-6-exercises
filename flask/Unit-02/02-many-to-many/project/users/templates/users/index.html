@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+{% if g.current_user.username %}
+  <h2>{{ g.current_user.username }}</h2>
+{% endif %}
+
+<ul>
+  {% for user in users %}
+    <li>
+      <!-- <a href="{{url_for('users.show', user_id=user.id)}}"> {{ user.first_name }} {{ user.last_name}}</a> -->
+      <a href="{{url_for('users.show', user_id=user.id)}}"> {{ user.username }}</a>
+
+      <button>
+        <a href="{{url_for('users.edit', user_id=user.id)}}">Edit user</a>
+      </button>
+
+      <form method="POST" action="{{url_for('users.show_update', user_id=user.id)}}?_method=DELETE">
+        {{ form.hidden_tag() }}
+        <input type="submit" value="Delete User">
+      </form>
+
+    </li>
+  {% endfor %}
+
+
+  <h2>Tags:</h2>
+  <button>
+    <a href="{{url_for('tags.new')}}">Add a new tag</a>
+  </button>
+  {% for tag in tags %}
+    <a href="{{url_for('tags.edit', tag_id=tag.id)}}">
+      {{ tag.content }}
+    </a>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}

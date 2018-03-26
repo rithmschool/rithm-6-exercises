@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{ user.first_name }} {{ user.last_name}}</p>
+
+<!-- this redirects to the 'create new user' form, no idea why -->
+<button>
+  <a href="{{url_for('messages.new', id=user.id)}}">Add message</a>
+</button>
+
+<h4>Click Message To Edit:</h4>
+<ul>
+  {% for message in user.messages %}
+  <li>
+    <a href="{{url_for('messages.edit', message_id=message.id)}}"> {{ message.content }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<button>
+  <a href="{{url_for('users.index')}}">Back to all users</a>
+</button>
+
+{% endblock %}
