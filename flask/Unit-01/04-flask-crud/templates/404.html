@@ -1,10 +1,8 @@
 {% extends "base.html" %}
-{% block title %}
-Page Not Found
-{% endblock %}
 
 {% block content %}
-<h1 class="m-5">HA HA HA PAGE NOT FOUND</h1>
- <h1 <p>NOTHING HERE DUDE</p></h1>
-  <p><a href="{{ url_for('index') }}">GO BACK TO SAFETY</a></p>
+  <section class="error--message">
+    <h1>😕 404 😕<h1>
+    This page is not on the menu!</h1>
+  </section>
 {% endblock %}

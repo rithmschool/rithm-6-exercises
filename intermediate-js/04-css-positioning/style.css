@@ -5,6 +5,7 @@
   width: 400px;
   height: 400px;
   background-color: red;
+  position: relative;
 }
 
 .two {
@@ -14,6 +15,10 @@
   width: 300px;
   height: 300px;
   background-color: yellow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .three {
@@ -23,6 +28,10 @@
   width: 200px;
   height: 200px;
   background-color: green;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .four {
@@ -32,21 +41,10 @@
   width: 100px;
   height: 100px;
   background-color: blue;
-} */ 
-
-/* exercise 2 */
-
-
-/* .one {
-  width: 400px;
-  height: 400px;
-  background-color: red;
-}
-
-.two {
-  width: 300px;
-  height: 300px;
-  background-color: yellow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .three {
@@ -70,16 +68,16 @@
     height: 400px;
     background-color: red;
   }
-  
+
   .two {
-    
+
     left:50px;
     top:50px;
     width: 300px;
     height: 300px;
     background-color: yellow;
   }
-  
+
   .three {
     position:absolute;
     right:-200px;
@@ -88,10 +86,10 @@
     height: 200px;
     background-color: green;
   }
-  
+
   .four {
     position:absolute;
-    
+
     top:100px;
     width: 100px;
     height: 100px;
@@ -108,7 +106,7 @@
     height: 400px;
     background-color: red;
   }
-  
+
   .two {
     position:absolute;
     bottom:0px;
@@ -117,7 +115,7 @@
     height: 300px;
     background-color: yellow;
   }
-  
+
   .three {
     position:absolute;
     left:-100px;
@@ -126,7 +124,7 @@
     height: 200px;
     background-color: green;
   }
-  
+
   .four {
     position:absolute;
     top:100px;
@@ -139,12 +137,12 @@
   /* exercise 05: */
 
   .one {
-    
+
     width: 400px;
     height: 400px;
     background-color: red;
   }
-  
+
   .two {
     position:absolute;
     bottom:0px;
@@ -153,7 +151,7 @@
     height: 300px;
     background-color: yellow;
   }
-  
+
   .three {
     position: absolute;
     bottom:300px;
@@ -162,11 +160,11 @@
     height: 200px;
     background-color: green;
   }
-  
+
   .four {
     position: fixed;
     top:8px;
     left:8px;
     width: 100px;
     height: 100px;
-    background-color: blue; 
+    background-color: blue;
