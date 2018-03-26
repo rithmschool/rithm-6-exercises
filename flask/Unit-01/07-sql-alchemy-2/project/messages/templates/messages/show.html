@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>MESSAGE INFORMATION</h4>
+<h5>First Name: {{found_message.user.first_name}}</h5>
+<h5>Last Name: {{found_message.user.last_name}}</h5>
+<br>
+<p>Content: {{found_message.content}}</p>
+<a href="{{url_for('messages.edit', message_id = found_message.id, user_id=user.id)}}">Edit Message</a>
+<br>
+<form action="{{url_for('messages.show', user_id=user.id, message_id=found_message.id)}}?_method=DELETE" method="POST">
+        {{ delete_form.hidden_tag() }}
+        <input type="submit" value="Delete">
+    </form>
+<small><a href="{{url_for('users.index')}}">Go Home</a></small>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+{% block title %}
+Create User
+{% endblock %}
+
+{% block content %}
+<h1>We are welcome to have you!<h1>
+    <br>
+    <form action="{{url_for('users.index')}}" method="POST">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ field.label }}
+            {{ field }}
+          
+            {% if field.errors %}
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+            {% endif %}
+          
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+    <small><a href="{{url_for('users.index')}}">Go Home</a></small>
+{% endblock %}
