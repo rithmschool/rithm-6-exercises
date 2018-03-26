@@ -10,7 +10,7 @@ describe("replaceWith", function() {
   });
   it("should not replace letters that don't exist", function() {
     expect(replaceWith("hi", "k", "a")).toBe("hi");
-  })
+  });
 });
 
 describe("expand", function() {
@@ -20,11 +20,11 @@ describe("expand", function() {
   it("should repeat an array once if n = 1", function() {
     expect(expand(["foo", "test"], 1)).toEqual(["foo", "test"]);
   });
-  it("should not return the original array if n = 1", function () {
+  it("should not return the original array if n = 1", function() {
     var arr = ["foo", "test"];
     expect(expand(arr, 1)).not.toBe(arr);
   });
-  it("should return an empty array if n = 0", function () {
+  it("should return an empty array if n = 0", function() {
     var arr = ["foo", "test"];
     expect(expand(["foo", "test"], 0)).toEqual([]);
   });
@@ -36,7 +36,7 @@ describe("expand", function() {
 });
 
 describe("acceptNumbersOnly", function() {
-  it("should return false if any argument isn't a number", function () {
+  it("should return false if any argument isn't a number", function() {
     expect(acceptNumbersOnly(1, "foo")).toBe(false);
     expect(acceptNumbersOnly("foo", 1)).toBe(false);
   });
@@ -59,20 +59,26 @@ describe("mergeArrays", function() {
   it("should return a merged array of the inputs arrays, sorted", function() {
     expect(mergeArrays([2, 1], [3, 4])).toEqual([1, 2, 3, 4]);
   });
-  it("should work with arrays of different lengths", function () {
+  it("should work with arrays of different lengths", function() {
     expect(mergeArrays([2, 1, 3], [3, 4, 5, 6])).toEqual([1, 2, 3, 3, 4, 5, 6]);
   });
-  it("should not filter for unique values in the sorted array", function () {
+  it("should not filter for unique values in the sorted array", function() {
     expect(mergeArrays([2, 1], [1, 4])).toEqual([1, 1, 2, 4]);
   });
-  it("should not filter for unique values in the sorted array", function () {
+  it("should not filter for unique values in the sorted array", function() {
     expect(mergeArrays([2, 1], [1, 4])).toEqual([1, 1, 2, 4]);
   });
-  it("should sort different input types", function () {
-    expect(mergeArrays([2, 1, 'a'], [1, 4, 'b'])).toEqual([1, 1, 2, 4, 'a', 'b']);
+  it("should sort different input types", function() {
+    expect(mergeArrays([2, 1, "a"], [1, 4, "b"])).toEqual([
+      1,
+      1,
+      2,
+      4,
+      "a",
+      "b"
+    ]);
   });
-  it(
-    "should ignore empty array inputs", function () {
+  it("should ignore empty array inputs", function() {
     expect(mergeArrays([], [1, 4])).toEqual([1, 4]);
     expect(mergeArrays([1, 4], [])).toEqual([1, 4]);
   });
@@ -92,7 +98,7 @@ describe("mergeObjects", function() {
     num: 33,
     test: "thing",
     other: ["hi"]
-  }
+  };
 
   var obj4 = {
     name: "Foo",
@@ -106,7 +112,7 @@ describe("mergeObjects", function() {
     name: "Foo",
     test: "thing",
     num: 55
-  }
+  };
   it("should return an object with the keys & values combined from the arguments", function() {
     expect(mergeObjects(obj1, obj2)).toEqual(obj3);
   });
@@ -114,8 +120,8 @@ describe("mergeObjects", function() {
     expect(mergeObjects(obj4, obj5)).toEqual(obj6);
   });
   it("should not modify the original objects", function() {
-    expect(obj1).toEqual({name: "Foo", num: 33});
-    expect(obj2).toEqual({test: "thing", other: ["hi"] });
+    expect(obj1).toEqual({ name: "Foo", num: 33 });
+    expect(obj2).toEqual({ test: "thing", other: ["hi"] });
   });
   it("should return a new object when given empty object inputs", function() {
     expect(mergeObjects(obj1, {})).toEqual(obj1);
@@ -123,4 +129,3 @@ describe("mergeObjects", function() {
     expect(mergeObjects(obj1, {})).not.toBe(obj1);
   });
 });
-

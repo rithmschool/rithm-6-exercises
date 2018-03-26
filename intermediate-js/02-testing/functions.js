@@ -1,17 +1,17 @@
 // Write your functions here!
 function replaceWith(str, replace, char) {
-  var strToArr = str.split('');
+  var strToArr = str.split("");
   var replaceIndex = strToArr.indexOf(replace);
   if (replaceIndex === -1) {
-    return strToArr.join('');
+    return strToArr.join("");
   }
   strToArr[replaceIndex] = char;
-  return replaceWith(strToArr.join(''), replace, char);
+  return replaceWith(strToArr.join(""), replace, char);
 }
 
 function expand(arr, n) {
   if (n === 0) return [];
-  return arr.concat(expand(arr, n - 1))
+  return arr.concat(expand(arr, n - 1));
 }
 
 function acceptNumbersOnly() {
@@ -19,7 +19,7 @@ function acceptNumbersOnly() {
     return false;
   }
   for (var i = 0; i < arguments.length; i++) {
-    if (typeof (arguments[i]) !== "number" || isNaN(arguments[i])) {
+    if (typeof arguments[i] !== "number" || isNaN(arguments[i])) {
       return false;
     }
   }

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+  {{super()}}
+{% endblock %}
+{% block content %}
+<section class="d-flex flex-column align-items-center container-fluid m-5">
+  <section class="row justify-content-center">
+    {% for user in users %}
+    <figure class="card mx-2 text-center" style="width: 15rem;">
+      <div class="card-img--container">
+        <img class="card-img-top" src="{{user.img_url}}" alt="{{user.first_name}}'s profile picture">
+      </div>
+      <figcaption class="card-block">
+        <h5 class="text-muted card-title">
+          <a class="text-muted" href="{{url_for('users.show', user_id=user.id)}}">{{ user.first_name }} {{ user.last_name }}</a>
+        </h5>
+        <p class="card-text">
+          {{ user.about_me }}
+        </p>
+        <a href="{{url_for('messages.index', user_id=user.id)}}" class="btn btn-outline-info">View Messages</a>
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </section>
+  <a class="btn btn-info btn-lg" href="{{url_for('users.new')}}">ADD A USER</a>
+</section>
+
+{% endblock %}
