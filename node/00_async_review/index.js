@@ -1,34 +1,29 @@
 $(function() {
-  let $div = $('#main');
-  let numFilms = 8;
-
-  function getMovies() {
-    const movies = [];
-    for (let i = 1; i < numFilms; i++) {
-      $.getJSON(`https://swapi.co/api/films/${i}/`).then(function(data) {
-        const movie = {};
-        movie.title = data.title;
-        movie.opening_crawl = data.opening_crawl;
-        movie.planets = [];
-        // const { movie : title, crawl, planets} =
-        let planetUrls = data['planets'];
-        let planetPromises = planetUrls.map(planet => {
-          return $.getJSON(planet);
-        });
-        Promise.all(planetPromises).then(function(data) {
-          data.forEach(planet => {
-            movie.planets.push(planet.name);
-          });
-        });
-        // console.log(movie);
-        movies.push(movie);
+  const $loadBtn = $('#load-btn');
+  const $main = $('#main');
+  const movies = [];
+  $.getJSON('https://swapi.co/api/films/').then(function(data) {
+    data = data.results;
+    data.forEach(movie => {
+      const movieObj = {};
+      movieObj.title = movie.title;
+      movieObj.opening_crawl = movie.opening_crawl;
+      movieObj.planets = [];
+      let planetUrls = movie['planets'];
+      let planetPromises = planetUrls.map(planet => {
+        return $.getJSON(planet);
       });
-      // .then(function() {
-      // console.log(movies);
-      // });
-    }
-    return movies;
-  }
-
-  console.log(getMovies());
+      Promise.all(planetPromises).then(function(movie) {
+        movie.forEach(planet => {
+          movieObj.planets.push(planet.name);
+        });
+      });
+      const $movie = $('<li>');
+      const $title = $('<p>').text(movie.title);
+      const $open = $('<p>').text(movie.opening_crawl);
+      $movie.append($title, $open);
+      $main.append($movie);
+    });
+    console.log(movies);
+  });
 });
