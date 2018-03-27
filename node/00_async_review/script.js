@@ -21,8 +21,22 @@ async function movieName() {
 }
 
 async function planets() {
-  let planetList = [];
-  $.getJSON(`${BASE_URL}/films`).then(function(data) {
-    return data.results.planets;
-  });
+  let films = await $.getJSON(`${BASE_URL}/films`);
+  let results = films['results'];
+  res = [];
+  results.forEach(function(film) {});
+  return res;
 }
+
+$.getJSON(`${BASE_URL}/films`).then(result => {
+  const processed = result.results.map(film => {
+    const { opening_crawl: crawl, title, planets } = film;
+    return { crawl, title, planets };
+  });
+});
+$.getJSON('https://swapi.co/api/films').then(res => {
+  const processed = res.data.results.map(film => {
+    const { opening_crawl: crawl, title, planets } = film;
+    return { crawl, title, planets };
+  });
+});
