@@ -31,15 +31,45 @@ async function swPlanets() {
     console.log(planetNames);
 }
 
-$.getJSON('https://swapi.co/api/films').then(data => { let newFilm = {}
-data.results.map(element => element.opening_crawl), console.log() })
+$.getJSON('https://swapi.co/api/films').then(data => {
+let newFilm = {}
+data.results.map(element => element.opening_crawl), console.log()
+})
 
 })
 
 // michael's solution
-$.getJSON('https://swapi.co/api/films').then(res => {
-    res.data.results.forEach(film => {
-        const { opening_crawl: crawl, title, planets } = film;
-        Promise.all(planets.map(planet => $.getJSON(planet).then(data => data.data.name))).then(planetNames => console.log({ crawl, title, planetNames }));
+function queryPlanetsPart1() {
+    // this function will return a promise (so it's .then()able)
+    return new Promise((resolve, reject) => {
+        // making an AJAX call to SW API
+        return $.getJSON('https://swapi.co/api/films').then(query1Res => {
+            // doing a bunch of ASYNC stuff in here
+            Promise.all(
+                // for the results (films) of the query response ojbect
+                query1Res.results.map(film => {
+                    // we're doing a bunch more async stuff on each
+                    return new Promise((resolve, reject) => {
+                        // result object here
+                        const processedFilm = {};
+                        processedFilm.title = film.title;
+                        processedFilm.opening_crawl = film.opening_crawl;
+                        // we have properties on this object that are async (because we need to query for them)
+                        Promise.all(
+                            film.planets.map(planetURL => $.getJSON(planetURL))
+                        ).then(planetObjs => {
+                            const newPlanets = planetObjs.map(p => p.name);
+                            processedFilm.planets = newPlanets;
+                            // resolve the nested promise (map callback)
+                            return resolve(processedFilm);
+                        });
+                    });
+                })
+            ).then(result => resolve(result)); // resolve outer promise
+        });
     });
+}
+
+queryPlanetsPart1().then(res => {
+    console.log(res[0].planets[0]);
 });
