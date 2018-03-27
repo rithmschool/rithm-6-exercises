@@ -16,10 +16,12 @@ def index(id):
     if request.method == 'POST':
         form = TagForm(request.form)
         # M:M: form.set_choices() so we can have latest list of tag options
-        form.set_choices()
+        form.set_choices()  # Why do we need this???
         if form.validate():
             name = form.data['name']
             tag = Tag(name)
+            tag.messages.extend(
+                form.data['messages'])  # writing to the join table
             db.session.add(tag)
             db.session.commit()
             flash('Tag Created!')
@@ -53,10 +55,18 @@ def edit(id, tag_id):
 @login_required
 @ensure_correct_user
 def show(id, tag_id):
+    user = User.query.get(id)
     tag = Tag.query.get(tag_id)
     if request.method == b"PATCH":
         form = TagForm(request.form)
         tag.name = form.data['name']
+        tag.messages = []
+        # for msg_id in form.data['messages']:
+        #     tag.messages.append(Message.query.get(msg_id))
+        # Try to do with a list comprehension instead
+        tag.messages = [
+            Message.query.get(msg_id) for msg_id in form.data['messages']
+        ]
         db.session.add(tag)
         db.session.commit()
         flash('Tag Updated!')
@@ -69,4 +79,5 @@ def show(id, tag_id):
             flash('Tag Deleted!')
             return redirect(url_for('tags.index', id=id))
     delete_form = DeleteForm()
-    return render_template('tags/show.html', tag=tag, delete_form=delete_form)
+    return render_template(
+        'tags/show.html', user=user, tag=tag, delete_form=delete_form)

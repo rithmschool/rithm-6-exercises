@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectMultipleField, widgets
 from wtforms.validators import DataRequired
-from project.models import Message
+from flask_login import current_user
 
 
-class newTagForm(FlaskForm):
+class TagForm(FlaskForm):
 
     name = StringField('name', validators=[DataRequired()])
     messages = SelectMultipleField(
@@ -15,7 +15,7 @@ class newTagForm(FlaskForm):
 
     def set_choices(self):
         self.messages.choices = [(m.id, m.content)
-                                 for m in Message.query.all()]
+                                 for m in current_user.messages]
 
 
 class DeleteForm(FlaskForm):

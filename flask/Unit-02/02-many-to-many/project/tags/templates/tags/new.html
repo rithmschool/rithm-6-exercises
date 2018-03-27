@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block nav %}
-<h1>Add a Message for {{ user.first_name }}:</h1>
+<h1>Create a New Tag</h1>
 {% endblock %} {% block content %}
 
 <!-- render the token -->
@@ -7,7 +7,7 @@
 <!-- for loop inside a span for errors -->
 
 
-<form action="{{url_for('messages.index', id=user.id)}}" method="POST">
+<form action="{{url_for('tags.index', id=user.id)}}" method="POST">
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
