@@ -1,41 +1,51 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
-from project.users.forms import UForm, DForm, LoginForm, EditForm
+from project.users.forms import UserForm, DeleteForm, LoginForm, EditForm
 from project.models import User
 from project.decorators import verify_login, verify_user, prevent_duplicate_login
 from project import db, bcrypt
 from IPython import embed
 
-ubp = Blueprint('u', __name__, template_folder='templates')
+users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
-@ubp.route('/', methods=['GET', 'POST'])
-
+@users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        u_form = UForm(request.form)
-        if u_form.validate():
-            hashed = bcrypt.generate_password_hash(password=u_form.data['password'])
+        user_form = UserForm(request.form)
+        if user_form.validate():
+            hashed = bcrypt.generate_password_hash(
+                password=user_form.data['password'])
             hashed_utf8 = hashed.decode('utf-8')
-            u = User(first_name=u_form.data['first_name'], last_name=u_form.data['last_name'], username=u_form.data['username'], password=hashed_utf8, image_url=u_form.data['image_url'])
+            user = User(
+                first_name=user_form.data['first_name'],
+                last_name=user_form.data['last_name'],
+                username=user_form.data['username'],
+                password=hashed_utf8,
+                image_url=user_form.data['image_url'])
             try:
                 db.session.add(u)
                 db.session.commit()
                 flash('User Created!')
-                return redirect(url_for('u.index'))
+                return redirect(url_for('user.index'))
             except IntegrityError as error:
-                return render_template('users/new.html', u_form=u_form, error='username unavailable')
+                return render_template(
+                    'users/new.html',
+                    user_form=user_form,
+                    error='username unavailable')
         flash('Form Incomplete!')
-        return render_template('users/new.html', u_form=u_form)
+        return render_template('users/new.html', user_form=user_form)
     return render_template('users/index.html', users=User.query.all())
 
-@ubp.route('/auth', methods=['GET','POST'])
+
+@users_blueprint.route('/auth', methods=['GET', 'POST'])
 @prevent_duplicate_login
 def login():
     login_form = LoginForm(request.form)
     if request.method == 'POST':
         if login_form.validate():
-            user = User.authenticate(login_form.data['username'], login_form.data['password'])
+            user = User.authenticate(login_form.data['username'],
+                                     login_form.data['password'])
             if user:
                 session['user_id'] = user.id
                 flash('Login Successful!')
@@ -43,63 +53,74 @@ def login():
         flash('Invalid Username/Password')
     return render_template('users/login.html', login_form=login_form)
 
-@ubp.route('/logout')
+
+@users_blueprint.route('/logout')
 def logout():
     session.pop('user_id', None)
     flash('You have been signed out')
-    return redirect(url_for('u.login'))
+    return redirect(url_for('users.login'))
 
 
-@ubp.route('/new')
+@users_blueprint.route('/new')
 def new():
-    return render_template('users/new.html', u_form=UForm())
+    return render_template('users/new.html', user_form=UserForm())
 
 
-@ubp.route('/<int:u_id>/edit')
+@users_blueprint.route('/<int:user_id>/edit')
 @verify_login
 @verify_user
-def edit(u_id):
-    u = User.query.get_or_404(u_id)
+def edit(user_id):
+    user = User.query.get_or_404(user_id)
     edit_form = EditForm(obj=u)
     return render_template(
-        'users/edit.html', u=u, edit_form=edit_form, d_form=DForm())
+        'users/edit.html',
+        user=user,
+        edit_form=edit_form,
+        delete_form=DeleteForm())
 
 
-@ubp.route('/<int:u_id>', methods=['GET', 'PATCH', 'DELETE'])
+@users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
 @verify_login
 @verify_user
-def show(u_id):
-    u = User.query.get_or_404(u_id)
-    d_form = DForm(request.form)
+def show(user_id):
+    user = User.query.get_or_404(user_id)
+    delete_form = DeleteForm(request.form)
     if request.method == b'PATCH':
         edit_form = EditForm(request.form)
         if edit_form.validate():
-            u.first_name = edit_form.data['first_name']
-            u.last_name = edit_form.data['last_name']
-            u.username = edit_form.data['username']
-            u.image_url = edit_form.data['image_url']
+            user.first_name = edit_form.data['first_name']
+            user.last_name = edit_form.data['last_name']
+            user.username = edit_form.data['username']
+            user.image_url = edit_form.data['image_url']
             try:
-                db.session.add(u)
+                db.session.add(user)
                 db.session.commit()
                 flash('User Updated!')
-                return redirect(url_for('m.index', u_id=u_id))
+                return redirect(url_for('messages.index', user_id=user_id))
             except IntegrityError as error:
-                return render_template('users/edit.html', u=u, edit_form=edit_form, d_form=DForm(), error='username unavailable')
+                return render_template(
+                    'users/edit.html',
+                    user=user,
+                    edit_form=edit_form,
+                    delete_form=DeleteForm(),
+                    error='username unavailable')
         flash('Form Incomplete!')
         return render_template(
-            'users/edit.html', u=u, edit_form=edit_form, d_form=DForm())
+            'users/edit.html',
+            user=user,
+            edit_form=edit_form,
+            delete_form=DeleteForm())
     if request.method == b'DELETE':
-        if d_form.validate():
-            db.session.delete(u)
+        if delete_form.validate():
+            db.session.delete(user)
             db.session.commit()
             flash('User Deleted!')
-            return redirect(url_for('u.index'))
+            return redirect(url_for('users.index'))
         flash('Delete Request Denied!')
-        return redirect(url_for('u.index'))
+        return redirect(url_for('users.index'))
 
 
-
-@ubp.before_request
+@users_blueprint.before_request
 def current_user():
     if session.get('user_id'):
         g.current_user = User.query.get(session['user_id'])

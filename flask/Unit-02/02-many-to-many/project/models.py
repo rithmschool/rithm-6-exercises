@@ -1,9 +1,14 @@
 from project import db, bcrypt
+from sqlalchemy import UniqueConstraint
 
-message_tag = db.Table('message_tags',
-                       db.Column('m_id', db.Integer,
-                                 db.ForeignKey('messages.id')),
-                       db.Column('t_id', db.Integer, db.ForeignKey('tags.id')))
+MessageTags = db.Table('message_tags',
+                       db.Column('id', db.Integer, primary_key=True),
+                       db.Column('message_id', db.Integer,
+                                 db.ForeignKey(
+                                     'messages.id', ondelete="cascade")),
+                       db.Column('tag_id', db.Integer,
+                                 db.ForeignKey('tags.id', ondelete="cascade")),
+                       UniqueConstraint('message_id', 'tag_id'))
 
 
 class User(db.Model):
@@ -20,11 +25,12 @@ class User(db.Model):
 
     @classmethod
     def authenticate(cls, username, password):
-        u = cls.query.filter_by(username = username).first()
-        if u:
-            auth_u = bcrypt.check_password_hash(u.password, password)
-            if auth_u:
-                return u
+        user = cls.query.filter_by(username=username).first()
+        if user:
+            authenticated_user = bcrypt.check_password_hash(
+                user.password, password)
+            if authenticated_user:
+                return user
         return False
 
 
@@ -35,7 +41,11 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    tags = db.relationship('Tag', backref='message', lazy='dynamic')
+    tags = db.relationship(
+        'Tag',
+        secondary=MessageTags,
+        backref=db.backref('messages', lazy='dynamic'),
+        lazy='dynamic')
 
 
 class Tag(db.Model):
@@ -44,4 +54,3 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
-    msg_id = db.Column(db.Integer, db.ForeignKey('messages.id'))

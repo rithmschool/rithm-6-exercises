@@ -1,66 +1,70 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.tags.forms import TForm, DForm
+from project.tags.forms import TagForm, DeleteForm
 from project.models import Tag, Message
 from project import db
 
-tbp = Blueprint('t', __name__, template_folder='templates')
+tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
-@tbp.route('/', methods=['GET', 'POST'])
+
+@tags_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        t_form = TForm(request.form)
-        t_form.set_choices()
-        if t_form.validate():
-            new_tag = Tag(name=t_form.data['name'])
-            for message in t_form.messages.data:
+        tag_form = TagForm(request.form)
+        tag_form.set_choices()
+        if tag_form.validate():
+            new_tag = Tag(name=tag_form.data['name'])
+            for message in tag_form.messages.data:
                 new_tag.messages.append(Message.query.get(message))
             db.session.add(new_tag)
             db.session.commit()
             flash('Tag Created!')
-            return redirect(url_for('t.index'))
+            return redirect(url_for('tags.index'))
         else:
             flash('Form Incomplete!')
-            return render_template('tags/new.html', t_form=t_form)
+            return render_template('tags/new.html', tag_form=tag_form)
     return render_template('tags/index.html', tags=Tag.query.all())
 
 
-@tbp.route('/new')
+@tags_blueprint.route('/new')
 def new():
-    t_form = TForm()
-    t_form.set_choices()
-    return render_template('tags/new.html', t_form=t_form)
+    tag_form = TagForm()
+    tag_form.set_choices()
+    return render_template('tags/new.html', tag_form=tag_form)
 
 
-@tbp.route('/<int:t_id>/edit')
-def edit(t_id):
-    t = Tag.query.get_or_404(t_id)
-    t_form = TForm(obj=t)
+@tags_blueprint.route('/<int:tag_id>/edit')
+def edit(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    tag_form = TagForm(obj=t)
     return render_template(
-        'tags/edit.html', t=t, t_form=t_form, d_form=DForm())
+        'tags/edit.html', tag=tag, tag_form=tag_form, delete_form=DeleteForm())
 
 
-@tbp.route('/<int:t_id>', methods=['GET', 'PATCH', 'DELETE'])
-def show(t_id):
-    t = Tag.query.get_or_404(t_id)
-    d_form = DForm(request.form)
+@tags_blueprint.route('/<int:tag_id>', methods=['GET', 'PATCH', 'DELETE'])
+def show(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    delete_form = DeleteForm(request.form)
     if request.method == b'PATCH':
-        t_form = TForm(request.form)
-        if t_form.validate():
-            t.name = t_form.data['name']
+        tag_form = TagForm(request.form)
+        if tag_form.validate():
+            tag.name = tag_form.data['name']
             db.session.add(t)
             db.session.commit()
             flash('Tag Updated!')
-            return redirect(url_for('t.index', t_id=t_id))
+            return redirect(url_for('tag.index', tag_id=tag_id))
         else:
             flash('Form Incomplete!')
             return render_template(
-                'tags/edit.html', t=t, t_form=t_form, d_form=DForm())
+                'tags/edit.html',
+                tag=tag,
+                tag_form=tag_form,
+                delete_form=DeleteForm())
     if request.method == b'DELETE':
-        if d_form.validate():
+        if delete_form.validate():
             db.session.delete(t)
             db.session.commit()
             flash('Tag Deleted!')
-            return redirect(url_for('t.index'))
+            return redirect(url_for('tags.index'))
         flash('Delete Request Denied')
-        return redirect(url_for('t.index'))
-    return render_template('tags/show.html', t=t)
+        return redirect(url_for('tags.index'))
+    return render_template('tags/show.html', tag=tag)
