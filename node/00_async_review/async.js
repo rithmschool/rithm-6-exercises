@@ -17,7 +17,8 @@ $(function() {
       return acc1;
     }, []);
     let combinedData = crawlsData.results.reduce(function(acc, ele, i) {
-      acc[ele.title] = {
+      acc[i] = {
+        title: ele.title,
         crawl: openingCrawls[i],
         planets: allPlanets[i]
       };
