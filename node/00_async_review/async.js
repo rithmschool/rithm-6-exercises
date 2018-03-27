@@ -7,10 +7,6 @@
 // crawl for a specific movie, along with the names of every planet featured in
 //   that movie.
 
-// Q1: I'm getting an array of promises?  Or an array of strings?
-// Q2: I'm starting with doing one movie
-// then chain .then() for each movie (7x total)
-
 let arr = [];
 
 $.getJSON('https://swapi.co/api/films')
