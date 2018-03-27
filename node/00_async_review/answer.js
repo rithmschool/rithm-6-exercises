@@ -1,23 +1,18 @@
 // PART 1
-$.getJSON("https://swapi.co/api/films").then(data => {
-  let filmInfo = [];
-
-  data.results.forEach(function(movie) {
-    let obj = {};
-    obj.title = movie.title;
-    obj.crawl = movie.opening_crawl;
-    let thisFilmsPlanets = Array.from(movie.planets, p => $.getJSON(`${p}`));
-    Promise.all(thisFilmsPlanets).then(function(data) {
-      let thisFilmsPlanetNames = [];
-      for (var key in data) {
-        thisFilmsPlanetNames.push(data[key].name);
-      }
-      obj.planets = thisFilmsPlanetNames;
-      filmInfo.push(obj);
+$.getJSON("https://swapi.co/api/films")
+  .then(data => {
+    return data.results.map(function(movie) {
+      let obj = {};
+      obj.title = movie.title;
+      obj.crawl = movie.opening_crawl;
+      let thisFilmsPlanets = movie.planets.map(url => $.getJSON(url));
+      Promise.all(thisFilmsPlanets).then(planets => {
+        obj.planets = planets.map(p => p.name);
+      });
+      return obj;
     });
-  });
-  console.log(filmInfo);
-});
+  })
+  .then(filmsInfo => console.log(filmsInfo));
 
 // Michael's answer
 axios.get("https://swapi.co/api/films").then(res => {
