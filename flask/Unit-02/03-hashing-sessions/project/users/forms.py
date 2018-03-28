@@ -10,3 +10,7 @@ class UserForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     pass
+
+class LoginForm(FlaskForm):
+    username = StringField('User Name', [validators.DataRequired()])
+    password = PasswordField('Password', [validators.DataRequired()])

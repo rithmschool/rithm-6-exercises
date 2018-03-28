@@ -10,7 +10,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from os import environ
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/flask_sql_many_to_many"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/flask_hashing_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')

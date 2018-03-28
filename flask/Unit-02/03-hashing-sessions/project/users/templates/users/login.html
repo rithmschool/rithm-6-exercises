@@ -1,6 +1,6 @@
-{% extends 'base.html' %} {% block title %} Signup User {% endblock %} {% block content %}
-<h1>Create a new account!</h1>
-<form method="POST" action="{{url_for('users.signup_users')}}">
+{% extends 'base.html' %} {% block title %} Login User {% endblock %} {% block content %}
+<h1>Log into your account!</h1>
+<form method="POST" action="{{url_for('users.login_users')}}">
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
   <p>
     {{field.label}} {{field}}
@@ -9,7 +9,7 @@
     </span>
   </p>
   {% endfor %}
-  <input class="btn btn-primary" type="submit" value="Create Account">
+  <input class="btn btn-primary" type="submit" value="Log In">
 </form>
 <br>
 <a class="btn btn-primary" href="{{url_for('root')}}">Home</a>

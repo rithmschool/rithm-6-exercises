@@ -21,6 +21,17 @@ class User(db.Model):
         self.username = username
         self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
 
+    @classmethod
+    def authenticate(cls, username, password):
+        found_user = cls.query.filter_by(username=username).first()
+        from IPython import embed; embed()
+        if found_user:
+            authenticated_user = bcrypt.check_password_hash(found_user.password, password)
+            if authenticated_user:
+                return found_user
+        return False
+
+
 MessageTag = db.Table('messages_tags',
                     db.Column('id', db.Integer, primary_key=True),
                     db.Column('message_id', db.Integer, db.ForeignKey('messages.id', ondelete='cascade')),
