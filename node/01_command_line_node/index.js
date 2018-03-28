@@ -1,38 +1,59 @@
-const axios = require('axios');
-const fs = require('fs');
-const prompt = require('prompt');
+var fs = require('fs');
+var people = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
-prompt.start();
+const localPeople = people.filter(person =>
+  city(person, ['Portland', 'San Francisco', 'Seattle'])
+);
 
-prompt.get(['Search'], function(err, result) {
-  if (err) {
-    return onErr(err);
-  }
-  // let search = process.argv[2];
-  let search = result.Search;
+const potentialPeople = people
+  .filter(person => state(person, ['California', 'Oregon', 'Washington']))
+  .filter(person => {
+    return !['Portland', 'San Francisco', 'Seattle', null].includes(
+      person.city
+    );
+  });
 
-  axios
-    .get(`https://icanhazdadjoke.com/search?term=${search}`, {
-      headers: { Accept: 'application/json' }
-    })
-    .then(res => {
-      const jokes = res.data.results;
-      const random = Math.floor(Math.random() * jokes.length);
-      const jokeText = jokes[random].joke;
-      console.log(jokeText);
-      fs.appendFile('./jokes.txt', jokeText, function(err) {
-        if (err) {
-          console.log('There was an error saving your joke');
-          return process.exit(1);
-        }
-      });
-    })
-    .catch(err => {
-      console.log(`Sorry, no jokes were found for the term ${search}`);
-    });
+localPeople.forEach(person => {
+  fs.writeFile(
+    `./emails/${person.email}.txt`,
+    generateEmail(person.firstName, person.company),
+    function(err) {
+      if (err) {
+        console.log('There was an error.');
+        return process.exit(1);
+      }
+    }
+  );
 });
 
-function onErr(err) {
-  console.log(err);
-  return 1;
+potentialPeople.forEach(person => {
+  let personData = `${person.firstName} ${person.lastName} ${person.email} ${
+    person.company
+  }\n`;
+  fs.appendFile('./potentials.txt', personData, function(err) {
+    if (err) {
+      console.log('There was an error.');
+      return process.exit(1);
+    }
+  });
+});
+
+function generateEmail(firstName, company) {
+  return `Hello ${firstName},
+
+  I saw your experience at ${company} and thought you would be a great fit for us here at LinkedList.
+  Let me know if you're interested in getting coffee or whatever recruiters say...
+
+  Best,
+
+  Randy Random
+  LinkedList`;
+}
+
+function city(person, cities) {
+  return cities.includes(person.city);
+}
+
+function state(person, states) {
+  return states.includes(person.state);
 }
