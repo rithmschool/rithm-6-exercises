@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %} Login {% endblock %} {% block body %}
 <h2>Login</h2>
-<form method="POST" action="{{ url_for('u.login') }}">
+<form method="POST" action="{{ url_for('users.login') }}">
   {{ login_form.hidden_tag() }} {% for field in login_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
@@ -10,6 +10,6 @@
   </p>
   {% endfor %}
   <input type="submit" value="Login">
-  <a href="{{ url_for('u.index') }}">Cancel</a>
+  <a href="{{ url_for('users.index') }}">Cancel</a>
 </form>
 {% endblock %}

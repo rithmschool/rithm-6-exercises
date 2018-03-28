@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %} Edit Tag {% endblock %} {% block body %}
 <h2>Edit Tag</h2>
-<form method="POST" action="{{ url_for('t.show', t_id=t.id) }}?_method=PATCH">
-  {{ t_form.hidden_tag() }} {% for field in t_form if field.widget.input_type != 'hidden' %}
+<form method="POST" action="{{ url_for('tags.show', tag_id=tag.id) }}?_method=PATCH">
+  {{ tag_form.hidden_tag() }} {% for field in tag_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
     <span>
@@ -10,10 +10,10 @@
   </p>
   {% endfor %}
   <input type="submit" value="Update Tag">
-  <a href="{{ url_for('t.index') }}">Cancel</a>
+  <a href="{{ url_for('tags.index') }}">Cancel</a>
 </form>
-<form method="POST" action="{{ url_for('t.show', t_id=t.id) }}?_method=DELETE">
-  {{ d_form.hidden_tag() }}
+<form method="POST" action="{{ url_for('tags.show', tag_id=tag.id) }}?_method=DELETE">
+  {{ delete_form.hidden_tag() }}
   <input type="submit" value="X">
 </form>
 {% endblock %}
