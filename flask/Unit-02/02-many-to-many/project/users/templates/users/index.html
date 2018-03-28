@@ -1,24 +1,27 @@
 {% extends 'base.html' %} {% block title %} Users {% endblock %} {% block body %}
 <h2>All Users</h2>
-<h3>Welcome back, {{ g.current_user.username }}</h3>
-<a href="{{ url_for('u.new') }}">Add a User!</a>
-{% if g.current_user %}
-<a href="{{ url_for('u.logout') }}">
-  Logout!</a>
+<!-- {# {% if g.current_user %}
+<p>{{ g.current_user.username }} |
+  <a href="{{ url_for('users.logout') }}">Logout</a>
+</p>
 {% else %}
-<a href="{{ url_for('u.login') }}">
-  Login!</a>
-{% endif %} {% for u in users %}
+<a href="{{ url_for('users.new') }}">Create an Account</a> |
+<a href="{{ url_for('users.login') }}">Login</a>
+{% endif %} #} -->
+<a href="{{ url_for('users.new') }}">Create a User</a> |
+<a href="{{ url_for('tags.new') }}">Create a Tag</a>
+{% for user in users %}
 <div class="card" style="width: 18rem;">
-  {% if u.image_url %}
-  <img class="card-img-top" src="{{ u.image_url }}" alt="{{ u.first_name }} {{ u.last_name }}'s profile picture"> {% endif %}
+  {% if user.image_url %}
+  <img class="card-img-top" src="{{ user.image_url }}" alt="{{ user.first_name }} {{ user.last_name }}'s profile picture"> {% endif %}
   <div class="card-body">
-    <h5 class="card-title">{{ u.first_name }} {{ u.last_name }}</h5>
-    {% if u.messages[-1] %}
-    <p class="card-text"> {{ u.messages[-1].content }}</p>
+    <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+    {% if user.messages[-1] %}
+    <p class="card-text"> Most recent message:
+      {{ user.messages[-1].content }}</p>
     {% endif %}
-    <a href="{{ url_for('m.index', u_id=u.id) }}">
-      View {{ u.first_name }}'s Messages</a>
+    <a href="{{ url_for('messages.index', user_id=user.id) }}">
+      View {{ user.first_name }}'s Messages</a>
   </div>
 </div>
 {% endfor %} {% endblock %}

@@ -8,7 +8,7 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/users_07'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/many_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -20,18 +20,18 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 toolbar = DebugToolbarExtension(app)
 
-from project.users.views import ubp
-from project.messages.views import mbp
-from project.tags.views import tbp
+from project.users.views import users_blueprint
+from project.messages.views import messages_blueprint
+from project.tags.views import tags_blueprint
 
-app.register_blueprint(ubp, url_prefix='/users')
-app.register_blueprint(mbp, url_prefix='/users/<int:u_id>/messages')
-app.register_blueprint(tbp, url_prefix='/tags')
+app.register_blueprint(users_blueprint, url_prefix='/users')
+app.register_blueprint(messages_blueprint, url_prefix='/users/<int:user_id>/messages')
+app.register_blueprint(tags_blueprint, url_prefix='/tags')
 
 
 @app.route('/')
 def root():
-    return redirect(url_for('u.index'))
+    return redirect(url_for('users.index'))
 
 
 @app.errorhandler(404)

@@ -4,8 +4,8 @@
 {% endif %}
 
 <h2>Add a New User</h2>
-<form method="POST" action="{{ url_for('u.index') }}">
-  {{ u_form.hidden_tag() }} {% for field in u_form if field.widget.input_type != 'hidden' %}
+<form method="POST" action="{{ url_for('users.index') }}">
+  {{ user_form.hidden_tag() }} {% for field in user_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
     <span>
@@ -14,6 +14,6 @@
   </p>
   {% endfor %}
   <input type="submit" value="Create User">
-  <a href="{{ url_for('u.index') }}">Cancel</a>
+  <a href="{{ url_for('users.index') }}">Cancel</a>
 </form>
 {% endblock %}
