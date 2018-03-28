@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.models import User, Tag
+from project.models import User, Tag, Message
 from project.tags.forms import TagForm, DeleteForm
 from project import db
 from project.decorators import ensure_correct_user
@@ -16,12 +16,14 @@ def index(id):
     if request.method == 'POST':
         form = TagForm(request.form)
         # M:M: form.set_choices() so we can have latest list of tag options
-        form.set_choices()  # Why do we need this???
+        form.set_choices()
         if form.validate():
             name = form.data['name']
             tag = Tag(name)
-            tag.messages.extend(
-                form.data['messages'])  # writing to the join table
+            messages = form.data['messages']
+            for msg in messages:
+                tag.messages.append(
+                    Message.query.get(msg))  # writing to the join table
             db.session.add(tag)
             db.session.commit()
             flash('Tag Created!')
@@ -46,7 +48,8 @@ def new(id):
 @ensure_correct_user
 def edit(id, tag_id):
     tag = Tag.query.get(tag_id)
-    form = TagForm(obj=tag)
+    messages = [msg.id for msg in tag.messages]
+    form = TagForm(messages=messages)  # How load pre-selected messages too?
     form.set_choices()
     return render_template('tags/edit.html', tag=tag, form=form, user_id=id)
 
@@ -59,18 +62,20 @@ def show(id, tag_id):
     tag = Tag.query.get(tag_id)
     if request.method == b"PATCH":
         form = TagForm(request.form)
-        tag.name = form.data['name']
-        tag.messages = []
-        # for msg_id in form.data['messages']:
-        #     tag.messages.append(Message.query.get(msg_id))
-        # Try to do with a list comprehension instead
-        tag.messages = [
-            Message.query.get(msg_id) for msg_id in form.data['messages']
-        ]
-        db.session.add(tag)
-        db.session.commit()
-        flash('Tag Updated!')
-        return redirect(url_for('tags.index', id=id))
+        form.set_choices
+        if form.validate():
+            tag.name = form.data['name']
+            # tag.messages = []
+            # for msg_id in form.data['messages']:
+            #     tag.messages.append(Message.query.get(msg_id))
+            # Try to do with a list comprehension instead
+            tag.messages = [
+                Message.query.get(msg_id) for msg_id in form.data['messages']
+            ]
+            db.session.add(tag)
+            db.session.commit()
+            flash('Tag Updated!')
+            return redirect(url_for('tags.index', id=id))
     if request.method == b"DELETE":
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
