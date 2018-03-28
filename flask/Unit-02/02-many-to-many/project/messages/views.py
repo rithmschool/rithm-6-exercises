@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.models import User, Message
+from project.models import User, Message, Tag
 from project.messages.forms import MessageForm, DeleteForm
 from project import db
 from project.decorators import ensure_correct_user
@@ -15,11 +15,13 @@ messages_blueprint = Blueprint(
 def index(id):
     user = User.query.get(id)
     if request.method == 'POST':
-        form = MessageForm(request.form)
+        form = MessageForm(request.form)  # Daniel did not put in request.form
         form.set_choices()
         if form.validate():
             content = form.data['content']
             msg = Message(content, id)
+            for tag_id in form.tags.data:
+                msg.tags.append(Tag.query.get(tag_id))
             db.session.add(msg)
             db.session.commit()
             flash('Message Created!')
@@ -43,8 +45,10 @@ def new(id):
 @ensure_correct_user
 def edit(id, msg_id):
     message = Message.query.get(msg_id)
-    form = MessageForm(obj=message)
+    tags = [tag.id for tag in message.tags]
+    form = MessageForm(content=message.content, tags=tags)
     form.set_choices()
+    # Add a delete form here if you want.  Daniel did.
     return render_template('messages/edit.html', message=message, form=form)
 
 
@@ -55,15 +59,20 @@ def show(id, msg_id):
     message = Message.query.get(msg_id)
     if request.method == b"PATCH":
         form = MessageForm(request.form)
-        message.content = form.data['content']
-        db.session.add(message)
-        db.session.commit()
-        flash('Message Updated!')
-        return redirect(url_for('messages.index', id=id))
+        form.set_choices()
+        if form.validate():
+            message.content = form.data['content']
+            message.tags = []
+            for tag_id in form.tags.data:
+                message.tags.append(Tag.query.get(tag_id))
+            db.session.add(message)
+            db.session.commit()
+            flash('Message Updated!')
+            return redirect(url_for('messages.index', id=id))
     if request.method == b"DELETE":
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
-            db.session.delete(message)
+            db.session.delete(message)  # Daniel had extra stuff for delete
             db.session.commit()
             flash('Message Deleted!')
             return redirect(url_for('messages.index', id=id))

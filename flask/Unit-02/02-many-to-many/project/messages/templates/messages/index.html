@@ -22,11 +22,9 @@
       <a href="{{url_for('messages.edit', id=user.id, msg_id=message.id)}}">Edit message</a>
       <a href="{{url_for('messages.show', id=user.id, msg_id=message.id)}}">Show message</a>
     </small>
-    <p>
       {% for tag in message.tags %}
         <button> {{ tag.name }} </button>
       {% endfor %}
-    </p>
   </li>
   {% endfor %}
 </ol>

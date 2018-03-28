@@ -21,9 +21,9 @@ def index(id):
             name = form.data['name']
             tag = Tag(name)
             messages = form.data['messages']
-            for msg in messages:
+            for msg_id in messages:
                 tag.messages.append(
-                    Message.query.get(msg))  # writing to the join table
+                    Message.query.get(msg_id))  # writing to the join table
             db.session.add(tag)
             db.session.commit()
             flash('Tag Created!')
@@ -49,8 +49,11 @@ def new(id):
 def edit(id, tag_id):
     tag = Tag.query.get(tag_id)
     messages = [msg.id for msg in tag.messages]
-    form = TagForm(messages=messages)  # How load pre-selected messages too?
+    form = TagForm(
+        name=tag.name,
+        messages=messages)  # How load pre-selected messages too?
     form.set_choices()
+    # Can add a delete form here if you like
     return render_template('tags/edit.html', tag=tag, form=form, user_id=id)
 
 
@@ -62,7 +65,7 @@ def show(id, tag_id):
     tag = Tag.query.get(tag_id)
     if request.method == b"PATCH":
         form = TagForm(request.form)
-        form.set_choices
+        form.set_choices()
         if form.validate():
             tag.name = form.data['name']
             # tag.messages = []
@@ -70,7 +73,8 @@ def show(id, tag_id):
             #     tag.messages.append(Message.query.get(msg_id))
             # Try to do with a list comprehension instead
             tag.messages = [
-                Message.query.get(msg_id) for msg_id in form.data['messages']
+                Message.query.get(msg_id)
+                for msg_id in form.data['messages']  # could use for loop
             ]
             db.session.add(tag)
             db.session.commit()
