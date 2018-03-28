@@ -26,6 +26,13 @@ localPeople.forEach(person => {
   );
 });
 
+fs.writeFileSync('./potentials.txt', '', function(err) {
+  if (err) {
+    console.log('There was an error.');
+    return process.exit(1);
+  }
+});
+
 potentialPeople.forEach(person => {
   let personData = `${person.firstName} ${person.lastName} ${person.email} ${
     person.company
