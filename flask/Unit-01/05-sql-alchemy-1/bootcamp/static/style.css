@@ -1,0 +1,40 @@
+li {
+  font-size: 25px;
+}
+
+h1,
+p {
+  text-align: center;
+}
+
+body::after {
+  content: "";
+  background: url(https://www.ymcachicago.org/page/-/fry/blog/boot_camp.png);
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  text-align: center;
+}
+
+.button {
+  display: block;
+  width: 200px;
+  height: 20px;
+  background: #055bfa;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  color: rgb(247, 244, 243);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+label {
+  margin: 5px;
+  font-weight: bold;
+}
