@@ -1,5 +1,42 @@
-// PART 1
-// my original answer
+// HOMEWORK PART 1
+// My new answer:
+function queryPlanetsPart1() {
+  return new Promise((resolve, reject) => {
+    return $.getJSON("https://swapi.co/api/films").then(query1Res => {
+      Promise.all(
+        query1Res.results.map(film => {
+          return new Promise((resolve, reject) => {
+            const processedFilm = {};
+            processedFilm.title = film.title;
+            processedFilm.opening_crawl = film.opening_crawl;
+            Promise.all(
+              film.planets.map(planetURL => $.getJSON(planetURL))
+            ).then(planetObjs => {
+              const newPlanets = planetObjs.map(p => p.name);
+              processedFilm.planets = newPlanets;
+              return resolve(processedFilm);
+            });
+          });
+        })
+      ).then(result => resolve(result));
+    });
+  });
+}
+
+arr = [];
+
+setTimeout(function() {
+  resolve(`Hi`);
+}, timeToResolve);
+
+function promiseAll(promisesArr) {
+  for (let i = 0; i < promisesArr.length; i++) {}
+}
+
+// HOMEWORK PART 2 (bonus)
+
+// NOTES ON PART 1
+// My original answer
 $.getJSON("https://swapi.co/api/films")
   .then(data => {
     return data.results.map(function(movie) {
@@ -15,18 +52,7 @@ $.getJSON("https://swapi.co/api/films")
   })
   .then(filmsInfo => console.log(filmsInfo));
 
-// Michael's short answer:
-
-axios.get("https://swapi.co/api/films").then(res => {
-  const processed = res.data.results.map(film => {
-    const { opening_crawl: crawl, title, planets } = film;
-    Promise.all(
-      planets.map(planet => axios.get(planet).then(data => data.data.name))
-    ).then(planetNames => console.log({ crawl, title, planetNames }));
-  });
-});
-
-// Michael's answer explained:
+// Michael's longer answer explained:
 
 function queryPlanetsPart1() {
   // this function will return a promise (so it's .then()able)
@@ -81,3 +107,14 @@ function queryPlanets() {
     });
   });
 }
+
+// Michael's short answer:
+
+axios.get("https://swapi.co/api/films").then(res => {
+  const processed = res.data.results.map(film => {
+    const { opening_crawl: crawl, title, planets } = film;
+    Promise.all(
+      planets.map(planet => axios.get(planet).then(data => data.data.name))
+    ).then(planetNames => console.log({ crawl, title, planetNames }));
+  });
+});
