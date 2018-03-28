@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const app = express()
 const PORT = 3000
-const numCheck = "12345678910,"
+const numCheck = "12345678910,."
 
 
 app.get('/', function(request, response, next) {
