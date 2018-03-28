@@ -12,5 +12,6 @@
     {% endfor %}
     <input type="submit" value="Create Message">
     <a href="{{ url_for('messages.index', user_id=user.id) }}">Cancel</a>
+
 </form>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %} Edit Tag {% endblock %} {% block body %}
 <h2>Edit Tag</h2>
 <form method="POST" action="{{ url_for('tags.show', tag_id=tag.id) }}?_method=PATCH">
-  {{ tag_from.hidden_tag() }} {% for field in tag_from if field.widget.input_type != 'hidden' %}
+  {{ tag_form.hidden_tag() }} {% for field in tag_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
     <span>

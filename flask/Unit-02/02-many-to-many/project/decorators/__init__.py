@@ -6,17 +6,16 @@ def verify_login(func):
     def wrapper(*args, **kwargs):
         if not session.get('user_id'):
             flash('Login Required')
-            return redirect(url_for('u.login'))
+            return redirect(url_for('users.login'))
         return func(*args, **kwargs)
     return wrapper
-
 
 def verify_user(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if kwargs.get('u_id') != session.get('user_id'):
+        if kwargs.get('user_id') != session.get('user_id'):
             flash('Not Authorized')
-            return redirect(url_for('u.index'))
+            return redirect(url_for('users.index'))
         return func(*args, **kwargs)
     return wrapper
 
@@ -25,7 +24,7 @@ def prevent_duplicate_login(func):
     def wrapper(*args, **kwargs):
         if session.get('user_id'):
             flash('Already Logged In!')
-            return redirect(url_for('u.index'))
+            return redirect(url_for('users.index'))
         return func(*args, **kwargs)
     return wrapper
 

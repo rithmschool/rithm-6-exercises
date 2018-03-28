@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block title %} Create Tag {% endblock %} {% block body %}
 <h2>Create a New Tag</h2>
-<form method="POST" action="{{ url_for('t.index') }}">
+<form method="POST" action="{{ url_for('tags.index') }}">
   <div class="form-group">
-    {{ t_form.hidden_tag() }} {% for field in t_form if field.widget.input_type != 'hidden' %}
+    {{ tag_form.hidden_tag() }} {% for field in tag_form if field.widget.input_type != 'hidden' %}
     <div class="form-group">
       {{ field.label }} {{ field }}
       <span>
@@ -11,7 +11,7 @@
     </div>
     {% endfor %}
     <input type="submit" value="Create Tag">
-    <a href="{{ url_for('t.index') }}">Cancel</a>
+    <a href="{{ url_for('tags.index') }}">Cancel</a>
 
 </form>
 {% endblock %}

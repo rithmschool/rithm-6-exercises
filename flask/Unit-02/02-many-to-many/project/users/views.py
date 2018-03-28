@@ -14,20 +14,20 @@ def index():
     if request.method == 'POST':
         user_form = UserForm(request.form)
         if user_form.validate():
-            hashed = bcrypt.generate_password_hash(
-                password=user_form.data['password'])
-            hashed_utf8 = hashed.decode('utf-8')
+            # hashed = bcrypt.generate_password_hash(
+            #     password=user_form.data['password'])
+            # hashed_utf8 = hashed.decode('utf-8')
             user = User(
                 first_name=user_form.data['first_name'],
                 last_name=user_form.data['last_name'],
                 username=user_form.data['username'],
-                password=hashed_utf8,
+                # password=hashed_utf8,
                 image_url=user_form.data['image_url'])
             try:
-                db.session.add(u)
+                db.session.add(user)
                 db.session.commit()
                 flash('User Created!')
-                return redirect(url_for('user.index'))
+                return redirect(url_for('users.index'))
             except IntegrityError as error:
                 return render_template(
                     'users/new.html',
@@ -38,20 +38,20 @@ def index():
     return render_template('users/index.html', users=User.query.all())
 
 
-@users_blueprint.route('/auth', methods=['GET', 'POST'])
-@prevent_duplicate_login
-def login():
-    login_form = LoginForm(request.form)
-    if request.method == 'POST':
-        if login_form.validate():
-            user = User.authenticate(login_form.data['username'],
-                                     login_form.data['password'])
-            if user:
-                session['user_id'] = user.id
-                flash('Login Successful!')
-                return redirect(url_for('u.index'))
-        flash('Invalid Username/Password')
-    return render_template('users/login.html', login_form=login_form)
+# @users_blueprint.route('/auth', methods=['GET', 'POST'])
+# @prevent_duplicate_login
+# def login():
+#     login_form = LoginForm(request.form)
+#     if request.method == 'POST':
+#         if login_form.validate():
+#             user = User.authenticate(login_form.data['username'],
+#                                      login_form.data['password'])
+#             if user:
+#                 session['user_id'] = user.id
+#                 flash('Login Successful!')
+#                 return redirect(url_for('users.index'))
+#         flash('Invalid Username/Password')
+#     return render_template('users/login.html', login_form=login_form)
 
 
 @users_blueprint.route('/logout')
@@ -67,11 +67,11 @@ def new():
 
 
 @users_blueprint.route('/<int:user_id>/edit')
-@verify_login
-@verify_user
+# @verify_login
+# @verify_user
 def edit(user_id):
     user = User.query.get_or_404(user_id)
-    edit_form = EditForm(obj=u)
+    edit_form = EditForm(obj=user)
     return render_template(
         'users/edit.html',
         user=user,
@@ -80,8 +80,8 @@ def edit(user_id):
 
 
 @users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
-@verify_login
-@verify_user
+# @verify_login
+# @verify_user
 def show(user_id):
     user = User.query.get_or_404(user_id)
     delete_form = DeleteForm(request.form)

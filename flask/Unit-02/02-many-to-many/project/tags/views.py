@@ -5,7 +5,6 @@ from project import db
 
 tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
-
 @tags_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -13,6 +12,7 @@ def index():
         tag_form.set_choices()
         if tag_form.validate():
             new_tag = Tag(name=tag_form.data['name'])
+            new_tag.messages = []
             for message in tag_form.messages.data:
                 new_tag.messages.append(Message.query.get(message))
             db.session.add(new_tag)
@@ -35,7 +35,8 @@ def new():
 @tags_blueprint.route('/<int:tag_id>/edit')
 def edit(tag_id):
     tag = Tag.query.get_or_404(tag_id)
-    tag_form = TagForm(obj=t)
+    tag_form = TagForm(obj=tag)
+    tag_form.set_choices()
     return render_template(
         'tags/edit.html', tag=tag, tag_form=tag_form, delete_form=DeleteForm())
 
@@ -46,22 +47,23 @@ def show(tag_id):
     delete_form = DeleteForm(request.form)
     if request.method == b'PATCH':
         tag_form = TagForm(request.form)
+        tag_form.set_choices()
         if tag_form.validate():
             tag.name = tag_form.data['name']
-            db.session.add(t)
+            tag.messages = []
+            for message in tag_form.messages.data:
+                tag.messages.append(Message.query.get(message))
+            db.session.add(tag)
             db.session.commit()
             flash('Tag Updated!')
-            return redirect(url_for('tag.index', tag_id=tag_id))
+            return redirect(url_for('tags.index', tag_id=tag_id))
         else:
             flash('Form Incomplete!')
             return render_template(
-                'tags/edit.html',
-                tag=tag,
-                tag_form=tag_form,
-                delete_form=DeleteForm())
+                'tags/edit.html', tag=tag, tag_form=tag_form, delete_form=DeleteForm())
     if request.method == b'DELETE':
         if delete_form.validate():
-            db.session.delete(t)
+            db.session.delete(tag)
             db.session.commit()
             flash('Tag Deleted!')
             return redirect(url_for('tags.index'))

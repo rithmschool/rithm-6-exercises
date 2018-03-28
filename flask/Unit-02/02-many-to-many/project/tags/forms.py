@@ -15,9 +15,7 @@ class TagForm(FlaskForm):
         option_widget=widgets.CheckboxInput())
 
     def set_choices(self):
-        self.messages.choices = [(message.id, message.content)
-                                 for message in Message.query.all()]
-
+        self.messages.choices = [(message.id, message.content) for message in Message.query.all()]
 
 class DeleteForm(FlaskForm):
     pass

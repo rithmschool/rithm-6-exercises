@@ -1,6 +1,6 @@
-{% extends 'base.html' %} {% block title %} {{ u.first_name}} {% endblock %} {% block body %}
-<h2>{{ u.first_name }} {{ u.last_name }}</h2>
-<a href="{{ url_for('u.edit', u_id=u.id) }}">Edit User</a>
-<a href="{{ url_for('m.new', u_id=u.id) }}">Create a Message for {{ u.first_name }}</a>
-<a href="{{ url_for('u.index') }}">View All Users</a>
+{% extends 'base.html' %} {% block title %} {{ user.first_name}} {% endblock %} {% block body %}
+<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+<a href="{{ url_for('users.edit', user_id=user.id) }}">Edit User</a> |
+<a href="{{ url_for('messages.new', user_id=user.id) }}">Post a Message!{{ user.first_name }}</a> |
+<a href="{{ url_for('users.index') }}">View All Users</a>
 {% endblock %}
