@@ -2,7 +2,10 @@ const fs = require('fs');
 const db = require("./data.json")
 
 let targets = db.filter(el => ['San Francisco', 'Seattle', 'Portland'].includes(el.city));
-let potentials = db.filter(el => ['California', 'Washington', 'Oregon'].includes(el.city) && !['San Francisco', 'Seattle', 'Portland'].includes(el.state))
+let potentials = db.filter(el => ['California', 'Washington', 'Oregon'].includes(el.state) && !['San Francisco', 'Seattle', 'Portland', null].includes(el.city))
+
+console.log(targets.length)
+console.log(potentials.length)
 
 targets.forEach(cand => {
     let email_text = `Hello ${cand.firstName},\n\nI saw your experience at ${cand.company} and thought you would be a great fit for us here at LinkedList. Let me know if you're interested in getting coffee or whatever recruiters say...\n\nBest,\n\nRandy Random\nLinkedList`
