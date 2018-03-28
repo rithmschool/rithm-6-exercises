@@ -11,3 +11,17 @@ img {
 .list-group-item {
     background-color: rgba(0, 0, 0, .6)
 }
+
+.company-tag {
+    font-size: 150%;
+}
+
+.email-tag > a {
+    text-decoration: none;
+    color: grey;
+    transition: color 0.3s linear;
+}
+
+.email-tag > a:hover {
+    color: whitesmoke;
+}
