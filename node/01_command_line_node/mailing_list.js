@@ -18,6 +18,8 @@ targets.forEach(cand => {
     });
 });
 
+fs.writeFile(`./potentials.txt`, '')
+
 potentials.forEach(cand => {
     fs.appendFile(`./potentials.txt`, `${cand.firstName} ${cand.lastName}, ${cand.email}, ${cand.company}\n`, function(err) {
         if(err) {

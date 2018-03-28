@@ -1,0 +1,13 @@
+body {
+    background-image: url('https://buildercdn.locomotivecms.com/attachments/b0609ad8de74f7310d0e8220b860df8893af7c9d/store/3b95f8fec3e01badea8532e7784973ec245f59e66b61d676aa7aa8499bdd/creative-office-new-1.jpg');
+    background-position-x: center;
+    background-size: 100%;
+}
+
+img {
+    max-width: 100px;
+}
+
+.list-group-item {
+    background-color: rgba(0, 0, 0, .6)
+}
