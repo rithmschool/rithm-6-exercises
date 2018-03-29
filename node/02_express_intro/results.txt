@@ -1,0 +1,5 @@
+The mean of 1, 2, 3, 4, 5 is 3
+
+The mode of 1, 2, 3, 4, 5 is 1
+
+The median of 1, 2, 3, 4, 5 is 3

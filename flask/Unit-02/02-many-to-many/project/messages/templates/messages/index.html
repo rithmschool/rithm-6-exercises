@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="d-flex flex-wrap flex-column align-items-center m-5">
+  <h4>
+    <a href="{{url_for('users.show', user_id=user.id)}}">{{user.username}}</a>
+  </h4>
+  <div class="card-img--container">
+    <img class="card-img-top" src="{{user.img_url}}" alt="{{user.first_name}}'s profile picture">
+  </div>
+
+  {% if user.id == current_user.id %}
+  <section class="d-flex my-4">
+    <a class="btn btn-info mx-1" href="{{url_for('messages.new', user_id=user.id)}}">ADD A NEW MESSAGE</a>
+    <a class="btn btn-info mx-2" href="{{url_for('tags.new')}}">ADD A NEW TAG</a>
+  </section>
+  {% endif %}
+
+  <h4>Messages</h4>
+  <table class="table mx-5">
+    <tbody>
+    {% for message in user.messages %}
+      <tr>
+        <td>{{ message.content }}</td>
+        <td>
+          Tags:
+          {% for tag in message.tags %}
+            <span>{{ tag.name }}</span>
+          {% endfor %}
+          {% if message.tags|length == 0 %}
+          <span>no tags added</span>
+          {% endif %}
+        </td>
+
+        {% if user.id == current_user.id %}
+        <td>
+            <a class="btn btn-primary" href="{{url_for('messages.edit', message_id=message.id, user_id=user.id)}}">
+              <i class="fas fa-pencil-alt"></i>
+              Edit
+            </a>
+        </td>
+        <td>
+        <td>
+          <form action="{{url_for('messages.show', message_id=message.id, user_id=user.id)}}?_method=DELETE" method="POST">
+            {{ delete_form.hidden_tag() }}
+            <button class="btn btn-danger" type="submit">
+              <i class="fas fa-trash-alt"></i>
+              Delete
+            </button>
+          </form>
+        </td>
+        {% endif %}
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
