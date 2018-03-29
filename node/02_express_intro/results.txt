@@ -1,1 +1,4 @@
+
 The mode of 2, 5, 9, 10, 10, 9, 8 is 9
+The median of 2, 5, 9, 10 is 7
+The mean of 2, 5, 9, 10 is 6.5

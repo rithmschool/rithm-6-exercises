@@ -123,12 +123,12 @@ app.get("/results", function(request, response, next) {
     err.status = 404;
     return next(err);
   }
-  fs.readFile("./results.txt", (err, data) => {
-    if (data === null) {
-      const err = new Error(`Not Found! There are no results yet.`);
-      err.status = 404;
-      return next(err);
-    }
+  fs.readFile("./results.txt", "utf8", (err, data) => {
+    // if (data === undefined) {
+    //   const err = new Error(`Not Found! There are no results yet.`);
+    //   err.status = 404;
+    //   return next(err);
+    // }
     return response.send(`${data}`);
   });
 });
