@@ -123,6 +123,14 @@ app.get('/mode', (request, response, next) => {
   return response.send(resultStr);
 });
 
+app.get('/results', (request, response, next) => {
+  if (!fs.existsSync('results.txt')) {
+    return next(new Error('You\'re the first! No data in the file'));
+  }
+  const data = fs.readFileSync('results.txt', 'utf8');
+  return response.send(data);
+});
+
 app.use((err, req, res, next) => {
   return res.status(400).send(err.message);
 });
