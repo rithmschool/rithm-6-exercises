@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% block logout %}
+{% endblock %}
+
+<form action="{{url_for('users.login')}}" method="POST" class="m-5 d-flex flex-column align-items-center">
+  {{ form.hidden_tag() }}
+  <h4>Login</h4>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="form-group w-50">
+    {{ field.label }}
+    {{ field(class_="form-control", rows="2") }}
+
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <span class="text-danger">{{ error }}</span>
+      {% endfor %}
+    {% endif %}
+  </div>
+  {% endfor %}
+  <button class="btn btn-primary btn-large w-50 mt-3" type="submit">Login!</button>
+</form>
+<div class="d-flex flex-column align-items-center">
+  <h5>No account? <a href="{{url_for('users.new')}}" class="">Create Account</a></h5>
+</div>
+{% endblock %}
