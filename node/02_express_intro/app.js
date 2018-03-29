@@ -116,11 +116,11 @@ function mode(object) {
 
 app.use(function(error, request, response, next) {
   if (error.message === 'Must be all numbers') {
-    return response.send('No numbers given');
+    return response.send('400 Bad Request Must be all numbers');
   } else if (error.message === 'No numbers given') {
-    return response.send('Please input numbers');
+    return response.send('400 Bad Request Please input numbers');
   } else if (error.message === 'File doesnt exist') {
-    return response.send('File does not exist. Please make some calculations');
+    return response.send('404 Not Found Please make some calculations');
   }
 });
 
