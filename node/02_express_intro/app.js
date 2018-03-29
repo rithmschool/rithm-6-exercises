@@ -25,10 +25,12 @@ function math(op, arr) {
 
 app.get('/results', (req, res, next) => {
     fs.readFile('./results.txt', (err, text) => {
-        if(err) {
+        if(err || `${text}`.length === 0) {
             return next('I couldn\'t open the file. Try again!');
         }
-        return res.send(text);
+        let html = `${text}`.split('\n');
+        // res.setHeader("content-disposition", "inline");
+        return res.send(html.map(a => `<p>${a}</p>`).join(''));
     });
 });
 
@@ -56,7 +58,7 @@ app.get('/:op', (req, res, next) => {
     let output;
     
     if(req.params.op === 'all') {
-        output = `The MEAN of ${nums} is ${math('mean' ,nums)}, the MEDIAN of ${nums} is ${math('median' ,nums)}, and the MODE of ${nums} is ${math('mode' ,nums)}`;
+        output = `The MEAN of ${nums} is ${math('mean' ,nums)}, the MEDIAN of ${nums} is ${math('median' ,nums)}, and the MODE of ${nums} is ${math('mode' ,nums)}.`;
     } else {
         output = `The ${req.params.op.toUpperCase()} of ${nums} is ${math(req.params.op.toLowerCase() ,nums)}.`;
     }
