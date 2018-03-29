@@ -17,8 +17,7 @@ function errCheck(nums, next) {
 
 
 app.get('/', function(request, response, next) {
-    let queries = request.query
-    return response.send('<h1>hello</h1>')
+    return response.send('<h1>Do some math! Mean, Median or Mode! </h1>')
 })
 
 app.get('/mean', function(request, response, next) {
