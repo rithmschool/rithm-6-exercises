@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 const fs = require('fs');
 
-app.get('/mean/', function(request, response, next) {
+app.get('/mean/', (request, response, next) => {
   let total = 0;
   let stringOfNums = request.query.nums;
   let arrayOfNums = stringOfNums.split(',');
@@ -25,7 +25,7 @@ app.get('/mean/', function(request, response, next) {
   return response.send(`The mean of ${stringOfNums} is ${finalMeanString}`);
 });
 
-app.get('/median/', function(request, response, next) {
+app.get('/median/', (request, response, next) => {
   let stringOfNums = request.query.nums;
   let arrayOfNums = stringOfNums.split(',');
   let arrayOfInts = arrayOfNums.map(Number);
@@ -50,7 +50,7 @@ app.get('/median/', function(request, response, next) {
   return response.send(`The median of ${stringOfNums} is ${medianString}`);
 });
 
-app.get('/mode/', function(request, response, next) {
+app.get('/mode/', (request, response, next) => {
   let stringOfNums = request.query.nums;
   let arrayOfNums = stringOfNums.split(',');
   let arrayOfInts = arrayOfNums.map(Number);
@@ -71,7 +71,7 @@ app.get('/mode/', function(request, response, next) {
   return response.send(`The mode of ${stringOfNums} is ${highestOccurenceStr}`);
 });
 
-app.get('/results', function(request, response, next) {
+app.get('/results', (request, response, next) => {
   fs.exists('./results.txt', function(exists) {
     if (exists) {
       fs.readFile('./results.txt', function read(err, data) {
@@ -114,7 +114,7 @@ function mode(object) {
   return highest;
 }
 
-app.use(function(error, request, response, next) {
+app.use((error, request, response, next) => {
   if (error.message === 'Must be all numbers') {
     return response.send('400 Bad Request Must be all numbers');
   } else if (error.message === 'No numbers given') {
