@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+    h1 See your items
+    a(href="/items/new") Add a new item!
+    ul
+    each item in items
+        li #{item}
