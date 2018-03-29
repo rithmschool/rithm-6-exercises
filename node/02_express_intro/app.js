@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const methodOverride = require('method-override');
 
+app.use(methodOverride('_method'));
 const PORT = 3000;
 
 function mean(nums) {
@@ -60,11 +62,14 @@ app.get('/mean', (request, response, next) => {
   let average = mean(numNums);
   let numStr = numNums.join(', ');
   let resultStr = `The average of ${numStr} is ${average}\n`;
-  fs.appendFileSync('./results.txt', resultStr, function(err) {
-    if (err) {
-      return next(new Error('There was an error saving the value'));
-    }
-  });
+
+  if (request.query.save !== 'false') {
+    fs.appendFileSync('./results.txt', resultStr, function(err) {
+      if (err) {
+        return next(new Error('There was an error saving the value'));
+      }
+    });
+  }
   return response.send(resultStr);
 });
 
@@ -87,11 +92,14 @@ app.get('/median', (request, response, next) => {
   let median = calcMedian(numNums);
   let numStr = numNums.join(', ');
   let resultStr = `The median of ${numStr} is ${median}\n`;
-  fs.appendFileSync('./results.txt', resultStr, function(err) {
-    if (err) {
-      return next(new Error('There was an error saving the value'));
-    }
-  });
+  if (request.query.save !== 'false') {
+    fs.appendFileSync('./results.txt', resultStr, function(err) {
+      if (err) {
+        return next(new Error('There was an error saving the value'));
+      }
+    });
+  }
+
   return response.send(resultStr);
 });
 
@@ -115,12 +123,50 @@ app.get('/mode', (request, response, next) => {
   let modeStr = modes.join(', ');
   let numStr = numNums.join(', ');
   let resultStr = `The mode of ${numStr} is ${modeStr}\n`;
-  fs.appendFileSync('./results.txt', resultStr, function(err) {
-    if (err) {
-      return next(new Error('There was an error saving the value'));
-    }
-  });
+
+  if (request.query.save !== 'false') {
+    fs.appendFileSync('./results.txt', resultStr, function(err) {
+      if (err) {
+        return next(new Error('There was an error saving the value'));
+      }
+    });
+  }
   return response.send(resultStr);
+});
+
+app.get('/all', (request, response, next) => {
+  if (!request.query.nums) return next(new Error('Please enter some data'));
+  else if (request.query.nums.length < 1)
+    return next(new Error('Please enter some numbers'));
+  else if (request.query.nums[request.query.nums.length - 1] === ',')
+    return next(new Error('Please remove the trailing comma, thanks,'));
+  let numsStr = request.query.nums.split(',');
+  let isNumberError = false;
+  numsStr.forEach(num => {
+    if (isNaN(num)) isNumberError = true;
+  });
+  if (isNumberError)
+    return next(new Error('There was a problem with one of your numbers'));
+  let numNums = numsStr.map(num => +num);
+  let modes = calcMode(numNums);
+  let average = mean(numNums);
+  let median = calcMedian(numNums);
+  let modeStr = modes.join(', ');
+  let numStr = numNums.join(', ');
+  let resultStr1 = `The mode of ${numStr} is ${modeStr}\n`;
+  let resultStr2 = `The mean of ${numStr} is ${average}\n`;
+  let resultStr3 = `The median of ${numStr} is ${median}\n`;
+  let allData = resultStr1.concat(resultStr2, resultStr3);
+
+  if (request.query.save !== 'false') {
+    fs.appendFileSync('./results.txt', allData, function(err) {
+      if (err) {
+        return next(new Error('There was an error saving the value'));
+      }
+    });
+  }
+
+  return response.send(allData);
 });
 
 app.get('/results', (request, response, next) => {
@@ -132,7 +178,11 @@ app.get('/results', (request, response, next) => {
 });
 
 app.use((err, req, res, next) => {
-  return res.status(400).send(err.message);
+  const e = err.message;
+  if (e.startsWith('You\'re')) {
+    return res.status(404).send(e);
+  }
+  return res.status(400).send(e);
 });
 
 app.listen(PORT, () => {
