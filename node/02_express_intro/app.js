@@ -22,6 +22,25 @@ function calcMedian(nums) {
   return result;
 }
 
+function calcMode(nums) {
+  const counter = {};
+  for (let num of nums) {
+    if (counter.hasOwnProperty(num)) {
+      counter[num]++;
+    } else {
+      counter[num] = 1;
+    }
+  }
+  const largestValue = Math.max(...Object.values(counter));
+  let modes = [];
+  for (let key in counter) {
+    if (counter[key] === largestValue) {
+      modes.push(key);
+    }
+  }
+  return modes;
+}
+
 app.get('/mean', (request, response, next) => {
   if (!request.query.nums) {
     return next(new Error('Please enter some data'));
@@ -76,7 +95,33 @@ app.get('/median', (request, response, next) => {
   return response.send(resultStr);
 });
 
-app.get('/mode', (request, response, next) => {});
+app.get('/mode', (request, response, next) => {
+  if (!request.query.nums) {
+    return next(new Error('Please enter some data'));
+  } else if (request.query.nums.length < 1) {
+    return next(new Error('Please enter some numbers'));
+  } else if (request.query.nums[request.query.nums.length - 1] === ',') {
+    return next(new Error('Please remove the trailing comma, thanks,'));
+  }
+  let numsStr = request.query.nums.split(',');
+  let isNumberError = false;
+  numsStr.forEach(num => {
+    if (isNaN(num)) isNumberError = true;
+  });
+  if (isNumberError)
+    return next(new Error('There was a problem with one of your numbers'));
+  let numNums = numsStr.map(num => +num);
+  let modes = calcMode(numNums);
+  let modeStr = modes.join(', ');
+  let numStr = numNums.join(', ');
+  let resultStr = `The mode of ${numStr} is ${modeStr}\n`;
+  fs.appendFileSync('./results.txt', modeStr, function(err) {
+    if (err) {
+      return next(new Error('There was an error saving the value'));
+    }
+  });
+  return response.send(resultStr);
+});
 
 app.use((err, req, res, next) => {
   return res.status(400).send(err.message);

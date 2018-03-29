@@ -6,3 +6,5 @@ The median of 1, 2, 3, 1, 10 is 3
 The median of 1, 2, 3, 1, 10, 1 is 2
 The median of 1, 2, 3, 1, 10, 1, 23 is 1
 The median of 1, 2, 3, 1, 10, 1, 23, 1 is 5.5
+The median of 1, 2, 3, 1, 10 is 3
+1111, 1010
