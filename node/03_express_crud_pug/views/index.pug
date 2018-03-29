@@ -1,0 +1,13 @@
+extends base.pug
+
+block title
+    title Shopping list
+
+block content
+    h1 Welcome to my list page
+    
+    ul
+    for el in items
+        li #{el}
+
+    a(href="/items/new") Add a new item to the list!
