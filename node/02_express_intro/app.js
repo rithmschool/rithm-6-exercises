@@ -24,7 +24,7 @@ function math(op, arr) {
 }
 
 app.get('/results', (req, res, next) => {
-    fs.readFile('./results.txt', function(err, text) {
+    fs.readFile('./results.txt', (err, text) => {
         if(err) {
             return next('I couldn\'t open the file. Try again!');
         }
@@ -33,7 +33,12 @@ app.get('/results', (req, res, next) => {
 });
 
 app.delete('/results', (req, res, next) => {
-    
+    fs.unlink('./results.txt', err => {
+        if(err) {
+            return next('Something went wrong when you tried to delete the file.')
+        }
+        return res.send('The results.txt file was successfully deleted.');
+    })
 });
 
 app.get('/:op', (req, res, next) => {
@@ -56,20 +61,22 @@ app.get('/:op', (req, res, next) => {
         output = `The ${req.params.op.toUpperCase()} of ${nums} is ${math(req.params.op.toLowerCase() ,nums)}.`;
     }
 
-    if(req.query.save !== false) {
+    if(req.query.save !== 'false') {
         fs.appendFile('./results.txt', `${output}\n`, function(err) {
             if(err) {
                 return next('Something went wrong trying to write the file. Try again!');
             }
             return res.send(`${output}`);
         })
+    } else {
+        return res.send(`${output}`);
     }
 });
 
 app.use((err, req, res, next) => {
     if(err === 'You didn\'t specify a valid operation. Try again!' || err === 'You didn\'t provide the valid \'nums\' key or numbers. Try again!') {
         return res.status(400).send(err);
-    } else if(err === 'Something went wrong trying to write the file. Try again!' || err === 'I couldn\'t open the file. Try again!') {
+    } else if(err === 'Something went wrong trying to write the file. Try again!' || err === 'I couldn\'t open the file. Try again!' || err === 'Something went wrong when you tried to delete the file.') {
         return res.status(404).send(err);
     }
     return res.status(404).send(err);
