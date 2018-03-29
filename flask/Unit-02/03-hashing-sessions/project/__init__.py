@@ -7,6 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from functools import wraps
 import os
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/07-sql-alchemy"
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -23,6 +24,7 @@ toolbar = DebugToolbarExtension(app)
 
 from project.users.views import users_blueprint
 from project.messages.views import messages_blueprint
+from project.models import Message, User
 
 app.register_blueprint(users_blueprint, url_prefix='/users')
 app.register_blueprint(messages_blueprint, url_prefix='/users/<int:id>/messages')
@@ -33,7 +35,7 @@ def root():
 
 @app.route('/messages')
 def all():
-    return
+    return render_template('messages/all.html', users=User.query.all())
 
 @app.errorhandler(404)
 def page_not_found(e):
