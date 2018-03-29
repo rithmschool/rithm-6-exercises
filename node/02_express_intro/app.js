@@ -2,7 +2,18 @@ const express = require('express')
 const fs = require('fs')
 const app = express()
 const PORT = 3000
-const numCheck = "12345678910,."
+const numCheck = "1234567890,."
+
+function errCheck(nums, next) {
+    if (nums.length === 0) {
+        return next("Add some dang numbers!", 400)
+    }
+    for (var i = 0; i < nums.length; i++) {
+        if (numCheck.indexOf(nums[i]) === -1) {
+            return next("One of those nums is not a num!",400)
+        }
+    }   
+}
 
 
 app.get('/', function(request, response, next) {
@@ -11,19 +22,9 @@ app.get('/', function(request, response, next) {
 })
 
 app.get('/mean', function(request, response, next) {
-    if (request.query.nums.length === 0) {
-        return next("Add some numbers!")
-    }
-
     let sum = 0;
     let nums = request.query.nums
-
-    for (var i = 0; i < nums.length; i++) {
-        if (numCheck.indexOf(nums[i]) === -1) {
-            return next("One of those nums is not a num!",400)
-        }
-    }    
-    
+    errCheck(nums, next);    
     let arr = nums.split(",")
 
     arr.forEach(num => sum += +num)
@@ -33,18 +34,8 @@ app.get('/mean', function(request, response, next) {
 })
 
 app.get('/median', function(request, response, next) {
-    if (request.query.nums.length === 0) {
-        return next("Add some numbers!")
-    }
-
     let nums = request.query.nums
-    
-    for (var i = 0; i < nums.length; i++) {
-        if (numCheck.indexOf(nums[i]) === -1) {
-            return next("One of those nums is not a num!",400)
-        }
-    }    
-    
+    errCheck(nums, next);    
     let arr = nums.split(",")
     arr.sort(function(a,b) {
         return a-b;
@@ -65,18 +56,8 @@ app.get('/median', function(request, response, next) {
 })  
 
 app.get('/mode', function(request, response, next) {
-    if (request.query.nums.length === 0) {
-        return next("Add some numbers!")
-    }
-
     let nums = request.query.nums
-    
-    for (var i = 0; i < nums.length; i++) {
-        if (numCheck.indexOf(nums[i]) === -1) {
-            return next("One of those nums is not a num!",400)
-        }
-    }    
-    
+    errCheck(nums, next);    
     let arr = nums.split(",")
     arr.sort(function(a,b) {
         return a-b;
