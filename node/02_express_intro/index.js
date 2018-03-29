@@ -4,8 +4,11 @@ const app = express();
 const PORT = 3000;
 let total = 0;
 let result;
+let numInput;
 let input;
 let printedResult;
+let nanErr = false;
+let nanCheck;
 
 function doMean() {
     total = input.reduce((a, b) => a + b, 0);
@@ -16,10 +19,9 @@ function doMean() {
 }
 
 function doMedian() {
-    let half = Math.floor(input.length / 2);
     input.sort((a, b) => a - b)
-    if (input.length % 2 === 0) result = input[half];
-    else result = (input[half] + input[half] + 1) / 2;
+    if (input.length % 2 === 0) result = (input[input.length / 2 - 1] + input[input.length / 2]) / 2;
+    else result = input[(input.length - 1) / 2];
 }
 
 function doMode() {
@@ -39,15 +41,26 @@ function doMode() {
     result = value;
 }
 
-// /mean?input=stuff     -->   request.query = { input: 'stuff' }
 app.get(`/mean`, (request, response, next) => {
-    if (request.query.nums.length === 0) {
-        console.log('sorry, no numbers');
-        return next();
+    if (!request.query.nums) {
+        const err = new Error('Bad Request! Please enter a number.')
+        err.status = 400;
+        return next(err);
     }
-    input = request.query.nums.split(',').map(Number);
+    numInput = request.query.nums.split(',')
+    nanCheck = numInput.map(element => {
+        element = +element;
+        if (Number.isNaN(element)) nanErr = true;
+    })
+    if (nanErr) {
+        const err = new Error('Bad Request! Please provide a valid number.')
+        err.status = 400;
+        return next(err);
+    }
+    input = numInput.map(Number);
     doMean(input);
-    printedResult = `The mean of ${input} is: ${result}`;
+    printedResult = `The mean of ${input} is: ${result}
+    `;
     fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
         if (err) throw err;
         console.log(`${printedResult} was appended to the file!`)
@@ -56,13 +69,25 @@ app.get(`/mean`, (request, response, next) => {
 })
 
 app.get(`/median`, (request, response, next) => {
-    if (request.query.nums.length === 0) {
-        console.log('sorry, no numbers');
-        return next();
+    if (!request.query.nums) {
+        const err = new Error('Bad Request! Please enter a number.')
+        err.status = 400;
+        return next(err);
     }
-    input = request.query.nums.split(',').map(Number);
+    numInput = request.query.nums.split(',')
+    nanCheck = numInput.map(element => {
+        element = +element;
+        if (Number.isNaN(element)) nanErr = true;
+    })
+    if (nanErr) {
+        const err = new Error('Bad Request! Please provide a valid number.')
+        err.status = 400;
+        return next(err);
+    }
+    input = numInput.map(Number);
     doMedian(input);
-    printedResult = `The median of ${input} is: ${result}`;
+    printedResult = `The median of ${input} is: ${result}
+    `;
     fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
         if (err) throw err;
         console.log(`${printedResult} was appended to the file!`)
@@ -71,18 +96,46 @@ app.get(`/median`, (request, response, next) => {
 })
 
 app.get(`/mode`, (request, response, next) => {
-    if (request.query.nums.length === 0) {
-        console.log('sorry, no numbers');
-        return next();
+    if (!request.query.nums) {
+        const err = new Error('Bad Request! Please enter a number.')
+        err.status = 400;
+        return next(err);
     }
-    input = request.query.nums.split(',').map(Number);
+    numInput = request.query.nums.split(',')
+    nanCheck = numInput.map(element => {
+        element = +element;
+        if (Number.isNaN(element)) nanErr = true;
+    })
+    if (nanErr) {
+        const err = new Error('Bad Request! Please provide a valid number.')
+        err.status = 400;
+        return next(err);
+    }
+    input = numInput.map(Number);
     doMode(input);
-    printedResult = `The mode of ${input} is: ${result}`;
+    printedResult = `The mode of ${input} is: ${result}
+    `;
     fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
         if (err) throw err;
         console.log(`${printedResult} was appended to the file!`)
     })
     return response.send(printedResult)
+})
+
+app.get('/results', (request, response, next) => {
+    if (!fs.existsSync('./results.txt')) {
+        const err = new Error('There are no results yet.')
+        err.status = 404;
+        return next(err);
+    }
+    fs.readFile('./results.txt', (error, data) => {
+        if (error) throw error;
+        return response.send(`${data}`)
+    })
+})
+
+app.use((error, request, response, next) => {
+    return response.status(error.status || 500).send(error.message);
 })
 
 app.listen(PORT, () => {
