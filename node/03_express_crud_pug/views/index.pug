@@ -1,0 +1,10 @@
+extends base.pug
+
+block title
+  | My Items
+
+block content
+  h1 View your items:
+  ul
+  each item in items
+    li #{item}
