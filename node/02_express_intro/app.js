@@ -173,8 +173,14 @@ app.get('/results', (request, response, next) => {
   if (!fs.existsSync('results.txt')) {
     return next(new Error('You\'re the first! No data in the file'));
   }
-  const data = fs.readFileSync('results.txt', 'utf8');
-  return response.send(data);
+  if (request.query._method === 'DELETE') {
+    fs.unlink('results.txt', function(e) {
+      return next(new Error('You\'re the first! No data in the file'));
+    });
+  } else {
+    const data = fs.readFileSync('results.txt', 'utf8');
+    return response.send(data);
+  }
 });
 
 app.use((err, req, res, next) => {
