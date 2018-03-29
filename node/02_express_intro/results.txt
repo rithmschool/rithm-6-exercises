@@ -1,0 +1,1 @@
+<p>The mean of 10,15,20 is 15</p><p>The median of 10,15,20 is 15</p><p>The mode of 10,15,20 is no mode</p>
