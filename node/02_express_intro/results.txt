@@ -1,0 +1,5 @@
+The median of 1,2,3 is: 2.5
+The median of 1,2,3 is: NaN
+The median of 1,2,3 is: 2
+The median of 4,5,6 is: 5.5
+The median of 4,5,6,5,6,7,4 is: 4
