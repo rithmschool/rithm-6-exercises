@@ -6,8 +6,10 @@ block title
 block content
     h1 Welcome to my list page
     
-    ul
+    ul(class="list-group")
     for el in items
-        li #{el}
+        li(class="list-group-item text-center")
+            span(class="item-span mx-1") #{el.item}
+            span(class="price-span ml-5") #{el.price}
 
     a(href="/items/new") Add a new item to the list!
