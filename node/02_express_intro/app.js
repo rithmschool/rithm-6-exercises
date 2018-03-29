@@ -115,7 +115,7 @@ app.get('/mode', (request, response, next) => {
   let modeStr = modes.join(', ');
   let numStr = numNums.join(', ');
   let resultStr = `The mode of ${numStr} is ${modeStr}\n`;
-  fs.appendFileSync('./results.txt', modeStr, function(err) {
+  fs.appendFileSync('./results.txt', resultStr, function(err) {
     if (err) {
       return next(new Error('There was an error saving the value'));
     }
