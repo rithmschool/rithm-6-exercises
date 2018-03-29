@@ -5,6 +5,7 @@ const PORT = 3000;
 let total = 0;
 let result;
 let input;
+let printedResult;
 
 // /mean?input=stuff     -->   request.query = { input: 'stuff' }
 app.get(`/mean`, (request, response, next) => {
@@ -14,11 +15,19 @@ app.get(`/mean`, (request, response, next) => {
     }
     input = request.query.nums.split(',').map(Number);
 
-    for (let i = 0; i < input.length; i++) {
-        total += input[i];
-    }
+    total = input.reduce((a, b) => a + b, 0);
+    // for (let i = 0; i < input.length; i++) {
+    //     total += input[i];
+    // }
     result = total / input.length;
-    return response.send(`The mean of ${input} is: ${result}`)
+    printedResult = `The median of ${input} is: ${result}`;
+
+    fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
+        if (err) throw err;
+        console.log(`${printedResult} was appended to the file!`)
+    })
+
+    return response.send(printedResult)
 })
 
 app.get(`/median`, (request, response, next) => {
@@ -33,7 +42,14 @@ app.get(`/median`, (request, response, next) => {
     if (input.length % 2 === 0) result = input[half];
     else result = (input[half] + input[half] + 1) / 2;
 
-    return response.send(`The median of ${input} is: ${result}`)
+    printedResult = `The median of ${input} is: ${result}`;
+
+    fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
+        if (err) throw err;
+        console.log(`${printedResult} was appended to the file!`)
+    })
+
+    return response.send(printedResult)
 })
 
 app.get(`/mode`, (request, response, next) => {
@@ -57,7 +73,14 @@ app.get(`/mode`, (request, response, next) => {
         }
     }
     result = value;
-    return response.send(`The mode of ${input} is: ${result}`)
+    printedResult = `The median of ${input} is: ${result}`;
+
+    fs.appendFile('./results.txt', `${printedResult}\n`, (err) => {
+        if (err) throw err;
+        console.log(`${printedResult} was appended to the file!`)
+    })
+
+    return response.send(printedResult)
 })
 
 app.listen(PORT, () => {
