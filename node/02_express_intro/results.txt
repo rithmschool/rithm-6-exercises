@@ -1,0 +1,2 @@
+The average of 1, 2, 3, 10 is 4
+The average of 1, 2, 3, 100 is 26.5
