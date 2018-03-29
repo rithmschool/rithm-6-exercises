@@ -12,9 +12,10 @@ function validator(str, next) {
   }
   for (var i = 0; i < str.length; i++) {
     if (nums.indexOf(str[i]) === -1) {
+      let badNumber = str[i];
       let badError2 = new Error();
       badError2.status = 400;
-      badError2.message = "Not a valid number";
+      badError2.message = `${badNumber} is not a valid number`;
       return next(badError2);
     }
   }
@@ -48,6 +49,7 @@ app.get("/median", (req, res, next) => {
 });
 
 app.get("/mean", (req, res, next) => {
+  validator(req.query.nums, next);
   let length = req.query.nums.split(",").length;
   let arr = req.query.nums.split(",").map(num => {
     return Number(num);
@@ -55,7 +57,6 @@ app.get("/mean", (req, res, next) => {
   let numbers = req.query.nums.split(",").reduce((acc, num) => {
     return (acc += Number(num));
   }, 0);
-  validator(req.query.nums, next);
   fs.appendFile(
     "./results.txt",
     `The mean of ${req.query.nums} is ${(numbers / length).toString()}\n`,
