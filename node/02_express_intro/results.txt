@@ -1,2 +1,8 @@
 The average of 1, 2, 3, 10 is 4
 The average of 1, 2, 3, 100 is 26.5
+The average of 1, 2, 3, 100 is 26.5
+The average of 1, 2, 3, 1 is 1.75
+The median of 1, 2, 3, 1, 10 is 3
+The median of 1, 2, 3, 1, 10, 1 is 2
+The median of 1, 2, 3, 1, 10, 1, 23 is 1
+The median of 1, 2, 3, 1, 10, 1, 23, 1 is 5.5

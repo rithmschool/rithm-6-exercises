@@ -9,6 +9,19 @@ function mean(nums) {
   return nums.reduce((a, b) => a + b) / len;
 }
 
+function calcMedian(nums) {
+  let result = 0;
+  let len = nums.length;
+  if (len % 2 === 1) {
+    result = nums[Math.floor(len / 2)];
+  } else {
+    let firstNum = nums[Math.floor(len / 2)];
+    let secondNum = nums[Math.floor(len / 2) - 1];
+    result = (firstNum + secondNum) / 2;
+  }
+  return result;
+}
+
 app.get('/mean', (request, response, next) => {
   if (!request.query.nums) {
     return next(new Error('Please enter some data'));
@@ -36,7 +49,32 @@ app.get('/mean', (request, response, next) => {
   return response.send(resultStr);
 });
 
-app.get('/median', (request, response, next) => {});
+app.get('/median', (request, response, next) => {
+  if (!request.query.nums) {
+    return next(new Error('Please enter some data'));
+  } else if (request.query.nums.length < 1) {
+    return next(new Error('Please enter some numbers'));
+  } else if (request.query.nums[request.query.nums.length - 1] === ',') {
+    return next(new Error('Please remove the trailing comma, thanks,'));
+  }
+  let numsStr = request.query.nums.split(',');
+  let isNumberError = false;
+  numsStr.forEach(num => {
+    if (isNaN(num)) isNumberError = true;
+  });
+  if (isNumberError)
+    return next(new Error('There was a problem with one of your numbers'));
+  let numNums = numsStr.map(num => +num);
+  let median = calcMedian(numNums);
+  let numStr = numNums.join(', ');
+  let resultStr = `The median of ${numStr} is ${median}\n`;
+  fs.appendFileSync('./results.txt', resultStr, function(err) {
+    if (err) {
+      return next(new Error('There was an error saving the value'));
+    }
+  });
+  return response.send(resultStr);
+});
 
 app.get('/mode', (request, response, next) => {});
 
