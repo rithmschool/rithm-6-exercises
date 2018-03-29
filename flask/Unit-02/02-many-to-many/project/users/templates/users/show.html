@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="d-flex flex-column text-center py-4 px-5 profile" style="background-color:white; border-radius:15px;">
+  <h3 class="">{{user.username}}</h3>
+  <div class="wrapper--profile-img">
+    <img class="profile-img" src="{{user.img_url}}" alt="{{user.first_name}}'s profile picture">
+  </div>
+  <h5 class="mt-1 mb-0">Name</h5>
+  <h6 class="m-2">{{ user.first_name }} {{ user.last_name }}</h6>
+  <h5 class="mt-1 mb-0">About Me</h5>
+  <h6 class="m-2">{{ user.about_me }}</h6>
+  <a class="btn btn-primary mt-3 text-center align-self-center" href="{{url_for('messages.index', user_id=user.id)}}">See Messages</a>
+
+  {# <!-- {% if show_edit_buttons %}                 render_template(..., show_edit_buttons=...) --> #}
+
+  {% if user.id == current_user.id %}
+  <form class="" action="{{url_for('users.destroy', user_id=user.id)}}?_method=DELETE" method="POST">
+    {{delete_form.hidden_tag()}}
+    <a class="btn btn-info mt-3" href="{{url_for('users.edit', user_id=user.id)}}">
+      <i class="fas fa-pencil-alt"></i>
+      Edit User
+    </a>
+    <button class="btn btn-danger mt-3" type="submit">
+      <i class="fas fa-exclamation-triangle"></i> Delete
+      <i class="fas fa-exclamation-triangle"></i>
+    </button>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

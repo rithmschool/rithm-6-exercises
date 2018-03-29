@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="d-flex flex-wrap flex-column align-items-center m-5">
+  <h2>Tags You've Used</h2>
+  <a class="btn btn-info my-4" href="{{url_for('tags.new')}}">ADD A NEW TAG</a>
+  <table class="table mx-5">
+    <tbody>
+      <thead>
+        <th>Tag</th>
+        <th>Messages</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </thead>
+    {% for tag in tags %}
+      <tr>
+        <td>{{ tag.name }}</td>
+        <td>
+            {% for m in tag.messages if m in current_user.messages %}
+               {{ m.content|truncate(length=50) }}
+               <br>
+            {% endfor %}
+        </td>
+        <td>
+            <a class="btn btn-primary" href="{{url_for('tags.edit', tag_id=tag.id)}}">
+              <i class="fas fa-pencil-alt"></i>
+              Edit
+            </a>
+        </td>
+        <td>
+          <form action="{{url_for('tags.show', tag_id=tag.id)}}?_method=DELETE" method="POST">
+            {{ delete_form.hidden_tag() }}
+            <button class="btn btn-danger" type="submit">
+              <i class="fas fa-trash-alt"></i>
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
