@@ -12,7 +12,8 @@ function errCheck(nums, next) {
         if (numCheck.indexOf(nums[i]) === -1) {
             return next("One of those nums is not a num!",400)
         }
-    }   
+    }
+    return;   
 }
 
 
@@ -21,11 +22,10 @@ app.get('/', function(request, response, next) {
 })
 
 app.get('/mean', function(request, response, next) {
-    let sum = 0;
     let nums = request.query.nums
     errCheck(nums, next);    
     let arr = nums.split(",")
-
+    let sum = 0;
     arr.forEach(num => sum += +num)
     answer = `The mean of ${nums} is ` + String(sum/arr.length)
     fs.appendFile('./results.txt', `${answer}\n`, function(data){})
