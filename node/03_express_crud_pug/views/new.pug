@@ -3,6 +3,9 @@ extends base.pug
 block content
     h1 Add a new animal!
     form(action="/animals" method="POST")
+        label(for="name") Name:
         input(type="text" name="name")
+        label(for="cuteness") Cuteness Index:
+        input(type="text" name="cuteness")
         button Add a new animal!
     a(href="/animals") Go back to all animals :)

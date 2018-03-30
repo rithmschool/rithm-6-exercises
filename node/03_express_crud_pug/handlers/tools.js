@@ -11,21 +11,17 @@ exports.renderNew = function(req, res, next) {
 
 exports.renderShow = function(req, res, next) {
   const animalId = +req.params.id;
-  console.log(animalId);
   const animal = animals.find(animal => {
     return animal.id === animalId;
   });
-  console.log(animal);
   res.render('show', { animal });
 };
 
 exports.renderEdit = function(req, res, next) {
   const animalId = +req.params.id;
-  console.log(animalId);
   const animal = animals.find(animal => {
     return animal.id === animalId;
   });
-  console.log(animal);
   res.render('edit', { animal });
 };
 
@@ -43,7 +39,8 @@ exports.updateItem = function(req, res, next) {
     return animal.id === animalId;
   });
   const animalIndex = animals.indexOf(animal);
-  animals[animalIndex].name = req.body.animal;
+  animals[animalIndex].name = req.body.name;
+  animals[animalIndex].cuteness = req.body.cuteness;
   res.redirect(`/animals/${animal.id}`);
 };
 

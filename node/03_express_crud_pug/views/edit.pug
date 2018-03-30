@@ -4,6 +4,9 @@ block content
     h1 Would you like to change your animal?
 
     form(action=`/animals/${animal.id}?_method=PATCH` method="POST")
-        input(type="text" name="animal")
+        label(for="name") Name:
+        input(type="text" name="name")
+        label(for="cuteness") Cuteness Index:
+        input(type="text" name="cuteness")
         button Change Animal!
     a(href=`/animals/${animal.id}`) Go back to this animal's main page
