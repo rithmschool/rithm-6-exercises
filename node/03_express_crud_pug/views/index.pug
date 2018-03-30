@@ -1,9 +1,20 @@
 extends base.pug
 
 block content
-  ul all items
-    for item in shoppingCart
-      li
-        a(href=`/items/${item.id}`) #{item.name} $#{item.price}
 
-  a(href="/items/new") NewItem
+  div(class="container")
+      table(class="table" style="text-align: center")
+        thead
+          tr
+            th(scope="col") Name
+            th(scope="col") Price
+        tbody
+          for item in shoppingCart
+            tr
+              td
+                a(href=`/items/${item.id}`)  #{item.name}
+              td $#{item.price}
+
+      form(action="/items/new" method="GET")
+        input(type="submit" value="NewItem" class="btn btn-primary")
+
