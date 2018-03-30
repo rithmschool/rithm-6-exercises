@@ -1,0 +1,26 @@
+body {
+    background-image: url(../css/bg2.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    color: white;
+}
+
+.list-group-item {
+    background-color: white;
+    opacity: .75;
+    border-top: 1px solid #ddd;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.container {
+    position: absolute;
+    margin-top: 100px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

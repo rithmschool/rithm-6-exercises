@@ -4,8 +4,10 @@ block content
   h1 Add a new item!
   br
   form(action="/items" method="POST")
-    label(for="item") Item:
-    input(type="text" name="item" placeholder="Enter item here")
-    label(for="item") Price:
-    input(type="text" name="price" placeholder="Enter price")
+    div(class="form-group")
+      label(for="item") Item:
+      input(type="text" name="item" placeholder="Enter item here")
+    div(class="form-group")
+      label(for="item") Price:
+      input(type="text" name="price" placeholder="Enter price")
     button.btn.btn-primary(type="submit") Add a new item!
