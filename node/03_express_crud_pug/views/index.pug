@@ -1,0 +1,11 @@
+extends base.pug
+
+block title
+  title Items
+
+block content
+  h1 See your items!
+  a(href="/items/new") Add an item to the list!
+  ul
+  each item in items
+    li #{item.name} #{item.price}
