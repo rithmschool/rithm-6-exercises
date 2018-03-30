@@ -6,6 +6,6 @@ All you need to do to complete this assignment is add your name and your favorit
 
 Good luck!
 
-Your name:
+Your name: Mark
 
-Your favorite color:
+Your favorite color: rgb(238,130,238)

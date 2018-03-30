@@ -1,3 +1,145 @@
+/* CHALLENGE ONE */
+
+/* .one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  position: absolute;
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  top: 50px;
+  left: 50px; 
+  background-color: yellow;
+  margin: 0 , auto;
+  position: relative;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  position: relative;
+  top: 50px;
+  left: 50px; 
+}
+
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border: black 1px solid;
+  position: relative;
+  top: 50px;
+  left: 50px; 
+} */
+
+
+/* CHALLENGE TWO */
+
+/* .one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  margin: 0 , auto;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green; 
+}
+
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border: black 1px solid;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+} */
+
+/* CHALLENGE THREE */
+
+/* .one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  margin: 0 , auto;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green; 
+  position: relative;
+  top: 200px;
+  left: 400px;
+}
+
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border: black 1px solid;
+  position: fixed;
+} */
+
+/* CHALLENGE FOUR */
+
+/* .one {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.two {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  margin: 0 , auto;
+  position: absolute;
+  top: 110px;
+  left: 110px;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: green; 
+  position: absolute;
+  top: -101px;
+  left: -101px;
+}
+
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border: black 1px solid;
+  position: absolute;
+  top: 97px;
+  left: 97px;
+} */
+
+/* CHALLENGE FIVE */
+
 .one {
   width: 400px;
   height: 400px;
@@ -8,16 +150,27 @@
   width: 300px;
   height: 300px;
   background-color: yellow;
+  margin: 0 , auto;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
 }
 
 .three {
   width: 200px;
   height: 200px;
-  background-color: green;
+  background-color: green; 
+  position: absolute;
+  right: 100px;
+  bottom: 300px;
 }
 
 .four {
   width: 100px;
   height: 100px;
   background-color: blue;
+  border: black 1px solid;
+  position: absolute;
+  top: -268px;
+  left: -1037px;
 }
