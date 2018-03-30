@@ -4,8 +4,8 @@ block title
   | My Items
 
 block content
-  h1 View your items:
+  h1 View All Items:
   ul
-  each item in items
-    li #{item}
-  a(href="/items/new" class="btn-primary") Add new item!
+    each item in items
+      li id: #{item.id} item: #{item.item} price: $#{item.price}
+        a(href=`/items/${item.id}`) View item

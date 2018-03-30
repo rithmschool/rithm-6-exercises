@@ -12,5 +12,9 @@ html(lang="en")
     title
       block title
   body
+    nav.navbar.navbar-default.navbar-light
+      .navbar-header
+        a( href="/items") View All Items |
+        a( href="/items/new" ) | Add New Item
     block content
     div(class="container")
