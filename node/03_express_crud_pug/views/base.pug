@@ -8,7 +8,10 @@ html(lang="en")
     link(href="./style.css")
     script(src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous")
     title Boss Shopping List
-  body(class="container")
-    nav(class="navbar navbar-light bg-light")
-      h6 Can Do Get These Items!
-    block content
+  body
+    section(class="container-fluid mb-3")
+      nav(class="navbar navbar-light bg-light px-4 mx-0")
+        a(href="/items" style="text-decoration: none;")
+         h6 Can Do Get These Items!
+    section(class="container")
+      block content

@@ -7,7 +7,7 @@ const app = express();
 const itemsRoutes = require("./routes/items");
 
 app.set("view engine", "pug");
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/style.css"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(methodOverride("_method"));

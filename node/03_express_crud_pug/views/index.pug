@@ -2,9 +2,9 @@ extends base.pug
 block content
   section(class="img__background")
     div(class="row")
-      h2(class="mx-auto") Today's Shopping List!
+      h2(class="mx-auto mb-4") Today's Shopping List!
     div(class="row")
-      a(href="/items/new" class="mx-auto") Add to your List!
+      a(href="/items/new" class="mx-auto mb-4") Add to your List!
     div(class="row")
       table(class="table table-hover table-sm table-bordered text-center mx-auto")
         thead
@@ -20,7 +20,7 @@ block content
           tr
             th(scope="row") #{shoppingItem.item}
             td #{shoppingItem.price}
-            td #{shoppingItem.item}
+            td #{shoppingItem.url}
             td
           tr
         tbody
