@@ -29,7 +29,12 @@ router
     })
     .patch((req, res, next) => {
         return Item.findByIdAndUpdate(req.params.item_id, req.body).then(() => {
-            console.log('item updated!')
+            return res.redirect(`/items/${req.params.item_id}`);
+        });
+    })
+    .delete((req, res, next) => {
+        return Item.findByIdAndRemove(req.params.item_id).then(() => {
+            return res.redirect('/items');
         });
     });
 
