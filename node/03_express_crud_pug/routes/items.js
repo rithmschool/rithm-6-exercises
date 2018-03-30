@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-let items = {1: {id: 1, name: 'milk', price: '$2.49'},
-            2: {id: 2, name: 'bread', price: '$3.99'}};
+let items = { };
 let counter = 1;
 
 router.get('/', (req, res, next) => {

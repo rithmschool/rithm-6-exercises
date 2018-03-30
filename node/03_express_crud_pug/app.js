@@ -17,8 +17,12 @@ app.get('/', (req, res, next) => {
     return res.redirect('/items');
 });
 
+app.use('/:err', (req, res, next) => {
+    return res.render('404');
+})
+
 app.use((err, req, res, next) => {
-    return res.status(404).render('404')
+    return res.render('404');
 });
 
 app.listen(PORT, () => {
