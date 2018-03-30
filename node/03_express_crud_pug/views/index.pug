@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+  h1 Shopping List
+  ul
+  each item in items
+    li name: #[a(href=`items/${item.id}`) #{item.name}], price: $#{item.price}
+  br
+  a(href="/items/new") Add a new item!
