@@ -1,0 +1,7 @@
+extends base.pug
+
+block content
+    a(href="/items/new") Add an Item
+    ol Shopping Items
+    for item in shoppingItems
+      li  #{item.name} $#{item.price}
