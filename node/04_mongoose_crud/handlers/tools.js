@@ -1,55 +1,61 @@
-const animals = [];
-let id = 1;
+const Animal = require('../models/index');
 
-exports.renderIndex = function(req, res, next) {
-  res.render('index', { animals });
+exports.renderIndex = async function(req, res, next) {
+  try {
+    const animals = await Animal.find({});
+    res.render('index', { animals });
+  } catch (err) {
+    console.log('Error creating!');
+  }
 };
 
 exports.renderNew = function(req, res, next) {
   res.render('new');
 };
 
-exports.renderShow = function(req, res, next) {
-  const animalId = +req.params.id;
-  const animal = animals.find(animal => {
-    return animal.id === animalId;
-  });
-  res.render('show', { animal });
+exports.renderShow = async function(req, res, next) {
+  const animalId = req.params.id;
+  try {
+    const animal = await Animal.findById({ _id: animalId });
+    res.render('show', { animal });
+  } catch (err) {
+    console.log('Error creating!');
+  }
 };
 
-exports.renderEdit = function(req, res, next) {
-  const animalId = +req.params.id;
-  const animal = animals.find(animal => {
-    return animal.id === animalId;
-  });
-  res.render('edit', { animal });
+exports.renderEdit = async function(req, res, next) {
+  const animalId = req.params.id;
+  try {
+    const animal = await Animal.findById({ _id: animalId });
+    res.render('edit', { animal });
+  } catch (err) {
+    console.log('Error creating!');
+  }
 };
 
-exports.postNew = function(req, res, next) {
-  const newAnimal = req.body;
-  newAnimal.id = id;
-  id++;
-  animals.push(newAnimal);
+exports.postNew = async function(req, res, next) {
+  const { name, cuteness } = req.body;
+  try {
+    await Animal.create({ name, cuteness });
+  } catch (err) {
+    console.log('Error creating!');
+  }
   res.redirect('/animals');
 };
 
-exports.updateItem = function(req, res, next) {
-  const animalId = +req.params.id;
-  const animal = animals.find(animal => {
-    return animal.id === animalId;
-  });
-  const animalIndex = animals.indexOf(animal);
-  animals[animalIndex].name = req.body.name;
-  animals[animalIndex].cuteness = req.body.cuteness;
+exports.updateItem = async function(req, res, next) {
+  const animalId = req.params.id;
+  const { name, cuteness } = req.body;
+  const animal = await Animal.findByIdAndUpdate(animalId, { name, cuteness });
   res.redirect(`/animals/${animal.id}`);
 };
 
-exports.deleteItem = function(req, res, next) {
-  const animalId = +req.params.id;
-  const animal = animals.find(animal => {
-    return animal.id === animalId;
-  });
-  const animalIndex = animals.indexOf(animal);
-  animals.splice(animalIndex, 1);
+exports.deleteItem = async function(req, res, next) {
+  const animalId = req.params.id;
+  try {
+    await Animal.findByIdAndRemove(animalId);
+  } catch (err) {
+    console.log('Error creating!');
+  }
   res.redirect('/animals');
 };
