@@ -1,3 +1,10 @@
+let id = 4;
+let items = [
+  { name: 'mangos', price: 20, id: 1 },
+  { name: 'crackers', price: 100, id: 2 },
+  { name: 'rice', price: 300, id: 3 }
+];
+
 exports.getItems = function(req, res, next) {
   return res.render('index', { items });
 };
