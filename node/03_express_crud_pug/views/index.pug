@@ -1,11 +1,27 @@
 extends base.pug
 block content
-  div(class="row")
-    h1(class="mx-auto") Today's Shopping List!
-  div(class="row")
-    a(href="/items/new" class="mx-auto") Add to your List!
-  div
-    ol
-    each shoppingItem in shoppingItems
-     li
-      a(href=`/items/${shoppingItem.id}`) #{shoppingItem.item}
+  section(class="img__background")
+    div(class="row")
+      h2(class="mx-auto") Today's Shopping List!
+    div(class="row")
+      a(href="/items/new" class="mx-auto") Add to your List!
+    div(class="row")
+      table(class="table table-hover table-sm table-bordered text-center mx-auto")
+        thead
+          tr
+            th(scope="col") Item
+            th(scope="col") Price
+            th(scope="col") Link To Item
+            th(scope="col") See Item
+          tr
+        thead
+        tbody
+        each shoppingItem in shoppingItems
+          tr
+            th(scope="row") #{shoppingItem.item}
+            td #{shoppingItem.price}
+            td #{shoppingItem.item}
+            td
+          tr
+        tbody
+      table

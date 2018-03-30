@@ -1,0 +1,4 @@
+section.img__background {
+  background-image: url("./mail.jpg");
+  background-size: cover;
+}

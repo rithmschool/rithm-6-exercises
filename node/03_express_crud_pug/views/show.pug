@@ -6,3 +6,6 @@ block content
   a(href=`/items/${item.id}/edit`) Text
   div
     a(href="/items") Go back
+  div
+    form(action=`/items/${item.id}?_method=DELETE` method="POST")
+      button(class="btn btn-danger") Delete It

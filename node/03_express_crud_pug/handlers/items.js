@@ -41,3 +41,11 @@ exports.updateItem = function(req, res, next) {
   item.price = req.body.price;
   return res.redirect(`/items/${item.id}`);
 };
+
+exports.deleteItem = function(req, res, next) {
+  const itemIndex = shoppingItems.findIndex(
+    item => item.id === Number(req.params.id)
+  );
+  shoppingItems.splice(itemIndex, 1);
+  return res.redirect("/items");
+};
