@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+<section class="row mt-5">
+  <div class="mx-auto text-center">
+      <h1>Page Not Found &nbsp;</h1>
+        <i class="far fa-frown fa-7x"></i>
+  <p class="mt-4 request__bad">These are not the users or messages you were looking for.... Because the user or message hasn't been added to our database!</p>
+  <p class="mt-4 request__bad"><a href="{{ url_for('users.index') }}">Go add them or it!... NOW!</a></p>
+  </div>
+</section>
+{% endblock %}

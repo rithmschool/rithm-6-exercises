@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <div class="div__center align-self-center">
+      <h1 class="header__center align-self-center">Messages</h1>
+    </div>
+    <div class="link__register--user">
+      <a href="{{url_for('users.login')}}" class="btn btn-outline-info my-2 my-sm-0">Login To See Your Messages</a>
+    </div>
+      <table class="table__whole--changes">
+        <thead class="table__structure">
+          <tr class="bg-info text-light">
+            <th class="column__headers">Username</th>
+            <th class="column__headers">Message Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messages %}
+          <tr>
+              <td class="column__headers">{{ message.user.first_name }} {{ message.user.last_name }}</td>
+              <td class="column__headers">{{ message.content }}</td>
+              <!--  -->
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </section>
+{% endblock %}
