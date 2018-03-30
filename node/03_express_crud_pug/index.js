@@ -7,7 +7,7 @@ const app = express();
 const items = [];
 
 app.set("view engine", "pug");
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.get("/", function(req, res, next) {
@@ -16,13 +16,21 @@ app.get("/", function(req, res, next) {
 
 app.get("/items", function(req, res, next) {
     return res.render("index", { items });
+});
+
+app.post("/items", function(req, res, next) {
+    items.push(req.body.item);
+    console.log(items);
+    return res.redirect("/items")
 })
 
-app.get("/new", function(req, res, next) {
+app.get("/items/new", function(req, res, next) {
     return res.render("new-item")
+
 })
 app.use(function(req, res, next) {
-    return res.send("We made a thing.")
+    // res.status = 500
+    return res.send("Error page", 500)
 })
 
 app.listen(3000, function() {
