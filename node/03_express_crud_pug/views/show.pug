@@ -2,5 +2,7 @@ extends base.pug
 
 block content
     h1 Animal: #{animal.name}
-    a(href="/animals/edit") Change your animal!
-    a(href="/animals/delete") Delete your animal!
+    a(href=`/animals/${animal.id}/edit`) Change your animal!
+    form(action=`/animals/${animal.id}?_method=DELETE` method="POST")
+        button Delete Animal!
+    a(href="/animals") Go back to all animals :)

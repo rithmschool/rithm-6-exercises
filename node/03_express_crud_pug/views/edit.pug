@@ -1,7 +1,9 @@
 extends base.pug
 
 block content
-    h1 Add a new animal!
-    form(action="/animals" method="POST")
+    h1 Would you like to change your animal?
+
+    form(action=`/animals/${animal.id}?_method=PATCH` method="POST")
         input(type="text" name="animal")
-        button Add a new animal!
+        button Change Animal!
+    a(href=`/animals/${animal.id}`) Go back to this animal's main page

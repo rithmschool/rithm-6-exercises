@@ -10,18 +10,23 @@ exports.renderNew = function(req, res, next) {
 };
 
 exports.renderShow = function(req, res, next) {
-  const animalId = req.params.id;
+  const animalId = +req.params.id;
   console.log(animalId);
   const animal = animals.find(animal => {
-    return animal.id == animalId;
+    return animal.id === animalId;
   });
   console.log(animal);
   res.render('show', { animal });
 };
 
 exports.renderEdit = function(req, res, next) {
-  // const animal = animals.find(val => val.id === Number(req.params.id));
-  // res.render('edit', { animals });
+  const animalId = +req.params.id;
+  console.log(animalId);
+  const animal = animals.find(animal => {
+    return animal.id === animalId;
+  });
+  console.log(animal);
+  res.render('edit', { animal });
 };
 
 exports.postNew = function(req, res, next) {
@@ -33,11 +38,21 @@ exports.postNew = function(req, res, next) {
 };
 
 exports.updateItem = function(req, res, next) {
-  console.log(req.body);
-  res.redirect('/animals');
+  const animalId = +req.params.id;
+  const animal = animals.find(animal => {
+    return animal.id === animalId;
+  });
+  const animalIndex = animals.indexOf(animal);
+  animals[animalIndex].name = req.body.animal;
+  res.redirect(`/animals/${animal.id}`);
 };
 
 exports.deleteItem = function(req, res, next) {
-  console.log(req.body);
+  const animalId = +req.params.id;
+  const animal = animals.find(animal => {
+    return animal.id === animalId;
+  });
+  const animalIndex = animals.indexOf(animal);
+  animals.splice(animalIndex, 1);
   res.redirect('/animals');
 };

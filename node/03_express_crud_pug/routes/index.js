@@ -17,7 +17,7 @@ router.get('/animals/:id', renderShow);
 router.get('/animals/:id/edit', renderEdit);
 
 router.post('/animals', postNew);
-router.post('/animals/:id', updateItem);
-router.post('/animals/:id', deleteItem);
+router.patch('/animals/:id', updateItem);
+router.delete('/animals/:id', deleteItem);
 
 module.exports = router;
