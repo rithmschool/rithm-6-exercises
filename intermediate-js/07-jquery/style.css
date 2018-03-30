@@ -1,0 +1,42 @@
+body {
+  background-color: rgb(246, 246, 239);
+  margin: 50px;
+}
+.mnavbar {
+  background-color: rgb(225, 102, 0);
+  color: black;
+}
+
+.mform {
+  max-width: 60%;
+}
+
+.container {
+  margin: 10px;
+}
+
+.mbtn {
+  background-color: grey;
+  color: white;
+  margin-top: 20px;
+}
+
+.notfloat,
+.atag {
+  display: inline;
+  margin-left: 1em;
+}
+
+.atag {
+  font-size: 0.75em;
+  color: grey;
+}
+
+.fa-star {
+  color: blue;
+}
+
+.navbar-brand,
+.nav-link {
+  color: black;
+}

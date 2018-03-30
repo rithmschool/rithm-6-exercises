@@ -10,14 +10,14 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
-        user1 = User("Elie", "Schoppik")
-        user2 = User("Tim", "Garcia")
-        user3 = User("Matt", "Lane")
+        user1 = User(first_name="Elie", last_name="Schoppik")
+        user2 = User(first_name="Tim", last_name="Garcia")
+        user3 = User(first_name="Matt", last_name="Lane")
         db.session.add_all([user1, user2, user3])
-        message1 = Message("Hello Elie!!", 1)
-        message2 = Message("Goodbye Elie!!", 1)
-        message3 = Message("Hello Tim!!", 2)
-        message4 = Message("Goodbye Tim!!", 2)
+        message1 = Message(message="Hello Elie!!", user_id=1)
+        message2 = Message(message="Goodbye Elie!!", user_id=1)
+        message3 = Message(message="Hello Tim!!", user_id=2)
+        message4 = Message(message="Goodbye Tim!!", user_id=2)
         db.session.add_all([message1, message2, message3,message4])
         db.session.commit()
 
@@ -82,7 +82,7 @@ class BaseTestCase(TestCase):
     def test_messages_create(self):
         response = self.client.post(
             '/users/1/messages',
-            data=dict(content="Hi Matt!!", user_id=3),
+            data=dict(message="Hi Matt!!", user_id=3),
             follow_redirects=True
         )
         self.assertEqual(response.status_code, 200)
@@ -102,7 +102,7 @@ class BaseTestCase(TestCase):
     def test_messages_update(self):
         response = self.client.patch(
             '/users/1/messages/1?_method=PATCH',
-            data=dict(content="Welcome Back Elie!"),
+            data=dict(message="Welcome Back Elie!"),
             follow_redirects=True
         )
         self.assertIn(b'Welcome Back Elie!', response.data)

@@ -6,6 +6,12 @@ All you need to do to complete this assignment is add your name and your favorit
 
 Good luck!
 
+<<<<<<< HEAD
 Your name: Yang
 
 Your favorite color: Blue
+=======
+Your name: Mark
+
+Your favorite color: rgb(238,130,238)
+>>>>>>> f0c525463b91b0e50d33a67dc11d7c9bdafc39a5
