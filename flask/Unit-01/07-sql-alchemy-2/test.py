@@ -25,6 +25,7 @@ class BaseTestCase(TestCase):
         message2 = Message("Max is maximum Max!", 2)
         message3 = Message("Hunter eats rice and chicken", 3)
         message4 = Message("This is a made up dude, dude", 4)
+
         db.session.add_all([message1, message2, message3, message4])
         db.session.commit()
 
@@ -39,9 +40,6 @@ class BaseTestCase(TestCase):
         self.assertIn(b'Max Nawa', response.data)
         self.assertIn(b'Hunter Casbeer', response.data)
         self.assertIn(b'Jim Boolean', response.data)
-        self.assertIn(b'Yoyo Ma', response.data)
-        self.assertIn(b'Jim Lean', response.data)
-        self.assertIn(b'Ploopinmalop Yop', response.data)
 
     def test_users_show(self):
         response = self.client.get('/users/3')
@@ -59,7 +57,7 @@ class BaseTestCase(TestCase):
         response = self.client.get('/users/4/edit')
         self.assertIn(b'Jim Boolean', response.data)
         self.assertNotIn(b'Hunter Casbeer', response.data)
-        
+
     def test_users_update(self):
         response = self.client.patch(
             '/users/4?_method=PATCH',
@@ -72,6 +70,7 @@ class BaseTestCase(TestCase):
         response = self.client.delete(
             '/users/5?_method=DELETE', follow_redirects=True)
         self.assertNotIn(b'Yoyo Ma', response.data)
+
 
     def test_messages_index(self):
         response = self.client.get(
