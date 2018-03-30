@@ -1,0 +1,13 @@
+body {
+    background-image: url('https://ecurrent.fit.edu/files/2017/11/star-wars-rpg-1401x788-bf5fde32-b497-4b52-8a6f-45aa36325018png.png');
+    background-position-x: center;
+    background-size: 100%;
+}
+
+img {
+    max-width: 100px;
+}
+
+.movie-bar {
+    background-color: rgba(255, 255, 255, .6)
+}
