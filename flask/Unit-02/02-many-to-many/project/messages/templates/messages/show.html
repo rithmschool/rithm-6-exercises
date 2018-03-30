@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+  <div class="div__center mx-auto">
+    <h1 class="header__center">{{messages.user.first_name}}'s Message Page&nbsp;</h1>
+    <div class="borderb__head"></div>
+
+  </div>
+  <h4>User Message ID: {{ messages.id }}</h4>
+  <div>
+    <p> {{messages.content}} </p>
+  </div>
+
+  <h4>Message Tags</h4>
+  <div>
+      {% for tag in messages.tags %}
+    <p> {{tag.tag_name}} </p>
+    {% endfor %}
+  </div>
+
+
+  <div>
+    <div>
+    <h5>Need To Update or Delete {{messages.user.first_name}}'s Message?</h5>
+    </div>
+    <div class="button__edit-delete">
+      <button class="btn btn-outline-info my-2 my-sm-0"><a href="{{url_for('messages.edit', user_id=messages.user_id, id=messages.id)}}" class="button__edit">Edit Here  &nbsp;<i class="fas fa-edit"></i></a></button>
+    </div>
+      <div class="button__edit-delete">
+    <form method="POST" action="{{url_for('messages.show', user_id=messages.user_id, id=messages.id)}}?_method=DELETE">
+        {{delete_form.hidden_tag()}}
+        <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Delete &nbsp;<i class="fas fa-trash-alt"></i> </button>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+
+{% endblock %}
