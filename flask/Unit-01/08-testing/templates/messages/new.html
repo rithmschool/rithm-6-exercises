@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %} New Message {% endblock %} {% block content %}
+
+<h1>Post a new message for {{user.first_name}}</h1>
+<form method="POST" action="{{url_for('index_messages', user_id=user.id)}}">
+  <br>
+  <label for="content">Content: </label>
+  <input type="text" name="content" id="content">
+  <br>
+  <input type="submit" value="Add Message!">
+</form>
+<a href="{{url_for('root')}}" class="button">Home</a>
+{% endblock %}
