@@ -11,7 +11,11 @@ exports.getNewItemForm = function(req, res, next) {
 
 exports.createItem = function(req, res, next) {
   console.log(req.body);
-  items.push({ name: req.body.name, price: req.body.type, id: id });
+  items.push({
+    name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
+    price: req.body.price,
+    id: id
+  });
   id++;
   res.redirect('/items');
 };

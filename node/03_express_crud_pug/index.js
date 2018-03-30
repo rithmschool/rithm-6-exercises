@@ -4,9 +4,6 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const itemRoutes = require('./routes/items');
 
-var items = [];
-var id = 1;
-
 app.set('view engine', 'pug');
 
 app.use(bodyParser.urlencoded({ extended: false }));
