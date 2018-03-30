@@ -13,22 +13,19 @@ class BaseTestCase(TestCase):
     def setUp(self):
         db.drop_all()
         db.create_all()
-        user1 = User(first_name="Mark", last_name="Suzuki")
-        user2 = User(first_name="Max", last_name="Nawa")
-        user3 = User(first_name="Hunter", last_name="Casbeer")
-        user4 = User(first_name="Jim", last_name="Boolean")
-        user5 = User(first_name="Yoyo", last_name="Ma")
-        user6 = User(first_name="Jim", last_name="Boolean")
-        user7 = User(first_name="Ploopinmalop", last_name="Yop")
+        user1 = User("Mark", "Suzuki")
+        user2 = User("Max", "Nawa")
+        user3 = User("Hunter", "Casbeer")
+        user4 = User("Jim", "Boolean")
+        user5 = User("Yoyo", "Ma")
+        user6 = User("Jim", "Lean")
+        user7 = User("Ploopinmalop", "Yop")
         db.session.add_all([user1, user2, user3, user4, user5, user6, user7])
-        message1 = Message(
-            content="Mark spilled coffee on his laptop, haha", user_id=1)
-        message2 = Message(content="Max is maximum Max!", user_id=2)
-        message3 = Message(
-            content=
-            "Hunter eats rice and chicken every day, where are the veggies dude",
-            user_id=3)
-        message4 = Message(content="This is a made up dude, dude", user_id=4)
+        message1 = Message("Mark spilled coffee on his laptop, haha", 1)
+        message2 = Message("Max is maximum Max!", 2)
+        message3 = Message("Hunter eats rice and chicken", 3)
+        message4 = Message("This is a made up dude, dude", 4)
+
         db.session.add_all([message1, message2, message3, message4])
         db.session.commit()
 
@@ -67,14 +64,13 @@ class BaseTestCase(TestCase):
             data=dict(first_name="thisguyusedtobe", last_name="JIMBOOLEAN!!"),
             follow_redirects=True)
         self.assertNotIn(b'Jim Boolean', response.data)
-        self.assertIn(b'thisguyusedtobe', response.data)
-        self.assertIn(b'JIMBOOLEAN!!', response.data)
+        self.assertIn(b'thisguyusedtobe JIMBOOLEAN!!', response.data)
 
     def test_users_delete(self):
         response = self.client.delete(
-            '/users/4?_method=DELETE', follow_redirects=True)
-        self.assertNotIn(b'Jim Boolean', response.data)
-        self.assertNotIn(b'thisguyusedtobe JIMBOOLEAN!!', response.data)
+            '/users/5?_method=DELETE', follow_redirects=True)
+        self.assertNotIn(b'Yoyo Ma', response.data)
+
 
     def test_messages_index(self):
         response = self.client.get(
@@ -82,11 +78,8 @@ class BaseTestCase(TestCase):
             content_type='html/text',
             follow_redirects=True)
         self.assertLess(response.status_code, 400)
-        self.assertIn(
-            b'Hunter eats rice and chicken every day, where are the veggies dude"',
-            response.data)
-        self.assertNotIn(b'hello there my name is jimbobimbopolos',
-                         response.data)
+        self.assertIn(b'Hunter eats rice and chicken', response.data)
+
 
     def test_messages_show(self):
         response = self.client.get('/users/2/messages/5')
