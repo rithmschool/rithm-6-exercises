@@ -2,8 +2,10 @@ extends base.pug
 
 block content
 
-  h1 Go Buy #{item.item}
-  a(href=`/items/${item.id}/edit`) Text
+  h1 Item: #{item.item}
+  h1 Price: #{item.price}
+  h1 Website: #{item.url}
+  a(href=`/items/${item.id}/edit`) Edit
   div
     a(href="/items") Go back
   div
