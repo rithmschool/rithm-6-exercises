@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+
+    h4 List Item #: #{found_item.id}
+    h4 Item: #{found_item.item}
+    h4 Price: #{found_item.price}
+    br
+    a(href=`/items/${found_item.id}/edit`) Edit item
+    br
+    a(href="/items") Go Back

@@ -1,0 +1,13 @@
+extends base.pug
+
+block content
+    h1 Add a new Item!
+    form(action="/items" method='POST')
+        label(for="item") item:
+        input(type="text" name="item")
+        br
+        label(for="price") price:
+        input(type="number" name="price" min='0')
+        br
+        input(type="submit" value="Create an Item!")
+    a(href="/items") Go Back

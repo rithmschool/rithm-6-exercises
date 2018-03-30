@@ -1,0 +1,19 @@
+extends base.pug
+
+block content
+
+    h1 Edit Item!
+        form(method='POST' action="/items/:id?_method=PATCH")
+            label(for="item") item:
+            input(type="text" name="item" value=`${found_item.item}`)
+            br
+            label(for="price") price:
+            input(type="number" name="price" min='0' value=`${found_item.price}`)
+            br
+            input(type="submit" value="Edit Item!")
+    h1 Delete Item!
+        <form method="POST" action="/items/:id?_method=DELETE">
+            <button type="submit">X</button>
+        </form>
+            
+        a(href="/items") Go Back
