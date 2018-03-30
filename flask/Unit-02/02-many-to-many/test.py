@@ -1,5 +1,6 @@
 from project import app,db
-from project.models import User,Message
+from project.users.models import User
+from project.messages.models import Message
 from flask_testing import TestCase
 import unittest
 
@@ -88,6 +89,7 @@ class BaseTestCase(TestCase):
             follow_redirects=True
         )
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Hi Matt!!', response.data)
 
     def test_messages_edit(self):
         response = self.client.get(
@@ -106,7 +108,7 @@ class BaseTestCase(TestCase):
             data=dict(text="Welcome Back Elie!"),
             follow_redirects=True
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Welcome Back Elie!', response.data)
 
     def test_messages_delete(self):
         response = self.client.delete(
