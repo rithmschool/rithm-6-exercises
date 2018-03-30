@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+
+  h1 Go Buy #{item.item}
+  a(href=`/items/${item.id}/edit`) Text
+  div
+    a(href="/items") Go back

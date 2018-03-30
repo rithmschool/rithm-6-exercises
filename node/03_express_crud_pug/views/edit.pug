@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+  h1 Need to Add Item To Your Shopping List? Submit It!
+    form(action=`/items/${item.id}?_method=PATCH` method="POST")
+      label(for="item") Item:
+      input(type="text" name="item" value=`${item.item}`)
+      label(for="price") Price:
+      input(type="text" name="price" value=`${item.price}`)
+      button Update Your Item!

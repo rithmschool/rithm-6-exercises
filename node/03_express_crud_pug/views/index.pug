@@ -1,0 +1,11 @@
+extends base.pug
+block content
+  div(class="row")
+    h1(class="mx-auto") Today's Shopping List!
+  div(class="row")
+    a(href="/items/new" class="mx-auto") Add to your List!
+  div
+    ol
+    each shoppingItem in shoppingItems
+     li
+      a(href=`/items/${shoppingItem.id}`) #{shoppingItem.item}
