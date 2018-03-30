@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>### Messages App ###</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% if g.current_user %}
+    <p>
+      <a href="{{url_for('users.logout')}}">Logout</a>
+    </p>
+  {% else %}
+    </p>
+      <a href="{{url_for('users.login')}}">Login</a>
+      <a href="{{url_for('users.signup')}}">Sign up</a>
+    </p>
+  {% endif %}
+
+
+  {% block content %}
+
+
+  {% endblock %}
+</body>
+</html>
