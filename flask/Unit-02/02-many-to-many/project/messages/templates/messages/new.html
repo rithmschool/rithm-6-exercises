@@ -5,7 +5,7 @@
 <h1>Add a new message</h1>
 
 <form method="POST" action="{{url_for('messages.index', user_id=user_id)}}">
-  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+  {{ message_form.hidden_tag() }} {% for field in message_form if field.widget.input_type != 'hidden' %}
   <p>
     {{ field.label }} {{ field }}
     <span>
