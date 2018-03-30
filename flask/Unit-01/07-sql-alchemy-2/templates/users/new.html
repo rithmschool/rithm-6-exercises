@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %} Create User {% endblock %} {% block body %}
+<h2>Add a New User</h2>
+<form method="POST" action="{{ url_for('index') }}">
+  <label for="f">First Name</label>
+  <input type="text" name="f" id="f" required>
+  <label for="l">Last Name</label>
+  <input type="text" name="l" id="l" required>
+  <label for="i">Profile Picture URL</label>
+  <input type="url" name="i" id="i">
+  <input type="submit" value="Create User">
+  <a href="{{ url_for('index') }}">Cancel</a>
+</form>
+{% endblock %}
