@@ -6,13 +6,29 @@ function replaceWith(str, targetChar, replacementChar) {
     if (str[i] === targetChar) newStr += replacementChar;
     else newStr += str[i];
   }
-  return newStr;  
+  return newStr;
 }
 
 function expand(arr, num) {
-  const newArr = [];
+  var newArr = [];
   for (let i = 0; i < num; i++) {
-    newArr.concat(arr);
+    newArr = newArr.concat(arr);
   }
   return newArr;
+}
+
+function acceptNumbersOnly(...nums) {
+  if (nums.length > 0)
+    return nums.every(num => {
+      return !isNaN(num) && typeof num === 'number';
+    });
+  return false;
+}
+
+function mergeArrays(arr1 = [], arr2 = []) {
+  return arr1.concat(arr2).sort((a, b) => a - b);
+}
+
+function mergeObjects(obj1, obj2) {
+  return Object.assign(obj1, obj2);
 }
