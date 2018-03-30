@@ -22,6 +22,8 @@ block content
             td #{shoppingItem.price}
             td #{shoppingItem.url}
             td
+             a(href=`/items/${shoppingItem.id}`)
+              i(class="fas fa-plus")
           tr
         tbody
       table
