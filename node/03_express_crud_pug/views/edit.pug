@@ -1,9 +1,7 @@
 extends base.pug
 
 block content
-    h1 Add a new item!
-    form(action="/items" method="POST")
-        input(type="text" name="item[task]")
-        input(type="text" name="item[assignee]")
-        input(type="text" name="item[due-date]")
-        button Add a new item!
+    h1 Add a new animal!
+    form(action="/animals" method="POST")
+        input(type="text" name="animal")
+        button Add a new animal!

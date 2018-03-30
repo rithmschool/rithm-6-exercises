@@ -1,8 +1,6 @@
 extends base.pug
 
 block content
-    h1 See your items
-    a(href="/items/new") Add a new item!
-    ul
-    each item in items
-        li #{item}
+    h1 Animal: #{animal.name}
+    a(href="/animals/edit") Change your animal!
+    a(href="/animals/delete") Delete your animal!

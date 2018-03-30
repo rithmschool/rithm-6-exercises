@@ -9,15 +9,15 @@ const {
   postNew,
   updateItem,
   deleteItem
-} = require('../handlers/items');
+} = require('../handlers/tools');
 
-router.get('/items', renderIndex);
-router.get('/items/new', renderNew);
-router.get('/items/:id', renderShow);
-router.get('/items/:id/edit', renderEdit);
+router.get('/animals', renderIndex);
+router.get('/animals/new', renderNew);
+router.get('/animals/:id', renderShow);
+router.get('/animals/:id/edit', renderEdit);
 
-router.post('/items', postNew);
-router.post('/items/:id', updateItem);
-router.post('/items/:id', deleteItem);
+router.post('/animals', postNew);
+router.post('/animals/:id', updateItem);
+router.post('/animals/:id', deleteItem);
 
 module.exports = router;

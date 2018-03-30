@@ -1,9 +1,8 @@
-const items = [];
+const animals = [];
 let id = 1;
 
 exports.renderIndex = function(req, res, next) {
-  // ill need to passin items somehow
-  res.render('index', { items });
+  res.render('index', { animals });
 };
 
 exports.renderNew = function(req, res, next) {
@@ -11,26 +10,34 @@ exports.renderNew = function(req, res, next) {
 };
 
 exports.renderShow = function(req, res, next) {
-  const item = items.find(val => val.id === Number(req.params.id));
-  res.render('show', { items });
+  const animalId = req.params.id;
+  console.log(animalId);
+  const animal = animals.find(animal => {
+    return animal.id == animalId;
+  });
+  console.log(animal);
+  res.render('show', { animal });
 };
 
 exports.renderEdit = function(req, res, next) {
-  const item = items.find(val => val.id === Number(req.params.id));
-  res.render('edit', { items });
+  // const animal = animals.find(val => val.id === Number(req.params.id));
+  // res.render('edit', { animals });
 };
 
 exports.postNew = function(req, res, next) {
-  console.log(req.body);
-  res.redirect('/items');
+  const newAnimal = req.body;
+  newAnimal.id = id;
+  id++;
+  animals.push(newAnimal);
+  res.redirect('/animals');
 };
 
 exports.updateItem = function(req, res, next) {
   console.log(req.body);
-  res.redirect('/items');
+  res.redirect('/animals');
 };
 
 exports.deleteItem = function(req, res, next) {
   console.log(req.body);
-  res.redirect('/items');
+  res.redirect('/animals');
 };
