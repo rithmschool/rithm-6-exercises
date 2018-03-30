@@ -1,0 +1,39 @@
+console.log('maybe works');
+$(function() {
+  console.log('connected to jQuery');
+
+  let $upButton = $('#upVote');
+  let $downButton = $('#downVote');
+
+  $('#bootcampsList').on('click', 'button', function(e) {
+    // debugger;
+    let $target = $(event.target);
+    let $votes = $(this)
+      .closest('li')
+      .find('span.votes');
+    let id = $votes.attr('data-bootcamp-id');
+    // debugger;
+    // if ($target.attr('id') === 'upVote') {
+    // console.log('up');
+    // $.post(`http://localhost:5000//bootcamps/${id}/vote`, {
+    //   direction: 'up'
+    // }).then(function(res) {
+    //   $votes.text(res);
+    // });
+    // }
+    if ($target.hasClass('downVote')) {
+      console.log('down');
+      console.log(`${id}`);
+      $.ajax({
+        type: 'POST',
+        url: `http://localhost:5000/bootcamps/${id}/vote`,
+        data: {
+          direction: 'down'
+        }
+      }).then(function(res) {
+        // debugger;
+        $votes.text(res.vote);
+      });
+    }
+  });
+});

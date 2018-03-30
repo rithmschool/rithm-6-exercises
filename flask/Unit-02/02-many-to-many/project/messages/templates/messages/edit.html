@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Edit Message</h1>
+
+<form method="POST" action="{{url_for('messages.show', user_id=message.user.id, message_id=message.id)}}?_method=PATCH">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{ field.label }}: {{ field }}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Edit Message">
+</form>
+
+  <form action="{{url_for('messages.show', user_id=message.user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+    {{ delete_form.hidden_tag() }}
+    <input type="submit" value="Delete">
+  </form>
+
+  <h2>All Tags:</h2>
+  {% for tag in tags %}
+  <p>
+    {{ tag.content }}
+  </p>
+  {% endfor %}
+
+<button>
+  <a href="{{url_for('users.show', user_id=message.user.id)}}">Back to all messages</a>
+</button>
+
+
+{% endblock %}

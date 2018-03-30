@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{ user.first_name }} {{ user.last_name}}</p>
+
+<button>
+  <a href="{{url_for('messages.new', user_id=user.id)}}">Add message</a>
+</button>
+
+<h4>Click Message To Edit:</h4>
+<ul>
+  {% for message in user.messages %}
+  <li>
+    <!-- all of a sudden I get an error unless I include a user id, even though
+    I only need a message id for messages.edit. why? -->
+    <a href="{{url_for('messages.edit', user_id=user.id, message_id=message.id)}}"> {{ message.content }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<button>
+  <a href="{{url_for('users.index')}}">Back to all users</a>
+</button>
+
+{% endblock %}
