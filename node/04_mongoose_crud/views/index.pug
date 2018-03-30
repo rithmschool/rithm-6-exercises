@@ -1,0 +1,21 @@
+extends base.pug
+
+block title
+    title item list
+
+block content
+    div(class="row mt-5 text-center")
+        h1(class="m-auto") this is the list
+
+    div(class="row m-5")
+        div(class="col col-6 mx-auto")
+            ul(class="list-group")
+            for el in items
+                li(class="list-group-item d-flex justify-content-around" id=`${el._id}`)
+                    span(class="mx-auto")
+                        a(href="#") #{el.name}
+                    span #{el.quantity}
+
+    div(class="text-center")
+        h5
+            a(href="/items/new") add a new item
