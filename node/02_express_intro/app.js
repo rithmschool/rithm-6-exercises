@@ -77,6 +77,11 @@ app.get('/mode', (req, res, next) => {
 });
 
 app.get('/results', (req, res, next) => {
+  if (!fs.existsSync('./results.txt')) {
+    const err = new Error(`Not found, the results file does not exist`);
+    err.status = 404;
+    return next(err);
+  }
   fs.readFile('./results.txt', (error, data) => {
     if (error) {
       next(error);
@@ -90,7 +95,11 @@ app.get('/results', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(404).send('404 something went wrong');
+  if (err.message) {
+    let errMsg = `${err.status}, ${err.message}`;
+    return res.send(errMsg);
+  }
+  return res.status(404).send('404 something went wrong');
 });
 
 app.listen(PORT, () => {
