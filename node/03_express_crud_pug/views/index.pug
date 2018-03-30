@@ -4,12 +4,15 @@ block title
     title Shopping list
 
 block content
-    h1 Welcome to my list page
+    div(class="text-center")
+        h1 Welcome to my list page
     
     ul(class="list-group")
     for el in items
-        li(class="list-group-item text-center")
-            span(class="item-span mx-1") #{el.item}
+        li(class="list-group-item text-center" id=`${el.id}`)
+        
+            span(class="item-span mx-1")
+                a(href=`/items/${el.id}`) #{el.name}
             span(class="price-span ml-5") #{el.price}
 
     a(href="/items/new") Add a new item to the list!

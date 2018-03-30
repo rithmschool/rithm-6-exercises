@@ -1,0 +1,17 @@
+extends base.pug
+
+block title
+    title Edit #{item.name}
+
+block content
+    div(class="text-center")
+        h1 Edit #{item.name}
+    
+    form(action=`/items/${item.id}?_method=PATCH`, method="POST")
+        div(class="form-group")
+            label(for="inputItem") Shopping list item
+            input(type="text", class="form-control", id="inputItem",name="inputItem",aria-describedby="inputItemHelp", placeholder="Enter item", value=`${item.name}`)
+        div(class="form-group")
+            label(for="inputPrice") Price of item
+            input(type="text",class="form-control", id="inputPrice",name="inputPrice", aria-describedby="inputPriceHelp", placeholder="Enter price", value=`${item.price}`)
+        button(type="submit",class="btn btn-secondary btn-lg btn-block") Submit changes

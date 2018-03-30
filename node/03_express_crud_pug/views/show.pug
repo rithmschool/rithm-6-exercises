@@ -1,0 +1,21 @@
+extends base.pug
+
+block title
+    title #{item.name}
+
+block content
+    div(class="text-center")
+        h1 This is the page of #{item.name}
+    
+    h3 Item id: #{item.id}
+    h3 Item name: #{item.name}
+    h3 Item price: #{item.price}
+
+    div(class="text-center")
+        h5
+            a(href="/items") Back to the shopping list
+            span(class="mx-2") |
+            a(href=`/items/${item.id}/eidt`) Edit this item
+
+        form(action=`/items/${item.id}?_method=DELETE`, method="post")
+            button(type="submit",class="btn btn-secondary m-3") Delete item

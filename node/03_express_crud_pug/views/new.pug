@@ -4,7 +4,9 @@ block title
     title Add new list item
 
 block content
-    h1 Add a new list item
+    div(class="text-center")
+        h1 Add a new list item
+    
     form(action="/items", method="POST")
         div(class="form-group")
             label(for="inputItem") Shopping list item
