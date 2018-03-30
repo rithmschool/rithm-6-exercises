@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block title %} Warbler {% endblock %} {% block content %}
+<h2>Check out these messages from our members!</h2>
+{% for user in users %}
+<br> {% for message in user.messages %}
+<ul class="list-group">
+    <li class="list-group-item">
+        {{ user.username }}: {{ message.content }}
+    </li>
+</ul>
+{% endfor %} {% endfor %} {% endblock %}

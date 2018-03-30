@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %} {% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+</head>
+
+<body>
+    <nav class="navbar fixed-top navbar-light bg-info  text-white py-0">
+        <a class="navbar-brand text-white" href="{{url_for('users.index')}}">
+            <i class="far fa-comments"></i> MessageBox
+        </a>
+        <div class="navbar-right">
+            {% if g.current_user %} {{ g.current_user.username }} |
+            <a href="{{url_for('users.logout')}}" class="text-white"></span> Logout</a> {% else %}
+            <a href="{{url_for('users.new')}}" class="text-white">Sign Up</a> |
+            <a href="{{url_for('users.login')}}" class="text-white"></span> Login</a> {% endif %}
+        </div>
+    </nav>
+
+    <div class="container pt-5 center">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p><strong>{{ message }}</strong></p>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+        <div class="container p-3">{% block content %} {% endblock %}</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
