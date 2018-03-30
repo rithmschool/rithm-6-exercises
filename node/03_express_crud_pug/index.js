@@ -17,7 +17,9 @@ app.get("/", function(request, response, next) {
 });
 
 app.use(function(err, request, response, next) {
-  console.log(err);
+  if (response.status(404)) {
+    return response.render("404");
+  }
 });
 
 app.listen(3002, () => console.log("Server starting on 3002"));
