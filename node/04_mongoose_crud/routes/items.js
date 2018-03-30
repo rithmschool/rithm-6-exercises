@@ -19,4 +19,25 @@ router.get('/new', (req, res, next) => {
     return res.render('new')
 })
 
+router
+    .route('/:item_id')
+    .get((req, res, next) => {
+        return Item.find({ _id: `${req.params.item_id}` }).then(item => {
+            item = item[0];
+            return res.render('show', { item });
+        });
+    })
+    .patch((req, res, next) => {
+        return Item.findByIdAndUpdate(req.params.item_id, req.body).then(() => {
+            console.log('item updated!')
+        });
+    });
+
+router.get('/:item_id/edit', (req, res, next) => {
+    return Item.find({ _id: `${req.params.item_id}` }).then(item => {
+        item = item[0];
+        return res.render('edit', { item });
+    });
+});
+
 module.exports = router;

@@ -11,10 +11,10 @@ block content
         div(class="col col-6 mx-auto")
             ul(class="list-group")
             for el in items
-                li(class="list-group-item d-flex justify-content-around" id=`${el._id}`)
-                    span(class="mx-auto")
-                        a(href="#") #{el.name}
-                    span #{el.quantity}
+                li(class="list-group-item d-flex justify-content-around")
+                    h4(class="mx-auto")
+                        a(href=`/items/${el._id}`) #{el.name}
+                    span(class="my-auto") #{el.quantity}
 
     div(class="text-center")
         h5
