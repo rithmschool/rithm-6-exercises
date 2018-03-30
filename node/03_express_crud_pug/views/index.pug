@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+  ul all items
+    for item in items
+      a(href=`/items/${item.id}`)
+        li(id = `${item.id}`) #{item.name} $ #{item.price}
+        
+        
