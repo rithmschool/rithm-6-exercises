@@ -1,0 +1,13 @@
+extends base.pug
+
+block content
+  div(class="container")
+    form(action="/items", method="POST")
+      div(class="form-group")
+        label(for="") Item
+          input(type="text", name="name" value="item" class="form-control input-lg")
+      div(class="form-group")
+        label(for="") Price
+          input(type="text", name="price" value="price" class="form-control")
+      div(class="form-group")
+        input(type="submit" value="submit" class="btn btn-primary")

@@ -1,0 +1,11 @@
+extend base.pug
+
+block content
+  form(action=`/items/${objInCart.id}?_method=PATCH`, method="POST")
+    label(for="") Item
+      input(type="text", name="name" value=`${objInCart.name}`)
+      br
+    label(for="") Price
+      input(type="text", name="price" value=`${objInCart.price}`)
+      br
+      input(type="submit" value="submit")
