@@ -1,0 +1,12 @@
+extends base.pug
+block title
+  | Edit Item
+block content
+    h2 Edit Item
+    form(action=`/items/${item.id}?_method=PATCH`, method="POST")
+      label(for="name") Name
+      input(type="text" name="name" id="name", value=`${item.name}`)
+      label(for="price") Price
+      input(type="text" name="price" id="price" value=`${item.price}`)
+      button(type="submit") Edit Item
+    a(href="/") Cancel
