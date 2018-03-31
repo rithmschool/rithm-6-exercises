@@ -44,7 +44,14 @@ exports.deleteItem = function(req, res, next) {
 };
 
 exports.deleteAllItems = function(req, res, next) {
-  return Item.remove({}).then(function() {
-    return res.redirect('/items');
-  });
+  console.log(req.body);
+};
+
+exports.searchForm = function(req, res, next) {
+  console.log(req.params);
+  return res.render('search');
+};
+
+exports.searchResults = function(req, res, next) {
+  return res.render('searchresults');
 };
