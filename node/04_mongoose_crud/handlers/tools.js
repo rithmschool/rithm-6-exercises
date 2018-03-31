@@ -77,3 +77,14 @@ exports.deleteAll = async function(req, res, next) {
   }
   res.redirect('/animals');
 };
+
+exports.search = async function(req, res, next) {
+  const searchQuery = req.query.search;
+  let animals;
+  try {
+    animals = await Animal.find({ name: searchQuery });
+  } catch (err) {
+    console.log(err.message);
+  }
+  res.render('index', { animals });
+};

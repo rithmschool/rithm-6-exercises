@@ -9,11 +9,13 @@ const {
   postNew,
   updateItem,
   deleteItem,
-  deleteAll
+  deleteAll,
+  search
 } = require('../handlers/tools');
 
 router.get('/animals', renderIndex);
 router.get('/animals/new', renderNew);
+router.get('/animals/search', search);
 router.get('/animals/:id', renderShow);
 router.get('/animals/:id/edit', renderEdit);
 
