@@ -8,12 +8,12 @@ router.get("/items/new", shoppingCartHandler.CreateItemForm);
 
 router.post("/items", shoppingCartHandler.CreateItem);
 
-router.get("/items/:id", shoppingCartHandler.showItem);
+router.get("/items/:_id", shoppingCartHandler.showItem);
 
 router.get("/items/:id/edit", shoppingCartHandler.UpdateForm);
 
-router.patch("/items/:id", shoppingCartHandler.UpdateItem);
+router.patch("/items/:_id", shoppingCartHandler.UpdateItem);
 
-router.delete("/items/:id", shoppingCartHandler.deleteItem);
+router.delete("/items/:_id", shoppingCartHandler.deleteItem);
 
 module.exports = router;

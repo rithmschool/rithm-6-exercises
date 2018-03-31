@@ -12,7 +12,7 @@ block content
           for item in shoppingCart
             tr
               td
-                a(href=`/items/${item.id}`)  #{item.name}
+                a(href=`/items/${item._id}`)  #{item.name}
               td $#{item.price}
 
       form(action="/items/new" method="GET")

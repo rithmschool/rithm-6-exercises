@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const itemRoutes = require("./routes/items");
 
 app.set("view engine", "pug");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(methodOverride("_method"));

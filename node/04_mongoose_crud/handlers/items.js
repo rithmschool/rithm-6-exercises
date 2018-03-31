@@ -1,12 +1,9 @@
-let id = 3;
-
-let shoppingCart = [
-  { id: 1, name: "Karl1000", price: 10 },
-  { id: 2, name: "Karl2000", price: 20 }
-];
+const { Item } = require("../models/index");
 
 exports.homePage = function(req, res, next) {
-  return res.render("index", { shoppingCart });
+  return Item.find().then(function(shoppingCart) {
+    return res.render("index", { shoppingCart });
+  });
 };
 
 exports.CreateItemForm = function(req, res, next) {
@@ -14,48 +11,38 @@ exports.CreateItemForm = function(req, res, next) {
 };
 
 exports.CreateItem = function(req, res, next) {
-  let newUser = {
-    id: id,
+  let newItem = {
     name: req.body.name,
     price: req.body.price
   };
-  console.log(req.body.price);
-  id++;
-  shoppingCart.push(newUser);
-  return res.redirect("/");
+  return Item.create(newItem).then(function() {
+    return res.redirect("/");
+  });
 };
 
 exports.showItem = function(req, res, next) {
-  let itemObj = shoppingCart.findIndex(function(obj) {
-    return obj.id === Number(req.params.id);
+  return Item.findById(req.params._id).then(function(objInCart) {
+    console.log(objInCart);
+    return res.render("item", { objInCart });
   });
-  console.log(itemObj);
-  let objInCart = shoppingCart[itemObj];
-  return res.render("item", { objInCart });
 };
 
 exports.UpdateForm = function(req, res, next) {
-  let itemObj = shoppingCart.findIndex(function(obj) {
-    return obj.id === Number(req.params.id);
+  return Item.findById(req.params.id).then(function(objInCart) {
+    return res.render("edit", { objInCart });
   });
-  let objInCart = shoppingCart[itemObj];
-  return res.render("edit", { objInCart });
 };
 
 exports.UpdateItem = function(req, res, next) {
-  let itemObj = shoppingCart.findIndex(function(obj) {
-    return obj.id === Number(req.params.id);
+  return Item.findByIdAndUpdate(req.params._id, req.body).then(function(
+    objInCart
+  ) {
+    return res.redirect("/");
   });
-  let objInCart = shoppingCart[itemObj];
-  objInCart.name = req.body.name;
-  objInCart.price = req.body.price;
-  return res.redirect("/");
 };
 
 exports.deleteItem = function(req, res, next) {
-  let itemObj = shoppingCart.findIndex(function(obj) {
-    return obj.id === Number(req.params.id);
+  return Item.findByIdAndRemove(req.params._id).then(function(objInCart) {
+    return res.redirect("/");
   });
-  shoppingCart.splice(itemObj, 1);
-  return res.redirect("/");
 };
