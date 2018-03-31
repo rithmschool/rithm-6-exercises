@@ -11,8 +11,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use('/animals', itemRoutes);
-app.use(itemRoutes);
+app.use('/animals', itemRoutes);
+// app.use(itemRoutes);
 
 app.get('/', function(req, res, next) {
   res.redirect('/animals');

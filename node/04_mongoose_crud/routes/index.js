@@ -13,15 +13,20 @@ const {
   search
 } = require('../handlers/tools');
 
-router.get('/animals', renderIndex);
-router.get('/animals/new', renderNew);
-router.get('/animals/search', search);
-router.get('/animals/:id', renderShow);
-router.get('/animals/:id/edit', renderEdit);
+router
+  .route('')
+  .get(renderIndex)
+  .post(postNew)
+  .delete(deleteAll);
 
-router.post('/animals', postNew);
-router.patch('/animals/:id', updateItem);
-router.delete('/animals/:id', deleteItem);
-router.delete('/animals', deleteAll);
+router.route('/new').get(renderNew);
+
+router.route('/search').get(search);
+router
+  .route('/:id')
+  .get(renderShow)
+  .patch(updateItem)
+  .delete(deleteItem);
+router.route('/:id/edit').get(renderEdit);
 
 module.exports = router;
