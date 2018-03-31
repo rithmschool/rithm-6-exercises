@@ -60,8 +60,10 @@ exports.searchForm = function(req, res, next) {
 exports.searchResults = function(req, res, next) {
   console.log(req.params);
   console.log(req.query);
-  return Item.find({ name: req.query.name }).then(function(result) {
-    console.log(result);
-    return res.render("searchResult", { result });
-  });
+  return Item.find({ name: { $regex: req.query.name, $options: "i" } }).then(
+    function(result) {
+      console.log(result);
+      return res.render("searchResult", { result });
+    }
+  );
 };
