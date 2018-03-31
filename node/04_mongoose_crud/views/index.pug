@@ -4,6 +4,6 @@ block content
   ul all items
     for item in items
       a(href=`/items/${item.id}`)
-        li(id = `${item.id}`) #{item.name} $ #{item.price}
+        li(id = `${item.id}`) #{item.name} $ #{item.price} #{item.quantity}
   a(href = '/items/new') Add a new item
         
