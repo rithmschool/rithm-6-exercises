@@ -1,0 +1,26 @@
+extends base.pug
+
+block title
+    | Edit Item
+
+block content
+    h1 Add Item to Shopping List
+
+    form(action=`/items/${item.id}?_method=PATCH` method="POST")
+        br
+        label Name
+        input(type="text", name="name", value=`${item.name}`)
+        br
+        br
+        label Quantity
+        input(type="text", name="quantity", value=`${item.quantity}`)
+        br
+        br
+        input(type="submit", name="edit", value="Edit Item")
+        br
+
+    form(action=`/items/${item.id}?_method=DELETE` method="POST" )
+        input(type="submit", name="delete", value="X")
+
+    a(href="/items") Cancel
+
