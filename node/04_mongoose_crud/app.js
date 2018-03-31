@@ -35,6 +35,14 @@ app.get('/', (req, res, next) => {
     return res.redirect('/items')
 });
 
+app.use('/:sg', (req, res, next) => {
+    return res.render('404');
+});
+
+app.use('/:sg', (err, req, res, next) => {
+    return res.status(404).render('404');
+});
+
 app.listen(PORT, () => {
     console.log(`Server is up and running at ${PORT}`);
 });

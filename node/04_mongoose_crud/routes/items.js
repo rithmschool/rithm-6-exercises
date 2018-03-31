@@ -24,6 +24,20 @@ router.get('/new', (req, res, next) => {
     return res.render('new')
 })
 
+router.get('/search', (req, res, next) => {
+    if(req.query.search) {
+        return Item.find({name: new RegExp(req.query.search, 'i')}).then(sres => {
+            if(sres.length) {
+                return res.render('search', { sres });
+            } else {
+                return res.render('search');
+            }
+        });
+    } else {
+        return res.render('search');
+    }
+});
+
 router
     .route('/:item_id')
     .get((req, res, next) => {
