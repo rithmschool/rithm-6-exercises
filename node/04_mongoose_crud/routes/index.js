@@ -16,4 +16,5 @@ router.patch('/:id', itemHandlers.postEditItem);
 
 router.delete('/:id', itemHandlers.deleteItem);
 
+router.delete('/', itemHandlers.deleteAllItems);
 module.exports = router;

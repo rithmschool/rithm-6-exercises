@@ -6,4 +6,6 @@ block content
       a(href=`/items/${item.id}`)
         li(id = `${item.id}`) #{item.name} $ #{item.price} #{item.quantity}
   a(href = '/items/new') Add a new item
-        
+  
+  form(action="/items?_method=DELETE" method = "POST")
+    input(type = "submit", value = "Delete all items")
