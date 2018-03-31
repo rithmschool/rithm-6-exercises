@@ -1,50 +1,71 @@
-exports.getItems = function(req, res, next) {
-  res.render('index', { items: items });
-};
+const { Item } = require('../models');
 
-exports.createItem = function(req, res, next) {
-  // items.push({
-  //   name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
-  //   price: req.body.price,
-  //   id: id
-  // });
-  // id++;
-  return Item.create({
-    name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
-    type: req.body.type,
-    price: req.body.price
-  })
-    .then(i => {
-      return res.redirect('/');
+exports.getItems = function(request, response, next) {
+  return Item.find({})
+    .then(items => {
+      return response.render('index', { items });
     })
     .catch(err => {
-      console.log(err, 'Error creating');
+      return response.render('404');
     });
 };
 
-exports.getNewItemForm = function(req, res, next) {
-  res.render('new.pug');
+exports.newItemForm = function(request, response, next) {
+  return response.render('new');
 };
 
-exports.showItem = function(req, res, next) {
-  return Item.findById(req.params.id).then(i => {
-    return res.render('show', { item: i });
-  });
+exports.postItem = function(request, response, next) {
+  return Item.create(request.body)
+    .then(item => {
+      return response.redirect('/');
+    })
+    .catch(err => {
+      let error = new Error('Item can not be created');
+      error.status = 500;
+      return next(error);
+    });
 };
 
-exports.updateItem = function(req, res, next) {
-  return Item.findByIdAndUpdate(req.params.id, req.body).then(i => {
-    return res.redirect('/');
-  });
-};
-exports.deleteItem = function(req, res, next) {
-  return Item.findByIdAndRemove(req.params.id).then(i => {
-    return res.redirect('/');
-  });
+exports.getItem = function(request, response, next) {
+  return Item.findById(request.params.id)
+    .then(inst => {
+      return response.render('show', { item: inst });
+    })
+    .catch(err => {
+      return response.render('404');
+    });
 };
 
-exports.editItem = function(req, res, next) {
-  return Item.findById(req.params.id).then(i => {
-    return res.render('edit', { item: i });
-  });
+exports.editForm = function(request, response, next) {
+  return Item.findById(request.params.id)
+    .then(inst => {
+      return response.render('edit', { item: inst });
+    })
+    .catch(err => {
+      return response.render('404');
+    });
+};
+
+exports.updateItem = function(request, response, next) {
+  return Item.findByIdAndUpdate(request.params.id, request.body)
+    .then(inst => {
+      return response.redirect('/items');
+    })
+    .catch(err => {
+      let error = new Error('Item can not be updated');
+      error.status = 500;
+      return next(error);
+    });
+};
+
+exports.deleteItem = function(request, response, next) {
+  return Item.findByIdAndRemove(request.params.id)
+    .then(inst => {
+      return response.redirect('/items');
+    })
+    .catch(err => {
+      let error = new Error('Item can not be removed');
+      error.status = 500;
+      return next(error);
+    });
 };

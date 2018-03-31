@@ -1,15 +1,10 @@
 extends base.pug
 
-block title
-  title New Item
-
 block content
-  h1 Add a new item to the shopping list!
-  form(action="/items" method="POST")
-    label(for="name") Name of Item Desired
-    input(type="text" name="name" id="name")
-    label(for="type") Type of Item
-    input(type="text" name="name" id="type")
-    label(for="price") Price
-    input(type="number" step="0.01" min="0" name="price" id="price")
-    button Add a new item!
+  h1 Add new item!
+  form(action="/items", method="post")
+    label(for="name") name:
+    input(type="text", name="name" id="name")
+    label(for="price") price: $
+    input(type="number", name="price", id="price" step="0.01")
+    input(type="submit")

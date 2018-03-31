@@ -4,9 +4,9 @@ block title
   title Items
 
 block content
-  h1 See your items!
-  a(href="/items/new") Add an item to the list!
+  h1 See your shopping list!
+  a(href="/items/new") Add an item to the shopping list!
   ul
   each item in items
-    li Name: #{item.name} Type: #{item.type} Price: $#{item.price}
-      a(href=`/items/${item.id}/edit`) Edit Item
+    li name: #[a(href=`items/${item.id}`) #{item.name}], price: $#{item.price}
+  br

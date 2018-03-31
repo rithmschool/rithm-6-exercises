@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const itemHandlers = require('../handlers/items');
+const itemsHandlers = require('../handlers/items');
 
-router.get('/', itemHandlers.getItems);
+router.get('/', itemsHandlers.getItems);
 
-router.post('/', itemHandlers.createItem);
+router.get('/new', itemsHandlers.newItemForm);
 
-router.get('/:id', itemHandlers.showItem);
+router.post('/', itemsHandlers.postItem);
 
-router.patch('/:id', itemHandlers.updateItem);
+router.get('/:id', itemsHandlers.getItem);
 
-router.delete('/:id', itemHandlers.deleteItem);
+router.get('/:id/edit', itemsHandlers.editForm);
 
-router.get('/new', itemHandlers.getNewItemForm);
+router.patch('/:id', itemsHandlers.updateItem);
 
-router.get('/:id/edit', itemHandlers.editItem);
+router.delete('/:id', itemsHandlers.deleteItem);
 
 module.exports = router;
