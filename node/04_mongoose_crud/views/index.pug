@@ -9,3 +9,5 @@ block content
           li
             a(href=`animals/${animal.id}`) #{animal.name}
             p Cuteness: #{animal.cuteness}
+      form(action=`/animals?_method=DELETE` method="POST")
+          button(class='btn btn-danger') Delete All Animals

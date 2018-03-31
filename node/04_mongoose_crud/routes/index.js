@@ -8,7 +8,8 @@ const {
   renderShow,
   postNew,
   updateItem,
-  deleteItem
+  deleteItem,
+  deleteAll
 } = require('../handlers/tools');
 
 router.get('/animals', renderIndex);
@@ -19,5 +20,6 @@ router.get('/animals/:id/edit', renderEdit);
 router.post('/animals', postNew);
 router.patch('/animals/:id', updateItem);
 router.delete('/animals/:id', deleteItem);
+router.delete('/animals', deleteAll);
 
 module.exports = router;
