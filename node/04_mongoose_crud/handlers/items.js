@@ -19,3 +19,32 @@ exports.createItem = function(req, res, next) {
   id++;
   res.redirect('/items');
 };
+
+exports.showItem = function(req, res, next) {
+  console.log(Number(req.params.id));
+  let item = items.find(v => v.id === Number(req.params.id));
+  console.log(item);
+  return res.render('show', { item: item });
+};
+
+exports.editItem = function(req, res, next) {
+  console.log(Number(req.params.id));
+  let item = items.find(v => v.id === Number(req.params.id));
+  console.log(item);
+  return res.render('edit', { item: item });
+};
+
+exports.updateItem = function(req, res, next) {
+  console.log(Number(req.params.id));
+  let item = items.find(v => v.id === Number(req.params.id));
+  console.log(item);
+  return res.redirect('/items');
+};
+
+exports.deleteItem = function(req, res, next) {
+  console.log(Number(req.params.id));
+  let itemIdx = items.findIndex(v => v.id === Number(req.params.id));
+  console.log(itemIdx);
+  items.splice(itemIdx, 1);
+  return res.redirect('/items');
+};
