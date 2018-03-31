@@ -3,6 +3,7 @@ const express = require("express");
 const methodOverride = require('method-override');
 const app = express();
 const items = [];
+const { Item } = require('./models')
 var id = 1;
 
 app.set('view engine', 'pug');
@@ -15,7 +16,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/items', (req, res) => {
-    return res.render('index', { items });
+    return Item.find().then(items => {
+        return res.render('index', { items });
+    })
 });
 
 app.get('/items/new', (req, res) => {
@@ -23,26 +26,35 @@ app.get('/items/new', (req, res) => {
 })
 
 app.post('/items', (req,res) => {
-    const item = { id, ...req.body };
-    items.push(item);
-    return res.redirect('/items');
+    const newItem = new Item(req.body);
+    return newItem.save().then(() => {
+        return res.redirect('/items');
+    })
 })
 
 app.get('/items/:id/edit', (req, res) => {
-    const item = items.find( v => v.id === Number(req.params.id));
-    return res.render('edit', { item });
+    return Item.findById(req.params.id).then((item) => {
+        return res.render('edit', { item });
+    })
+})
+
+app.get('/items/:id', (req, res) => {
+    const item = Item.findById(req.params.id).then(item => {
+        return res.render('show', { item });
+    })
 })
 
 app.patch('/items/:id', (req, res) => {
-    const item = items.find( v => v.id === Number(req.params.id));
-    item.name = req.body.name;
-    return res.redirect('/items');
+    return Item.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name }})
+    .then(() => {
+        return res.redirect('/items');
+    })
 })
 
 app.delete('/items/:id', (req, res) => {
-    const itemIdx = items.findIndex( v => v.id === Number(req.params.id));
-    items.splice(itemIdx, 1);
-    return res.redirect('/items');
+    return Item.findByIdAndRemove(req.params.id).then(() => {
+        return res.redirect('/items');
+    })
 })
 
 app.listen(3000, () => {
