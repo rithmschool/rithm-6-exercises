@@ -1,0 +1,37 @@
+extends base.pug
+block content
+  section(class="img__background")
+    div(class="row")
+      h2(class="mx-auto mb-4") My PetLife Prep!
+    div(class="row")
+      a(href="/pets/new" class="mx-auto mb-4") Add FurBaby to your Wish List!
+    div(class="row")
+      table(class="table table-hover table table-bordered text-center mx-auto")
+        thead
+          tr
+            th(scope="col") Type of FurBae
+            th(scope="col") Specific Breed &nbsp;
+             span
+              small(class="text-muted") If One
+            th(scope="col") Possible Names
+            th(scope="col") Link to my FurBae
+            th(scope="col") See Notes/Edit
+            th(scope="col") Remove
+          tr
+        thead
+        tbody
+        each pet in pets
+          tr
+            th(scope="row") #{pet.type}
+            td #{pet.breed}
+            td #{pet.petNames[0]}
+            td #{pet.url}
+            td
+             a(href=`/pets/${pet.id}`)
+              i(class="fas fa-paw")
+            td
+             a(href=`/pets/${pet.id}`)
+              i(class="far fa-frown")
+          tr
+        tbody
+      table
