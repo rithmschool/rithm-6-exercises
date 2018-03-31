@@ -6,7 +6,7 @@ const { Item } = require("../models");
 router
   .route("/")
 
-  .get(function(request, response, next) {
+  .get((request, response, next) => {
     return Item.find()
       .then(items => {
         return response.render("index", { shoppingList: items });
@@ -16,7 +16,7 @@ router
       });
   })
 
-  .post(function(request, response, next) {
+  .post((request, response, next) => {
     const newItem = new Item(request.body);
     return newItem
       .save()
@@ -26,15 +26,42 @@ router
       .catch(err => {
         return next(err);
       });
+  })
+
+  .delete((request, response, next) => {
+    return Item.remove()
+      .then(() => {
+        return response.redirect("/items");
+      })
+      .catch(err => {
+        return next(err);
+      });
   });
 
-router.route("/new").get(function(request, response) {
+router.route("/new").get((request, response) => {
   return response.render("new");
+});
+
+router.route("/search").get((request, response) => {
+  return response.render("search");
+});
+
+router.route("/searchresults").get((request, response, next) => {
+  return Item.find({ name: request.query.name }) //return Item.find({ name: { $regex: /^`${request.query.name}`/i } })
+    .then(items => {
+      return response.render("searchresults", {
+        searchItem: request.query.name,
+        searchResults: items
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
 });
 
 router
   .route("/:id")
-  .get(function(request, response, next) {
+  .get((request, response, next) => {
     return Item.findById(request.params.id)
       .then(item => {
         return response.render("show", { item });
@@ -43,7 +70,8 @@ router
         return next(err);
       });
   })
-  .patch(function(request, response, next) {
+
+  .patch((request, response, next) => {
     return Item.findByIdAndUpdate(request.params.id, {
       $set: { name: request.body.name, quantity: request.body.quantity }
     })
@@ -54,7 +82,8 @@ router
         return next(err);
       });
   })
-  .delete(function(request, response, next) {
+
+  .delete((request, response, next) => {
     return Item.findByIdAndRemove(request.params.id)
       .then(() => {
         return response.redirect("/items");
@@ -64,7 +93,7 @@ router
       });
   });
 
-router.route("/:id/edit").get(function(request, response, next) {
+router.route("/:id/edit").get((request, response, next) => {
   return Item.findById(request.params.id)
     .then(item => {
       return response.render("edit", { item });

@@ -1,0 +1,22 @@
+extends base.pug
+
+block title
+    | Search Results
+
+block content
+    h1 Search Results
+    p You searched for #{searchItem}
+    br
+    if searchResults.length === 0
+        span No results found
+    ul
+    for item in searchResults
+        li
+          a(href=`/items/${item.id}`) #{item.name}
+          span  | #{item.quantity}
+
+    br
+    a(href="/items/search") Search Items
+    br
+    a(href="/items") Home
+

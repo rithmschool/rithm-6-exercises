@@ -1,0 +1,17 @@
+extends base.pug
+
+block title
+    | Search Items
+
+block content
+    h1 Search Items in Shopping List
+
+    form(action="/items/searchresults")
+        br
+        label Name
+        input(type="text", name="name")
+        br
+        br
+        input(type="submit", name="done", value="Search Items")
+        br
+        a(href="/items") Home
