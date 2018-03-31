@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+  div(class="container")
+    if result.length === 0
+      p No Results match that search
+      img(src="https://media.giphy.com/media/XQvhpuryrPGnK/giphy.gif", alt="")
+    else
+      p #{result[0].name}

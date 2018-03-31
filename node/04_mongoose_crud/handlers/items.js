@@ -52,3 +52,16 @@ exports.deleteAllItems = function(req, res, next) {
     return res.redirect("/");
   });
 };
+
+exports.searchForm = function(req, res, next) {
+  return res.render("search");
+};
+
+exports.searchResults = function(req, res, next) {
+  console.log(req.params);
+  console.log(req.query);
+  return Item.find({ name: req.query.name }).then(function(result) {
+    console.log(result);
+    return res.render("searchResult", { result });
+  });
+};
