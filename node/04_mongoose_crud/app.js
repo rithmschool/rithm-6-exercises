@@ -11,6 +11,7 @@ const itemRoutes = require('./routes/items');
 
 // settings
 app.set('view engine', 'pug');
+app.use(express.static(__dirname + "/public"));
 
 // database
 const mongoose = require('mongoose');

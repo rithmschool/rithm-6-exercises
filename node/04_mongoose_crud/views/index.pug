@@ -19,3 +19,7 @@ block content
     div(class="text-center")
         h5
             a(href="/items/new") add a new item
+
+    div(class="row")
+        form(action=`/items?_method=DELETE`, method="POST" class="mx-auto my-3")
+            button(type="submit", class="btn btn-danger btn-sm") delete all items

@@ -13,6 +13,11 @@ router
         return Item.create(req.body).then(() => {
             return res.redirect('/');
         });
+    })
+    .delete((req, res, next) => {
+        return Item.remove({}).then(() => {
+            return res.redirect('/items');
+        });
     });
 
 router.get('/new', (req, res, next) => {
