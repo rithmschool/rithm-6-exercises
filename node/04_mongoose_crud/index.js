@@ -8,8 +8,8 @@ const itemsRoutes = require('./routes/index');
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+app.use(override('_method'));
 app.use('/items', itemsRoutes);
-
 app.get('/', function(req, res, next) {
   res.redirect('/items');
 });

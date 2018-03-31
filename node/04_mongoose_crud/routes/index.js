@@ -12,6 +12,8 @@ router.get('/:id', itemHandlers.showIndividualItem);
 
 router.get('/:id/edit', itemHandlers.getEditForm);
 
-router.post('/:id', itemHandlers.postEditItem);
+router.patch('/:id', itemHandlers.postEditItem);
+
+router.delete('/:id', itemHandlers.deleteItem);
 
 module.exports = router;

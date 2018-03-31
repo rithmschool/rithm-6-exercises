@@ -34,3 +34,11 @@ exports.postEditItem = function(req, res, next) {
     return res.redirect('/items');
   });
 };
+
+exports.deleteItem = function(req, res, next) {
+  console.log(req.params.id);
+  return Item.findByIdAndRemove(req.params.id).then(function(data) {
+    console.log(data);
+    return res.redirect('/items');
+  });
+};
