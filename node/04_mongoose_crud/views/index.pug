@@ -8,4 +8,5 @@ block content
   a(href="/items/new") Add an item to the list!
   ul
   each item in items
-    li #{item.name} $#{item.price}
+    li Name: #{item.name} Type: #{item.type} Price: $#{item.price}
+      a(href=`/items/${item.id}/edit`) Edit Item

@@ -1,10 +1,9 @@
-const express = require('express');
 const bodyParser = require('body-parser');
+const express = require('express');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 
-const app = express();
-const itemRoutes = require('./routes/items');
+const { itemRouter } = require('./routes');
 
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
@@ -21,15 +20,33 @@ mongoose
     console.log(err);
   });
 
+const app = express();
+
 app.set('view engine', 'pug');
+app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
+app.use(express.static('04_mongoose_crud' + '/public'));
+app.use('/items', itemRouter);
 
-app.use('/items', itemRoutes);
 app.get('/', (req, res, next) => {
   res.redirect('/items');
+});
+
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  return next(err);
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  return res.render('error', {
+    message: err.message,
+    error: app.get('env') === 'development' ? err : {}
+  });
 });
 
 app.listen(3000, () => {

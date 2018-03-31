@@ -1,50 +1,50 @@
-var items = [];
-var id = 1;
-
 exports.getItems = function(req, res, next) {
   res.render('index', { items: items });
 };
 
-exports.getNewItemForm = function(req, res, next) {
-  res.render('new');
+exports.createItem = function(req, res, next) {
+  // items.push({
+  //   name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
+  //   price: req.body.price,
+  //   id: id
+  // });
+  // id++;
+  return Item.create({
+    name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
+    type: req.body.type,
+    price: req.body.price
+  })
+    .then(i => {
+      return res.redirect('/');
+    })
+    .catch(err => {
+      console.log(err, 'Error creating');
+    });
 };
 
-exports.createItem = function(req, res, next) {
-  console.log(req.body);
-  items.push({
-    name: req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1),
-    price: req.body.price,
-    id: id
-  });
-  id++;
-  res.redirect('/items');
+exports.getNewItemForm = function(req, res, next) {
+  res.render('new.pug');
 };
 
 exports.showItem = function(req, res, next) {
-  console.log(Number(req.params.id));
-  let item = items.find(v => v.id === Number(req.params.id));
-  console.log(item);
-  return res.render('show', { item: item });
-};
-
-exports.editItem = function(req, res, next) {
-  console.log(Number(req.params.id));
-  let item = items.find(v => v.id === Number(req.params.id));
-  console.log(item);
-  return res.render('edit', { item: item });
+  return Item.findById(req.params.id).then(i => {
+    return res.render('show', { item: i });
+  });
 };
 
 exports.updateItem = function(req, res, next) {
-  console.log(Number(req.params.id));
-  let item = items.find(v => v.id === Number(req.params.id));
-  console.log(item);
-  return res.redirect('/items');
+  return Item.findByIdAndUpdate(req.params.id, req.body).then(i => {
+    return res.redirect('/');
+  });
+};
+exports.deleteItem = function(req, res, next) {
+  return Item.findByIdAndRemove(req.params.id).then(i => {
+    return res.redirect('/');
+  });
 };
 
-exports.deleteItem = function(req, res, next) {
-  console.log(Number(req.params.id));
-  let itemIdx = items.findIndex(v => v.id === Number(req.params.id));
-  console.log(itemIdx);
-  items.splice(itemIdx, 1);
-  return res.redirect('/items');
+exports.editItem = function(req, res, next) {
+  return Item.findById(req.params.id).then(i => {
+    return res.render('edit', { item: i });
+  });
 };

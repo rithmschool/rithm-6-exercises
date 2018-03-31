@@ -1,0 +1,17 @@
+extends base.pug
+
+block title
+  Title Edit Item
+
+block content
+  h1 Edit Item
+  form(action="/items/#{item.id}?_method=PATCH" method="POST")
+    label(for="name") Name of Item Desired
+    input(type="text" name="name" id="name" value="#{item.name}")
+    label(for="type") Type of Item
+    input(type="text" name="name" id="type" value="#{item.type}")
+    label(for="price") Price
+    input(type="number" step="0.01" min="0" name="price" id="price" value="#{item.price}")
+    button Edit item!
+  form(action="/items/#{item.id}?_method=DELETE", method="POST")
+    button Delete Item!

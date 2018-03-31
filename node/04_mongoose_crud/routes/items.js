@@ -4,16 +4,16 @@ const itemHandlers = require('../handlers/items');
 
 router.get('/', itemHandlers.getItems);
 
-router.get('/new', itemHandlers.getNewItemForm);
+router.post('/', itemHandlers.createItem);
 
 router.get('/:id', itemHandlers.showItem);
-
-router.get('/:id/edit', itemHandlers.editItem);
-
-router.post('/', itemHandlers.createItem);
 
 router.patch('/:id', itemHandlers.updateItem);
 
 router.delete('/:id', itemHandlers.deleteItem);
+
+router.get('/new', itemHandlers.getNewItemForm);
+
+router.get('/:id/edit', itemHandlers.editItem);
 
 module.exports = router;
