@@ -53,5 +53,8 @@ exports.searchForm = function(req, res, next) {
 };
 
 exports.searchResults = function(req, res, next) {
-  return res.render('searchresults');
+  let lookupName = req.query.name;
+  return Item.find({ name: lookupName }).then(function(items) {
+    return res.render('searchresults', { items });
+  });
 };
