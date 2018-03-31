@@ -16,4 +16,6 @@ router.patch("/items/:_id", shoppingCartHandler.UpdateItem);
 
 router.delete("/items/:_id", shoppingCartHandler.deleteItem);
 
+router.delete("/items", shoppingCartHandler.deleteAllItems);
+
 module.exports = router;

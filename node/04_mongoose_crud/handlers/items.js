@@ -46,3 +46,9 @@ exports.deleteItem = function(req, res, next) {
     return res.redirect("/");
   });
 };
+
+exports.deleteAllItems = function(req, res, next) {
+  return Item.remove().then(function() {
+    return res.redirect("/");
+  });
+};
