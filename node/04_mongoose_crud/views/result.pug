@@ -1,0 +1,12 @@
+extends base.pug
+
+block title
+  title Search Results
+
+block content
+  h1 Here are your search results:
+  ul
+    each item in items
+      li= item
+    else
+      li There are no items that match your search.
