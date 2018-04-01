@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+mongoose.set("debug", true);
+mongoose.Promise = global.Promise;
 mongoose
   .connect("mongodb://localhost/users")
   .then(function() {
@@ -7,7 +9,6 @@ mongoose
   .catch(function(err) {
     console.log(err);
   });
-mongoose.set("debug", true);
-mongoose.Promise = global.Promise;
 
 exports.User = require("./user");
+exports.Item = require("./item");

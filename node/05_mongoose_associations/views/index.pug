@@ -13,6 +13,8 @@ block content
             tr
               td
                 a(href=`/user/${user._id}`)  #{user.firstName} #{user.lastName}
+              td
+                a(href=`/user/${user._id}/items`) See User items
 
       form(action="/user/new" method="GET")
         input(type="submit" value="NewUser" class="btn btn-primary")

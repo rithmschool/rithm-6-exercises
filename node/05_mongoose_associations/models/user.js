@@ -2,8 +2,13 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   firstName: String,
-  lastName: String
-  // snacks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Snack" }]
+  lastName: String,
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Item"
+    }
+  ]
 });
 
 const User = mongoose.model("User", UserSchema);

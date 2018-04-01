@@ -1,0 +1,13 @@
+extends base.pug
+
+block content
+  h1 All of #{user.firstName} #{user.lastName} items
+
+  ul
+    each item in user.items
+      li  #{item.name}
+        a(href=`/user/${user.id}/items/${item.id}/edit`) Edit
+
+
+  form(action=`/user/${user.id}/items/new` method="GET")
+    input(type="submit" value="CreateANewItem" class="btn btn-primary")
