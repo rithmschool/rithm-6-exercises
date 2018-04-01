@@ -1,11 +1,19 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from project.messages.forms import MessageForm, DeleteForm
 from project.models import Message, User, Tag
 from project import db
+from project.decorators import ensure_authenticated, ensure_correct_user, ensure_correct_user_message
 
 messages_blueprint = Blueprint('messages', __name__, template_folder='templates')
 
 ################### Messages View Functions #########################
+
+@messages_blueprint.before_request
+def current_user():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
 def user_index_messages(user_id):
@@ -30,10 +38,11 @@ def user_index_messages(user_id):
         else:
             return render_template('messages/new.html', user=found_user, form=message_form)
 
-    delete_form = DeleteForm()
-    return render_template('messages/index.html', user=found_user, delete_form=delete_form)
+    return render_template('messages/index.html', user=found_user)
 
 @messages_blueprint.route('/new')
+@ensure_authenticated
+@ensure_correct_user
 def new_messages(user_id):
     '''Creates a new message'''
 
@@ -43,6 +52,8 @@ def new_messages(user_id):
     return render_template('messages/new.html', user=found_user, form=message_form)
 
 @messages_blueprint.route('/<int:message_id>', methods=['GET', 'PATCH', 'DELETE'])
+@ensure_authenticated
+@ensure_correct_user
 def show_messages(user_id, message_id):
     ''''''
 
@@ -77,6 +88,8 @@ def show_messages(user_id, message_id):
     return render_template('messages/show.html', user=found_user, message=found_message, tags=message_tags, delete_form=delete_form)
 
 @messages_blueprint.route('/<int:message_id>/edit')
+@ensure_authenticated
+@ensure_correct_user
 def edit_messages(user_id, message_id):
     '''Edit Messages'''
 

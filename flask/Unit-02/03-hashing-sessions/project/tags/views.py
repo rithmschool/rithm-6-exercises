@@ -1,11 +1,18 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint
+from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
 from project.tags.forms import TagForm, DeleteForm
-from project.models import Tag, Message
+from project.models import Tag, Message, User
 from project import db
 
 tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
 ################### Tags View Functions #########################
+
+@tags_blueprint.before_request
+def current_user():
+    if session.get('user_id'):
+        g.current_user = User.query.get(session['user_id'])
+    else:
+        g.current_user = None
 
 @tags_blueprint.route('/', methods=['GET', 'POST'])
 def index_tags():

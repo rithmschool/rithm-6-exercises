@@ -18,7 +18,7 @@
 
     <p>
       {% if g.current_user %}
-        <a href="{{url_for('users.logout_users')}}">Logout</a>
+        <a href="{{url_for('users.logout_users')}}">Logout {{g.current_user.username}}</a>
       {% else %}
         <a href="{{url_for('users.login_users')}}">Login</a>
       {% endif %}

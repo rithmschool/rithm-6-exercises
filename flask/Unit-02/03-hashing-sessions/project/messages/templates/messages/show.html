@@ -13,10 +13,6 @@
   <a class="btn btn-primary" href="{{url_for('messages.edit_messages', user_id=user.id, message_id=message.id)}}">Edit this message</a>
 </p>
 
-<form method="POST" action="{{url_for('messages.show_messages', user_id=user.id, message_id=message.id)}}?_method=DELETE">
-  {{delete_form.hidden_tag()}}
-  <input class="btn btn-primary" type="submit" value="Delete Message!">
-</form>
 <br>
 <a class="btn btn-primary" href="{{url_for('messages.user_index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a>
 <br>
