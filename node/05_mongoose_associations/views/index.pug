@@ -1,0 +1,29 @@
+extends base.pug
+
+block content
+
+  div(class="container")
+      table(class="table" style="text-align: center")
+        thead
+          tr
+            th(scope="col") Name
+            th(scope="col") Price
+        tbody
+          for item in shoppingCart
+            tr
+              td
+                a(href=`/items/${item._id}`)  #{item.name}
+              td $#{item.price}
+
+      form(action="/items/new" method="GET")
+        input(type="submit" value="NewItem" class="btn btn-primary")
+
+      br
+
+      form(action=`/items?_method=DELETE`, method="POST")
+        input(type="submit", value="DELETE ALL ITEMS" class="btn btn-primary")
+      br
+
+      form(action="/items/search" method="GET")
+        input(type="submit" value="Search Item" class="btn btn-primary")
+
