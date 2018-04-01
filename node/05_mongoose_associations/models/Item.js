@@ -4,7 +4,11 @@ const itemSchema = new mongoose.Schema(
   {
     name: String,
     price: Number,
-    quantity: Number
+    quantity: Number,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
   },
   {
     timestamps: true
