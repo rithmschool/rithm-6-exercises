@@ -1,0 +1,5 @@
+extends base.pug
+block content
+  ul All found items
+    for item in items
+      li #{item.name} #{item.price} #{item.quantity}
