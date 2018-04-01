@@ -24,10 +24,9 @@ class User(db.Model):
     @classmethod
     def authenticate(cls, username, password):
         found_user = cls.query.filter_by(username=username).first()
-        from IPython import embed; embed()
         if found_user:
-            authenticated_user = bcrypt.check_password_hash(found_user.password, password)
-            if authenticated_user:
+            is_authenticated = bcrypt.check_password_hash(found_user.password, password)
+            if is_authenticated:
                 return found_user
         return False
 

@@ -12,10 +12,6 @@
   <a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Nessage</a>
 </p>
 
-<form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
-  {{delete_form.hidden_tag()}}
-  <input type="submit" class="btn btn-primary" value='Delete Me'>
-</form>
 <br>
 <a class="btn btn-primary" href="{{url_for('users.index_users')}}">Home</a>
 {% endblock %}

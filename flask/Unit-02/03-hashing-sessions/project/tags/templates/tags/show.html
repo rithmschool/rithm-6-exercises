@@ -15,7 +15,7 @@
 
 <form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=DELETE" method="POST">
   {{delete_form.hidden_tag()}}
-  <input type="submit" class="btn btn-primary" value='Delete Me'>
+  <input type="submit" class="btn btn-primary" value='Delete Tag'>
 </form>
 <br>
 <a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">List of Tags</a>

@@ -15,6 +15,14 @@
     {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
     <p>{{message}}</p>
     {% endfor %} {% endif %} {% endwith %}
+
+    <p>
+      {% if g.current_user %}
+        <a href="{{url_for('users.logout_users')}}">Logout</a>
+      {% else %}
+        <a href="{{url_for('users.login_users')}}">Login</a>
+      {% endif %}
+    </p>
   </div>
 
   <div class="container">
