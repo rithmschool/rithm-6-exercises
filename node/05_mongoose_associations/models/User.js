@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: String,
   items: [
     {
@@ -8,3 +8,5 @@ const UserSchema = new mongoose.Schema({
     }
   ]
 });
+
+module.exports = mongoose.model('User', userSchema);
