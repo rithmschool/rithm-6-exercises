@@ -19,7 +19,7 @@ def current_user():
 @users_blueprint.route('/')
 @ensure_authenticated
 def index_users():
-    '''Display list of users'''
+    '''Display all users'''
 
     delete_form = DeleteForm()
     return render_template('users/index.html', users=User.query.order_by('id').all(), delete_form=delete_form)

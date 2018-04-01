@@ -18,8 +18,9 @@
   <input class="btn btn-primary" type="submit" value="Delete Message!">
 </form>
 <br>
-<a class="btn btn-primary" href="{{url_for('messages.index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a>
+<a class="btn btn-primary" href="{{url_for('messages.user_index_messages', user_id=user.id)}}">Show other messages by {{user.first_name}}</a>
 <br>
 <br>
+<a class="btn btn-primary" href="{{url_for('index_messages')}}">All Messages</a>
 <a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %} List of Messages {% endblock %} {% block content %}
+{% extends 'base.html' %} {% block title %}User Messages {% endblock %} {% block content %}
 <br>
 <h1>Messages for {{user.first_name}} {{user.last_name}}</h1>
 <hr> {% for message in user.messages %}
@@ -19,5 +19,6 @@
 {% endfor %}
 <br>
 <a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Message</a>
+<a class="btn btn-primary" href="{{url_for('index_messages')}}">All Messages</a>
 <a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
 {% endblock %}

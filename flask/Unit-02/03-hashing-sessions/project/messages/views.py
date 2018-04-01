@@ -8,7 +8,7 @@ messages_blueprint = Blueprint('messages', __name__, template_folder='templates'
 ################### Messages View Functions #########################
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
-def index_messages(user_id):
+def user_index_messages(user_id):
     '''Create a new message'''
 
     found_user = User.query.get_or_404(user_id)
@@ -25,7 +25,7 @@ def index_messages(user_id):
             db.session.add(new_message)
             db.session.commit()
             flash('Message Created!')
-            return redirect(url_for('messages.index_messages', user_id=user_id))
+            return redirect(url_for('messages.user_index_messages', user_id=user_id))
 
         else:
             return render_template('messages/new.html', user=found_user, form=message_form)
@@ -62,7 +62,7 @@ def show_messages(user_id, message_id):
             db.session.add(found_message)
             db.session.commit()
             flash('Message Updated!')
-            return redirect(url_for('messages.index_messages', user_id=user_id))
+            return redirect(url_for('messages.user_index_messages', user_id=user_id))
         return render_template('messages/edit.html', user=found_user, message=found_message, form=message_form, delete_form=delete_form)
 
     if request.method == b'DELETE':
@@ -71,7 +71,7 @@ def show_messages(user_id, message_id):
             db.session.delete(found_message)
             db.session.commit()
             flash('Message Deleted!')
-        return redirect(url_for('messages.index_messages', user_id=user_id))
+        return redirect(url_for('messages.user_index_messages', user_id=user_id))
 
     message_tags = [tag.content for tag in found_message.tags]
     return render_template('messages/show.html', user=found_user, message=found_message, tags=message_tags, delete_form=delete_form)

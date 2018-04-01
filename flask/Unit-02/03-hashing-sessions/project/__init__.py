@@ -29,6 +29,7 @@ from project.tags.views import tags_blueprint
 app.register_blueprint(users_blueprint, url_prefix='/users')
 app.register_blueprint(messages_blueprint, url_prefix='/users/<int:user_id>/messages')
 app.register_blueprint(tags_blueprint, url_prefix='/tags')
+from project.models import Message
 
 ################### Root View Functions #########################
 
@@ -37,6 +38,12 @@ def root():
     '''Returns listing of all users.'''
 
     return redirect(url_for('users.index_users'))
+
+@app.route('/messages')
+def index_messages():
+    '''Returns listing of all users.'''
+
+    return render_template('messages/all.html', messages=Message.query.order_by('id').all())
 
 ################### 404 View Functions #########################
 

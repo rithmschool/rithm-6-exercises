@@ -6,10 +6,10 @@
   <a class="btn btn-primary" href="{{url_for('users.edit_users', user_id=user.id)}}">Edit</a>
   <br>{{user.image_url}}
   <br>
-  <a class="btn btn-primary" href="{{url_for('messages.index_messages', user_id=user.id)}}">Show Messages</a>
+  <a class="btn btn-primary" href="{{url_for('messages.user_index_messages', user_id=user.id)}}">Show Messages</a>
   <br>
   <br>
-  <a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Nessage</a>
+  <a class="btn btn-primary" href="{{url_for('messages.new_messages', user_id=user.id)}}">Create a New Message</a>
 </p>
 
 <br>

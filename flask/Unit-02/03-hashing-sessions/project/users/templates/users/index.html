@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %} List of Users {% endblock %} {% block content %}
+{% extends 'base.html' %} {% block title %} All Users {% endblock %} {% block content %}
 <h2>Welcome back {{g.current_user.username}}</h2>
 {% for user in users %}
 <br>
@@ -11,6 +11,7 @@
   <hr>
 </p>
 {% endfor %}
-<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">List of Tags</a>
+<a class="btn btn-primary" href="{{url_for('index_messages')}}">All Messages</a>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">All Tags</a>
 <a class="btn btn-primary" href="{{url_for('users.logout_users')}}">Logout</a>
 {% endblock %}

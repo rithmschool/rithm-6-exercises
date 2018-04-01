@@ -9,7 +9,7 @@ tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 
 @tags_blueprint.route('/', methods=['GET', 'POST'])
 def index_tags():
-    '''Display list of tags'''
+    '''Display all tags'''
 
     if request.method == 'POST':
         tag_form = TagForm(request.form)
