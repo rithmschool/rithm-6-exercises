@@ -2,12 +2,12 @@ extends base.pug
 
 block content
   div(class="container")
-    form(action="/items", method="POST")
+    form(action="/user", method="POST")
       div(class="form-group")
-        label(for="") Item
-          input(type="text", name="name" value="item" class="form-control input-lg")
+        label(for="") First Name
+          input(type="text", name="firstName" placeholder="firstName" class="form-control input-lg")
       div(class="form-group")
-        label(for="") Price
-          input(type="text", name="price" value="price" class="form-control")
+        label(for="") Last Name
+          input(type="text", name="lastName" placeholder="lastName" class="form-control")
       div(class="form-group")
         input(type="submit" value="submit" class="btn btn-primary")

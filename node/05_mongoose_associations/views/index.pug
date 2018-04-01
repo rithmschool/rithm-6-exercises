@@ -7,23 +7,22 @@ block content
         thead
           tr
             th(scope="col") Name
-            th(scope="col") Price
+            th(scope="col") Snacks
         tbody
-          for item in shoppingCart
+          for user in users
             tr
               td
-                a(href=`/items/${item._id}`)  #{item.name}
-              td $#{item.price}
+                a(href=`/user/${user._id}`)  #{user.firstName} #{user.lastName}
 
-      form(action="/items/new" method="GET")
-        input(type="submit" value="NewItem" class="btn btn-primary")
+      form(action="/user/new" method="GET")
+        input(type="submit" value="NewUser" class="btn btn-primary")
 
       br
 
-      form(action=`/items?_method=DELETE`, method="POST")
-        input(type="submit", value="DELETE ALL ITEMS" class="btn btn-primary")
+      form(action=`/user?_method=DELETE`, method="POST")
+        input(type="submit", value="DELETE ALL USERS" class="btn btn-primary")
       br
 
-      form(action="/items/search" method="GET")
-        input(type="submit" value="Search Item" class="btn btn-primary")
+      //- form(action="/items/search" method="GET")
+      //-   input(type="submit" value="Search Item" class="btn btn-primary")
 

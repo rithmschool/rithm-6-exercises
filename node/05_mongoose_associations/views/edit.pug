@@ -1,11 +1,11 @@
 extend base.pug
 
 block content
-  form(action=`/items/${objInCart.id}?_method=PATCH`, method="POST")
-    label(for="") Item
-      input(type="text", name="name" value=`${objInCart.name}`)
+  form(action=`/user/${user.id}?_method=PATCH`, method="POST")
+    label(for="") First Name
+      input(type="text", name="firstName" value=`${user.firstName}`)
       br
-    label(for="") Price
-      input(type="text", name="price" value=`${objInCart.price}`)
+    label(for="") Last Name
+      input(type="text", name="lastName" value=`${user.lastName}`)
       br
       input(type="submit" value="submit")

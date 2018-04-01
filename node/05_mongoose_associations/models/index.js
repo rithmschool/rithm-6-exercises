@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://localhost/items")
+  .connect("mongodb://localhost/users")
   .then(function() {
     console.log("Connceted to MogoDB");
   })
@@ -10,4 +10,4 @@ mongoose
 mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 
-exports.Item = require("./Item");
+exports.User = require("./user");

@@ -3,17 +3,17 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 const methodOverride = require("method-override");
-const itemRoutes = require("./routes/items");
+const users = require("./routes/user");
 
 app.set("view engine", "pug");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(methodOverride("_method"));
-app.use(itemRoutes);
+app.use(users);
 
 app.get("/", (req, res) => {
-  return res.redirect("/items");
+  return res.redirect("/user");
 });
 
 app.listen(3000, () => {
