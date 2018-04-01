@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
+from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.users.forms import UserForm, DeleteForm, LoginForm
 from project.models import User
 from project import db
@@ -9,13 +9,6 @@ from flask_login import login_user, logout_user, login_required
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 ################### Users View Functions #########################
-
-@users_blueprint.before_request
-def current_user():
-    if session.get('user_id'):
-        g.current_user = User.query.get(session['user_id'])
-    else:
-        g.current_user = None
 
 @users_blueprint.route('/')
 @login_required
@@ -91,7 +84,6 @@ def signup_users():
                     user_form.password.data)
             db.session.add(new_user)
             db.session.commit()
-            #session['user_id'] = new_user.id
             login_user(new_user)
             flash('User Created!')
             return redirect(url_for('users.index_users'))
@@ -110,7 +102,6 @@ def login_users():
     if request.method == "POST" and login_form.validate():
         authenticated_user = User.authenticate(login_form.data['username'], login_form.data['password'])
         if authenticated_user:
-            # session['user_id'] = authenticated_user.id
             login_user(authenticated_user)
             flash("You've successfully logged in!")
             return redirect(url_for('users.index_users'))

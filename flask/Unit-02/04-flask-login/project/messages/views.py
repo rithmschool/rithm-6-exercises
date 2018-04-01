@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, flash, Blueprint, session, g
+from flask import redirect, render_template, request, url_for, flash, Blueprint
 from project.messages.forms import MessageForm, DeleteForm
 from project.models import Message, User, Tag
 from project import db
@@ -8,13 +8,6 @@ from flask_login import login_required
 messages_blueprint = Blueprint('messages', __name__, template_folder='templates')
 
 ################### Messages View Functions #########################
-
-@messages_blueprint.before_request
-def current_user():
-    if session.get('user_id'):
-        g.current_user = User.query.get(session['user_id'])
-    else:
-        g.current_user = None
 
 @messages_blueprint.route('/', methods=['GET', 'POST'])
 def user_index_messages(user_id):
