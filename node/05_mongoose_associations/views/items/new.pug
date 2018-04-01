@@ -1,0 +1,9 @@
+extends base.pug
+block content
+  h1 Add a new Item
+  form(action=`/users/${user.id}/items` method = "POST")
+    input(type="text", name = "name", placeholder = "Name")
+    input(type="text", price = "price", placeholder = "price")
+    input(type="text", quantity = "quantity", placeholder = "quantity")
+    input(type="submit", value = "add a new item")
+    

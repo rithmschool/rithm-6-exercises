@@ -7,4 +7,5 @@ mongoose.connect('mongodb://localhost/items', {
 mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
 
-exports.Item = require('./Item');
+module.exports.Item = require('./Item');
+module.exports.User = require('./User');

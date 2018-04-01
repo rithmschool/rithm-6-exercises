@@ -1,0 +1,16 @@
+extends base.pug
+
+block content
+  ul All Users
+    for user in users
+      a(href=`/users/${user.id}`)
+        li(id = `${user.id}`) #{user.name}
+  a(href ='/users/new') Add a new user
+  
+  form(action="/users?_method=DELETE" method = "POST")
+    input(type = "submit", value = "Delete all users")
+  
+  form(action = '/users/search', method = "GET")
+    input(type="submit", value = "click here to search")
+ 
+  

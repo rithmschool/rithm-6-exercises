@@ -1,0 +1,9 @@
+extends base.pug
+block content
+  h1 Edit this item 
+  form(action=`/users/${foundItem.user.id}/items/${foundItem.id}?_method=PATCH`method = "POST")
+    input(type="text", name = "name", value = `${foundItem.name}`)
+    input(type="text", name = "price", value = `${foundItem.price}` )
+    input(type = "text", name = "quantity", value = `${foundItem.quantity}`)
+    input(type="submit" value = "Edit") 
+  

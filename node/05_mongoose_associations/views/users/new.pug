@@ -1,0 +1,7 @@
+extends base.pug
+block content
+  h1 Add a new User
+  form(action="/users" method = "POST")
+    input(type="text", name = "name", placeholder = "Name")
+    input(type="submit", value = "add a new user")
+    
