@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} All Messages {% endblock %} {% block content %}
+<br>
+<h1>All User Messages</h1>
+<hr> {% for message in messages %}
+<p>
+  {{message.content}}
+  <br>
+  <br>
+  <a class="btn btn-primary" href="{{url_for('messages.show_messages', user_id=message.users_id, message_id=message.id)}}">See more about message</a>
+  <hr>
+</p>
+
+{% endfor %}
+<br>
+<a class="btn btn-primary" href="{{url_for('root')}}" class="button">Home</a>
+{% endblock %}
