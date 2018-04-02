@@ -9,4 +9,7 @@ const itemSchema = new mongoose.Schema(
 );
 
 const Item = mongoose.model("Item", itemSchema);
+// pluralization will happen automatically for us
+// so we'll see items in mongoDB
+// want it to be singular is bc this is essentially a class
 module.exports = Item;
