@@ -7,7 +7,7 @@ router.get("/user/:userId/items", function(req, res, next) {
     .populate("items")
     .exec()
     .then(function(user) {
-      console.log("FUCK ME " + user);
+      // console.log("FUCK ME " + user);
       return res.render("itemIndex", { user });
     });
 });
@@ -23,7 +23,7 @@ router.get("/user/:userId/items/new", function(req, res, next) {
 router.post("/user/:userId/items", function(req, res, next) {
   let newItem = new Item(req.body);
   let UserId = req.params.userId;
-  console.log("Blah " + UserId);
+  // console.log("Blah " + UserId);
   newItem.user = UserId;
   return newItem
     .save()
@@ -58,14 +58,16 @@ router.get("/user/:userId/items/:_id/edit", function(req, res, next) {
 
 // save the item
 router.patch("/user/:userId/items/:_id", function(req, res, next) {
-  return Item.findById(req.params._id, req.body).then(function(data) {
+  return Item.findByIdAndUpdate(req.params._id, req.body).then(function(data) {
+    console.log(req.params._id);
+    console.log(req.body);
     return res.redirect(`/user/${req.params.userId}/items`);
   });
 });
 
 // delete item
 router.delete("/user/:userId/items/:_id", function(req, res, next) {
-  return Item.findById(req.params._id).then(function(data) {
+  return Item.findByIdAndRemove(req.params._id).then(function(data) {
     return res.redirect(`/user/${req.params.userId}/items`);
   });
 });
