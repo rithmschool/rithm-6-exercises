@@ -1,0 +1,14 @@
+extends base.pug
+
+block content
+  h1 Add an item to the shopping list!
+  form(action="/items" method="POST")
+    label(for="name") Name &nbsp;
+    input(type="text" name="name" id="name" placeholder="Enter name of item")
+    br
+    br
+    label(for="price") Price &nbsp;
+    input(type="text" name="price" id="price" placeholder="Enter price")
+    br
+    br
+    input(type="submit" value="Submit!")
