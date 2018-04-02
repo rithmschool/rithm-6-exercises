@@ -1,12 +1,19 @@
+// npm packages
 const express = require("express");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
+// global
 const app = express();
 
-// require our routes/index.js file
-const itemsRoutes = require("./routes");
+// require our routes/index.js file ****prev version
+// const itemsRoutes = require("./routes"); ****prev version
+
+// app imports
+const {
+  itemRoutes
+} = require("./routes");
 
 // set pug as the templating engine
 app.set("view engine", "pug");
@@ -21,7 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride("_method"));
 
 // app.use(itemsRoutes);
-app.use("/items", itemsRoutes)
+app.use("/items", itemRoutes)
 
 app.get("/", (req, res, next) => {
   return res.redirect("/items");
