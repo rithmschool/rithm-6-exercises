@@ -7,3 +7,5 @@ block content
     li name: #[a(href=`items/${item.id}`) #{item.name}], price: $#{item.price}
   br
   a(href="/items/new") Add a new item!
+  form(action=`/items/?_method=DELETE` method="POST")
+    input(type="submit" name="delete" value="Delete all items!")

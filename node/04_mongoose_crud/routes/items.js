@@ -2,18 +2,20 @@ const express = require("express");
 const router = express.Router();
 const itemsHandlers = require("../handlers/items");
 
-router.get("/", itemsHandlers.getItems);
+router
+  .route("/")
+  .get(itemsHandlers.getItems)
+  .post(itemsHandlers.postItem)
+  .delete(itemsHandlers.deleteAll);
 
 router.get("/new", itemsHandlers.newItemForm);
 
-router.post("/", itemsHandlers.postItem);
-
-router.get("/:id", itemsHandlers.getItem);
-
 router.get("/:id/edit", itemsHandlers.editForm);
 
-router.patch("/:id", itemsHandlers.updateItem);
-
-router.delete("/:id", itemsHandlers.deleteItem);
+router
+  .route("/:id")
+  .get(itemsHandlers.getItem)
+  .patch(itemsHandlers.updateItem)
+  .delete(itemsHandlers.deleteItem);
 
 module.exports = router;

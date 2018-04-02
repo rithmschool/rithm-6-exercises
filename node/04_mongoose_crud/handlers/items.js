@@ -10,10 +10,6 @@ exports.getItems = function(request, response, next) {
     });
 };
 
-exports.newItemForm = function(request, response, next) {
-  return response.render("new");
-};
-
 exports.postItem = function(request, response, next) {
   return Item.create(request.body)
     .then(item => {
@@ -24,6 +20,22 @@ exports.postItem = function(request, response, next) {
       error.status = 500;
       return next(error);
     });
+};
+
+exports.deleteAll = function(request, response, next) {
+  return Item.remove()
+    .then(inst => {
+      return response.redirect("/items");
+    })
+    .catch(err => {
+      let error = new Error("Can not remove all items");
+      error.status = 500;
+      return next(error);
+    });
+};
+
+exports.newItemForm = function(request, response, next) {
+  return response.render("new");
 };
 
 exports.getItem = function(request, response, next) {
