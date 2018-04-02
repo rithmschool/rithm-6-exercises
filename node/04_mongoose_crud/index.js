@@ -8,6 +8,9 @@ const methodOverride = require("method-override");
 const app = express();
 const itemRoutes = require("./routes/items");
 
+// url encoding stuff;
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // db config
 const mongoose = require("mongoose");
 mongoose.set("debug", true);

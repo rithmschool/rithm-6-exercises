@@ -7,6 +7,12 @@ const itemSchema = new mongoose.Schema(
   { timestamps: true }
   // now I have createdAt & updatedAt
 );
+// schema doesn't have methods on it
+// it's just describe what's in here
+
+// IDs - you get a UUID
+// you can roll your own using the uuid package
+// the uuid package is just middleware
 
 const Item = mongoose.model("Item", itemSchema);
 // pluralization will happen automatically for us
