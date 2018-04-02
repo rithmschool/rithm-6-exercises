@@ -7,19 +7,23 @@ function math(op, arr) {
     if(op === 'mean') return arr.reduce((sum, a) => sum + a, 0) / arr.length;
     if(op === 'median') return arr[Math.floor(arr.length / 2)];
     if(op === 'mode') {
-        let mostFreq;
-        let freqCount = 0;
+        let freqCount = {};
 
         for(let i = 0; i < arr.length; i++) {
-            if(mostFreq !== arr[i]) {
-                let tempFreq = 0;
-                for(let j = 0; j < arr.length; j++) {
-                    if(arr[i] === arr[j]) tempFreq++;
-                }
-                if(tempFreq > freqCount) freqCount = tempFreq, mostFreq = arr[i];
+            if(!freqCount[arr[i]]) {
+                freqCount[arr[i]] = 1;
+            } else {
+                freqCount[arr[i]]++;
             }
         }
-        return mostFreq;
+        let max;
+        for(let key in freqCount) {
+            if(!max) max = key;
+            if(freqCount[key] > freqCount[max]) {
+                max = key;
+            }
+        }
+        return max;
     };
 }
 
