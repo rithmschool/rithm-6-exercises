@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Tags!
+{% endblock %}
+
+{% block content %}
+<h1>Check out the current tags available:</h1>
+<ul>
+  {% for tag in tags %}
+  <li>
+    <a href="{{url_for('tags.show', id=tag.id)}}">
+      {{ tag.name }}
+    </a>
+    edit this tag <a href="{{url_for('tags.edit', id=tag.id)}}">here</a>
+  </li>
+  {% endfor %}
+</ul>
+<br>
+<a href="{{url_for('tags.new')}}">Add another tag!</a>
+<br>
+Or checkout <a href="{{url_for('users.index')}}">users</a>
+{% endblock %}

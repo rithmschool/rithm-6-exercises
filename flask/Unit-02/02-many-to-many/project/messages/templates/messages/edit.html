@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Message!
+{% endblock %}
+
+
+{% block content %}
+<h1>Change the message: "{{ message.content }}"</h1>
+<form action="{{url_for('messages.show', id=user.id, message_id=message.id)}}?_method=PATCH" method="POST">
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.content.label }} {{ form.content(value=message.content) }}
+      {% if form.content.errors %}
+      {% for error in form.content.errors %}
+        {{ error }}
+      {% endfor %}
+    {% endif %}
+  </p>
+  <p>
+    {{ form.tags }}
+  </p>
+<button type="submit">Create new message!</button>
+</form>
+<h1>...or delete!</h1>
+<form action="{{url_for('messages.show', id=user.id, message_id=message.id)}}?_method=DELETE" method=POST>
+  {{ delete_form.hidden_tag() }}
+  <input type="submit" value="X">
+</form>
+<h2>
+  Done? Return back to the current user
+  <a href="{{url_for('messages.index', id=user.id)}}">
+    here
+  </a>
+  or checkout complete info on this message
+  <a href="{{url_for('messages.show', id=user.id, message_id=message.id)}}">here</a>
+</h2>
+{% endblock %}

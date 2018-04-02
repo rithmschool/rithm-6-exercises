@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<p>
+  Tag: {{ tag.name }}
+  <br>
+  <p>
+      Messages associated with {{ tag.name }}:
+    <ul>
+        {% for message in messages %}
+            <li>
+                {{message.content}}
+            </li>
+        {% endfor %}
+    </ul>
+  </p>
+
+  <br>
+  <a href="{{url_for('tags.edit', id=tag.id)}}">
+    Edit {{ tag.name }}
+  </a>
+</p>
+<h1>Return back to tags
+  <a href="{{url_for('tags.index', id=tag.id)}}">here</a>
+</h1>
+{% endblock %}
