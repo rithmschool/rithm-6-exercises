@@ -95,7 +95,7 @@ Students can only push to their own branches.
 
 ## V. MongoDB
 
-1.  [MongoDB Fundamentals](./mongodb/01_fundamentals)
+1.  [MongoDB Fundamentals](./mongodb/01_fundamentals.md)
 
 ## VI. React
 
