@@ -15,7 +15,7 @@ mongoose.Promise = global.Promise;
 
 mongoose
   .connect("mongodb://localhost/04-mongoose-crud", {
-    useMongoClient: true
+    useMongoClient: true // taken out now
   })
   .then(() => {
     console.log("Connected to MongoDB");
