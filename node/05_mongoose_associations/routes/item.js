@@ -39,8 +39,8 @@ router.post("/user/:userId/items", function(req, res, next) {
 });
 
 // render item
-router.get("/user/:userId/items/:id", function(req, res, next) {
-  return Item.findById(req.params.userId)
+router.get("/user/:userId/items/:_id", function(req, res, next) {
+  return Item.findById(req.params._id)
     .populate("user")
     .then(function(item) {
       return res.render("item", { item });

@@ -1,13 +1,20 @@
 extends base.pug
 
 block content
-  h1 All of #{user.firstName} #{user.lastName} items
+  div(class="container")
+      h1 All of #{user.firstName} #{user.lastName} items
+      table(class="table" style="text-align: center")
+        thead
+          tr
+            th(scope="col") Snacks
+            th(scope="col") Edit
+        tbody
+          each item in user.items
+            tr
+              td
+               a(href=`/user/${user.id}/items/${item.id}/`) #{item.name}
+              td
+                a(href=`/user/${user.id}/items/${item.id}/edit`) Edit
 
-  ul
-    each item in user.items
-      li  #{item.name}
-        a(href=`/user/${user.id}/items/${item.id}/edit`) Edit
-
-
-  form(action=`/user/${user.id}/items/new` method="GET")
-    input(type="submit" value="CreateANewItem" class="btn btn-primary")
+        form(action=`/user/${user.id}/items/new` method="GET")
+          input(type="submit" value="Create A NewItem" class="btn btn-primary")
