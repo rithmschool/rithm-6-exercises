@@ -1,8 +1,8 @@
 {
-  "name": "03_express_crud_pug",
+  "name": "express_router",
   "version": "1.0.0",
-  "description": "For this exercise we will be building a simple application where we will store a shopping list. You should use an **array** to store your items in the shopping list.",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,8 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
     "pug": "^2.0.3"
   }
 }
