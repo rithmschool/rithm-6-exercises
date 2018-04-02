@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 // globals
 const app = express();
 const PORT = 3003;
-const itemRoutes = require('./routes/items');
+const { itemRoutes, userRoutes } = require('./routes');
 
 // settings
 app.set('view engine', 'pug');
@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use('/items', itemRoutes);
+app.use('/users', userRoutes);
 
 app.get('/', (req, res, next) => {
     return res.redirect('/items')

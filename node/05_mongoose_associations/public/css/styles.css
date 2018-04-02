@@ -4,6 +4,7 @@
 
 body {
     background-image: url(https://images.freeimages.com/images/large-previews/700/road-to-nowhere-1383109.jpg);
+    background-size: cover;
 }
 
 .list-group-item {
