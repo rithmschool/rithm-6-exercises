@@ -1,0 +1,22 @@
+{
+  "name": "04_mongoose_crud",
+  "version": "1.0.0",
+  "description": "Let's once again rebuild our previous example using a shopping list, but this time we will not be using an array to store our data. Instead, we will be using a MongoDB database! The resource we will be working with once again is `item`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "package-lock.json": "^1.0.0",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {}
+}
