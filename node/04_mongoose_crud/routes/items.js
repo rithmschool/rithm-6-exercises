@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .route('')
   .get((req, res, next) => {
-    Items.find()
+    Item.find()
       .then(items => res.render('index', { items }))
       .catch(err => next(err))
   })
@@ -39,7 +39,7 @@ router
   })
   .delete((req, res, next) => {
     Item.findByIdAndRemove(req.params.id)
-      .then(() => res.redirect('/instructors'))
+      .then(() => res.redirect('/items'))
       .catch(err => next(err))
   });
 
