@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//mongoose.connect("mongodb://localhost/users_items", {
 mongoose.connect("mongodb://localhost/items", {
   useMongoClient: true
 });

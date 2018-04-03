@@ -1,0 +1,21 @@
+extends base.pug
+
+block title
+    | User Search Results
+
+block content
+    h1 User Search Results
+    p You searched for #{searchUser}
+    br
+    if searchResults.length === 0
+        span No results found
+    ul
+    for user in searchResults
+        li
+          a(href=`/users/${user.id}`) #{user.name}
+
+    br
+    a(href="/users/search") Search Users
+    br
+    a(href="/users") Home
+

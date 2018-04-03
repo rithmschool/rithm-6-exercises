@@ -1,0 +1,22 @@
+extends base.pug
+
+block title
+    | Edit User
+
+block content
+    h1 Edit User
+
+    form(action=`/users/${user.id}?_method=PATCH` method="POST")
+        br
+        label Name
+        input(type="text", name="name", value=`${user.name}`)
+        br
+        br
+        input(type="submit", name="edit", value="Edit User")
+        br
+
+    form(action=`/users/${user.id}?_method=DELETE` method="POST" )
+        input(type="submit", name="delete", value="X")
+
+    a(href="/users") Cancel
+

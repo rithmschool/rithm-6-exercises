@@ -1,0 +1,17 @@
+extends base.pug
+
+block title
+    | Add User
+
+block content
+    h1 Add User
+
+    form(action="/users" method="POST")
+        br
+        label Name
+        input(type="text", name="name")
+        br
+        br
+        input(type="submit", name="done", value="Add User")
+        br
+        a(href="/users") Cancel

@@ -1,51 +1,51 @@
 const { User } = require("../models");
 
-exports.getAllItems = (request, response, next) => {
+exports.getAllUsers = (request, response, next) => {
   return User.find()
-    .then(items => {
-      return response.render("index", { shoppingList: items });
+    .then(users => {
+      return response.render("users_index", { userList: users });
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.createNewItem = (request, response, next) => {
-  const newItem = new Item(request.body);
-  return newItem
+exports.createNewUser = (request, response, next) => {
+  const newUser = new User(request.body);
+  return newUser
     .save()
     .then(() => {
-      return response.redirect("/items");
+      return response.redirect("/users");
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.deleteAllItems = (request, response, next) => {
+exports.deleteAllUsers = (request, response, next) => {
   return User.remove()
     .then(() => {
-      return response.redirect("/items");
+      return response.redirect("/users");
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.createNewItemForm = (request, response) => {
-  return response.render("new");
+exports.createNewUserForm = (request, response) => {
+  return response.render("users_new");
 };
 
-exports.searchItemForm = (request, response) => {
-  return response.render("search");
+exports.searchUserForm = (request, response) => {
+  return response.render("users_search");
 };
 
 exports.searchResults = (request, response, next) => {
-  return User.find({ name: request.query.name }) //return Item.find({ name: { $regex: /^`${request.query.name}`/i } })
-    .then(items => {
-      return response.render("searchresults", {
-        searchItem: request.query.name,
-        searchResults: items
+  return User.find({ name: request.query.name })
+    .then(users => {
+      return response.render("users_searchresults", {
+        searchUser: request.query.name,
+        searchResults: users
       });
     })
     .catch(err => {
@@ -53,42 +53,42 @@ exports.searchResults = (request, response, next) => {
     });
 };
 
-exports.showItem = (request, response, next) => {
+exports.showUser = (request, response, next) => {
   return User.findById(request.params.id)
-    .then(item => {
-      return response.render("show", { item });
+    .then(user => {
+      return response.render("show", { user });
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.updateItem = (request, response, next) => {
+exports.updateUser = (request, response, next) => {
   return User.findByIdAndUpdate(request.params.id, {
-    $set: { name: request.body.name, quantity: request.body.quantity }
+    $set: { name: request.body.name }
   })
     .then(() => {
-      return response.redirect("/items");
+      return response.redirect("/users");
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.deleteItem = (request, response, next) => {
+exports.deleteUser = (request, response, next) => {
   return User.findByIdAndRemove(request.params.id)
     .then(() => {
-      return response.redirect("/items");
+      return response.redirect("/users");
     })
     .catch(err => {
       return next(err);
     });
 };
 
-exports.editItemForm = (request, response, next) => {
+exports.editUserForm = (request, response, next) => {
   return User.findById(request.params.id)
-    .then(item => {
-      return response.render("edit", { item });
+    .then(user => {
+      return response.render("users_edit", { user });
     })
     .catch(err => {
       return next(err);

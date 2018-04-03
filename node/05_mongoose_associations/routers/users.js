@@ -4,22 +4,22 @@ const usersHandlers = require("../handlers/users");
 
 router
   .route("/")
-  .get(usersHandlers.getAllItems)
-  .post(usersHandlers.createNewItem)
-  .delete(usersHandlers.deleteAllItems);
+  .get(usersHandlers.getAllUsers)
+  .post(usersHandlers.createNewUser)
+  .delete(usersHandlers.deleteAllUsers);
 
-router.route("/new").get(usersHandlers.createNewItemForm);
+router.route("/new").get(usersHandlers.createNewUserForm);
 
-router.route("/search").get(usersHandlers.searchItemForm);
+router.route("/search").get(usersHandlers.searchUserForm);
 
 router.route("/searchresults").get(usersHandlers.searchResults);
 
 router
   .route("/:id")
-  .get(usersHandlers.showItem)
-  .patch(usersHandlers.updateItem)
-  .delete(usersHandlers.deleteItem);
+  .get(usersHandlers.showUser)
+  .patch(usersHandlers.updateUser)
+  .delete(usersHandlers.deleteUser);
 
-router.route("/:id/edit").get(usersHandlers.editItemForm);
+router.route("/:id/edit").get(usersHandlers.editUserForm);
 
 module.exports = router;

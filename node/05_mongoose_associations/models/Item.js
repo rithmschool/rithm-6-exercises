@@ -2,8 +2,15 @@ const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema(
   {
-    name: String,
-    quantity: Number
+    name: {
+      type: String,
+      required: true
+    },
+    quantity: {
+      type: Number,
+      min: 0,
+      required: true
+    }
   },
   {
     timestamps: true
