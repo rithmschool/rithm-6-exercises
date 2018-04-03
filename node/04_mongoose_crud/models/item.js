@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 const itemSchema = new mongoose.Schema({
     name: String,
@@ -6,10 +7,11 @@ const itemSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    { timestamps: true }
 });
 
-itemSchema.post('save', dog => {
+itemSchema.post('save', item => {
     User.findOneAndUpdate(item.user, { $addToSet: { items: item._id } })
         .then(() => {
             console.log('POST HOOK RAN');
@@ -29,4 +31,5 @@ itemSchema.post('findOneAndRemove', item => {
     });
 });
 
-module.exports = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', itemSchema, 'items');
+module.exports = Item;

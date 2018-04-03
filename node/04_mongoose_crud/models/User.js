@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     }]
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema, 'users');
+module.exports = User;

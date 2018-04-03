@@ -1,28 +1,24 @@
-const express = require("express");
-const { User } = require("../models");
+const express = require('express');
+const { User, Item } = require('../models');
 const router = express.Router();
 
 router
-    .route("/")
+    .route('/')
     .get((req, res, next) => {
-        return User.find().then(users => {
-            return res.render("usersIndex", { users });
-        }).catch(err => next(err))
+        User.find()
+            .then(users => res.render('usersIndex', { users }))
+            .catch(err => next(err))
     })
     .post((req, res, next) => {
-        const newUser = new User(req.body);
-        return newUser
-            .save()
-            .then(() => {
-                return res.redirect('/users');
-            })
-            .catch(err => next(err));
+        User.create(req.body)
+            .then(() => res.redirect('/')
+                .catch(err => next(err)))
     });
 
-router.route("/:id")
+router.route('/:id')
     .get((req, res, next) => {
-        return User.findById(req.params.id)
-            .populate("items")
+        User.findById(req.params.id)
+            .populate('items')
             .exec()
             .then(user => {
                 const items = user.items;
@@ -31,46 +27,44 @@ router.route("/:id")
             .catch(err => next(err));
     })
     .patch((req, res, next) => {
-        return User.findByIdAndUpdate(req.params.id, {
+        User.findByIdAndUpdate(req.params.id, {
             $set: { name: req.body.name }
         }).then(() => {
-            return res.redirect("/users");
+            return res.redirect('/users');
         })
     })
     .delete((req, res, next) => {
-        return User.findByIdAndRemove(req.params.id, req.body)
-            .then(() => res.redirect("/users"))
+        User.findByIdAndRemove(req.params.id, req.body)
+            .then(() => res.redirect('/users'))
             .catch(err => next(err))
     })
 
 router
-    .route("/new")
+    .route('/new')
     .get((req, res, next) => {
-        return res.render("newUser");
+        return res.render('newUser');
     });
 
 router
-    .route("/:id/edit")
-    .get((req, res, next) => {
-        return User.findById(req.params.id)
-            .then(user => {
-                return res.render("usersEdit", { user });
-            })
-            .catch(err => next(err));
-    });
+    .route('/:id/edit')
+    .get((req, res, next) =>
+        User.findById(req.params.id)
+        .then(user => res.render('usersEdit', { user }))
+        .catch(err => next(err))
+    );
 
 router
-    .route("/:id/items/new")
+    .route('/:id/items/new')
     .get((req, res, next) => {
         return User.findById(req.params.id).then(user => {
             return Item.find().then(items => {
-                return res.render("newUserItem", { user, items });
+                return res.render('newUserItem', { user, items });
             });
         });
     });
 
 router
-    .route("/:id/items").post((req, res, next) => {
+    .route('/:id/items').post((req, res, next) => {
         return User.findByIdAndUpdate(req.params.id, {
             $addToSet: { skills: req.body.item_id }
         }).then(() => {
