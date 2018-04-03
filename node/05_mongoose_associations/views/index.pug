@@ -1,0 +1,26 @@
+extends base.pug
+
+block content
+    h1 The to-do-list
+    br
+    table.table.table-striped
+    thead
+        tr
+            th(scope='col') ID
+            th(scope='col') Name
+            th(scope='col') Price
+    tbody
+        tr
+            th(scope='row') 1
+            td #{item.id}
+            td #{item.name}
+            td #{item.price}
+    
+    br
+    a(href="/items/new") Add a new to-do!
+
+
+
+
+//- for item in items
+    //-     li #{item.id} #{item.name}, #{item.price}

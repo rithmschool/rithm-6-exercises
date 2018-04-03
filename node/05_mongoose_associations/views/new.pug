@@ -1,0 +1,19 @@
+extends base.pug
+
+block content
+    .container
+        h1 Add an item
+        br
+        form(action="/item-post" method="post")
+            label(for="name") Name &nbsp;
+            input(type="text" name="name" id="name")
+            br
+            br
+            if (priceAlert)
+                span.text-danger
+                    p #{priceAlert}
+            label(for="price") Price &nbsp;
+            input(type="text" name="price" id="price")
+            br
+            br
+            input(type="submit" value="Click to submit") 
