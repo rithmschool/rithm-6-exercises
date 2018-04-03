@@ -1,0 +1,10 @@
+extends ../base.pug
+block title
+  | Add User
+block content
+    h2 Add User
+    form(action="/users", method="POST")
+      label(for="name") Name
+      input(type="text", name="name" id="name" placeholder="Ex: Karl")
+      button(type="submit") Add User
+    a(href="/") Cancel

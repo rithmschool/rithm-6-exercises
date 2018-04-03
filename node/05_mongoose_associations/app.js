@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 // app imports
-const { itemsRouter } = require('./routers');
+const { usersRouter, itemsRouter } = require('./routers');
 
 // globals
 const app = express();
@@ -20,9 +20,10 @@ app.use(bodyParser.json({ type: '*/* '})); // to specify interpreting everything
 app.use(methodOverride('_method'));
 
 // route handlers
-app.use('/items', itemsRouter);
+app.use('/users/:userId/items', itemsRouter);
+app.use('/users', usersRouter);
 
-app.get('/', (req, res) => res.redirect('/items'));
+app.get('/', (req, res) => res.redirect('/users'));
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
@@ -36,9 +37,9 @@ app.use((req, res) => {
   the first is assumed to be an error passed by another handler's 'next'
  */
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  return res.render('error', {
-    message: err.message,
+  res.status(err.status || 500).render('error', {
+    message: err.message || 'Something Went Wrong',
+    title: err.title || 'Internal Server Error',
     /*
      if in development mode, include stack trace (full error object)
      otherwise, it's an empty object so users don't see the stack trace

@@ -1,4 +1,5 @@
 exports.Item = require('./Item');
+exports.User = require('./User');
 
 const mongoose = require('mongoose');
 

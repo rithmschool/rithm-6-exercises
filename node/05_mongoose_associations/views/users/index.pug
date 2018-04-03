@@ -1,0 +1,16 @@
+extends ../base.pug
+block title
+  | Users
+block content
+  h2 Users
+  a(href="/users/new") Add User
+  for user in users
+    p User: #{user.name}
+      ul
+        li
+          a(href=`/users/${user.id}/items`) View Items
+        li
+          a(href=`/users/${user.id}/edit`) Edit User
+        li
+          form(action=`/users/${user.id}?_method=DELETE`, method="POST")
+            button(type="submit") X
