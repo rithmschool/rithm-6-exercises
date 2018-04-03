@@ -33,7 +33,7 @@ app.use('/items', itemRoutes);
 app.use('/users', userRoutes);
 
 app.get('/', (req, res, next) => {
-    return res.redirect('/items')
+    return res.redirect('/users')
 });
 
 app.use('/:sg', (req, res, next) => {
