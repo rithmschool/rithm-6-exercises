@@ -2,6 +2,7 @@ const { User } = require("../models/index");
 
 exports.homePage = function(req, res, next) {
   return User.find().then(function(users) {
+    console.log(users);
     return res.render("index", { users });
   });
 };
@@ -16,6 +17,7 @@ exports.CreateUser = function(req, res, next) {
     lastName: req.body.lastName
   };
   return User.create(newUser).then(function() {
+    console.log(newUser);
     return res.redirect("/");
   });
 };

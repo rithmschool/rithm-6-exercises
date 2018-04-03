@@ -1,75 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const { User, Item } = require("../models/index");
+const itemHandler = require("../handlers/item");
 
-router.get("/user/:userId/items", function(req, res, next) {
-  return User.findById(req.params.userId)
-    .populate("items")
-    .exec()
-    .then(function(user) {
-      // console.log("FUCK ME " + user);
-      return res.render("itemIndex", { user });
-    });
-});
+router.get("/user/:userId/items", itemHandler.getUserItems);
 
 // render new form
-router.get("/user/:userId/items/new", function(req, res, next) {
-  return User.findById(req.params.userId).then(function(user) {
-    return res.render("newItemForm", { user });
-  });
-});
+router.get("/user/:userId/items/new", itemHandler.rederNewItemForm);
 
 //POST new item to user items array
-router.post("/user/:userId/items", function(req, res, next) {
-  let newItem = new Item(req.body);
-  let UserId = req.params.userId;
-  // console.log("Blah " + UserId);
-  newItem.user = UserId;
-  return newItem
-    .save()
-    .then(function(item) {
-      return User.findByIdAndUpdate(UserId, { $addToSet: { items: item._id } });
-    })
-    .then(function() {
-      return res.redirect(`/user/${UserId}/items`);
-    })
-    .catch(function(err) {
-      console.log("Something went Wrong");
-    });
-});
+router.post("/user/:userId/items", itemHandler.postNewItem);
 
 // render item
-router.get("/user/:userId/items/:_id", function(req, res, next) {
-  return Item.findById(req.params._id)
-    .populate("user")
-    .then(function(item) {
-      return res.render("item", { item });
-    });
-});
+router.get("/user/:userId/items/:_id", itemHandler.renderItem);
 
 //edit item render form
-router.get("/user/:userId/items/:_id/edit", function(req, res, next) {
-  return Item.findById(req.params._id)
-    .populate("user")
-    .then(function(item) {
-      return res.render("editItem", { item });
-    });
-});
+router.get("/user/:userId/items/:_id/edit", itemHandler.renderItemEditForm);
 
 // save the item
-router.patch("/user/:userId/items/:_id", function(req, res, next) {
-  return Item.findByIdAndUpdate(req.params._id, req.body).then(function(data) {
-    console.log(req.params._id);
-    console.log(req.body);
-    return res.redirect(`/user/${req.params.userId}/items`);
-  });
-});
+router.patch("/user/:userId/items/:_id", itemHandler.updateItem);
 
 // delete item
-router.delete("/user/:userId/items/:_id", function(req, res, next) {
-  return Item.findByIdAndRemove(req.params._id).then(function(data) {
-    return res.redirect(`/user/${req.params.userId}/items`);
-  });
-});
+router.delete("/user/:userId/items/:_id", itemHandler.deleteItem);
 
 module.exports = router;

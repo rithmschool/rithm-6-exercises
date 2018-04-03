@@ -2,7 +2,9 @@ extends base.pug
 
 block content
   div(class="container")
-    h1 #{item.name}
+    h1 Hello
 
-  //- form(action=`/user/${users._id}/items`, method="GET")
-  //-   input(type="submit" value="SeeItems" class="btn btn-primary")
+    h3 The snack is #{item.name} and the price is $#{item.price} per item. You have #{item.qty} bags in your Kart, for a total price of $#{item.price * item.qty}
+
+    form(action=`/user/${item.user._id}/items`, method="GET")
+      input(type="submit" value="See Items" class="btn btn-primary")
