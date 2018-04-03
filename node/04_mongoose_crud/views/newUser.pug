@@ -1,0 +1,12 @@
+extends base.pug
+
+block title
+  title New User
+
+block content
+  h1 Add a new user!
+  form(action="/users" method="POST")
+    div(class="form-group")
+      label(for="item") Name:
+      input(type="text" name="name" placeholder="Enter your name")
+    button.btn.btn-primary(type="submit") Add a new user!

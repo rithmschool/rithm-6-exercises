@@ -1,0 +1,16 @@
+extends base.pug
+
+block title
+  title View All Items
+
+block content
+  h1 See All Users:
+  ul(class="list-group")
+  each user in users
+    li(class="list-group-item align-items-center mx-50")
+      span #{user.name} &nbsp;
+      br
+      a(href=`/users/${user.id}`) Profile
+      br
+      a(href=`/users/${user.id}/edit`) Edit
+

@@ -1,9 +1,32 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 const itemSchema = new mongoose.Schema({
     name: String,
-    quantity: Number
-}, { timestamps: true });
+    quantity: Number,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+});
 
-const Item = mongoose.model("Item", itemSchema);
+itemSchema.post('save', dog => {
+    User.findOneAndUpdate(item.user, { $addToSet: { items: item._id } })
+        .then(() => {
+            console.log('POST HOOK RAN');
+        });
+});
 
-module.exports = Item;
+itemSchema.post('findOneAndUpdate', item => {
+    User.findOneAndUpdate(item.user, { $addToSet: { items: item._id } })
+        .then(() => {
+            console.log('POST HOOK RAN')
+        });
+});
+
+itemSchema.post('findOneAndRemove', item => {
+    User.findOneAndUpdate(item.user, { $pull: { items: item._id } }).then(() => {
+        console.log('POST HOOK RAN');
+    });
+});
+
+module.exports = mongoose.model('Item', itemSchema);

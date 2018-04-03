@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost/items", {
-        useMongoClient: true
-    })
+mongoose.connect("mongodb://localhost/items")
     .then(() => {
         console.log("Connected to MongoDB!");
     })
@@ -12,4 +10,5 @@ mongoose.connect("mongodb://localhost/items", {
         console.log(err);
     });
 
-exports.Item = require("./item");
+exports.Item = require("./Item");
+exports.User = require("./User")

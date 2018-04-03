@@ -1,0 +1,9 @@
+extends base.html
+
+block content
+  h1 Add Skills for #{user.name}
+    each item in items
+      spam #{item.name}
+      form(action=`/users/${user.id}/items` method="POST")
+        input(type="type" name="item_id" value=`${item_id}` hidden=true)
+        input(type="submit" value="Add Item")

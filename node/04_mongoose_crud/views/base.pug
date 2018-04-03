@@ -12,13 +12,17 @@ html(lang="en")
     block title
   body
     nav(class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark")
-      a(class="navbar-brand" href="/") ItemsApp
+      div(class="navbar-brand") ItemsApp
       div(class="collapse navbar-collapse" id="navbarText")
         ul(class="navbar-nav mr-auto")
           li(class="nav-item")
             a(class="nav-link" href="/items") Home
           li(class="nav-item")
-            a(class="nav-link" href="/items/new") Add New Item
+            a(class="nav-link" href="/users") All Users
+          li(class="nav-item")
+            a(class="nav-link" href="/items/new") New Item
+          li(class="nav-item")
+            a(class="nav-link" href="/users/new") New User
       form(class="form-inline mr-sm-2" action=`/items?_method=DELETE` method="POST")
         button(class="btn btn-outline-danger my-2 my-sm-0" name="delete" type="submit") Delete List
       form(class="form-inline mr-sm-2" action="/search" method="GET")

@@ -13,7 +13,7 @@ router
     })
     .post((req, res, next) => {
         return Item.create(req.body).then(() => {
-            return res.redirect("/");
+            return res.redirect("/items");
         })
     })
     .delete((req, res, next) => {

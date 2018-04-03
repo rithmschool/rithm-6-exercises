@@ -4,7 +4,8 @@ block title
   title View Item
 
 block content
-  h3 View your item below:
-  h5 Item: #{item.name}
-  h5 Quantity: #{item.quantity}
-  a(href=`/items/${item.id}/edit`) Edit Item
+  h3 #{user.name}'s Profile
+  h2 Items:
+  each item in items
+    li
+      span #{item.name}
