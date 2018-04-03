@@ -35,9 +35,7 @@ app.post('/item-post', function(request, response, next) {
       return response.redirect('/items');
     })
     .catch(err => {
-      console.log(request.body.price);
       if (Number.isNaN(+request.body.price) === true) {
-        console.log('hey Darrien22');
       }
       let priceAlert = 'Hey the price needs to be a number!';
       response.render('new', { priceAlert });
