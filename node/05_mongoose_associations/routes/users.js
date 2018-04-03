@@ -1,5 +1,5 @@
 const express = require('express');
-const { User } = require('../models');
+const { User, Item } = require('../models');
 const router = express.Router();
 
 router
@@ -39,29 +39,48 @@ router.get('/search', (req, res, next) => {
 });
 
 router
-    .route('/:item_id')
+    .route('/:user_id')
     .get((req, res, next) => {
-        return Item.find({ _id: `${req.params.item_id}` }).then(item => {
-            item = item[0];
-            return res.render('show', { item });
+        return User.findOne({ _id: `${req.params.user_id}` })
+            .populate('items')
+            .exec()
+            .then(user => {
+            return res.render('showUser', { user });
         });
     })
     .patch((req, res, next) => {
-        return Item.findByIdAndUpdate(req.params.item_id, req.body).then(() => {
-            return res.redirect(`/items/${req.params.item_id}`);
+        return User.findByIdAndUpdate(req.params.user_id, req.body).then(() => {
+            return res.redirect(`/users/${req.params.user_id}`);
         });
     })
     .delete((req, res, next) => {
-        return Item.findByIdAndRemove(req.params.item_id).then(() => {
-            return res.redirect('/items');
+        return User.findByIdAndRemove(req.params.user_id).then(() => {
+            return res.redirect('/users');
         });
     });
 
-router.get('/:item_id/edit', (req, res, next) => {
-    return Item.find({ _id: `${req.params.item_id}` }).then(item => {
-        item = item[0];
-        return res.render('edit', { item });
-    });
+router.get('/:user_id/edit', (req, res, next) => {
+    return User.findOne({ _id: `${req.params.user_id}` }).then(user => {
+        return Item.find({ }).then(items => {
+            let userItems = user.items.map(x => x.toString())
+            let addItems = items.filter(x => !userItems.includes(x._id.toString()))
+            let removeItems = items.filter(x => userItems.includes(x._id.toString())) 
+            return res.render('editUser', { user, addItems, removeItems });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 });
+
+router
+    .route('/:user_id/item')
+    .patch((req, res, next) => {
+        return User.findByIdAndUpdate(req.params.user_id, { $addToSet: { items: req.body.user_item } }).then(() => {
+            return res.redirect(`/users/${req.params.user_id}`);
+        });
+    })
+    .delete((req, res, next) => {
+        return User.findByIdAndUpdate(req.params.user_id, { $pull: { items: req.body.user_item } }).then(() => {
+            return res.redirect(`/users/${req.params.user_id}`);
+        });
+    });
 
 module.exports = router;

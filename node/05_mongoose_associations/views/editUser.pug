@@ -1,0 +1,40 @@
+extends base.pug
+
+block title
+    title edit user
+
+block content
+    div(class="text-center m-4")
+        h1 edit list user
+    
+    form(action=`/users/${user._id}?_method=PATCH`, method="POST")
+        div(class="form-group")
+            label(for="name") user name
+            input(type="text", class="form-control", id="name", name="name", aria-describedby="nameHelp", placeholder="Enter user", value=`${user.name}`)
+        button(type="submit", class="btn btn-secondary btn-lg btn-block") submit changes
+    
+    div(class="row my-3")
+        h5(class="mx-auto")
+            a(href="/") go back to the user list
+            span(class="mx-2") |
+            a(href=`/users/${user._id}`) go back to user view
+
+    div(class="row my-3")
+        h3(class="mx-auto") add / remove items to the user
+    
+    div(class="row my-3")
+        for el in addItems
+            div(class="col col-4 text-center my-2")
+                h5 #{el.name}
+                form(action=`/users/${user._id}/item?_method=PATCH`, method="POST")
+                    input(type="text" name="user_item" value=`${el.id}` hidden=true)
+                    input(class="btn btn-sm btn-secondary" type="submit" value="add item")
+    
+        for el in removeItems
+            div(class="col col-4 text-center my-2")
+                h5 #{el.name}
+                form(action=`/users/${user._id}/item?_method=DELETE`, method="POST")
+                    input(type="text" name="user_item" value=`${el.id}` hidden=true)
+                    input(class="btn btn-sm btn-secondary" type="submit" value="remove item")
+
+

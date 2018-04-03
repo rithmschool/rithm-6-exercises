@@ -12,17 +12,23 @@ head
     block title
 body
     nav(class="navbar sticky-top navbar-expand-lg navbar-light bg-light mb-2")
-        a(class="navbar-brand", href="/items") the list
+        a(class="navbar-brand", href="#") the list
         button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
             span(class="navbar-toggler-icon")
 
         div(class="collapse navbar-collapse", id="navbarSupportedContent")
             ul(class="navbar-nav mr-auto")
                 li(class="nav-item")
-                    a(class="nav-link", href="/items") home
-            
+                    a(class="nav-link", href="/items") item list
+
                 li(class="nav-item")
                     a(class="nav-link", href="/items/new") add new item
+
+                li(class="nav-item")
+                    a(class="nav-link", href="/users") user list
+            
+                li(class="nav-item")
+                    a(class="nav-link", href="/users/new") add new user
 
             form(class="form-inline my-2 my-lg-0" action="/items/search" method="GET")
                 input(class="form-control mr-sm-2", type="search", name="search", placeholder="Search",aria-label="Search")
