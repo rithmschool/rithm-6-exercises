@@ -40,11 +40,9 @@ exports.renderEdit = async function(req, res, next) {
 exports.postNew = async function(req, res, next) {
   const { name, cuteness } = req.body;
   const ownerId = req.params.id;
-  // try {
-  // const newAnimal = new Animal(name, cuteness);
-  console.log('before animal');
+  // console.log('before animal');
   const newAnimal = new Animal(req.body);
-  console.log('before animal');
+  // console.log('before animal');
   newAnimal.owner = ownerId;
   return newAnimal
     .save()
@@ -54,7 +52,7 @@ exports.postNew = async function(req, res, next) {
       });
     })
     .then(() => {
-      return res.redirect(`/owners/${ownerId}/pets`);
+      return res.redirect(`/owners/${ownerId}`);
     })
     .catch(err => next(err));
 

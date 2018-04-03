@@ -21,7 +21,7 @@ exports.renderShow = async function(req, res, next) {
   let animals;
   try {
     owner = await Owner.findById({ _id: ownerId })
-      .populate('pets')
+      .populate('animals')
       .exec();
     animals = owner.animals;
   } catch (err) {

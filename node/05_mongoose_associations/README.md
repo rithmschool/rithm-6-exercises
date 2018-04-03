@@ -15,3 +15,7 @@ Our application should have the following routes:
 1.  `GET /animals/:id/edit` - this route should render a form where the user can update the name or price of the animal, which sends a PATCH to `/animals/:id`, or click an `X` to delete the animal, sending a DELETE to `/animals/:id`
 1.  `PATCH /animals/:id` - this route should accept edits to existing animals.
 1.  `DELETE /animals/:id` - this route should allow you to delete a specific animal from the array.
+
+I need to add new animals to owner
+I need to edit animal and have that change updated in owner
+I need to delete animal and have that change updated in owner
