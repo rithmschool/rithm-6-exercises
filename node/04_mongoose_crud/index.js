@@ -3,19 +3,21 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const petRoutes = require("./routes/pets");
+const { userRouter, petRouter } = require("./routes");
+
 const app = express();
 
 app.set("view engine", "pug");
-app.use(express.static(__dirname + "/public/style.css"));
+app.use(express.static(__dirname + "/public"));
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use("/pets", petRoutes);
 
 app.get("/", (req, res, next) => {
-  return res.redirect("/pets");
+  return res.redirect("/users");
 });
+app.use("/users", userRouter);
+app.use("/users/:userId/pets", petRouter);
 
 // app.use((req, res, next) => {
 //   const err = new Error("Not Found");

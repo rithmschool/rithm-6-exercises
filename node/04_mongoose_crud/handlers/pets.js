@@ -1,44 +1,58 @@
-const { Pet } = require("../models");
+const { Pet, User } = require("../models");
+
 // Pet.create({
 
 //   petName: "pig"
 // })
 exports.getPets = function(req, res, next) {
-  return Pet.find().then(pets => {
-    return res.render("index", { pets });
-  });
+  return User.findById(req.params.user_id)
+    .populate("pets")
+    .exec()
+    .then(user => {
+      return res.render("pets/index", { user });
+    });
 };
 
 exports.newPetForm = function(req, res, next) {
-  return res.render("new");
+  return User.findById(req.params.user_id).then(user =>
+    res.render("pets/new", { user })
+  );
 };
 
 exports.addPet = function(req, res, next) {
-  return Pet.create(req.body).then(pet => {
-    return res.redirect("/");
+  return User.findById(req.params.user_id).then(user => {
+    Pet.create(req.body).then(createdPet => {
+      createdPet.user = req.params.user_id;
+      user.pets.push(createdPet._id);
+      return user.save().then(() => res.redirect(`/users/${user.id}/pets`));
+    });
   });
 };
 
 exports.showPet = function(req, res, next) {
-  return Pet.findById(req.params.id).then(pet => {
-    return res.render("show", { pet });
-  });
+  Pet.findById(req.params.id)
+    .populate("user")
+    .then(pet => {
+      return res.render("pets/show", { pet });
+    });
 };
 
 exports.editPet = function(req, res, next) {
-  return Pet.findById(req.params.id).then(pet => {
-    return res.render("edit", { pet });
-  });
+  return Pet.findById(req.params.id)
+    .populate("user")
+    .then(pet => {
+      return res.render("pets/edit", { pet });
+    });
 };
 
 exports.updatePet = function(req, res, next) {
   return Pet.findByIdAndUpdate(req.params.id, req.body).then(pet => {
-    return res.redirect("/");
+    return res.redirect(`/users/${userId}/pets/`);
   });
 };
 
 exports.deletePet = function(req, res, next) {
   return Pet.findByIdAndRemove(req.params.id).then(pet => {
-    return res.redirect("/");
+    return res.redirect(`/users/${userId}/pets/`);
   });
 };

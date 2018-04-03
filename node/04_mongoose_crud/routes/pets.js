@@ -1,30 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getPets,
-  newPetForm,
-  addPet,
-  showPet,
-  editPet,
-  updatePet,
-  deletePet
-} = require("../handlers/pets");
+const { pets } = require("../handlers");
 
 router
   .route("")
-  .get(getPets)
-  .post(addPet);
+  .get(pets.getPets)
+  .post(pets.addPet);
 
-router.route("/new").get(newPetForm);
+router.route("/new").get(pets.newPetForm);
 
 router
-  .route("/:id")
-  .get(showPet)
-  .patch(updatePet)
-  .delete(deletePet);
+  .route("/:petId")
+  .get(pets.showPet)
+  .patch(pets.updatePet)
+  .delete(pets.deletePet);
 
-router.route("/:id/edit").get(editPet);
+router.route("/:petId/edit").get(pets.editPet);
 
-router.post("/", addPet);
+// router.post("/", addPet);
 
 module.exports = router;

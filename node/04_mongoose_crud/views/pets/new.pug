@@ -1,11 +1,11 @@
-extends base.pug
+extends ../base.pug
 
 block content
   section(class="row")
     div(class="mx-auto")
       h2 Enter Your Future Pet Love's Details!
   div(class="row mt-4")
-      form(action="/pets" method="POST" class="mx-auto col-8")
+      form(action=`users/${user.id}/pets` method="POST" class="mx-auto col-8")
         div(class="form-group row")
           label(for="type" class="col-sm-3 col-form-label") Type of Pet:
           div(class="col-sm-9")

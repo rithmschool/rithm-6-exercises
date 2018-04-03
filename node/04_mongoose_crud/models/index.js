@@ -14,3 +14,4 @@ mongoose
   });
 
 exports.Pet = require("./pet");
+exports.User = require("./users");
