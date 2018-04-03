@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const usersHandlers = require("../handlers/users");
+const { usersHandlers } = require("../handlers");
 
 router
   .route("/")

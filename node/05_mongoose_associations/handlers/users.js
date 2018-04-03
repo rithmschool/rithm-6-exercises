@@ -56,7 +56,7 @@ exports.searchResults = (request, response, next) => {
 exports.showUser = (request, response, next) => {
   return User.findById(request.params.id)
     .then(user => {
-      return response.render("show", { user });
+      return response.render("users_show", { user });
     })
     .catch(err => {
       return next(err);

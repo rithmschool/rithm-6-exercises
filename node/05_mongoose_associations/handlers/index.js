@@ -1,1 +1,2 @@
-exports.items = require("./items");
+exports.itemsHandlers = require("./items");
+exports.usersHandlers = require("./users");
