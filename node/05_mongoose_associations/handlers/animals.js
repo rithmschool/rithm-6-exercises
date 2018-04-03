@@ -1,4 +1,4 @@
-const Animal = require('../models/index');
+const Animal = require('../models/Animal');
 
 exports.renderIndex = async function(req, res, next) {
   let animals;
@@ -7,11 +7,11 @@ exports.renderIndex = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('index', { animals });
+  res.render('animals/index', { animals });
 };
 
 exports.renderNew = function(req, res, next) {
-  res.render('new');
+  res.render('animals/new');
 };
 
 exports.renderShow = async function(req, res, next) {
@@ -22,7 +22,7 @@ exports.renderShow = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('show', { animal });
+  res.render('animals/show', { animal });
 };
 
 exports.renderEdit = async function(req, res, next) {
@@ -33,7 +33,7 @@ exports.renderEdit = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('edit', { animal });
+  res.render('animals/edit', { animal });
 };
 
 exports.postNew = async function(req, res, next) {
@@ -86,5 +86,5 @@ exports.search = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('index', { animals });
+  res.render('animals/index', { animals });
 };

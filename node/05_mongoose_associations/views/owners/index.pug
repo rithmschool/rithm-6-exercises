@@ -1,18 +1,12 @@
-extends base.pug
+extends ../base.pug
 
 block content
     div(class='text-center')
-      h1 See your animals
+      h1 Users
 
-      form(action=`/animals/search` method="GET")
-        input(type="text" name='search' placeholder="Search...")
-        button(class='btn btn-secondary') Search
-
-      a(href="/animals/new") Add a new animal!
+      a(href="/owners/new") Add user
       ul(class='list-unstyled')
-      each animal in animals
+      each owner in owners
           li
-            a(href=`animals/${animal.id}`) #{animal.name}
-            p Cuteness: #{animal.cuteness}
-      form(action=`/animals?_method=DELETE` method="POST")
-          button(class='btn btn-danger') Delete All Animals
+            a(href=`owners/${owner.id}`) #{owner.name}
+

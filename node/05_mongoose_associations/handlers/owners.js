@@ -1,4 +1,5 @@
-const Owner = require('../models/owners');
+const Owner = require('../models/Owner');
+const Animal = require('../models/Animal');
 
 exports.renderIndex = async function(req, res, next) {
   let owners;
@@ -7,22 +8,26 @@ exports.renderIndex = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('index', { owners });
+  res.render('owners/index', { owners });
 };
 
 exports.renderNew = function(req, res, next) {
-  res.render('new');
+  res.render('owners/new');
 };
 
 exports.renderShow = async function(req, res, next) {
   const ownerId = req.params.id;
   let owner;
+  let animals;
   try {
-    owner = await Owner.findById({ _id: ownerId });
+    owner = await Owner.findById({ _id: ownerId })
+      .populate('pets')
+      .exec();
+    animals = owner.animals;
   } catch (err) {
     console.log(err.message);
   }
-  res.render('show', { owner });
+  res.render('owners/show', { owner, animals });
 };
 
 exports.renderEdit = async function(req, res, next) {
@@ -33,7 +38,7 @@ exports.renderEdit = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('edit', { owner });
+  res.render('owners/edit', { owner });
 };
 
 exports.postNew = async function(req, res, next) {
@@ -76,5 +81,5 @@ exports.search = async function(req, res, next) {
   } catch (err) {
     console.log(err.message);
   }
-  res.render('index', { owners });
+  res.render('owners/index', { owners });
 };

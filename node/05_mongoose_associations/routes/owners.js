@@ -9,15 +9,13 @@ const {
   postNew,
   updateItem,
   deleteItem,
-  deleteAll,
   search
-} = require('../handlers/tools');
+} = require('../handlers/owners');
 
 router
   .route('')
   .get(renderIndex)
-  .post(postNew)
-  .delete(deleteAll);
+  .post(postNew);
 
 router.route('/new').get(renderNew);
 

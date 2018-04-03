@@ -1,22 +1,43 @@
+//basic dependencies
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
-const itemRoutes = require('./routes/index');
+const mongoose = require('mongoose');
 
+//globals
+const app = express();
+const animalRoutes = require('./routes/animals');
+const ownerRoutes = require('./routes/owners');
+
+//Database
+mongoose.set('debug', true);
+mongoose.Promise = global.Promise;
+
+mongoose
+  .connect('mongodb://localhost/animals-app')
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+//middleware
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
-
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/animals', itemRoutes);
-// app.use(itemRoutes);
+app.use('owners/:id/animals', animalRoutes);
+app.use('/owners', ownerRoutes);
 
+//routes
 app.get('/', function(req, res, next) {
-  res.redirect('/animals');
+  res.redirect('/owners');
 });
+
+//errors
 
 // app.use((req, res, next) => {
 //   const err = new Error('Not Found');
@@ -33,6 +54,7 @@ app.get('/', function(req, res, next) {
 //   });
 // });
 
+//server init
 app.listen(3000, function() {
   console.log('Server starting on 3000');
 });
