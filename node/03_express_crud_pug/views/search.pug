@@ -1,0 +1,21 @@
+extends base.pug
+
+block content
+    div()
+        h1() search results
+
+    if sres
+        div()
+            ul()
+            for el in sres
+                li(class="list-group-item d-flex justify-content-around")
+                    h4()
+                        a(href=`/items/${el._id}`) #{el.name}
+                    span() #{el.quantity}
+    else
+        div()
+            h4() Nothing Matched :(
+            h4() Try Being a better Googler
+    
+        h5()
+            a(href="/") Go back!

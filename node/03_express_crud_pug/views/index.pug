@@ -3,11 +3,13 @@ extends base.pug
 block content
     h1 Amare's Shopping List! 
     ul
-    for item in shopList
-        li #{item.item}  -  #{item.price} 
+    for item in items
+        li #{item.item}  -  $ #{item.price} 
         a(href=`/items/${item.id}`) See item
         br
     br
     a(href="/items/new") Create a New Item
+    br
+    a(href="/users") See Users
     br
     img(src="http://media.thehoopdoctors.com/wp-content/uploads/2010/09/amare-feature-1.jpg", alt="")

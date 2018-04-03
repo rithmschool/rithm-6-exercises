@@ -3,7 +3,7 @@ extends base.pug
 block content
 
     h1 Edit Item!
-        form(method='POST' action="/items/:id?_method=PATCH")
+        form(action=`/items/${found_item._id}?_method=PATCH`, method="POST")
             label(for="item") item:
             input(type="text" name="item" value=`${found_item.item}`)
             br
@@ -12,8 +12,6 @@ block content
             br
             input(type="submit" value="Edit Item!")
     h1 Delete Item!
-        <form method="POST" action="/items/:id?_method=DELETE">
-            <button type="submit">X</button>
-        </form>
-            
+        form(action=`/items/${found_item._id}?_method=DELETE`, method="POST")
+            button(type="subit") X
         a(href="/items") Go Back

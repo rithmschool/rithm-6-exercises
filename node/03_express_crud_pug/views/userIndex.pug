@@ -1,0 +1,15 @@
+extends base.pug
+
+block content
+    h1 Users
+    ul
+    for user in users
+        li #{user.name}
+        a(href=`/users/${user.id}`) See user
+        br
+    br
+    a(href="/users/new") Create a New User
+    br
+    a(href="/users") See Users
+    br
+    img(src="https://cdn-s3.si.com/s3fs-public/2017/01/11/amare-stoudemire-kids-israel.jpg", alt="")
