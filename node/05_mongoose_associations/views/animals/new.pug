@@ -3,7 +3,7 @@ extends ../base.pug
 block content
     div(class='text-center')
       h1 Add a new animal!
-      form(action="/animals" class="form-horizontal" method="POST")
+      form(action=`/owners/${owner_id}/animals` class="form-horizontal" method="POST")
         <div class="form-group">
           label(for="name" class="") Name:
           input(type="text" name="name" placeholder="Name" required)

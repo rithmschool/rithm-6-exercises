@@ -1,4 +1,5 @@
 const Animal = require('../models/Animal');
+const Owner = require('../models/Owner');
 
 exports.renderIndex = async function(req, res, next) {
   let animals;
@@ -11,7 +12,7 @@ exports.renderIndex = async function(req, res, next) {
 };
 
 exports.renderNew = function(req, res, next) {
-  res.render('animals/new');
+  res.render('animals/new', { owner_id: req.params.id });
 };
 
 exports.renderShow = async function(req, res, next) {
@@ -38,12 +39,30 @@ exports.renderEdit = async function(req, res, next) {
 
 exports.postNew = async function(req, res, next) {
   const { name, cuteness } = req.body;
-  try {
-    await Animal.create({ name, cuteness });
-  } catch (err) {
-    console.log(err.message);
-  }
-  res.redirect('/animals');
+  const ownerId = req.params.id;
+  // try {
+  // const newAnimal = new Animal(name, cuteness);
+  console.log('before animal');
+  const newAnimal = new Animal(req.body);
+  console.log('before animal');
+  newAnimal.owner = ownerId;
+  return newAnimal
+    .save()
+    .then(animal => {
+      return Owner.findByIdAndUpdate(ownerId, {
+        $addToSet: { animals: animal._id }
+      });
+    })
+    .then(() => {
+      return res.redirect(`/owners/${ownerId}/pets`);
+    })
+    .catch(err => next(err));
+
+  // await Animal.create({ name, cuteness });
+  // } catch (err) {
+  //   console.log(err.message);
+  // }
+  // res.redirect('/animals');
 };
 
 exports.updateItem = async function(req, res, next) {

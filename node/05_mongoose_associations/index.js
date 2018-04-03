@@ -29,7 +29,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('owners/:id/animals', animalRoutes);
+app.use('/owners/:id/animals', animalRoutes);
 app.use('/owners', ownerRoutes);
 
 //routes
