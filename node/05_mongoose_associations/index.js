@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 const express = require("express");
-const itemRouter = require("./routes/items");
+const { itemsRouter, usersRouter } = require("./routers");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
 
@@ -9,7 +9,7 @@ app.set("view engine", "pug");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use("/items", itemRouter);
+app.use("/items", itemsRouter);
 app.use(morgan("dev"));
 
 app.get("/", (request, response) => {

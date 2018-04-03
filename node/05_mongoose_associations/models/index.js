@@ -7,3 +7,4 @@ mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 
 exports.Item = require("./Item");
+exports.User = require("./User");
