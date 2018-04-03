@@ -1,0 +1,12 @@
+extends base.pug
+block title
+  | Add Item
+block content
+    h2 Add Item
+    form(action="/items", method="POST")
+      label(for="name") Name
+      input(type="text", name="name" id="name" placeholder="Ex: apples")
+      label(for="price") Price
+      input(type="text" name="price" id="price" placeholder="Ex: 2.99")
+      button(type="submit") Add Item
+    a(href="/") Cancel
