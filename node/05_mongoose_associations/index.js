@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 
 // globals
 const app = express();
-const itemRoutes = require("./routes/items");
+const { itemRoutes, userRoutes } = require("./routes");
 
 // url encoding stuff;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +17,7 @@ mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb://localhost/04-mongoose-crud", {
+  .connect("mongodb://localhost/05-mongoose-associations", {
     useMongoClient: true // taken out now
   })
   .then(() => {
@@ -34,11 +34,12 @@ app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(methodOverride("_method"));
-app.use("/items", itemRoutes);
+app.use("/users/:user_id/items", itemRoutes);
+app.use("/users", userRoutes);
 
 // route handlers
 app.get("/", function(request, response, next) {
-  return response.redirect("/items");
+  return response.redirect("/users");
 });
 
 app.use(function(err, request, response, next) {

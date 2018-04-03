@@ -1,21 +1,22 @@
 const express = require("express");
-const router = express.Router();
-const itemsHandlers = require("../handlers/items");
+const router = express.Router({ mergeParams: true });
+
+const { items } = require("../handlers");
 
 router
   .route("/")
-  .get(itemsHandlers.getItems)
-  .post(itemsHandlers.postItem)
-  .delete(itemsHandlers.deleteAll);
+  .get(items.getItems)
+  .post(items.postItem)
+  .delete(items.deleteAll);
 
-router.get("/new", itemsHandlers.newItemForm);
+router.get("/new", items.newItemForm);
 
-router.get("/:id/edit", itemsHandlers.editForm);
+router.get("/:id/edit", items.editForm);
 
 router
   .route("/:id")
-  .get(itemsHandlers.getItem)
-  .patch(itemsHandlers.updateItem)
-  .delete(itemsHandlers.deleteItem);
+  .get(items.getItem)
+  .patch(items.updateItem)
+  .delete(items.deleteItem);
 
 module.exports = router;

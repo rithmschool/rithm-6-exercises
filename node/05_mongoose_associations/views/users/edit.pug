@@ -1,0 +1,9 @@
+extends ../base.pug
+
+block content
+  h1 Edit the user!
+  form(action=`/users/${user.id}?_method=PATCH` method="POST")
+    label(for="name") name:
+    input(type="text" name="name" id="name" value=`${user.name}`)
+    br
+    input(type="submit" name="add")

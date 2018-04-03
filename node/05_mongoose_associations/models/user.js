@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema(
   {
-    name: String
+    name: String,
+    items: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item"
+      }
+    ]
   },
   { timestamps: true }
   // now I have createdAt & updatedAt
@@ -17,4 +23,4 @@ const User = mongoose.model("User", userSchema);
 // pluralization will happen automatically for us
 // so we'll see items in mongoDB
 // want it to be singular is bc this is essentially a class
-module.exports = Item;
+module.exports = User;

@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const itemSchema = new mongoose.Schema(
   {
     name: String,
-    price: Number
+    price: Number,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
   },
   { timestamps: true }
   // now I have createdAt & updatedAt

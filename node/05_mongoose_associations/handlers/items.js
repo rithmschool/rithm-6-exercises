@@ -1,9 +1,12 @@
 const { Item } = require("../models");
+const { User } = require("../models");
 
 exports.getItems = function(request, response, next) {
-  return Item.find({})
-    .then(items => {
-      return response.render("index", { items });
+  return User.findById(request.params.user_id)
+    .populate("items")
+    .exec()
+    .then(user => {
+      return response.render("items/index", { user });
     })
     .catch(err => {
       return response.render("404");
@@ -11,37 +14,76 @@ exports.getItems = function(request, response, next) {
 };
 
 exports.postItem = function(request, response, next) {
-  return Item.create(request.body)
+  let newItem = new Item(request.body);
+  let userId = request.params.user_id;
+  newItem.user = userId;
+  return newItem
+    .save()
     .then(item => {
-      return response.redirect("/");
+      item.user = request.params.user_id;
+      return User.findByIdAndUpdate(request.params.user_id, {
+        $addToSet: { items: item.id }
+      });
+    })
+    .then(() => {
+      return response.redirect(`/users/${request.params.user_id}/items`);
     })
     .catch(err => {
       let error = new Error("Item can not be created");
       error.status = 500;
       return next(error);
     });
+  // return Item.create(request.body)
+  //   .then(item => {
+  //     item.user = request.params.user_id;
+  //     return User.findByIdAndUpdate(request.params.user_id, {
+  //       $addToSet: { items: item.id }
+  //     });
+  //   })
+  //   .then(() => {
+  //     return response.redirect(`/users/${request.params.user_id}/items`);
+  //   })
+  //   .catch(err => {
+  //     let error = new Error("Item can not be created");
+  //     error.status = 500;
+  //     return next(error);
+  //   });
 };
 
 exports.deleteAll = function(request, response, next) {
-  return Item.remove()
-    .then(inst => {
-      return response.redirect("/items");
+  return User.findById(request.params.user_id)
+    .then(user => {
+      return Item.remove({ _id: { $in: user.items } }).then(() => {
+        return User.findByIdAndUpdate(request.params.user_id, { items: [] })
+          .then(user => {
+            return response.redirect(`/users/${request.params.user_id}/items`);
+          })
+          .catch(err => {
+            let error = new Error("Items can not be deleted");
+            error.status = 500;
+            return next(error);
+          });
+      });
     })
     .catch(err => {
-      let error = new Error("Can not remove all items");
+      let error = new Error("Items can not be deleted");
       error.status = 500;
       return next(error);
     });
 };
 
 exports.newItemForm = function(request, response, next) {
-  return response.render("new");
+  return response.render("items/new", { user_id: request.params.user_id });
 };
 
 exports.getItem = function(request, response, next) {
   return Item.findById(request.params.id)
     .then(inst => {
-      return response.render("show", { item: inst });
+      console.log("THE USER IS:", inst.user);
+      return response.render("items/show", {
+        item: inst,
+        user_id: request.params.user_id
+      });
     })
     .catch(err => {
       return response.render("404");
@@ -51,7 +93,10 @@ exports.getItem = function(request, response, next) {
 exports.editForm = function(request, response, next) {
   return Item.findById(request.params.id)
     .then(inst => {
-      return response.render("edit", { item: inst });
+      return response.render("items/edit", {
+        item: inst,
+        user_id: request.params.user_id
+      });
     })
     .catch(err => {
       return response.render("404");
@@ -61,7 +106,7 @@ exports.editForm = function(request, response, next) {
 exports.updateItem = function(request, response, next) {
   return Item.findByIdAndUpdate(request.params.id, request.body)
     .then(inst => {
-      return response.redirect("/items");
+      return response.redirect(`/users/${request.params.user_id}/items`);
     })
     .catch(err => {
       let error = new Error("Item can not be updated");
@@ -73,7 +118,7 @@ exports.updateItem = function(request, response, next) {
 exports.deleteItem = function(request, response, next) {
   return Item.findByIdAndRemove(request.params.id)
     .then(inst => {
-      return response.redirect("/items");
+      return response.redirect(`/users/${request.params.user_id}/items`);
     })
     .catch(err => {
       let error = new Error("Item can not be removed");
