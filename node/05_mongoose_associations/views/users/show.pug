@@ -1,10 +1,18 @@
-extends base.pug
+extends ../base.pug
 
 block content
 
-  h1 #{foundUser.name}
+  h1 #{foundUser.firstName}
+    br
 
-    a(href=`/users/${foundUser.id}/edit`)    click here to edit
+    a(href=`/users/${foundUser.id}/edit`) click here to edit
+      br
+      a(href=`/users/${foundUser.id}/items`) click here to see all items 
+        br
+        a(href=`/users/${foundUser.id}/items/new`) click here to add more items
+
+
+        
 
   form(action=`/users/${foundUser.id}?_method=DELETE` method = "POST")
     input(type = "submit", value = "delete this user")

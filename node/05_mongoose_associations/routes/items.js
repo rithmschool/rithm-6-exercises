@@ -1,67 +1,66 @@
 const express = require('express');
 
-const router = new express.Router();
+const router = new express.Router({ mergeParams: true });
 
 const { Item } = require('../models');
-
-router
-  .route('/')
-  .get(function(req, res, next) {
-    return User.findById(req.params.id)
-      .populate('items')
-      .exec()
-      .then(function(user) {
-        return res.render('items/index', { user });
-      });
-  })
-  .post(function(req, res, next) {
-    const newItem = new Item(req.body);
-    const { userId } = req.params;
-    newItem.user = userId;
-    return newItem
-      .save()
-      .then(function(item) {
-        return User.findByIdAndUpdate(userId, {
-          $addToSet: { items: item.id }
-        });
-      })
-      .then(function(req, res, next) {
-        return res.redirect(`/users/${userId}/items`);
-      });
+const { User } = require('../models');
+router.get('/', function(req, res, next) {
+  return User.findById(req.params.user_id)
+    .populate('item')
+    .exec()
+    .then(function(foundUser) {
+      console.log('ITEMS' + foundUser.items[0].name + '///////////////');
+      return res.render('items/index', { foundUser });
+    });
+});
+router.post('/', function(req, res, next) {
+  console.log('///////////////////////////////////////');
+  console.log(req.body);
+  let newItem = new Item(req.body);
+  let userId = req.params.user_id;
+  newItem.user = userId;
+  return newItem.save().then(function(createdItem) {
+    return User.findByIdAndUpdate(userId, {
+      $addToSet: { items: createdItem.id }
+    }).then(function() {
+      return res.redirect(`/users/${userId}/items`);
+    });
   });
-
-router.route('/new').get(function(req, res, next) {
-  return res.render('items/new');
 });
 
-router.route('/:itemId/edit').get(function(req, res, next) {
-  return Item.findById(req.params.itemId)
-    .populate('user')
-    .then(function(item) {
+router.get('/new', function(req, res, next) {
+  console.log(req.params.user_id);
+  return User.findById(req.params.user_id).then(function(foundUser) {
+    return res.render('items/new', { foundUser });
+  });
+});
+
+router.get('/:item_id/edit', function(req, res, next) {
+  return Item.findById(req.params.item_id)
+    .populate('User')
+    .then(function(foundItem) {
       return res.render('items/edit', { foundItem });
     });
 });
 
-router
-  .route('/:itemId')
-  .get(function(req, res, next) {
-    return Item.findById(req.params.itemId)
-      .populate('user')
-      .then(function(foundItem) {
-        return res.render('items/show', { foundItem });
-      });
-  })
-  .patch(function(req, res, next) {
-    return Item.findByIdAndUpdate(req.params.itemId, req.body).then(function(
-      data
-    ) {
-      return res.redirect(`users/${req.params.user_id}/items/`);
+router.get('/:item_id', function(req, res, next) {
+  return Item.findById(req.params.item_id)
+    .populate('user')
+    .then(function(foundItem) {
+      return res.render('items/show', { foundItem });
     });
-  })
-  .delete(function(req, res, next) {
-    return Item.findByIdAndRemove(req.params.itemId).then(function(data) {
-      return res.redirect(`users/${req.params.user_id}/items/`);
-    });
+});
+router.patch('/:item_id', function(req, res, next) {
+  return Item.findByIdAndUpdate(req.params.item_id, req.body).then(function(
+    data
+  ) {
+    return res.redirect(`users/${req.params.user_id}/items/`);
   });
+});
+router.delete('/:item_id', function(req, res, next) {
+  return Item.findByIdAndRemove(req.params.item_id).then(function(data) {
+    return res.redirect(`users/${req.params.user_id}/items/`);
+  });
+});
 
 module.exports = router;

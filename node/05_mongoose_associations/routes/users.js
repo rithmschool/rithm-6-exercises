@@ -1,49 +1,51 @@
 const express = require('express');
-const router = new express.Router();
+const router = new express.Router({ mergeParams: true });
 
 const { User } = require('../models');
+const { Item } = require('../models');
 
-router
-  .get('/')
-  .get(function(req, res, next) {
-    return User.find().then(function(users) {
-      return res.render('users/index', { users });
-    });
-  })
-  .post(function(req, res, next) {
-    let newUser = new User(req.body);
-    return newUser.save().then(function() {
-      return res.redirect('/');
-    });
+router.get('/', function(req, res, next) {
+  return User.find().then(function(users) {
+    console.log(users);
+    return res.render('users/index', { users });
   });
+});
 
-router.route('/new').get(function(req, res, next) {
+router.get('/new', function(req, res, next) {
   return res.render('users/new');
 });
 
-router
-  .route('/:user_id')
-  .get(function(req, res, next) {
-    return User.findById(req.params.user_id).then(function(foundUser) {
-      return res.render('users/show', { foundUser });
-    });
-  })
-  .patch(function(req, res, next) {
-    return User.findByIdAndUpdate(req.params.user_id, req.body).then(
-      function() {
-        return res.redirect('/:user_id');
-      }
-    );
-  })
-  .delete(function(req, res, next) {
-    return User.findByIdAndRemove(req.params.user_id).then(function() {
-      return res.redirect('/users');
-    });
-  });
-
-router.route('/:user_id/edit').get(function(req, res, next) {
+router.get('/:user_id', function(req, res, next) {
   return User.findById(req.params.user_id).then(function(foundUser) {
-    return res.render('/users/edit', { foundUser });
+    return res.render('users/show', { foundUser });
+  });
+});
+
+router.get('/:user_id/edit', function(req, res, next) {
+  return User.findById(req.params.user_id).then(function(foundUser) {
+    return res.render('users/edit', { foundUser });
+  });
+});
+
+router.post('/', function(req, res, next) {
+  let newUser = { firstName: req.body.firstName };
+  console.log(req.body.firstName + '///////////////////');
+  return User.create(newUser).then(function() {
+    console.log(newUser);
+    return res.redirect('/');
+  });
+});
+
+router.patch('/:user_id', function(req, res, next) {
+  return User.findByIdAndUpdate(req.params.user_id, req.body).then(function(
+    user
+  ) {
+    return res.redirect(`/${user.id}`);
+  });
+});
+router.delete('/:user_id', function(req, res, next) {
+  return User.findByIdAndRemove(req.params.user_id).then(function() {
+    return res.redirect('/users');
   });
 });
 

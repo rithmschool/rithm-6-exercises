@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/items', {
-  useMongoClient: true
-});
-
 mongoose.set('debug', true);
+
+mongoose.connect('mongodb://localhost/users');
+
 mongoose.Promise = global.Promise;
 
 module.exports.Item = require('./Item');
