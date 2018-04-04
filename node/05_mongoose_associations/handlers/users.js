@@ -92,7 +92,12 @@ exports.editUserForm = (request, response, next) => {
   return User.findById(request.params.id).then(user => {
     return Item.find()
       .then(items => {
-        return response.render("users_edit", { user, items });
+        let userItems = user.items.map(x => x.toString());
+        let addItems = items.filter(x => !userItems.includes(x._id.toString()));
+        let removeItems = items.filter(x =>
+          userItems.includes(x._id.toString())
+        );
+        return response.render("users_edit", { user, addItems, removeItems });
       })
       .catch(err => {
         return next(err);
@@ -101,11 +106,11 @@ exports.editUserForm = (request, response, next) => {
 };
 
 exports.createUserItems = (request, response, next) => {
-  return User.findByIdAndUpdate(request.params.user_id, {
+  return User.findByIdAndUpdate(request.params.id, {
     $addToSet: { items: request.body.item_id }
   })
     .then(() => {
-      return result.redirect(`/users/${request.params.id}`);
+      return response.redirect(`/users/${request.params.id}`);
     })
     .catch(err => {
       return next(err);
@@ -113,11 +118,11 @@ exports.createUserItems = (request, response, next) => {
 };
 
 exports.deleteUserItems = (request, response, next) => {
-  return User.findByIdAndUpdate(request.params.user_id, {
+  return User.findByIdAndUpdate(request.params.id, {
     $pull: { items: request.body.item_id }
   })
     .then(() => {
-      return result.redirect(`/users/${request.params.id}`);
+      return response.redirect(`/users/${request.params.id}`);
     })
     .catch(err => {
       return next(err);

@@ -5,19 +5,18 @@ block title
 
 block content
     h1 Show User - ID #{user.id}
-    br
-    p #{user.name}
-    br
-    h2 Skills
+    p Username: #{user.name}
+    h3 Items for #{user.name}
     each item in items
         li
             span #{item.name}
 
+    br
     a(href=`/users/${user.id}/edit`) Edit User
     br
-
+    br
     form(action=`/users/${user.id}?_method=DELETE` method="POST" )
-        input(type="submit", name="delete", value="X")
+        input(type="submit", name="delete", value="Delete User")
 
     br
     a(href="/users") Home
