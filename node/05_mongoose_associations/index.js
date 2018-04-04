@@ -35,26 +35,32 @@ app.use('/owners', ownersRouter);
 //routes
 app.get('/', function(req, res, next) {
   res.redirect('/owners');
-});
+}); ////////////////////////////////////////////////////////////////
 
-//errors
+/* ////////////////////////////////////////////////////////////////
+  Error Handlers
+*/ app.use(
+  (req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    return next(err);
+  }
+);
 
-// app.use((req, res, next) => {
-//   const err = new Error('Not Found');
-//   err.status = 404;
-//   return next(err);
-// });
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  return res.render('error', {
+    message: err.message
+    // not quite sure what this last line does
+    // error: app.get('env') === 'development' ? err : {}
+  });
+}); ////////////////////////////////////////////////////////////////
 
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500);
-//   return res.render('error', {
-//     message: err.message
-//     // not quite sure what this last line does
-//     // error: app.get('env') === 'development' ? err : {}
-//   });
-// });
-
-//server init
-app.listen(3000, function() {
-  console.log('Server starting on 3000');
-});
+/* ////////////////////////////////////////////////////////////////
+  Starts Server
+*/ app.listen(
+  3000,
+  function() {
+    console.log('Server starting on 3000');
+  }
+);

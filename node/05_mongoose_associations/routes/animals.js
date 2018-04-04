@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const {
-  renderIndex,
+  // renderIndex,
   renderEdit,
   renderNew,
   renderShow,
@@ -15,18 +15,18 @@ const {
 
 router
   .route('')
-  .get(renderIndex)
+  // .get(renderIndex)
   .post(postNew)
   .delete(deleteAll);
 
 router.route('/new').get(renderNew);
 
-router.route('/search').get(search);
+// router.route('/search').get(search);
 router
-  .route('/:id')
+  .route('/:animalId')
   .get(renderShow)
   .patch(updateItem)
   .delete(deleteItem);
-router.route('/:id/edit').get(renderEdit);
+router.route('/:animalId/edit').get(renderEdit);
 
 module.exports = router;

@@ -1,23 +1,26 @@
 const { Animal } = require('../models');
 const { Owner } = require('../models');
 
-exports.renderIndex = async function(req, res, next) {
-  let animals;
-  try {
-    animals = await Animal.find({});
-  } catch (err) {
-    console.log(err.message);
-  }
-  res.render('animals/index', { animals });
-};
+// exports.renderIndex = async function(req, res, next) {
+//   let animals;
+//   try {
+//     animals = await Animal.find({});
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+//   res.render('animals/index', { animals });
+// };
 
 exports.renderNew = function(req, res, next) {
   res.render('animals/new', { owner_id: req.params.id });
 };
 
 exports.renderShow = async function(req, res, next) {
-  const animalId = req.params.id;
+  const { animalId, id } = req.params;
+  console.log(animalId);
+  console.log(id);
   let animal;
+  let owner;
   try {
     animal = await Animal.findById({ _id: animalId });
   } catch (err) {

@@ -19,7 +19,7 @@ router
 
 router.route('/new').get(renderNew);
 
-router.route('/search').get(search);
+// router.route('/search').get(search);
 router
   .route('/:id')
   .get(renderShow)
