@@ -1,9 +1,10 @@
 const express = require('express');
 const { User, Item } = require('../models');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
+
 
 router
-    .route('/')
+    .route('/users')
     .get((req, res, next) => {
         User.find()
             .then(users => res.render('usersIndex', { users }))
@@ -11,11 +12,11 @@ router
     })
     .post((req, res, next) => {
         User.create(req.body)
-            .then(() => res.redirect('/')
+            .then(() => res.redirect('/users')
                 .catch(err => next(err)))
     });
 
-router.route('/:id')
+router.route('/users/:userId')
     .get((req, res, next) => {
         User.findById(req.params.id)
             .populate('items')
@@ -40,13 +41,13 @@ router.route('/:id')
     })
 
 router
-    .route('/new')
+    .route('/users/new')
     .get((req, res, next) => {
         return res.render('newUser');
     });
 
 router
-    .route('/:id/edit')
+    .route('/users/:userId/edit')
     .get((req, res, next) =>
         User.findById(req.params.id)
         .then(user => res.render('usersEdit', { user }))
@@ -54,7 +55,7 @@ router
     );
 
 router
-    .route('/:id/items/new')
+    .route('/users/:userId/items/new')
     .get((req, res, next) => {
         return User.findById(req.params.id).then(user => {
             return Item.find().then(items => {
@@ -64,7 +65,7 @@ router
     });
 
 router
-    .route('/:id/items').post((req, res, next) => {
+    .route('/:userId/items').post((req, res, next) => {
         return User.findByIdAndUpdate(req.params.id, {
             $addToSet: { skills: req.body.item_id }
         }).then(() => {

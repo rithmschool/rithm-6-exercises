@@ -4,28 +4,29 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 
+// app imports
+const { itemsRouter, usersRouter } = require('./router');
+
 // globals
 const PORT = 3000;
-const { itemsRouter, usersRouter } = require('./router');
 const app = express();
 
 // settings
 app.set('view engine', 'pug');
-app.use(express.static(_dirname + '/public'));
 
 // database
-const mongoose = require("mongoose");
-mongoose.set("debug", true);
+const mongoose = require('mongoose');
+mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/items")
+mongoose.connect('mongodb://localhost/items')
     .then(() => {
-        console.log("Connected to MongoDB!");
+        console.log('Connected to MongoDB!');
     })
     .catch(err => {
         console.log(err);
     });
 
-// middleware
+// middleware app config
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ type: '*/*' }))
@@ -37,9 +38,12 @@ app.get('/', (req, res, next) => {
     return res.redirect('/users');
 })
 
-app.use((req, res, next) => {
+app.use((err, req, res, next) => {
     if (err.status === 500) {
         return res.send(err)
+    }
+    if (err.status === 400) {
+        return res.render('404')
     }
 })
 

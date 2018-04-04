@@ -1,11 +1,11 @@
-const express = require("express");
-const { Item, User } = require("../models");
+const express = require('express');
+const { Item, User } = require('../models');
 const router = express.Router({ mergeParams: true });
 
 router
-    .route("/")
+    .route('/users/:userId/items')
     .get((req, res, next) => {
-        User.findById(req.params.userId)
+        return User.findById(req.params.userId)
             .populate('items')
             .exec()
             .then(user => res.render('index', { user }))
@@ -22,41 +22,41 @@ router
     })
     .delete((req, res, next) => {
         return Item.remove({}).then(() => {
-            return res.redirect("/")
-        })
+            return res.redirect('/')
+        }).catch(err => next(err))
     })
 
 router
-    .route("/new")
+    .route('/users/:userId/items/new')
     .get((req, res, next) => {
-        User.findById(req.params.userId)
+        return User.findById(req.params.userId)
             .then(user => res.render('new', { user }))
             .catch(err => next(err))
     });
 
 router
-    .route("/:id")
+    .route('/users/:userId/items/:itemId')
     .get((req, res, next) => {
-        Item.findById(req.params.id)
+        return Item.findById(req.params.id)
             .populate('user')
             .then(item => res.render('show', { item }))
             .catch(err => next(err))
     })
     .patch((req, res, next) => {
-        Item.findByIdAndUpdate(req.params.id, req.body)
+        return Item.findByIdAndUpdate(req.params.id, req.body)
             .then(() => res.redirect(`/users/${req.params.userId}/items`))
             .catch(err => next(err))
     })
     .delete((req, res, next) => {
-        Item.findByIdAndRemove(req.params.id)
+        return Item.findByIdAndRemove(req.params.id)
             .then(() => res.redirect(`/users/${req.params.userId}/items`))
             .catch(err => next(err))
     });
 
 router
-    .route("/:id/edit")
+    .route('/users/:userId/items/:itemId/edit')
     .get((req, res, next) => {
-        Item.findById(req.params.id)
+        return Item.findById(req.params.id)
             .populate('user')
             .then(item => res.render('edit', { item }))
             .catch(err => next(err))
@@ -64,10 +64,10 @@ router
 
 // search route does not work yet
 router
-    .route("/search")
+    .route('/search')
     .get((req, res, next) => {
         return Item.find({ name: req.query.name }).then(item => {
-            return res.render("result", { item })
+            return res.render('result', { item })
         })
     })
 
