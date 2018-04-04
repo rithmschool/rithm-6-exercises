@@ -8,13 +8,14 @@ const app = express();
 app.set("view engine", "pug");
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: "*/*" }));
 app.use(methodOverride("_method"));
 app.use("/items", itemsRouter);
 app.use("/users", usersRouter);
 app.use(morgan("dev"));
 
 app.get("/", (request, response) => {
-  return response.redirect("/items");
+  return response.redirect("/users");
 });
 
 app.use((request, response, next) => {

@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Item } = require("../models");
 
 exports.getAllUsers = (request, response, next) => {
   return User.find()
@@ -55,8 +55,11 @@ exports.searchResults = (request, response, next) => {
 
 exports.showUser = (request, response, next) => {
   return User.findById(request.params.id)
+    .populate("items")
+    .exec()
     .then(user => {
-      return response.render("users_show", { user });
+      const items = user.items || [];
+      return response.render("users_show", { user, items });
     })
     .catch(err => {
       return next(err);
@@ -86,9 +89,35 @@ exports.deleteUser = (request, response, next) => {
 };
 
 exports.editUserForm = (request, response, next) => {
-  return User.findById(request.params.id)
-    .then(user => {
-      return response.render("users_edit", { user });
+  return User.findById(request.params.id).then(user => {
+    return Item.find()
+      .then(items => {
+        return response.render("users_edit", { user, items });
+      })
+      .catch(err => {
+        return next(err);
+      });
+  });
+};
+
+exports.createUserItems = (request, response, next) => {
+  return User.findByIdAndUpdate(request.params.user_id, {
+    $addToSet: { items: request.body.item_id }
+  })
+    .then(() => {
+      return result.redirect(`/users/${request.params.id}`);
+    })
+    .catch(err => {
+      return next(err);
+    });
+};
+
+exports.deleteUserItems = (request, response, next) => {
+  return User.findByIdAndUpdate(request.params.user_id, {
+    $pull: { items: request.body.item_id }
+  })
+    .then(() => {
+      return result.redirect(`/users/${request.params.id}`);
     })
     .catch(err => {
       return next(err);

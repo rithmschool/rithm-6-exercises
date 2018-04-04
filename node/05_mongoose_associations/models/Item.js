@@ -10,7 +10,13 @@ const itemSchema = new mongoose.Schema(
       type: Number,
       min: 0,
       required: true
-    }
+    },
+    users: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ]
   },
   {
     timestamps: true

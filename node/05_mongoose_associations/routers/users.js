@@ -22,4 +22,9 @@ router
 
 router.route("/:id/edit").get(usersHandlers.editUserForm);
 
+router
+  .route("/:id/items")
+  .patch(usersHandlers.createUserItems)
+  .delete(usersHandlers.deleteUserItems);
+
 module.exports = router;

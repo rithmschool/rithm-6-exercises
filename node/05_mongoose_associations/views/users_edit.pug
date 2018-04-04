@@ -6,6 +6,21 @@ block title
 block content
     h1 Edit User
 
+    h2 Add Items
+    each item in addItems:
+        span #{item.name}
+        form(action=`/users/${user.id}/items?_method=PATCH` method="POST")
+            input(type="text" name="item_id" value=`${item.id}` hidden=true)
+            input(type="submit" value="Add Item")
+
+
+    h2 Delete Items
+    each item in delItems:
+        span #{item.name}
+        form(action=`/users/${user.id}/items?_method=DELETE` method="POST")
+            input(type="text" name="item_id" value=`${item.id}` hidden=true)
+            input(type="submit" value="Remove Item")
+
     form(action=`/users/${user.id}?_method=PATCH` method="POST")
         br
         label Name
