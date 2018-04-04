@@ -1,5 +1,5 @@
-const Animal = require('../models/Animal');
-const Owner = require('../models/Owner');
+const { Animal } = require('../models');
+const { Owner } = require('../models');
 
 exports.renderIndex = async function(req, res, next) {
   let animals;

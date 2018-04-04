@@ -1,4 +1,4 @@
-//basic dependencies
+// npm packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 
 //globals
 const app = express();
-const animalRoutes = require('./routes/animals');
-const ownerRoutes = require('./routes/owners');
+const { animalsRouter } = require('./routes');
+const { ownersRouter } = require('./routes');
 
 //Database
 mongoose.set('debug', true);
@@ -29,8 +29,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/owners/:id/animals', animalRoutes);
-app.use('/owners', ownerRoutes);
+app.use('/owners/:id/animals', animalsRouter);
+app.use('/owners', ownersRouter);
 
 //routes
 app.get('/', function(req, res, next) {
