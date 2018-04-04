@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+  h1 Users
+  a(href="/users/new") Add a User
+  ul
+    each user in users
+      li #{user.name} &nbsp;
+      a(href=`/users/${user.id}`) See Users Shopping List
+

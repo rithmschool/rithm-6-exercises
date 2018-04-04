@@ -20,9 +20,9 @@ app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 
 // routes
-app.get('/', (req, res) => res.redirect('/users'));
+app.get('/', (req, res) => res.redirect('/items'));
 app.use('/users', usersRouter);
-app.use('/users/:userId/items', itemsRouter);
+app.use('/items', itemsRouter);
 
 // error handler
 app.use((err, req, res, next) => {

@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+  h1 #{user.name}'s Shopping List
+  a(href=`/users/${user._id}/items/new`) Add an Item to the Shopping List
+  ol
+    each item in items
+      li #{item.name} Qty: #{item.quantity}
+      form(action=`/users/${user._id}/items?_method=DELETE` method="POST")
+        input(type="text" name="item_id" value=`${item._id}` hidden=true)
+        input(type="submit" value="Remove Item from Shopping List")
