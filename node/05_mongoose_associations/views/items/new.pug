@@ -1,0 +1,17 @@
+extends base.pug
+
+block title
+    title add new item
+
+block content
+    div(class="text-center m-4")
+        h1 add a new list item
+    
+    form(action="/items", method="POST")
+        div(class="form-group")
+            label(for="name") list item
+            input(type="text",class="form-control",id="name",name="name",aria-describedby="nameHelp",placeholder="Enter item")
+        div(class="form-group")
+            label(for="quantity") quantity of item
+            input(type="text",class="form-control",id="quantity",name="quantity",aria-describedby="quantityHelp",placeholder="Enter quantity")
+        button(type="submit",class="btn btn-secondary btn-lg btn-block") submit new item 

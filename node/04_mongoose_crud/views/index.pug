@@ -6,7 +6,7 @@ block content
     ul
     each item in items
       li
-        a(href='/items/' + item.id) #{item.name}: + $  + #{item.price}
+        a(href='/items/' + item.id) #{item.name}: #{item.price}
 
     a(href='/items/new', class="btn btn-primary") Add New
         

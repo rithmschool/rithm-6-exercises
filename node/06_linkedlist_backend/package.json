@@ -1,0 +1,20 @@
+{
+  "name": "06_linkedlist_backend",
+  "version": "1.0.0",
+  "description": "It's time to start the backend for the capstone project of Node/Express! Introducing, [LinkedList](https://github.com/rithmschool/LinkedList) - a LinkedIn / AngelList (pun) clone.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0"
+  }
+}

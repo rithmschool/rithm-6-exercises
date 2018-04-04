@@ -1,0 +1,14 @@
+extends base.pug
+
+block title
+    title add new user
+
+block content
+    div(class="text-center m-4")
+        h1 add a new user
+    
+    form(action="/users", method="POST")
+        div(class="form-group")
+            label(for="name") user
+            input(type="text",class="form-control",id="name",name="name",aria-describedby="nameHelp",placeholder="Enter item")
+        button(type="submit",class="btn btn-secondary btn-lg btn-block") create new user
