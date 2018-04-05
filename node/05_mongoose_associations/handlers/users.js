@@ -2,6 +2,7 @@ const { User, Item } = require("../models");
 
 exports.getAllUsers = (request, response, next) => {
   return User.find()
+    .sort("name")
     .then(users => {
       return response.render("users_index", { userList: users });
     })
@@ -59,6 +60,7 @@ exports.showUser = (request, response, next) => {
     .exec()
     .then(user => {
       const items = user.items || [];
+      items.sort((a, b) => a.name > b.name);
       return response.render("users_show", { user, items });
     })
     .catch(err => {
@@ -94,15 +96,13 @@ exports.editUserForm = (request, response, next) => {
       .then(items => {
         let userItems = user.items.map(x => x.toString());
         let addItems = items.filter(x => !userItems.includes(x._id.toString()));
+        addItems.sort((a, b) => a.name > b.name);
         let removeItems = items.filter(x =>
           userItems.includes(x._id.toString())
         );
-        return response.render("users_edit", {
-          user,
-          addItems,
-          removeItems,
-          userItems
-        });
+        removeItems.sort((a, b) => a.name > b.name);
+
+        return response.render("users_edit", { user, addItems, removeItems });
       })
       .catch(err => {
         return next(err);

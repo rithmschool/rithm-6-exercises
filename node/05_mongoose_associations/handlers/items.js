@@ -2,6 +2,7 @@ const { Item } = require("../models");
 
 exports.getAllItems = (request, response, next) => {
   return Item.find()
+    .sort("name")
     .then(items => {
       return response.render("items_index", { shoppingList: items });
     })

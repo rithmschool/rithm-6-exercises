@@ -9,7 +9,7 @@ block content
     h3 Items for #{user.name}
     each item in items
         li
-            span #{item.name}
+            span #{item.name} | #{item.quantity}
 
     br
     a(href=`/users/${user.id}/edit`) Edit User
@@ -18,5 +18,3 @@ block content
     form(action=`/users/${user.id}?_method=DELETE` method="POST" )
         input(type="submit", name="delete", value="Delete User")
 
-    br
-    a(href="/users") Home

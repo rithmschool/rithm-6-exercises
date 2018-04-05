@@ -22,7 +22,7 @@ block content
     h2 Add Items to User
     each item in addItems
       li
-        span #{item.name}
+        span #{item.name} | #{item.quantity}
         form(action=`/users/${user.id}/items?_method=PATCH` method="POST")
             input(type="text" name="item_id" value=`${item.id}` hidden=true)
             input(type="submit" value="Add Item")
@@ -31,7 +31,7 @@ block content
     h2 Remove Items from User
     each item in removeItems
       li
-        span #{item.name}
+        span #{item.name} | #{item.quantity}
         form(action=`/users/${user.id}/items?_method=DELETE` method="POST")
             input(type="text" name="item_id" value=`${item.id}` hidden=true)
             input(type="submit" value="Remove Item")
