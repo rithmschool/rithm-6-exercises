@@ -97,7 +97,12 @@ exports.editUserForm = (request, response, next) => {
         let removeItems = items.filter(x =>
           userItems.includes(x._id.toString())
         );
-        return response.render("users_edit", { user, addItems, removeItems });
+        return response.render("users_edit", {
+          user,
+          addItems,
+          removeItems,
+          userItems
+        });
       })
       .catch(err => {
         return next(err);

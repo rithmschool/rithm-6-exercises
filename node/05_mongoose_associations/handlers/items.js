@@ -3,7 +3,7 @@ const { Item } = require("../models");
 exports.getAllItems = (request, response, next) => {
   return Item.find()
     .then(items => {
-      return response.render("index", { shoppingList: items });
+      return response.render("items_index", { shoppingList: items });
     })
     .catch(err => {
       return next(err);
@@ -33,17 +33,17 @@ exports.deleteAllItems = (request, response, next) => {
 };
 
 exports.createNewItemForm = (request, response) => {
-  return response.render("new");
+  return response.render("items_new");
 };
 
 exports.searchItemForm = (request, response) => {
-  return response.render("search");
+  return response.render("items_search");
 };
 
 exports.searchResults = (request, response, next) => {
   return Item.find({ name: request.query.name }) //return Item.find({ name: { $regex: /^`${request.query.name}`/i } })
     .then(items => {
-      return response.render("searchresults", {
+      return response.render("items_searchresults", {
         searchItem: request.query.name,
         searchResults: items
       });
@@ -56,7 +56,7 @@ exports.searchResults = (request, response, next) => {
 exports.showItem = (request, response, next) => {
   return Item.findById(request.params.id)
     .then(item => {
-      return response.render("show", { item });
+      return response.render("items_show", { item });
     })
     .catch(err => {
       return next(err);
@@ -88,7 +88,7 @@ exports.deleteItem = (request, response, next) => {
 exports.editItemForm = (request, response, next) => {
   return Item.findById(request.params.id)
     .then(item => {
-      return response.render("edit", { item });
+      return response.render("items_edit", { item });
     })
     .catch(err => {
       return next(err);
