@@ -16,8 +16,16 @@ exports.renderNew = function(req, res, next) {
 };
 
 exports.renderShow = async function(req, res, next) {
-  const { animalId, id } = req.params;
-  console.log(animalId);
+  console.log('renderShow params=', req.params);
+  const { animalId, id } = req.params; ////////////////////////////////////////////////////////////////
+  /* ////////////////////////////////////////////////////////////////
+    Why am I not getting both the id and the animal id?
+    Do I need both?
+    Do I need to get both from the view?
+    Can these be accessed via the req.params
+  */ console.log(
+    animalId
+  );
   console.log(id);
   let animal;
   let owner;

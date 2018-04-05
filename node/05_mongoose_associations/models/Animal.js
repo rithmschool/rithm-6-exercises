@@ -12,6 +12,9 @@ const animalSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//hook here
+// animalSchema.post('save', fn - to - call - after - save);
+
 const Animal = mongoose.model('Animal', animalSchema);
 
 module.exports = Animal;
