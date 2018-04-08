@@ -8,16 +8,16 @@ const {
   renderShow,
   postNew,
   updateItem,
-  deleteItem,
-  deleteAll,
-  search
+  deleteItem
+  // deleteAll,
+  // search
 } = require('../handlers/animals');
 
 router
   .route('')
   // .get(renderIndex)
-  .post(postNew)
-  .delete(deleteAll);
+  .post(postNew);
+// .delete(deleteAll);
 
 router.route('/new').get(renderNew);
 

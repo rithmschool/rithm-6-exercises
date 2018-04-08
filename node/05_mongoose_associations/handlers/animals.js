@@ -78,23 +78,23 @@ exports.deleteItem = async function(req, res, next) {
   res.redirect(`/owners/${id}`);
 };
 
-exports.deleteAll = async function(req, res, next) {
-  const animalId = req.params.id;
-  try {
-    await Animal.remove({});
-  } catch (err) {
-    console.log(err.message);
-  }
-  res.redirect('/animals');
-};
+// exports.deleteAll = async function(req, res, next) {
+//   const animalId = req.params.id;
+//   try {
+//     await Animal.remove({});
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+//   res.redirect('/animals');
+// };
 
-exports.search = async function(req, res, next) {
-  const searchQuery = req.query.search;
-  let animals;
-  try {
-    animals = await Animal.find({ name: searchQuery });
-  } catch (err) {
-    console.log(err.message);
-  }
-  res.render('animals/index', { animals });
-};
+// exports.search = async function(req, res, next) {
+//   const searchQuery = req.query.search;
+//   let animals;
+//   try {
+//     animals = await Animal.find({ name: searchQuery });
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+//   res.render('animals/index', { animals });
+// };
