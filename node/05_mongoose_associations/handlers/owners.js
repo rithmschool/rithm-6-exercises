@@ -1,7 +1,10 @@
-const { Owner } = require('../models');
-const { Animal } = require('../models');
+const mongoose = require('mongoose');
 
-exports.renderIndex = async function(req, res, next) {
+const { Owner, Animal } = require('../models');
+
+/*
+  Renders all owners
+*/ exports.renderIndex = async function(req, res, next) {
   let owners;
   try {
     owners = await Owner.find({});
@@ -10,10 +13,17 @@ exports.renderIndex = async function(req, res, next) {
   }
   res.render('owners/index', { owners });
 };
-
+/*
+  Renders new owner page
+*/
 exports.renderNew = function(req, res, next) {
   res.render('owners/new');
 };
+/*
+  requies target owner
+  populates the 'animals' field in that object
+  renders owner/show with owner and animals of that owner
+*/
 
 exports.renderShow = async function(req, res, next) {
   const ownerId = req.params.id;
@@ -29,6 +39,10 @@ exports.renderShow = async function(req, res, next) {
   }
   res.render('owners/show', { owner, animals });
 };
+/*
+  queries owner id specified in params
+  renders edit page passing in that owner
+*/
 
 exports.renderEdit = async function(req, res, next) {
   const ownerId = req.params.id;
@@ -40,7 +54,10 @@ exports.renderEdit = async function(req, res, next) {
   }
   res.render('owners/edit', { owner });
 };
-
+/*
+  creates new owner from the request.body data
+  redirects to owners
+*/
 exports.postNew = async function(req, res, next) {
   try {
     await Owner.create(req.body);
@@ -49,7 +66,11 @@ exports.postNew = async function(req, res, next) {
   }
   res.redirect('/owners');
 };
-
+/*
+  queries owner according to the id specified in the route
+  updates that owner with the contents of the request body
+  redirects to the specified owner's show page
+*/
 exports.updateItem = async function(req, res, next) {
   const ownerId = req.params.id;
   let owner;
@@ -61,10 +82,17 @@ exports.updateItem = async function(req, res, next) {
   res.redirect(`/owners/${owner.id}`);
 };
 
+/*
+  removes owner specified
+*/
+
 exports.deleteItem = async function(req, res, next) {
   const ownerId = req.params.id;
   try {
-    await Owner.findByIdAndRemove(ownerId);
+    const owner = await Owner.findByIdAndRemove(ownerId);
+    console.log('THIS IS THE OWNER:', owner);
+    const animal = await Animal.remove({ owner: owner.id });
+    console.log('THIS IS THE ANIMAL THAT WAS REMOVED', animal);
   } catch (err) {
     console.log(err.message);
   }
