@@ -1,12 +1,10 @@
-const { Animal } = require('../models');
-const { Owner } = require('../models');
+const { Animal, Owner } = require('../models');
 
 // exports.renderIndex = async function(req, res, next) {
 //   let animals;
 //   try {
 //     animals = await Animal.find({});
 //   } catch (err) {
-//     console.log(err.message);
 //   }
 //   res.render('animals/index', { animals });
 // };
@@ -16,29 +14,19 @@ exports.renderNew = function(req, res, next) {
 };
 
 exports.renderShow = async function(req, res, next) {
-  console.log('renderShow params=', req.params);
-  const { animalId, id } = req.params; ////////////////////////////////////////////////////////////////
-  /* ////////////////////////////////////////////////////////////////
-    Why am I not getting both the id and the animal id?
-    Do I need both?
-    Do I need to get both from the view?
-    Can these be accessed via the req.params
-  */ console.log(
-    animalId
-  );
-  console.log(id);
+  const { animalId, id } = req.params;
   let animal;
-  let owner;
   try {
     animal = await Animal.findById({ _id: animalId });
   } catch (err) {
     console.log(err.message);
   }
-  res.render('animals/show', { animal });
+
+  res.render('animals/show', { animal, id });
 };
 
 exports.renderEdit = async function(req, res, next) {
-  const animalId = req.params.id;
+  const { id, animalId } = req.params;
   let animal;
   try {
     animal = await Animal.findById({ _id: animalId });
@@ -49,11 +37,8 @@ exports.renderEdit = async function(req, res, next) {
 };
 
 exports.postNew = async function(req, res, next) {
-  const { name, cuteness } = req.body;
   const ownerId = req.params.id;
-  // console.log('before animal');
   const newAnimal = new Animal(req.body);
-  // console.log('before animal');
   newAnimal.owner = ownerId;
   return newAnimal
     .save()
@@ -66,34 +51,31 @@ exports.postNew = async function(req, res, next) {
       return res.redirect(`/owners/${ownerId}`);
     })
     .catch(err => next(err));
-
-  // await Animal.create({ name, cuteness });
-  // } catch (err) {
-  //   console.log(err.message);
-  // }
-  // res.redirect('/animals');
 };
 
 exports.updateItem = async function(req, res, next) {
-  const animalId = req.params.id;
-  const { name, cuteness } = req.body;
+  const { id, animalId } = req.params;
   let animal;
+
   try {
-    animal = await Animal.findByIdAndUpdate(animalId, { name, cuteness });
+    animal = await Animal.findByIdAndUpdate(animalId, req.body);
   } catch (err) {
     console.log(err.message);
   }
-  res.redirect(`/animals/${animal.id}`);
+  res.redirect(`/owners/${id}/animals/${animal.id}`);
 };
 
 exports.deleteItem = async function(req, res, next) {
-  const animalId = req.params.id;
+  const { id, animalId } = req.params;
   try {
     await Animal.findByIdAndRemove(animalId);
+    const owner = await Owner.findByIdAndUpdate(id, {
+      $pull: { animals: animalId }
+    });
   } catch (err) {
     console.log(err.message);
   }
-  res.redirect('/animals');
+  res.redirect(`/owners/${id}`);
 };
 
 exports.deleteAll = async function(req, res, next) {

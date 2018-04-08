@@ -35,7 +35,7 @@ app.use('/owners', ownersRouter);
 //routes
 app.get('/', function(req, res, next) {
   res.redirect('/owners');
-}); ////////////////////////////////////////////////////////////////
+});
 
 /* ////////////////////////////////////////////////////////////////
   Error Handlers
@@ -50,11 +50,11 @@ app.get('/', function(req, res, next) {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   return res.render('error', {
-    message: err.message
+    message: err.message,
     // not quite sure what this last line does
-    // error: app.get('env') === 'development' ? err : {}
+    error: app.get('env') === 'development' ? err : {}
   });
-}); ////////////////////////////////////////////////////////////////
+});
 
 /* ////////////////////////////////////////////////////////////////
   Starts Server

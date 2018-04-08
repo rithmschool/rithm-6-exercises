@@ -2,7 +2,7 @@ extends ../base.pug
 
 block content
     h1(class='text-center') Would you like to change your animal?
-    form(action=`/animals/${animal.id}?_method=PATCH` method="POST")
+    form(action=`/owners/${animal.owner}/animals/${animal.id}?_method=PATCH` method="POST")
       <div class="form-group">
         label(for="name" class='form-group') Name:
         input(type="text" name="name" value=`${animal.name}` placeholder="Name" required)
@@ -11,4 +11,4 @@ block content
         input(type="text" name="cuteness" value=`${animal.cuteness}` placeholder="Cuteness" required)
       <div class="form-group">
         button(class='btn btn-primary') Change Animal!
-    a(href=`/animals/${animal.id}`) Go back to this animal's main page
+    a(href=`/owners/${animal.owner}/animals/${animal.id}`) Go back to this animal's main page

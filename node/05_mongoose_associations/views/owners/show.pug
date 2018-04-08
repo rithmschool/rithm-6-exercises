@@ -8,9 +8,8 @@ block content
       ul(class='list-unstyled')
         for animal in animals
             li
-              a(href=`/owners/${owner.id}/animals/${animal.id}`) #{animal.name}
+              a(href=`/owners/${animal.owner}/animals/${animal.id}`) #{animal.name}
               span : #{animal.cuteness}
-              span : #{animal.id}
       a(class="d-flex justify-content-center" href="/owners") Go back to all users
 
 
