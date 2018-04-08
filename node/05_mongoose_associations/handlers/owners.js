@@ -90,9 +90,7 @@ exports.deleteItem = async function(req, res, next) {
   const ownerId = req.params.id;
   try {
     const owner = await Owner.findByIdAndRemove(ownerId);
-    console.log('THIS IS THE OWNER:', owner);
     const animal = await Animal.remove({ owner: owner.id });
-    console.log('THIS IS THE ANIMAL THAT WAS REMOVED', animal);
   } catch (err) {
     console.log(err.message);
   }
