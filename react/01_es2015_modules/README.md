@@ -16,7 +16,7 @@ For this assignment you should create three JavaScript files:
     "🍉",
     "🍊",
     "🍋",
-    "��",
+    "🍌",
     "🍍",
     "🍎",
     "🍏",
@@ -31,8 +31,8 @@ For this assignment you should create three JavaScript files:
 
 * `main.js` - This file should import the fruits and both array helpers. It should then:
   * Randomly draw a fruit from the array
-  * Log the message "I'd like one RANDOM_FRUIT, please."
-  * Log the message "Here you go: RANDOM_FRUIT"
-  * Log the message "Delicious! May I have another?"
+  * Log the message _I'd like one RANDOMFRUIT, please._
+  * Log the message _Here you go: RANDOMFRUIT_
+  * Log the message _Delicious! May I have another?_
   * Remove the fruit from the array of fruits
-  * Log the message "I'm sorry, we are all out. We have NUMBER_OF_FRUITS_LEFT fruits remaining."
+  * Log the message _I'm sorry, we are all out. We have FRUITSLEFT fruits remaining._
