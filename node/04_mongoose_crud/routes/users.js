@@ -11,7 +11,7 @@ router
 router.route("/new").get(users.createUserForm);
 
 router
-  .route("/:ownerId")
+  .route("/:id")
   .get(users.readUsers)
   .delete(users.deleteUser);
 

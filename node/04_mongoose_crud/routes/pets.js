@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const { pets } = require("../handlers");
 
 router
@@ -10,12 +10,12 @@ router
 router.route("/new").get(pets.newPetForm);
 
 router
-  .route("/:petId")
+  .route("/:id")
   .get(pets.showPet)
   .patch(pets.updatePet)
   .delete(pets.deletePet);
 
-router.route("/:petId/edit").get(pets.editPet);
+router.route("/:id/edit").get(pets.editPet);
 
 // router.post("/", addPet);
 

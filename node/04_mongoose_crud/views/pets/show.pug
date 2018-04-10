@@ -8,10 +8,10 @@ block content
     h6 Possible Names: #{pet.petNames}
     h6 Website: #{pet.petUrl}
     h6 Notes: #{pet.petNotes}
-  a(href=`users/${user.id}/pets/${pet.id}/edit`) Edit
+  a(href=`/users/${pet.user}/pets/${id}/edit`) Edit
   div
-    a(href="/pets") Go back to the List
+    a(href=`/users/${user}/pets`) Go back to the List
   div
-    form(action=`users/${user.id}/pets/${pet.id}?_method=DELETE` method="POST")
+    form(action=`/users/${pet.user}/pets/${pet.id}?_method=DELETE` method="POST")
   div
       button(class="btn btn-danger") Delete It

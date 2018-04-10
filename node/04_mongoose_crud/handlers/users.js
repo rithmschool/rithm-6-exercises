@@ -7,7 +7,7 @@ exports.readUsers = function(req, res, next) {
 };
 exports.createUser = function(req, res, next) {
   return User.create(req.body).then(user => {
-    return res.redirect(`/users/${user.id}/pets`);
+    return res.redirect("/users");
   });
 };
 // exports.updateUser = function(req, res, next) {

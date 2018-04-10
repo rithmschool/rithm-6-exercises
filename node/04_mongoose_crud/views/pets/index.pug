@@ -2,9 +2,9 @@ extends ../base.pug
 block content
   section(class="img__background")
     div(class="row")
-      h2(class="mx-auto mb-4") PetLife Prep!
+      h2(class="mx-auto mb-4") #{user.name} PetLife Prep!
     div(class="row")
-      a(href="/pets/new" class="mx-auto mb-4") Add FurBaby to your Wish List!
+      a(href=`/users/${user.id}/pets/new` class="mx-auto mb-4") Add FurBaby to your Wish List!
     div(class="row")
       table(class="table table-hover table table-bordered text-center mx-auto")
         thead
@@ -20,6 +20,7 @@ block content
           tr
         thead
         tbody
+        //- if (user.pets.length !== 0)
         each pet in user.pets
           tr
             th(scope="row") #{pet.type}
@@ -27,7 +28,7 @@ block content
             td #{pet.petNames[0]}
             td #{pet.url}
             td
-             a(href=`/pets/${pet.id}`)
+             a(href=`/users/${user.id}/pets/${pet._id}`)
               i(class="fas fa-paw")
             td
              a(href=`/pets/${pet.id}`)
