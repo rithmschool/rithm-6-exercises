@@ -115,7 +115,7 @@ Complete the following CodeWars problems:
 **BONUS**
 
 - Write a function called search that finds a value in an array and returns the index where the value is at. If the value is not found, the function should return negative 1.
-
+    
 ```javascript
 search([1,2,3,4,5],5) // 4
 search([1,2,3,4,5],15) // -1
