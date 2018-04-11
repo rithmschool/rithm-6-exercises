@@ -13,26 +13,14 @@ messages_blueprint = Blueprint(
 def index(user_id):
     if request.method == 'POST':
         message_form = MessageForm(request.form)
-        import pdb
-        pdb.set_trace()
+        message_form.set_choices()
         if message_form.validate():
-            content = message_form.content.data  # 'body of msg'
-            import pdb
-            pdb.set_trace()
-            # ugly_way_to_get_tags = request.message_form.getmultiple('tags')  # ['1', '2', '3']
-            # tag_ids = message_form.tags.data  # [1, 2, 3]   <- ids of tags
-            import pdb
-            pdb.set_trace()
+            content = message_form.content.data
+            tag_ids = message_form.tags.data  # [1, 2, 3]   <- ids of tags
             new_message = Message(content, user_id)
-            import pdb
-            pdb.set_trace()
-            # new_tags = [Tag.query.get(id)
-            #             for id in tag_ids]  # [<Tag 1>, <Tag 2>]
-            import pdb
-            pdb.set_trace()
-            # new_message.tags.extend(new_tags)
-            # import pdb
-            # pdb.set_trace()
+            new_tags = [Tag.query.get(id)
+                        for id in tag_ids]  # [<Tag 1>, <Tag 2>]
+            new_message.tags.extend(new_tags)
             # when you do this in edit, you need to clear the current tags first
             db.session.add(new_message)
             db.session.commit()
@@ -58,9 +46,15 @@ def new(user_id):
 def show(message_id, user_id):
     target_message = Message.query.get(message_id)
     if request.method == b'PATCH':
-        message_form = MessageForm(request.message_form)
+        message_form = MessageForm(request.form)
+        message_form.set_choices()
         if message_form.validate():
-            target_message.content = request.message_form.get('content')
+            target_message.content = request.form.get('content')
+            tag_ids = message_form.tags.data  # [1, 2, 3]   <- ids of tags
+            new_tags = [Tag.query.get(id)
+                        for id in tag_ids]  # [<Tag 1>, <Tag 2>]
+            target_message.tags = new_tags
+            # target_message.tags.extend(new_tags)
             db.session.add(target_message)
             db.session.commit()
             flash('Message edited')
@@ -72,7 +66,7 @@ def show(message_id, user_id):
                 message=target_message,
                 message_form=message_form)
     if request.method == b'DELETE':
-        delete_form = DeleteForm(request.message_form)
+        delete_form = DeleteForm(request.form)
         if delete_form.validate():
             db.session.delete(target_message)
             db.session.commit()
@@ -85,11 +79,21 @@ def show(message_id, user_id):
 @ensure_correct_user
 def edit(message_id, user_id):
     target_message = Message.query.get(message_id)
-    message_form = MessageForm(obj=target_message)
+    tags = [t.id for t in target_message.tags]
+    print(f"*** TAGS: {tags}")
+    message_form = MessageForm(content=target_message.content, tags=tags)
+    # get tags associated with target_message!
+    # we will query based on tag id
+    # we will query agains tthe message_tags table
+    # from IPython import embed
+    # embed()
+    # pass tags to message_form and have the already selected tags show up in the view
+    # new_tags = [Tag.query.get(id) for id in tag_ids]  # [<Tag 1>, <Tag 2>]
     message_form.set_choices()
     return render_template(
         '/messages/edit.html',
         user_id=user_id,
         delete_form=DeleteForm(),
         message=target_message,
+        tags=Tag.query.all(),
         message_form=message_form)
