@@ -1,1 +1,0 @@
-exports.itemRoutes = require('./items');

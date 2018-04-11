@@ -12,23 +12,30 @@ const app = express();
 
 // app imports
 const {
-  itemRoutes
-} = require("./routes");
+  itemsRouter,
+  ownersRouter
+} = require("./routers");
 
 // set pug as the templating engine
 app.set("view engine", "pug");
 // locaiton of styling folder
 app.use(express.static(__dirname + "/public"));
-// useful for debugging?
+// useful for debugging?json
 app.use(morgan("tiny"));
 // helps with handling "?" "&" "+" in query string
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(bodyParser.json({
+  type: '*/*'
+}));
+
 app.use(methodOverride("_method"));
 
 // app.use(itemsRoutes);
-app.use("/items", itemRoutes)
+app.use("/items", itemsRouter);
+app.use("/owners", ownersRouter);
 
 app.get("/", (req, res, next) => {
   return res.redirect("/items");

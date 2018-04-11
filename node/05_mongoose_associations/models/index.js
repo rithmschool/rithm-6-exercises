@@ -7,3 +7,4 @@ mongoose.connect('mongodb://localhost/shopping_list', {
 mongoose.Promise = Promise;
 
 module.exports.Item = require('./item');
+module.exports.Owner = require('./owner');
