@@ -1,8 +1,9 @@
 {
-  "name": "03_express_crud_pug",
+  "name": "05_mongoose_associations",
   "version": "1.0.0",
-  "description": "For this exercise we will be building a simple application where we will store a shopping list. You should use an **array** to store your items in the shopping list.",
-  "main": "index.js",
+  "description":
+    "Create another model called `User`, which should have a reference to `Item`. A user should be able to have their own list of items and have full CRUD over items in their list.",
+  "main": ".index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,8 +14,9 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "method-override": "^2.3.10",
-    "mongoose": "^5.0.12",
+    "mongoose": "^5.0.13",
     "morgan": "^1.9.0",
+    "package-lock.json": "^1.0.0",
     "pug": "^2.0.3"
   }
 }
