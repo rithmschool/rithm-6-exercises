@@ -40,7 +40,9 @@
   color: blue;
 }
 
-.tweet {
+.tweet,
+.person {
+  font-size: 1.1rem;
   margin: auto;
   width: 350px;
   margin-bottom: 1px;

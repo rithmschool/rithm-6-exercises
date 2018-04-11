@@ -31,7 +31,10 @@ class App extends Component {
           date="In another life"
           message="Blub Blub I'm a fish"
         />
-        {/* <Person /> */}
+        <h2>Drink Eligibility Status:</h2>
+        <Person name="Karl" age="19" />
+        <Person name="Charmaine" age="something-9" />
+        <Person name="Daniel" age="3-something?" />
       </div>
     );
   }
