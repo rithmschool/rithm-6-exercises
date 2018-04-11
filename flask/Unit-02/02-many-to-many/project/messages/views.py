@@ -20,8 +20,7 @@ def index(user_id):
             new_message = Message(content, user_id)
             new_tags = [Tag.query.get(id)
                         for id in tag_ids]  # [<Tag 1>, <Tag 2>]
-            new_message.tags.extend(new_tags)
-            # when you do this in edit, you need to clear the current tags first
+            new_message.tags = new_tags
             db.session.add(new_message)
             db.session.commit()
             flash('Message added')
@@ -51,10 +50,9 @@ def show(message_id, user_id):
         if message_form.validate():
             target_message.content = request.form.get('content')
             tag_ids = message_form.tags.data  # [1, 2, 3]   <- ids of tags
-            new_tags = [Tag.query.get(id)
+            updated_tags = [Tag.query.get(id)
                         for id in tag_ids]  # [<Tag 1>, <Tag 2>]
-            target_message.tags = new_tags
-            # target_message.tags.extend(new_tags)
+            target_message.tags = updated_tags
             db.session.add(target_message)
             db.session.commit()
             flash('Message edited')

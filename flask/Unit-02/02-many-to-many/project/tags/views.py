@@ -10,9 +10,15 @@ tags_blueprint = Blueprint('tags', __name__, template_folder='templates')
 def index():
     if request.method == 'POST':
         new_tag_form = NewTagForm(request.form)
+        new_tag_form.set_choices()
         if new_tag_form.validate():
             content = request.form.get('content')
             new_tag = Tag(content)
+            message_ids = new_tag_form.messages.data
+            associated_messages = [
+                Message.query.get(id) for id in message_ids
+            ]  # [<Tag 1>, <Tag 2>]
+            new_tag.messages = associated_messages
             db.session.add(new_tag)
             db.session.commit()
             flash('Tag added')
@@ -24,7 +30,7 @@ def index():
 @tags_blueprint.route('/new')
 def new():
     new_tag_form = NewTagForm()
-    # new_tag_form.set_choices()
+    new_tag_form.set_choices()
     return render_template('./tags/new.html', form=new_tag_form)
 
 
@@ -32,16 +38,21 @@ def new():
 def show(tag_id):
     target_tag = Tag.query.get(tag_id)
     if request.method == b'PATCH':
-        form = NewTagForm(request.form)
-        if form.validate():
-            target_tag.content = request.form.get('content')
+        new_tag_form = NewTagForm(request.form)
+        new_tag_form.set_choices()
+        if new_tag_form.validate():
+            message_ids = new_tag_form.messages.data
+            associated_messages = [
+                Message.query.get(id) for id in message_ids
+            ]  # [<Tag 1>, <Tag 2>]
+            target_tag.messages = associated_messages
             db.session.add(target_tag)
             db.session.commit()
             flash('Tag edited')
             return redirect(url_for('users.index'))
         else:
             return render_template(
-                '/tags/edit.html', tag=target_tag, form=form)
+                '/tags/edit.html', tag=target_tag, form=new_tag_form)
     if request.method == b'DELETE':
         delete_form = DeleteForm(request.form)
         if delete_form.validate():
@@ -55,7 +66,7 @@ def show(tag_id):
 def edit(tag_id):
     target_tag = Tag.query.get(tag_id)
     new_tag_form = NewTagForm(obj=target_tag)
-    # new_tag_form.set_choices()
+    new_tag_form.set_choices()
     return render_template(
         '/tags/edit.html',
         delete_form=DeleteForm(),
