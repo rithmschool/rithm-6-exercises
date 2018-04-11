@@ -1,7 +1,6 @@
 import fruits from './foods.js';
 import { choice, remove } from './arrayHelpers.js';
 
-// console.log(fruits.length);
 let randomfruit = choice(fruits);
 console.log(`I'd like one ${randomfruit}, please.`);
 console.log(`Here you go: ${randomfruit}`);

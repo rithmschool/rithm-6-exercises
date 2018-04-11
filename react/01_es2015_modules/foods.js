@@ -1,4 +1,6 @@
-var foods = [
+// the foods
+
+let foods = [
     "🍇",
     "🍈",
     "🍉",

@@ -1,3 +1,4 @@
+// the array helpers
 function choice(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
