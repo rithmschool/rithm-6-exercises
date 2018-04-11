@@ -1,4 +1,5 @@
-const { User } = require('../models');
+const { User, Item } = require('../models');
+
 
 function seeUsers(req, res, next) {
     User.find({})
@@ -13,6 +14,22 @@ function newUser(req, res, next) {
     return res.render('../views/users/new')
 }
 
+function newUserItem(req, res, next) {
+    User.findById(req.params.userId).then( user => {
+        return res.render('../views/users/newUserItem', { user })
+    })
+}
+
+function createUserItem(req, res, next) {
+    return User.findByIdAndUpdate(req.params.userId, {
+        $addToSet: {
+            items: req.body.item_id
+        }
+    }).then(() => {
+        return res.redirect(`/users/${req.params.userId}`)
+    })
+}
+
 function editUser(req, res, next) {
     User.findById(req.params.userId)
         .then( user => {
@@ -24,7 +41,7 @@ function editUser(req, res, next) {
 }
 
 function createUser(req, res, next) {
-    const user = new User( {
+    let user = new User( {
         name: req.body.name
     })
     user
@@ -38,9 +55,14 @@ function createUser(req, res, next) {
 }
 
 function seeUser(req, res, next) {
-    User.findById(req.params.userId)
+    User
+    .findById(req.params.userId)
+    .populate('items')
+    .exec()
         .then( user => {
-            return res.render('../views/users/show', { user })
+            return Item.find().then( items => {
+                return res.render('../views/users/show', { user, items })
+            })
         })
         .catch( err => {
             console.log("Error finding user.", err);
@@ -73,6 +95,8 @@ function deleteUser(req, res, next) {
 module.exports = {
     seeUsers,
     createUser,
+    newUserItem,
+    createUserItem,
     newUser,
     seeUser,
     editUser,

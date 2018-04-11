@@ -22,4 +22,12 @@ router
     .patch(users.updateUser)
     .delete(users.deleteUser)
 
+router
+    .route('/:userId/items/new')
+    .get(users.newUserItem)
+
+router
+    .route('/:userId/items')
+    .post(users.createUserItem)
+
 module.exports = router;
