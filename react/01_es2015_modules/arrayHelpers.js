@@ -3,9 +3,9 @@ function choice(arr) {
 }
 
 function remove(arr, item) {
-    if (choice(arr) === item) {
-        let removedItem = arr.indexOf(choice(arr));
-        arr.splice(removedItem, 1);
+    let selected = arr.indexOf(item);
+    if (arr[selected] !== -1) {
+        arr.splice(selected, 1);
         return item;
     }
 }
