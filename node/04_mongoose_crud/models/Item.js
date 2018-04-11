@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema(
   {
-    name: String,
+    name: { type: String },
     price: Number,
     quantity: Number
   },

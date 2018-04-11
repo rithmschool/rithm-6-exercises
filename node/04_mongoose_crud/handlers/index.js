@@ -24,8 +24,8 @@ exports.showIndividualItem = function(req, res, next) {
 
 exports.postNewItem = function(req, res, next) {
   let newItem = new Item(req.body);
-  return newItem.save().then(function() {
-    return res.redirect('/items');
+  return newItem.save().then(function(item) {
+    return res.json(item);
   });
 };
 
