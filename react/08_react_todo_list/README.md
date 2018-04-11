@@ -1,6 +1,6 @@
 # React To-Do List
 
-In this exercise, make a Todo App for React, using all that you've learned so far.
+In this exercise, complete your Todo App for React, using all that you've learned so far.
 
 ### Requirements
 
