@@ -1,5 +1,5 @@
-.single-tweet {
-    border: 15px solid turquoise;
+.person {
+    border: 15px solid salmon;
     border-radius: 20px;
     width: 25%;
     text-align: left;
@@ -7,16 +7,9 @@
     padding-left: 10px;
     align-content: center;
     margin: auto;
-    margin-bottom: 10px;
-}
-
-.styled-text {
-    color: purple;
+    color: navy;
     font-size: 1.0em;
-}
-
-.username {
-    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .message {
