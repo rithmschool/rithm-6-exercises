@@ -5,6 +5,7 @@ import FC from './FirstComponent';
 import SC from './SecondComponent';
 import NC from './NamedComponent';
 import Tweet from './Tweet'
+import Person from './Person'
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
         <SC/>
         <NC name="Jim"/>
         <hr/>
+        
         <h1>
           PART 2
         </h1>
@@ -30,6 +32,15 @@ class App extends Component {
           <Tweet username="blond-hurricane" date="3/22" name="Lee Onora" message="Common @kicker, chill! He's just a troll from facebook"/>
         </div>
         <hr/>
+        
+        <h1>
+          PART 3
+        </h1>
+        <Person name="Leona" age="26" hobbies={["stuff", "more stuff"]}/>
+        <Person name="Randolphus" age="20" hobbies={["hobby1", "hobby2"]}/>
+        <Person name="Ellixirina" age="18" hobbies={["pokemon go", "walking"]}/>
+        <hr/>
+
       </div>
     );
   }
