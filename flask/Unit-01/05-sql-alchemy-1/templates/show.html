@@ -1,0 +1,33 @@
+{% extends'base.html' %} {% block title %} View Bootcamp {% endblock %} {% block body %}
+<h2>View Bootcamp</h2>
+<a href="{{ url_for('edit', id=bootcamp.id) }}">Edit Bootcamp</a>
+<a href="{{ url_for('index') }}">
+  View All</a>
+<div id="map"></div>
+<script>
+  function initMap() {
+    var geocoder = new google.maps.Geocoder();
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 19,
+      center: {
+        lat: 0,
+        lng: 0
+      },
+    });
+    geocoder.geocode({
+      'address': '{{ bootcamp.name }} {{ bootcamp.location }}'
+    }, function (results, status) {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert(`${status}: Please click 'edit bootcamp' to correct the name and/or location`);
+      }
+    });
+  }
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJHt6FenkBe8EKemyrAuvahytICI3HNGw&callback=initMap">
+
+
+</script>
+{% endblock %}
