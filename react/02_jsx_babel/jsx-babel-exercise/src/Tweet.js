@@ -7,7 +7,7 @@ class Tweet extends Component {
       <div className="Tweet">
         <h3 className="Tweet_username">Username : {this.props.username}</h3>
         <h4>Name: {this.props.name}</h4>
-        <p>Date: {this.props.date}</p>
+        <p className="date__style">Date: {this.props.date}</p>
         <p>Message: {this.props.message}</p>
       </div>
     );

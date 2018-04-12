@@ -2,10 +2,16 @@
   /* text-align: center; */
   margin: 0 auto;
   margin-top: 5%;
-  width: 50%;
-  border: 1px dotted lightslategray;
+  width: 35%;
+  padding: 2%;
+  border: 5px dotted rgb(21, 129, 236);
 }
 
 .Tweet_username {
   color: darkred;
+  text-transform: uppercase;
+}
+
+.date__style {
+  font-style: italic;
 }

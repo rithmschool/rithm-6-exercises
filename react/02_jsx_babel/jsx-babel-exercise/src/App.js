@@ -42,19 +42,19 @@ class App extends Component {
         </div>
 
         <Person
-          name="Miranda"
-          age="28"
-          hobbies={["Playing Volleyball", "React"]}
+          name="Paula"
+          age="26"
+          hobbies={["PokemonGo", "Cuddling Pigs", "Backgammon"]}
         />
         <Person
           name="Alex"
           age="21"
-          hobbies={["Playing Volleyball", "React"]}
+          hobbies={["Crushing Babies", "React", "Lumbering"]}
         />
         <Person
           name="Charmaine"
           age="29"
-          hobbies={["Playing Volleyball", "React"]}
+          hobbies={["Sippin Rose", "Instagramming", "Beating up old people"]}
         />
       </div>
     );
