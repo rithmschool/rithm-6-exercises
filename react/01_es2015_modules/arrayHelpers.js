@@ -10,4 +10,3 @@ function remove(arr, item) {
 }
 
 export { choice, remove };
-// export default { choice, remove };
