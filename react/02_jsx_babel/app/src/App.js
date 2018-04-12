@@ -31,19 +31,19 @@ class App extends Component {
               username="spacexengineer"
               name="hunter"
               date="3/20"
-              message="yay"
+              message="It's a bird..."
             />
             <Tweet
               username="spacexengineer"
               name="hunter"
               date="3/20"
-              message="yay"
+              message="It's a plane..."
             />
             <Tweet
               username="spacexengineer"
               name="hunter"
               date="3/20"
-              message="yay"
+              message="It's a tweet!!!!!!!!!!!!!!!!!!!!!!"
             />
           </div>
         </div>
@@ -51,9 +51,9 @@ class App extends Component {
         <div>
           <h2>Part 3</h2>
           <Person
-            name="Hunter"
+            name="Hunterjkhasdfadfadfadf"
             age={24}
-            hobbies={hobbies: [{"icecream"}, {"cookies"}, {"beer"}]}
+            hobbies={["icecream", "cookies", "beer"]}
           />
         </div>
       </div>
