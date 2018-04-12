@@ -1,0 +1,25 @@
+.Tweet {
+  border: 1px solid gray;
+  border-radius: 1rem;
+  margin: 10px auto;
+  padding: 1rem;
+  width: 30rem;
+}
+
+.Tweet em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+}
+
+.user-message {
+  text-align: left;
+}
+
+h4,
+h5 {
+  margin: 0 0.25rem;
+}
