@@ -32,9 +32,25 @@ class App extends Component {
           message="Blub Blub I'm a fish"
         />
         <h2>Drink Eligibility Status:</h2>
-        <Person name="Karl" age="19" />
-        <Person name="Charmaine" age="something-9" />
-        <Person name="Daniel" age="3-something?" />
+        <Person
+          name="Karl"
+          age="19"
+          hobbies={['Trolling', 'Dodgeball', 'Staring Directly at Sun']}
+        />
+        <Person
+          name="Charmaine"
+          age="something-9"
+          hobbies={['Tea', 'Squats', 'Breaking People']}
+        />
+        <Person
+          name="Daniel"
+          age="30-something?"
+          hobbies={[
+            'Polite Amusement',
+            'Bogarting Whisky\'s Love',
+            'Crushing Code'
+          ]}
+        />
       </div>
     );
   }
