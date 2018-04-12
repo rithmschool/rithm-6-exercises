@@ -8,7 +8,7 @@ function remove(arr, item) {
   if (itemToRemoveIndex < 0) {
     return undefined
   } else {
-    return arr.itemToRemoveIndex.splice(itemToRemoveIndex, 1)
+    return arr.splice(itemToRemoveIndex, 1)
   }
 }
 
