@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block title %} Tags {% endblock %} {% block body %}
+<a href="{{ url_for('t.new') }}">Add a Tag</a>
+{% for t in tags %}
+<div class="post-it">
+  <p>{{ t.name }}</p>
+  <a href="{{ url_for('t.edit', t_id=t.id) }}">Edit Tag</a>
+</div>
+{% endfor %}
+<a href="{{ url_for('t.index') }}">View All Tags</a>
+{% endblock %}

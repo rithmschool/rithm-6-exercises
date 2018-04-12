@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %} Create Message {% endblock %} {% block body %}
+<h2>Edit Message</h2>
+<form method="POST" action="{{ url_for('m_show', u_id=u.id, m_id=m.id) }}?_method=PATCH">
+  <label for="c">Message Content</label>
+  <input type="text" name="c" id="c" value="{{ m.content }}" required>
+  <input type="submit" value="Update Message">
+  <a href="{{ url_for('m_index', u_id=u.id) }}">Cancel</a>
+</form>
+<form method="POST" action="{{ url_for('m_show', u_id=u.id, m_id=m.id) }}?_method=DELETE">
+  <input type="submit" value="X">
+</form>
+{% endblock %}
