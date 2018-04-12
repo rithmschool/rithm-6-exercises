@@ -5,6 +5,7 @@ import FirstComp from './FirstComponent';
 import SecondComp from './SecondComponent';
 import NamedComp from './NamedComponent';
 import Tweet from './Tweet';
+import Person from './Person';
 
 class App extends Component {
   render() {
@@ -43,6 +44,37 @@ class App extends Component {
             name="Joel"
             date="4/12/18"
             message="Thank goodness computers were invented--now the code I write can't get smudged!"
+          />
+        </div>
+        <div className="App-part-three">
+          <Person
+            name="Karl"
+            age="32"
+            hobbies={[
+              'accidentally coming up with perfectly timed and absolutely acceptable trolls',
+              'cooking',
+              'eating'
+            ]}
+          />
+          <Person
+            name="Fang"
+            age="28"
+            hobbies={[
+              'photo blogging',
+              'fashion blogging',
+              'posing for pictures',
+              'wearing interesting clothes'
+            ]}
+          />
+          <Person
+            name="Natalie"
+            age="29"
+            hobbies={[
+              'having second pick at the Secco gene pool',
+              'being less smart',
+              'being less funny',
+              'being less really, really, ridiculously good looking #bluesteel'
+            ]}
           />
         </div>
       </div>
