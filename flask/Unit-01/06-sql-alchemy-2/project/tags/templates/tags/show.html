@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<br>
+<div class="container">
+  <h2>
+    {{tag.text}}
+  </h2>
+  <h3>Messages Associated With {{tag.text}}</h3>
+  {%for message in message%}
+  <ul>
+    <li>{{message}}</li>
+  </ul>
+  {%endfor%}
+
+  <a href="{{url_for('tags.tags_edit', id=tag.id)}}">Edit Tag</a>
+  <br>
+  <a href="{{ url_for('root') }}">Go To Users</a>
+
+  <form action="{{url_for('tags.tags_destroy', id=tag.id)}}?_method=DELETE" method="POST">
+    <input type="submit" value="DELETE TAG" class="btn btn-danger">
+  </form>
+</div>
+{%endblock%}
