@@ -19,3 +19,16 @@ class Person extends Component {
 }
 
 export default Person;
+
+import React, { Component } from "react";\n
+import "./App.css";\n
+\n
+class App extends Component {\n
+  render() {\t\n
+    return (\t\t\n
+      \t\t\t\$0\n
+    );\t\t\n
+  }\t\n
+}
+
+export default App;
