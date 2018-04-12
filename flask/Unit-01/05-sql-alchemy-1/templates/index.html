@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %} Bootcamps {% endblock %} {% block body %}
+<div id="index-body">
+  <h3>Discover a Bootcamp:</h3>
+  <ul>
+    {% for bc in bootcamps|sort(attribute='votes', reverse=True) %}
+    <li id="{{ bc.id }}">
+      <i class="fas fa-arrow-up"></i>
+      <span class="rank"> {{ bc.votes }} </span>
+      <i class="fas fa-arrow-down"></i>
+      {{ bc.name }}
+      <a href="{{ url_for('show', id=bc.id) }}">
+        <i class="fas fa-map-marker-alt"></i>
+      </a>
+      <em>{{ bc.location }}</em>
+      <i class="fas fa-ban"></i>
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('new') }}">Add a Bootcamp</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

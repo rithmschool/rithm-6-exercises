@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+    {% block title %} {% endblock %}
+  </title>
+  <link rel="shortcut icon" href="about:blank">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<header>
+  <h1>Post-it Quotes</h1>
+</header>
+
+<body>
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %} {% endif %} {% endwith %} {% block body %} {% endblock %}
+</body>
+
+</html>

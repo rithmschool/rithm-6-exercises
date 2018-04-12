@@ -1,0 +1,19 @@
+li {
+  list-style-type: none;
+}
+i {
+  cursor: pointer;
+}
+.fa-arrow-up {
+  color: green;
+}
+.fa-arrow-down {
+  color: red;
+}
+.fa-ban:hover {
+  color: orange;
+}
+#map {
+  height: 400px;
+  width: 100%;
+}
