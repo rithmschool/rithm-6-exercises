@@ -4,6 +4,7 @@
   margin: 10px auto;
   padding: 1rem;
   width: 30rem;
+  text-align: left;
 }
 
 .Tweet em {
@@ -11,14 +12,24 @@
   font-weight: bold;
 }
 
-.user-info {
+.flex {
   display: flex;
 }
 
-.user-message {
-  text-align: left;
+.column {
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  margin: 1rem 0;
+  list-style: none;
+  padding: 0;
 }
 
+li {
+  margin-left: 1rem;
+}
+
+h3,
 h4,
 h5 {
   margin: 0 0.25rem;

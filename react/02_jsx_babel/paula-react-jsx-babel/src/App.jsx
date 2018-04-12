@@ -4,6 +4,7 @@ import FirstComponent from "./FirstComponent";
 import SecondComponent from "./SecondComponent";
 import NamedComponent from "./NamedComponent";
 import TweetComponent from "./TweetComponent.js";
+import PersonComponent from "./PersonComponent.js";
 import "./App.css";
 
 class App extends Component {
@@ -34,6 +35,21 @@ class App extends Component {
           name="Marissa Todino"
           date="April 11th, 2018"
           message="Want to hear my pizza joke? Never mind, it's too cheesy."
+        />
+        <PersonComponent
+          age={25}
+          name="Alejandro"
+          interests={["kites", "dogs", "coin collecting"]}
+        />
+        <PersonComponent
+          age={5}
+          name="Kit"
+          interests={["drawing", "jumping", "lizards"]}
+        />
+        <PersonComponent
+          age={90}
+          name="Byron"
+          interests={["checkers", "podcasts", "skydiving"]}
         />
       </div>
     );
