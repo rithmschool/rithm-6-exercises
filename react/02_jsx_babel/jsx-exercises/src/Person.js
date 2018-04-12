@@ -16,7 +16,7 @@ class Person extends Component {
         <p>Person: {this.props.name}</p>
         <p>Age: {this.props.age}</p>
         <p>Status: {message}</p>
-        <ul>{hobbies}</ul>
+        <ul className="personUl">{hobbies}</ul>
       </div>
     );
   }

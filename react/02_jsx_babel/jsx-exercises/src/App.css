@@ -50,3 +50,8 @@
   background-color: rgb(73, 73, 212);
   color: white;
 }
+
+.personUl {
+  list-style-type: none;
+  padding: 0;
+}
