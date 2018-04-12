@@ -4,6 +4,7 @@ import './App.css';
 import FC from './FirstComponent';
 import SC from './SecondComponent';
 import NC from './NamedComponent';
+import Tweet from './Tweet'
 
 class App extends Component {
   render() {
@@ -13,12 +14,22 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>
+          PART 1
+        </h1>
         <FC/>
         <SC/>
         <NC name="Jim"/>
+        <hr/>
+        <h1>
+          PART 2
+        </h1>
+        <div className="tweets">
+          <Tweet username="sir-loves-a-lot" date="3/20" name="Don John" message="This is my first tweet, it is so exciting"/>
+          <Tweet username="kicker" date="3/21" name="Mary Ann" message="I just got on Tweeter, but I already hate this Don John guy!"/>
+          <Tweet username="blond-hurricane" date="3/22" name="Lee Onora" message="Common @kicker, chill! He's just a troll from facebook"/>
+        </div>
+        <hr/>
       </div>
     );
   }

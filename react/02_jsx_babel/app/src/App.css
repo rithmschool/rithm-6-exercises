@@ -26,3 +26,37 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.tweet-box {
+  border: solid 1px grey;
+  border-radius: 10px;
+  min-width: 20%;
+  max-width: 25%;
+  margin: 5px auto;
+  text-align: left;
+}
+
+.tweet-username-date {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 10px 5px 5px;
+}
+
+.tweet-username {
+  text-decoration: underline;
+  color: blue;
+}
+
+.tweet-date {
+  color: rgba(0,0,0, .9)
+}
+
+.tweet-user-name {
+  margin: 10px 5px 10px 5px;
+  color: darkgray;
+}
+
+.tweet-message {
+  margin: 10px 7.5px 15px 7.5px;
+}
+
