@@ -1,0 +1,11 @@
+.Tweet {
+  /* text-align: center; */
+  margin: 0 auto;
+  margin-top: 5%;
+  width: 50%;
+  border: 1px dotted lightslategray;
+}
+
+.Tweet_username {
+  color: darkred;
+}
