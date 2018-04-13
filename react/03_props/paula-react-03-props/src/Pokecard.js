@@ -7,7 +7,7 @@ export default class Pokecard extends Component {
     return (
       <figure className="Pokecard">
         <h4>{name}</h4>
-        <img src={image} alt="picture of {name}" />
+        <img src={image} alt=" {name}" />
         <h5>Type:{type}</h5>
       </figure>
     );

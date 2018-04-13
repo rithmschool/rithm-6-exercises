@@ -5,14 +5,12 @@ import "./pokemon.css";
 export default class Pokedex extends Component {
   render() {
     let pokeCards = this.props.pokemon.map(pokemon => (
-      <span>
-        <Pokecard
-          key={pokemon.id}
-          name={pokemon.name}
-          type={pokemon.type}
-          image={pokemon.image}
-        />
-      </span>
+      <Pokecard
+        key={pokemon.id}
+        name={pokemon.name}
+        type={pokemon.type}
+        image={pokemon.image}
+      />
     ));
     return (
       <section className="Pokedex">
