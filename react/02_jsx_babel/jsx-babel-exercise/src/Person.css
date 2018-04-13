@@ -1,0 +1,21 @@
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+div .Person {
+  margin-top: 10%;
+  box-shadow: 20px -10px 30px 0px rgba(0, 0, 0, 0.55);
+  margin: 10% auto;
+  padding: 1% 0 3%;
+  width: 65%;
+  border-radius: 100px;
+  text-align: center;
+}
+
+.title__learn {
+  font-size: 130%;
+  font-weight: bold;
+  text-decoration: underline darkred;
+}
