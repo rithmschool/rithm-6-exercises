@@ -57,7 +57,7 @@ export default class CardContainer extends Component {
     let listOfBoxes = this.state.colors.map((color, index) => {
       return (
         <Card
-          otherColor={this.changeColor.bind(this)}
+          otherColor={this.changeColor}
           color={this.changeColor()}
           key={index}
         />
