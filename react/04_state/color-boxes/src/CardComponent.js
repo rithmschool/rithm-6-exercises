@@ -4,10 +4,10 @@ import './App.css';
 export default class Card extends Component {
   constructor(props) {
     super(props);
-    (this.state = {
+    this.state = {
       color: this.props.color
-    }),
-      (this.changeColorAgain = this.changeColorAgain.bind(this));
+    };
+    this.changeColorAgain = this.changeColorAgain.bind(this);
   }
   changeColorAgain() {
     this.setState({ color: this.props.otherColor() });

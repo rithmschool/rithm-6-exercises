@@ -49,19 +49,13 @@ export default class CardContainer extends Component {
 
   changeColor() {
     let shuffledColors = this.shuffle(this.state.colors);
-    let randomNumber = Math.floor(Math.random() * shuffledColors.length); // returns a number between 0 and 9
-    return shuffledColors[randomNumber];
+    let randomNumber = Math.floor(Math.random() * shuffledColors.length);
+    return shuffledColors[randomNumber]; // returns a number between 0 and 9
   }
 
   render() {
     let listOfBoxes = this.state.colors.map((color, index) => {
-      return (
-        <Card
-          otherColor={this.changeColor}
-          color={this.changeColor()}
-          key={index}
-        />
-      );
+      return <Card otherColor={this.changeColor} color={color} key={index} />;
     });
     return <div>{listOfBoxes}</div>;
   }
