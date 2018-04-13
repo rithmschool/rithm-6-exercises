@@ -4,26 +4,8 @@ import Card from './CardComponent.js';
 export default class CardContainer extends Component {
   constructor(props) {
     super(props);
-    (this.state = {
-      colors: [
-        'blue',
-        'orange',
-        'black',
-        'gold',
-        'purple',
-        'Goldenrod',
-        'ForestGreen',
-        'IndianRed',
-        'LightPink',
-        'Salmon',
-        'DarkOrchid',
-        'DarkGoldenRod',
-        'LightSeaGreen',
-        'Moccasin',
-        'Olive'
-      ]
-    }),
-      (this.changeColor = this.changeColor.bind(this)),
+
+    (this.changeColor = this.changeColor.bind(this)),
       (this.shuffle = this.shuffle.bind(this));
   }
 
@@ -48,15 +30,35 @@ export default class CardContainer extends Component {
   }
 
   changeColor() {
-    let shuffledColors = this.shuffle(this.state.colors);
+    let shuffledColors = this.shuffle(this.props.allColors);
     let randomNumber = Math.floor(Math.random() * shuffledColors.length);
     return shuffledColors[randomNumber]; // returns a number between 0 and 9
   }
 
   render() {
-    let listOfBoxes = this.state.colors.map((color, index) => {
+    let listOfBoxes = this.props.allColors.map((color, index) => {
       return <Card otherColor={this.changeColor} color={color} key={index} />;
     });
     return <div>{listOfBoxes}</div>;
   }
 }
+
+CardContainer.defaultProps = {
+  allColors: [
+    'blue',
+    'orange',
+    'black',
+    'gold',
+    'purple',
+    'Goldenrod',
+    'ForestGreen',
+    'IndianRed',
+    'LightPink',
+    'Salmon',
+    'DarkOrchid',
+    'DarkGoldenRod',
+    'LightSeaGreen',
+    'Moccasin',
+    'Olive'
+  ]
+};
