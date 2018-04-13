@@ -17,11 +17,11 @@ class App extends Component {
 
   handleClick(e) {
     let newColor = this.RandomColor();
-    let statei = e.target.getAttribute("index");
-    this.setState(prevState => {
-      let { stateBoxes } = prevState;
-      stateBoxes[statei] = newColor;
-    });
+    e.target.setAttribute("style", `background-color: ${newColor}`);
+    // this.setState(prevState => {
+    //   let { stateBoxes } = prevState;
+    //   stateBoxes[statei] = newColor;
+    // });
   }
 
   RandomColor() {
