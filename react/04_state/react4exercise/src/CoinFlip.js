@@ -46,6 +46,8 @@ export default class CoinFlip extends Component {
             <div>
                 <p> Let's flip a coin! </p>
                 <img src={this.state.side} alt="coin"/>
+                <br/>
+                <br/>
                 <button onClick={this.changeSide}> Flip! </button>
                 <p> Out of {this.state.totalFlips} flips, there have been {this.state.headCount} heads and {this.state.tailCount} tails. </p>
             </div>
