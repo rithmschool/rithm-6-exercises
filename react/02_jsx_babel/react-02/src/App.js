@@ -4,6 +4,8 @@ import './App.css';
 import FirstComponent from './FirstComponent';
 import SecondComponent from './SecondComponent';
 import NamedComponent from './NamedComponent';
+import Tweet from './Tweet';
+import Person from './Person';
 
 class App extends Component {
   render() {
@@ -16,9 +18,36 @@ class App extends Component {
         <FirstComponent />
         <SecondComponent />
         <NamedComponent name="Kelson" />
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Tweet
+          name="Kelson Warner"
+          date="March 5, 2001"
+          message="This is my first tweet."
+        />
+        <Tweet
+          name="Jimmy James"
+          date="June 5, 2011"
+          message="This is my second tweet."
+        />
+        <Tweet
+          name="Alred Smith"
+          date="June 5, 1941"
+          message="This is a really old tweet."
+        />
+        <Person
+          name="Andoo"
+          age="21"
+          hobbies={['fishing', 'coding 90 hours a week', 'never relaxing']}
+        />
+        <Person
+          name="A Man A Plan A Canal Panama"
+          age="19"
+          hobbies={['coding', 'stuff', 'no life, cats']}
+        />
+        <Person
+          name="Jeff"
+          age="37"
+          hobbies={['heavy metal', 'music', 'dogs']}
+        />
       </div>
     );
   }
