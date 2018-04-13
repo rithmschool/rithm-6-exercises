@@ -1,0 +1,33 @@
+.Pokecard-container {
+  text-align: center;
+  display: inline-block;
+  background-color: lightgray;
+  border-radius: 20px;
+  height: 300px;
+  width: 220px;
+  margin: 40px;
+  position: relative;
+}
+
+.Pokecard__title {
+  font-size: 140%;
+  font-weight: bold;
+  color: darkblue;
+}
+img {
+  width: 150px;
+}
+
+.Pokecard__img {
+  position: relative;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -10%);
+}
+
+.Pokecard__type {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
