@@ -1,0 +1,8 @@
+.inlineList {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 5px;
+  list-style: none;
+  white-space: nowrap;
+}

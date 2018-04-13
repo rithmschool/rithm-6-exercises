@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import './Pokedex.css';
 
 class Pokedex extends Component {
   render() {
     const { id, name, type, image } = this.props;
-    return console.log('pass');
+    const pokemonList = this.props.pokemon.map(p => {
+      return (
+        <div className="card">
+          <li key={p.id}>
+            <h2>{p.name}</h2>
+            <img src={p.image} alt={p.name} />
+            <p>Type: {p.type}</p>
+          </li>
+        </div>
+      );
+    });
+    return (
+      <div>
+        <ul className="inlineList">{pokemonList}</ul>
+      </div>
+    );
   }
 }
 
