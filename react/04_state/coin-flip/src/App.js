@@ -3,7 +3,7 @@ import frontCoin from './frontCoin.png';
 import backCoin from './backCoin.png';
 import './App.css';
 import DisplayCoin from './DisplayCoin';
-import CoinStatus from './CoinStatus';
+// import CoinStatus from './CoinStatus';
 
 class App extends Component {
   constructor(props) {
@@ -15,15 +15,26 @@ class App extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.randomNum = this.randomNum.bind(this);
+  }
+
+  randomNum() {
+    let isHeads;
+    const random = Math.random();
+    if (random < 0.5) isHeads = false;
+    else if (random > 0.5) isHeads = true;
+    return isHeads;
   }
 
   handleClick() {
-    if (this.state.isHeads) {
+    let isHeads = this.randomNum();
+    if (isHeads) {
       this.setState(() => ({ numHeads: this.state.numHeads + 1 }));
-    } else {
+      this.setState({ isHeads: true });
+    } else if (!isHeads) {
       this.setState(() => ({ numTails: this.state.numTails + 1 }));
+      this.setState({ isHeads: false });
     }
-    this.setState(() => ({ isHeads: !this.state.isHeads }));
   }
 
   render() {
@@ -40,8 +51,6 @@ class App extends Component {
         <DisplayCoin image={coinImg} />
         <button onClick={this.handleClick}>Flip Coin</button>
         <p>{message}</p>
-        {/* <CoinStatus />
-         */}
       </div>
     );
   }
