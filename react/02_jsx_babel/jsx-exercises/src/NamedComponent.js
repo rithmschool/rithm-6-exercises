@@ -7,3 +7,4 @@ class NamedComponent extends Component {
 }
 
 export default NamedComponent;
+
