@@ -3,13 +3,13 @@ import React, { Component } from "react";
 export default class Square extends Component {
   render() {
     let size = {
-      width: "100px",
-      height: "100px",
+      width: "200px",
+      height: "200px",
       display: "inline-block",
       backgroundColor: this.props.backgroundColor
     };
     return (
-      <div listId={this.props.listId} style={size} onClick={this.props.click} />
+      <div listid={this.props.listid} style={size} onClick={this.props.click} />
     );
   }
 }

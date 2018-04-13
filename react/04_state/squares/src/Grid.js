@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Square from "./Square";
 
-const Num = 24;
+const Num = 25;
 
 export default class Grid extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export default class Grid extends Component {
     const boxes = [];
     for (var i = 0; i < Num; i++) {
       boxes.push({
-        listId: i,
+        listid: i,
         backgroundColor: this.getRandomBoxColor()
       });
     }
@@ -27,19 +27,19 @@ export default class Grid extends Component {
 
   updateColor(e) {
     let updateBoxes = this.state.boxes.slice();
-    updateBoxes[e.target.getAttribute("listId")] = {
-      listId: e.target.getAttribute("listId"),
+    updateBoxes[e.target.getAttribute("listid")] = {
+      listid: e.target.getAttribute("listid"),
       backgroundColor: this.getRandomBoxColor()
     };
     this.setState({ boxes: updateBoxes });
   }
 
   render() {
-    let colorSquare = this.state.boxes.map(square => {
+    let colorSquare = this.state.boxes.map((square, index) => {
       return (
         <Square
-          key={square.listId}
-          listId={square.listId}
+          key={index}
+          listid={square.listid}
           click={this.updateColor}
           backgroundColor={square.backgroundColor}
         />
