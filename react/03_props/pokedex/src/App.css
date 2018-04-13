@@ -22,7 +22,27 @@
   font-size: large;
 }
 
+.pokedex-title {
+  color: gray;
+}
+
+.pokecard {
+  border-radius: 10px;
+  display: inline-block;
+  min-width: 150px;
+  margin: 15px;
+  background-color: #c0c0c0;
+}
+
+.name {
+  color: blue;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
