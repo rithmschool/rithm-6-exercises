@@ -1,52 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Todo } from './Todo';
 
 class TodoList extends Component {
-  render() {
-    const { task, date, status } = this.props;
-    const list = this.props.todos.map(todo => {
-      return (
-        <div className="task">
-          <li>
-            <p>
-              {todo.task} {todo.date} {todo.status}
-            </p>
-          </li>
-        </div>
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: ['code', 'groceries', 'exercise']
+    };
+  }
+
+  handleRemove(idx) {
+    const { todos } = this.state;
+    const remainingTodos = todos.slice(0, idx).concat(todos.slice(idx + 1));
+    this.setState({
+      todos: remainingTodos
     });
-    return (
-      <div className="TodoList">
-        <ul className="todolist">{list}</ul>
-      </div>
-    );
+  }
+
+  render() {
+    let todos = this.state.todos.map((todo, idx) => (
+      <Todo
+        removeTodo={this.handleRemove.bind(this, idx)}
+        todo={todo}
+        key={idx}
+      />
+    ));
+    return <div>{todos}</div>;
   }
 }
-
-TodoList.defaultProps = {
-  todos: [
-    {
-      task: 'Laundry',
-      date: '4-12-18',
-      status: false
-    },
-    {
-      task: 'Code',
-      date: '4-13-18',
-      status: false
-    },
-    {
-      task: 'Grocery shopping',
-      date: '4-14-18',
-      status: false
-    }
-  ]
-};
-
-TodoList.PropTypes = {
-  task: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  status: PropTypes.bool.isRequired
-};
 
 export default TodoList;

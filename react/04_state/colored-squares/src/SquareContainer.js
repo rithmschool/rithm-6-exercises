@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import TodoList from './TodoList';
+import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Things I have to do:</h1>
-        <TodoList />
+        <header className="App-header">
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
       </div>
     );
   }

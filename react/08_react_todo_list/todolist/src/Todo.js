@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import './Todo.css';
 
 class Todo extends Component {
   render() {
     return (
       <div className="Todo">
         <li>
-          <p>Task: {this.props.task}</p>
-          <p>Due Date: {this.props.date}</p>
-          <p>Complete? {this.props.status}</p>
+          {this.props.todo}
+          <button onClick={this.props.removeTodo}>X</button>
         </li>
       </div>
     );
