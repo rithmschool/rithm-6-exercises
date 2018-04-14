@@ -1,0 +1,11 @@
+.Pokecard {
+  width: 150px;
+  margin: 25px;
+  display: inline-block;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.Pokecard-name {
+  color: dodgerblue;
+}
