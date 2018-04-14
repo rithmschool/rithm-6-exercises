@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Todo extends Component {
-  render() {
-    return (
+const newTodoItem = {{newTodo}} => (
       <li>
-        {this.props.message}. Due Date: {this.props.date} ! Done with this todo?{" "}
+        {newTodo}. Due Date: {newTodo}
         <span>
-          <input type="checkbox" />
+           <button onClick={this.props.removeTodo}>Done with this todo?</button>
         </span>{" "}
       </li>
     );
   }
 }
 
-export default Todo;
+export default newTodoItem;
