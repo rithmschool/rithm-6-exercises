@@ -6,7 +6,7 @@ Create two components `CustomLink` and `App`. The `CustomLink` component should 
 
 * `href` - a URL
 * `text` - the text inside the link
-* `handleClick` - a callback to run when the user clicks on the link.
+* `handleClick` - a callback to run when the user clicks on the link, which logs the message "you clicked on a link!".
 
 The component should render a link tag with an appropriate `href` and `text` coming from the props. It should also open in a new window (set the `target` attribute to `"_blank"`).
 
