@@ -1,0 +1,87 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+body {
+  background-image: url('Righteousness.jpeg');
+  background-position: center center;
+  background-repeat: repeat, repeat;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 60%;
+  background-color: white;
+  opacity: 0.9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+li {
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+form input,
+#index__form--delete,
+#index__form--edit {
+  border-radius: 3px;
+}
+
+button a {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.snack__buttons {
+  display: inline-block;
+}
+
+#btn__add {
+  border: none;
+  padding-bottom: 10px;
+}
+
+input {
+  display: block;
+}
+
+.form-group {
+  /* width: 400px; */
+  /* display: inline-block; */
+}
