@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Box from "./Box";
 import "./App.css";
 
-const num = 24;
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -11,17 +9,8 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.RandomColor = this.RandomColor.bind(this);
 
-    const stateBoxes = new Array(num).fill("").map(this.RandomColor);
+    const stateBoxes = new Array(24).fill("").map(this.RandomColor);
     this.state = { stateBoxes };
-  }
-
-  handleClick(e) {
-    let newColor = this.RandomColor();
-    e.target.setAttribute("style", `background-color: ${newColor}`);
-    // this.setState(prevState => {
-    //   let { stateBoxes } = prevState;
-    //   stateBoxes[statei] = newColor;
-    // });
   }
 
   RandomColor() {
@@ -29,9 +18,19 @@ class App extends Component {
     return this.props.colors[colori];
   }
 
+  handleClick(e) {
+    let newColor = this.RandomColor();
+    let statei = e.target.getAttribute("index");
+    this.setState(prevState => {
+      let { stateBoxes } = prevState;
+      stateBoxes[statei] = newColor;
+      return stateBoxes;
+    });
+  }
+
   render() {
     const boxes = this.state.stateBoxes.map((color, i) => (
-      <Box index={i} color={color} onClick={this.handleClick} />
+      <Box index={i} color={color} onClick={this.handleClick} key={i} />
     ));
     return <div className="App">{boxes}</div>;
   }
