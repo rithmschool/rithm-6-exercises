@@ -17,17 +17,17 @@ class App extends Component {
     }
   }
 
-  buttonHandler(e) {
-    console.log('button clicked');
-    this.setState(() => (this.state.isEnabled = !this.state.isEnabled));
-  }
-
   // buttonHandler(e) {
   //   console.log('button clicked');
-  //   this.setState(prevState => ({
-  //     isEnabled: !prevState.isEnabled
-  //   }));
+  //   this.setState(() => (this.state.isEnabled = !this.state.isEnabled));
   // }
+
+  buttonHandler(e) {
+    console.log('button clicked');
+    this.setState(prevState => ({
+      isEnabled: !prevState.isEnabled
+    }));
+  }
 
   render() {
     let links = this.props.links.map(({ href, text, handleClick }, i) => {
