@@ -1,50 +1,57 @@
 import React, { Component } from 'react';
 import Card from './CardComponent.js';
+import { choice } from './choiceHandler.js';
+import './App.css';
 
 export default class CardContainer extends Component {
   constructor(props) {
     super(props);
-
-    (this.changeColor = this.changeColor.bind(this)),
-      (this.shuffle = this.shuffle.bind(this));
+    this.state = {
+      colors: Array.from({ length: 24 }, () => choice(this.props.allColors))
+    };
   }
 
-  shuffle(array) {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  }
-
-  changeColor() {
-    let shuffledColors = this.shuffle(this.props.allColors);
-    let randomNumber = Math.floor(Math.random() * shuffledColors.length);
-    return shuffledColors[randomNumber]; // returns a number between 0 and 9
+  handleClick(idx) {
+    this.setState(prevState => {
+      let newColors = [...prevState.colors];
+      newColors[idx] = choice(this.props.allColors);
+      return { colors: newColors };
+    });
   }
 
   render() {
-    let listOfBoxes = this.props.allColors.map((color, index) => {
-      return <Card otherColor={this.changeColor} color={color} key={index} />;
-    });
-    return <div>{listOfBoxes}</div>;
+    let allCards = this.state.colors.map((color, i) => (
+      <Card
+        key={i}
+        color={color}
+        handleClick={this.handleClick.bind(this, i)}
+      />
+    ));
+    return (
+      <div>
+        <h1>I'm the square container!</h1>
+        <div>{allCards}</div>
+      </div>
+    );
   }
 }
-
 CardContainer.defaultProps = {
   allColors: [
+    'blue',
+    'orange',
+    'black',
+    'gold',
+    'purple',
+    'Goldenrod',
+    'ForestGreen',
+    'IndianRed',
+    'LightPink',
+    'Salmon',
+    'DarkOrchid',
+    'DarkGoldenRod',
+    'LightSeaGreen',
+    'Moccasin',
+    'Olive',
     'blue',
     'orange',
     'black',
