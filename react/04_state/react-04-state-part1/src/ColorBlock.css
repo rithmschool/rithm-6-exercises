@@ -1,0 +1,12 @@
+.ColorBlock {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+}
+
+.BlocksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
