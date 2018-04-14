@@ -24,6 +24,13 @@ input {
   margin: 2px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+}
 .App-btn {
   background-color: lightblue;
   margin-top: 15px;
