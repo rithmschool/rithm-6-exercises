@@ -5,50 +5,42 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // currentTodos: Array.from(
-      //   { length: this.props.Todos.length },
-      //   (item, index) => this.props.Todos[index]
-      // )
-
-      currentTodos: Array.from({ length: this.props.Todos.length }).map(
+      todos: Array.from({ length: this.props.Todos.length }).map(
         (item, index) => {
           return { ...this.props.Todos[index], isCompleted: 'false' };
         }
       )
-
-      // currentTodos: [
-      //   {
-      //     title: 'morning',
-      //     description: 'it is the morning',
-      //     isCompleted: true
-      //   },
-      //   {
-      //     title: 'afternoon',
-      //     description: 'it is the afternoon',
-      //     isCompleted: false
-      //   }
-      // ]
     };
     this.markAsComplete = this.markAsComplete.bind(this);
-    // this.handleAdd = this.handleAdd.bind(this);
+    this.removeToDo = this.removeToDo.bind(this);
     // this.handleAdd = this.handleAdd.bind(this);
   }
 
   // addToDo() {}
-  // removeToDo() {}
+  removeToDo(index) {
+    this.setState(prevState => {
+      console.log(prevState.todos);
+      let todosCopy = [...prevState.todos].filter((todo, i) => {
+        if (i !== index) return todo;
+      });
+      console.log(todosCopy);
+      return { todos: todosCopy };
+    });
+  }
+
   markAsComplete(index) {
     console.log('clicked');
-    //trying to get click event handler to update state
     console.log(index);
     this.setState(prevState => {
-      let todosCopy = [...prevState.currentTodos];
-      todosCopy[index].isComplete = !todosCopy[index].isComplete;
-      return { currentTodos: todosCopy };
+      let todosCopy = [...prevState.todos];
+      todosCopy[index].isCompleted = !todosCopy[index].isCompleted;
+      console.log(todosCopy);
+      return { todos: todosCopy };
     });
   }
 
   render() {
-    let Todos = this.state.currentTodos.map(
+    let Todos = this.state.todos.map(
       ({ title, description, isCompleted }, i) => {
         return (
           <Todo
@@ -57,15 +49,11 @@ class TodoList extends Component {
             description={description}
             isCompleted={isCompleted}
             markAsComplete={this.markAsComplete.bind(this, i)}
-            // onClick={() => console.log('murph')}
-            // onClick={this.markAsComplete}
+            removeToDo={this.removeToDo.bind(this, i)}
           />
         );
       }
     );
-    // let Todos = this.props.Todos.map(({ title, description }) => {
-    //   return <Todo title={title} description={description} />;
-    // });
     return <div>{Todos}</div>;
   }
 }
