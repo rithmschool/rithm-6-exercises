@@ -6,20 +6,9 @@ import DivForm from './DivForm';
 
 class App extends Component {
   constructor(props) {
-    super(props),
+    super(props)
     this.state = {
-      divs: [
-        {
-          w: 100,
-          h: 100,
-          bgc: 'black'
-        },
-        {
-          w: 200,
-          h: 100,
-          bgc: 'yellow'
-        }
-      ]
+      divs: [ ]
     }
     this.addDiv = this.addDiv.bind(this);
   }
@@ -44,9 +33,7 @@ class App extends Component {
           <div className="row my-2 d-flex justify-content-center">
             {this.state.divs.map((el, i) => <Div key={i} height={el.h + "px"} width={el.w + "px"} backgroundColor={el.bgc} />)}
           </div>
-        </div>
-        {/* <button className="m-3" onClick={this.addDiv.bind(this, {w: '100px', h: '100px', bgc: 'lime'})}> Add square
-        </button> */}
+        </div> 
       </div>
     );
   }
