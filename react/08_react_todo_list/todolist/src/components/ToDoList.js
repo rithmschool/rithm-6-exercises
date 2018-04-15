@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ToDo from "./ToDo";
+import NewToDoForm from "./NewToDoForm";
 import "./ToDoList.css";
 
 class ToDoList extends Component {
@@ -27,6 +28,7 @@ class ToDoList extends Component {
         }
       ]
     };
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleRemove(idx) {
@@ -51,6 +53,12 @@ class ToDoList extends Component {
     });
   }
 
+  handleAdd(newTask) {
+    this.setState(prevState => {
+      return { tasks: [newTask, ...prevState.tasks] };
+    });
+  }
+
   render() {
     let tasksList = this.state.tasks.map((task, idx) => {
       return (
@@ -62,12 +70,15 @@ class ToDoList extends Component {
           completed={task.completed}
           removeTask={this.handleRemove.bind(this, idx)}
           completeTask={this.handleComplete.bind(this, idx)}
-          // {idx => this.handleComplete(this, idx)}
+          // completeTask={idx => this.handleComplete(this, idx)}
         />
       );
     });
+
     return (
       <div>
+        <NewToDoForm handleAdd={this.handleAdd} />
+        <hr />
         <ul>{tasksList}</ul>
       </div>
     );
