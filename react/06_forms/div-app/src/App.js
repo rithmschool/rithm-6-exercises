@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props),
     this.state = {
-      squares: [
+      divs: [
         {
           w: '100px',
           h: '100px',
@@ -20,6 +20,13 @@ class App extends Component {
         }
       ]
     }
+    this.addSquare = this.addSquare.bind(this);
+  }
+
+  addSquare(newDiv) {
+    this.setState(prevState => {
+      return { divs: [newDiv, ...prevState.divs] }
+    });
   }
 
   render() {
@@ -31,9 +38,11 @@ class App extends Component {
         </header>
         <div className="container">
           <div className="row my-2 d-flex justify-content-center">
-            {this.state.squares.map(el => <Div height={el.h} width={el.w} backgroundColor={el.bgc} />)}
+            {this.state.divs.map((el, i) => <Div key={i} height={el.h} width={el.w} backgroundColor={el.bgc} />)}
           </div>
         </div>
+        <button onClick={this.addSquare.bind(this, {w: '100px', h: '100px', bgc: 'lime'})}> Add square
+        </button>
       </div>
     );
   }

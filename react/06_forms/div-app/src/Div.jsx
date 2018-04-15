@@ -5,7 +5,7 @@ const Div = ({ width, height, backgroundColor }) => (
         width,
         height,
         backgroundColor,
-    }} className="square mx-2" ></div>
+    }} className="div m-2" ></div>
 )
 
 export default Div;
