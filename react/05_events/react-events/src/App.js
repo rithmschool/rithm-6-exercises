@@ -11,20 +11,19 @@ class App extends Component {
         {
           href: "https://www.google.com/",
           text: "Google",
-          disabled: ""
+          disabled: false
         },
         {
           href: "https://www.reddit.com/",
           text: "Reddit",
-          disabled: ""
+          disabled: false
         },
         {
           href: "http://bleacherreport.com/",
           text: "Bleach Report",
-          disabled: ""
+          disabled: false
         }
-      ],
-      disabled: false
+      ]
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -32,14 +31,19 @@ class App extends Component {
   handleClick(e) {
     console.log(e.target.text);
   }
+
   changeClass() {
-    let newLinks = [...this.state.links];
-    if (!newLinks[0].disabled === "enabled") {
-      newLinks.map(link => (
-        
-      ))
-    }
+    this.setState(prevState => {
+      let newLinks = [...prevState];
+      if (newLinks[0].disabled === false) {
+        let newLink = newLinks.map(link => (link.disabled = true));
+      } else {
+        let newLink = newLinks.map(link => (link.disabled = false));
+      }
+      return { links: newLink };
+    });
   }
+
   render() {
     let atags = this.state.links.map((link, i) => (
       <CustomLink
@@ -47,7 +51,7 @@ class App extends Component {
         href={link.href}
         text={link.text}
         handleClick={this.handleClick}
-        disabled={this.state.disabled}
+        disabled={link.disabled}
       />
     ));
     return (

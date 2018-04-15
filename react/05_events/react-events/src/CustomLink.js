@@ -1,10 +1,11 @@
 import React, { Components } from "react";
+import "./CustomLink.css";
 
-const CustomLink = ({ href, handleClick, text }) => (
+const CustomLink = ({ href, handleClick, text, disabled }) => (
   <div>
     <a
       href={href}
-      className={this.props.disabled ? "disabled" : "enabled"}
+      className={disabled ? "notActive" : ""}
       target="_blank"
       onClick={handleClick}
     >
