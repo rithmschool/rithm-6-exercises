@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Div from './Div';
+import DivForm from './DivForm';
 
 class App extends Component {
   constructor(props) {
@@ -9,21 +10,21 @@ class App extends Component {
     this.state = {
       divs: [
         {
-          w: '100px',
-          h: '100px',
+          w: 100,
+          h: 100,
           bgc: 'black'
         },
         {
-          w: '200px',
-          h: '100px',
+          w: 200,
+          h: 100,
           bgc: 'yellow'
         }
       ]
     }
-    this.addSquare = this.addSquare.bind(this);
+    this.addDiv = this.addDiv.bind(this);
   }
 
-  addSquare(newDiv) {
+  addDiv(newDiv) {
     this.setState(prevState => {
       return { divs: [newDiv, ...prevState.divs] }
     });
@@ -37,12 +38,15 @@ class App extends Component {
           <h1 className="App-title m-2">Welcome to Div App</h1>
         </header>
         <div className="container">
+          <div className="text-left">
+            <DivForm addDiv={this.addDiv} />
+          </div>
           <div className="row my-2 d-flex justify-content-center">
-            {this.state.divs.map((el, i) => <Div key={i} height={el.h} width={el.w} backgroundColor={el.bgc} />)}
+            {this.state.divs.map((el, i) => <Div key={i} height={el.h + "px"} width={el.w + "px"} backgroundColor={el.bgc} />)}
           </div>
         </div>
-        <button onClick={this.addSquare.bind(this, {w: '100px', h: '100px', bgc: 'lime'})}> Add square
-        </button>
+        {/* <button className="m-3" onClick={this.addDiv.bind(this, {w: '100px', h: '100px', bgc: 'lime'})}> Add square
+        </button> */}
       </div>
     );
   }
