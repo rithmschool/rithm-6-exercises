@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class CustomLink extends Component {
   render() {
     return (
-      <div>
+      <div className="link">
         <a
           href={this.props.href}
           target="_blank"
@@ -15,3 +15,5 @@ class CustomLink extends Component {
     );
   }
 }
+
+export default CustomLink;
