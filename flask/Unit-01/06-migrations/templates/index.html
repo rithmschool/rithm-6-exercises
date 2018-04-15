@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sunsets</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet"
+  />
+</head>
+<body>
+
+    <div class="container">
+
+      <!-- Remember to update the action and the method to the form -->
+      <form id="form" action="{{url_for('index')}}" method="POST">
+        <div class="form-group row">
+          <label for="image_url" class="col-2 col-form-label">Image URL:</label>
+          <input type="url" class="form-control col-9" id="image_url" name="image_url" placeholder="Enter image URL here">
+        </div>
+        <div class="form-group row">
+          <label for="caption" class="col-2 col-form-label">Caption:</label>
+          <input type="text" class="form-control col-9" id="caption" name="caption" placeholder="Enter text you want at the top of the image">
+        </div>
+        <div class="form-group row">
+          <label for="location" class="col-2 col-form-label">Location:</label>
+          <input type="text" class="form-control col-9" id="location" name="location" placeholder="Enter location">
+        </div>
+        <div class="form-group row">
+          <label for="beauty" class="col-2 col-form-label">Beauty:</label>
+          <input type="number" class="form-control col-9" id="beauty" name="beauty" placeholder="Enter beauty">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="row">
+        {% for s in sunsets %}
+          <div class="col col-4">
+            <img class="col-12" src="{{s.image_url}} " alt="">
+            <p> {{ s.caption }} </p>
+            <p>{{ s.location }}</p>
+            <p>{{ s.beauty }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+<!-- form to add a sunset image, and a collection of all of the sunset images -->
