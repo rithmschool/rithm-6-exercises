@@ -44,7 +44,7 @@ class CoinContainer extends Component {
 }
 
 CoinContainer.defaultProps = {
-  coinStatus: ['./heads.png', './tails.png']
+  coinStatus: [heads, tails]
 };
 
 export default CoinContainer;
