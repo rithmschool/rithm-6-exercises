@@ -19,8 +19,6 @@ class TodoList extends Component {
 
   addToDo(newTodo) {
     this.setState(prevState => {
-      console.log(prevState);
-      console.log(newTodo);
       return { todos: [...prevState.todos, newTodo] };
     });
   }

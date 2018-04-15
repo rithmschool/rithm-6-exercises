@@ -13,9 +13,11 @@ class NewToDoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('works');
-    console.log(this.state);
+    //calls addToDo and passes NewToDoForm's state as an argument
     this.props.addToDo({ ...this.state });
+    //resets inputs after submission
+    this.setState({ title: '', description: '' });
+    e.target.reset();
   }
 
   handleChange(e) {
