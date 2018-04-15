@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Todo } from './Todo';
+import Todo from './Todo';
+import NewTodoForm from './NewTodoForm';
 
 class TodoList extends Component {
   constructor(props) {
@@ -7,6 +8,14 @@ class TodoList extends Component {
     this.state = {
       todos: ['code', 'groceries', 'exercise']
     };
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  handleAdd(newTodo) {
+    this.setState(prevState => ({
+      todos: [newTodo, ...prevState.todos]
+    }));
   }
 
   handleRemove(idx) {
@@ -25,7 +34,14 @@ class TodoList extends Component {
         key={idx}
       />
     ));
-    return <div>{todos}</div>;
+    return (
+      <div>
+        Add new todo:
+        <NewTodoForm handleAdd={this.handleAdd} />
+        <br />
+        {todos}
+      </div>
+    );
   }
 }
 

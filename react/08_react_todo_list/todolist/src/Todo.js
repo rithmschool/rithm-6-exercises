@@ -14,4 +14,4 @@ class Todo extends Component {
   }
 }
 
-export { Todo };
+export default Todo;
