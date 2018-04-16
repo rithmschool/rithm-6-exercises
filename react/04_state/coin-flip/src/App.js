@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     this.state = {
       heads: true,
-      count: 0
+      countHead: 0,
+      countTail: 0
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -16,14 +17,13 @@ class App extends Component {
     e.preventDefault();
     if (this.state.heads === true) {
       this.setState(prevState => {
-        return { heads: false, count: this.state.count + 1 };
+        return { heads: false, countHead: this.state.countHead + 1 };
       });
     } else {
       this.setState(prevState => {
-        return { heads: true, count: this.state.count + 1 };
+        return { heads: true, countTail: this.state.countTail + 1 };
       });
     }
-    console.log(this.state.count);
   }
   render() {
     let coin;
@@ -34,7 +34,8 @@ class App extends Component {
     }
     return (
       <div className="coinContainer">
-        <h3>You have flipped the coin {this.state.count} times</h3>
+        <h3>You have flipped heads {this.state.countHead} times</h3>
+        <h3>You have flipped tail {this.state.countTail} times</h3>
         {coin}
         <button onClick={this.handleClick}>Click here to flip</button>
       </div>
