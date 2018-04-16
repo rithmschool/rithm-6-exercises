@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    const buttonText = this.hasActiveLinks ? "disable" : "enable";
+    const buttonText = this.state.hasActiveLinks ? "disable" : "enable";
     const links = this.props.links.map((l, i) => (
       <CustomLink
         href={l.href}
