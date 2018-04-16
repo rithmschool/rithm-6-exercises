@@ -21,7 +21,7 @@ class TodoList extends Component {
   render() {
     var todos = this.state.todos.map(taco => <li> {taco.task} </li>);
 
-    const someStyle = { float: 'left' };
+    const someStyle = { color: 'green' };
 
     // var todos = this.state.todos.map(function(taco, idx) {
     //   return <li> {taco.task} </li>;
