@@ -22,7 +22,12 @@ class NewTodoForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input name="todo" onChange={this.handleChange} type="text" />
+        <input
+          name="todo"
+          onChange={this.handleChange}
+          type="text"
+          value={this.state.todo}
+        />
         <input type="submit" />
       </form>
     );

@@ -13,6 +13,7 @@ class TodoList extends Component {
   }
 
   handleAdd(newTodo) {
+    newTodo = newTodo.todo;
     this.setState(prevState => ({
       todos: [newTodo, ...prevState.todos]
     }));
