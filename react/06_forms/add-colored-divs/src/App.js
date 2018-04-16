@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AddDivForm from './AddDivForm';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      divs: []
+    };
+    this.addDiv = this.addDiv.bind(this);
+  }
+
+  addDiv(newDiv) {
+    console.log(newDiv);
+    this.setState(prevState => {
+      //Alternative technique
+      // divs: [...prevState.divs, newDiv]
+      return { divs: [...prevState.divs, newDiv] };
+    });
+  }
+
   render() {
+    const divs = this.state.divs.map(div => {
+      return (
+        <div
+          style={{
+            width: div.width,
+            height: div.height,
+            backgroundColor: div.backgroundColor
+          }}
+        >
+          I am a div
+        </div>
+      );
+    });
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>murph</p>
+        <AddDivForm addDiv={this.addDiv} />
+        {divs}
       </div>
     );
   }
