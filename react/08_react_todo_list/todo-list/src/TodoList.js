@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import newTodoItem from "./Todo.js";
+import NewTodoItem from "./newTodoItem.js";
 import NewTodoForm from "./NewTodoForm.js";
+import "./TodoList.css";
 
 class TodoList extends Component {
   constructor(props) {
@@ -19,15 +20,28 @@ class TodoList extends Component {
   }
 
   handleAdd(newTodo) {
-    this.setState(prevState => ({ todos: [newTodo, ...prevState.todos] }));
+    this.setState(prevState => ({
+      todos: [newTodo, ...prevState.todos]
+    }));
+  }
+
+  handleDelete(idxTodo) {
+    let newTodos = this.state.todos.filter(t => t.id !== idx);
+    this.setState({ todos: newTodos });
   }
 
   render() {
-    const todoListItems = this.state.todos.map((todo, i) => {
-      return <Todo key={i} newTodo={todo.newTodo} date={todo.date} />;
-    });
+    let todoListItems = this.state.todos.map((todo, i) => (
+      <NewTodoItem
+        key={i}
+        newTodo={todo.newTodo}
+        handleDelete={this.handleDelete.bind(this, todo.i)}
+      />
+    ));
     return (
       <div className="TodoList">
+        <h1>What's your Todo Today?</h1>
+        <NewTodoForm handleAdd={this.handleAdd} />
         <ul>{todoListItems}</ul>
       </div>
     );
