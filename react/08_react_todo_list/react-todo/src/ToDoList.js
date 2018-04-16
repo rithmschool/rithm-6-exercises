@@ -40,7 +40,25 @@ class TodoList extends Component {
     });
   }
 
-  editToDo(index) {}
+  editToDo(index, e) {
+    e.preventDefault();
+    //it didn't let me process these inside of setState, why not?
+    // 'synthetic object' error
+    let newTitle = { [e.target[0].name]: e.target[0].value };
+    let newDescription = { [e.target[1].name]: e.target[1].value };
+    this.setState(prevState => {
+      let todosCopy = [...prevState.todos];
+      // debugger;
+      if (newTitle['title'].length < 1) newTitle.title = todosCopy[index].title;
+      if (newDescription['description'].length < 1)
+        newDescription.description = todosCopy[index].description;
+      todosCopy[index] = {
+        ...newTitle,
+        ...newDescription
+      };
+      return { todos: todosCopy };
+    });
+  }
 
   showEditForm(index) {
     this.setState(prevState => {
@@ -68,7 +86,6 @@ class TodoList extends Component {
             title={title}
             description={description}
             isCompleted={isCompleted}
-            //still don't really get the bind(i) part
             markAsComplete={this.markAsComplete.bind(this, i)}
             removeToDo={this.removeToDo.bind(this, i)}
             editToDo={this.editToDo.bind(this, i)}
