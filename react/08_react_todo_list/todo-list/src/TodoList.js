@@ -8,13 +8,14 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       todos: [
-        { title: 'Walk the Dog', deadline: '3pm' },
-        { title: 'Walk the Dog', deadline: '3pm' },
-        { title: 'Walk the Dog', deadline: '3pm' }
+        { title: 'Walk the Dog', deadline: '3pm', completed: false },
+        { title: 'Walk the Dog', deadline: '3pm', completed: false },
+        { title: 'Walk the Dog', deadline: '3pm', completed: false }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.toggleCompleted = this.toggleCompleted.bind(this);
   }
   handleAdd(newTodo) {
     this.setState(prevState => ({
@@ -22,6 +23,17 @@ export default class TodoList extends Component {
     }));
   }
 
+  toggleCompleted(index) {
+    this.setState(prevState => {
+      let newTodos = [...prevState.todos];
+      if (newTodos[index].completed === true) {
+        newTodos[index].completed = false;
+      } else {
+        newTodos[index].completed = true;
+      }
+      return { todos: newTodos };
+    });
+  }
   removeTodo(todo) {
     let index = this.state.todos.indexOf(todo);
     let array = this.state.todos;
@@ -34,8 +46,15 @@ export default class TodoList extends Component {
   render() {
     let allTodos = this.state.todos.map((todo, index) => {
       let content = { title: todo.title, deadline: todo.deadline };
+      if (todo.completed === false) {
+        content['className'] = '';
+      } else {
+        content['className'] = 'completed';
+      }
       return (
         <TodoComponent
+          toggleCompleted={this.toggleCompleted}
+          className={content.className}
           remove={this.removeTodo}
           index={index}
           key={index}
