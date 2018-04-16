@@ -20,7 +20,9 @@ const Todo = ({
     <button onClick={showEditForm}>Change</button>
     {isEditSelected ? (
       <form onSubmit={editToDo}>
+        <label htmlFor="title">Title: </label>
         <input name="title" />
+        <label htmlFor="description">Description: </label>
         <input name="description" />
         <input type="submit" />
       </form>
