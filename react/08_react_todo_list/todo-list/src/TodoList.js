@@ -10,24 +10,46 @@ class TodoList extends Component {
       todos: [
         {
           newTodo:
-            "Finish my React exercises and become a superstar developer(hopefully)"
+            "Finish my React exercises and become a superstar developer(hopefully)",
+          idx: 0,
+          isCompleted: false
         },
-        { newTodo: "Buy some milk and a cow" },
-        { newTodo: "Go to the gym for sanity" }
+        {
+          newTodo: "Buy some milk and a cow",
+          idx: 1,
+          isCompleted: false
+        },
+        {
+          newTodo: "Go to the gym for sanity",
+          idx: 2,
+          isCompleted: false
+        }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleAdd(newTodo) {
+    newTodo.isCompleted = false;
     this.setState(prevState => ({
       todos: [newTodo, ...prevState.todos]
     }));
   }
 
+  handleIsCompleted(idxTodo) {
+    let foundTodos = this.state.todos.map((todo, i) => {
+      if (i === idxTodo) {
+        todo.isCompleted = !todo.isCompleted;
+      }
+      return todo;
+    });
+    console.log(foundTodos);
+    this.setState({ todos: foundTodos });
+  }
+
   handleDelete(idxTodo) {
-    let newTodos = this.state.todos.filter(t => t.id !== idx);
-    this.setState({ todos: newTodos });
+    let updatedTodos = this.state.todos.filter((todo, i) => todo.i !== i);
+    this.setState({ todos: updatedTodos });
   }
 
   render() {
@@ -35,7 +57,10 @@ class TodoList extends Component {
       <NewTodoItem
         key={i}
         newTodo={todo.newTodo}
-        handleDelete={this.handleDelete.bind(this, todo.i)}
+        idx={todo.idx}
+        isCompleted={todo.isCompleted}
+        handleIsCompleted={this.handleIsCompleted.bind(this, i)}
+        handleDelete={this.handleDelete.bind(this, i)}
       />
     ));
     return (

@@ -8,7 +8,6 @@ class NewTodoForm extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    //this.handleRemove = this.handleRemove(bind);
   }
 
   handleChange(e) {
