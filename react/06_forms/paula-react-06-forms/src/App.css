@@ -1,0 +1,17 @@
+.App {
+  margin: 5rem;
+  text-align: center;
+}
+
+.NewDivForm {
+  text-align: center;
+  margin: 2rem 2rem 3rem;
+}
+
+.NewDivForm label {
+  padding: 0 0.1rem 0 1rem;
+}
+
+.NewDivForm button {
+  margin: 0 20px;
+}
