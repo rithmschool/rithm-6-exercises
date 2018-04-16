@@ -5,7 +5,8 @@ export default class TodoForm extends Component {
     super(props);
     this.state = {
       title: '',
-      deadline: ''
+      deadline: '',
+      completed: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
