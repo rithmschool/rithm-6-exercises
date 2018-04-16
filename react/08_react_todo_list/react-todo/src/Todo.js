@@ -5,7 +5,8 @@ const Todo = ({
   description,
   isCompleted,
   markAsComplete,
-  removeToDo
+  removeToDo,
+  editToDo
 }) => (
   <div>
     <p>Title: {title}</p>
@@ -13,6 +14,7 @@ const Todo = ({
     <p>Is Completed: {isCompleted ? 'True' : 'False'}</p>
     <button onClick={markAsComplete}>Toggle Completion Status</button>
     <button onClick={removeToDo}>Delete</button>
+    <button onClick={editToDo}>Edit</button>
   </div>
 );
 

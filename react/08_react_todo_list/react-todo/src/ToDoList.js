@@ -15,6 +15,7 @@ class TodoList extends Component {
     this.markAsComplete = this.markAsComplete.bind(this);
     this.removeToDo = this.removeToDo.bind(this);
     this.addToDo = this.addToDo.bind(this);
+    this.editToDo = this.editToDo.bind(this);
   }
 
   addToDo(newTodo) {
@@ -33,6 +34,8 @@ class TodoList extends Component {
       return { todos: todosCopy };
     });
   }
+
+  editToDo(index) {}
 
   markAsComplete(index) {
     console.log('clicked');
@@ -57,6 +60,7 @@ class TodoList extends Component {
             //still don't really get the bind(i) part
             markAsComplete={this.markAsComplete.bind(this, i)}
             removeToDo={this.removeToDo.bind(this, i)}
+            editToDo={this.editToDo.bind(this, i)}
           />
         );
       }
