@@ -1,37 +1,12 @@
-.Pokedex {
-  width: 75%;
-  margin: auto;
-  background-color: whitesmoke;
-  padding: 1rem;
-}
-
-.Pokecards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.Pokecard {
-  display: flex;
-  width: 10rem;
-  flex-direction: column;
-  box-shadow: 0 5px 10px gray;
-  border-radius: 10px;
-  background-color: gainsboro;
-}
-
-.Pokecard img {
-  object-fit: cover;
-}
-
 .PokemonCard {
   border-radius: 25px;
-  background-color: rgba(211, 211, 211);
-  width: 30%;
+  background-color: rgb(211, 211, 211);
+  width: 20%;
   margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 h2 {
   color: blue;
-  margin-top: 20px;
 }
