@@ -21,13 +21,15 @@ class App extends Component {
   }
 
   render() {
-    const divs = this.state.divs.map(div => {
+    const divs = this.state.divs.map((div, i) => {
       return (
         <div
+          key={i}
           style={{
-            width: div.width,
-            height: div.height,
-            backgroundColor: div.backgroundColor
+            width: `${div.width}px`,
+            height: `${div.height}px`,
+            backgroundColor: div.backgroundColor,
+            margin: '5px'
           }}
         >
           I am a div
@@ -38,7 +40,15 @@ class App extends Component {
       <div className="App">
         <p>murph</p>
         <AddDivForm addDiv={this.addDiv} />
-        {divs}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
+          {divs}
+        </div>
       </div>
     );
   }
