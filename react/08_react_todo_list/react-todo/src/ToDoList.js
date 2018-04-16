@@ -8,7 +8,11 @@ class TodoList extends Component {
     this.state = {
       todos: Array.from({ length: this.props.Todos.length }).map(
         (item, index) => {
-          return { ...this.props.Todos[index], isCompleted: 'false' };
+          return {
+            ...this.props.Todos[index],
+            isCompleted: false,
+            isEditSelected: false
+          };
         }
       )
     };
@@ -16,6 +20,7 @@ class TodoList extends Component {
     this.removeToDo = this.removeToDo.bind(this);
     this.addToDo = this.addToDo.bind(this);
     this.editToDo = this.editToDo.bind(this);
+    this.showEditForm = this.showEditForm.bind(this);
   }
 
   addToDo(newTodo) {
@@ -37,20 +42,26 @@ class TodoList extends Component {
 
   editToDo(index) {}
 
+  showEditForm(index) {
+    this.setState(prevState => {
+      let todosCopy = [...prevState.todos];
+      todosCopy[index].isEditSelected = !todosCopy[index].isEditSelected;
+      console.log(todosCopy);
+      return { todos: todosCopy };
+    });
+  }
+
   markAsComplete(index) {
-    console.log('clicked');
-    console.log(index);
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[index].isCompleted = !todosCopy[index].isCompleted;
-      console.log(todosCopy);
       return { todos: todosCopy };
     });
   }
 
   render() {
     let Todos = this.state.todos.map(
-      ({ title, description, isCompleted }, i) => {
+      ({ title, description, isCompleted, isEditSelected }, i) => {
         return (
           <Todo
             key={i}
@@ -61,6 +72,8 @@ class TodoList extends Component {
             markAsComplete={this.markAsComplete.bind(this, i)}
             removeToDo={this.removeToDo.bind(this, i)}
             editToDo={this.editToDo.bind(this, i)}
+            showEditForm={this.showEditForm.bind(this, i)}
+            isEditSelected={isEditSelected}
           />
         );
       }
