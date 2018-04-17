@@ -33,7 +33,6 @@ class NewTodoForm extends Component {
             placeholder="Enter A Todo"
           />
           <label>Enter A Todo</label>
-
           <input
             name="desc"
             value={this.state.desc}

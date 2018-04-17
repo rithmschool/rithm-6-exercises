@@ -13,6 +13,7 @@ class NewTodoForm extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    debugger;
     return {
       title: nextProps.title,
       desc: nextProps.desc,

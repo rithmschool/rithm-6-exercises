@@ -6,6 +6,7 @@
 label {
   position: absolute;
   top: 0;
+  right: -100;
   font-size: var(--font-size-small);
   opacity: 1;
   transform: translateY(0);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Todo from "./components/Todo";
 import NewTodoForm from "./components/NewTodoForm";
 import EditForm from "./components/EditForm";
+import Header from "./components/Header";
 import "./TodoList.css";
 
 export default class TodoList extends Component {
@@ -22,8 +23,8 @@ export default class TodoList extends Component {
           toEdit: false
         },
         {
-          title: "Fart",
-          desc: "Fart on Healthy Food",
+          title: "Drink Water",
+          desc: "Drink 8 cups a day",
           complete: false,
           toEdit: false
         }
@@ -102,7 +103,8 @@ export default class TodoList extends Component {
       }
     });
     return (
-      <div>
+      <div className="container">
+        <Header />
         <NewTodoForm handleAdd={this.handleAdd} />
         {todos}
       </div>
