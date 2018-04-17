@@ -1,5 +1,11 @@
+body {
+  height: 100%;
+  background-color: lightblue;
+}
+
 .App {
   text-align: center;
+  padding: 30px;
 }
 
 .App-logo {
@@ -22,7 +28,15 @@
   font-size: large;
 }
 
+.MemeForm {
+  padding: 10px;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
