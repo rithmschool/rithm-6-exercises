@@ -19,7 +19,7 @@ class VendingMachine extends Component {
 }
 
 const Home = () => (
-  <div>
+  <div className="main">
     <h1>Welcome To Aqua Cuisine</h1>
     <h2>World's Finest Maritime Fare</h2>
     <div>
