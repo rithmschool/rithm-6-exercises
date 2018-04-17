@@ -29,12 +29,14 @@ class NewToDoForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
         <input
+          id="title"
           name="title"
           onChange={this.handleChange}
           value={this.state.title}
         />
         <label htmlFor="description">Description: </label>
         <input
+          id="description"
           name="description"
           onChange={this.handleChange}
           value={this.state.description}

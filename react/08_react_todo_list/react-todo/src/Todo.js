@@ -7,6 +7,8 @@ class Todo extends Component {
       title: '',
       description: ''
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -16,33 +18,55 @@ class Todo extends Component {
     };
   }
 
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.editToDo({ ...this.state });
+    this.setState({ title: '', description: '' });
+    e.target.reset();
+  }
+
   render() {
-    const Todo = {
+    const {
       //where does this need to happen?
-      this.props.title,
-      this.props.description,
-      this.props.isCompleted,
-      this.props.markAsComplete,
-      this.props.removeToDo,
-      this.props.showEditForm,
-      this.props.editToDo,
-      this.props.isEditSelected
-    };
+      title,
+      description,
+      isCompleted,
+      markAsComplete,
+      removeToDo,
+      showEditForm,
+      editToDo,
+      isEditSelected
+    } = this.props;
     return (
       <div>
         <p>Title: {title}</p>
         <p>Description: {description}</p>
-
         <p>Is Completed: {isCompleted ? 'True' : 'False'}</p>
         <button onClick={markAsComplete}>Toggle Completion Status</button>
         <button onClick={removeToDo}>Delete</button>
         <button onClick={showEditForm}>Change</button>
         {isEditSelected ? (
-          <form onSubmit={editToDo}>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor="title">Title: </label>
-            <input name="title" />
+            <input
+              id="title"
+              name="title"
+              onChange={this.handleChange}
+              value={this.state.title}
+            />
             <label htmlFor="description">Description: </label>
-            <input name="description" />
+            <input
+              id="description"
+              name="description"
+              onChange={this.handleChange}
+              value={this.state.description}
+            />
             <input type="submit" />
           </form>
         ) : null}
