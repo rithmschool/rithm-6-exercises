@@ -11,6 +11,7 @@ class App extends Component {
       memeUrls: []
     };
     this.addGif = this.addGif.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
   }
 
   async componentDidMount(query) {
@@ -35,10 +36,16 @@ class App extends Component {
     });
   }
 
+  deleteAll() {
+    this.setState(prevState => {
+      return { memeUrls: [] };
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <MemeForm addGif={this.addGif} />
+        <MemeForm addGif={this.addGif} deleteAll={this.deleteAll} />
         <MemeList memeUrls={this.state.memeUrls} />
       </div>
     );

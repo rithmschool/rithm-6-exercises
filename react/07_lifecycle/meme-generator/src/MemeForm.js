@@ -25,16 +25,19 @@ class MemeForm extends Component {
 
   render() {
     return (
-      <form className="MemeForm" onSubmit={this.handleSubmit}>
-        <label htmlFor="url">Title: </label>
-        <input
-          id="url"
-          name="url"
-          onChange={this.handleChange}
-          value={this.state.url}
-        />
-        <input type="submit" />
-      </form>
+      <div>
+        <form className="MemeForm" onSubmit={this.handleSubmit}>
+          <label htmlFor="url">Title: </label>
+          <input
+            id="url"
+            name="url"
+            onChange={this.handleChange}
+            value={this.state.url}
+          />
+          <input type="submit" />
+        </form>
+        <button onClick={this.props.deleteAll}>Delete All</button>
+      </div>
     );
   }
 }
