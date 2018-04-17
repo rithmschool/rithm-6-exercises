@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewTodoItem from "./newTodoItem.js";
 import NewTodoForm from "./NewTodoForm.js";
+import EditTodoForm from "./EditTodoForm.js";
 import "./TodoList.css";
 
 class TodoList extends Component {
@@ -9,20 +10,23 @@ class TodoList extends Component {
     this.state = {
       todos: [
         {
-          newTodo:
+          title:
             "Finish my React exercises and become a superstar developer(hopefully)",
           idx: 0,
-          isCompleted: false
+          isCompleted: false,
+          isEditing: false
         },
         {
-          newTodo: "Buy some milk and a cow",
+          title: "Buy some milk and a cow",
           idx: 1,
-          isCompleted: false
+          isCompleted: false,
+          isEditing: false
         },
         {
-          newTodo: "Go to the gym for sanity",
+          title: "Go to the gym for sanity",
           idx: 2,
-          isCompleted: false
+          isCompleted: false,
+          isEditing: false
         }
       ]
     };
@@ -31,9 +35,32 @@ class TodoList extends Component {
 
   handleAdd(newTodo) {
     newTodo.isCompleted = false;
+    newTodo.isEditing = false;
     this.setState(prevState => ({
       todos: [newTodo, ...prevState.todos]
     }));
+  }
+
+  handleEdit(idxTodo) {
+    let foundTodos = this.state.todos.map((todo, i) => {
+      if (i === idxTodo) {
+        todo.isEditing = !todo.isEditing;
+      }
+      return todo;
+    });
+    this.setState({ todos: foundTodos });
+  }
+
+  handleSetUpdate(id, updatedTodo) {
+    //updatedTodo.isEditing = false;
+    let updatedTodos = this.state.todos.map((todo, i) => {
+      if (i === todo.i) {
+        todo.title = updatedTodo.title;
+        todo.isEditing = false;
+      }
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
   }
 
   handleIsCompleted(idxTodo) {
@@ -48,21 +75,36 @@ class TodoList extends Component {
   }
 
   handleDelete(idxTodo) {
-    let updatedTodos = this.state.todos.filter((todo, i) => todo.i !== i);
+    let updatedTodos = this.state.todos.filter((todo, i) => i !== idxTodo);
     this.setState({ todos: updatedTodos });
   }
 
   render() {
-    let todoListItems = this.state.todos.map((todo, i) => (
-      <NewTodoItem
-        key={i}
-        newTodo={todo.newTodo}
-        idx={todo.idx}
-        isCompleted={todo.isCompleted}
-        handleIsCompleted={this.handleIsCompleted.bind(this, i)}
-        handleDelete={this.handleDelete.bind(this, i)}
-      />
-    ));
+    let todoListItems = this.state.todos.map(
+      (todo, i) =>
+        todo.isEditing ? (
+          <EditTodoForm
+            key={i}
+            title={todo.title}
+            idx={todo.idx}
+            isCompleted={todo.isCompleted}
+            isEditing={todo.isEditing}
+            setUpdate={this.handleSetUpdate.bind(this, i)}
+            handleEdit={this.handleEdit.bind(this, i)}
+          />
+        ) : (
+          <NewTodoItem
+            key={i}
+            title={todo.title}
+            idx={todo.idx}
+            isCompleted={todo.isCompleted}
+            isEditing={todo.isEditing}
+            handleEdit={this.handleEdit.bind(this, i)}
+            handleIsCompleted={this.handleIsCompleted.bind(this, i)}
+            handleDelete={this.handleDelete.bind(this, i)}
+          />
+        )
+    );
     return (
       <div className="TodoList">
         <h1>What's your Todo Today?</h1>

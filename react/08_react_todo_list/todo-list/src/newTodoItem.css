@@ -1,3 +1,42 @@
+* {
+  box-sizing: border-box;
+}
 .completed__look {
   text-decoration-line: line-through;
+}
+
+li {
+  margin-top: 1%;
+}
+
+.button__shape {
+  height: 30px;
+  width: auto;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 5px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.delete__todo {
+  background-color: darkred;
+}
+
+.completed__todo {
+  background-color: seagreen;
+}
+
+.inprogress__todo {
+  background-color: slategray;
+}
+
+.edit__todo {
+  background-color: goldenrod;
+}
+
+.inprogress__edit {
+  background-color: dodgerblue;
 }

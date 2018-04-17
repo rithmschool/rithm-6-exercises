@@ -4,7 +4,7 @@ class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newTodo: ""
+      title: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -16,14 +16,14 @@ class NewTodoForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.handleAdd({ ...this.state });
-    this.setState({ newTodo: "" });
+    this.setState({ title: "" });
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <input
-          name="newTodo"
-          value={this.state.newTodo}
+          name="title"
+          value={this.state.title}
           onChange={this.handleChange}
           type="text"
         />
