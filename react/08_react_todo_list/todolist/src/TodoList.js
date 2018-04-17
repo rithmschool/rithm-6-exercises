@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Todo from "./components/Todo";
 import NewTodoForm from "./components/NewTodoForm";
+import EditForm from "./components/EditForm";
 import "./TodoList.css";
 
 export default class TodoList extends Component {
@@ -11,16 +12,32 @@ export default class TodoList extends Component {
         {
           title: "Sleep",
           desc: "Get GoodnightSleep",
-          complete: false
+          complete: false,
+          toEdit: false
         },
         {
           title: "Eat",
           desc: "Eat Healthy Food",
-          complete: false
+          complete: false,
+          toEdit: false
+        },
+        {
+          title: "Fart",
+          desc: "Fart on Healthy Food",
+          complete: false,
+          toEdit: true
         }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleEdit(idx) {
+    this.setState(prevState => {
+      let todos = [...prevState.todos];
+      todos[idx].toEdit = true;
+      return { todos: todos };
+    });
   }
 
   handleRemove(idx) {
@@ -41,6 +58,7 @@ export default class TodoList extends Component {
 
   handleAdd(newTodo) {
     newTodo["complete"] = false;
+    newTodo["toEdit"] = false;
     this.setState(prevState => ({
       todos: [newTodo, ...prevState.todos]
     }));
@@ -48,17 +66,28 @@ export default class TodoList extends Component {
 
   render() {
     let todos = this.state.todos.map((todo, idx) => {
-      return (
-        <Todo
-          key={idx}
-          title={todo.title}
-          desc={todo.desc}
-          finished={todo.complete}
-          status={todo.button}
-          removeToDo={this.handleRemove.bind(this, idx)}
-          update={this.updateStatus.bind(this, idx)}
-        />
-      );
+      if (todo.toEdit === false) {
+        return (
+          <Todo
+            key={idx}
+            title={todo.title}
+            desc={todo.desc}
+            finished={todo.complete}
+            status={todo.button}
+            removeToDo={this.handleRemove.bind(this, idx)}
+            update={this.updateStatus.bind(this, idx)}
+            updateToDo={this.handleEdit.bind(this, idx)}
+          />
+        );
+      } else {
+        return (
+          <EditForm
+            title={todo.title}
+            desc={todo.desc}
+            handleAdd={this.handleAdd}
+          />
+        );
+      }
     });
     return (
       <div>
