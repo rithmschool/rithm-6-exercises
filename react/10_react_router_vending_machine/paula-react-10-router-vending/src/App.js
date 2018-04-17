@@ -4,7 +4,6 @@ import VendingMachine from "./VendingMachine";
 import AvocadoToast from "./AvocadoToast";
 import LaCroix from "./LaCroix";
 import PixieSticks from "./PixieSticks";
-import "./App.css";
 
 class App extends Component {
   render() {
