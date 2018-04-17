@@ -16,7 +16,9 @@ export default class Todo extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   handleDoubleClick(editKey) {
@@ -35,6 +37,10 @@ export default class Todo extends Component {
   handleSubmit(e) {
     let updated = { field: e.target.name, value: e.target.value };
     this.props.handleEdit(updated);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return { title: nextProps.title, description: nextProps.description };
   }
 
   render() {
