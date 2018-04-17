@@ -4,11 +4,20 @@ class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.title,
-      desc: this.props.desc
+      title: "",
+      desc: "",
+      id: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      title: nextProps.title,
+      desc: nextProps.desc,
+      id: nextProps.id
+    };
   }
 
   handleChange(e) {
@@ -17,7 +26,7 @@ class NewTodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleAdd({ ...this.state });
+    this.props.addEdit(this.state);
     this.setState({ title: "", desc: "" });
   }
 

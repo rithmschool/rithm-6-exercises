@@ -25,16 +25,18 @@ export default class TodoList extends Component {
           title: "Fart",
           desc: "Fart on Healthy Food",
           complete: false,
-          toEdit: true
+          toEdit: false
         }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.addEdit = this.addEdit.bind(this);
   }
 
   handleEdit(idx) {
     this.setState(prevState => {
       let todos = [...prevState.todos];
+      todos[idx]["id"] = idx;
       todos[idx].toEdit = true;
       return { todos: todos };
     });
@@ -64,6 +66,15 @@ export default class TodoList extends Component {
     }));
   }
 
+  addEdit(updatedTodo) {
+    let id = updatedTodo.id;
+    let todos = this.state.todos.slice();
+    todos[id] = updatedTodo;
+    todos[id].complete = false;
+    todos[id].toEdit = false;
+    this.setState({ todos });
+  }
+
   render() {
     let todos = this.state.todos.map((todo, idx) => {
       if (todo.toEdit === false) {
@@ -84,7 +95,8 @@ export default class TodoList extends Component {
           <EditForm
             title={todo.title}
             desc={todo.desc}
-            handleAdd={this.handleAdd}
+            id={todo.id}
+            addEdit={this.addEdit}
           />
         );
       }
