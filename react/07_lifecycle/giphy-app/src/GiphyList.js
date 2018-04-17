@@ -17,12 +17,6 @@ class GiphyList extends Component {
     this.handleAdd = this.handleAdd.bind(this);
   }
 
-  // handleAdd(newGif) {
-  //   this.setState(prevState => ({
-  //     gifs: [newGif, ...prevState.gifs]
-  //   }));
-  // }
-
   async handleAdd(query) {
     query = query.searchTerm.split(' ').join('+');
     const response = await fetch(
@@ -37,22 +31,24 @@ class GiphyList extends Component {
   }
 
   render() {
-    let data = 'Sorry, no gifs yet. Add a gif!';
-    if (this.state.gifs.length > 0) {
-      data = this.state.gifs.map(gif => (
-        <div key={gif.id}>
-          <p>{gif.searchTerm}</p>
-        </div>
-      ));
-    }
-    // let allGifs = this.state.gifs.map((gif, i) => (
-    //   <Gif key={i} src={gif.src} searchTerm={gif.searchTerm} />
-    // ));
+    // let data = 'Sorry, no gifs yet. Add a gif!';
+    // if (this.state.gifs.length > 0) {
+    //   data = this.state.gifs.map(gif => (
+    //     <div key={gif.id}>
+    //       <p>{gif.searchTerm}</p>
+    //     </div>
+    //   ));
+    // }
+
+    let allGifs = this.state.gifs.map((gif, idx) => (
+      <Gif key={idx} src={gif.src} searchTerm={gif.searchTerm} />
+    ));
+
     return (
       <div className="GiphyList">
         <h1>Here ARE SOME AWESOME GIFS</h1>
         <NewGiphyForm handleAdd={this.handleAdd} />
-        {data}
+        {allGifs}
       </div>
     );
   }
