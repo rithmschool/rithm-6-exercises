@@ -22,15 +22,14 @@ export default class GiphyList extends Component {
     }));
   }
 
-  // async componentDidMount(query) {
-  //   let data = await axios.get(
-  //     "https://api.giphy.com/v1/gifs/random?api_key=lB6ofTMau0V63MDSHpV1nVpahYNJkWEd"
-  //   );
-  //   let newUrl = data["data"]["data"]["image_url"];
-  //   this.setState(prevState => {
-  //     return { memes: [...prevState.memes, newUrl] };
-  //   });
-  // }
+  async componentDidMount() {
+    const randomGif = await axios.get(
+      "https://api.giphy.com/v1/gifs/random?api_key=7ZEFWow7Ud3maNI79i6LS2XK3r69X6ab"
+    );
+    const url = randomGif.data.data.images.fixed_height.url;
+    const newGif = { searchTerm: "random", url };
+    this.setState(prevState => ({ gifs: [newGif, ...prevState.gifs] }));
+  }
 
   render() {
     const gifs = this.state.gifs.map((g, i) => (
