@@ -48,7 +48,6 @@ class TodoList extends Component {
     let newDescription = { [e.target[1].name]: e.target[1].value };
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      // debugger;
       if (newTitle['title'].length < 1) newTitle.title = todosCopy[index].title;
       if (newDescription['description'].length < 1)
         newDescription.description = todosCopy[index].description;
