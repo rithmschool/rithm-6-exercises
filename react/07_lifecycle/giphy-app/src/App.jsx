@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchForm from './SearchForm';
 import axios from 'axios';
+import Gif from './Gif'
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
   }
   
   handleAdd(url) {
-    this.setState(prevState => ({ gifs: [url, ...prevState.gifs ]}))
+    this.setState(prevState => ({ gifs: [ ...prevState.gifs, url ]}))
   }
 
   removeAll(event) {
@@ -44,7 +45,7 @@ class App extends Component {
           </div>
           
           <div className="row d-flex justify-content-center">
-            {this.state.gifs.map(src => <div className="m-2 img-div"><img className="gif-img" src={src} alt="some gif"/></div>)}
+            {this.state.gifs.map((src, i) => <Gif key={i} url={src} />)}
           </div>
         </div>
       </div>
