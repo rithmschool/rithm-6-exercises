@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Meme from './Meme';
 
 class MemeForm extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class MemeForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addToDo({ ...this.state });
+    this.props.addGif({ ...this.state });
     this.setState({ url: '' });
     e.target.reset();
   }
@@ -27,8 +26,13 @@ class MemeForm extends Component {
   render() {
     return (
       <form className="MemeForm" onSubmit={this.handleSubmit}>
-        <label htmlFor="title">Title: </label>
-        <input name="url" onChange={this.handleChange} value={this.state.url} />
+        <label htmlFor="url">Title: </label>
+        <input
+          id="url"
+          name="url"
+          onChange={this.handleChange}
+          value={this.state.url}
+        />
         <input type="submit" />
       </form>
     );

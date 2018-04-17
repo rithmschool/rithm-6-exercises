@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Meme from './Meme';
 
 class MemeList extends Component {
@@ -17,7 +16,7 @@ class MemeList extends Component {
   }
 
   render() {
-    const memeUrls = this.state.memeUrls.map((url, index) => {
+    const memeUrls = this.props.memeUrls.map((url, index) => {
       return <Meme key={index} src={url} />;
     });
     return <div>{memeUrls}</div>;
