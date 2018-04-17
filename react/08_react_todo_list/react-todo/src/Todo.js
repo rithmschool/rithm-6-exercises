@@ -1,5 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 
+class Todo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: ''
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      title: nextProps.title,
+      description: nextProps.description
+    }
+  }
+
+  render() {
+    render(
+
+    )
+  }
 const Todo = ({
   title,
   description,
@@ -29,5 +50,5 @@ const Todo = ({
     ) : null}
   </div>
 );
-
+}
 export default Todo;
