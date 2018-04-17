@@ -9,6 +9,11 @@ export default class GiphyList extends Component {
     super(props);
     this.state = { gifs: [] };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    this.setState({ gifs: [] });
   }
 
   async handleAdd(searchTerm) {
@@ -39,6 +44,7 @@ export default class GiphyList extends Component {
       <section>
         <h3>Add new Gif!</h3>
         <NewGiphyForm handleAdd={this.handleAdd} />
+        <button onClick={this.handleDelete}>Delete all gifs!</button>
         {gifs}
       </section>
     );
