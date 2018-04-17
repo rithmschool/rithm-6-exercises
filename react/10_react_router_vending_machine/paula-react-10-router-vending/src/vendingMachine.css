@@ -1,0 +1,32 @@
+.background-img {
+  position: fixed;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -200;
+}
+
+.vending-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.vending-prompt-row {
+  width: 40rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.vending-prompt-row li {
+  list-style: none;
+}
+
+.vending-img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
