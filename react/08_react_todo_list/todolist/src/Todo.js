@@ -22,12 +22,12 @@ class Todo extends Component {
     this.setState({ name: '' });
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   return {
-  //     title: nextProps.title,
-  //     description: nextProps.description
-  //   };
-  // }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.name !== prevState.name) {
+      return { name: nextProps.name };
+    }
+    return null;
+  }
 
   render() {
     let todoRender;
