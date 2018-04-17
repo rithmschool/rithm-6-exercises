@@ -11,6 +11,15 @@ class EditTodoForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.task !== prevState.task) {
+  //     return {
+  //       task: nextProps.task
+  //     };
+  //   }
+  //   return null;
+  // }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
