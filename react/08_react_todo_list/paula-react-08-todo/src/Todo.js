@@ -51,7 +51,6 @@ export default class Todo extends Component {
     const titleInput = (
       <input
         name="title"
-        placeholder={title}
         value={this.state.title}
         onChange={this.handleChange}
         onKeyDown={this.onKeyDown.bind(this, "editTitle")}
@@ -60,7 +59,6 @@ export default class Todo extends Component {
     const descInput = (
       <input
         name="description"
-        placeholder={description}
         value={this.state.title}
         onChange={this.handleChange}
         onKeyDown={this.onKeyDown.bind(this, "editDescription")}
