@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       gifs: [
-        "https://media1.tenor.com/images/584bb2b120144fb033725e459ece68a1/tenor.gif?itemid=7682653"
+        // "https://media1.tenor.com/images/584bb2b120144fb033725e459ece68a1/tenor.gif?itemid=7682653"
       ]
     }
   }
@@ -28,6 +28,16 @@ class App extends Component {
   removeAll(event) {
       event.preventDefault();
       this.setState(prevState => ({ gifs: [ ] }))
+  }
+
+  componentDidMount() {
+    axios
+      .get(`https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC`)
+      .then(res => {
+        // console.log(res.data.data.images.original.url)
+        let url = res.data.data.images.original.url;
+        this.setState(prevState => ({ gifs: [url]}))
+      })
   }
   
   render() {
