@@ -1,13 +1,23 @@
 import React from 'react';
 import './Todo.css';
 
-const Todo = ({ isComplete, description, title, toggleIsComplete, removeTodo }) => (
+const Todo = ({
+  title,
+  description,
+  isComplete,
+  beingUpdated,
+  toggleBeingUpdated,
+  toggleIsComplete,
+  updateTodo,
+  removeTodo
+}) => (
   <li>
     <span className={isComplete ? 'Todo--isComplete' : 'Todo--notComplete'}>
       {title}: {description}
     </span>{' '}
-    <button onClick={toggleIsComplete}>Mark Complete</button>{' '}
-    <button onClick={removeTodo}>Remove!</button>
+    <button onClick={toggleBeingUpdated}>Edit</button>{' '}
+    <button onClick={toggleIsComplete}>Complete</button>{' '}
+    <button onClick={removeTodo}>Remove</button>
   </li>
 );
 
@@ -18,6 +28,7 @@ const Todo = ({ isComplete, description, title, toggleIsComplete, removeTodo }) 
 //         <span className={this.props.isComplete ? 'Todo--isComplete' : 'Todo--notComplete'}>
 //           {this.props.title}: {this.props.description}
 //         </span>{' '}
+//         <button onClick={toggleBeingUpdated}>Edit</button>{' '}
 //         <button onClick={this.props.toggleIsComplete}>Mark Complete</button>{' '}
 //         <button onClick={this.props.removeTodo}>Remove!</button>
 //       </li>

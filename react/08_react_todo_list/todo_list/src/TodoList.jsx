@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
+import UpdateTodoForm from './UpdateTodoForm';
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -10,21 +11,25 @@ export default class TodoList extends Component {
         {
           title: 'Eat',
           description: 'Think of all the things that can be vehicles for butter',
-          isComplete: false
+          isComplete: false,
+          beingUpdated: false
         },
         {
           title: 'Sleep',
           description: 'You need both physical and mental repair, else suffer in performance',
-          isComplete: false
+          isComplete: false,
+          beingUpdated: false
         },
         {
           title: 'Code',
-          description: "Let's remember why we're hear; eyes on the prize",
-          isComplete: false
+          description: "Remember why you're hear; eyes on the prize",
+          isComplete: false,
+          beingUpdated: false
         }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   handleAdd(newTodo) {
@@ -32,8 +37,22 @@ export default class TodoList extends Component {
     this.setState({ todos });
   }
 
+  handleUpdate(i, updatedTodo) {
+    let newState = { ...this.state };
+    let { todos } = newState;
+    todos[i] = updatedTodo;
+    todos[i].beingUpdated = false;
+    this.setState({ todos });
+  }
+
+  toggleBeingUpdated(i) {
+    let { todos } = this.state;
+    todos[i].beingUpdated = true;
+    this.setState({ todos });
+  }
+
   toggleIsComplete(i) {
-    const { todos } = this.state;
+    let { todos } = this.state;
     todos[i].isComplete = !todos[i].isComplete;
     this.setState({ todos });
   }
@@ -45,19 +64,35 @@ export default class TodoList extends Component {
   }
 
   render() {
-    let todos = this.state.todos.map((todo, i) => (
-      <Todo
-        key={i}
-        title={todo.title}
-        description={todo.description}
-        isComplete={todo.isComplete}
-        toggleIsComplete={this.toggleIsComplete.bind(this, i)}
-        removeTodo={this.handleRemove.bind(this, i)}
-      />
-    ));
+    let todos = this.state.todos.map((todo, i) => {
+      if (todo.beingUpdated === false)
+        return (
+          <Todo
+            key={i}
+            title={todo.title}
+            description={todo.description}
+            isComplete={todo.isComplete}
+            beingUpdated={todo.beingUpdated}
+            toggleBeingUpdated={this.toggleBeingUpdated.bind(this, i)}
+            toggleIsComplete={this.toggleIsComplete.bind(this, i)}
+            removeTodo={this.handleRemove.bind(this, i)}
+          />
+        );
+      else
+        return (
+          <UpdateTodoForm
+            key={i}
+            title={todo.title}
+            description={todo.description}
+            isComplete={todo.isComplete}
+            beingUpdated={todo.beingUpdated}
+            updateTodo={this.handleUpdate.bind(this, i)}
+          />
+        );
+    });
     return (
       <div>
-        <NewTodoForm handleAdd={this.handleAdd} />
+        <NewTodoForm createTodo={this.handleAdd} />
         <br />
         {todos}
       </div>
