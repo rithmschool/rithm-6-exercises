@@ -9,15 +9,18 @@ export default class TodoList extends Component {
       todos: [
         {
           title: 'Buy ice cream',
-          description: 'Grocery Store'
+          description: 'Grocery Store',
+          isEditing: false
         },
         {
           title: 'Order pizza',
-          description: 'Dinner Plans'
+          description: 'Dinner Plans',
+          isEditing: false
         },
         {
           title: 'Walk 20 miles',
-          description: 'Fitness Routine'
+          description: 'Fitness Routine',
+          isEditing: false
         }
       ]
     };
@@ -28,6 +31,19 @@ export default class TodoList extends Component {
     this.setState(prevState => ({
       todos: [data, ...prevState.todos]
     }));
+  }
+
+  handleEdit(idx, data) {
+    let newState = { ...this.state };
+    newState.todos[idx] = data;
+    this.setState(newState);
+  }
+
+  handleEditRequest(idx, data) {
+    let newState = { ...this.state };
+    let foundTodo = newState.todos[idx];
+    foundTodo.isEditing = !foundTodo.isEditing;
+    this.setState(newState);
   }
 
   handleComplete(idx) {
@@ -51,6 +67,9 @@ export default class TodoList extends Component {
       return <Todo
         title={data.title}
         description={data.description}
+        isEditing={data.isEditing}
+        handleEditRequest={this.handleEditRequest.bind(this, idx)}
+        handleEdit={this.handleEdit.bind(this, idx)}
         handleComplete={this.handleComplete.bind(this, idx)}
         handleDelete={this.handleDelete.bind(this, idx)}
         className={data.className}
