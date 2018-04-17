@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Add a new user</h1>
+
+<form method="POST" action="{{url_for('users.signup')}}">
+  {{ form.hidden_tag() }}  <!-- this line means "push out all hidden fields, which includes CSRF" -->
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <p>
+      {{ field.label }} {{ field }}
+      <span>
+        {% if field.errors %} {% for error in field.errors %} {{ error }} {% endfor %} {% endif %}
+      </span>
+    </p>
+  {% endfor %}
+
+  {% if error == "username_taken" %}
+    <p>
+        That username is already taken
+    </p>
+  {% endif %}
+
+  <span>
+    {% if form.username.errors %}
+      {% for error in form.username.errors %}
+        {{ error }}
+      {% endfor %}
+    {% endif %}
+  </span>
+
+  <span>
+    {% if form.password.errors %} {% for error in form.password.errors %} {{ error }} {% endfor %} {% endif %}
+  </span>
+
+  <button type="submit">Sign Up!</button>
+</form>
+
+  <button>
+    <a href="{{url_for('users.index')}}">Home</a>
+  </button>
+
+{% endblock %}
