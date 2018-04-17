@@ -1,7 +1,9 @@
 # React Router Vending Machine
 
-For this assignment, add prop type validation, default props (if necessary), and tests for your ToDo Application.
+For this assignment, you should use the router to build a vending machine in React!
 
-While you're going through this application, try to be specific about your prop types and see if you can create custom prop types for your todos! Make sure that every component that you render has propTypes on it.
+Your app should consist of a `VendingMachine` component, as well as at least three components for things you can get from the vending machine. By clicking on an item in the `VendingMachine` you can view one of things inside of the machine.
 
-The tests should utilize Jest snapshot tests for components and Enzyme for shallow mounting.
+Here's an example of what this might look like:
+
+![vending machine demo](./vending-machine.gif)
