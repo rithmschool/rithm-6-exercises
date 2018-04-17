@@ -9,3 +9,11 @@ body {
 .page-title {
   color: white;
 }
+
+.img-div {
+  max-width: 400px;
+}
+
+.gif-img {
+  width: 100%;
+}
