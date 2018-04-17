@@ -21,6 +21,7 @@ class Todo extends Component {
 
     )
   }
+  //refactor into standard component function
 const Todo = ({
   title,
   description,
