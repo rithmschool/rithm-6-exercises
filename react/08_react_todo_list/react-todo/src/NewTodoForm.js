@@ -13,3 +13,6 @@ export default class Todo extends Component {
     );
   }
 }
+
+//this render a form that when submitted will create a new todo.
+//no state has one props called add( function)
