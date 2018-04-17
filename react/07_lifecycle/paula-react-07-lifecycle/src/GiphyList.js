@@ -43,8 +43,10 @@ export default class GiphyList extends Component {
     return (
       <section>
         <h3>Add new Gif!</h3>
-        <NewGiphyForm handleAdd={this.handleAdd} />
-        <button onClick={this.handleDelete}>Delete all gifs!</button>
+        <NewGiphyForm
+          handleAdd={this.handleAdd}
+          handleDelete={this.handleDelete}
+        />
         {gifs}
       </section>
     );

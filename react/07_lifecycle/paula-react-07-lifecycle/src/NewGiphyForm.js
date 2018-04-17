@@ -31,6 +31,9 @@ class NewGiphyForm extends Component {
           value={this.state.searchTerm}
         />
         <input type="submit" value="Search Giphy!" />
+        <button onClick={this.props.handleDelete} type="button">
+          Delete all gifs!
+        </button>
       </form>
     );
   }
