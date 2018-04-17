@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
 
 class Surprise extends Component {
   constructor(props) {
@@ -6,7 +7,19 @@ class Surprise extends Component {
     this.state = {};
   }
   render() {
-    return <video src="https://www.youtube.com/watch?v=olTuSpJTL2g" />;
+    return (
+      <div>
+        <iframe
+          width="800"
+          height="600"
+          src="https://www.youtube.com/embed/olTuSpJTL2g?autoplay=1&loop=1"
+          frameborder="0"
+        />
+        <div>
+          <Link to="/">Still Hungry</Link>
+        </div>
+      </div>
+    );
   }
 }
 
