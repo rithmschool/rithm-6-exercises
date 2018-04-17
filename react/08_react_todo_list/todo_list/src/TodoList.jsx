@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
+import NewTodoForm from './NewTodoForm';
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -23,6 +24,12 @@ export default class TodoList extends Component {
         }
       ]
     };
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleAdd(newTodo) {
+    let todos = this.state.todos.concat(newTodo);
+    this.setState({ todos });
   }
 
   toggleIsComplete(i) {
@@ -48,6 +55,12 @@ export default class TodoList extends Component {
         removeTodo={this.handleRemove.bind(this, i)}
       />
     ));
-    return <div>{todos}</div>;
+    return (
+      <div>
+        <NewTodoForm handleAdd={this.handleAdd} />
+        <br />
+        {todos}
+      </div>
+    );
   }
 }
