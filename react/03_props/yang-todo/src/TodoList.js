@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo.js'
+import NewTodoForm from "./NewTodoForm.js"
 
 export default class TodoList extends Component {
     constructor(props) {
@@ -18,21 +19,15 @@ export default class TodoList extends Component {
         event.target.reset()
         return;
     }
+
     render() {
         console.log(this.state.tasks);
         var taskList = this.state.tasks.map((task,idx) => <Todo value={task} key={idx}/>
         );
         return (
             <div>
-                <form onSubmit={this.addTodo}>
-                <label> Todo List </label>
-                <input type="text" name="task"/>
-                <br/>
-                <input type="submit" value="Submit"/>
-                </form>
-                <div>
+                <NewTodoForm addTodo={this.addTodo} />
                 {taskList}
-                </div>
             </div>
         )
     }
