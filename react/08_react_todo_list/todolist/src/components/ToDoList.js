@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ToDo from "./ToDo";
 import NewToDoForm from "./NewToDoForm";
+import EditToDoForm from "./EditToDoForm";
 import "./ToDoList.css";
 
 class ToDoList extends Component {
@@ -12,23 +13,34 @@ class ToDoList extends Component {
           title: "Eat",
           desc: "eat at 9am",
           date: "02/02/2018",
-          completed: false
+          completed: false,
+          isEditing: false
         },
         {
           title: "Pray",
           desc: "pray at 12pm",
           date: "03/03/2018",
-          completed: false
+          completed: false,
+          isEditing: false
         },
         {
           title: "Love",
           desc: "love at 6pm",
           date: "04/04/2018",
-          completed: false
+          completed: false,
+          isEditing: false
         }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleEdit(idx) {
+    this.setState(prevState => {
+      let editTasks = prevState.tasks.slice();
+      editTasks[idx].isEditing = true;
+      return { tasks: editTasks };
+    });
   }
 
   handleRemove(idx) {
@@ -40,15 +52,10 @@ class ToDoList extends Component {
   }
 
   handleComplete(idx) {
-    // alert("Are you sure you want to complete this?", idx);
     this.setState(prevState => {
       let newTasks = prevState.tasks.slice();
-
-      console.log(newTasks[idx]);
       newTasks[idx].completed =
         newTasks[idx].completed === false ? true : false;
-      console.log(newTasks[idx]);
-
       return { tasks: newTasks };
     });
   }
@@ -68,6 +75,7 @@ class ToDoList extends Component {
           desc={task.desc}
           date={task.date}
           completed={task.completed}
+          isEditing={task.isEditing}
           removeTask={this.handleRemove.bind(this, idx)}
           completeTask={this.handleComplete.bind(this, idx)}
           // completeTask={idx => this.handleComplete(this, idx)}
@@ -84,13 +92,5 @@ class ToDoList extends Component {
     );
   }
 }
-
-// ToDoList.defaultProps = {
-//   tasks: [
-//     { desc: "eat", date: "02/02/2018" },
-//     { desc: "pray", date: "03/03/2018" },
-//     { desc: "love", date: "04/04/2018" }
-//   ]
-// };
 
 export default ToDoList;
