@@ -22,6 +22,13 @@ class Todo extends Component {
     this.setState({ name: '' });
   }
 
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   return {
+  //     title: nextProps.title,
+  //     description: nextProps.description
+  //   };
+  // }
+
   render() {
     let todoRender;
     // turn isEditing off. update /replace name property for the todo.
