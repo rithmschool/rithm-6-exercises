@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import './App.css';
+import ManSquid from './ManSquid';
+import Fish from './Fish';
+import Squid from './Squid';
 
 class VendingMachine extends Component {
   render() {
@@ -17,7 +20,8 @@ class VendingMachine extends Component {
 
 const Home = () => (
   <div>
-    <h1>VendingMachine! Woo!</h1>
+    <h1>Welcome To Aqua Cuisine</h1>
+    <h2>World's Finest Maritime Fare</h2>
     <div>
       <p>Menu:</p>
       <ul>
@@ -32,27 +36,6 @@ const Home = () => (
         </li>
       </ul>
     </div>
-  </div>
-);
-
-const Fish = () => (
-  <div>
-    <p>Delicious fish</p>
-    <Link to="/">Take me home</Link>
-  </div>
-);
-
-const Squid = () => (
-  <div>
-    <p>Delicious squid</p>
-    <Link to="/">Take me home</Link>
-  </div>
-);
-
-const ManSquid = () => (
-  <div>
-    <p>Delicious manSquid</p>
-    <Link to="/">Take me home</Link>
   </div>
 );
 
