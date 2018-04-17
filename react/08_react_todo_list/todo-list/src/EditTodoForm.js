@@ -4,10 +4,9 @@ export default class TodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      deadline: '',
-      completed: false,
-      being_edited: false
+      title: this.props.title,
+      deadline: this.props.deadline,
+      completed: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,8 +16,9 @@ export default class TodoForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleAdd(this.state);
-    this.setState({ title: '', deadline: '' });
+    this.setState({ title: '', deadline: '', being_edit: false });
+    this.props.handleEditSubmit(this.state, this.props.index);
+
     e.target.reset();
   }
 
@@ -30,12 +30,14 @@ export default class TodoForm extends Component {
           onChange={this.handleChange}
           name="title"
           type="text"
+          value={this.state.title}
         />
         <input
           placeholder="Enter Deadline for Todo"
           onChange={this.handleChange}
           name="deadline"
           type="text"
+          value={this.state.deadline}
         />
         <input type="submit" />
       </form>
