@@ -16,7 +16,8 @@ class EditTodoForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.setUpdate({ ...this.state });
+    this.props.setUpdate(this.state.title);
+    this.setState({ title: "" });
   }
   render() {
     return (

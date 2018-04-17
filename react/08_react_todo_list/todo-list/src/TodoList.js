@@ -52,15 +52,12 @@ class TodoList extends Component {
   }
 
   handleSetUpdate(id, updatedTodo) {
-    //updatedTodo.isEditing = false;
-    let updatedTodos = this.state.todos.map((todo, i) => {
-      if (i === todo.i) {
-        todo.title = updatedTodo.title;
-        todo.isEditing = false;
-      }
-      return todo;
+    const edited = { title: updatedTodo, isEditing: false };
+    this.setState(prevState => {
+      const updatedTodos = [...prevState.todos];
+      updatedTodos[id] = edited;
+      return { todos: updatedTodos };
     });
-    this.setState({ todos: updatedTodos });
   }
 
   handleIsCompleted(idxTodo) {
