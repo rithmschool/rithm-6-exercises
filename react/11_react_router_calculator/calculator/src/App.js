@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 import Operations from './Operations';
 
@@ -9,12 +9,9 @@ class App extends Component {
       <div>
         <Route path="/" exact component={Calculator} />
         <Route
-          path="/add/:arg1/:arg2"
+          path="/:operation/:arg1/:arg2"
           component={props => <Operations {...props} />}
         />
-        {/* <Route path="/subtract/:arg1/:arg2" component={Operations} />
-        <Route path="/multiply/:arg1/:arg2" component={Operations} />
-        <Route path="/divide/:arg1/:arg2" component={Operations} /> */}
       </div>
     );
   }
