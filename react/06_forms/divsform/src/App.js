@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import DivForm from './DivForm';
-import Div from '.NewDiv';
 import './App.css';
+import Div from './Div';
+import DivForm from './DivForm';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      divs: [],
-      divCount: 0
+      divs: []
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.addChange = this.addChange.bind(this);
   }
 
-  handleChange(e) {
-    this.setState(prevState => ({
-      divs: [e, ...prevState.divs],
-      divCount: prevSate.divCount + 1
-    }));
+  addChange(newDiv) {
+    this.setState(prevState => {
+      return { divs: [newDiv, ...prevState.divs] };
+    });
   }
 
   render() {
-    let divs = this.state.divs.map((div, idx) => {
+    let divs = this.state.divs.map((el, idx) => {
       return (
         <Div
           key={idx}
-          height={div.height + 'px'}
-          width={div.width + 'px'}
-          backgroundColor={div.color}
+          height={el.height + 'px'}
+          width={el.width + 'px'}
+          backgroundColor={el.color}
         />
       );
     });
     return (
       <div>
-        <DivForm handleChange={this.handleChange} />
-        <div>{divs}</div>
+        <DivForm addChange={this.addChange} />
+        {divs}
       </div>
     );
   }
