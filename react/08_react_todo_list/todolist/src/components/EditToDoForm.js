@@ -18,8 +18,7 @@ class EditToDoForm extends Component {
     return {
       title: nextProps.title,
       desc: nextProps.desc,
-      date: nextProps.date,
-      id: nextProps.id
+      date: nextProps.date
     };
   }
 

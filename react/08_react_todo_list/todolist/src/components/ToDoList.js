@@ -42,6 +42,17 @@ class ToDoList extends Component {
     });
   }
 
+  handleEdit(idx, editTask) {
+    let updatedTasks = [...this.state.tasks];
+    console.log(idx);
+    console.log(editTask);
+    updatedTasks[idx] = editTask;
+    updatedTasks[idx].completed = false;
+    updatedTasks[idx].isEditing = false;
+    console.log(editTask);
+    this.setState({ tasks: updatedTasks });
+  }
+
   handleTurnEditOn(idx) {
     this.setState(prevState => {
       let editTasks = [...prevState.tasks];
@@ -68,14 +79,6 @@ class ToDoList extends Component {
     });
   }
 
-  handleEdit(idx, editTask) {
-    let updatedTasks = [...this.state.tasks];
-    updatedTasks[idx] = editTask;
-    updatedTasks[idx].completed = false;
-    updatedTasks[idx].isEditing = false;
-    this.setState({ tasks: updatedTasks });
-  }
-
   render() {
     let tasksList = this.state.tasks.map((task, idx) => {
       if (task.isEditing === false) {
@@ -100,6 +103,8 @@ class ToDoList extends Component {
             title={task.title}
             desc={task.desc}
             date={task.date}
+            completed={task.completed}
+            isEditing={task.isEditing}
             editTask={this.handleEdit.bind(this, idx)}
           />
         );
