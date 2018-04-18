@@ -1,0 +1,15 @@
+extends ../base.pug
+
+block content
+  h1 Shopping List
+  ul
+  each item in user.items
+    li name: #[a(href=`items/${item.id}`) #{item.name}], price: $#{item.price}
+  br
+  a(href=`/users/${user.id}/items/new`) Add a new item!
+  br
+  br
+  form(action=`/users/${user.id}/items?_method=DELETE` method="POST")
+    input(type="submit" name="delete" value="Delete all items!")
+  br
+  a(href=`/users/${user.id}`) Return to user!

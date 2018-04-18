@@ -1,0 +1,12 @@
+extends ../base.pug
+
+block content
+  h1 Edit the item!
+  form(action=`/users/${user_id}/items/${item.id}?_method=PATCH` method="POST")
+    label(for="name") name:
+    input(type="text" name="name" id="name" value=`${item.name}`)
+    br
+    label(for="name") price: $
+    input(type="number" name="price" id="price" value=`${item.price}` step="0.01")
+    br
+    input(type="submit" name="add")

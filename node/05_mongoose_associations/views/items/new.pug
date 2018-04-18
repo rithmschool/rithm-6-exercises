@@ -1,0 +1,10 @@
+extends ../base.pug
+
+block content
+  h1 Add new item!
+  form(action=`/users/${user_id}/items`, method="post")
+    label(for="name") name:
+    input(type="text", name="name" id="name")
+    label(for="price") price: $
+    input(type="number", name="price", id="price" step="0.01")
+    input(type="submit")

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>🍿SNACKS🍿</h1>
+<h3>KEEP TRACK OF YOUR SNACKS!</h3>
+<section class="container-snacks"></section>
+<section class="wrapper-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Snack Name</th>
+        <th>Kind</th>
+        <th colspan="2" class="snack-table--actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for snack in snacks: %}
+      <tr id="{{snack.id}}">
+        <td>{{snack.name}}</td>
+        <td>{{snack.kind}}</td>
+        <td class="snack-table--actions">
+          <a href="{{url_for('edit', id=snack.id)}}" class="icon icon--edit"><i class="fas fa-pencil-alt"></i></a>
+          <a href="#" class="icon icon--delete delete"><i class="fas fa-trash-alt"></i></a>
+        </td>
+      </tr>
+      {% endfor %}
+  </table>
+</section>
+<a href="{{url_for('new')}}" class="button button--add">ADD NEW SNACK!</a>
+
+{% endblock %}
