@@ -1,0 +1,12 @@
+strong {
+  color: purple;
+}
+
+span {
+  color: gray;
+}
+
+div {
+  border: 1px solid purple;
+  border-radius: 10px;
+}
