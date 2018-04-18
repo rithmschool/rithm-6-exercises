@@ -4,4 +4,4 @@ const NewDiv = ({ width, height, backgroundColor }) => (
   <div style={{ width, height, backgroundColor }} />
 );
 
-export default NewDiv;
+export default Div;
