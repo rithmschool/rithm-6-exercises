@@ -1,0 +1,30 @@
+body {
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url('./vending-machine.JPG');
+}
+.centered {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  border: 2px solid white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  /* bring your own prefixes */
+}
+.list {
+  font-size: 40px;
+  text-align: center;
+  list-style: none;
+  transform: translate(-5%, -5%);
+}
+
+a {
+  text-decoration: none;
+  color: #fe7c7c;
+  text-decoration: underline;
+}
+
+.list > li {
+  margin-top: 10px;
+}
