@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ListColors from './ListColors';
+import NewColorForm from './NewColorForm';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      colors: [{ name: 'green', color: 'green' }]
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {}
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>Welcome to ColorZone</h1>
+        <h2>So. Many. Colors.</h2>
+        <ListColors Colors={this.state.Colors} />;
       </div>
     );
   }
