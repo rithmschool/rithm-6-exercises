@@ -1,5 +1,4 @@
 import React from "react";
-import Color from "./Color";
 import PropTypes from "prop-types";
 
 const Color = ({ name, value }) => {
@@ -11,8 +10,8 @@ const Color = ({ name, value }) => {
   );
 };
 
-export default Color;
-
 Color.defaultProps = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired
 };
+
+export default Color;

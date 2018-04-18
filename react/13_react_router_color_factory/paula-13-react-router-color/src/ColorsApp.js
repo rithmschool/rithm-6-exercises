@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Navbar } from "bootstrap";
+import ColorsForm from "./ColorsForm";
+import ColorsList from "./ColorsList";
 import "./App.css";
 
 class ColorsApp extends Component {
@@ -16,7 +19,29 @@ class ColorsApp extends Component {
     }));
   }
   render() {
-    return <section>hi</section>;
+    return (
+      <section>
+        <Navbar>
+          <Link to="/">All Colors</Link>
+          <br />
+          <Link to="/new">Add a new color</Link>
+        </Navbar>
+        <Switch>
+          <Route
+            path="/new"
+            render={props => (
+              <ColorsForm handleAdd={this.handleAdd} {...props} />
+            )}
+          />
+          <Route
+            path="/"
+            render={props => (
+              <ColorsList colors={this.state.colors} {...props} />
+            )}
+          />
+        </Switch>
+      </section>
+    );
   }
 }
 
