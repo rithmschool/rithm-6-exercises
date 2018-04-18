@@ -32,7 +32,7 @@ class ColorsForm extends Component {
         />
         <label htmlFor="value">Color Value</label>
         <input
-          type="url"
+          type="color"
           name="value"
           onChange={this.handleChange}
           value={this.state.value}
