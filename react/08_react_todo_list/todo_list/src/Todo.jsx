@@ -5,10 +5,8 @@ const Todo = ({
   title,
   description,
   isComplete,
-  beingUpdated,
   toggleBeingUpdated,
   toggleIsComplete,
-  updateTodo,
   removeTodo
 }) => (
   <li>
@@ -20,6 +18,9 @@ const Todo = ({
     <button onClick={removeTodo}>Remove</button>
   </li>
 );
+
+// above: stateless functional component
+// below: class
 
 // export default class Todo extends Component {
 //   render() {

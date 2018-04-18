@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
-import NewTodoForm from './NewTodoForm';
-import UpdateTodoForm from './UpdateTodoForm';
+import TodoForm from './TodoForm';
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -38,8 +37,7 @@ export default class TodoList extends Component {
   }
 
   handleUpdate(i, updatedTodo) {
-    let newState = { ...this.state };
-    let { todos } = newState;
+    let { todos } = this.state;
     todos[i] = updatedTodo;
     todos[i].beingUpdated = false;
     this.setState({ todos });
@@ -80,19 +78,19 @@ export default class TodoList extends Component {
         );
       else
         return (
-          <UpdateTodoForm
+          <TodoForm
             key={i}
             title={todo.title}
             description={todo.description}
             isComplete={todo.isComplete}
             beingUpdated={todo.beingUpdated}
-            updateTodo={this.handleUpdate.bind(this, i)}
+            updateTodos={this.handleUpdate.bind(this, i)}
           />
         );
     });
     return (
       <div>
-        <NewTodoForm createTodo={this.handleAdd} />
+        <TodoForm updateTodos={this.handleAdd} />
         <br />
         {todos}
       </div>
