@@ -11,6 +11,7 @@ export default class GifForm extends Component {
   handleChange = e => {
     // let newState = { ...this.state };
     // newState[e.target.name] = e.target.value;
+    // this.setState(newState);
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -27,15 +28,16 @@ export default class GifForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} >
+        <form onSubmit={this.handleSubmit} style={{ display: 'inline' }}>
           <input
+            name="userInput"
             placeholder="Enter a Search Term"
             onChange={this.handleChange}
             value={this.state.userInput}
           />
           <button>Search Giphy!</button>
-          <button onClick={this.handleDelete} >Remove Images</button>
         </form>
+        <button onClick={this.props.handleDelete} style={{ display: 'inline' }}>Remove Images</button>
       </div>
     );
   }
