@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+    form(action=`/users/${user.id}/items` method="POST")
+        input(type="text" name="name")
+        input(type="text" name="price")
+        input(type="text" name="quantity")
+        input(type="text" name="item_id" value=`${item._id}` hidden=true)
+        input(type="submit" value="Create")

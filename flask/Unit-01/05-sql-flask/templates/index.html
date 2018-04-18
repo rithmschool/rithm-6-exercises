@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block extraHeader %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+{% endblock %}
+{% block content %}
+<div id="container">
+    <h1>snacks</h1>
+        <ul>
+            {% for snack in snacks %}
+                <li>
+                    <a href="{{url_for('show', id=snack.id)}}">{{snack.name}} {{snack.kind}}</a>
+                </li>  
+            {% endfor %}
+        </ul>
+    <div id="add-snack"><a href="{{url_for('new')}}">Add a snack</a></div>
+</div>
+{% endblock %}

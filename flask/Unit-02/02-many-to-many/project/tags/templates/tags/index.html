@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for tag in tags %}
+    <a href="{{url_for('tags.show', id=id, tag_id=tag.id)}}">{{tag.label}}</a>
+    <form method="POST" action="{{url_for('tags.show', id=id, tag_id=tag.id)}}?_method=DELETE">
+        {{delete_form.hidden_tag()}}
+        <input type="submit" value="X">
+    </form>
+{% endfor %}    
+
+{% endblock %}

@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+    h1 User List
+    a(href=`/users/new`) Add a new user!
+    each user in users
+        p #{ user.name }
+        a(href=`/users/${user.id}`) See #{ user.name }
