@@ -1,16 +1,16 @@
-.sardines-comp {
-    background-image: url('https://media.giphy.com/media/PEvkzE0C8jmak/giphy.gif');
+.chips-comp {
+    background-image: url('https://media.giphy.com/media/iPLIJLYVGKctW/giphy.gif');
     background-position-x: center;
     background-size: cover;
     width: 100vw;
     height: 100vh;
 }
 
-.sardines-msg {
+.chips-msg {
     position: fixed;
     top: 35vh;
-    left: 15%;
-    width: 70%;
+    left: 30%;
+    width: 40%;
     height: 30vh;
     background-color: rgba(255, 255, 255, 0.5);
     margin: auto;

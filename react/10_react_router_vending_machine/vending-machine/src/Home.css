@@ -28,14 +28,3 @@
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px; 
 }
-
-.message {
-    position: fixed;
-    top: 35vh;
-    left: 15%;
-    width: 70%;
-    height: 30vh;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: auto;
-    border-radius: 20px;
-}
