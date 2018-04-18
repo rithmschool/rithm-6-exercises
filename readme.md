@@ -95,20 +95,24 @@ Students can only push to their own branches.
 
 ## V. MongoDB
 
-1.  [MongoDB Fundamentals](./mongodb/01_fundamentals)
+1.  [MongoDB Fundamentals](./mongodb/01_fundamentals.md)
 
 ## VI. React
 
-1.  [JSX and Babel](./react/01_jsx_babel)
-1.  [Props](./react/02_props)
-1.  [State](./react/03_state)
-1.  [Events](./react/04_events)
-1.  [Forms](./react/05_forms)
-1.  [Lifecycle Methods](./react/06_lifecycle)
-1.  [Todo List](./react/07_react_todo_list)
-1.  [PropTypes and Testing](./react/08_proptypes_testing_todo)
-1.  [React Router](./react/09_react_router)
-1.  [React Router Todo List](./react/10_react_router_todo)
-1.  [Redux](./react/11_redux)
-1.  [React Redux Todo](./react/12_react_redux_todo)
-1.  [React LinkedList Frontend](./react/13_linkedlist_frontend)
+1.  [ES2015 Modules](./react/01_es2015_modules)
+1.  [JSX and Babel](./react/02_jsx_babel)
+1.  [Props](./react/03_props)
+1.  [State](./react/04_state)
+1.  [Events](./react/05_events)
+1.  [Forms](./react/06_forms)
+1.  [Lifecycle Methods](./react/07_lifecycle)
+1.  [Todo List](./react/08_react_todo_list)
+1.  [PropTypes and Testing](./react/09_proptypes_testing_todo)
+1.  [React Router Vending Machine](./react/10_react_router_vending_machine)
+1.  [React Router Calculator](./react/11_react_router_calculator)
+1.  [React Router Dog Finder](./react/12_react_router_dog_finder)
+1.  [React Router Color Factory](./react/13_react_router_color_factory)
+1.  [React Router Todo List](./react/14_react_router_todo)
+1.  [Redux](./react/15_redux)
+1.  [React Redux Todo](./react/16_react_redux_todo)
+1.  [React LinkedList Frontend](./react/17_linkedlist_frontend)
