@@ -33,7 +33,6 @@ class Todo extends Component {
 
   render() {
     const {
-      //where does this need to happen?
       title,
       description,
       isCompleted,
