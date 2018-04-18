@@ -3,8 +3,7 @@ import React, { Component } from "react";
 const initialState = {
   title: "",
   desc: "",
-  date: "",
-  completed: false
+  date: ""
 };
 
 class EditToDoForm extends Component {
@@ -15,9 +14,18 @@ class EditToDoForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      title: nextProps.title,
+      desc: nextProps.desc,
+      date: nextProps.date,
+      id: nextProps.id
+    };
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.props.handleAdd({ ...this.state });
+    this.props.editTask(this.state);
     this.setState(initialState);
   }
 
@@ -28,27 +36,24 @@ class EditToDoForm extends Component {
   render() {
     return (
       <div>
-        <h3>Edit item</h3>
+        <h3>Edit task</h3>
         <form onSubmit={this.handleSubmit}>
           <input
             name="title"
-            placeholder="Task Title"
             onChange={this.handleChange}
             value={this.state.title}
           />
           <input
             name="desc"
-            placeholder="Task Description"
             onChange={this.handleChange}
             value={this.state.desc}
           />
           <input
             name="date"
-            placeholder="Due Date"
             onChange={this.handleChange}
             value={this.state.date}
           />
-          <input type="submit" />
+          <input type="submit" value="Edit Task" />
         </form>
       </div>
     );

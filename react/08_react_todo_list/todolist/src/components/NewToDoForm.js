@@ -4,7 +4,8 @@ const initialState = {
   title: "",
   desc: "",
   date: "",
-  completed: false
+  completed: false,
+  isEditing: false
 };
 
 class NewToDoForm extends Component {
@@ -28,7 +29,7 @@ class NewToDoForm extends Component {
   render() {
     return (
       <div>
-        <h3>Add new item</h3>
+        <h3>Add new task</h3>
         <form onSubmit={this.handleSubmit}>
           <input
             name="title"
@@ -48,7 +49,7 @@ class NewToDoForm extends Component {
             onChange={this.handleChange}
             value={this.state.date}
           />
-          <input type="submit" />
+          <input type="submit" value="Add Task" />
         </form>
       </div>
     );

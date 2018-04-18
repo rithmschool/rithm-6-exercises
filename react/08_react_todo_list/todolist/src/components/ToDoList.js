@@ -17,15 +17,15 @@ class ToDoList extends Component {
           isEditing: false
         },
         {
-          title: "Pray",
-          desc: "pray at 12pm",
+          title: "Run",
+          desc: "run at 12pm",
           date: "03/03/2018",
           completed: false,
           isEditing: false
         },
         {
-          title: "Love",
-          desc: "love at 6pm",
+          title: "Sleep",
+          desc: "sleep at 6pm",
           date: "04/04/2018",
           completed: false,
           isEditing: false
@@ -33,31 +33,7 @@ class ToDoList extends Component {
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
-  }
-
-  handleEdit(idx) {
-    this.setState(prevState => {
-      let editTasks = prevState.tasks.slice();
-      editTasks[idx].isEditing = true;
-      return { tasks: editTasks };
-    });
-  }
-
-  handleRemove(idx) {
-    this.setState(prevState => {
-      let newTasks = prevState.tasks.slice();
-      newTasks.splice(idx, 1);
-      return { tasks: newTasks };
-    });
-  }
-
-  handleComplete(idx) {
-    this.setState(prevState => {
-      let newTasks = prevState.tasks.slice();
-      newTasks[idx].completed =
-        newTasks[idx].completed === false ? true : false;
-      return { tasks: newTasks };
-    });
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleAdd(newTask) {
@@ -66,21 +42,68 @@ class ToDoList extends Component {
     });
   }
 
+  handleTurnEditOn(idx) {
+    this.setState(prevState => {
+      let editTasks = [...prevState.tasks];
+      editTasks[idx]["id"] = idx;
+      editTasks[idx].isEditing = true;
+      return { tasks: editTasks };
+    });
+  }
+
+  handleRemove(idx) {
+    this.setState(prevState => {
+      let newTasks = [...prevState.tasks];
+      newTasks.splice(idx, 1);
+      return { tasks: newTasks };
+    });
+  }
+
+  handleComplete(idx) {
+    this.setState(prevState => {
+      let newTasks = [...prevState.tasks];
+      newTasks[idx].completed =
+        newTasks[idx].completed === false ? true : false;
+      return { tasks: newTasks };
+    });
+  }
+
+  handleEdit(idx, editTask) {
+    let updatedTasks = [...this.state.tasks];
+    updatedTasks[idx] = editTask;
+    updatedTasks[idx].completed = false;
+    updatedTasks[idx].isEditing = false;
+    this.setState({ tasks: updatedTasks });
+  }
+
   render() {
     let tasksList = this.state.tasks.map((task, idx) => {
-      return (
-        <ToDo
-          key={task.idx}
-          title={task.title}
-          desc={task.desc}
-          date={task.date}
-          completed={task.completed}
-          isEditing={task.isEditing}
-          removeTask={this.handleRemove.bind(this, idx)}
-          completeTask={this.handleComplete.bind(this, idx)}
-          // completeTask={idx => this.handleComplete(this, idx)}
-        />
-      );
+      if (task.isEditing === false) {
+        return (
+          <ToDo
+            key={idx}
+            title={task.title}
+            desc={task.desc}
+            date={task.date}
+            completed={task.completed}
+            isEditing={task.isEditing}
+            removeTask={this.handleRemove.bind(this, idx)}
+            completeTask={this.handleComplete.bind(this, idx)}
+            editTask={this.handleTurnEditOn.bind(this, idx)}
+            // completeTask={idx => this.handleComplete(this, idx)}
+          />
+        );
+      } else {
+        return (
+          <EditToDoForm
+            key={idx}
+            title={task.title}
+            desc={task.desc}
+            date={task.date}
+            editTask={this.handleEdit.bind(this, idx)}
+          />
+        );
+      }
     });
 
     return (
