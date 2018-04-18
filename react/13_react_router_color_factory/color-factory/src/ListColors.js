@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 class ListColors extends Component {
-  state = {};
   render() {
-    const colors = this.props.Colors.map(color => {
-      return <li>{color.name}</li>;
+    const colors = this.props.Colors.map((color, index) => {
+      return <li key={index}>{color.name}</li>;
     });
-    return <div>{colors}</div>;
+    return (
+      <div>
+        <ul>{colors}</ul>
+      </div>
+    );
   }
 }
 

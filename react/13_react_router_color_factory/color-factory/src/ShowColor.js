@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class ShowColor extends Component {
-  state = {};
   render() {
     return (
       <div

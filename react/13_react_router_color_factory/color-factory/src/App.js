@@ -7,19 +7,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: [{ name: 'green', color: 'green' }]
+      Colors: [{ name: 'green', color: 'green' }]
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addColor = this.addColor.bind(this);
   }
 
-  handleSubmit() {}
+  addColor(newColor) {
+    this.setState(prevState => {
+      return { Colors: [...prevState.Colors, newColor] };
+    });
+  }
 
   render() {
     return (
-      <div>
+      <div className="App">
         <h1>Welcome to ColorZone</h1>
         <h2>So. Many. Colors.</h2>
-        <ListColors Colors={this.state.Colors} />;
+        <NewColorForm addColor={this.addColor} />
+        <ListColors Colors={this.state.Colors} />
       </div>
     );
   }
