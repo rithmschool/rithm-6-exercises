@@ -1,0 +1,41 @@
+.home-comp {
+    background-image: url('https://media.flysfo.com/Vending_Machines.jpg');
+    background-position-x: center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.home-left, .home-right {
+    width: 35%;
+    height: 30vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+}
+
+.home-left {
+    position: fixed;
+    left: 0;
+    top: 35vh;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px; 
+}
+
+.home-right {
+    position: fixed;
+    right: 0;
+    top: 35vh;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px; 
+}
+
+.message {
+    position: fixed;
+    top: 35vh;
+    left: 15%;
+    width: 70%;
+    height: 30vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+    border-radius: 20px;
+}
