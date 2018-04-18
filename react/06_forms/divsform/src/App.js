@@ -17,12 +17,27 @@ class App extends Component {
   handleChange(e) {
     this.setState(prevState => ({
       divs: [e, ...prevState.divs],
-      pre
+      divCount: prevSate.divCount + 1
     }));
   }
 
-  render(){
-    let divs = this.state.divs.map
+  render() {
+    let divs = this.state.divs.map((div, idx) => {
+      return (
+        <Div
+          key={idx}
+          height={div.height + 'px'}
+          width={div.width + 'px'}
+          backgroundColor={div.color}
+        />
+      );
+    });
+    return (
+      <div>
+        <DivForm handleChange={this.handleChange} />
+        <div>{divs}</div>
+      </div>
+    );
   }
 }
 
