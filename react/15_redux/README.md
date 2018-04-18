@@ -6,9 +6,9 @@ In this exercise, you will build a mood changer app that uses redux to alter the
 
 You should use the starter `index.html` boilerplate.
 
-You can use whatever ASCII faces you want.
+You can use whatever ASCII faces you want, [you can find them here](https://www.jemoticons.com/en/).
 
-Remember that since you are using redux, your reducer must be a pure function. Your actions should include a payload with the new face.
+Remember that since you are using Redux, your reducer must be a pure function. Your actions should include a payload with the new face.
 
 You can use raw JavaScript or JQuery, with Redux CDN included in the HTML script tag (this has been done for you in the boilerplate).
 
