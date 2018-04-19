@@ -1,11 +1,12 @@
 import React from "react";
-import Color from "./Color";
+import ColorLi from "./ColorLi";
 import PropTypes from "prop-types";
+import "./ColorsList.css";
 
 const ColorsList = ({ colors }) => {
   return (
-    <section>
-      {colors.map((d, i) => <Color name={d.name} value={d.value} key={i} />)}
+    <section className="ColorsList">
+      {colors.map((d, i) => <ColorLi name={d.name} value={d.value} key={i} />)}
     </section>
   );
 };

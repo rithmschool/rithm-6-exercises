@@ -1,0 +1,7 @@
+.ColorsApp {
+  text-align: center;
+  height: 100vh;
+  background-color: wheat;
+  display: flex;
+  flex-direction: column;
+}
