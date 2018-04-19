@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import TodoList from "./TodoList";
@@ -56,38 +56,45 @@ class Todo extends Component {
     }));
   }
 
-  addEdit(updatedTodo) {
-    let id = updatedTodo.id;
+  addEdit(idx, updatedTodo) {
+    // console.log("this is the updated to do", updatedTodo);
+    // let id = updatedTodo.id;
     let todos = this.state.todos.slice();
-    todos[id] = updatedTodo;
+    todos[idx] = updatedTodo;
     this.setState({ todos });
   }
   render() {
     return (
       <div>
         <div>
-          <Link to="/new">Enter a New ToDo</Link>
+          <Link to="/todos/new">Enter a New ToDo</Link>
         </div>
 
-        <div>
+        <Switch>
           <Route
-            path="/"
+            path="/todos"
             exact
-            component={() => (
+            render={props => (
               <TodoList
                 allTodos={this.state.todos}
                 handleRemove={this.handleRemove}
                 updateStatus={this.updateStatus}
                 handleEdit={this.handleEdit}
+                addEdit={this.addEdit}
+                {...props}
               />
             )}
           />
           <Route
-            path="/new"
+            path="/todos/new"
             exact
-            component={() => <NewTodoForm handleAdd={this.handleAdd} />}
+            render={props => (
+              <NewTodoForm handleAdd={this.handleAdd} {...props} />
+            )}
           />
-        </div>
+
+          <Redirect to="todos" />
+        </Switch>
       </div>
     );
   }
