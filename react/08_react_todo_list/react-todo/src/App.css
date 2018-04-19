@@ -23,6 +23,7 @@ a:hover {
 
 .App {
   text-align: center;
+  padding-top: 10px;
 }
 
 .App-header {
@@ -42,100 +43,20 @@ a:hover {
 
 .App {
   margin: auto;
-  max-width: 250px;
+  max-width: 300px;
   /* max-width: 400px; */
   background-color: #ff6666;
-  padding: 40px;
+  /* padding: 40px; */
   color: white;
   font-family: 'Quicksand', sans-serif;
   font-size: 12px;
   /* font-size: 18px; */
 }
 
-header {
-  /*use rbga to reduce opacity*/
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+.Todo {
+  padding: 10px 40px 25px 40px;
 }
 
-h1 {
-  margin: 0;
-  font-size: 2.6em;
-  letter-spacing: 0.05em;
-}
-
-h2 {
-  font-size: 0.8em;
-}
-
-/* #list {
-  margin: 0;
-  padding: 10px 0 5px 0;
-} */
-
-#toggle {
-  font-size: 0.6em;
-}
-#toggle p {
-  display: inline;
-}
-
-#new-item {
-  font-size: 1em;
-}
-#new-item input {
-  height: 30px;
-}
-#new-item button {
-  border: solid 1px white;
-  padding: 11px;
-  font-size: 0.5em;
-  background-color: transparent;
-  color: white;
-}
-
-.list-item {
-  margin-top: 5px;
-  background-color: rgba(255, 102, 102, 0.3);
-}
-.list-item div {
-  display: flex;
-  justify-content: space-between;
-}
-.list-item div p {
-  display: inline;
-}
-.list-item div div {
-  width: 50px;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-.list-item div div button {
-  border: none;
-  font-size: 1.2rem;
-  background-color: transparent;
-  color: white;
-}
-.list-item div div input[type='checkbox'] {
-  position: absolute;
-  top: 20px;
-  right: 10px;
-  transform: scale(2);
-}
-
-.checked p {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-#new-item button:hover {
-  background-color: #ff5e5e;
-}
-
-#toggleBtn {
-  padding: 5px;
-  color: red;
-  border-radius: 15px;
-  width: 40px;
-  border: none;
+.Completed {
+  backgroundcolor: 'green';
 }

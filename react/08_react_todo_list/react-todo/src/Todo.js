@@ -43,18 +43,27 @@ class Todo extends Component {
       editToDo,
       isEditSelected
     } = this.props;
+    let completionText = 'Mark Completed';
+    if (isCompleted) completionText = 'Mark Incomplete';
     return (
-      <div>
+      <div
+        className="Todo"
+        style={isCompleted ? { backgroundColor: 'rgba(68, 57, 57, .5)' } : {}}
+      >
         {/* so i can render show and edit routes */}
         {/* {this.props.index ? (
           <Link to={`/todos/${this.props.index}`}>{title}</Link>
         ) : (
           <p>Title: {title}</p>
         )} */}
-        <p>Title: {title}</p>
-        <p>Description: {description}</p>
-        <p>Is Completed: {isCompleted ? 'True' : 'False'}</p>
-        <button onClick={markAsComplete}>Toggle Completion Status</button>
+        <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
+          Title: {title}
+        </p>
+        <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
+          Description: {description}
+        </p>
+        {/* <p>Is Completed: {isCompleted ? 'True' : 'False'}</p> */}
+        <button onClick={markAsComplete}>{completionText}</button>
         <button onClick={removeToDo}>Delete</button>
         <button onClick={showEditForm}>Change</button>
         {isEditSelected ? (

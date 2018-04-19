@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   editToDo(index, editedTodo) {
-    debugger;
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[index] = {
@@ -72,41 +71,37 @@ class App extends Component {
     });
   }
   render() {
+    const renderTodoList = props => {
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <Link to="/todos/new">Add New Todo</Link>
+          <ToDoList
+            key={0}
+            markAsComplete={this.markAsComplete}
+            removeToDo={this.removeToDo}
+            editToDo={this.editToDo}
+            showEditForm={this.showEditForm}
+            isEditSelected={this.isEditSelected}
+            todos={this.state.todos}
+          />
+        </div>
+      );
+    };
+
+    const renderTodoForm = props => {
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <NewToDoForm addToDo={this.addToDo} />
+        </div>
+      );
+    };
+
     return (
       <Switch>
-        <Route
-          path="/todos"
-          exact
-          render={props => {
-            return (
-              <div className="App">
-                <h1>Dragon Todo List</h1>
-                {/* <NewToDoForm addToDo={this.addToDo} /> */}
-                <Link to="/todos/new">Add New Todo</Link>
-                <ToDoList
-                  key={0}
-                  markAsComplete={this.markAsComplete}
-                  removeToDo={this.removeToDo}
-                  editToDo={this.editToDo}
-                  showEditForm={this.showEditForm}
-                  isEditSelected={this.isEditSelected}
-                  todos={this.state.todos}
-                />
-              </div>
-            );
-          }}
-        />
-        <Route
-          path="/todos/new"
-          render={props => {
-            return (
-              <div className="App">
-                <h1>Dragon Todo List</h1>
-                <NewToDoForm addToDo={this.addToDo} />
-              </div>
-            );
-          }}
-        />
+        <Route path="/todos" exact render={renderTodoList} />
+        <Route path="/todos/new" render={renderTodoForm} />
         {/* <Route
           path="/todos/:id"
           render={props => {
@@ -166,11 +161,15 @@ App.defaultProps = {
   Todos: [
     {
       title: 'wake up',
-      description: 'wake up and stuff.'
+      description: 'wake up and chill with all my treasure.'
     },
     {
       title: 'attack',
-      description: 'attack without mercy.'
+      description: 'attack all without mercy.'
+    },
+    {
+      title: 'burn stuff',
+      description: 'Breath fire on the countryside.'
     },
     {
       title: 'chill',
