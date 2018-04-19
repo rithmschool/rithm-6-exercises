@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormGroup, FormControl, ControlLabel, Button } from "react-bootstrap";
 
 class ColorsForm extends Component {
   constructor(props) {
@@ -23,21 +24,25 @@ class ColorsForm extends Component {
   render() {
     return (
       <form action="" onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Color Name</label>
-        <input
-          type="text"
-          name="name"
-          onChange={this.handleChange}
-          value={this.state.name}
-        />
-        <label htmlFor="value">Color Value</label>
-        <input
-          type="color"
-          name="value"
-          onChange={this.handleChange}
-          value={this.state.value}
-        />
-        <input type="submit" />
+        <FormGroup>
+          <ControlLabel>Color Name</ControlLabel>
+          <FormControl
+            type="text"
+            name="name"
+            onChange={this.handleChange}
+            value={this.state.name}
+          />
+        </FormGroup>
+        <FormGroup>
+          <label htmlFor="value">Color Value</label>
+          <FormControl
+            type="color"
+            name="value"
+            onChange={this.handleChange}
+            value={this.state.value}
+          />
+        </FormGroup>
+        <Button type="submit">Submit</Button>
       </form>
     );
   }
