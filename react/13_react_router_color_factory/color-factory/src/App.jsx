@@ -25,14 +25,26 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    if(localStorage.colors) {
+      let colors = JSON.parse(localStorage.getItem('colors'));
+      this.setState({ colors })
+    }
+  }
+
+  componentDidUpdate() {
+    let colors = JSON.stringify(this.state.colors);
+    localStorage.setItem('colors', colors);
+  }
+
   render() {
     return (
       <div className="container">
         <Switch>
           <Route path="/colors/new" render={routerProps => <NewColorForm addColor={this.addColor}  {...routerProps} />} />
-          <Route path="/colors/:name" render={routerProps => {
-            if(this.state.colors.filter(color => routerProps.match.params.name === color.name)[0]) {
-              return <Color color={this.state.colors.filter(color => routerProps.match.params.name === color.name)[0]}  {...routerProps} />
+          <Route path="/colors/:color" render={routerProps => {
+            if(this.state.colors.filter(color => routerProps.match.params.color === color.name)[0]) {
+              return <Color color={this.state.colors.filter(color => routerProps.match.params.color === color.name)[0]}  {...routerProps} />
             } else
               return <Redirect to="/colors" />
           }} />
