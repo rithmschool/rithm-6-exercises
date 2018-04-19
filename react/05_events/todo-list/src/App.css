@@ -1,10 +1,12 @@
 .App {
   text-align: center;
 }
-
 h1 {
   padding-top: 1rem;
   margin: 0;
   height: 4rem;
-  background-color: #367abd;
+}
+
+body {
+  background-image: url(http://cdn.abclocal.go.com/content/kgo/images/cms/24996_1280x720.jpg);
 }

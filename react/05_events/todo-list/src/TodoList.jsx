@@ -1,24 +1,19 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import "./TodoList.css";
+import { Route, Link } from "react-router-dom";
 import NewTodoForm from "./NewTodoForm";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: ["test2"]
+      todos: ["test2", ...this.props.todos]
     };
-    this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  handleAdd(newTodo) {
-    this.setState(prevState => ({
-      todos: [newTodo, ...prevState.todos]
-    }));
-  }
   handleUpdate(newText, i) {
     let statei = i;
     this.setState(prevState => {
@@ -48,8 +43,12 @@ class TodoList extends Component {
     ));
     return (
       <div className="TodoList">
-        <NewTodoForm handleAdd={this.handleAdd} />
+        <Link to="/new">Add New Todo</Link>
         <ul>{todos}</ul>
+        <img
+          src="https://i.pinimg.com/originals/81/35/08/8135084de2993949cc18cb9f57f2aa48.png"
+          alt=""
+        />
       </div>
     );
   }

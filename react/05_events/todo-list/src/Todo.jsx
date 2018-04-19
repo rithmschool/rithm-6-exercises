@@ -16,8 +16,9 @@ class Todo extends Component {
     this.setState({ completed: !this.state.completed });
   }
   isEditing(e) {
+    e.preventDefault();
     if (this.state.isEditing) {
-      let newText = e.target.parentNode.children[2].value;
+      let newText = e.target.parentNode.children[2].children[0].value;
       if (newText !== "") {
         let statei = this.props.index;
         this.props.handleUpdate(newText, statei);
@@ -32,7 +33,9 @@ class Todo extends Component {
       <div className="Todo">
         <input onClick={this.markComplete} type="checkbox" />
         <p style={{ textDecoration: status }}>{this.props.text}</p>
-        {edit}
+        <form action="" onSubmit={this.isEditing}>
+          {edit}
+        </form>
         <button onClick={this.isEditing}>Update</button>
         <button onClick={this.props.handleDelete}>Delete</button>
       </div>

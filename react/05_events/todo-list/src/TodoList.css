@@ -4,5 +4,9 @@
   flex-direction: column;
   width: 100vw;
   height: 40rem;
-  background-color: #367abd;
+}
+
+img {
+  height: 10rem;
+  border-radius: 30px 30px 30px 30px;
 }

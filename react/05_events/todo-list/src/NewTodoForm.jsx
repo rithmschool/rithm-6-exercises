@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class TodoForm extends Component {
+class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = { val: "" };
@@ -15,6 +15,7 @@ class TodoForm extends Component {
     e.preventDefault();
     this.props.handleAdd(this.state.val);
     this.setState({ val: "" });
+    this.props.history.push("/");
   }
   render() {
     return (
@@ -26,4 +27,4 @@ class TodoForm extends Component {
   }
 }
 
-export default TodoForm;
+export default NewTodoForm;
