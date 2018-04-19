@@ -9,15 +9,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: Array.from({ length: this.props.Todos.length }).map(
-        (item, index) => {
-          return {
-            ...this.props.Todos[index],
-            isCompleted: false,
-            isEditSelected: false
-          };
-        }
-      )
+      todos: Array.from({ length: this.props.Todos.length }).map((item, id) => {
+        return {
+          ...this.props.Todos[id],
+          isCompleted: false,
+          isEditSelected: false
+        };
+      })
     };
     this.markAsComplete = this.markAsComplete.bind(this);
     this.removeToDo = this.removeToDo.bind(this);
@@ -32,11 +30,12 @@ class App extends Component {
     });
   }
 
-  removeToDo(index) {
+  removeToDo(id) {
+    // debugger;
     this.setState(prevState => {
       console.log(prevState.todos);
       let todosCopy = [...prevState.todos].filter((todo, i) => {
-        if (i === index) return undefined;
+        if (i === +id) return undefined;
         return todo;
       });
       console.log(todosCopy);
@@ -44,29 +43,29 @@ class App extends Component {
     });
   }
 
-  editToDo(index, editedTodo) {
+  editToDo(id, editedTodo) {
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      todosCopy[index] = {
+      todosCopy[id] = {
         ...editedTodo
       };
       return { todos: todosCopy };
     });
   }
 
-  showEditForm(index) {
+  showEditForm(id) {
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      todosCopy[index].isEditSelected = !todosCopy[index].isEditSelected;
+      todosCopy[id].isEditSelected = !todosCopy[id].isEditSelected;
       console.log(todosCopy);
       return { todos: todosCopy };
     });
   }
 
-  markAsComplete(index) {
+  markAsComplete(id) {
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      todosCopy[index].isCompleted = !todosCopy[index].isCompleted;
+      todosCopy[id].isCompleted = !todosCopy[id].isCompleted;
       return { todos: todosCopy };
     });
   }
@@ -102,44 +101,48 @@ class App extends Component {
       <Switch>
         <Route path="/todos" exact render={renderTodoList} />
         <Route path="/todos/new" render={renderTodoForm} />
-        {/* <Route
+        <Route
           path="/todos/:id"
           render={props => {
+            //debugger;
             const targetTodo = this.state.todos.filter(
               (todo, i) => +props.match.params.id === i
             )[0];
             return (
               <div className="App">
                 <h1>Dragon Todo List</h1>
+                <Link to="/todos">Back To All Todos</Link>
                 <Todo
                   // key={i}
                   //so i can render show and edit routes
-                  // index={i}
+                  // id={i}
                   title={targetTodo.title}
                   description={targetTodo.description}
                   isCompleted={targetTodo.isCompleted}
-                  // markAsComplete={this.state.markAsComplete.bind(
+                  markAsComplete={this.markAsComplete.bind(
+                    this,
+                    props.match.params.id
+                  )}
+                  // markAsComplete={this.markAsComplete.bind(
                   //   this,
-                  //   props.match.params.index
+                  //   props.match.params.id
                   // )}
-                  // removeToDo={this.state.removeToDo.bind(
-                  //   this,
-                  //   props.match.params.index
-                  // )}
+                  removeToDo={this.removeToDo.bind(this, props.match.params.id)}
                   // editToDo={this.state.editToDo.bind(
                   //   this,
-                  //   props.match.params.index
+                  //   props.match.params.id
                   // )}
                   // showEditForm={this.state.showEditForm.bind(
                   //   this,
-                  //   props.match.params.index
+                  //   props.match.params.id
                   // )}
-                  isEditSelected={targetTodo.isEditSelected}
-                  // todo={
-                  // this.state.todos.filter(
-                  //   (todo, i) => props.match.params.index === i
-                  // )[0]
-                  // {...props}
+                  // isEditSelected={targetTodo.isEditSelected}
+                  todo={
+                    this.state.todos.filter(
+                      (todo, i) => props.match.params.id === i
+                    )[0]
+                    // {...props}
+                  }
                 />
               </div>
             );
@@ -172,8 +175,8 @@ App.defaultProps = {
       description: 'Breath fire on the countryside.'
     },
     {
-      title: 'chill',
-      description: 'just sorta chill or whatever.'
+      title: 'chill with mom',
+      description: 'hang out with my mom.'
     }
   ]
 };

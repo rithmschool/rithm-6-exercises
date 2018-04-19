@@ -45,20 +45,28 @@ class Todo extends Component {
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
+    // //debugger;
     return (
       <div
         className="Todo"
         style={isCompleted ? { backgroundColor: 'rgba(68, 57, 57, .5)' } : {}}
       >
         {/* so i can render show and edit routes */}
-        {/* {this.props.index ? (
-          <Link to={`/todos/${this.props.index}`}>{title}</Link>
+        {this.props.id !== undefined ? (
+          <Link
+            style={isCompleted ? { textDecoration: 'line-through' } : {}}
+            to={`/todos/${this.props.id}`}
+          >
+            {title}
+          </Link>
         ) : (
-          <p>Title: {title}</p>
-        )} */}
-        <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
+          <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
+            Title: {title}
+          </p>
+        )}
+        {/* <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
           Title: {title}
-        </p>
+        </p> */}
         <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
           Description: {description}
         </p>
