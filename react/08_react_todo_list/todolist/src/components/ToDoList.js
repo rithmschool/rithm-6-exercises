@@ -42,24 +42,21 @@ class ToDoList extends Component {
     });
   }
 
+  handleComplete(idx) {
+    this.setState(prevState => {
+      let newTasks = [...prevState.tasks];
+      newTasks[idx].completed =
+        newTasks[idx].completed === false ? true : false;
+      return { tasks: newTasks };
+    });
+  }
+
   handleEdit(idx, editTask) {
     let updatedTasks = [...this.state.tasks];
-    console.log(idx);
-    console.log(editTask);
     updatedTasks[idx] = editTask;
     updatedTasks[idx].completed = false;
     updatedTasks[idx].isEditing = false;
-    console.log(editTask);
     this.setState({ tasks: updatedTasks });
-  }
-
-  handleTurnEditOn(idx) {
-    this.setState(prevState => {
-      let editTasks = [...prevState.tasks];
-      editTasks[idx]["id"] = idx;
-      editTasks[idx].isEditing = true;
-      return { tasks: editTasks };
-    });
   }
 
   handleRemove(idx) {
@@ -70,12 +67,12 @@ class ToDoList extends Component {
     });
   }
 
-  handleComplete(idx) {
+  handleTurnEditOn(idx) {
     this.setState(prevState => {
-      let newTasks = [...prevState.tasks];
-      newTasks[idx].completed =
-        newTasks[idx].completed === false ? true : false;
-      return { tasks: newTasks };
+      let editTasks = [...prevState.tasks];
+      editTasks[idx]["id"] = idx;
+      editTasks[idx].isEditing = true;
+      return { tasks: editTasks };
     });
   }
 
@@ -89,11 +86,11 @@ class ToDoList extends Component {
             desc={task.desc}
             date={task.date}
             completed={task.completed}
-            isEditing={task.isEditing}
-            removeTask={this.handleRemove.bind(this, idx)}
-            completeTask={this.handleComplete.bind(this, idx)}
-            editTask={this.handleTurnEditOn.bind(this, idx)}
+            // isEditing={task.isEditing}
             // completeTask={idx => this.handleComplete(this, idx)}
+            completeTask={this.handleComplete.bind(this, idx)}
+            turnEditOnTask={this.handleTurnEditOn.bind(this, idx)}
+            removeTask={this.handleRemove.bind(this, idx)}
           />
         );
       } else {
@@ -103,7 +100,7 @@ class ToDoList extends Component {
             title={task.title}
             desc={task.desc}
             date={task.date}
-            completed={task.completed}
+            // completed={task.completed}
             isEditing={task.isEditing}
             editTask={this.handleEdit.bind(this, idx)}
           />

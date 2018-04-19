@@ -17,7 +17,7 @@ class ToDo extends Component {
           Due Date: {this.props.date}
         </h3>
         <button onClick={this.props.completeTask}>{btnDisplay}</button>
-        <button onClick={this.props.editTask}>Edit</button>
+        <button onClick={this.props.turnEditOnTask}>Edit</button>
         <button onClick={this.props.removeTask}>Remove</button>
         <hr />
       </div>
