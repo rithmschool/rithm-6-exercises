@@ -12,15 +12,15 @@ class App extends Component {
         'http://cdn2-www.mandatory.com/assets/mandatory/legacy/2016/03/man_file_1065676_962755.gif'
       ]
     };
-    this.handleAdd = this.handleAdd.bind();
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleAdd(link) {
-    this.setState(prevState => ({ giphs: [...prevState, link] }));
+    this.setState(prevState => ({ giphs: [link, ...prevState.giphs] }));
   }
 
   clearAll(e) {
-    event.preventDefault();
+    e.preventDefault();
     this.setState(prevState => ({ giphs: [] }));
   }
 
