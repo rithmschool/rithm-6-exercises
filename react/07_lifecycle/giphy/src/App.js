@@ -24,6 +24,15 @@ class App extends Component {
     this.setState(prevState => ({ giphs: [] }));
   }
 
+  componentDidMount() {
+    axios
+      .get(`https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC`)
+      .then(res => {
+        let url = res.data.data.images.original.url;
+        this.setState(prevState => ({ giphs: [url] }));
+      });
+  }
+
   render() {
     let imgs = this.state.giphs.map((src, i) => <Giphy key={i} url={src} />);
     return (
@@ -34,7 +43,15 @@ class App extends Component {
           </div>
           <div className="col text-center">
             <SearchForm handleAdd={this.handleAdd} />
+            <button
+              type="submit"
+              onSubmit={this.clearAll}
+              className="btn btn-secondary m-1 mb-2 search-btn"
+            >
+              Clear
+            </button>
           </div>
+
           <div className="row d-flex justify-content center">{imgs}</div>
         </div>
       </div>
