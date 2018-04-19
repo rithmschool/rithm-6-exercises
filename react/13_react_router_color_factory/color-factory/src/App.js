@@ -20,7 +20,7 @@ class App extends Component {
 
   addColor(newColor) {
     this.setState(prevState => {
-      return { Colors: [...prevState.Colors, newColor] };
+      return { Colors: [newColor, ...prevState.Colors] };
     });
   }
 
