@@ -14,7 +14,7 @@ class ColorsApp extends Component {
         { name: "red", hex: "#f00" },
         { name: "blue", hex: "#00f" },
         { name: "green", hex: "#008000" },
-        { name: "yellow", hex: "	#FFFF00" }
+        { name: "yellow", hex: "#FFFF00" }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
