@@ -22,18 +22,24 @@ class NewColorForm extends Component {
             name: this.state.name,
             value: this.state.value
         })
+        this.props.history.push('/colors')
     }
 
     render() {
         return (
-            <div className="new-color-form">
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="name" id="name" onChange={this.handleChange} />
-                    <input type="color" name="value" id="value" onChange={this.handleChange} />
-                    <button type="submit">Add new color</button>
-                </form>
-                <Link to="/colors">back to your colors</Link>
+            <div className="new-color-page">
+                <div className="new-color-form">
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="text" name="name" id="name" onChange={this.handleChange} />
+                        <br/>
+                        <input type="color" name="value" id="value" onChange={this.handleChange} />
+                        <br/>
+                        <button type="submit">Add new color</button>
+                    </form>
+                    <Link to="/colors">back to your colors</Link>
+                </div>
             </div>
+            
         )
     }
 }

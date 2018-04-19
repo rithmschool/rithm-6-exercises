@@ -8,7 +8,7 @@ const Home = ({ colors }) => {
     })
     
     return (
-        <div>
+        <div className="home-page">
             <header className="App-header">
                 <h3>Welcome to the color factory.</h3>
                 <h1 className="App-title">
