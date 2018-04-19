@@ -53,11 +53,12 @@ nav {
 }
 
 a {
-  color: white;
+  color: black;
 }
 
 a:hover {
-  color: white;
+  color: black;
+  text-decoration: none;
 }
 
 ul {
@@ -67,4 +68,5 @@ ul {
 
 li {
   padding: 0;
+  /* display: block; */
 }

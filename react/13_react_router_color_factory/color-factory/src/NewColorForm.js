@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class NewColorForm extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class NewColorForm extends Component {
     this.props.addColor({ ...this.state });
     this.setState({ name: '', color: '' });
     e.target.reset();
+    this.props.history.push('/');
   }
 
   handleChange(e) {
@@ -48,4 +50,4 @@ class NewColorForm extends Component {
   }
 }
 
-export default NewColorForm;
+export default withRouter(NewColorForm);
