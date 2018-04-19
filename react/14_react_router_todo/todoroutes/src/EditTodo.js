@@ -7,6 +7,8 @@ class EditTodoForm extends Component {
     this.state = {
       title: "",
       desc: "",
+      complete: false,
+      toEdit: false,
       id: null
     };
     this.handleChange = this.handleChange.bind(this);
@@ -26,7 +28,7 @@ class EditTodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    console.log("Begining", this.state);
     this.props.addEdit({ ...this.state });
     console.log(this.props.addEdit(this.state));
     this.setState({ title: "", desc: "" });
