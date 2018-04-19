@@ -12,11 +12,11 @@ class ColorApp extends Component {
       colors: [
         {
           name: "Violet",
-          colorValue: "9575AB"
+          colorValue: "#9575AB"
         },
         {
           name: "Blood-Red",
-          colorValue: "4C0017"
+          colorValue: "#4C0017"
         }
       ]
     };

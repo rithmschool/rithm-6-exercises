@@ -9,8 +9,14 @@ const ColorList = ({ colors }) => {
     </li>
   ));
   return (
-    <div className="main__section">
-      <ul>{colorList}</ul>
+    <div className="list__background">
+      <br />
+      <h1>Color Lists Are The Best!</h1>
+      <div className="main__section">
+        <div>
+          <ul>{colorList}</ul>
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ class NewColorForm extends Component {
     super(props);
     this.state = {
       name: "",
-      colorValue: ""
+      colorValue: "#ffffff"
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,12 +23,13 @@ class NewColorForm extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="NewColorForm">
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="NewInput">
             <label>
-              What's The Name of Your Color?
+              What's The Name of Your Color?{" "}
               <input
+                className="text__input"
                 name="name"
                 value={this.state.name}
                 onChange={this.handleChange}
@@ -36,9 +37,9 @@ class NewColorForm extends Component {
               />
             </label>
           </div>
-          <div>
+          <div className="NewInput">
             <label>
-              Color Picker:
+              Color Picker: &nbsp;&nbsp;
               <input
                 name="colorValue"
                 value={this.state.colorValue}
@@ -47,7 +48,9 @@ class NewColorForm extends Component {
               />
             </label>
           </div>
-          <button type="submit">Color Me Up!</button>
+          <button type="submit" className="Btn__style">
+            Color Me Up!
+          </button>
         </form>
       </div>
     );

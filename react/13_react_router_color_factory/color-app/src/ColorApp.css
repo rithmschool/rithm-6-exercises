@@ -1,3 +1,7 @@
+* {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .App-header {
   background-image: url("https://data.whicdn.com/images/94322669/original.jpg");
   height: 100px;
@@ -28,7 +32,8 @@ a {
   margin: 0 auto;
   display: inline-block;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
+  font-style: italic;
 }
 
 @keyframes App-logo-spin {

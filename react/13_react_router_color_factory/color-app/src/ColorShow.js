@@ -7,22 +7,25 @@ const ColorShow = ({ colors, match }) => {
     return color.name === match.params.color;
   });
 
-  return (
-    <div
-      className="ColorShow"
-      style={{ backgroundColor: `#${foundColor.colorValue}` }}
-    >
-      <ul>
-        <li>
-          <p className="show__title">{foundColor.name}</p>{" "}
-        </li>
-        <li>
-          <p>Hex Color: #{foundColor.colorValue}</p>
-        </li>
-      </ul>
-      <Link to="/colors">Go Back</Link>
-    </div>
-  );
+  if (foundColor === undefined) {
+    return <Redirect from="/" to="/colors" />;
+  } else {
+    return (
+      <div
+        className="ColorShow"
+        style={{ backgroundColor: `${foundColor.colorValue}` }}
+      >
+        <ul>
+          <li>
+            <p className="show__title">{foundColor.name}</p>{" "}
+          </li>
+          <li>
+            <p>Hex Color: {foundColor.colorValue}</p>
+          </li>
+        </ul>
+        <Link to="/colors">Go Back</Link>
+      </div>
+    );
+  }
 };
-
 export default ColorShow;
