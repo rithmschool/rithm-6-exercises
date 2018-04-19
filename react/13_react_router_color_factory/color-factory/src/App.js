@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch, withRouter } from 'react-router-dom';
+import { Route, Link, Switch, withRouter, Redirect } from 'react-router-dom';
 import './App.css';
 import ListColors from './ListColors';
 import NewColorForm from './NewColorForm';
@@ -41,19 +41,46 @@ class App extends Component {
               return <NewColorForm addColor={this.addColor} />;
             }}
           />
+
           <Route
             path="/colors/:name"
-            render={props => (
+            render={props => {
+              if (
+                this.state.Colors.filter(
+                  color => props.match.params.name === color.name
+                )[0]
+              ) {
+                return (
+                  <ShowColor
+                    color={
+                      this.state.Colors.filter(
+                        color => props.match.params.name === color.name
+                      )[0]
+                    }
+                    {...props}
+                  />
+                );
+              } else return <Redirect to="/colors" />;
+            }}
+          />
+          {/*
+          <Route
+            path="/colors/:name"
+            render={props =>
               <ShowColor
                 color={
                   this.state.Colors.filter(color => {
-                    debugger;
                     return props.match.params.name === color.name;
                   })[0]
                 }
                 {...props}
               />
             )}
+          /> */}
+          <Route
+            render={() => {
+              return <Redirect to={'/'} />;
+            }}
           />
         </Switch>
       </div>
