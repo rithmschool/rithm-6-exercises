@@ -1,0 +1,36 @@
+.Tweet {
+  border: 1px solid gray;
+  border-radius: 1rem;
+  margin: 10px auto;
+  padding: 1rem;
+  width: 30rem;
+  text-align: left;
+}
+
+.Tweet em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  margin: 1rem 0;
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-left: 1rem;
+}
+
+h3,
+h4,
+h5 {
+  margin: 0 0.25rem;
+}
