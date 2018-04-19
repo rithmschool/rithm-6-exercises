@@ -14,6 +14,8 @@ class ListColors extends Component {
     });
     return (
       <div>
+        <h1>Welcome to ColorZone</h1>
+        <h2>So. Many. Colors.</h2>
         <Link to="/colors/new">Add Color</Link>
         <p>Colors:</p>
         <ul>{colors}</ul>

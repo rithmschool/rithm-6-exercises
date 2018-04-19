@@ -27,8 +27,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to ColorZone</h1>
-        <h2>So. Many. Colors.</h2>
         <Switch>
           <Route
             path="/"
@@ -45,6 +43,7 @@ class App extends Component {
           <Route
             path="/colors/:name"
             render={props => {
+              //check that url parameter is valid
               if (
                 this.state.Colors.filter(
                   color => props.match.params.name === color.name
