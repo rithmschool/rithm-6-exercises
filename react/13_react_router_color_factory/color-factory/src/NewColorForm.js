@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class NewColorForm extends Component {
   constructor(props) {
@@ -28,24 +28,27 @@ class NewColorForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Name: </label>
-        <input
-          id="name"
-          name="name"
-          onChange={this.handleChange}
-          value={this.state.name}
-        />
-        {/* change to be the color type input */}
-        <label htmlFor="color">Color: </label>
-        <input
-          id="color"
-          name="color"
-          onChange={this.handleChange}
-          value={this.state.color}
-        />
-        <input type="submit" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="name">Name: </label>
+          <input
+            id="name"
+            name="name"
+            onChange={this.handleChange}
+            value={this.state.name}
+          />
+          {/* change to be the color type input */}
+          <label htmlFor="color">Color: </label>
+          <input
+            id="color"
+            name="color"
+            onChange={this.handleChange}
+            value={this.state.color}
+          />
+          <input type="submit" />
+        </form>
+        <Link to="/">Go Back To All Colors</Link>
+      </div>
     );
   }
 }
