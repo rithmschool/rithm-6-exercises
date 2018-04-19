@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class NewToDoForm extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class NewToDoForm extends Component {
     this.props.addToDo({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
+    this.props.history.push('/todo');
   }
 
   handleChange(e) {
@@ -55,4 +56,4 @@ class NewToDoForm extends Component {
   }
 }
 
-export default NewToDoForm;
+export default withRouter(NewToDoForm);

@@ -51,6 +51,7 @@ class Todo extends Component {
         ) : (
           <p>Title: {title}</p>
         )} */}
+        <p>Title: {title}</p>
         <p>Description: {description}</p>
         <p>Is Completed: {isCompleted ? 'True' : 'False'}</p>
         <button onClick={markAsComplete}>Toggle Completion Status</button>

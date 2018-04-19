@@ -25,6 +25,7 @@ class App extends Component {
     this.editToDo = this.editToDo.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
   }
+
   addToDo(newTodo) {
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
@@ -106,7 +107,7 @@ class App extends Component {
             );
           }}
         />
-        <Route
+        {/* <Route
           path="/todos/:id"
           render={props => {
             const targetTodo = this.state.todos.filter(
@@ -154,7 +155,8 @@ class App extends Component {
           <Todo addToDo={this.addToDo} />
         </div>
         ); }} />
-        <Route path="/todos/:id/edit" />
+        <Route path="/todos/:id/edit" /> */}
+        <Redirect to="/todos" />
       </Switch>
     );
   }
