@@ -11,6 +11,16 @@ button {
   cursor: pointer;
 }
 
+a,
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.inputWrapper {
+  padding: 1px;
+}
+
 .App {
   text-align: center;
 }

@@ -9,6 +9,8 @@ class TodoList extends Component {
         return (
           <Todo
             key={i}
+            //so i can render show and edit routes
+            index={i}
             title={title}
             description={description}
             isCompleted={isCompleted}

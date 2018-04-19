@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class NewToDoForm extends Component {
   constructor(props) {
@@ -26,23 +27,30 @@ class NewToDoForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="title">Title: </label>
-        <input
-          id="title"
-          name="title"
-          onChange={this.handleChange}
-          value={this.state.title}
-        />
-        <label htmlFor="description">Description: </label>
-        <input
-          id="description"
-          name="description"
-          onChange={this.handleChange}
-          value={this.state.description}
-        />
-        <input type="submit" />
-      </form>
+      <div>
+        <Link to="/todos">Back To All Todos</Link>
+        <form onSubmit={this.handleSubmit}>
+          <div className="inputWrapper">
+            <label htmlFor="title">Title: </label>
+            <input
+              id="title"
+              name="title"
+              onChange={this.handleChange}
+              value={this.state.title}
+            />
+          </div>
+          <div className="inputWrapper">
+            <label htmlFor="description">Description: </label>
+            <input
+              id="description"
+              name="description"
+              onChange={this.handleChange}
+              value={this.state.description}
+            />
+          </div>
+          <input type="submit" />
+        </form>
+      </div>
     );
   }
 }

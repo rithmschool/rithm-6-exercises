@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Todo extends Component {
   constructor(props) {
@@ -44,7 +45,12 @@ class Todo extends Component {
     } = this.props;
     return (
       <div>
-        <p>Title: {title}</p>
+        {/* so i can render show and edit routes */}
+        {/* {this.props.index ? (
+          <Link to={`/todos/${this.props.index}`}>{title}</Link>
+        ) : (
+          <p>Title: {title}</p>
+        )} */}
         <p>Description: {description}</p>
         <p>Is Completed: {isCompleted ? 'True' : 'False'}</p>
         <button onClick={markAsComplete}>Toggle Completion Status</button>
