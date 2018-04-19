@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./ColorLi.css";
 
-const ColorLi = ({ name, value }) => {
+const ColorLi = ({ name, hex }) => {
   return (
     <figure className="ColorLi">
-      <div style={{ backgroundColor: value }}>
-        <Link to={`/colors/${name}`}>{name}</Link>
+      <div style={{ backgroundColor: hex }}>
+        <Link className="ColorLi-caption" to={`/colors/${name}`}>
+          {name}
+        </Link>
       </div>
     </figure>
   );

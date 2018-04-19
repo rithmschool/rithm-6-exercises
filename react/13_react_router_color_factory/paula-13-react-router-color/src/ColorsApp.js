@@ -11,10 +11,10 @@ class ColorsApp extends Component {
     super(props);
     this.state = {
       colors: [
-        { name: "red", value: "#f00" },
-        { name: "blue", value: "#00f" },
-        { name: "green", value: "#008000" },
-        { name: "yellow", value: "	#FFFF00" }
+        { name: "red", hex: "#f00" },
+        { name: "blue", hex: "#00f" },
+        { name: "green", hex: "#008000" },
+        { name: "yellow", hex: "	#FFFF00" }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -31,7 +31,7 @@ class ColorsApp extends Component {
       color => color.name === props.match.params.color
     );
     if (colorObj) {
-      return colorObj.value;
+      return colorObj.hex;
     }
     return false;
   }
@@ -42,14 +42,12 @@ class ColorsApp extends Component {
         <NavigationBar />
         <Switch>
           <Route
-            exact
             path="/colors/new"
             render={props => (
               <ColorsForm handleAdd={this.handleAdd} {...props} />
             )}
           />
           <Route
-            exact
             path="/colors/:color"
             render={props => {
               const foundColor = this.findColor(props);
@@ -66,7 +64,7 @@ class ColorsApp extends Component {
               <ColorsList colors={this.state.colors} {...props} />
             )}
           />
-          <Redirect from="/" to="/colors" />
+          <Redirect to="/colors" />
         </Switch>
       </section>
     );

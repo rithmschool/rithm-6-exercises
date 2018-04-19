@@ -6,7 +6,7 @@ import "./ColorsList.css";
 const ColorsList = ({ colors }) => {
   return (
     <section className="ColorsList">
-      {colors.map((d, i) => <ColorLi name={d.name} value={d.value} key={i} />)}
+      {colors.map((d, i) => <ColorLi name={d.name} hex={d.hex} key={i} />)}
     </section>
   );
 };

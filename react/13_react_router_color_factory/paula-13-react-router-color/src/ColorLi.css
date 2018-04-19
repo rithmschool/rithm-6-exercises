@@ -5,3 +5,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.ColorLi:hover .ColorLi-caption {
+  opacity: 1;
+}
+
+.ColorLi-caption {
+  opacity: 0;
+}
