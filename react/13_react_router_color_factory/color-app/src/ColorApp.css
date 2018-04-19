@@ -1,0 +1,41 @@
+.App-header {
+  background-image: url("https://data.whicdn.com/images/94322669/original.jpg");
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+a {
+  text-decoration: none;
+}
+.color__logo {
+  display: inline-block;
+}
+.color__logo img {
+  height: 100px;
+  width: auto;
+}
+.title {
+  margin: 0 auto;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

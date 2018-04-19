@@ -1,0 +1,12 @@
+.ColorShow {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+.show__title {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 25px;
+}

@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+}
+
+li > a {
+  text-decoration: none;
+}
+
+.main__section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
