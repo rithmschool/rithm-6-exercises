@@ -10,7 +10,7 @@ class TodoList extends Component {
           <Todo
             key={i}
             //this is imperative and should be refactored eventually
-            index={i}
+            id={i}
             title={title}
             description={description}
             isCompleted={isCompleted}

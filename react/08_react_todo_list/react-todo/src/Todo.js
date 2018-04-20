@@ -45,7 +45,7 @@ class Todo extends Component {
       showEditForm,
       editToDo,
       isEditSelected,
-      index
+      id
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
@@ -53,6 +53,7 @@ class Todo extends Component {
     //   //debugger;;;
     //   this.props.history.push(`/todo/${this.props.match.params.id}`);
     // }
+    // debugger;
     return (
       <div
         className="Todo"
@@ -77,7 +78,7 @@ class Todo extends Component {
         <button onClick={removeToDo}>Delete</button>
         <button>
           {/* Change */}
-          <Link to={`/todos/${index}/edit`}>Change</Link>
+          <Link to={`/todos/${id}/edit`}>Change</Link>
         </button>
         {/* <button
           onClick={() => {

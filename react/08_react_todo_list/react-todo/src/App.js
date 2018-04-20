@@ -133,6 +133,8 @@ class App extends Component {
             )}
             removeToDo={this.removeToDo.bind(this, props.match.params.id)}
             submitData={this.editToDo.bind(this, props.match.params.id)}
+            //refactor so now i?
+            //instead get index in App.js when processing?
             showEditForm={this.showEditForm.bind(this, props.match.params.id)}
             isEditSelected={targetTodo.isEditSelected}
           />
