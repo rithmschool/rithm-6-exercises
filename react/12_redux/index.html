@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+
+  <div style="text-align: center">
+    <h2>Elie's mood...</h2>
+    <p id="face">◉‿◉</p>
+    <button type="submit" id="happy">HAPPY</button>
+    <button type="submit" id="sad">SAD</button>
+    <button type="submit" id="mad">MAD</button>
+    <button type="submit" id="confused">CONFUSED</button>
+    <button type="submit" id="random">RANDOM</button>
+  </div>
+  <script>
+    function getMood() {
+      let moods = ["◉‿◉", "●︿●", "ಠ_ಠ", "◔_◔"]
+      const randomIdx = Math.floor(Math.random() * moods.length)
+      let randomMood = moods[randomIdx];
+      return randomMood
+    }
+    const INITIAL_STATE = {
+      img: getMood()
+    };
+    function rootReducer(state = INITIAL_STATE, action) {
+      switch (action.type) {
+        case "HAPPY":
+          var newState = { ...state };
+          newState.img = "◉‿◉"
+          return newState;
+        case "SAD":
+          var newState = { ...state };
+          newState.img = "●︿●"
+          return newState;
+        case "MAD":
+          var newState = { ...state };
+          newState.img = "ಠ_ಠ"
+          return newState;
+        case "CONFUSED":
+          var newState = { ...state };
+          newState.img = "◔_◔"
+          return newState;
+        case "RANDOM":
+          var newState = { ...state };
+          newState.img = getMood();
+          return newState;
+        default:
+          return state;
+      }
+    }
+    // var store = Redux.createStore(rootReducer);
+
+    $(document).ready(function() {
+      // get the state from redux
+      let currentState = store.getState();
+      let $face = $("#face");
+      $face.text(currentState.img);
+
+      $("#happy").on("click", function() {
+        store.dispatch({ type: "HAPPY" });
+        let updatedState = store.getState();
+        $face.text(updatedState.img);
+      });
+
+      $("#sad").on("click", function() {
+        store.dispatch({ type: "SAD" });
+        let updatedState = store.getState();
+        $face.text(updatedState.img);
+      });
+
+      $("#mad").on("click", function() {
+        store.dispatch({ type: "MAD" });
+        let updatedState = store.getState();
+        $face.text(updatedState.img);
+      });
+
+      $("#confused").on("click", function() {
+        store.dispatch({ type: "CONFUSED" });
+        let updatedState = store.getState();
+        $face.text(updatedState.img);
+      });
+
+      $("#random").on("click", function() {
+        store.dispatch({ type: "RANDOM" });
+        let updatedState = store.getState();
+        $face.text(updatedState.img);
+      });
+    });
+  </script>
+</body>
+</html>
