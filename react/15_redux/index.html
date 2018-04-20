@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
-</body>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+
+    const INITIAL_STATE = {emoji: "(`･Д･)ノ=☆"}
+
+      function moodReducer(state=INITIAL_STATE, action) {
+
+        switch(action.type) {
+
+          case "Happy":
+            var newState = {... state, emoji: "ɷ◡ɷ"};
+            return newState;
+
+          case "Sad":
+            var newState = {... state, emoji: "⊙︿⊙"};
+            return newState;
+
+          case "Angry":
+            var newState = {... state, emoji: "ಠ_ಠ"};
+            return newState;
+
+          case "Confused":
+            var newState = {... state, emoji: "ఠ_ఠ"};
+            return newState;
+
+          default:
+            return state;
+        }
+      }
+
+      var store = Redux.createStore(moodReducer);
+
+      $(document).ready(function() {
+          let currentState = store.getState();
+          let $mood = $("#mood");
+          $mood.text(currentState.emoji);
+
+          $("#happy").on("click", function() {
+              store.dispatch({ type: "Happy" });
+              let updatedState = store.getState();
+              $mood.text(updatedState.emoji);
+          });
+
+          $("#sad").on("click", function() {
+              store.dispatch({ type: "Sad" });
+              let updatedState = store.getState();
+              $mood.text(updatedState.emoji);
+          });
+
+          $("#angry").on("click", function() {
+              store.dispatch({ type: "Angry" });
+              let updatedState = store.getState();
+              $mood.text(updatedState.emoji);
+          });
+
+          $("#confused").on("click", function() {
+              store.dispatch({ type: "Confused" });
+              let updatedState = store.getState();
+              $mood.text(updatedState.emoji);
+          });
+      });
+    </script>
+    <div align="center">
+      <button id="happy">Happy</button>
+      <button id="sad">Sad</button>
+      <button id="angry">Angry</button>
+      <button id="confused">Confused</button>
+      <br>
+      <div id="mood"></div>
+    </div>
+
+  </body>
 </html>
