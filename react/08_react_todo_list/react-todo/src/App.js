@@ -27,7 +27,7 @@ class App extends Component {
 
   addToDo(newTodo) {
     console.log('adding todo');
-    debugger;
+    //debugger;
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
     });
@@ -45,6 +45,8 @@ class App extends Component {
   }
 
   editToDo(id, editedTodo) {
+    console.log('in edit to do');
+    debugger;
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[id] = {
@@ -99,9 +101,21 @@ class App extends Component {
         </div>
       );
     };
+
+    const renderEditForm = props => {
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <p>Edit Todo</p>
+          {/* not sure if this is right handler */}
+          <NewToDoForm submitData={this.editToDo} />
+        </div>
+      );
+    };
+
     //i'll end up ignoring props
     const renderSingleTodo = props => {
-      ////debugger;;;
+      //////debugger;;;
       const targetTodo = this.state.todos.filter(
         (todo, i) => +props.match.params.id === i
       )[0];
@@ -140,13 +154,8 @@ class App extends Component {
       <Switch>
         <Route path="/todos" exact render={renderTodoList} />
         <Route path="/todos/new" render={renderNewTodoForm} />
+        <Route path="/todos/:id/edit" render={renderEditForm} />
         <Route path="/todos/:id" render={renderSingleTodo} />
-        <Route
-          path="/todos/:id/edit"
-          render={() => {
-            console.log('yay');
-          }}
-        />
         <Redirect to="/todos" />
       </Switch>
     );

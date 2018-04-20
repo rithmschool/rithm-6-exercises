@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import NewToDoForm from './NewToDoForm';
 
 class Todo extends Component {
@@ -33,6 +33,8 @@ class Todo extends Component {
     e.target.reset();
   }
 
+  editFormRedirect() {}
+
   render() {
     const {
       title,
@@ -42,7 +44,8 @@ class Todo extends Component {
       removeToDo,
       showEditForm,
       editToDo,
-      isEditSelected
+      isEditSelected,
+      index
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
@@ -72,7 +75,20 @@ class Todo extends Component {
         </p>
         <button onClick={markAsComplete}>{completionText}</button>
         <button onClick={removeToDo}>Delete</button>
-        <button onClick={showEditForm}>Change</button>
+        <button>
+          {/* Change */}
+          <Link to={`/todos/${index}/edit`}>Change</Link>
+        </button>
+        {/* <button
+          onClick={() => {
+            console.log('panda');
+            <Redirect to="/todos/new" />;
+            this.props.history.push('/todo/new');
+          }}
+        >
+          Change
+        </button> */}
+        {/* <button onClick={showEditForm}>Change</button> */}
         {isEditSelected ? (
           <NewToDoForm
             title={title}

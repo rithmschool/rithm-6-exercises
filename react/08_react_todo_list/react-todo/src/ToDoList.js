@@ -9,11 +9,15 @@ class TodoList extends Component {
         return (
           <Todo
             key={i}
+            //this is imperative and should be refactored eventually
+            index={i}
             title={title}
             description={description}
             isCompleted={isCompleted}
             markAsComplete={idx => this.props.markAsComplete(i)}
             removeToDo={this.props.removeToDo.bind(this, i)}
+            //refactor so now i?
+            //instead get index in App.js when processing?
             submitData={this.props.editToDo.bind(this, i)}
             showEditForm={this.props.showEditForm.bind(this, i)}
             isEditSelected={isEditSelected}
