@@ -11,9 +11,10 @@ const TodoList = ({ todos, handleDelete, toggleComplete }) => {
           title={td.title}
           description={td.description}
           isComplete={td.isComplete}
-          key={i}
           handleDelete={handleDelete.bind(this, i)}
           toggleComplete={toggleComplete.bind(this, i)}
+          idx={i}
+          key={i}
         />
       ))}
     </section>

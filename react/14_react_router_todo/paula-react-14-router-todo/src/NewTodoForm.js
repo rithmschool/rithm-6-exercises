@@ -19,12 +19,13 @@ export default class NewTodoForm extends Component {
     e.preventDefault();
     this.props.handleAdd(this.state);
     this.setState({ title: "", description: "" });
+    this.props.history.push("/todos");
   }
 
   render() {
     return (
       <form action="" onSubmit={this.handleSubmit}>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="title">Title</label>
         <input
           type="text"
           name="title"
@@ -32,7 +33,7 @@ export default class NewTodoForm extends Component {
           onChange={this.handleChange}
           value={this.state.title}
         />
-        <label htmlFor="title">Title</label>
+        <label htmlFor="description">Description</label>
         <input
           type="text"
           name="description"

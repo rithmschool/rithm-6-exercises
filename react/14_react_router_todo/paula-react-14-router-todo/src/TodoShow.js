@@ -1,9 +1,11 @@
 import React from "react";
+import Todo from "./Todo";
 
 const TodoShow = props => {
+  console.log(props);
   return (
     <section>
-      <h1>Todo List!</h1>
+      <Todo />
     </section>
   );
 };

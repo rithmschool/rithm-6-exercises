@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   toggleComplete(idx) {
-    console.log(this, idx);
     let newTodos = [...this.state.todos];
     newTodos[idx].isComplete = !newTodos[idx].isComplete;
     this.setState({ todos: newTodos });
@@ -61,6 +60,8 @@ class App extends Component {
               <NewTodoForm handleAdd={this.handleAdd} {...props} />
             )}
           />
+          <Route path="/todos/:id/edit" render={NewTodoForm} />
+          <Route path="/todos/:id" render={TodoShow} />
           <Route
             path="/todos"
             render={props => (
@@ -72,8 +73,6 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/todos/:id/edit" render={NewTodoForm} />
-          <Route path="/todos/:id" render={TodoShow} />
           <Redirect to="/todos" />
         </Switch>
       </section>
