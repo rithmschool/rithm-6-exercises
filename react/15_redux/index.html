@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vanilla Redux Exercise</title>
 </head>
+
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+
+  <h1 class="emoticon"></h1>
+  <div class="buttons">
+    <button class="HAPPY">Happy</button>
+    <button class="SAD">Sad</button>
+    <button class="ANGRY">Angry</button>
+    <button class="CONFUSED">Confused</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js "></script>
+  <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin=" anonymous "></script>
+  <script>
+
+    // Reducer must be a pure function
+    // Actions should include a new face
+
+    const INITIAL_STATE = {
+      face: "ヽ(ヅ)ノ"
+    };
+
+    function rootReducer(state = INITIAL_STATE, action) {
+      let newState = { ...state };
+      switch (action.type) {
+        case "HAPPY":
+          newState.face = "ヽ(ヅ)ノ";
+          return newState;
+        case "SAD":
+          newState.face = "(◕︿◕✿)";
+          return newState;
+        case "ANGRY":
+          newState.face = "(¬､¬)";
+          return newState;
+        case "CONFUSED":
+          newState.face = "(⊙_☉)";
+          return newState;
+        default:
+          return state;
+      }
+      /*  if (action.type === 'HAPPY') newState.face = "ヽ(ヅ)ノ";
+        if (action.type === 'SAD') newState.face = "(◕︿◕✿)";
+        if (action.type === 'ANGRY') newState.face = "(¬､¬)";
+        if (action.type === 'CONFUSED') newState.face = "(⊙_☉)";
+        return newState; */
+    }
+
+    var store = Redux.createStore(rootReducer);
+
+    $(function () {
+
+      $(".buttons").on("click", "button", e => {
+        let mood = $(e.target).attr("class");
+        store.dispatch({ type: mood });
+        $(".emoticon ").text(store.getState().face);
+      })
+
+      $(".emoticon ").text(store.getState().face);
+
+    })
+
+  </script>
 </body>
+
 </html>
