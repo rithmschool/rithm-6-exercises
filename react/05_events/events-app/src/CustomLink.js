@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
-const CustomLink = ({ text, href, handleLinkClick }) => (
-  <div>
-    <br />
-    <a href={href} onClick={handleLinkClick} target="_blank">
-      {text}
-    </a>
-  </div>
-);
+const CustomLink = ({ text, href, handleLinkClick }) => {
+  return (
+    <div>
+      <p>
+        <a href={href} onClick={handleLinkClick} target="_blank">
+          {text}
+        </a>
+      </p>
+    </div>
+  );
+};
 
 export default CustomLink;

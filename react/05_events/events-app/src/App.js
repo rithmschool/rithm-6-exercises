@@ -6,31 +6,31 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { clicked: true };
+    this.state = { notClicked: true };
+    this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleLinkClick = this.handleLinkClick.bind(this);
   }
 
   handleButtonClick() {
-    this.state.clicked
-      ? this.setState({ clicked: false })
-      : this.setState({ clicked: true });
+    this.state.notClicked
+      ? this.setState({ notClicked: false })
+      : this.setState({ notClicked: true });
   }
 
   handleLinkClick(event) {
-    console.log("clicked");
-    this.state.clicked
+    this.state.notClicked
       ? console.log("You clicked on a link!")
       : event.preventDefault();
   }
 
   render() {
     let allLinks = this.props.links.map((link, idx) => {
-      if (this.state.clicked) {
+      if (this.state.notClicked) {
         return (
           <CustomLink
             key={idx}
             text={link.text}
-            onClick={this.handleLinkClick}
+            handleLinkClick={this.handleLinkClick}
             href={link.href}
           />
         );
@@ -54,10 +54,12 @@ class App extends Component {
         {allLinks}
         <br />
         <input
-          onClick={this.handleButtonClick.bind(this)}
+          onClick={this.handleButtonClick}
           type="submit"
           value={
-            this.state.clicked ? this.props.btnText[0] : this.props.btnText[1]
+            this.state.notClicked
+              ? this.props.btnText[0]
+              : this.props.btnText[1]
           }
         />
       </div>
