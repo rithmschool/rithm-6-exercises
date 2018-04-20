@@ -7,6 +7,82 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div class="container">
+    <div class="mood">
+        മ◡മ
+    </div>
+    </div>
+
+    <button id="happy">Happy</button>
+    <button id="grin">Grin</button>
+    <button id="shocked">Shocked</button>
+    <button id="blush">Blush</button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+    <script>
+    const INITIAL_STATE = {
+        mood: "മ◡മ"
+    }
+        var happy= "മ◡മ";
+        var grin= "(￣▼￣)";
+        var shocked= "（（゜Д゜；）））";
+        var blush= "(´∀｀•)";
+
+     function rootReducer(state=INITIAL_STATE, action){
+      switch(action.type){
+            case "HAPPY":
+                var newState = { ...state };
+                newState.mood = happy;
+                return newState;
+            case "GRIN":
+                var newState = { ...state };
+                newState.mood = grin;
+                return newState;
+            case "SHOCKED":
+                var newState = { ...state };
+                newState.mood = shocked;
+                return newState;
+            case "BLUSH":
+                var newState = { ...state };
+                newState.mood = blush;
+                return newState;
+      }
+    }
+    var store = Redux.createStore(rootReducer)
+
+    $(document).ready(function() {
+      var currentState = store.getState();
+      var $mood = $(".mood");
+      $mood.text(INITIAL_STATE.mood);
+
+
+    $("#happy").on("click", function() {
+        store.dispatch({ type: "HAPPY" });
+        var currentState = store.getState();
+        $mood.text(currentState.mood);
+
+    });
+    $("#grin").on("click", function() {
+        store.dispatch({ type: "GRIN" });
+        var currentState = store.getState();
+        $mood.text(currentState.mood);
+
+    });
+    $("#shocked").on("click", function() {
+        store.dispatch({ type: "SHOCKED" });
+        var currentState = store.getState();
+        $mood.text(currentState.mood);
+    });
+    $("#blush").on("click", function() {
+        store.dispatch({ type: "BLUSH" });
+        var currentState = store.getState();
+        $mood.text(currentState.mood);
+    });
+    })
+
+    </script>
 </body>
 </html>
