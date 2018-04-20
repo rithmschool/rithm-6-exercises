@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class TodoForm extends Component {
+export default class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -39,10 +39,6 @@ export default class Todo extends Component {
     this.props.handleEdit(updated);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return { title: nextProps.title, description: nextProps.description };
-  }
-
   render() {
     const {
       title,
@@ -87,9 +83,9 @@ export default class Todo extends Component {
 
     return (
       <div>
-        <h6 style={{ textDecoration: strikeStyle }}>
+        <h4 style={{ textDecoration: strikeStyle }}>
           {titleDisplay} {descDisplay}
-        </h6>
+        </h4>
         <button onClick={toggleComplete}>Mark as Complete!</button>
         <button onClick={handleDelete}>Delete Me!</button>
       </div>
