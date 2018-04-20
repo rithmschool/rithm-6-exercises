@@ -12,12 +12,24 @@ class NewToDoForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      title: nextProps.title,
+      description: nextProps.description
+    };
+  }
+
   handleSubmit(e) {
+    console.log('handling submit');
     e.preventDefault();
-    this.props.addToDo({ ...this.state });
+    //for add to do, i pass the whole state object, nothing else
+    // this.props.addToDo({ ...this.state });
+    debugger;
+
+    this.props.submitData({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
-    this.props.history.push('/');
+    this.props.history.push('/todo');
   }
 
   handleChange(e) {
@@ -27,6 +39,8 @@ class NewToDoForm extends Component {
   }
 
   render() {
+    //standard js goes here!
+    //debugger;;;
     return (
       <div>
         <Link to="/todos">Back To All Todos</Link>

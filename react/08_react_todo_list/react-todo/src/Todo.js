@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NewToDoForm from './NewToDoForm';
 
 class Todo extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Todo extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.editToDo({ ...this.state });
+    this.props.submitData({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
   }
@@ -46,7 +47,7 @@ class Todo extends Component {
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
     // if (isEditSelected) {
-    //   debugger;
+    //   //debugger;;;
     //   this.props.history.push(`/todo/${this.props.match.params.id}`);
     // }
     return (
@@ -73,24 +74,27 @@ class Todo extends Component {
         <button onClick={removeToDo}>Delete</button>
         <button onClick={showEditForm}>Change</button>
         {isEditSelected ? (
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="title">Title: </label>
-            <input
-              id="title"
-              name="title"
-              onChange={this.handleChange}
-              value={this.state.title}
-            />
-            <label htmlFor="description">Description: </label>
-            <input
-              id="description"
-              name="description"
-              onChange={this.handleChange}
-              value={this.state.description}
-            />
-            <input type="submit" />
-          </form>
+          <NewToDoForm submitData={this.props.submitData} />
         ) : null}
+
+        {/* // <form onSubmit={this.handleSubmit}>
+          //   <label htmlFor="title">Title: </label>
+          //   <input
+          //     id="title"
+          //     name="title"
+          //     onChange={this.handleChange}
+          //     value={this.state.title}
+          //   />
+          //   <label htmlFor="description">Description: </label>
+          //   <input
+          //     id="description"
+          //     name="description"
+          //     onChange={this.handleChange}
+          //     value={this.state.description}
+          //   />
+          //   <input type="submit" />
+          // </form>
+        // ) : (null)} */}
       </div>
     );
   }

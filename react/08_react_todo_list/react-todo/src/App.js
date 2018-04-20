@@ -26,14 +26,14 @@ class App extends Component {
   }
 
   addToDo(newTodo) {
+    console.log('adding todo');
+    debugger;
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
     });
   }
 
   removeToDo(id) {
-    // debugger;
-    // ask for redirect by setting it in state
     this.setState(prevState => {
       let todosCopy = [...prevState.todos].filter((todo, i) => {
         if (i === +id) return undefined;
@@ -89,19 +89,19 @@ class App extends Component {
       );
     };
 
-    const renderTodoForm = props => {
+    const renderNewTodoForm = props => {
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
-          <NewToDoForm addToDo={this.addToDo} />
+          <NewToDoForm submitData={this.addToDo} />
           {/* <TodoForm handleSubmit={this.addTodo} */}
           {/* <TodoForm handleSubmit={this.edito} */}
         </div>
       );
     };
-
+    //i'll end up ignoring props
     const renderSingleTodo = props => {
-      //debugger;
+      ////debugger;;;
       const targetTodo = this.state.todos.filter(
         (todo, i) => +props.match.params.id === i
       )[0];
@@ -117,26 +117,15 @@ class App extends Component {
               this,
               props.match.params.id
             )}
-            //need to figure out the best way to handle deleting a todo
             removeToDo={this.removeToDo.bind(this, props.match.params.id)}
-            editToDo={this.editToDo.bind(this, props.match.params.id)}
+            submitData={this.editToDo.bind(this, props.match.params.id)}
             showEditForm={this.showEditForm.bind(this, props.match.params.id)}
             isEditSelected={targetTodo.isEditSelected}
-            // {...props}
           />
         </div>
       );
     };
 
-    // if we shoudl redirect, in your del method:
-    //    - setState({redirect: true})
-
-    // if your app/render
-    //  if this.state.redirect:
-    //     this.setState(redirect: false)
-    //     return <Redirect to="/todos" />
-    //  else:
-    //     normal return
     {
       if (this.state.redirect) {
         this.setState(prevState => {
@@ -150,55 +139,8 @@ class App extends Component {
     return (
       <Switch>
         <Route path="/todos" exact render={renderTodoList} />
-        <Route path="/todos/new" render={renderTodoForm} />
-        <Route
-          path="/todos/:id"
-          render={renderSingleTodo}
-          // render={props => {
-          //   //debugger;
-          //   const targetTodo = this.state.todos.filter(
-          //     (todo, i) => +props.match.params.id === i
-          //   )[0];
-          //   return (
-          //     <div className="App">
-          //       <h1>Dragon Todo List</h1>
-          //       <Link to="/todos">Back To All Todos</Link>
-          //       <Todo
-          //         // key={i}
-          //         //so i can render show and edit routes
-          //         // id={i}
-          //         title={targetTodo.title}
-          //         description={targetTodo.description}
-          //         isCompleted={targetTodo.isCompleted}
-          //         markAsComplete={this.markAsComplete.bind(
-          //           this,
-          //           props.match.params.id
-          //         )}
-          //         // markAsComplete={this.markAsComplete.bind(
-          //         //   this,
-          //         //   props.match.params.id
-          //         // )}
-          //         removeToDo={this.removeToDo.bind(this, props.match.params.id)}
-          //         // editToDo={this.state.editToDo.bind(
-          //         //   this,
-          //         //   props.match.params.id
-          //         // )}
-          //         // showEditForm={this.state.showEditForm.bind(
-          //         //   this,
-          //         //   props.match.params.id
-          //         // )}
-          //         // isEditSelected={targetTodo.isEditSelected}
-          //         todo={
-          //           this.state.todos.filter(
-          //             (todo, i) => props.match.params.id === i
-          //           )[0]
-          //           // {...props}
-          //         }
-          //       />
-          //     </div>
-          //   );
-          // }}
-        />
+        <Route path="/todos/new" render={renderNewTodoForm} />
+        <Route path="/todos/:id" render={renderSingleTodo} />
         <Route
           path="/todos/:id/edit"
           render={() => {
