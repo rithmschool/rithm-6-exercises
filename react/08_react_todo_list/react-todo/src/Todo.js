@@ -74,7 +74,11 @@ class Todo extends Component {
         <button onClick={removeToDo}>Delete</button>
         <button onClick={showEditForm}>Change</button>
         {isEditSelected ? (
-          <NewToDoForm submitData={this.props.submitData} />
+          <NewToDoForm
+            title={title}
+            description={description}
+            submitData={this.props.submitData}
+          />
         ) : null}
 
         {/* // <form onSubmit={this.handleSubmit}>

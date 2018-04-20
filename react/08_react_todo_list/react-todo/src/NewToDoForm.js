@@ -13,6 +13,8 @@ class NewToDoForm extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('in getDerivedState');
+    debugger;
     return {
       title: nextProps.title,
       description: nextProps.description
