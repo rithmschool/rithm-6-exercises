@@ -27,7 +27,6 @@ class App extends Component {
 
   addToDo(newTodo) {
     console.log('adding todo');
-    ////debugger;
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
     });
@@ -46,7 +45,6 @@ class App extends Component {
 
   editToDo(id, editedTodo) {
     console.log('in edit to do');
-    //debugger;
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[id] = {
@@ -98,8 +96,6 @@ class App extends Component {
         <div className="App">
           <h1>Dragon Todo List</h1>
           <NewToDoForm submitData={this.addToDo} />
-          {/* <TodoForm handleSubmit={this.addTodo} */}
-          {/* <TodoForm handleSubmit={this.edito} */}
         </div>
       );
     };

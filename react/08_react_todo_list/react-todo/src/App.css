@@ -45,21 +45,14 @@ a:hover {
 .App {
   margin: auto;
   max-width: 300px;
-  /* max-width: 400px; */
   background-color: #ff6666;
-  /* padding: 40px; */
   color: white;
   font-family: 'Quicksand', sans-serif;
   font-size: 12px;
-  /* font-size: 18px; */
 }
 
 .Todo {
   padding: 10px 40px 25px 40px;
-}
-
-.Completed {
-  backgroundcolor: 'green';
 }
 
 .TodoForm {
