@@ -36,3 +36,7 @@ export default class NewTodoForm extends Component {
   }
 
 }
+
+NewTodoForm.propTypes = {
+  handleAdd: PropTypes.func
+};

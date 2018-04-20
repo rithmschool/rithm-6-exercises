@@ -61,5 +61,11 @@ export default class Todo extends Component {
 
 Todo.propTypes = {
   title: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  className: PropTypes.string,
+  isEditing: PropTypes.string,
+  handleEdit: PropTypes.func,
+  handleDelete: PropTypes.func,
+  handleComplete: PropTypes.func,
+  handleEditRequest: PropTypes.func
 };
