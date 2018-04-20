@@ -16,9 +16,15 @@ const Itodo = ({
     <div>
       <h1 className={finished ? "finished" : ""}>{title}</h1>
       <h2 className={finished ? "finished" : ""}>{desc}</h2>
-      <button onClick={handleRemove}>X</button>
-      <button onClick={updateStatus}>{btnValue}</button>
-      <button onClick={handleEdit}>Edit Todo</button>
+      <button className="btn" onClick={handleRemove}>
+        X
+      </button>
+      <button className="btn" onClick={updateStatus}>
+        {btnValue}
+      </button>
+      <button className="btn" onClick={handleEdit}>
+        Edit Todo
+      </button>
       {/* <button onClick={showToDo}>ShowToDo</button> */}
     </div>
   );

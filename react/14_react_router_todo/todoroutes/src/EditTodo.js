@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import "./EditTodo.css";
 
 class EditTodoForm extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class EditTodoForm extends Component {
             // placeholder="Enter A Description"
           />
           <label>Enter A Description</label>
-          <input type="Submit" />
+          <input className="btn" type="Submit" />
         </form>
       </div>
     );

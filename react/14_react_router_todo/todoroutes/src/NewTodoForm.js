@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import "./NewTodoForm.css";
 
 class NewTodoForm extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class NewTodoForm extends Component {
             placeholder="Enter A Description"
           />
           <label>Enter A Description</label>
-          <input type="submit" />
+          <input className="btn" type="submit" />
         </form>
         <Link to="/">Go Home</Link>
       </div>
