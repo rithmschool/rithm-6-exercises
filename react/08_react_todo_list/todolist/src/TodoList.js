@@ -1,78 +1,28 @@
-import React, { Component } from 'react';
-import Todo from './Todo';
-import NewTodoForm from './NewTodoForm';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [
-        { name: 'code', description: 'finish homework', isEditing: false }
-      ]
-    };
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-  }
-
-  handleAdd(newTodoName) {
-    const newTodo = { name: newTodoName, isEditing: false };
-    this.setState(prevState => ({
-      todos: [newTodo, ...prevState.todos]
-    }));
-  }
-
-  handleEdit(idx, editedTodo) {
-    const edited = { name: editedTodo, isEditing: false };
-    this.setState(prevState => {
-      const newTodos = [...prevState.todos];
-      newTodos[idx] = edited;
-      return { todos: newTodos };
-    });
-  }
-
-  handleRemove(idx) {
-    const { todos } = this.state;
-    // todos.slice(0, idx).concat(todos.slice(idx + 1)); below is the same
-    const remainingTodos = todos.filter((val, i) => i !== idx);
-    this.setState({
-      todos: remainingTodos
-    });
-  }
-
-  toggleEdit(idx) {
-    const { todos } = this.state;
-    const updatedTodos = todos.map((todo, i) => {
-      if (i === idx) {
-        todo.isEditing = !todo.isEditing;
-      }
-      return todo;
-    });
-    this.setState({
-      todos: updatedTodos
-    });
-  }
-
-  render() {
-    let todos = this.state.todos.map((todo, idx) => (
-      <Todo
-        handleEdit={this.handleEdit.bind(this, idx)}
-        editTodo={this.toggleEdit.bind(this, idx)}
-        removeTodo={this.handleRemove.bind(this, idx)}
-        todo={todo}
-        key={idx}
-      />
-    ));
-
-    return (
+const TodoList = ({ todos }) => {
+  // fixme : todos is an array of todo objs
+  //  todos.map(todo => <li ... todo.name />)
+  const todoLinks = todos.map(todo => (
+    <li key={todo.name}>
+      <Link to={`/todos:${todo.name}`}>{todo.name}</Link>
+    </li>
+  ));
+  return (
+    <div className="TodoList">
+      <header>
+        <h1>Things I have to do:</h1>
+        <h2>
+          <Link to="/todos/new">Add a new todo</Link>
+        </h2>
+      </header>
       <div>
-        Add new todo:
-        <NewTodoForm handleAdd={this.handleAdd} />
-        <br />
-        {todos}
+        <p>Check off your list!</p>
+        <ul>{todoLinks}</ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default TodoList;
