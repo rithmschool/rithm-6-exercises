@@ -79,7 +79,9 @@ class Todo extends Component {
         <button onClick={removeToDo}>Delete</button>
         <button>
           {/* Change */}
-          <Link to={`/todos/${id}/edit`}>Change</Link>
+          <Link className="EditFormLink" to={`/todos/${id}/edit`}>
+            Change
+          </Link>
         </button>
         {/* <button
           onClick={() => {
