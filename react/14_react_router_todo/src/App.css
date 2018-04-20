@@ -31,11 +31,12 @@
   width: 600px;
 }
 
-li {
+li, li a {
   transition: all .5s linear;
+  color: black;
 }
 
-li.completed {
+li.completed, li.completed a {
   text-decoration: line-through;
   color: #707070;
 }
