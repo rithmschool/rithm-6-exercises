@@ -36,6 +36,7 @@ class Todo extends Component {
   editFormRedirect() {}
 
   render() {
+    console.log('rendering todo from todo');
     const {
       title,
       description,
@@ -43,17 +44,17 @@ class Todo extends Component {
       markAsComplete,
       removeToDo,
       showEditForm,
-      editToDo,
+      // editToDo,
       isEditSelected,
       id
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
     // if (isEditSelected) {
-    //   //debugger;;;
+    //   ////debugger;;;
     //   this.props.history.push(`/todo/${this.props.match.params.id}`);
     // }
-    // debugger;
+    //debugger;
     return (
       <div
         className="Todo"
@@ -90,13 +91,13 @@ class Todo extends Component {
           Change
         </button> */}
         {/* <button onClick={showEditForm}>Change</button> */}
-        {isEditSelected ? (
+        {/* {isEditSelected ? (
           <NewToDoForm
             title={title}
             description={description}
-            submitData={this.props.submitData}
+            submitData={this.props.submitData.bind(this, id)}
           />
-        ) : null}
+        ) : null} */}
       </div>
     );
   }

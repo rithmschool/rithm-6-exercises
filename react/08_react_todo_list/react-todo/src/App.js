@@ -27,7 +27,7 @@ class App extends Component {
 
   addToDo(newTodo) {
     console.log('adding todo');
-    //debugger;
+    ////debugger;
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
     });
@@ -46,7 +46,7 @@ class App extends Component {
 
   editToDo(id, editedTodo) {
     console.log('in edit to do');
-    debugger;
+    //debugger;
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[id] = {
@@ -92,6 +92,8 @@ class App extends Component {
     };
 
     const renderNewTodoForm = props => {
+      console.log('rendering form from app.js');
+      //debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -103,19 +105,22 @@ class App extends Component {
     };
 
     const renderEditForm = props => {
+      console.log('rendering edit form');
+      //debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
           <p>Edit Todo</p>
-          {/* not sure if this is right handler */}
-          <NewToDoForm submitData={this.editToDo} />
+          <NewToDoForm
+            submitData={this.editToDo.bind(this, props.match.params.id)}
+          />
         </div>
       );
     };
 
     //i'll end up ignoring props
     const renderSingleTodo = props => {
-      //////debugger;;;
+      ////////debugger;;;
       const targetTodo = this.state.todos.filter(
         (todo, i) => +props.match.params.id === i
       )[0];
