@@ -7,6 +7,70 @@
     <title>Document</title>
 </head>
 <body>
+  <div>
+    <h1>How are you feeling today?</h1>
+    <h2 id="mood"></h3>
+      <button id="happy">HAPPY</button>
+      <button id="sad">SAD</button>
+      <button id="angry">ANGRY</button>
+      <button id="confused">CONFUSED</button>
+  </div>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+    <script>
+    const INITIAL_STATE = {
+      mood: ''
+    }
+
+    function rootReducer(state=INITIAL_STATE, action) {
+      switch(action.type) {
+        case "HAPPY":
+          state.mood = "(≧▽≦)"
+          return state
+        case "SAD":
+          state.mood = "(╥_╥)"
+          return state
+        case "ANGRY":
+          state.mood = "(╬ಠ益ಠ)"
+          return state
+        case "CONFUSED":
+          state.mood = "(⊙＿⊙)"
+          return state
+        default:
+          return state
+      }
+    }
+
+    var store = Redux.createStore(rootReducer);
+
+    $(document).ready(function() {
+      let currentState = store.getState();
+      let $mood = $("#mood");
+      $mood.text(currentState.mood);
+      let updatedMood = store.getState();
+
+      $("#happy").on("click", function() {
+        store.dispatch({type: "HAPPY"});
+        $mood.text(updatedMood.mood);
+      });
+
+      $("#sad").on("click", function () {
+        store.dispatch({ type: "SAD" });
+        $mood.text(updatedMood.mood);
+      });
+
+      $("#angry").on("click", function () {
+        store.dispatch({ type: "ANGRY" });
+        $mood.text(updatedMood.mood);
+      });
+
+      $("#confused").on("click", function () {
+        store.dispatch({ type: "CONFUSED" });
+        $mood.text(updatedMood.mood);
+      });
+
+    })
+    </script>
 </body>
 </html>
