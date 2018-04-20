@@ -8,5 +8,93 @@
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script>
+      //create store object, pass in root reducer
+      var store = Redux.createStore(rootReducer)
+      //test if it works
+      // store.dispatch({ type: "ZEN_AF" })
+      // console.log(store.getState());
+      // store.dispatch({ type: "QUIT" })
+      // console.log(store.getState());
+      // store.dispatch({ type: "VICTORY" })
+      // console.log(store.getState());
+      // store.dispatch({ type: "UNIMPRESSED" })
+      // console.log(store.getState());
+
+      //will handle all dispatches we send to store
+      function rootReducer(state = "◕‿◕", action) {
+          let newState = state.slice()
+          switch (action.type) {
+            case "ZEN":
+              newState = "╭∩╮（︶︿︶）╭∩╮"
+              return newState
+            case "QUIT":
+              newState = "ヽ༼ ツ ༽ﾉ ︵┻━┻"
+              return newState
+            case "VICTORY":
+              newState = "✌(◔౪◔ ) ✌"
+              return newState
+            case "UNIMPRESSED":
+              newState = "@(･ェ･) @"
+              return newState
+            default:
+              return state
+          }
+        }
+
+        $(document).ready(function () {
+            // get the state from redux
+            console.log('jquery starting');
+            let currentState = store.getState();
+            let $displayFace = $("#displayFace");
+            $displayFace.text(currentState);
+
+            $("#zen").on("click", function () {
+              console.log('zen');
+              store.dispatch({ type: "ZEN" });
+              let updatedState = store.getState();
+              $displayFace.text(updatedState);
+            });
+
+            $("#quit").on("click", function () {
+              console.log('quit');
+              store.dispatch({ type: "QUIT" });
+              let updatedState = store.getState();
+              $displayFace.text(updatedState);
+            });
+
+            $("#victory").on("click", function () {
+              console.log('victory');
+              store.dispatch({ type: "VICTORY" });
+              let updatedState = store.getState();
+              $displayFace.text(updatedState);
+            });
+
+            $("#unimpressed").on("click", function () {
+              console.log('unimpressed');
+              store.dispatch({ type: "UNIMPRESSED" });
+              let updatedState = store.getState();
+              $displayFace.text(updatedState);
+            });
+          });
+    </script>
+
+    <div class="container">
+      <h1>Faces of Truth</h1>
+      <main>
+        <div>
+          <p id='displayFace'></p>
+        </div>
+        <button id='zen'>Zen af</button>
+        <button id='quit'>F Everything</button>
+        <button id='victory'>Achieve Victory</button>
+        <button id='unimpressed'>Unimpressed Monkey</button>
+      </main>
+    </div>
+
+
+
+
 </body>
 </html>
