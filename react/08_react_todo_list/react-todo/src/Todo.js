@@ -45,13 +45,15 @@ class Todo extends Component {
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';
-    // //debugger;
+    // if (isEditSelected) {
+    //   debugger;
+    //   this.props.history.push(`/todo/${this.props.match.params.id}`);
+    // }
     return (
       <div
         className="Todo"
         style={isCompleted ? { backgroundColor: 'rgba(68, 57, 57, .5)' } : {}}
       >
-        {/* so i can render show and edit routes */}
         {this.props.id !== undefined ? (
           <Link
             style={isCompleted ? { textDecoration: 'line-through' } : {}}
@@ -64,13 +66,9 @@ class Todo extends Component {
             Title: {title}
           </p>
         )}
-        {/* <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
-          Title: {title}
-        </p> */}
         <p style={isCompleted ? { textDecoration: 'line-through' } : {}}>
           Description: {description}
         </p>
-        {/* <p>Is Completed: {isCompleted ? 'True' : 'False'}</p> */}
         <button onClick={markAsComplete}>{completionText}</button>
         <button onClick={removeToDo}>Delete</button>
         <button onClick={showEditForm}>Change</button>

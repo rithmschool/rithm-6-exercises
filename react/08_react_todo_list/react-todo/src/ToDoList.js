@@ -14,7 +14,7 @@ class TodoList extends Component {
             title={title}
             description={description}
             isCompleted={isCompleted}
-            markAsComplete={this.props.markAsComplete.bind(this, i)}
+            markAsComplete={idx => this.props.markAsComplete(i)}
             removeToDo={this.props.removeToDo.bind(this, i)}
             editToDo={this.props.editToDo.bind(this, i)}
             showEditForm={this.props.showEditForm.bind(this, i)}

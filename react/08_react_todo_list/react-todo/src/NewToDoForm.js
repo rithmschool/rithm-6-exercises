@@ -17,7 +17,7 @@ class NewToDoForm extends Component {
     this.props.addToDo({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
-    this.props.history.push('/todo');
+    this.props.history.push('/');
   }
 
   handleChange(e) {
@@ -30,7 +30,7 @@ class NewToDoForm extends Component {
     return (
       <div>
         <Link to="/todos">Back To All Todos</Link>
-        <form onSubmit={this.handleSubmit}>
+        <form className="TodoForm" onSubmit={this.handleSubmit}>
           <div className="inputWrapper">
             <label htmlFor="title">Title: </label>
             <input
