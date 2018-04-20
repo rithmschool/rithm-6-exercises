@@ -24,10 +24,6 @@ class NewToDoForm extends Component {
   handleSubmit(e) {
     console.log('handling submit');
     e.preventDefault();
-    //for add to do, i pass the whole state object, nothing else
-    // this.props.addToDo({ ...this.state });
-    debugger;
-
     this.props.submitData({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
@@ -41,8 +37,6 @@ class NewToDoForm extends Component {
   }
 
   render() {
-    //standard js goes here!
-    //debugger;;;
     return (
       <div>
         <Link to="/todos">Back To All Todos</Link>
