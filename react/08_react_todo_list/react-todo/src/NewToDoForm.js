@@ -13,8 +13,6 @@ class NewToDoForm extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('in getDerivedState');
-    ////debugger;
     return {
       title: nextProps.title,
       description: nextProps.description
@@ -22,12 +20,11 @@ class NewToDoForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log('handling submit');
-    //debugger;
     e.preventDefault();
     this.props.submitData({ ...this.state });
     this.setState({ title: '', description: '' });
     e.target.reset();
+    //why am I using this over a redirect?
     this.props.history.push('/todo');
   }
 
@@ -38,8 +35,6 @@ class NewToDoForm extends Component {
   }
 
   render() {
-    console.log('in form');
-    // //debugger;
     return (
       <div>
         <Link to="/todos">Back To All Todos</Link>

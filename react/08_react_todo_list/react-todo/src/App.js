@@ -82,7 +82,6 @@ class App extends Component {
             removeToDo={this.removeToDo}
             editToDo={this.editToDo}
             showEditForm={this.showEditForm}
-            isEditSelected={this.isEditSelected}
             todos={this.state.todos}
           />
         </div>
@@ -90,8 +89,6 @@ class App extends Component {
     };
 
     const renderNewTodoForm = props => {
-      console.log('rendering form from app.js');
-      //debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -101,8 +98,6 @@ class App extends Component {
     };
 
     const renderEditForm = props => {
-      console.log('rendering edit form');
-      //debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -114,9 +109,7 @@ class App extends Component {
       );
     };
 
-    //i'll end up ignoring props
     const renderSingleTodo = props => {
-      ////////debugger;;;
       const targetTodo = this.state.todos.filter(
         (todo, i) => +props.match.params.id === i
       )[0];
@@ -134,8 +127,6 @@ class App extends Component {
             )}
             removeToDo={this.removeToDo.bind(this, props.match.params.id)}
             submitData={this.editToDo.bind(this, props.match.params.id)}
-            //refactor so now i?
-            //instead get index in App.js when processing?
             showEditForm={this.showEditForm.bind(this, props.match.params.id)}
             isEditSelected={targetTodo.isEditSelected}
           />
