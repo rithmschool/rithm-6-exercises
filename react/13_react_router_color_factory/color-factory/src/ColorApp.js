@@ -39,18 +39,35 @@ class App extends Component {
         <Switch>
           <Route
             path="/new"
-            render={routeProps => <ColorForm handleAdd={this.handleAdd} />}
+            render={
+              routeProps => 
+                <ColorForm 
+                  handleAdd={this.handleAdd} 
+                />
+            }
           />
           <Route
             path="/colors"
             exact
-            render={routeProps => (
-              <ColorList colorData={this.state.colors} {...routeProps} />
-            )}
+            render={
+              routeProps => (
+                <ColorList 
+                  colorData={this.state.colors} 
+                  {...routeProps} 
+                />)
+            }
           />
-          <Route path="/colors/:color" exact render={routeProps => (
-              <ColorPage colorData={this.state.colors} {...routeProps}/>
-          )}/>
+          <Route 
+            path="/colors/:color" 
+            exact 
+            render={
+              routeProps => (
+                <ColorPage 
+                  colorData={this.state.colors} 
+                  {...routeProps}
+                />)
+            }
+          />
 
           <Redirect to="/colors" />
         </Switch>
