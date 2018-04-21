@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-let idCounter = 4;
+let idCounter = 5;
 class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
-      deadline: ''
+      deadline: '',
+      id: idCounter,
+      being_edited: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +22,6 @@ class NewTodoForm extends Component {
     e.preventDefault();
     console.log(this.state);
     idCounter++;
-    this.setState({ deadline: idCounter });
     this.props.handleAdd(this.state);
     this.setState({ title: '', deadline: '' });
     this.props.history.push('/');
@@ -41,7 +42,7 @@ class NewTodoForm extends Component {
           type="text"
           name="deadline"
         />
-        <input type="submit" value="Create a new color" />
+        <input type="submit" value="Create a new todo" />
       </form>
     );
   }

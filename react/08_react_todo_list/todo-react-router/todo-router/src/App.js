@@ -3,8 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import NewTodoForm from './newTodoForm.js';
 import TodoList from './TodoList.js';
+import EditTodoForm from './EditTodoForm.js';
 import TodoShowPage from './TodoShowPage.js';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +35,9 @@ class App extends Component {
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleAdd(newTodo) {
@@ -42,43 +46,97 @@ class App extends Component {
     }));
   }
 
-  removeTodo(index) {
-    let array = this.state.todos;
-    array.splice(index, 1);
+  handleEdit(id) {
+    this.setState(prevState => {
+      let newTodos = prevState.todos;
+      let foundTodo = (newTodos.filter(function(todo) {
+        return todo.id === parseInt(id);
+      })[0]['being_edited'] = true);
+      let updatedTodos = newTodos.map(function(todo) {
+        if (todo.id === foundTodo.id) {
+          return foundTodo[0];
+        } else {
+          return todo;
+        }
+      });
+      return { todos: updatedTodos };
+    });
+  }
+
+  handleEditSubmit(editedTodo, id) {
+    this.setState(prevState => {
+      let newTodos = prevState.todos;
+      let updatedTodos = newTodos.map(function(todo) {
+        if (todo.id === parseInt(id)) {
+          return editedTodo;
+        } else {
+          return todo;
+        }
+      });
+      return { todos: updatedTodos };
+    });
+  }
+
+  handleDelete(id) {
+    let newTodos = this.state.todos.filter(function(todo) {
+      return todo.id !== parseInt(id);
+    });
     this.setState(prevState => ({
-      todos: array
+      todos: newTodos
     }));
   }
 
   render() {
     return (
       <div>
-        <div>
-          <Link to="/new">Add a New Todo</Link>
-          <TodoList allTodos={this.state.todos} />
-        </div>
-        <div>
+        <Switch>
           <Route
-            path="/new"
+            path="/todos/:todo_id/edit"
+            exact
+            component={props => (
+              <EditTodoForm
+                handleEditSubmit={this.handleEditSubmit}
+                todo_id={props.match.params.todo_id}
+                title={
+                  this.state.todos.filter(function(todo) {
+                    return todo.id === parseInt(props.match.params.todo_id);
+                  })[0].title
+                }
+                deadline={
+                  this.state.todos.filter(function(todo) {
+                    return todo.id === parseInt(props.match.params.todo_id);
+                  })[0].deadline
+                }
+              />
+            )}
+          />
+          <Route
+            path="/todos/new"
             exact
             component={props => <NewTodoForm handleAdd={this.handleAdd} />}
           />
-
           <Route
-            path="/:todo_id"
+            path="/todos/:todo_id"
             exact
             component={props => (
               <TodoShowPage
+                handleDelete={this.handleDelete}
+                handleEdit={this.handleEdit}
                 title={
-                  this.state.todos.filter(
-                    todo => todo.id === props.match.params.todo_id
-                  )[0].title
+                  this.state.todos.filter(function(todo) {
+                    return todo.id === parseInt(props.match.params.todo_id);
+                  })[0].title
                 }
                 todo_id={props.match.params.todo_id}
               />
             )}
           />
-        </div>
+          <Route
+            path="/"
+            exact
+            component={props => <TodoList allTodos={this.state.todos} />}
+          />
+        </Switch>
       </div>
     );
   }
