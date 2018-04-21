@@ -19,13 +19,14 @@ class NewColorForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.handleAddColor(this.state);
+    this.setState({ color: "", code: "" });
     this.props.history.push("/colors");
   }
 
   render() {
     return (
       <div>
-        <form onClick={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} type="text" name="color" />
           <input onChange={this.handleChange} type="color" name="code" />
           <input type="submit" value="Create a new color" />
