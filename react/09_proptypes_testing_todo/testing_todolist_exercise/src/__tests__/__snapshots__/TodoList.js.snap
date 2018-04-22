@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList /> matches snapshot 1`] = `
+<div>
+  <NewTodoForm
+    handleAdd={[Function]}
+  />
+  <ol>
+    <Todo
+      description="Grocery Store"
+      handleComplete={[Function]}
+      handleDelete={[Function]}
+      handleEdit={[Function]}
+      handleEditRequest={[Function]}
+      isEditing={false}
+      title="Buy ice cream"
+    />
+    <Todo
+      description="Dinner Plans"
+      handleComplete={[Function]}
+      handleDelete={[Function]}
+      handleEdit={[Function]}
+      handleEditRequest={[Function]}
+      isEditing={false}
+      title="Order pizza"
+    />
+    <Todo
+      description="Fitness Routine"
+      handleComplete={[Function]}
+      handleDelete={[Function]}
+      handleEdit={[Function]}
+      handleEditRequest={[Function]}
+      isEditing={false}
+      title="Walk 20 miles"
+    />
+  </ol>
+</div>
+`;
