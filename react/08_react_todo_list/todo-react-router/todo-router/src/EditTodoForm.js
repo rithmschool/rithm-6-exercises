@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+const uuidv4 = require('uuid/v4');
 class TodoForm extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +8,7 @@ class TodoForm extends Component {
       title: this.props.title,
       deadline: this.props.deadline,
       completed: false,
-      id: parseInt(this.props.todo_id)
+      id: this.props.todo_id
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

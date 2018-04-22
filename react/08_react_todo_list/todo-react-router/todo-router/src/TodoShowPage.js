@@ -9,7 +9,6 @@ class TodoShow extends Component {
     this.deleteTodo = this.deleteTodo.bind(this);
   }
   editTodo(e) {
-    console.log(this.props.todo_id);
     this.props.handleEdit(this.props.todo_id);
   }
 

@@ -10,29 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        {
-          title: 'Walk the Dog',
-          id: 1,
-          deadline: '3pm',
-          completed: '',
-          being_edited: false
-        },
-        {
-          title: 'Take Out the trash',
-          id: 2,
-          deadline: '3pm',
-          completed: '',
-          being_edited: false
-        },
-        {
-          title: 'Go To Dinner',
-          id: 3,
-          deadline: '3pm',
-          completed: '',
-          being_edited: false
-        }
-      ]
+      todos: []
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -49,15 +27,11 @@ class App extends Component {
   handleEdit(id) {
     this.setState(prevState => {
       let newTodos = prevState.todos;
-      let foundTodo = (newTodos.filter(function(todo) {
-        return todo.id === parseInt(id);
+      let foundTodo = (newTodos.filter(todo => {
+        return todo.id === id;
       })[0]['being_edited'] = true);
-      let updatedTodos = newTodos.map(function(todo) {
-        if (todo.id === foundTodo.id) {
-          return foundTodo[0];
-        } else {
-          return todo;
-        }
+      let updatedTodos = newTodos.map(todo => {
+        return todo.id === foundTodo.id ? foundTodo[0] : todo;
       });
       return { todos: updatedTodos };
     });
@@ -66,20 +40,16 @@ class App extends Component {
   handleEditSubmit(editedTodo, id) {
     this.setState(prevState => {
       let newTodos = prevState.todos;
-      let updatedTodos = newTodos.map(function(todo) {
-        if (todo.id === parseInt(id)) {
-          return editedTodo;
-        } else {
-          return todo;
-        }
+      let updatedTodos = newTodos.map(todo => {
+        return todo.id === id ? editedTodo : todo;
       });
       return { todos: updatedTodos };
     });
   }
 
   handleDelete(id) {
-    let newTodos = this.state.todos.filter(function(todo) {
-      return todo.id !== parseInt(id);
+    let newTodos = this.state.todos.filter(todo => {
+      return todo.id !== id;
     });
     this.setState(prevState => ({
       todos: newTodos
@@ -98,13 +68,13 @@ class App extends Component {
                 handleEditSubmit={this.handleEditSubmit}
                 todo_id={props.match.params.todo_id}
                 title={
-                  this.state.todos.filter(function(todo) {
-                    return todo.id === parseInt(props.match.params.todo_id);
+                  this.state.todos.filter(todo => {
+                    return todo.id === props.match.params.todo_id;
                   })[0].title
                 }
                 deadline={
-                  this.state.todos.filter(function(todo) {
-                    return todo.id === parseInt(props.match.params.todo_id);
+                  this.state.todos.filter(todo => {
+                    return todo.id === props.match.params.todo_id;
                   })[0].deadline
                 }
               />
@@ -123,8 +93,8 @@ class App extends Component {
                 handleDelete={this.handleDelete}
                 handleEdit={this.handleEdit}
                 title={
-                  this.state.todos.filter(function(todo) {
-                    return todo.id === parseInt(props.match.params.todo_id);
+                  this.state.todos.filter(todo => {
+                    return todo.id === props.match.params.todo_id;
                   })[0].title
                 }
                 todo_id={props.match.params.todo_id}

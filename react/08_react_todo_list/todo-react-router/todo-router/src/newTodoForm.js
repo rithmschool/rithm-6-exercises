@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-let idCounter = 5;
+const uuidv4 = require('uuid/v4');
+
 class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       deadline: '',
-      id: idCounter,
+      id: uuidv4(),
       being_edited: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,8 +21,6 @@ class NewTodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
-    idCounter++;
     this.props.handleAdd(this.state);
     this.setState({ title: '', deadline: '' });
     this.props.history.push('/');
