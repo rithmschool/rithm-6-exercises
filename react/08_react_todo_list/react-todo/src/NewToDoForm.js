@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-tylpes';
 
 class NewToDoForm extends Component {
   constructor(props) {
@@ -63,5 +64,11 @@ class NewToDoForm extends Component {
     );
   }
 }
+
+NewToDoForm.PropTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  submitData: PropTypes.func
+};
 
 export default withRouter(NewToDoForm);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import NewToDoForm from './NewToDoForm';
+import PropTypes from 'prop-tylpes';
 
 class Todo extends Component {
   constructor(props) {
@@ -77,4 +78,15 @@ class Todo extends Component {
     );
   }
 }
+
+Todo.PropTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  isCompleted: PropTypes.boolean,
+  isEditSelected: PropTypes.boolean,
+  markAsComplete: PropTypes.func,
+  removeToDo: PropTypes.func,
+  submitData: PropTypes.func
+};
+
 export default Todo;

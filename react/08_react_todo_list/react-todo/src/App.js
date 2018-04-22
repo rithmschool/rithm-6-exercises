@@ -4,6 +4,7 @@ import './App.css';
 import NewToDoForm from './NewToDoForm';
 import ToDoList from './ToDoList';
 import Todo from './Todo';
+import PropTypes from 'prop-types';
 
 class App extends Component {
   constructor(props) {
@@ -175,6 +176,10 @@ App.defaultProps = {
       description: 'hang out with my mom.'
     }
   ]
+};
+
+App.PropTypes = {
+  Todos: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default App;
