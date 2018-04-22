@@ -15,7 +15,7 @@ export default class TodoList extends Component {
       return (
         <div>
           <div>
-            <Link to={`/todos/${todo.id}`}>
+            <Link className={this.props.className} to={`/todos/${todo.id}`}>
               {todo.title} by {todo.deadline}{' '}
             </Link>
           </div>

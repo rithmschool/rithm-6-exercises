@@ -15,6 +15,7 @@ class App extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
+
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -104,7 +105,13 @@ class App extends Component {
           <Route
             path="/"
             exact
-            component={props => <TodoList allTodos={this.state.todos} />}
+            component={props => (
+              <TodoList
+                handleCompleted={this.handleCompleted}
+                className={this.completed}
+                allTodos={this.state.todos}
+              />
+            )}
           />
         </Switch>
       </div>

@@ -16,6 +16,7 @@ class TodoShow extends Component {
     this.props.handleDelete(this.props.todo_id);
     this.props.history.push('/');
   }
+
   render() {
     return (
       <div>
@@ -29,6 +30,7 @@ class TodoShow extends Component {
               Edit this todo
             </Link>
             <button onClick={this.deleteTodo}>Delete this todo</button>
+            <button>Mark as finished</button>
           </div>
         </div>
 

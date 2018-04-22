@@ -9,7 +9,8 @@ class NewTodoForm extends Component {
       title: '',
       deadline: '',
       id: uuidv4(),
-      being_edited: false
+      being_edited: false,
+      completed: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
