@@ -79,13 +79,13 @@ class Todo extends Component {
 }
 
 Todo.PropTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   isCompleted: PropTypes.boolean,
   isEditSelected: PropTypes.boolean,
-  markAsComplete: PropTypes.func,
-  removeToDo: PropTypes.func,
-  submitData: PropTypes.func
+  markAsComplete: PropTypes.func.isRequired,
+  removeToDo: PropTypes.func.isRequired,
+  submitData: PropTypes.func.isRequired
 };
 
 export default Todo;

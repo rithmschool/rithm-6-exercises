@@ -178,7 +178,7 @@ App.defaultProps = {
 };
 
 App.PropTypes = {
-  Todos: PropTypes.arrayOf(PropTypes.object)
+  Todos: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default App;

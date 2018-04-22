@@ -28,15 +28,15 @@ class TodoList extends Component {
 }
 
 TodoList.PropTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   isCompleted: PropTypes.boolean,
   isEditSelected: PropTypes.boolean,
-  markAsComplete: PropTypes.func,
-  removeToDo: PropTypes.func,
-  addToDo: PropTypes.func,
-  editToDo: PropTypes.func,
-  showEditForm: PropTypes.func
+  markAsComplete: PropTypes.func.isRequired,
+  removeToDo: PropTypes.func.isRequired,
+  addToDo: PropTypes.func.isRequired,
+  editToDo: PropTypes.func.isRequired,
+  showEditForm: PropTypes.func.isRequired
 };
 
 export default TodoList;
