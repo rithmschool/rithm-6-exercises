@@ -1,13 +1,19 @@
-// "Mango: King of all Fruits"
-
-// "Mangoes Eaten";
-
 import React, { Component } from "react";
-import "./Mango.css";
+import mangoes from "./mangoes.jpg";
+import "./VendingMachine.css";
 
 class Mango extends Component {
   render() {
-    return <div>Mango: King of all Fruits</div>;
+    return (
+      <div>
+        <h2>King of all fruits</h2>
+        <h5>Mangoes Eaten:</h5>
+        <div
+          className="VendingMachine"
+          style={{ backgroundImage: `url(${mangoes})` }}
+        />
+      </div>
+    );
   }
 }
 
