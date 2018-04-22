@@ -63,7 +63,7 @@ Todo.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   className: PropTypes.string,
-  isEditing: PropTypes.string,
+  isEditing: PropTypes.bool,
   handleEdit: PropTypes.func,
   handleDelete: PropTypes.func,
   handleComplete: PropTypes.func,

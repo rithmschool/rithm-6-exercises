@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Todo /> matches snapshot 1`] = `
+<Todo>
+  <li
+    className="todo undefined"
+  >
+    <p>
+      Title: 
+    </p>
+    <p>
+      Description: 
+    </p>
+    <button>
+      Mark/Unmark as Complete
+    </button>
+    <button>
+      Delete Item
+    </button>
+  </li>
+</Todo>
+`;
