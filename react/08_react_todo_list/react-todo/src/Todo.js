@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import NewToDoForm from './NewToDoForm';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Todo extends Component {

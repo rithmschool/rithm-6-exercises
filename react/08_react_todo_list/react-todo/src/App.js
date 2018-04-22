@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import NewToDoForm from './NewToDoForm';
 import ToDoList from './ToDoList';
@@ -135,16 +135,15 @@ class App extends Component {
       );
     };
 
-    {
-      if (this.state.redirect) {
-        this.setState(prevState => {
-          let newState = { ...prevState };
-          newState.redirect = false;
-          return { ...newState };
-        });
-        return <Redirect to="/todos" />;
-      }
+    if (this.state.redirect) {
+      this.setState(prevState => {
+        let newState = { ...prevState };
+        newState.redirect = false;
+        return { ...newState };
+      });
+      return <Redirect to="/todos" />;
     }
+
     return (
       <Switch>
         <Route path="/todos" exact render={renderTodoList} />

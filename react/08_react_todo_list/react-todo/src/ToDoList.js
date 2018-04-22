@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
-import NewToDoForm from './NewToDoForm';
 import PropTypes from 'prop-types';
 
 class TodoList extends Component {
