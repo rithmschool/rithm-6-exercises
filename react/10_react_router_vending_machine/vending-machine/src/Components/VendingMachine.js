@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import vending from "./vending.jpg";
 import "./VendingMachine.css";
 
