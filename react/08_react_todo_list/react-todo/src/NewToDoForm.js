@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import PropTypes from 'prop-tylpes';
+import PropTypes from 'prop-types';
 
 class NewToDoForm extends Component {
   constructor(props) {
