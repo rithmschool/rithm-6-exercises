@@ -48,7 +48,7 @@ const TodoList = ({
   handleEdit,
   handleIsCompleted,
   handleDelete,
-  setUpdate
+  handleSetUpdate
 }) => {
   let todoListItems = todos.map((todo, i) => {
     let completedTask = todo.isCompleted ? "completed__look" : "";
@@ -64,20 +64,21 @@ const TodoList = ({
     if (todo.isEditing === true) {
       return (
         <EditTodoForm
-          // key={i}
+          key={i}
+          id={i}
           // title={todo.title}
           // idx={todo.idx}
           // isCompleted={todo.isCompleted}
           // isEditing={todo.isEditing}
-          todos={this.state.todos}
-          setUpdate={this.handleSetUpdate.bind(this, i)}
-          handleEdit={this.handleEdit.bind(this, i)}
+          todo={todo}
+          handleSetUpdate={handleSetUpdate.bind(this, i)}
+          handleEdit={handleEdit.bind(this, i)}
         />
       );
     } else {
       return (
         <li className={completedTask}>
-          {todo.title}.{" "}
+          Title: {todo.title}. Description: {todo.description},{" "}
           <button
             onClick={handleEdit.bind(this, i)}
             className="edit__todo button__shape"

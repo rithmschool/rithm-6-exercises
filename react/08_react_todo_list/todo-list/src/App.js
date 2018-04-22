@@ -5,6 +5,7 @@ import { Route, Link, Redirect, Switch } from "react-router-dom";
 import NewTodoForm from "./NewTodoForm";
 // import NewTodoItem from "./newTodoItem";
 import TodoList from "./TodoList.js";
+import EditTodoForm from "./EditTodoForm";
 
 class App extends Component {
   constructor(props) {
@@ -12,20 +13,23 @@ class App extends Component {
     this.state = {
       todos: [
         {
-          title:
+          title: "Finish React Ex!",
+          description:
             "Finish my React exercises and become a superstar developer(hopefully)",
           idx: 0,
           isCompleted: true,
           isEditing: false
         },
         {
-          title: "Buy some milk and a cow",
+          title: "Milk",
+          description: "Buy some milk and a cow",
           idx: 1,
           isCompleted: false,
           isEditing: false
         },
         {
-          title: "Go to the gym for sanity",
+          title: "Work it out!",
+          description: "Go to the gym for sanity",
           idx: 2,
           isCompleted: false,
           isEditing: false
@@ -33,6 +37,7 @@ class App extends Component {
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
     this.handleIsCompleted = this.handleIsCompleted.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -45,18 +50,23 @@ class App extends Component {
     }));
   }
   handleEdit(idxTodo) {
-    let foundTodos = this.state.todos.map((todo, i) => {
+    console.log("wemade it");
+    let editingTodos = this.state.todos.map((todo, i) => {
       if (i === idxTodo) {
         todo.isEditing = !todo.isEditing;
         console.log(todo);
       }
       return todo;
     });
-    this.setState({ todos: foundTodos });
+    this.setState({ todos: editingTodos });
   }
 
   handleSetUpdate(id, updatedTodo) {
-    const edited = { title: updatedTodo, isEditing: false };
+    const edited = {
+      title: updatedTodo.title,
+      description: updatedTodo.description,
+      isEditing: false
+    };
     this.setState(prevState => {
       const updatedTodos = [...prevState.todos];
       updatedTodos[id] = edited;
@@ -65,7 +75,6 @@ class App extends Component {
   }
 
   handleIsCompleted(idxTodo) {
-    console.log("wemade it");
     let foundTodos = this.state.todos.map((todo, i) => {
       console.log("wemade it" + i + " " + idxTodo);
       if (i === idxTodo) {
@@ -121,6 +130,21 @@ class App extends Component {
                 <ColorShow colors={this.state.colors} {...props} />
               )}
            /> */}
+
+            <Route
+              path="/todos/:id/edit"
+              render={props => (
+                <EditTodoForm
+                  todo={this.state.todos[props.match.params.id]}
+                  handleEdit={this.handleEdit.bind(this, props.match.params.id)}
+                  handleDelete={this.handleDelete}
+                  handleSetUpdate={this.handleSetUpdate}
+                  handleIsCompleted={this.handleIsCompleted}
+                  {...props}
+                />
+              )}
+            />
+            {/* <Route path="/todos/:id" render={props => <TodoShow todo={this.state.todos[routeProps.match.params.id]} editTodo={this.editTodo} deleteTodo={this.deleteTodo} goToEdit={this.goToEdit} markCompleted={this.markCompleted} {...routeProps} />} /> */}
             <Route
               path="/todos"
               render={props => (
