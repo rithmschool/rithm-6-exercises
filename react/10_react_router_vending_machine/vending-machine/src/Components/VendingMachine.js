@@ -1,7 +1,27 @@
-"Hello I am a vending machine. What would you like to eat?";
+// "Hello I am a vending machine. What would you like to eat?"
 
-"Bags Eaten";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Chip from "./Chip";
+import Mango from "./Mango";
+import Soda from "./Soda";
+import vending from "./vending.jpg";
+import "./VendingMachine.css";
 
-"Mangoes: King of Fruit";
-"Never eat potato chips without first opening the packet";
-"That was the best ice-cream soda I ever tasted.";
+class VendingMachine extends Component {
+  render() {
+    return (
+      <div>
+        <p>Hello I am a vending machine. What would you like to eat?</p>
+        <Chip />
+        <br />
+        <Mango />
+        <br />
+        <Soda />
+        <br />
+      </div>
+    );
+  }
+}
+
+export default VendingMachine;
