@@ -32,27 +32,33 @@ export default class TodoList extends Component {
   }
 
   handleAdd(newTodo) {
-    let todos = this.state.todos.concat(newTodo);
-    this.setState({ todos });
+    const { todos } = this.state;
+    const updatedTodos = todos.concat(newTodo);
+    this.setState({ todos: updatedTodos });
   }
 
   handleUpdate(i, updatedTodo) {
-    let { todos } = this.state;
-    todos[i] = updatedTodo;
-    todos[i].beingUpdated = false;
-    this.setState({ todos });
+    const { todos } = this.state;
+    const updatedTodos = todos.map((todo, todoI) => (todoI === i ? updatedTodo : todo));
+    this.setState({ todos: updatedTodos });
   }
 
   toggleBeingUpdated(i) {
-    let { todos } = this.state;
-    todos[i].beingUpdated = true;
-    this.setState({ todos });
+    const { todos } = this.state;
+    const updatedTodos = todos.map((todo, todoI) => {
+      if (todoI === i) todo.beingUpdated = true;
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
   }
 
   toggleIsComplete(i) {
-    let { todos } = this.state;
-    todos[i].isComplete = !todos[i].isComplete;
-    this.setState({ todos });
+    const { todos } = this.state;
+    const updatedTodos = todos.map((todo, todoI) => {
+      if (todoI === i) todo.isComplete = !todos[i].isComplete;
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
   }
 
   handleRemove(i) {
@@ -62,7 +68,7 @@ export default class TodoList extends Component {
   }
 
   render() {
-    let todos = this.state.todos.map((todo, i) => {
+    const todos = this.state.todos.map((todo, i) => {
       if (todo.beingUpdated === false)
         return (
           <Todo
