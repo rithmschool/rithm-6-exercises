@@ -7,11 +7,25 @@ import ColorList from './ColorList';
 import Color from './Color';
 
 class App extends Component {
-  render() {
-    return (
-      s
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      colors: [
+        { color: 'orange', code: '#FFC300' },
+        { color: 'blue', code: '#0336F2' },
+        { color: 'green', code: '#2ECC71' }
+      ]
+    };
+    this.handleAdd = this.handleAdd.bind(this);
   }
+
+  handleAdd(newColor) {
+    this.setState(prevState => ({
+      colors: [newColor, ...prevState.colors]
+    }));
+  }
+
+  render() {}
 }
 
 export default App;
