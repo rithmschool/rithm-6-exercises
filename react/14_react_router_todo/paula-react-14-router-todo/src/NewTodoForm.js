@@ -17,7 +17,7 @@ export default class NewTodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleAdd(this.state);
+    this.props.addTodo(this.state);
     this.setState({ title: "", description: "" });
     this.props.history.push("/todos");
   }

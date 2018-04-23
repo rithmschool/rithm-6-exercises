@@ -1,7 +1,11 @@
+// libraries
 import React, { Component } from "react";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
+
+// src
 import TodoList from "./TodoList";
 import NewTodoForm from "./NewTodoForm";
+import EditTodoForm from "./EditTodoForm";
 import TodoShow from "./TodoShow";
 import "./App.css";
 
@@ -18,12 +22,14 @@ class App extends Component {
         }
       ]
     };
-    this.handleAdd = this.handleAdd.bind(this);
+    this.addTodo = this.addTodo.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.getTodo = this.getTodo.bind(this);
+    this.editTodo = this.editTodo.bind(this);
   }
 
-  handleAdd(newTodo) {
+  addTodo(newTodo) {
     newTodo.isComplete = false;
     this.setState(prevState => ({ todos: [newTodo, ...prevState.todos] }));
   }
@@ -34,15 +40,19 @@ class App extends Component {
     this.setState({ todos: newTodos });
   }
 
-  handleDelete(idx) {
+  deleteTodo(idx) {
     let updatedTodos = this.state.todos.filter((todo, i) => i !== idx);
     this.setState({ todos: updatedTodos });
   }
 
-  handleEdit(idx, updatedTodo) {
+  editTodo(idx, updatedTodo) {
     let updatedTodos = [...this.state.todos];
-    updatedTodos[idx][updatedTodo.field] = updatedTodo.value;
+    updatedTodos[idx] = { ...updatedTodo, isComplete: false };
     this.setState({ todos: updatedTodos });
+  }
+
+  getTodo(id) {
+    return this.state.todos[id];
   }
 
   render() {
@@ -56,18 +66,56 @@ class App extends Component {
         <Switch>
           <Route
             path="/new"
-            render={props => (
-              <NewTodoForm handleAdd={this.handleAdd} {...props} />
-            )}
+            render={props => <NewTodoForm addTodo={this.addTodo} {...props} />}
           />
-          <Route path="/todos/:id/edit" render={NewTodoForm} />
-          <Route path="/todos/:id" render={TodoShow} />
+          <Route
+            path="/todos/:id/edit"
+            render={props => {
+              const todo = this.getTodo(props.match.params.id);
+
+              if (!todo) {
+                return <Redirect to="/todos" />;
+              }
+
+              return (
+                <EditTodoForm
+                  title={todo.title}
+                  description={todo.description}
+                  idx={+props.match.params.id}
+                  editTodo={this.editTodo}
+                  {...props}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/todos/:id"
+            render={props => {
+              const todo = this.getTodo(props.match.params.id);
+
+              if (!todo) {
+                return <Redirect to="/todos" />;
+              }
+
+              return (
+                <TodoShow
+                  title={todo.title}
+                  description={todo.description}
+                  isComplete={todo.isComplete}
+                  idx={+props.match.params.id}
+                  toggleComplete={this.toggleComplete}
+                  deleteTodo={this.deleteTodo}
+                  {...props}
+                />
+              );
+            }}
+          />
           <Route
             path="/todos"
             render={props => (
               <TodoList
                 todos={this.state.todos}
-                handleDelete={this.handleDelete}
+                deleteTodo={this.deleteTodo}
                 toggleComplete={this.toggleComplete}
                 {...props}
               />

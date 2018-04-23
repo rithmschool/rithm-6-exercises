@@ -2,7 +2,7 @@ import React from "react";
 import "./Todo.css";
 import Todo from "./Todo";
 
-const TodoList = ({ todos, handleDelete, toggleComplete }) => {
+const TodoList = ({ todos, deleteTodo, toggleComplete }) => {
   return (
     <section>
       <h1>Todo List!</h1>
@@ -11,7 +11,7 @@ const TodoList = ({ todos, handleDelete, toggleComplete }) => {
           title={td.title}
           description={td.description}
           isComplete={td.isComplete}
-          handleDelete={handleDelete.bind(this, i)}
+          deleteTodo={deleteTodo.bind(this, i)}
           toggleComplete={toggleComplete.bind(this, i)}
           idx={i}
           key={i}

@@ -1,6 +1,19 @@
+// libraries
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+// src
 import "./Todo.css";
+
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  isComplete: PropTypes.bool.isRequired,
+  idx: PropTypes.number.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
+};
 
 const Todo = props => {
   const {
@@ -8,40 +21,11 @@ const Todo = props => {
     description,
     isComplete,
     toggleComplete,
-    handleDelete,
+    deleteTodo,
     idx
   } = props;
 
   const strikeStyle = isComplete ? "line-through" : "none";
-
-  // const titleInput = (
-  //   <input
-  //     name="title"
-  //     value={this.state.title}
-  //     onChange={this.handleChange}
-  //     onKeyDown={this.onKeyDown.bind(this, "editTitle")}
-  //   />
-  // );
-  // const descInput = (
-  //   <input
-  //     name="description"
-  //     value={this.state.title}
-  //     onChange={this.handleChange}
-  //     onKeyDown={this.onKeyDown.bind(this, "editDescription")}
-  //   />
-  // );
-  // const titleSpan = (
-  //   <span onDoubleClick={this.handleDoubleClick.bind(this, "editTitle")}>
-  //     {title}:{" "}
-  //   </span>
-  // );
-  // const descSpan = (
-  //   <span onDoubleClick={this.handleDoubleClick.bind(this, "editDescription")}>
-  //     {description}
-  //   </span>
-  // );
-  // const titleDisplay = this.state.editTitle ? titleInput : titleSpan;
-  // const descDisplay = this.state.editDescription ? descInput : descSpan;
 
   return (
     <div>
@@ -50,10 +34,27 @@ const Todo = props => {
           {title}: {description}
         </Link>
       </h4>
-      <button onClick={toggleComplete}>Mark as Complete!</button>
-      <button onClick={handleDelete}>Delete Me!</button>
+      <button
+        onClick={() => {
+          toggleComplete(idx);
+        }}
+      >
+        Mark as {isComplete ? "incomplete." : "complete!"}
+      </button>
+      <button
+        onClick={() => {
+          deleteTodo(idx);
+        }}
+      >
+        Delete Me!
+      </button>
+      <button>
+        <Link to={`/todos/${idx}/edit`}>Edit</Link>
+      </button>
     </div>
   );
 };
+
+Todo.propTypes = propTypes;
 
 export default Todo;
