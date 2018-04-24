@@ -40,10 +40,9 @@ class App extends Component {
     console.log('in removing todo');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos].filter((todo, i) => {
-        if (i === +id) return undefined;
-        return todo;
+        return i !== +id;
       });
-      console.log(todosCopy);
+      // console.log(todosCopy);
       return { todos: todosCopy, redirect: true };
     });
   }
@@ -77,9 +76,10 @@ class App extends Component {
       return { todos: todosCopy };
     });
   }
+
   render() {
     console.log('in renderTodoList');
-    debugger;
+    // debugger;
     const renderTodoList = props => {
       return (
         <div className="App">
@@ -91,61 +91,63 @@ class App extends Component {
             removeToDo={this.removeToDo}
             editToDo={this.editToDo}
             showEditForm={this.showEditForm}
-            todos={this.props.Todos}
+            todos={this.props.todos}
             // todos={this.state.todos}
           />
         </div>
       );
     };
 
-    const renderNewTodoForm = props => {
-      console.log('in renderNewTodoForm');
-      return (
-        <div className="App">
-          <h1>Dragon Todo List</h1>
-          <NewToDoForm submitData={this.addToDo} />
-        </div>
-      );
-    };
+    // const renderNewTodoForm = props => {
+    //   console.log('in renderNewTodoForm');
+    //   return (
+    //     <div className="App">
+    //       <h1>Dragon Todo List</h1>
+    //       <NewToDoForm submitData={this.addToDo} />
+    //     </div>
+    //   );
+    // };
 
-    const renderEditForm = props => {
-      console.log('in renderEditForm');
-      return (
-        <div className="App">
-          <h1>Dragon Todo List</h1>
-          <p>Edit Todo</p>
-          <NewToDoForm
-            submitData={this.editToDo.bind(this, props.match.params.id)}
-          />
-        </div>
-      );
-    };
-
-    const renderSingleTodo = props => {
-      console.log('in renderSingleTodo');
-      const targetTodo = this.state.todos.filter(
-        (todo, i) => +props.match.params.id === i
-      )[0];
-      return (
-        <div className="App">
-          <h1>Dragon Todo List</h1>
-          <Link to="/todos">Back To All Todos</Link>
-          <Todo
-            title={targetTodo.title}
-            description={targetTodo.description}
-            isCompleted={targetTodo.isCompleted}
-            markAsComplete={this.markAsComplete.bind(
-              this,
-              props.match.params.id
-            )}
-            removeToDo={this.removeToDo.bind(this, props.match.params.id)}
-            submitData={this.editToDo.bind(this, props.match.params.id)}
-            showEditForm={this.showEditForm.bind(this, props.match.params.id)}
-            isEditSelected={targetTodo.isEditSelected}
-          />
-        </div>
-      );
-    };
+    // const renderEditForm = props => {
+    //   console.log('in renderEditForm');
+    //   return (
+    //     <div className="App">
+    //       <h1>Dragon Todo List</h1>
+    //       <p>Edit Todo</p>
+    //       <NewToDoForm
+    //         submitData={this.editToDo.bind(this, props.match.params.id)}
+    //       />
+    //     </div>
+    //   );
+    // };
+    // ignore for now! Focus just on redux-ing the main page!
+    // const renderSingleTodo = props => {
+    //   console.log('in renderSingleTodo');
+    //   debugger;
+    //   // const targetTodo = this.state.todos.filter(
+    //   const targetTodo = this.props.todos.filter(
+    //     (todo, i) => +props.match.params.id === i
+    //   )[0];
+    //   return (
+    //     <div className="App">
+    //       <h1>Dragon Todo List</h1>
+    //       <Link to="/todos">Back To All Todos</Link>
+    //       <Todo
+    //         title={targetTodo.title}
+    //         description={targetTodo.description}
+    //         isCompleted={targetTodo.isCompleted}
+    //         markAsComplete={this.markAsComplete.bind(
+    //           this,
+    //           props.match.params.id
+    //         )}
+    //         removeToDo={this.removeToDo.bind(this, props.match.params.id)}
+    //         submitData={this.editToDo.bind(this, props.match.params.id)}
+    //         showEditForm={this.showEditForm.bind(this, props.match.params.id)}
+    //         isEditSelected={targetTodo.isEditSelected}
+    //       />
+    //     </div>
+    //   );
+    // };
 
     // if (this.state.redirect) {
     //   this.setState(prevState => {
@@ -156,16 +158,16 @@ class App extends Component {
     //   return <Redirect to="/todos" />;
     // }
 
-    debugger;
+    // debugger;
     return (
       <Switch>
         {/* <Route path="/todos" exact render={TodoListContainer} />
         <Route path="/todos/new" render={TodoFormContainer} />
         <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
         <Route path="/todos" exact render={renderTodoList} /> */}
-        <Route path="/todos/new" render={renderNewTodoForm} />
-        <Route path="/todos/:id/edit" render={renderEditForm} />
-        <Route path="/todos/:id" render={renderSingleTodo} />
+        {/* <Route path="/todos/new" render={renderNewTodoForm} /> */}
+        {/* <Route path="/todos/:id/edit" render={renderEditForm} /> */}
+        {/* <Route path="/todos/:id" render={renderSingleTodo} /> */}
         <Redirect to="/todos" />
       </Switch>
     );
@@ -200,7 +202,7 @@ App.propTypes = {
 function mapStateToProps(state) {
   console.log('entering mapStateToProps');
   return {
-    Todos: state.Todos,
+    todos: state.todos,
     redirect: state.redirect
   };
 }

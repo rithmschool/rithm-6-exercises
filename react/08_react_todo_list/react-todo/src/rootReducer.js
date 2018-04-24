@@ -9,7 +9,7 @@ default is an empty array
 not sure what the id signifies?
 */
 const DEFAULT_STATE = {
-  Todos: [
+  todos: [
     {
       title: 'wake up',
       description: 'wake up and chill with all my treasure.'

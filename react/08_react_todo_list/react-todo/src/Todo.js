@@ -78,7 +78,7 @@ class Todo extends Component {
   }
 }
 
-Todo.PropTypes = {
+Todo.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isCompleted: PropTypes.boolean,
