@@ -38,16 +38,21 @@ const DEFAULT_STATE = {
 };
 
 export default function rootReducer(state = DEFAULT_STATE, action = {}) {
+  console.log('in rootReducer');
+  debugger;
   let newState = { ...state };
-  // switch (action.type) {
+  switch (action.type) {
   // case ADD:
   //   return { ...action.payload, newState };
   // case UPDATE:
   //   //search for todo that needs to be updated
+
+  case 'REMOVE_TODO':
+    console.log('in rootReducer RemoveTodo');
+    debugger;
+    let newTodos = newState.todos.filter(todo => todo.id !== action.id);
+    return { ...state, todos: newTodos };
+  }
   // default:
   return newState;
-
-  // case DELETE:
-  //   //search by id for todo that needs to be deleted
-  // }
 }

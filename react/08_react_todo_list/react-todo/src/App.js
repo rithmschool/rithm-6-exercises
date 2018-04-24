@@ -39,7 +39,11 @@ class App extends Component {
   removeToDo(id) {
     console.log('in removing todo');
     debugger;
-    () => this.props.dispatch();
+    // () =>
+    this.props.dispatch({
+      type: 'REMOVE_TODO',
+      id
+    });
 
     // this.setState(prevState => {
     //   let todosCopy = [...prevState.todos].filter(todo => {
