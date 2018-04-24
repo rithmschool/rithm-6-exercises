@@ -39,11 +39,11 @@ const DEFAULT_STATE = {
 
 export default function rootReducer(state = DEFAULT_STATE, action = {}) {
   console.log('in rootReducer');
-  // debugger;
+  // //debugger;
   let newState = { ...state };
   switch (action.type) {
   case 'ADD_TODO':
-    debugger;
+    //debugger;
     console.log('in rootReducer ADD_TODO');
     return {
       ...newState,
@@ -51,22 +51,23 @@ export default function rootReducer(state = DEFAULT_STATE, action = {}) {
     };
   case 'UPDATE_TODO':
     console.log('in rootReducer UPDATE_TODO');
-    debugger;
+    //debugger;
     let targetTodo = newState.todos.filter(
-      todo => todo.id !== action.editedTodo.id
+      todo => todo.id === action.editedTodo.id
     );
-    debugger;
-    // newState.targetTodo = action.
+      // //debugger;
+    newState.targetTodo = action.editedTodo;
     return { ...this.newState, todos: [...newState.todos] };
-    // case 'REMOVE_TODO':
-    //   console.log('in rootReducer RemoveTodo');
-    //   debugger;
-    //   let newTodos = newState.todos.filter(
-    //     todo => todo.id !== action.payload.id
-    //   );
-    //   return { ...state, todos: newTodos };
-    // return { ...state, todos: newTodos, redirect: action.payload.redirect };
+  case 'REMOVE_TODO':
+    console.log('in rootReducer RemoveTodo');
+    //debugger;
+    let newTodos = newState.todos.filter(
+      todo => todo.id !== action.payload.id
+    );
+      // return { ...state, todos: newTodos };
+    return { ...state, todos: newTodos, redirect: action.payload.redirect };
+    //  }
+  default:
+    return newState;
   }
-  // default:
-  return newState;
 }

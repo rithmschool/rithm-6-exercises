@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { BrowserRouter } from 'react-router-dom';
+
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
 // import TodoListContainer from './TodoListContainer';
@@ -42,7 +44,7 @@ class App extends Component {
 
   removeToDo(id) {
     console.log('in removing todo');
-    debugger;
+    //debugger;
     // () =>
     this.props.dispatch({
       type: 'REMOVE_TODO',
@@ -60,7 +62,7 @@ class App extends Component {
 
   editToDo(id, editedTodo) {
     console.log('in edit to do');
-    debugger;
+    //debugger;
     this.props.dispatch({
       type: 'UPDATE_TODO',
       editedTodo
@@ -97,7 +99,7 @@ class App extends Component {
 
   render() {
     console.log('in renderTodoList');
-    // debugger;
+    // //debugger;
     const renderTodoList = props => {
       return (
         <div className="App">
@@ -118,6 +120,7 @@ class App extends Component {
 
     const renderNewTodoForm = props => {
       console.log('in renderNewTodoForm');
+      //debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -128,7 +131,7 @@ class App extends Component {
 
     const renderEditForm = props => {
       console.log('in renderEditForm');
-      debugger;
+      //debugger;
       const targetTodo = this.props.todos.filter(todo => {
         return todo.id === props.match.params.id;
       });
@@ -143,34 +146,31 @@ class App extends Component {
         </div>
       );
     };
-    // ignore for now! Focus just on redux-ing the main page!
-    // const renderSingleTodo = props => {
-    //   console.log('in renderSingleTodo');
-    //   debugger;
-    //   // const targetTodo = this.state.todos.filter(
-    //   const targetTodo = this.props.todos.filter(
-    //     (todo, i) => +props.match.params.id === i
-    //   )[0];
-    //   return (
-    //     <div className="App">
-    //       <h1>Dragon Todo List</h1>
-    //       <Link to="/todos">Back To All Todos</Link>
-    //       <Todo
-    //         title={targetTodo.title}
-    //         description={targetTodo.description}
-    //         isCompleted={targetTodo.isCompleted}
-    //         markAsComplete={this.markAsComplete.bind(
-    //           this,
-    //           props.match.params.id
-    //         )}
-    //         removeToDo={this.removeToDo.bind(this, props.match.params.id)}
-    //         submitData={this.editToDo.bind(this, props.match.params.id)}
-    //         showEditForm={this.showEditForm.bind(this, props.match.params.id)}
-    //         isEditSelected={targetTodo.isEditSelected}
-    //       />
-    //     </div>
-    //   );
-    // };
+    const renderSingleTodo = props => {
+      console.log('in renderSingleTodo');
+      const targetTodo = this.props.todos.filter(
+        todo => props.match.params.id === todo.id
+      )[0];
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <Link to="/todos">Back To All Todos</Link>
+          <Todo
+            title={targetTodo.title}
+            description={targetTodo.description}
+            isCompleted={targetTodo.isCompleted}
+            markAsComplete={this.markAsComplete.bind(
+              this,
+              props.match.params.id
+            )}
+            removeToDo={this.removeToDo.bind(this, props.match.params.id)}
+            submitData={this.editToDo.bind(this, props.match.params.id)}
+            showEditForm={this.showEditForm.bind(this, props.match.params.id)}
+            isEditSelected={targetTodo.isEditSelected}
+          />
+        </div>
+      );
+    };
 
     // if (this.state.redirect) {
     //   this.setState(prevState => {
@@ -181,18 +181,20 @@ class App extends Component {
     //   return <Redirect to="/todos" />;
     // }
 
-    // debugger;
+    // //debugger;
     return (
-      <Switch>
-        {/* <Route path="/todos" exact render={TodoListContainer} />
+      <BrowserRouter>
+        <Switch>
+          {/* <Route path="/todos" exact render={TodoListContainer} />
         <Route path="/todos/new" render={TodoFormContainer} />
         <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
-        <Route path="/todos" exact render={renderTodoList} />
-        <Route path="/todos/new" render={renderNewTodoForm} />
-        <Route path="/todos/:id/edit" render={renderEditForm} />
-        {/* <Route path="/todos/:id" render={renderSingleTodo} /> */}
-        <Redirect to="/todos" />
-      </Switch>
+          <Route path="/todos" exact render={renderTodoList} />
+          <Route path="/todos/new" render={renderNewTodoForm} />
+          <Route path="/todos/:id/edit" render={renderEditForm} />
+          <Route path="/todos/:id" render={renderSingleTodo} />
+          <Redirect to="/todos" />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
@@ -233,3 +235,4 @@ function mapStateToProps(state) {
 //import connect
 //addmapstatetoprop
 export default connect(mapStateToProps)(App);
+// export default App;
