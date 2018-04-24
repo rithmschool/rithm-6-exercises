@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './App.css';
-import TodoListContainer from './TodoListContainer';
-import TodoFormContainer from './TodoFormContainer';
+// import TodoListContainer from './TodoListContainer';
+// import TodoFormContainer from './TodoFormContainer';
 import NewToDoForm from './NewToDoForm';
 import ToDoList from './ToDoList';
 import Todo from './Todo';
@@ -11,16 +12,16 @@ import Todo from './Todo';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      todos: Array.from({ length: this.props.Todos.length }).map((item, id) => {
-        return {
-          ...this.props.Todos[id],
-          isCompleted: false,
-          isEditSelected: false
-        };
-      }),
-      redirect: false
-    };
+    // this.state = {
+    //   todos: Array.from({ length: this.props.Todos.length }).map((item, id) => {
+    //     return {
+    //       ...this.props.Todos[id],
+    //       isCompleted: false,
+    //       isEditSelected: false
+    //     };
+    //   }),
+    //   redirect: false
+    // };
     this.markAsComplete = this.markAsComplete.bind(this);
     this.removeToDo = this.removeToDo.bind(this);
     this.addToDo = this.addToDo.bind(this);
@@ -29,13 +30,14 @@ class App extends Component {
   }
 
   addToDo(newTodo) {
-    console.log('adding todo');
+    console.log('in adding todo');
     this.setState(prevState => {
       return { todos: [...prevState.todos, newTodo] };
     });
   }
 
   removeToDo(id) {
+    console.log('in removing todo');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos].filter((todo, i) => {
         if (i === +id) return undefined;
@@ -58,6 +60,7 @@ class App extends Component {
   }
 
   showEditForm(id) {
+    console.log('in show edit form');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[id].isEditSelected = !todosCopy[id].isEditSelected;
@@ -67,6 +70,7 @@ class App extends Component {
   }
 
   markAsComplete(id) {
+    console.log('in mark as complete');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
       todosCopy[id].isCompleted = !todosCopy[id].isCompleted;
@@ -74,6 +78,8 @@ class App extends Component {
     });
   }
   render() {
+    console.log('in renderTodoList');
+    debugger;
     const renderTodoList = props => {
       return (
         <div className="App">
@@ -85,13 +91,15 @@ class App extends Component {
             removeToDo={this.removeToDo}
             editToDo={this.editToDo}
             showEditForm={this.showEditForm}
-            todos={this.state.todos}
+            todos={this.props.Todos}
+            // todos={this.state.todos}
           />
         </div>
       );
     };
 
     const renderNewTodoForm = props => {
+      console.log('in renderNewTodoForm');
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -101,6 +109,7 @@ class App extends Component {
     };
 
     const renderEditForm = props => {
+      console.log('in renderEditForm');
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -113,6 +122,7 @@ class App extends Component {
     };
 
     const renderSingleTodo = props => {
+      console.log('in renderSingleTodo');
       const targetTodo = this.state.todos.filter(
         (todo, i) => +props.match.params.id === i
       )[0];
@@ -137,23 +147,24 @@ class App extends Component {
       );
     };
 
-    if (this.state.redirect) {
-      this.setState(prevState => {
-        let newState = { ...prevState };
-        newState.redirect = false;
-        return { ...newState };
-      });
-      return <Redirect to="/todos" />;
-    }
+    // if (this.state.redirect) {
+    //   this.setState(prevState => {
+    //     let newState = { ...prevState };
+    //     newState.redirect = false;
+    //     return { ...newState };
+    //   });
+    //   return <Redirect to="/todos" />;
+    // }
 
+    debugger;
     return (
       <Switch>
-        <Route path="/todos" exact render={TodoListContainer} />
+        {/* <Route path="/todos" exact render={TodoListContainer} />
         <Route path="/todos/new" render={TodoFormContainer} />
-        <Route path="/todos/:id/edit" render={TodoFormContainer} />
-        {/* <Route path="/todos" exact render={renderTodoList} /> */}
-        {/* <Route path="/todos/new" render={renderNewTodoForm} /> */}
-        {/* <Route path="/todos/:id/edit" render={renderEditForm} /> */}
+        <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
+        <Route path="/todos" exact render={renderTodoList} /> */}
+        <Route path="/todos/new" render={renderNewTodoForm} />
+        <Route path="/todos/:id/edit" render={renderEditForm} />
         <Route path="/todos/:id" render={renderSingleTodo} />
         <Redirect to="/todos" />
       </Switch>
@@ -161,29 +172,39 @@ class App extends Component {
   }
 }
 
-App.defaultProps = {
-  Todos: [
-    {
-      title: 'wake up',
-      description: 'wake up and chill with all my treasure.'
-    },
-    {
-      title: 'attack',
-      description: 'attack all without mercy.'
-    },
-    {
-      title: 'burn stuff',
-      description: 'Breath fire on the countryside.'
-    },
-    {
-      title: 'chill with mom',
-      description: 'hang out with my mom.'
-    }
-  ]
+// App.defaultProps = {
+//   Todos: [
+//     {
+//       title: 'wake up',
+//       description: 'wake up and chill with all my treasure.'
+//     },
+//     {
+//       title: 'attack',
+//       description: 'attack all without mercy.'
+//     },
+//     {
+//       title: 'burn stuff',
+//       description: 'Breath fire on the countryside.'
+//     },
+//     {
+//       title: 'chill with mom',
+//       description: 'hang out with my mom.'
+//     }
+//   ]
+// };
+
+App.propTypes = {
+  // Todos: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-App.PropTypes = {
-  Todos: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+function mapStateToProps(state) {
+  console.log('entering mapStateToProps');
+  return {
+    Todos: state.Todos,
+    redirect: state.redirect
+  };
+}
 
-export default App;
+//import connect
+//addmapstatetoprop
+export default connect(mapStateToProps)(App);
