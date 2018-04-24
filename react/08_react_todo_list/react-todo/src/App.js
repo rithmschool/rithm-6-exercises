@@ -31,9 +31,13 @@ class App extends Component {
 
   addToDo(newTodo) {
     console.log('in adding todo');
-    this.setState(prevState => {
-      return { todos: [...prevState.todos, newTodo] };
+    this.props.dispatch({
+      type: 'ADD_TODO',
+      newTodo
     });
+    // this.setState(prevState => {
+    //   return { todos: [...prevState.todos, newTodo] };
+    // });
   }
 
   removeToDo(id) {
@@ -86,7 +90,7 @@ class App extends Component {
 
   render() {
     console.log('in renderTodoList');
-    // debugger;
+    debugger;
     const renderTodoList = props => {
       return (
         <div className="App">
@@ -105,15 +109,15 @@ class App extends Component {
       );
     };
 
-    // const renderNewTodoForm = props => {
-    //   console.log('in renderNewTodoForm');
-    //   return (
-    //     <div className="App">
-    //       <h1>Dragon Todo List</h1>
-    //       <NewToDoForm submitData={this.addToDo} />
-    //     </div>
-    //   );
-    // };
+    const renderNewTodoForm = props => {
+      console.log('in renderNewTodoForm');
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <NewToDoForm submitData={this.addToDo} />
+        </div>
+      );
+    };
 
     // const renderEditForm = props => {
     //   console.log('in renderEditForm');
@@ -171,8 +175,8 @@ class App extends Component {
         {/* <Route path="/todos" exact render={TodoListContainer} />
         <Route path="/todos/new" render={TodoFormContainer} />
         <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
-        <Route path="/todos" exact render={renderTodoList} /> */}
-        {/* <Route path="/todos/new" render={renderNewTodoForm} /> */}
+        <Route path="/todos" exact render={renderTodoList} />
+        <Route path="/todos/new" render={renderNewTodoForm} />
         {/* <Route path="/todos/:id/edit" render={renderEditForm} /> */}
         {/* <Route path="/todos/:id" render={renderSingleTodo} /> */}
         <Redirect to="/todos" />

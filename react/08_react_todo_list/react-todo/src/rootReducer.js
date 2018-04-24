@@ -39,13 +39,17 @@ const DEFAULT_STATE = {
 
 export default function rootReducer(state = DEFAULT_STATE, action = {}) {
   console.log('in rootReducer');
-  debugger;
+  // debugger;
   let newState = { ...state };
   switch (action.type) {
-  // case ADD:
-  //   return { ...action.payload, newState };
-  // case UPDATE:
-  //   //search for todo that needs to be updated
+  case 'ADD_TODO':
+    debugger;
+    console.log('in rootReducer ADD_TODO');
+    return {
+      ...newState,
+      todos: [...newState.todos, { ...action.newTodo, id: uuidv1() }]
+    }; // case UPDATE:
+    //   //search for todo that needs to be updated
 
   case 'REMOVE_TODO':
     console.log('in rootReducer RemoveTodo');
