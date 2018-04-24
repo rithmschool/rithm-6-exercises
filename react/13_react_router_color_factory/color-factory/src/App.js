@@ -11,9 +11,9 @@ class App extends Component {
     super(props);
     this.state = {
       colors: [
-        { color: 'orange', code: '#FFC300' },
-        { color: 'blue', code: '#0336F2' },
-        { color: 'green', code: '#2ECC71' }
+        { color: 'orange', hex: '#FFC300' },
+        { color: 'blue', hex: '#0336F2' },
+        { color: 'green', hex: '#2ECC71' }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -38,7 +38,7 @@ class App extends Component {
             path="/colors"
             exact
             render={props => (
-              <ColorList allColors={this.state.colors} {...props} />
+              <ColorList colorList={this.state.colors} {...props} />
             )}
           />
           <Route
