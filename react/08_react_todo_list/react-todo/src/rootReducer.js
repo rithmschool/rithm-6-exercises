@@ -14,21 +14,25 @@ const DEFAULT_STATE = {
     {
       title: 'wake up',
       description: 'wake up and chill with all my treasure.',
+      isCompleted: false,
       id: uuidv1()
     },
     {
       title: 'attack',
       description: 'attack all without mercy.',
+      isCompleted: false,
       id: uuidv1()
     },
     {
       title: 'burn stuff',
       description: 'Breath fire on the countryside.',
+      isCompleted: false,
       id: uuidv1()
     },
     {
       title: 'chill with mom',
       description: 'hang out with my mom.',
+      isCompleted: false,
       id: uuidv1()
     }
   ],
@@ -47,26 +51,35 @@ export default function rootReducer(state = DEFAULT_STATE, action = {}) {
     console.log('in rootReducer ADD_TODO');
     return {
       ...newState,
-      todos: [...newState.todos, { ...action.newTodo, id: uuidv1() }]
+      todos: [
+        ...newState.todos,
+        { ...action.newTodo, id: uuidv1(), isComplete: false }
+      ]
     };
   case 'UPDATE_TODO':
     console.log('in rootReducer UPDATE_TODO');
     //debugger;
-    let targetTodo = newState.todos.filter(
-      todo => todo.id === action.editedTodo.id
-    );
-      // //debugger;
+    let targetTodo = newState.todos.filter(todo => todo.id === action.id);
+    debugger;
     newState.targetTodo = action.editedTodo;
     return { ...this.newState, todos: [...newState.todos] };
   case 'REMOVE_TODO':
     console.log('in rootReducer RemoveTodo');
     //debugger;
-    let newTodos = newState.todos.filter(
+    var newTodos = newState.todos.filter(
       todo => todo.id !== action.payload.id
     );
-      // return { ...state, todos: newTodos };
     return { ...state, todos: newTodos, redirect: action.payload.redirect };
-    //  }
+  case 'TOGGLE_COMPLETION':
+    console.log('in rootReducer TOGGLE_COMPLETE');
+    var updatedTodos = newState.todos.map(
+      todo =>
+        todo.id === action.id
+          ? { ...todo, isCompleted: !todo.isCompleted }
+          : todo
+    );
+      // debugger;
+    return { ...newState, todos: updatedTodos };
   default:
     return newState;
   }

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 class TodoList extends Component {
   render() {
-    let Todos = this.props.todos.map(
+    // debugger;
+    let todoLis = this.props.todos.map(
       ({ title, description, id, isCompleted, isEditSelected }) => {
         return (
           <Todo
@@ -23,7 +24,7 @@ class TodoList extends Component {
         );
       }
     );
-    return <div>{Todos}</div>;
+    return <div>{todoLis}</div>;
   }
 }
 

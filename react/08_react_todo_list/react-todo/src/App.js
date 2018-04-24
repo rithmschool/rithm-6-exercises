@@ -5,8 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
-// import TodoListContainer from './TodoListContainer';
-// import TodoFormContainer from './TodoFormContainer';
 import NewToDoForm from './NewToDoForm';
 import ToDoList from './ToDoList';
 import Todo from './Todo';
@@ -65,7 +63,8 @@ class App extends Component {
     //debugger;
     this.props.dispatch({
       type: 'UPDATE_TODO',
-      editedTodo
+      editedTodo,
+      id
     });
     // this.setState(prevState => {
     //   let todosCopy = [...prevState.todos];
@@ -88,19 +87,28 @@ class App extends Component {
     // });
   }
 
+  //make sure it's being passed the new id
   markAsComplete(id) {
     console.log('in mark as complete');
-    this.setState(prevState => {
-      let todosCopy = [...prevState.todos];
-      todosCopy.id.isCompleted = !todosCopy.id.isCompleted;
-      return { todos: todosCopy };
+    this.props.dispatch({
+      type: 'TOGGLE_COMPLETION',
+      id
     });
+    // this.setState(prevState => {
+    //   let todosCopy = [...prevState.todos];
+    //   todosCopy.id.isCompleted = !todosCopy.id.isCompleted;
+    //   return { todos: todosCopy };
+    // });
   }
 
   render() {
     console.log('in renderTodoList');
-    // //debugger;
+    // console.log(this.props.todos);
+    // debugger;
     const renderTodoList = props => {
+      // debugger;
+      console.log('in in renderTodoList', this.props.todos);
+      console.log('in props', props, this.props);
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -131,10 +139,14 @@ class App extends Component {
 
     const renderEditForm = props => {
       console.log('in renderEditForm');
-      //debugger;
+      // debugger;
       const targetTodo = this.props.todos.filter(todo => {
+        // debugger;
+
         return todo.id === props.match.params.id;
-      });
+      })[0];
+      console.log('Target todo id:', targetTodo.id);
+      // debugger;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -185,9 +197,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/todos" exact render={TodoListContainer} />
-        <Route path="/todos/new" render={TodoFormContainer} />
-        <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
           <Route path="/todos" exact render={renderTodoList} />
           <Route path="/todos/new" render={renderNewTodoForm} />
           <Route path="/todos/:id/edit" render={renderEditForm} />
@@ -199,31 +208,6 @@ class App extends Component {
   }
 }
 
-// App.defaultProps = {
-//   Todos: [
-//     {
-//       title: 'wake up',
-//       description: 'wake up and chill with all my treasure.'
-//     },
-//     {
-//       title: 'attack',
-//       description: 'attack all without mercy.'
-//     },
-//     {
-//       title: 'burn stuff',
-//       description: 'Breath fire on the countryside.'
-//     },
-//     {
-//       title: 'chill with mom',
-//       description: 'hang out with my mom.'
-//     }
-//   ]
-// };
-
-// App.propTypes = {
-//   // Todos: PropTypes.arrayOf(PropTypes.object).isRequired
-// };
-
 function mapStateToProps(state) {
   console.log('entering mapStateToProps');
   return {
@@ -232,7 +216,4 @@ function mapStateToProps(state) {
   };
 }
 
-//import connect
-//addmapstatetoprop
 export default connect(mapStateToProps)(App);
-// export default App;
