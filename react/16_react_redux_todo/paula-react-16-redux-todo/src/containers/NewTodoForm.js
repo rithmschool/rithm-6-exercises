@@ -1,34 +1,34 @@
 // libraries
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+// src
+import { ADD_TODO } from "../actions";
+
 const propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  idx: PropTypes.number.isRequired,
-  editTodo: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
-class EditTodoForm extends Component {
+class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.title,
-      description: this.props.description
+      title: "",
+      description: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit() {
-    this.props.editTodo(this.props.idx, this.state);
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.dispatch({ type: ADD_TODO, todo: this.state });
     this.props.history.push("/todos");
   }
 
@@ -57,6 +57,12 @@ class EditTodoForm extends Component {
   }
 }
 
-EditTodoForm.propTypes = propTypes;
+function mapStateToProps(state) {
+  return {
+    todos: state.todos
+  };
+}
 
-export default EditTodoForm;
+NewTodoForm.propTypes = propTypes;
+
+export default connect(mapStateToProps)(NewTodoForm);

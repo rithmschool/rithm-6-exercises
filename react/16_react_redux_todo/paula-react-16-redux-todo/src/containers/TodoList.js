@@ -1,41 +1,27 @@
+// libraries
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DELETE_TODO, TOGGLE_COMPLETE } from "../actions";
-import Todo from "../Todo";
+
+// src
+import Todo from "./Todo";
 
 const propTypes = {
   todos: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 
-const TodoList = ({ todos, dispatch }) => {
-  const deleteTodo = id => {
-    dispatch({
-      type: DELETE_TODO,
-      id
-    });
-  };
-
-  const toggleComplete = id => {
-    dispatch({
-      type: TOGGLE_COMPLETE,
-      id
-    });
-  };
-
+const TodoList = ({ todos }) => {
   return (
     <section>
       <h1>Todo List!</h1>
-      {todos.map(td => (
+      {todos.map(todo => (
         <Todo
-          title={td.title}
-          description={td.description}
-          isComplete={td.isComplete}
-          deleteTodo={deleteTodo.bind(this, td.id)}
-          toggleComplete={toggleComplete.bind(this, td.id)}
-          idx={td.id}
-          key={td.id}
+          title={todo.title}
+          description={todo.description}
+          isComplete={todo.isComplete}
+          id={todo.id}
+          key={todo.id}
         />
       ))}
     </section>
