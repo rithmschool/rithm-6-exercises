@@ -38,10 +38,10 @@ class Todo extends Component {
     const {
       title,
       description,
+      id,
       isCompleted,
       markAsComplete,
-      removeToDo,
-      id
+      removeToDo
     } = this.props;
     let completionText = 'Mark Completed';
     if (isCompleted) completionText = 'Mark Incomplete';

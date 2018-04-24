@@ -48,14 +48,24 @@ export default function rootReducer(state = DEFAULT_STATE, action = {}) {
     return {
       ...newState,
       todos: [...newState.todos, { ...action.newTodo, id: uuidv1() }]
-    }; // case UPDATE:
-    //   //search for todo that needs to be updated
-
-  case 'REMOVE_TODO':
-    console.log('in rootReducer RemoveTodo');
+    };
+  case 'UPDATE_TODO':
+    console.log('in rootReducer UPDATE_TODO');
     debugger;
-    let newTodos = newState.todos.filter(todo => todo.id !== action.id);
-    return { ...state, todos: newTodos };
+    let targetTodo = newState.todos.filter(
+      todo => todo.id !== action.editedTodo.id
+    );
+    debugger;
+    // newState.targetTodo = action.
+    return { ...this.newState, todos: [...newState.todos] };
+    // case 'REMOVE_TODO':
+    //   console.log('in rootReducer RemoveTodo');
+    //   debugger;
+    //   let newTodos = newState.todos.filter(
+    //     todo => todo.id !== action.payload.id
+    //   );
+    //   return { ...state, todos: newTodos };
+    // return { ...state, todos: newTodos, redirect: action.payload.redirect };
   }
   // default:
   return newState;

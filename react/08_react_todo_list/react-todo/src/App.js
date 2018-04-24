@@ -15,7 +15,7 @@ class App extends Component {
     // this.state = {
     //   todos: Array.from({ length: this.props.Todos.length }).map((item, id) => {
     //     return {
-    //       ...this.props.Todos[id],
+    //       ...this.props.Todos.id,
     //       isCompleted: false,
     //       isEditSelected: false
     //     };
@@ -46,7 +46,7 @@ class App extends Component {
     // () =>
     this.props.dispatch({
       type: 'REMOVE_TODO',
-      id
+      payload: { id, redirect: false }
     });
 
     // this.setState(prevState => {
@@ -60,37 +60,44 @@ class App extends Component {
 
   editToDo(id, editedTodo) {
     console.log('in edit to do');
-    this.setState(prevState => {
-      let todosCopy = [...prevState.todos];
-      todosCopy[id] = {
-        ...editedTodo
-      };
-      return { todos: todosCopy };
+    debugger;
+    this.props.dispatch({
+      type: 'UPDATE_TODO',
+      editedTodo
     });
+    // this.setState(prevState => {
+    //   let todosCopy = [...prevState.todos];
+    //   todosCopy.id = {
+    //     ...editedTodo
+    //   };
+    //   return { todos: todosCopy };
+    // });
   }
 
   showEditForm(id) {
     console.log('in show edit form');
-    this.setState(prevState => {
-      let todosCopy = [...prevState.todos];
-      todosCopy.id.isEditSelected = !todosCopy.id.isEditSelected;
-      console.log(todosCopy);
-      return { todos: todosCopy };
-    });
+    //need to move isEditSelected and all into redux store
+
+    // this.setState(prevState => {
+    //   let todosCopy = [...prevState.todos];
+    //   todosCopy.id.isEditSelected = !todosCopy.id.isEditSelected;
+    //   console.log(todosCopy);
+    //   return { todos: todosCopy };
+    // });
   }
 
   markAsComplete(id) {
     console.log('in mark as complete');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      todosCopy[id].isCompleted = !todosCopy[id].isCompleted;
+      todosCopy.id.isCompleted = !todosCopy.id.isCompleted;
       return { todos: todosCopy };
     });
   }
 
   render() {
     console.log('in renderTodoList');
-    debugger;
+    // debugger;
     const renderTodoList = props => {
       return (
         <div className="App">
@@ -119,18 +126,23 @@ class App extends Component {
       );
     };
 
-    // const renderEditForm = props => {
-    //   console.log('in renderEditForm');
-    //   return (
-    //     <div className="App">
-    //       <h1>Dragon Todo List</h1>
-    //       <p>Edit Todo</p>
-    //       <NewToDoForm
-    //         submitData={this.editToDo.bind(this, props.match.params.id)}
-    //       />
-    //     </div>
-    //   );
-    // };
+    const renderEditForm = props => {
+      console.log('in renderEditForm');
+      debugger;
+      const targetTodo = this.props.todos.filter(todo => {
+        return todo.id === props.match.params.id;
+      });
+      return (
+        <div className="App">
+          <h1>Dragon Todo List</h1>
+          <p>Edit Todo</p>
+          <NewToDoForm
+            submitData={this.editToDo.bind(this, targetTodo.id)}
+            // submitData={this.editToDo.bind(this, props.match.params.id)}
+          />
+        </div>
+      );
+    };
     // ignore for now! Focus just on redux-ing the main page!
     // const renderSingleTodo = props => {
     //   console.log('in renderSingleTodo');
@@ -177,7 +189,7 @@ class App extends Component {
         <Route path="/todos/:id/edit" render={TodoFormContainer} /> */}
         <Route path="/todos" exact render={renderTodoList} />
         <Route path="/todos/new" render={renderNewTodoForm} />
-        {/* <Route path="/todos/:id/edit" render={renderEditForm} /> */}
+        <Route path="/todos/:id/edit" render={renderEditForm} />
         {/* <Route path="/todos/:id" render={renderSingleTodo} /> */}
         <Redirect to="/todos" />
       </Switch>
