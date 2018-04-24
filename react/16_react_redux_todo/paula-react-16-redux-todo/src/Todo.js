@@ -3,14 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-// src
-import "./Todo.css";
-
 const propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
-  idx: PropTypes.number.isRequired,
+  idx: PropTypes.string.isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired
 };
