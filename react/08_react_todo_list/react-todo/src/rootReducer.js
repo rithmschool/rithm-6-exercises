@@ -1,3 +1,4 @@
+const uuidv1 = require('uuid/v1');
 // import { ADD, UPDATE, DELETE } from './actions';
 
 /*
@@ -12,19 +13,23 @@ const DEFAULT_STATE = {
   todos: [
     {
       title: 'wake up',
-      description: 'wake up and chill with all my treasure.'
+      description: 'wake up and chill with all my treasure.',
+      id: uuidv1()
     },
     {
       title: 'attack',
-      description: 'attack all without mercy.'
+      description: 'attack all without mercy.',
+      id: uuidv1()
     },
     {
       title: 'burn stuff',
-      description: 'Breath fire on the countryside.'
+      description: 'Breath fire on the countryside.',
+      id: uuidv1()
     },
     {
       title: 'chill with mom',
-      description: 'hang out with my mom.'
+      description: 'hang out with my mom.',
+      id: uuidv1()
     }
   ],
   redirect: false

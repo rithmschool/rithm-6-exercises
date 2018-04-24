@@ -65,10 +65,10 @@ class NewToDoForm extends Component {
   }
 }
 
-NewToDoForm.PropTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  submitData: PropTypes.func.isRequired
-};
+// NewToDoForm.PropTypes = {
+//   title: PropTypes.string.isRequired,
+//   description: PropTypes.string.isRequired,
+//   submitData: PropTypes.func.isRequired
+// };
 
 export default withRouter(NewToDoForm);

@@ -38,13 +38,16 @@ class App extends Component {
 
   removeToDo(id) {
     console.log('in removing todo');
-    this.setState(prevState => {
-      let todosCopy = [...prevState.todos].filter((todo, i) => {
-        return i !== +id;
-      });
-      // console.log(todosCopy);
-      return { todos: todosCopy, redirect: true };
-    });
+    debugger;
+    () => this.props.dispatch();
+
+    // this.setState(prevState => {
+    //   let todosCopy = [...prevState.todos].filter(todo => {
+    //     return todo.id !== id;
+    //   });
+    //   // console.log(todosCopy);
+    //   return { todos: todosCopy, redirect: true };
+    // });
   }
 
   editToDo(id, editedTodo) {
@@ -62,7 +65,7 @@ class App extends Component {
     console.log('in show edit form');
     this.setState(prevState => {
       let todosCopy = [...prevState.todos];
-      todosCopy[id].isEditSelected = !todosCopy[id].isEditSelected;
+      todosCopy.id.isEditSelected = !todosCopy.id.isEditSelected;
       console.log(todosCopy);
       return { todos: todosCopy };
     });
@@ -195,9 +198,9 @@ class App extends Component {
 //   ]
 // };
 
-App.propTypes = {
-  // Todos: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+// App.propTypes = {
+//   // Todos: PropTypes.arrayOf(PropTypes.object).isRequired
+// };
 
 function mapStateToProps(state) {
   console.log('entering mapStateToProps');
