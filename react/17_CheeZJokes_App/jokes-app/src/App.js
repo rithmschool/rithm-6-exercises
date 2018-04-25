@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ListJokes from './ListJokes';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      jokes: []
+      // jokes: [{title: 'title', id:1234, count:0}]
+    };
+  }
+
+  addNewJoke = () => {
+    //null
+  };
+
+  upVoted = () => {
+    //null
+  };
+
+  downVoted = () => {
+    //null
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ListJokes
+          upVoted={upVoted}
+          downVoted={this.downVoted}
+          addNewJoke={this.addNewJoke}
+        />
       </div>
     );
   }
