@@ -43,11 +43,11 @@ const DEFAULT_STATE = {
 
 export default function rootReducer(state = DEFAULT_STATE, action = {}) {
   console.log('in rootReducer');
-  // //debugger;
+  // //////debugger;;;
   let newState = { ...state };
   switch (action.type) {
   case 'ADD_TODO':
-    //debugger;
+    //////debugger;;;
     console.log('in rootReducer ADD_TODO');
     return {
       ...newState,
@@ -58,14 +58,19 @@ export default function rootReducer(state = DEFAULT_STATE, action = {}) {
     };
   case 'UPDATE_TODO':
     console.log('in rootReducer UPDATE_TODO');
-    //debugger;
-    let targetTodo = newState.todos.filter(todo => todo.id === action.id);
-    debugger;
-    newState.targetTodo = action.editedTodo;
-    return { ...this.newState, todos: [...newState.todos] };
+    var updatedTodos = newState.todos.map(
+      todo =>
+        todo.id === action.id
+          ? {
+            ...todo,
+            title: action.editedTodo.title,
+            description: action.editedTodo.description
+          }
+          : todo
+    );
+    return { ...newState, todos: updatedTodos };
   case 'REMOVE_TODO':
     console.log('in rootReducer RemoveTodo');
-    //debugger;
     var newTodos = newState.todos.filter(
       todo => todo.id !== action.payload.id
     );
@@ -78,7 +83,7 @@ export default function rootReducer(state = DEFAULT_STATE, action = {}) {
           ? { ...todo, isCompleted: !todo.isCompleted }
           : todo
     );
-      // debugger;
+      // ////debugger;;;
     return { ...newState, todos: updatedTodos };
   default:
     return newState;

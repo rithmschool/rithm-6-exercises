@@ -42,7 +42,7 @@ class App extends Component {
 
   removeToDo(id) {
     console.log('in removing todo');
-    //debugger;
+    //////debugger;;;
     // () =>
     this.props.dispatch({
       type: 'REMOVE_TODO',
@@ -60,7 +60,7 @@ class App extends Component {
 
   editToDo(id, editedTodo) {
     console.log('in edit to do');
-    //debugger;
+    //////debugger;;;
     this.props.dispatch({
       type: 'UPDATE_TODO',
       editedTodo,
@@ -104,9 +104,9 @@ class App extends Component {
   render() {
     console.log('in renderTodoList');
     // console.log(this.props.todos);
-    // debugger;
+    // ////debugger;;;
     const renderTodoList = props => {
-      // debugger;
+      // ////debugger;;;
       console.log('in in renderTodoList', this.props.todos);
       console.log('in props', props, this.props);
       return (
@@ -128,7 +128,7 @@ class App extends Component {
 
     const renderNewTodoForm = props => {
       console.log('in renderNewTodoForm');
-      //debugger;
+      //////debugger;;;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -138,15 +138,15 @@ class App extends Component {
     };
 
     const renderEditForm = props => {
-      console.log('in renderEditForm');
-      // debugger;
+      ////debugger;;;
       const targetTodo = this.props.todos.filter(todo => {
-        // debugger;
+        ////debugger;;;
 
         return todo.id === props.match.params.id;
       })[0];
+      console.log('the value of this props todos is', this.props.todos);
       console.log('Target todo id:', targetTodo.id);
-      // debugger;
+      // ////debugger;;;
       return (
         <div className="App">
           <h1>Dragon Todo List</h1>
@@ -192,15 +192,14 @@ class App extends Component {
     //   });
     //   return <Redirect to="/todos" />;
     // }
-
-    // //debugger;
+    // //////debugger;;;
     return (
       <BrowserRouter>
         <Switch>
           <Route path="/todos" exact render={renderTodoList} />
-          <Route path="/todos/new" render={renderNewTodoForm} />
-          <Route path="/todos/:id/edit" render={renderEditForm} />
-          <Route path="/todos/:id" render={renderSingleTodo} />
+          <Route path="/todos/new" exact render={renderNewTodoForm} />
+          <Route path="/todos/:id/edit" exact render={renderEditForm} />
+          <Route path="/todos/:id" exact render={renderSingleTodo} />
           <Redirect to="/todos" />
         </Switch>
       </BrowserRouter>

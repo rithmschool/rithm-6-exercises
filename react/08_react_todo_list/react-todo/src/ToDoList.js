@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class TodoList extends Component {
   render() {
-    // debugger;
+    // ////debugger;;;
     let todoLis = this.props.todos.map(
       ({ title, description, id, isCompleted, isEditSelected }) => {
         return (
