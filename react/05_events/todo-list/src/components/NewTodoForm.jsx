@@ -13,7 +13,7 @@ class NewTodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleAdd(this.state.val);
+    this.props.addTodo(this.state.val);
     this.setState({ val: "" });
     this.props.history.push("/");
   }

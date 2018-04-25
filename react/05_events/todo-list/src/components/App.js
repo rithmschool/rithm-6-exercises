@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import TodoList from "./TodoList";
-import NewTodoForm from "./NewTodoForm";
+import { Route, Link, Switch } from "react-router-dom";
+import TodoListContainer from "../containers/TodoListContainer";
+import TodoFormContainer from "../containers/TodoFormContainer";
 
 const NotFound = ({ location }) => (
   <div>
@@ -16,13 +16,8 @@ const NotFound = ({ location }) => (
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { todos: [] };
   }
-  handleAdd = newTodo => {
-    this.setState(prevState => ({
-      todos: [newTodo, ...prevState.todos]
-    }));
-  };
+
   render() {
     return (
       <div className="App">
@@ -30,14 +25,12 @@ class App extends Component {
         <Switch>
           <Route
             path="/new"
-            render={props => (
-              <NewTodoForm handleAdd={this.handleAdd} {...props} />
-            )}
+            render={props => <TodoFormContainer {...props} />}
           />
           <Route
             exact
             path="/"
-            render={props => <TodoList todos={this.state.todos} {...props} />}
+            render={props => <TodoListContainer {...props} />}
           />
           <Route component={NotFound} />
         </Switch>
