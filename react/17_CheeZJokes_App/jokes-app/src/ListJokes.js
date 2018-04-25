@@ -17,7 +17,7 @@ class ListJokes extends Component {
           upVoted={this.props.upVoted.bind(this, joke.id)}
           // upVoted={this.props.upVoted.bind(this, joke.id)}
           // upVoted={() => this.props.upVoted(joke.id)}
-          downVoted={this.props.downVoted}
+          downVoted={this.props.downVoted.bind(this, joke.id)}
         />
       );
     });

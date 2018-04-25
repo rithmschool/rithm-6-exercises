@@ -48,15 +48,46 @@ class App extends Component {
 
   upVoted = id => {
     console.log('entered upvote');
-    debugger;
-    const updatedJokes = this.state.jokes.map(
-      joke => (joke.id === id ? (joke.count = joke.count++) : joke)
-    );
-    this.setState(prevState => ({ ...prevState, jokes: updatedJokes }));
+    // debugger;
+    // const updatedJokes = this.state.jokes.map(
+    //   joke => (joke.id === id ? (joke.count = joke.count++) : joke)
+    // );
+    this.setState(prevState => {
+      // debugger;
+      const updatedJokes = prevState.jokes.map(joke => {
+        //keep failing to get this format to work :(
+        // joke => (joke.id === id ? joke.count++ : joke);
+        if (joke.id === id) {
+          debugger;
+          joke.count++;
+        }
+        return joke;
+      });
+      // debugger;
+      return { ...prevState, jokes: updatedJokes };
+    });
   };
 
   downVoted = id => {
     console.log('entered upvote');
+    // debugger;
+    // const updatedJokes = this.state.jokes.map(
+    //   joke => (joke.id === id ? (joke.count = joke.count++) : joke)
+    // );
+    this.setState(prevState => {
+      // debugger;
+      const updatedJokes = prevState.jokes.map(joke => {
+        //keep failing to get this format to work :(
+        // joke => (joke.id === id ? joke.count++ : joke);
+        if (joke.id === id) {
+          debugger;
+          joke.count--;
+        }
+        return joke;
+      });
+      // debugger;
+      return { ...prevState, jokes: updatedJokes };
+    });
   };
 
   render() {
