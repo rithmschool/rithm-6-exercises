@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { addTodo, updateTodo } from "../actions";
-import TodoForm from "../TodoForm";
+import TodoForm from "../components/TodoForm";
 
 class TodoFormContainer extends Component {
   constructor(props) {
