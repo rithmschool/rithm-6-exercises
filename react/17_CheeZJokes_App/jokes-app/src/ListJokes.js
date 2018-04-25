@@ -15,14 +15,13 @@ class ListJokes extends Component {
           title={joke.title}
           count={joke.count}
           upVoted={this.props.upVoted.bind(this, joke.id)}
-          // upVoted={this.props.upVoted.bind(this, joke.id)}
-          // upVoted={() => this.props.upVoted(joke.id)}
           downVoted={this.props.downVoted.bind(this, joke.id)}
         />
       );
     });
     return (
       <div>
+        <button onClick={this.props.addNewJoke}>Add New Joke</button>
         <h2>Jokes:</h2>
         <ul>{jokes}</ul>
       </div>

@@ -44,6 +44,26 @@ class App extends Component {
 
   addNewJoke = () => {
     console.log('entered addNewJoke');
+    debugger;
+    this.setState(async prevState => {
+      const res = await axios('https://icanhazdadjoke.com/search', {
+        headers: {
+          Accept: 'application/json'
+        },
+        //goal is to help us get new joke
+        current_page: 2,
+        limit: 10
+      });
+      const newJokesArr = res.data.results;
+      const currentJokesSet = new Set(prevState.jokes);
+      let newSize = currentJokesSet.size + 1;
+      let counter = 0;
+      while (currentJokesSet.size < newSize) {
+        currentJokesSet.add(newJokesArr[counter].joke);
+      }
+      const updatedJokes = [...currentJokesSet];
+      return { ...prevState, jokes: updatedJokes };
+    });
   };
 
   upVoted = id => {
