@@ -115,4 +115,5 @@ Students can only push to their own branches.
 1.  [React Router Todo List](./react/14_react_router_todo)
 1.  [Redux](./react/15_redux)
 1.  [React Redux Todo](./react/16_react_redux_todo)
-1.  [React LinkedList Frontend](./react/17_linkedlist_frontend)
+1.  [CheeZJokesApp](./react/17_CheeZJokes_App)
+1.  [React LinkedList Frontend](./react/18_linkedlist_frontend)
