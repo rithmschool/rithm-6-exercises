@@ -5,8 +5,8 @@ import Joke from './Joke';
 
 class ListJokes extends Component {
   render() {
-    debugger;
     console.log('entering jokeList');
+    // debugger;
     const jokes = this.props.jokes.map(joke => {
       return (
         <Joke
@@ -14,7 +14,9 @@ class ListJokes extends Component {
           id={joke.id}
           title={joke.title}
           count={joke.count}
-          upVoted={this.props.upVoted}
+          upVoted={this.props.upVoted.bind(this, joke.id)}
+          // upVoted={this.props.upVoted.bind(this, joke.id)}
+          // upVoted={() => this.props.upVoted(joke.id)}
           downVoted={this.props.downVoted}
         />
       );

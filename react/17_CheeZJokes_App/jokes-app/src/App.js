@@ -46,16 +46,21 @@ class App extends Component {
     console.log('entered addNewJoke');
   };
 
-  upVoted = () => {
+  upVoted = id => {
     console.log('entered upvote');
+    debugger;
+    const updatedJokes = this.state.jokes.map(
+      joke => (joke.id === id ? (joke.count = joke.count++) : joke)
+    );
+    this.setState(prevState => ({ ...prevState, jokes: updatedJokes }));
   };
 
-  downVoted = () => {
+  downVoted = id => {
     console.log('entered upvote');
   };
 
   render() {
-    debugger;
+    // debugger;
     console.log('listJokes');
     return (
       <div className="App">
