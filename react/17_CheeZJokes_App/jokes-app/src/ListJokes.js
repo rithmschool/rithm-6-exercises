@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuidv1 from 'uuid';
 
 import Joke from './Joke';
 
@@ -7,7 +8,7 @@ class ListJokes extends Component {
     const jokes = this.props.jokes.map(joke => {
       return (
         <Joke
-          // key={uuidv1()}
+          key={uuidv1()}
           id={joke.id}
           tite={joke.title}
           count={joke.count}
@@ -16,7 +17,12 @@ class ListJokes extends Component {
         />
       );
     });
-    return <ul>{jokes}</ul>;
+    return (
+      <div>
+        <h2>Jokes:</h2>
+        <ul>{jokes}</ul>
+      </div>
+    );
   }
 }
 

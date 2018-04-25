@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ListJokes from './ListJokes';
 
@@ -13,24 +12,26 @@ class App extends Component {
   }
 
   addNewJoke = () => {
-    //null
+    console.log('entered addNewJoke');
   };
 
   upVoted = () => {
-    //null
+    console.log('entered upvote');
   };
 
   downVoted = () => {
-    //null
+    console.log('entered upvote');
   };
 
   render() {
     return (
       <div className="App">
+        <h1>Welcome to Jokes App!</h1>
         <ListJokes
-          upVoted={upVoted}
+          upVoted={this.upVoted}
           downVoted={this.downVoted}
           addNewJoke={this.addNewJoke}
+          jokes={this.state.jokes}
         />
       </div>
     );
