@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class NewTodoForm extends Component {
   constructor(props) {
     super(props);
-    // is "isEditing" really state here?
-    this.state = { name: '', description: '', isEditing: false };
+    // is "isEditing" really state here? REMOVED
+    this.state = { name: '', description: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }

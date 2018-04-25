@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import TodoList from './TodoList';
 import NewTodoForm from './NewTodoForm';
 import Todo from './Todo';
@@ -9,19 +9,31 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // FIXME: this shoudl be a \list of todos DONE
+      nextId: 4,
       todos: [
-        { name: 'code', description: 'finish homework', isEditing: false },
-        { name: 'exercise', description: 'aerial yoga', isEditing: false },
+        {
+          name: 'code',
+          description: 'finish homework',
+          isEditing: false,
+          id: 1
+        },
+        {
+          name: 'exercise',
+          description: 'aerial yoga',
+          isEditing: false,
+          id: 2
+        },
         {
           name: 'laundry',
           description: 'wash towels',
-          isEditing: false
+          isEditing: false,
+          id: 3
         }
       ]
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
@@ -49,12 +61,24 @@ class App extends Component {
     });
   }
 
+  handleComplete(id) {
+    let newState = { ...this.state };
+    let idx = newState.todos.findIndex(todo => todo.id === id);
+    if (newState.todos[idx].className === 'completed') {
+      newState.todos[idx].className = '';
+    } else {
+      newState.todos[idx].className = 'completed';
+    }
+    this.setState(newState);
+  }
+
   handleRemove(idx) {
     const { todos } = this.state;
     const remainingTodos = todos.filter((val, i) => i !== idx);
     this.setState({
       todos: remainingTodos
     });
+    this.props.history.push('/todos');
   }
 
   toggleEdit(idx) {
@@ -62,9 +86,8 @@ class App extends Component {
     const updatedTodos = todos.map((todo, i) => {
       if (i === idx) {
         // FIXME: you mutate the same todo obj DONE
-        // { ...todo, isEditing: !todo.isEditing };
-
-        todo.isEditing = !todo.isEditing;
+        { ...todo, isEditing: !todo.isEditing };
+        // todo.isEditing = !todo.isEditing;
       }
       return todo;
     });
