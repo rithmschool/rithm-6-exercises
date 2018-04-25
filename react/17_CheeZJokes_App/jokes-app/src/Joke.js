@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class Joke extends Component {
   render() {
+    console.log('entering joke');
+    debugger;
     return (
       <div>
         <p>Joke: {this.props.title}</p>

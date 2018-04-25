@@ -5,12 +5,14 @@ import Joke from './Joke';
 
 class ListJokes extends Component {
   render() {
+    debugger;
+    console.log('entering jokeList');
     const jokes = this.props.jokes.map(joke => {
       return (
         <Joke
           key={uuidv1()}
           id={joke.id}
-          tite={joke.title}
+          title={joke.title}
           count={joke.count}
           upVoted={this.props.upVoted}
           downVoted={this.props.downVoted}
