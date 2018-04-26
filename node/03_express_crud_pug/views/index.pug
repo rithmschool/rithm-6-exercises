@@ -1,0 +1,19 @@
+extends base.pug
+
+block title
+    title Shopping list
+
+block content
+    div(class="text-center m-4")
+        h1 Welcome to my list page
+    
+    ul(class="list-group")
+    for el in items
+        li(class="list-group-item text-center" id=`${el.id}`)
+        
+            span(class="item-span mx-1")
+                a(href=`/items/${el.id}`) #{el.name}
+            span(class="price-span ml-5") #{el.price}
+
+    div(class="m-3")
+        a(href="/items/new") Add a new item to the list!

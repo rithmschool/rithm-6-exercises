@@ -1,0 +1,18 @@
+extends base.pug
+
+block title
+    title Add new list item
+
+block content
+    div(class="text-center m-4")
+        h1 Add a new list item
+    
+    form(action="/items", method="POST")
+        div(class="form-group")
+            label(for="inputItem") Shopping list item
+            input(type="text",class="form-control",id="inputItem",name="inputItem",aria-describedby="inputItemHelp",placeholder="Enter item")
+        div(class="form-group")
+            label(for="inputPrice") Price of item
+            input(type="text",class="form-control",id="inputPrice",name="inputPrice",aria-describedby="inputPriceHelp",placeholder="Enter price")
+        button(type="submit",class="btn btn-secondary btn-lg btn-block") Submit new item
+        
