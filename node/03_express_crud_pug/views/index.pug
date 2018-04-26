@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+    h1 The to-do-list
+    br
+
+    for item in list
+        li #{item.id} #{item.name}, #{item.price}
+    
+    br
+    a(href="/items/new") Add a new to-do!
