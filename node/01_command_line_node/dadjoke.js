@@ -8,7 +8,7 @@ axios
   .get(`https://icanhazdadjoke.com/search?term=${term}`, {
     headers: { Accept: 'application/json' }
   })
-  .then(result => {
+  .then((result => {
     num = Math.floor(Math.random() * result.data.results.length);
     joke = result.data.results[num].joke;
     console.log(joke);
