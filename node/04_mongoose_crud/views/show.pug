@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+
+  h1 #{foundItem.name} $#{foundItem.price} #{foundItem.quantity}
+
+    a(href=`/items/${foundItem.id}/edit`)    click here to edit
+
+  form(action=`/items/${foundItem.id}?_method=DELETE` method = "POST")
+    input(type = "submit", value = "delete this item")
+

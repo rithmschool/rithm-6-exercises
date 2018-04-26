@@ -1,0 +1,6 @@
+extends base.pug
+
+block content
+  form(action="/items/search/results", method = "GET")
+    input(type = "text" ,name = "name" placeholder= "search here")
+    input(type = "submit" value= "click to search")
