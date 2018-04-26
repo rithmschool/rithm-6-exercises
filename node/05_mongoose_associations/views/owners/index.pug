@@ -1,0 +1,12 @@
+extends ../base.pug
+
+block content
+    div(class='text-center')
+      h1 Users
+
+      a(href="/owners/new") Add user
+      ul(class='list-unstyled')
+      each owner in owners
+          li
+            a(href=`owners/${owner.id}`) #{owner.name}
+

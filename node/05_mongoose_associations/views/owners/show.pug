@@ -1,0 +1,17 @@
+extends ../base.pug
+
+block content
+    div(class='text-center w-75 m-auto')
+      h1 Name: #{owner.name}
+      a(class='btn btn-primary d-flex justify-content-center' href=`/owners/${owner.id}/edit`) Change your name
+      a(class='btn btn-primary d-flex justify-content-center' href=`/owners/${owner.id}/animals/new`) Add Animal
+      ul(class='list-unstyled')
+        for animal in animals
+            li
+              a(href=`/owners/${animal.owner}/animals/${animal.id}`) #{animal.name}
+              span : #{animal.cuteness}
+      a(class="d-flex justify-content-center" href="/owners") Go back to all users
+
+
+      form(action=`/owners/${owner.id}?_method=DELETE` method="POST")
+          button(class='btn btn-danger') Delete profile

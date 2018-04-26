@@ -1,0 +1,15 @@
+extends ../base.pug
+
+block content
+    div(class='text-center')
+      h1 Add a new animal!
+      form(action=`/owners/${owner_id}/animals` class="form-horizontal" method="POST")
+        <div class="form-group">
+          label(for="name" class="") Name:
+          input(type="text" name="name" placeholder="Name" required)
+        <div class="form-group">
+          label(for="cuteness") Cuteness Index:
+          input(type="text" name="cuteness" placeholder="Cuteness" required)
+        <div class="form-group">
+          button(class='btn btn-primary' ) Add a new animal!
+      a(href="/animals") Go back to all animals :)

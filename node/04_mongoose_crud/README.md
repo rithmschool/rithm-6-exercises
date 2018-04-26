@@ -1,24 +1,17 @@
-# Mongoose CRUD
+# Express CRUD with PUG
 
-Let's once again rebuild our previous example using a shopping list, but this time we will not be using an array to store our data. Instead, we will be using a MongoDB database! The resource we will be working with once again is `item`.
+For this exercise we will be building a simple application where we will store a shopping list. You should use an **array** to store your animals in the shopping list.
 
-The application should have one model for `Item` and each item should have:
+Our application should have the following routes:
 
-* a unique id
-* a name which should be a string
-* a quantity which should be a number
-
-The application should have the following routes:
-
-* `GET /items` to show all items in the shopping list
-* `GET /items/new` to show a form for creating a new item
-* `GET /items/:id` to show a single item
-* `GET /items/:id/edit` to show a form for editing a item
-* `POST /items` to create an item when a form is submitted
-* `PATCH /items/:id` to edit an item when a form is submitted
-* `DELETE /items/:id` to delete an item when a form is submitted
+1.  `GET /` - this should redirect to `/animals`
+1.  `GET /animals` - this should render a list of shopping animals.
+1.  `GET /animals/new` - this page should render a form where a user can add an animal to their shopping list, with at least `name` and `price` attributes. When the form is submitted, the browser should make a `POST` request to `/animals`.
+1.  `POST /animals` - this route should accept form data and add it to the shopping list.
 
 ### Bonus
 
-1.  Create a route for `GET /items/search` which allows a user to search for items in the shopping list.
-2.  Create a route for `DELETE /items` which allows a user to remove all the items in the shopping list.
+1.  `GET /animals/:id` - this route should display a single animal's name and price
+1.  `GET /animals/:id/edit` - this route should render a form where the user can update the name or price of the animal, which sends a PATCH to `/animals/:id`, or click an `X` to delete the animal, sending a DELETE to `/animals/:id`
+1.  `PATCH /animals/:id` - this route should accept edits to existing animals.
+1.  `DELETE /animals/:id` - this route should allow you to delete a specific animal from the array.

@@ -1,0 +1,11 @@
+extends ../base.pug
+
+block content
+    h1(class='text-center') Would you like to change your name?
+    form(action=`/owners/${owner.id}?_method=PATCH` method="POST")
+      <div class="form-group">
+        label(for="name" class='form-group') Name:
+        input(type="text" name="name" value=`${owner.name}` placeholder="Name" required)
+      <div class="form-group">
+        button(class='btn btn-primary') Change name
+    a(href=`/owners/${owner.id}`) Go back to your main page

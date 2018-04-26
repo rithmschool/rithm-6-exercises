@@ -1,0 +1,12 @@
+extends ../base.pug
+
+block content
+    div(class='text-center')
+      h1 Add a new owner!
+      form(action="/owners" class="form-horizontal" method="POST")
+        <div class="form-group">
+          label(for="name" class="") Name:
+          input(type="text" name="name" placeholder="Name" required)
+        <div class="form-group">
+          button(class='btn btn-primary' ) Add a new owner!
+      a(href="/owners") Go back to all owners :)

@@ -1,0 +1,11 @@
+extends ../base.pug
+
+//- I have access to animal.owner in here
+block content
+    div(class='text-center')
+      h1 Animal: #{animal.name}
+      h3 Cuteness: #{animal.cuteness}
+      a(href=`/owners/${animal.owner}/animals/${animal.id}/edit`) Change your animal!
+      form(action=`/owners/${animal.owner}/animals/${animal.id}?_method=DELETE` method="POST")
+          button(class='btn btn-danger') Delete Animal!
+      a(href=`/owners/${animal.owner}`) Go back to all animals :)
