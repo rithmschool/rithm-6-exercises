@@ -4,8 +4,13 @@ click==6.7
 decorator==4.2.1
 Flask==0.12.2
 Flask-Migrate==2.1.1
+<<<<<<< HEAD
 Flask-Modus==0.0.1
 Flask-SQLAlchemy==2.3.2
+=======
+Flask-SQLAlchemy==2.3.2
+Flask-Testing==0.7.1
+>>>>>>> master
 ipython==6.2.1
 ipython-genutils==0.2.0
 itsdangerous==0.24
@@ -28,4 +33,7 @@ SQLAlchemy==1.2.5
 traitlets==4.3.2
 wcwidth==0.1.7
 Werkzeug==0.14.1
+<<<<<<< HEAD
 yapf==0.20.2
+=======
+>>>>>>> master
