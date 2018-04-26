@@ -2,9 +2,9 @@ import React from 'react';
 import Pokedex from './pokedex';
 import pokemon from '../pokemonData';
 
-const PokecardFunc = () => {
-  return <div>'this is the pokemon card function' </div>;
-};
+// const PokecardFunc = () => {
+//   return <div>'this is the pokemon card function' </div>;
+// };
 
 class Pokecard extends React.Component {
   render() {
