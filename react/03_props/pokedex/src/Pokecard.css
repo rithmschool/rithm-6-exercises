@@ -1,0 +1,12 @@
+.PokemonCard {
+  border-radius: 25px;
+  background-color: rgb(211, 211, 211);
+  width: 20%;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h2 {
+  color: blue;
+}
