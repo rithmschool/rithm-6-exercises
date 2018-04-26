@@ -1,0 +1,29 @@
+body {
+  background-color: black;
+  text-align: center;
+  color: white
+}
+
+.vending {
+  width: 22.5rem;
+  margin-top: 1rem;
+}
+
+.steak {
+  width: 30rem;
+  margin-top: 4rem;
+}
+.ice-cream {
+  width: 60rem;
+  margin-top: 4rem;
+}
+
+.french-fries {
+  width: 65rem;
+  margin-top: 4rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
