@@ -1,0 +1,11 @@
+The mean of 1,2,3 is 2
+The mean of 1,2,3,4 is 2.5
+The mean of 1,2,3 is 2
+The mean of 1,2,3 is 2
+The mean of 1,2,3,foo is NaN
+The mean of 1,2,3,55 is 15.25
+The mean of 1,2,3 is 2
+The mean of 1,2,3,foo is NaN
+The mean of  is 0
+The mean of  is 0
+The mean of 1,2,3 is 2
