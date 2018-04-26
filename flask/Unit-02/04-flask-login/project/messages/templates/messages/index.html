@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %} {{ user.first_name }} | Messages {% endblock %} {% block body %}
+<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+{% if user.image_url %}
+<div class="post-it">
+  <img src="{{ user.image_url }}" alt="{{ user.first_name }} {{ user.last_name }}'s profile picture">
+</div>
+{% endif %}
+<a href="{{ url_for('messages.new', user_id=user.id) }}">Add a New Message for {{ user.first_name }}</a> |
+<a href="{{ url_for('tags.new') }}">Create a Tag</a> |
+<a href="{{ url_for('users.edit', user_id=user.id) }}">Edit User</a>
+<br>
+<br>
+{% for message in user.messages %}
+<div>
+  <p>{{ message.content }}
+    <br> |
+      {% for tag in message.tags %}
+      <a href="{{ url_for('tags.index') }}">{{ tag.name }}</a> |
+      {% endfor %}
+    <br>
+    <a href="{{ url_for('messages.edit', user_id=user.id, message_id=message.id) }}">Edit Message</a>
+  </p>
+</div>
+{% endfor %}
+<a href="{{ url_for('tags.index') }}">View All Tags</a> |
+<a href="{{ url_for('users.index') }}">View All Users</a>
+{% endblock %}
