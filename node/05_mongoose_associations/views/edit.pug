@@ -1,0 +1,23 @@
+extends base.pug
+
+block title
+    title edit item
+
+block content
+    div(class="text-center m-4")
+        h1 edit list item
+    
+    form(action=`/items/${item._id}?_method=PATCH`, method="POST")
+        div(class="form-group")
+            label(for="name") list item
+            input(type="text", class="form-control", id="name", name="name", aria-describedby="nameHelp", placeholder="Enter item", value=`${item.name}`)
+        div(class="form-group")
+            label(for="quantity") quantity of item
+            input(type="text", class="form-control", id="quantity", name="quantity", aria-describedby="quantityHelp", placeholder="Enter quantity", value=`${item.quantity}`)
+        button(type="submit", class="btn btn-secondary btn-lg btn-block") submit changes
+    
+    div(class="row my-3")
+        h5(class="mx-auto")
+            a(href="/") go back to the list
+            span(class="mx-2") |
+            a(href=`/items/${item._id}`) go back to item view
