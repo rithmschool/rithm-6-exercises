@@ -1,0 +1,21 @@
+extends base.pug
+
+block title
+    | Add Item
+
+block content
+    h1 Add Item to Shopping List
+
+    form(action="/items" method="POST")
+        br
+        label Name
+        input(type="text", name="name")
+        br
+        br
+        label Price
+        input(type="text", name="price")
+        br
+        br
+        input(type="submit", name="done", value="Add Item")
+        br
+        a(href="/items") Cancel
