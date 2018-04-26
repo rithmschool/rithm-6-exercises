@@ -1,0 +1,32 @@
+.chips-comp {
+    background-color: antiquewhite;
+    width: 100vw;
+    height: 100vh;
+}
+
+button {
+    height: 45px;
+    width: 125px;
+    background-color: darkred;
+    border-radius: 7px;
+}
+
+.chips-msg {
+    position: fixed;
+    top: 35vh;
+    left: 35%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.chips-holder {
+    width: 100vw;
+    height: 100vh;
+}
+
+.chips-bag {
+    position: fixed;
+}
