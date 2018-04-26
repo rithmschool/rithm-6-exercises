@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = "alert alert-light override-nav">
+<a href="{{url_for('users.new')}}">Add a New User</a>
+<a href="{{url_for('tags.new')}}">Add a New Tag</a>
+</div>
+{% for user in users %}
+        <div id = "override-list">
+        <ul class = "list-group list-group-flush">
+            
+
+        <li class = "list-group-item">{{user.first_name}} {{user.last_name}}
+        <br>
+        <a href="{{url_for('users.show', id=user.id)}}"> Login to see more about this user</a>
+        <br>
+        <a href="{{url_for('messages.index', id = user.id)}}">See all user messages</a>
+    </li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock %}

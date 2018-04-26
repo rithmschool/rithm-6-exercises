@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action = "{{url_for('tags.show, tag_id = tag.id)}}?_method = PATCH">
+    <input type="text" value = "{{tag.subject}}" name = "Tag-subject">
+    <input type="submit" value = "Edit Tag">
+</form>
+
+
+{% endblock %}

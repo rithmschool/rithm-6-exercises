@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<p>
+  {{user.first_name}} {{user.last_name}}
+  <br>
+  <a href="{{url_for('users_edit', id=user.id)}}">Edit {{user.first_name}}</a>
+</p>
+
+<form method="POST" action="{{url_for('users_show',id = user.id)}}?_method=DELETE">
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <p>
+        <span>
+            {% if field.errors%}
+            {% for error in field.errors%}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+        </span>
+    </p>
+    {% endfor %}
+<input type="submit" value="Delete this user">
+</form>
+
+<a href="{{url_for('index')}}">Back to All Users</a>
+{% endblock %}

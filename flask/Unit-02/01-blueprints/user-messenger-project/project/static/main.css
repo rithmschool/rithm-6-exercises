@@ -1,0 +1,18 @@
+#override-body {
+  padding: 50px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    url('https://c1.staticflickr.com/4/3180/2580881465_d5849acef3_b.jpg');
+}
+
+#override-list {
+  background-color: black;
+  border: 2px solid black;
+}
+
+#override-nav {
+  border: 1px solid black;
+}

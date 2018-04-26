@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+
+<p>
+  {{message.content}}
+  <br>
+  <a href="{{url_for('message_edit',id = message.user_id, message_id = message.id)}}">Edit this message</a>
+</p>
+
+<form method="POST" action="{{url_for('message_show',message_id = message.id, id = message.user_id)}}?_method=DELETE">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <p>
+            <span>
+                {% if field.errors%}
+                {% for error in field.errors%}
+                {{error}}
+                {% endfor %}
+                {% endif %}
+            </span>
+        </p>
+        {% endfor %}
+    <input type="submit" value="DELETE THIS MESSAGE">
+</form>
+{% endblock %}

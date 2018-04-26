@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class = "list-group list-group-flush">
+
+        <li class = "list-group-item"><form method="POST" action="{{url_for('messages.index', id = user.id)}}">
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+     <p>
+        {{field.label}}
+        {{field}}
+        <span>
+            {% if field.errors%}
+            {% for error in field.errors%}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+        </span>
+    </p>
+    {% endfor %}
+    <p>
+    </p>
+    <input type="submit" value="Add Message">
+</form>
+</li>
+</ul>
+{% endblock %}
