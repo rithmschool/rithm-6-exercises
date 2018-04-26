@@ -1,0 +1,14 @@
+.inprogress__edit {
+  background-color: dodgerblue;
+}
+
+form {
+  display: inline-block;
+}
+
+.edit__input {
+  height: 30px;
+  width: 300px;
+  border-radius: 3px;
+  font-size: 12px;
+}

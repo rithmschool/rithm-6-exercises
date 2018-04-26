@@ -1,0 +1,25 @@
+ul {
+  list-style: none;
+  font-size: 18px;
+}
+
+li > a {
+  text-decoration: none;
+}
+
+.main__section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.list__background {
+  background-image: url("https://data.whicdn.com/images/271983597/large.jpg");
+  margin: 0 auto;
+  height: 800px;
+  width: 600px;
+}
+
+h1 {
+  margin: 0;
+}
