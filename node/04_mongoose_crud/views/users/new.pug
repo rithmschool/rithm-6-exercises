@@ -1,0 +1,16 @@
+extends ../base.pug
+
+block content
+  section(class="row")
+    div(class="mx-auto")
+      h2 Enter Your Name and Start Collecting Pets!
+  div(class="row mt-4")
+      form(action=`/users` method="POST" class="mx-auto col-8")
+        div(class="form-group row")
+          label(for="name" class="col-sm-3 col-form-label") Name:
+          div(class="col-sm-9")
+            input(type="text" class="form-control" name="name" class="col-sm-12")
+        div(class="form-group row")
+          div(class="col-sm-9")
+            button(class="btn btn-outline-success mx-auto") Start Your Pet Planning!&nbsp;
+             i(class="fas fa-heart")

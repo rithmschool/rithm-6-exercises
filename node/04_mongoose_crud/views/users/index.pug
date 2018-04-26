@@ -1,0 +1,29 @@
+extends ../base.pug
+block content
+  section(class="img__background")
+    div(class="row")
+      h2(class="mx-auto mb-4") Users signed up to Pet Prep!
+    div(class="row")
+      a(href="/users/new" class="mx-auto mb-4") Sign Up a New User!
+    div(class="row")
+      table(class="table table-hover table table-bordered text-center mx-auto")
+        thead
+          tr
+            th(scope="col") User
+            th(scope="col") See Profile
+            th(scope="col") Remove
+          tr
+        thead
+        tbody
+        each user in users
+          tr
+            th(scope="row") #{user.name}
+            td
+             a(href=`/users/${user.id}/pets`)
+              i(class="fas fa-paw")
+            td
+             a(href="#")
+              i(class="far fa-frown")
+          tr
+        tbody
+      table

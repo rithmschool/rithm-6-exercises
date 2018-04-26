@@ -1,0 +1,34 @@
+extends ../base.pug
+
+block content
+  section(class="row")
+    div(class="mx-auto")
+      h2 Enter Your Future Pet Love's Details!
+  div(class="row mt-4")
+      form(action=`/users/${user.id}/pets` method="POST" class="mx-auto col-8")
+        div(class="form-group row")
+          label(for="type" class="col-sm-3 col-form-label") Type of Pet:
+          div(class="col-sm-9")
+            input(type="text" class="form-control" name="type" class="col-sm-12")
+        div(class="form-group row")
+          label(for="breed" class="col-sm-3 col-form-label") Breed:
+          div(class="col-sm-9")
+            input(type="text" class="form-control" name="breed" class="col-sm-12")
+        div(class="form-group row")
+          label(for="petNames" class="col-sm-3 col-form-label") Possible Name(s):
+          div(class="col-sm-9")
+            input(type="text" class="form-control" name="petNames" class="col-sm-12")
+        div(class="form-group row")
+          label(for="petUrl" class="col-sm-3 col-form-label") URL of the Furball:
+          div(class="col-sm-9")
+            input(type="url" name="petUrl" class="form-control")
+        div(class="form-group row")
+          label(for="petNotes" class="col-sm-3 col-form-label") Notes:
+          div(class="col-sm-9")
+            textArea(rows="4" class="form-control col-sm-12" name="petNotes")
+        div(class="form-group row")
+          div(class="col-sm-9")
+            button(class="btn btn-outline-success mx-auto") Add Your Pet to The List!&nbsp;
+             i(class="fas fa-heart")
+
+

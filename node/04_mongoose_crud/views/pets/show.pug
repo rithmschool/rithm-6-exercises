@@ -1,0 +1,17 @@
+extends ../base.pug
+
+block content
+  h1(class="text-center") Info on the FFB (Future FurBaby)
+  div(class="mx-auto text-center")
+    h6 Type: #{pet.type}
+    h6 Breed: #{pet.breed}
+    h6 Possible Names: #{pet.petNames}
+    h6 Website: #{pet.petUrl}
+    h6 Notes: #{pet.petNotes}
+  a(href=`/users/${pet.user}/pets/${id}/edit`) Edit
+  div
+    a(href=`/users/${user}/pets`) Go back to the List
+  div
+    form(action=`/users/${pet.user}/pets/${pet.id}?_method=DELETE` method="POST")
+  div
+      button(class="btn btn-danger") Delete It
