@@ -1,0 +1,31 @@
+extends base.pug
+
+block content
+  div(class="container")
+      h2(style="text-align: center") All of #{user.firstName} #{user.lastName} items
+
+      table(class="table" style="text-align: center")
+        thead
+          tr
+            th(scope="col") Snacks
+            th(scope="col") Price
+            th(scope="col") Qty
+            th(scope="col") SubTotal
+            th(scope="col") Edit
+        tbody
+          each item in user.items
+            tr
+              td
+               a(href=`/user/${user.id}/items/${item.id}/`) #{item.name}
+              td $#{item.price}
+              td #{item.qty}
+              td $#{item.price * item.qty}
+              td
+                a(href=`/user/${user.id}/items/${item.id}/edit`) Edit
+      h2 Your Total is $#{total}
+      h2 There are #{totalQty} items in your Kart
+
+      form(action=`/user/${user.id}/items/new` method="GET")
+        input(type="submit" value="Create A New Item" class="btn btn-primary")
+
+

@@ -1,0 +1,7 @@
+extends base.pug
+
+block content
+        form(action="/items/search/results" method="GET")
+          label(for="") Search
+            input(type="text" name="name" value="search")
+            input(type="submit" value="Search Item" class="btn btn-primary")
