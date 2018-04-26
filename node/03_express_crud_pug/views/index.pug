@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+    div(class='text-center')
+      h1 See your animals
+      a(href="/animals/new") Add a new animal!
+      ul(class='list-unstyled')
+      each animal in animals
+          li
+            a(href=`animals/${animal.id}`) #{animal.name}
