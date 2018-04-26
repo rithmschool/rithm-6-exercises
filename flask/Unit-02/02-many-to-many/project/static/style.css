@@ -14,13 +14,14 @@ html {
   font-size: 16px;
 }
 
-/* body { */
-/* background-image: url('Righteousness.jpeg');
+body {
+  /* background-image: url('Righteousness.jpeg');
   background-position: center center;
   background-repeat: repeat, repeat; */
-/* display: flex; */
-/* justify-content: center; */
-/* } */
+  /* display: flex; */
+  /* justify-content: center; */
+  padding: 20px 50px;
+}
 
 main {
   /* width: 60%; */
