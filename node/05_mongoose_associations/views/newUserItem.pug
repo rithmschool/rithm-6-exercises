@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+  h1 Add Items for #{user.name}
+  ol
+    each item in items
+      li #{item.name} Qty: #{item.quantity}
+      form(action=`/users/${user._id}/items` method="POST")
+        input(type="text" name="item_id" value=`${item._id}` hidden=true)
+        input(type="submit" value="Add Item to User's Shopping List")

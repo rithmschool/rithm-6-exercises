@@ -1,0 +1,9 @@
+extends base.pug
+
+block content
+  h1 Shopping List
+  a(href="/items/new") Add an Item
+  ul
+    each item in items
+      li #{item.name} Qty #{item.quantity} &nbsp;
+        a(href=`/items/${item.id}/edit`) Edit Item
