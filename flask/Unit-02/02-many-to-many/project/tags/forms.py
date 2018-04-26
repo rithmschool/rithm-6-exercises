@@ -3,7 +3,7 @@ from wtforms import StringField, SelectMultipleField, widgets, validators
 from project.models import Message
 
 
-class TForm(FlaskForm):
+class TagForm(FlaskForm):
     name = StringField(
         'Tag Name',
         [validators.DataRequired(message='Please enter a tag name')])
@@ -17,5 +17,5 @@ class TForm(FlaskForm):
     def set_choices(self):
         self.messages.choices = [(message.id, message.content) for message in Message.query.all()]
 
-class DForm(FlaskForm):
+class DeleteForm(FlaskForm):
     pass

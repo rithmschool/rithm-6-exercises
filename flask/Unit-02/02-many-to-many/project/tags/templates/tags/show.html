@@ -1,3 +1,12 @@
-{% extends 'base.html' %} {% title block %} Tag Messages {% endblock %} {% body block %} {% for m in messages %}
-<p>t.content</p>
-{% endfor %} {% endblock %}
+{% extends 'base.html' %} {% title block %} Tag Messages {% endblock %} {% body block %}
+<p>tag.name
+    <br> |
+    {% for message in tag.messages %}
+    <a href="{{ url_for('messages.index', user_id=message.user_id) }}">Message {{ message.id }}</a> |
+    {% endfor %}
+    <br>
+  <a href="{{ url_for('tags.edit', tag_id=tag.id) }}">Edit Tag</a>
+</p>
+<a href="{{ url_for('tags.index') }}">View All Tags</a> |
+<a href="{{ url_for('users.index') }}">View All Users</a>
+{% endblock %}

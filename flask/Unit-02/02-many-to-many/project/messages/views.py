@@ -1,69 +1,78 @@
 from flask import redirect, render_template, request, url_for, flash, Blueprint
-from project.messages.forms import MForm, DForm
-from project.models import User, Message
+from project.messages.forms import MessageForm, DeleteForm
+from project.models import User, Message, Tag
 from project import db
 
-mbp = Blueprint('m', __name__, template_folder='templates')
+messages_blueprint = Blueprint('messages', __name__, template_folder='templates')
 
 
-@mbp.route('/', methods=['GET', 'POST'])
-def index(u_id):
+@messages_blueprint.route('/', methods=['GET', 'POST'])
+def index(user_id):
     if request.method == 'POST':
-        m_form = MForm(request.form)
-        if m_form.validate():
-            db.session.add(
-                Message(content=m_form.data['content'], user_id=u_id))
+        message_form = MessageForm(request.form)
+        message_form.set_choices()
+        if message_form.validate():
+            new_message = Message(content=message_form.data['content'], user_id=user_id)
+            new_message.tags = []
+            for tag in message_form.tags.data:
+                new_message.tags.append(Tag.query.get(tag))
+            db.session.add(new_message)
             db.session.commit()
             flash('Message Created!')
-            return redirect(url_for('m.index', u_id=u_id))
+            return redirect(url_for('messages.index', user_id=user_id))
         else:
-            flash('Form Incomplete!')
             return render_template(
-                'messages/new.html', u=User.query.get(u_id), m_form=m_form)
+                'messages/new.html', user=User.query.get(user_id), message_form=message_form)
     return render_template(
-        'messages/index.html', u=User.query.get_or_404(u_id))
+        'messages/index.html', user=User.query.get_or_404(user_id))
 
 
-@mbp.route('/new')
-def new(u_id):
+@messages_blueprint.route('/new')
+def new(user_id):
+    message_form = MessageForm()
+    message_form.set_choices()
     return render_template(
-        'messages/new.html', u=User.query.get_or_404(u_id), m_form=MForm())
+        'messages/new.html', user=User.query.get_or_404(user_id), message_form=message_form)
 
 
-@mbp.route('/<int:m_id>/edit')
-def edit(u_id, m_id):
-    u = User.query.get_or_404(u_id)
-    m = Message.query.get_or_404(m_id)
-    m_form = MForm(obj=m)
+@messages_blueprint.route('/<int:message_id>/edit')
+def edit(user_id, message_id):
+    user = User.query.get_or_404(user_id)
+    message = Message.query.get_or_404(message_id)
+    message_form = MessageForm(obj=message)
+    message_form.set_choices()
     return render_template(
-        'messages/edit.html', u=u, m=m, m_form=m_form, d_form=DForm())
+        'messages/edit.html', user=user, message=message, message_form=message_form, delete_form=DeleteForm())
 
 
-@mbp.route('/<int:m_id>', methods=['PATCH', 'DELETE'])
-def show(u_id, m_id):
-    m = Message.query.get_or_404(m_id)
-    d_form = DForm(request.form)
+@messages_blueprint.route('/<int:message_id>', methods=['PATCH', 'DELETE'])
+def show(user_id, message_id):
+    message = Message.query.get_or_404(message_id)
+    delete_form = DeleteForm(request.form)
     if request.method == b'PATCH':
-        m_form = MForm(request.form)
-        if m_form.validate():
-            m.content = request.form['content']
-            db.session.add(m)
+        message_form = MessageForm(request.form)
+        message_form.set_choices()
+        if message_form.validate():
+            message.content = request.form['content']
+            message.tags = []
+            for tag in message_form.tags.data:
+                message.tags.append(Tag.query.get(tag))
+            db.session.add(message)
             db.session.commit()
             flash('Message Updated!')
-            return redirect(url_for('m.index', u_id=u_id))
+            return redirect(url_for('messages.index', user_id=user_id))
         else:
-            flash('Form Incomplete!')
             return render_template(
                 'messages/edit.html',
-                u=User.query.get(u_id),
-                m=m,
-                m_form=m_form,
-                d_form=DForm())
+                user=User.query.get(user_id),
+                message=message,
+                message_form=message_form,
+                delete_form=DeleteForm())
     if request.method == b'DELETE':
-        if d_form.validate():
-            db.session.delete(m)
+        if delete_form.validate():
+            db.session.delete(message)
             db.session.commit()
             flash('Message Deleted!')
-            return redirect(url_for('m.index', u_id=u_id))
+            return redirect(url_for('messages.index', user_id=user_id))
         flash('Delete Request Denied!')
-        return redirect(url_for('m.index', u_id=u_id))
+        return redirect(url_for('messages.index', user_id=user_id))
