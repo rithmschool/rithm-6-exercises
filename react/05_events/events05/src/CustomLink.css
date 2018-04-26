@@ -1,0 +1,13 @@
+.link {
+  margin: 10px;
+  font-size: 2em;
+  border: 1px solid black;
+}
+
+button {
+  background-color: black;
+  color: white;
+  height: 50px;
+  width: 150px;
+  margin-top: 10px;
+}
