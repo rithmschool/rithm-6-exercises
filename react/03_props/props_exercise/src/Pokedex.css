@@ -1,0 +1,20 @@
+.Pokemon {
+  border-radius: 8px;
+  background-color: lightgray;
+  width: 200px;
+  margin: 5px 10.5%;
+  float: left;
+}
+
+h2 {
+  color: blue;
+  margin: 0;
+  padding-top: 10px;
+}
+
+p {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+
