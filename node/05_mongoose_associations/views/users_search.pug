@@ -1,0 +1,16 @@
+extends base.pug
+
+block title
+    | Search User
+
+block content
+    h1 Search Users in User List
+
+    form(action="/users/searchresults")
+        br
+        label Name
+        input(type="text", name="name")
+        br
+        br
+        input(type="submit", name="done", value="Search Users")
+

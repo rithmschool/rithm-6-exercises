@@ -1,0 +1,16 @@
+extends base.pug
+
+block title
+    | Show Item
+
+block content
+    h1 Show Item - ID #{item.id}
+    br
+    p #{item.name} : #{item.quantity}
+    br
+    a(href=`/items/${item.id}/edit`) Edit Item
+    br
+
+    form(action=`/items/${item.id}?_method=DELETE` method="POST" )
+        input(type="submit", name="delete", value="X")
+

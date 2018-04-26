@@ -1,0 +1,20 @@
+extends base.pug
+
+block title
+    | Show User Profile
+
+block content
+    h1 Show User - ID #{user.id}
+    p Username: #{user.name}
+    h3 Items for #{user.name}
+    each item in items
+        li
+            span #{item.name} | #{item.quantity}
+
+    br
+    a(href=`/users/${user.id}/edit`) Edit User
+    br
+    br
+    form(action=`/users/${user.id}?_method=DELETE` method="POST" )
+        input(type="submit", name="delete", value="Delete User")
+
