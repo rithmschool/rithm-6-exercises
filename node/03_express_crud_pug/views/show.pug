@@ -1,0 +1,7 @@
+extends base.pug
+
+block content
+  h3 View your item below:
+  h5 Item: #{item.item}
+  h5 Price: #{item.price}
+  a(href=`/items/${item.id}/edit`) Edit Item

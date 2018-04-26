@@ -1,0 +1,11 @@
+extends base.pug
+
+block title
+  | My Items
+
+block content
+  h1 View All Items:
+  ul(class="list-group")
+  each item in items
+    li(class="list-group-item align-items-center mx-50"): a(href=`/items/${item.id}`) #{item.item} $#{item.price}
+

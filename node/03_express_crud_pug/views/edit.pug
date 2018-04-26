@@ -1,0 +1,15 @@
+extends base.pug
+
+block content
+  h1 Edit your item!
+  br
+  form(action=`/items/${item.id}?_method=PATCH` method="POST")
+    div(class="form-group")
+      label(for="item") Item:
+      input(type="text" name="item" value=`${item.item}`)
+    div(class="form-group")
+      label(for="item") Price:
+      input(type="text" name="price" value=`${item.price}`)
+    button.btn.btn-primary(type="submit") Edit
+  form(action=`/items/${item.id}?_method=DELETE` method="POST")
+    button.btn.btn-danger(type="submit") X
