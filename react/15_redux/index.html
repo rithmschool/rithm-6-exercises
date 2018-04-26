@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Redux Exercise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
+
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
-</body>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./emoji.js"></script>
+    <script src="./emojiJquery.js"></script>
+    <div align="center">
+        <br><br>
+      <button id="happy" type="button" class="btn btn-primary">Happy</button>
+      <button id="sad" type="button" class="btn btn-success">Sad</button>
+      <button id="angry" type="button" class="btn btn-danger">Angry</button>
+      <button id="confused" type="button" class="btn btn-warning">Confused</button>
+      <br><br>
+      <div id="mood"></div>
+    </div>
+
+  </body>
 </html>
