@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block title %} Edit User {% endblock %} {% block content %}
+
+<form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=PATCH" method="POST">
+
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %}
+  <p>
+    {{field.label}} {{field}}
+    <span>
+      {% if field.errors %} {% for error in field.errors %} {{error}} {% endfor %} {% endif %}
+    </span>
+  </p>
+  {% endfor %}
+
+  <input class="btn btn-primary" type="submit" value="Edit Tag">
+</form>
+<br>
+<form action="{{url_for('tags.show_tags', tag_id=tag.id)}}?_method=DELETE" method="POST">
+  {{delete_form.hidden_tag()}}
+  <input type="submit" class="btn btn-primary" value='Delete Me'>
+</form>
+<br>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">Cancel</a>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">All Tags</a>
+{% endblock %}
