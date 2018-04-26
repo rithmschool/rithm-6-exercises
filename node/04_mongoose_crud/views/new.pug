@@ -1,0 +1,15 @@
+extends base.pug
+
+block title
+  title New Item
+
+block content
+  h1 Add a new item!
+  form(action="/items" method="POST")
+    div(class="form-group")
+      label(for="item") Item:
+      input(type="text" name="name" placeholder="Enter item here")
+    div(class="form-group")
+      label(for="item") Quantity:
+      input(type="number" name="quantity" placeholder="Enter quantity")
+    button.btn.btn-primary(type="submit") Add a new item!
