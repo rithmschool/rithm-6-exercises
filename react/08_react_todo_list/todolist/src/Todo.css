@@ -1,0 +1,9 @@
+.Todo {
+  margin: auto;
+  width: 50%;
+  text-align: left;
+}
+
+li {
+  list-style: none;
+}
