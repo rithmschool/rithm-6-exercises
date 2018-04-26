@@ -1,0 +1,19 @@
+body {
+  background-color: #212121;
+}
+
+.App {
+  text-align: center;
+}
+
+.page-title {
+  color: white;
+}
+
+.img-div {
+  max-width: 400px;
+}
+
+.gif-img {
+  width: 100%;
+}
