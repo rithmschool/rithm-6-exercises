@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+    h1 List of Items
+    
+    ul
+    each item in items
+      li=  item.name  + ":" + item.price
+
+
+//-  li= '<a href="/items/' + item.id + '">' + item.name +  + item.price
+     

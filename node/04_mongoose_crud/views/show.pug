@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+    h1  Item Details
+    
+    p Name: #{item.name} 
+    p Price:  $ #{item.price} 
+
+
+    a(href='/items/' + item.id + '/edit') Edit/Delete    
