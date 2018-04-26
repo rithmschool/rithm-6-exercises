@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+    h1 See All Items
+    a(href="/items/new") Create a New Item
+    ul
+        each item in items
+            li 
+                a(href=`/items/${item.id}`) #{item.name}
+                br
+                a(href=`/items/${item.id}/edit`) Edit Item
+                br
