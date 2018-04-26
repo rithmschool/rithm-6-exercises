@@ -1,0 +1,11 @@
+.finished {
+  text-decoration: line-through;
+}
+
+.btn {
+  background: #eb94d0;
+  background-image: linear-gradient(to bottom, #eb94d0, #2079b0);
+  border-radius: 5px;
+  text-shadow: 3px 2px 1px #9daef5;
+  box-shadow: 6px 5px 24px #666666;
+}
