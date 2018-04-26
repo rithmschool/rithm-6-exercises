@@ -1,0 +1,109 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+  margin-top: 40px;
+}
+
+.App-title a {
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.color-show {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+.color-show a {
+  color: white;
+  text-decoration: none;
+}
+
+.color-show h1 {
+  margin-top: 0px;
+}
+
+.home-page {
+  text-align: center;
+}
+
+.new-color-page {
+  height: 100vh;
+  width: 100vw;
+  background-image: url(https://www.xrite.com/-/media/xrite/images/whitepaper/color-communication-guide/whitepaper-color-communication-guide-large.jpg?h=400&w=800&la=en&hash=9B304E79568D6D57EAE98CB0D1DD0B2CBA05CF30);
+  background-size: cover;
+}
+
+.new-color-form {
+  position: fixed;
+  top: 40vh;
+  left: 35vw;
+  width: 30vw;
+  height: 25vh;
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  border: solid grey 1px;
+}
+
+.new-color-form a {
+  margin: 20px;
+}
+
+form {
+  margin: 20px;
+}
+
+input {
+  margin: 5px;
+}
+
+.color-show {
+  font-size: 3rem;
+}
+
+.first-color-line {
+  padding-top: 80px;
+}
+
+body {
+  margin: 0px;
+}
+
+div {
+  margin: 0px;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
+}
