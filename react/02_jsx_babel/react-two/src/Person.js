@@ -34,32 +34,7 @@ class Person extends Component {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div id="inner">
-        <img
-          src="http://www.animated-gifs.eu/category_kitchen/kitchen-beer/0057.gif"
-          alt="drinking gif"
-        />
-        <Person
-          name="Zoka"
-          age={78}
-          hobbies={["Sleeping", "Snooring", "Yawing"]}
-        />
-        <Person
-          name="Elie"
-          age={22}
-          hobbies={["Talking", "Screeming", "Yelling"]}
-        />
-        <Person
-          name="Matt"
-          age={21}
-          hobbies={["Math", "MathAgain", "mathAlways"]}
-        />
-      </div>
-    );
-  }
-}
+
+     
 
 export default Person;
