@@ -1,0 +1,29 @@
+extends base.pug
+block content
+  section(class="img__background")
+    div(class="row")
+      h2(class="mx-auto mb-4") Today's Shopping List!
+    div(class="row")
+      a(href="/items/new" class="mx-auto mb-4") Add to your List!
+    div(class="row")
+      table(class="table table-hover table-sm table-bordered text-center mx-auto")
+        thead
+          tr
+            th(scope="col") Item
+            th(scope="col") Price
+            th(scope="col") Link To Item
+            th(scope="col") See Item
+          tr
+        thead
+        tbody
+        each shoppingItem in shoppingItems
+          tr
+            th(scope="row") #{shoppingItem.item}
+            td #{shoppingItem.price}
+            td #{shoppingItem.url}
+            td
+             a(href=`/items/${shoppingItem.id}`)
+              i(class="fas fa-plus")
+          tr
+        tbody
+      table

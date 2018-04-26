@@ -1,0 +1,13 @@
+extends base.pug
+
+block content
+
+  h1 Item: #{item.item}
+  h1 Price: #{item.price}
+  h1 Website: #{item.url}
+  a(href=`/items/${item.id}/edit`) Edit
+  div
+    a(href="/items") Go back
+  div
+    form(action=`/items/${item.id}?_method=DELETE` method="POST")
+      button(class="btn btn-danger") Delete It
