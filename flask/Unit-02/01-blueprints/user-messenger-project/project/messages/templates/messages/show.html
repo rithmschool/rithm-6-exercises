@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<ul class = "list-group list-group-flush">
+
+<li class = "list-group-item"> <h2>Message Headline</h2>
+<p>
+  {{message.content}}
+  <br>
+<h2>Tags Associated with this message</h2>
+  {% for tag in tags%}
+  <p>
+      {{tag.subject}}
+  </p>
+  {% endfor %}
+
+  <a href="{{url_for('messages.edit',id = message.user_id, message_id = message.id)}}">Edit this message</a>
+</p>
+
+<form method="POST" action="{{url_for('messages.show',message_id = message.id, id = message.user_id)}}?_method=DELETE">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <p>
+            <span>
+                {% if field.errors%}
+                {% for error in field.errors%}
+                {{error}}
+                {% endfor %}
+                {% endif %}
+            </span>
+        </p>
+        {% endfor %}
+    <input type="submit" value="DELETE THIS MESSAGE">
+</form>
+
+</ul>
+{% endblock %}
