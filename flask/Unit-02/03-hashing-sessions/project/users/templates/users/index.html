@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block title %} List of Users {% endblock %} {% block content %} {% for user in users %}
+{% extends 'base.html' %} {% block title %} All Users {% endblock %} {% block content %}
+<h2>Welcome back {{g.current_user.username}}</h2>
+{% for user in users %}
 <br>
 <p>
   {{user.id}} | {{user.first_name}} {{user.last_name}} | {{user.image_url}}
@@ -6,14 +8,10 @@
   <br>
   <a class="btn btn-primary" href="{{url_for('users.show_users', user_id=user.id)}}">See more about {{user.first_name}}</a>
   <a class="btn btn-primary" href="{{url_for('users.edit_users', user_id=user.id)}}">Edit</a>
-
-  <form action="{{url_for('users.show_users', user_id=user.id)}}?_method=DELETE" method="POST">
-    {{delete_form.hidden_tag()}}
-    <input class="btn btn-primary" type="submit" class="button" value='Delete Me'>
-  </form>
   <hr>
 </p>
 {% endfor %}
-<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">List of Tags</a>
-<a class="btn btn-primary" href="{{url_for('users.new_users')}}">Create a New User</a>
+<a class="btn btn-primary" href="{{url_for('index_messages')}}">All Messages</a>
+<a class="btn btn-primary" href="{{url_for('tags.index_tags')}}">All Tags</a>
+<a class="btn btn-primary" href="{{url_for('users.logout_users')}}">Logout</a>
 {% endblock %}
