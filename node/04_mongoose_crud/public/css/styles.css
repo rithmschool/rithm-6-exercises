@@ -1,0 +1,15 @@
+.text-muted {
+    font-size: 70%;
+}
+
+body {
+    background-image: url(https://images.freeimages.com/images/large-previews/700/road-to-nowhere-1383109.jpg);
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, .6)
+}
+
+a:hover {
+    text-decoration: none;
+}
