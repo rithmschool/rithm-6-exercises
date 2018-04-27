@@ -1,0 +1,84 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.list-group-item {
+  width: 600px;
+}
+
+li, li a {
+  transition: all .5s linear;
+  color: black;
+}
+
+li.completed, li.completed a {
+  text-decoration: line-through;
+  color: #707070;
+}
+
+li.completed:hover {
+  text-decoration: line-through;
+}
+
+.todo-form {
+  width: 600px;
+  height: 250px;
+  transition: all 1s ease-in-out;
+}
+
+.todo-form.hide {
+  height: 0px; 
+  opacity: 0;
+}
+
+.form-opener {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+.all-todos-btn, .new-todo-btn {
+  border-radius: 0px;
+  position: relative;
+  display: block;
+}
+
+.all-todos-btn {
+  margin-bottom: 1px;
+  border-top-left-radius: 15px;
+}
+
+.new-todo-btn {
+  border-bottom-left-radius: 15px;
+}
+
+.nav-btns {
+  position: fixed;
+  right: 0;
+  top: 38px;
+}
