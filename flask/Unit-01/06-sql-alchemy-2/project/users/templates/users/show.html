@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <p>
+    {{user.first_name}}{{user.last_name}}
+    <br>
+    <a href="{{url_for('users.edit', id=user.id)}}">Edit A User</a>
+  </p>
+
+
+  <form action="{{url_for('users.destroy', id=user.id)}}?_method=DELETE" method="POST">
+    {{delete_form.hidden_tag()}}
+    <input type="submit" value="DELETE USER" class="btn btn-primary">
+  </form>
+  <br>
+  <a href="{{url_for('messages.messages_index', user_id=user.id)}}">See Messages for {{user.first_name}}</a>
+  <br>
+  <a href="{{ url_for('root') }}">Go Back To Users</a>
+  <br>
+  <a href="{{url_for('users.logout')}}">Logout</a>
+</div>
+
+
+{%endblock%}
