@@ -31,7 +31,8 @@ class App extends Component {
       text: prevState.text
     }));
   }
-  // Disabling links works great, but I can't think of how to correctly pass the (previous, previous) state
+  // Disabling links works great, but I can't think of how to correctly pass the (previous, previous) state.
+  // Currently the code is referring to the immediately previous state which is null, so it never renables.
 
   toggleLinksOff() {
     console.log('toggleLinksOff()');
