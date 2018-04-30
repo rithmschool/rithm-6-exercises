@@ -16,6 +16,7 @@ class App extends Component {
     this.areLinksOn = this.areLinksOn.bind(this);
   }
   noOfComponents = Array.from({ length: 3 });
+  // originalLink = this.state.href; // This caused the app to crash - not sure why?
 
   toggleLinks() {
     console.log('toggleLinks()');
@@ -30,6 +31,7 @@ class App extends Component {
       text: prevState.text
     }));
   }
+  // Disabling links works great, but I can't think of how to correctly pass the (previous, previous) state
 
   toggleLinksOff() {
     console.log('toggleLinksOff()');
