@@ -19,7 +19,6 @@ function rootReducer(state = initState, action) {
       return { ...state, todos };
     case UPDATE_TODO:
       var todos = state.todos.map((val, i) => {
-        debugger;
         if (i === action.id) return action.newTask;
         else return val;
       });
