@@ -1,0 +1,14 @@
+.Todo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30rem;
+}
+
+.hidden {
+  display: hidden;
+}
+
+p {
+  flex-grow: 2;
+}
