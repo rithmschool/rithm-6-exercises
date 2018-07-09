@@ -1,0 +1,8 @@
+.ColorsForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  margin-top: 10%;
+  width: 80%;
+}

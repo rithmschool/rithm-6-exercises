@@ -1,0 +1,9 @@
+.ColorsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 70px);
+  width: 50%;
+  align-self: center;
+}
