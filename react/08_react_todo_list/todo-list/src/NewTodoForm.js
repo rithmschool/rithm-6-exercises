@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./NewTodoForm.css";
 
 class NewTodoForm extends Component {
   constructor(props) {
@@ -17,18 +19,25 @@ class NewTodoForm extends Component {
     e.preventDefault();
     this.props.handleAdd({ ...this.state });
     this.setState({ title: "" });
+    this.props.history.push("/");
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="title"
-          value={this.state.title}
-          onChange={this.handleChange}
-          type="text"
-        />
-        <input type="submit" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className="todo__area"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChange}
+            type="text"
+          />
+          <input type="submit" />
+        </form>
+        <button>
+          <Link to="/">Check Out All Those Todos</Link>
+        </button>
+      </div>
     );
   }
 }
