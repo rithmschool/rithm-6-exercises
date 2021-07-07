@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./NewTodoForm.css";
 
 class NewTodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ""
+      title: "",
+      description: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -16,19 +19,33 @@ class NewTodoForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.handleAdd({ ...this.state });
-    this.setState({ title: "" });
+    this.setState({ title: "", description: "" });
+    this.props.history.push("/");
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="title"
-          value={this.state.title}
-          onChange={this.handleChange}
-          type="text"
-        />
-        <input type="submit" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className="todo__area"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChange}
+            type="text"
+          />
+          <input
+            className="todo__area"
+            name="description"
+            value={this.state.description}
+            onChange={this.handleChange}
+            type="text"
+          />
+          <input type="submit" />
+        </form>
+        <button>
+          <Link to="/">Check Out All Those Todos</Link>
+        </button>
+      </div>
     );
   }
 }
